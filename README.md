@@ -44,6 +44,40 @@ It deploys as is on Vercel (import the repository, keep the defaults): the page 
 
 Everything entered is kept in the page address, so a classification can be bookmarked or shared.
 
+## Veille réglementaire
+
+The **Veille réglementaire** view lists the texts published in the Journal Officiel (JORT) that
+concern the app. They're read from each issue's sommaire, in the French translation published at
+`https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf`.
+
+```bash
+npm run veille                                   # the issues of this year not read yet
+npm run veille -- --year 2025                    # the issues of 2025 not read yet
+npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
+npm run veille -- --file jort.pdf --year 2010 --number 18   # a PDF already on disk
+```
+
+The command runs on any computer that reaches jort.tn. It needs Node.js only: PDFs are read with
+pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
+if interrupted. Results go to `data/veille/feed.json`: commit that file to share them, and the page
+shows them.
+
+A text is flagged when its sommaire title:
+
+* cites a text the app is built on (the nomenclature of 15 novembre 2005, its 2010 and 2012
+  amendments, décret n° 2005-1991, décret n° 2006-2687, décret n° 68-88): **critique**, the app may
+  have to change;
+* or is on one of the app's subjects (établissements classés, étude d'impact, environmental cahiers
+  des charges, ANPE and dépollution, déchets dangereux, matières dangereuses, étude de dangers):
+  **important**.
+
+Nominations, délégations de signature and concours are ignored. The rules are in
+`data/veille/watch.json`. Matching ignores accents and case, and only on whole words. Each hit
+links to its page in the JORT PDF and says which part of the app it concerns. On the page, each
+reader can mark a text as "pertinent" or "sans objet"; that is kept in their browser only.
+
+A flagged text is something to read, not a legal conclusion.
+
 ## Layout
 
 | Path | What |
@@ -56,6 +90,10 @@ Everything entered is kept in the page address, so a classification can be bookm
 | `data/pipeline/` | `ocr.py` (scans → `data/ocr/`), `parse.py` (→ `data/nomenclature.json`, `data/review.md`), `eie.py` (decree → `data/eie.json`). |
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
+| `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), and the watch rules (`watch.ts`). |
+| `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/feed.json`. |
+| `data/veille/` | `watch.json` (the rules) and `feed.json` (the texts found). |
+| `app/components/veille.tsx` | The Veille réglementaire view. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
 ## Texts

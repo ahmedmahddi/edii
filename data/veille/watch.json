@@ -1,0 +1,21 @@
+{
+ "comment": "Rules of the veille réglementaire. A JORT text matches a rule when its sommaire title contains one of 'any' (accents and case ignored when matching), and, when 'with' is given, also one of 'with'. 'references' rules catch texts that cite a text the app is built on: they are critique, the app may have to change. 'impacts' names the parts of the app concerned: nomenclature, addition (règle d'addition), etude (étude ANPE), procedures. Titles starting with one of 'ignore' (nominations, concours…) never match.",
+ "ignore": ["nomination", "délégation de signature", "arrêtés portant délégation", "cessation", "démission", "liste de promotion", "promotion", "maintien en activité", "attribution de la classe", "ouverture d'un concours", "ouverture d'un examen", "ouverture du concours", "chargé des fonctions", "mise à la retraite"],
+ "references": [
+  {"id": "ref-nomenclature", "label": "Arrêté du 15 novembre 2005 (nomenclature des établissements classés)", "any": ["15 novembre 2005"], "with": ["nomenclature", "établissements dangereux", "insalubres"], "impacts": ["nomenclature", "addition"]},
+  {"id": "ref-2010", "label": "Arrêté du 23 février 2010 (modification de la nomenclature, règle d'addition)", "any": ["23 février 2010"], "with": ["nomenclature", "établissements dangereux", "insalubres"], "impacts": ["nomenclature", "addition"]},
+  {"id": "ref-2012", "label": "Arrêté du 24 octobre 2012 (modification de la nomenclature)", "any": ["24 octobre 2012"], "with": ["nomenclature", "établissements dangereux", "insalubres"], "impacts": ["nomenclature"]},
+  {"id": "ref-eie", "label": "Décret n° 2005-1991 (étude d'impact sur l'environnement)", "any": ["2005-1991"], "impacts": ["etude"]},
+  {"id": "ref-procedures", "label": "Décret n° 2006-2687 (procédures d'ouverture et d'exploitation)", "any": ["2006-2687"], "impacts": ["procedures"]},
+  {"id": "ref-1968", "label": "Décret n° 68-88 (établissements dangereux, insalubres ou incommodes)", "any": ["68-88"], "impacts": ["procedures"]}
+ ],
+ "topics": [
+  {"id": "etablissements-classes", "label": "Établissements classés", "any": ["établissements dangereux", "insalubres ou incommodes", "établissements classés", "nomenclature des établissements"], "impacts": ["nomenclature", "procedures"]},
+  {"id": "etude-impact", "label": "Étude d'impact sur l'environnement", "any": ["étude d'impact", "études d'impact", "impact sur l'environnement"], "impacts": ["etude"]},
+  {"id": "cahiers-des-charges", "label": "Cahiers des charges environnementaux", "any": ["cahier des charges", "cahiers des charges"], "with": ["environnement", "protection de l'environnement", "mesures environnementales"], "impacts": ["etude"]},
+  {"id": "ANPE", "label": "ANPE, dépollution", "any": ["Agence nationale de protection de l'environnement", "ANPE", "dépollution", "fonds de dépollution", "FODEP"], "impacts": ["etude"]},
+  {"id": "dechets", "label": "Déchets dangereux", "any": ["déchets dangereux", "gestion des déchets", "élimination des déchets"], "impacts": ["nomenclature"]},
+  {"id": "matieres-dangereuses", "label": "Matières et substances dangereuses", "any": ["matières dangereuses", "substances dangereuses", "produits chimiques dangereux", "préparations dangereuses"], "impacts": ["nomenclature", "addition"]},
+  {"id": "risques", "label": "Étude de dangers, risques industriels", "any": ["étude de dangers", "études de dangers", "plan d'opération interne", "risques industriels", "accidents majeurs"], "impacts": ["procedures"]}
+ ]
+}
