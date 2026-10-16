@@ -3,7 +3,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { additionGroup, classify, type Input, rubrique, search, variants } from "@/lib/classify";
+import { additionGroup, classify, type Input, nomenclature, rubrique, search, variants } from "@/lib/classify";
 import { type Activity, classifyEstablishment, decodeActivities, encodeActivities } from "@/lib/establishment";
 import { eie, eieEntry, entriesFor, establishmentStudy, studyFor } from "@/lib/studies";
 
@@ -218,10 +218,35 @@ describe("études ANPE (décret n° 2005-1991)", () => {
     expect(eieEntry("CDC6")?.text).toBe("Les unités de trituration d'olive (huileries)");
   });
 
-  it("suggests entries for a rubrique, never only those", () => {
+  it("suggests entries for a rubrique with their conditions, and keeps every entry available", () => {
     const { suggested, others } = entriesFor("1213"); // huiles végétales
-    expect(suggested.map((e) => e.id)).toEqual(["A14", "CDC6", "CDC7"]);
+    expect(suggested.map((s) => s.entry.id)).toEqual(["CDC6", "CDC7", "A14"]);
+    expect(suggested[0].when).toMatch(/trituration d'olives/);
     expect(suggested.length + others.length).toBe(eie.entries.length);
+  });
+
+  it("covers every activity rubrique: suggestions with a condition, or a note", () => {
+    for (const r of nomenclature.rubriques.filter((r) => r.kind === "activity")) {
+      const s = eie.suggestions[r.code];
+      expect(s, r.code).toBeDefined();
+      expect(s.links.length > 0 || !!s.note, r.code).toBe(true);
+      for (const l of s.links) expect(l.when, `${r.code} → ${l.entry}`).not.toBe("");
+    }
+  });
+
+  it("follows the activity's case", () => {
+    const [fabrication, stockage] = variants(rubrique("2101")!);
+    expect(entriesFor("2101", fabrication).suggested.map((s) => s.entry.id)).toEqual(["B6"]);
+    expect(entriesFor("2101", stockage).suggested.map((s) => s.entry.id)).toEqual(["CDC14"]);
+    expect(entriesFor("2101").suggested.map((s) => s.entry.id)).toEqual(["B6", "CDC14"]);
+  });
+
+  it("does not send substance use or ancillary activities to an entry of their own", () => {
+    expect(entriesFor("1612").suggested).toEqual([]); // réfrigération
+    expect(entriesFor("1612").note).toMatch(/activité principale/);
+    expect(entriesFor("2104").suggested.map((s) => s.entry.id)).toEqual(["CDC14"]); // peroxydes, emploi et stockage
+    expect(entriesFor("2105").suggested.map((s) => s.entry.id)).toEqual(["A24"]); // peroxydes, fabrication
+    expect(entriesFor("1725").suggested).toEqual([]); // dépôt de ciments, plâtres…
   });
 
   it("picks the study for one activity", () => {
