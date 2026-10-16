@@ -1,0 +1,201 @@
+# EDII: classement des établissements dangereux, insalubres ou incommodes
+
+A web app that classifies a Tunisian establishment under the nomenclature of *établissements
+dangereux, insalubres ou incommodes*: **1ère**, **2ème**, **3ème catégorie** or **non classé**.
+It also tells which environmental study the ANPE expects: étude d'impact (catégorie A or B),
+cahier des charges, étude de dépollution or demande d'avis.
+
+No AI is involved. The categories and thresholds come from the official texts (`data/sources/`),
+read by OCR for the scanned ones, checked, and stored as data. Each result shows the text it
+comes from.
+
+## Run it
+
+Needs Node.js 22. No database, no account.
+
+```bash
+npm install
+npm run dev        # http://localhost:3000
+```
+
+```bash
+npm run typecheck
+npm test           # classification, addition rule, ANPE study, and data in sync with the texts
+npm run build && npm start
+```
+
+It deploys as is on Vercel (import the repository, keep the defaults): the page is static.
+
+## How to use it
+
+1. Search each activity or substance of the establishment (words or rubrique number), or browse
+   a section, and add it with **+**.
+2. For each activity, choose its case and enter its quantity or capacity. The establishment takes
+   the most severe category of its activities (décret n° 2006-2687, art. 5), and the addition rule
+   (arrêté du 23 février 2010, art. 2 bis) is applied to the substances of one group.
+3. In **Étude environnementale (ANPE)**, give the situation (new project, extension, unit already
+   operating), whether the site can affect a protected area, and each activity's entry in
+   décret n° 2005-1991. The page gives the study, the ANPE's review time and the steps.
+
+Everything entered is kept in the page address, so a classification can be bookmarked or shared.
+
+## Layout
+
+| Path | What |
+|---|---|
+| `app/page.tsx` | The page. |
+| `lib/classify.ts` | One rubrique: search, thresholds, units, outcome. |
+| `lib/establishment.ts` | Several activities, the addition rule, and the URL form. |
+| `lib/studies.ts` | The ANPE study, from décret n° 2005-1991. |
+| `data/sources/` | The official texts (PDF). |
+| `data/pipeline/` | `ocr.py` (scans → `data/ocr/`), `parse.py` (→ `data/nomenclature.json`, `data/review.md`), `eie.py` (decree → `data/eie.json`). |
+| `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
+| `data/eie-links.json` | Rubriques suggested for each entry of décret n° 2005-1991 (a reading; the user chooses). |
+| `tests/` | Vitest suite. Expected categories were read off the scans. |
+
+## Texts
+
+| File | Text | Role |
+|---|---|---|
+| `data/sources/2005-11-15-arrete-nomenclature.pdf` | Arrêté du 15 novembre 2005 (JORT n° 94) | The nomenclature (24 scanned pages) |
+| `data/sources/2010-02-23-arrete-modificatif.pdf` | Arrêté du 23 février 2010 (JORT n° 18) | Annex 1 replaces rubriques, annex 2 adds rubriques, art. 2 bis adds the addition rule |
+| `data/sources/2012-10-24-arrete-modificatif.pdf` | Arrêté du 24 octobre 2012 (JORT n° 88) | Same structure: annex 1 replaces, annex 2 adds |
+| `data/sources/2005-07-11-decret-2005-1991-eie.pdf` | Décret n° 2005-1991 du 11 juillet 2005 (JORT n° 57) | Étude d'impact: annexe 1 (catégories A and B) and annexe 2 (cahiers des charges) |
+| `data/sources/2006-10-09-decret-2006-2687.pdf` | Décret n° 2006-2687 du 9 octobre 2006 | Procedures per category (reference only, not parsed) |
+
+`data/sources.json` says which pages hold the tables and what each annex does.
+
+## Pipeline
+
+```bash
+npm run data:ocr     # stage 1: scans → data/ocr/<source>.json  (needs tesseract + fra, pdftoppm, numpy, Pillow)
+npm run data:parse   # stage 2: OCR + corrections → nomenclature.json and review.md  (Python standard library only)
+```
+
+**Stage 1, `data/pipeline/ocr.py`.** OCR on a whole page mixes up the three columns (N° | Désignation | CAT).
+For each page, the script:
+
+1. renders the page at 300 dpi and straightens it, using the table's vertical rules,
+2. finds the four vertical rules,
+3. erases the dotted leaders (`animaux ........ 2`), which would otherwise swallow the unit
+   (`10 t......` came out as `10 ts`),
+4. OCRs the code column and the designation column separately,
+5. finds each digit in the CAT column as a blob of ink, then reads it as a single character.
+   Reading the whole column at once missed digits that touch a rule.
+
+The output keeps every line with its position and confidence, so stage 2 can change without
+running the OCR again. It is committed, so the OCR only runs again when a source changes.
+
+**Stage 2, `data/pipeline/parse.py`.** It matches codes and categories to lines by position, and
+cleans up recurring misreads (`1/j` → `l/j`, `m°` → `m3`, `It` → `1 t`…). It rebuilds each
+rubrique's cases (`1)`, `a)`, `I)`) and parses each threshold into a numeric range in a canonical
+unit (`supérieure à 2 t, mais inférieure à 75 t` → `2000 < x < 75000 kg`). Then it applies the
+amendments in order. It writes:
+
+* `data/nomenclature.json`: the consolidated rubriques in force, read by the app.
+* `data/review.md`: what a person still has to check against the scans.
+
+`data/review.md` lists low-confidence category digits, thresholds without a readable unit, and ranges
+that overlap or go the wrong way (a larger quantity giving a less severe category). It also lists
+odd digit grouping in the official text (`6 5000 kg` in the 2012 text) and corrections that no
+longer match anything.
+
+## Fixing a misread
+
+Check the point against the scan (the reference is `source p.<PDF page> y=<pixel row>` at
+300 dpi), then add an entry to `data/corrections.json`:
+
+* `text`: replace `find` with `replace` in the lines of one source page,
+* `category`: set the category of the line that starts with `line_starts`. This entry also
+  confirms a low-confidence digit that is correct.
+
+Run `npm run data:parse` and commit the result. `tests/edii.test.ts` fails when
+`data/nomenclature.json` no longer matches what the parser produces.
+
+## Classifying
+
+The page at `/` classifies a whole establishment. Search each activity or substance, add it
+with "+", then choose its case and enter its quantity. The list is kept in the URL, so a
+classification can be bookmarked or shared.
+
+`lib/classify.ts` classifies one rubrique:
+
+* `search(query)`: rubriques by code (`2722 bis`) or words, ignoring accents.
+* `classify(rubrique, { variant, quantity, unit })`: returns one of these outcomes:
+  * `classified`: category 1, 2 or 3, or `NC` (non classé) below the smallest threshold.
+  * `choose`: several cases of the rubrique may apply, and the text decides between them, not a number.
+  * `needs_quantity`: the category depends on a threshold.
+  * `unit_mismatch`: the quantity is in a unit the rubrique does not use.
+  * `definition`: the rubrique only defines a family of substances and points to its sub-rubriques.
+
+Units convert to the canonical unit of each threshold: t ↔ kg, l ↔ m3, kg/j ↔ t/j, MW ↔ kW, ha ↔ m2, MBq ↔ GBq.
+When a condition can't be reduced to one number (two thresholds at once, or no unit), the
+classifier shows the text instead of guessing.
+
+`lib/establishment.ts` combines the activities:
+
+* **Several activities.** The establishment takes the most severe category of its activities.
+  Décret n° 2006-2687, art. 5: an establishment with several classified activities makes a single
+  request, has a single public enquiry and gets a single authorisation.
+* **Règle d'addition** (arrêté du 23 février 2010, art. 2 bis). When the establishment stores or
+  uses two or more substances of the same group, it computes Σ qx/Qx. If the sum is above 1, the
+  establishment is classed in *la catégorie supérieure qui suit*.
+  * qx is the quantity held.
+  * Qx is the threshold of the category just above the group's current one (the most severe
+    category of its substances taken one by one, or 3ème when they are all non classé). At their
+    own category, each classified substance alone would already reach 1, so the rule would always apply.
+  * The groups are:
+    * Groupe 1: 2703, 2704, 2706, 2708, 2722 bis 1, 2722 bis 2, 2723, 2724 bis 1, 2724 bis 2, 2725, 2726.
+    * Groupe 2: 2711, 2712, 2713, 2715, 2720.
+    * Groupe 3: the 2100 rubriques, 2402 to 2408, and the 2500 rubriques except 2503, 2506, 2507 bis, 2514, 2516.
+  * Example: acétylène 30 t (2502) and hydrogène 30 t (2509) are each 2ème catégorie. With the 1ère
+    thresholds (50 t each), 30/50 + 30/50 = 1.2 > 1, so the establishment is classed 1ère catégorie.
+
+## Environmental study (ANPE)
+
+The page also says which study the ANPE expects, under décret n° 2005-1991 du 11 juillet 2005
+(`data/sources/2005-07-11-decret-2005-1991-eie.pdf`, a Word export, so its text is exact and needs no OCR).
+
+```bash
+npm run data:eie     # decree → data/eie.json  (needs pdftotext)
+```
+
+`data/pipeline/eie.py` splits the decree's three lists into 68 entries:
+
+* annexe 1, catégorie A: 24 entries, étude d'impact, ANPE avis within 21 working days (art. 9);
+* annexe 1, catégorie B: 26 entries, étude d'impact, ANPE avis within 3 months (art. 9);
+* annexe 2: 18 entries, cahier des charges (art. 3).
+
+These lists are separate from the EDII nomenclature: mostly sectors, some with their own
+thresholds (t/j, t/an, ha, lits, MW), and some projects outside it (roads, lotissements, hotels).
+`data/eie-links.json` suggests, for each entry, the rubriques it may cover. That is a reading of two
+texts, so the page lists the suggested entries first but **the user chooses** each activity's
+entry, or "none".
+
+`lib/studies.ts` then decides:
+
+| Situation | Entry | Study |
+|---|---|---|
+| New project, or existing unit extended, transformed or changing its process (art. 12) | annexe 1 A | Étude d'impact, catégorie A (3 months instead of 21 days near a protected area, art. 9) |
+| same | annexe 1 B | Étude d'impact, catégorie B |
+| same | annexe 2 | Cahier des charges |
+| Unit already operating, regularising | annexe 1 or 2 | Étude de dépollution, on the ANPE's terms of reference |
+| Any | none | Demande d'avis |
+
+The establishment takes the most demanding study of its activities. The page lists the steps
+with their articles: who writes the study (art. 2, 6, 7), how many copies go where (art. 8), the
+ANPE's deadline and tacit agreement (art. 9), the avis of a protected area's manager (art. 10),
+and that no authorisation comes before (art. 5).
+
+## Not done yet
+
+* **Reading of the addition rule**: the text does not say which threshold Qx is. The reading
+  above (the category just above) is the only one under which the rule can ever leave a category
+  unchanged; it should be confirmed.
+* **Étude de dépollution**: it is not in décret n° 2005-1991. Circulaire n° 27 du 7 novembre 2024
+  allowed it as a regularisation route until 31 December 2025; the page asks to check that it is
+  still in force. Whether an existing annexe 2 unit regularises with a dépollution study or with
+  its cahier des charges should be confirmed with the ANPE.
+* **Reading of 2724**: the 2010 text restates rubrique 2724 as a definition only, in its "complete"
+  annex, and moves the thresholds to 2724 bis 1 and bis 2. The parser treats the restatement as a
+  replacement. This reading should be confirmed (see `data/review.md`).

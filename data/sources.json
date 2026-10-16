@@ -1,0 +1,59 @@
+{
+  "comment": "Official texts behind the EDII nomenclature (Tunisia). 'pages' are the PDF pages holding the nomenclature table; 'annexes' says what each annex of an amending text does to the base nomenclature.",
+  "sources": [
+    {
+      "id": "2005",
+      "file": "2005-11-15-arrete-nomenclature.pdf",
+      "title": "Arrêté du ministre de l'industrie, de l'énergie et des PME du 15 novembre 2005, fixant la nomenclature des établissements dangereux, insalubres ou incommodes",
+      "jort": "JORT n° 94 du 25 novembre 2005",
+      "role": "base",
+      "pages": [
+        2,
+        25
+      ]
+    },
+    {
+      "id": "2010",
+      "file": "2010-02-23-arrete-modificatif.pdf",
+      "title": "Arrêté du ministre de l'industrie et de la technologie du 23 février 2010, modifiant et complétant l'arrêté du 15 novembre 2005",
+      "jort": "JORT n° 18 du 2 mars 2010",
+      "role": "amendment",
+      "pages": [
+        8,
+        13
+      ],
+      "annexes": {
+        "1": "modify",
+        "2": "complete"
+      }
+    },
+    {
+      "id": "2012",
+      "file": "2012-10-24-arrete-modificatif.pdf",
+      "title": "Arrêté du ministre de l'industrie du 24 octobre 2012, modifiant et complétant l'arrêté du 15 novembre 2005",
+      "jort": "JORT n° 88 du 6 novembre 2012",
+      "role": "amendment",
+      "pages": [
+        2,
+        3
+      ],
+      "annexes": {
+        "1": "modify",
+        "2": "complete"
+      }
+    }
+  ],
+  "references": [
+    {
+      "file": "2005-07-11-decret-2005-1991-eie.pdf",
+      "title": "Décret n° 2005-1991 du 11 juillet 2005, relatif à l'étude d'impact sur l'environnement et fixant les catégories d'unités soumises à l'étude d'impact sur l'environnement et les catégories d'unités soumises aux cahiers des charges",
+      "jort": "JORT n° 57 du 19 juillet 2005",
+      "used_by": "data/pipeline/eie.py → data/eie.json"
+    },
+    {
+      "file": "2006-10-09-decret-2006-2687.pdf",
+      "title": "Décret n° 2006-2687 du 9 octobre 2006, relatif aux procédures d'ouverture et d'exploitation des établissements dangereux, insalubres ou incommodes",
+      "jort": "JORT n° 83 du 17 octobre 2006"
+    }
+  ]
+}

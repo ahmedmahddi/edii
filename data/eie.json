@@ -1,0 +1,699 @@
+{
+ "title": "Décret n° 2005-1991 du 11 juillet 2005, relatif à l'étude d'impact sur l'environnement",
+ "source": "sources/2005-07-11-decret-2005-1991-eie.pdf",
+ "annexes": {
+  "A": "Annexe 1, catégorie A : étude d'impact, avis de l'ANPE sous 21 jours ouvrables",
+  "B": "Annexe 1, catégorie B : étude d'impact, avis de l'ANPE sous 3 mois ouvrables",
+  "CDC": "Annexe 2 : cahier des charges"
+ },
+ "entries": [
+  {
+   "id": "A1",
+   "annexe": "A",
+   "number": 1,
+   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité ne dépassant pas vingt tonnes par jour (20T/j)",
+   "rubriques": [
+    "1507",
+    "1511",
+    "1512",
+    "1513",
+    "1514"
+   ]
+  },
+  {
+   "id": "A2",
+   "annexe": "A",
+   "number": 2,
+   "text": "Unités de traitement et fabrication des matériaux de construction, de céramique et de verre",
+   "rubriques": [
+    "1707",
+    "1712",
+    "1724",
+    "1728",
+    "1729",
+    "1730"
+   ]
+  },
+  {
+   "id": "A3",
+   "annexe": "A",
+   "number": 3,
+   "text": "Unités de fabrication des médicaments",
+   "rubriques": [
+    "1413",
+    "1415"
+   ]
+  },
+  {
+   "id": "A4",
+   "annexe": "A",
+   "number": 4,
+   "text": "Unités de fabrication des métaux non ferreux",
+   "rubriques": [
+    "1403",
+    "1715",
+    "1716",
+    "1723",
+    "1727"
+   ]
+  },
+  {
+   "id": "A5",
+   "annexe": "A",
+   "number": 5,
+   "text": "Unités de traitement des métaux et de traitement de surface",
+   "rubriques": [
+    "1501",
+    "1701",
+    "1704",
+    "1711",
+    "1718",
+    "1719",
+    "1720",
+    "1721",
+    "1722"
+   ]
+  },
+  {
+   "id": "A6",
+   "annexe": "A",
+   "number": 6,
+   "text": "Projets d'exploration et d'extraction du pétrole et du gaz naturel",
+   "rubriques": [
+    "1426",
+    "2517"
+   ]
+  },
+  {
+   "id": "A7",
+   "annexe": "A",
+   "number": 7,
+   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production ne dépassant pas trois cent milles tonnes /an (300000 tonnes/an), et les carrières industrielles d'argile et des pierres marbrières",
+   "rubriques": [
+    "1706"
+   ]
+  },
+  {
+   "id": "A8",
+   "annexe": "A",
+   "number": 8,
+   "text": "Unités de fabrication de sucreries et de levure",
+   "rubriques": [
+    "1215",
+    "1216"
+   ]
+  },
+  {
+   "id": "A9",
+   "annexe": "A",
+   "number": 9,
+   "text": "Unités de teinture du textile, du fil et des vêtements, de tricotage et de délavage de jeans et de finition",
+   "rubriques": [
+    "1813"
+   ]
+  },
+  {
+   "id": "A10",
+   "annexe": "A",
+   "number": 10,
+   "text": "Projets d'aménagement des zones industrielles dont la superficie ne dépassant pas les cinq (5) hectares",
+   "rubriques": []
+  },
+  {
+   "id": "A11",
+   "annexe": "A",
+   "number": 11,
+   "text": "Projets de lotissements urbains dont la superficie est comprise entre cinq (5) et vingt (20) hectares",
+   "rubriques": []
+  },
+  {
+   "id": "A12",
+   "annexe": "A",
+   "number": 12,
+   "text": "Projets d'aménagement des zones touristiques dont la superficie est comprise entre dix (10) et trente (30) hectares",
+   "rubriques": []
+  },
+  {
+   "id": "A13",
+   "annexe": "A",
+   "number": 13,
+   "text": "Unités de fabrication de fibres minérales",
+   "rubriques": [
+    "1805"
+   ]
+  },
+  {
+   "id": "A14",
+   "annexe": "A",
+   "number": 14,
+   "text": "Unités de fabrication, de transformation, de conditionnement et de conservation des produits alimentaires",
+   "rubriques": [
+    "1114",
+    "1202",
+    "1203",
+    "1204",
+    "1205",
+    "1206",
+    "1207",
+    "1208",
+    "1209",
+    "1210",
+    "1211",
+    "1212",
+    "1213",
+    "1214",
+    "1217"
+   ]
+  },
+  {
+   "id": "A15",
+   "annexe": "A",
+   "number": 15,
+   "text": "Les abattoirs",
+   "rubriques": [
+    "1201"
+   ]
+  },
+  {
+   "id": "A16",
+   "annexe": "A",
+   "number": 16,
+   "text": "Unités de fabrication ou de construction des automobiles, camions ou leurs moteurs",
+   "rubriques": []
+  },
+  {
+   "id": "A17",
+   "annexe": "A",
+   "number": 17,
+   "text": "Projets de chantiers navals",
+   "rubriques": []
+  },
+  {
+   "id": "A18",
+   "annexe": "A",
+   "number": 18,
+   "text": "Unités de fabrication et d'entretien d'aéronefs",
+   "rubriques": []
+  },
+  {
+   "id": "A19",
+   "annexe": "A",
+   "number": 19,
+   "text": "Unités de conchyliculture",
+   "rubriques": [
+    "1111"
+   ]
+  },
+  {
+   "id": "A20",
+   "annexe": "A",
+   "number": 20,
+   "text": "Unités de dessalement de l'eau dans les unités industrielles et touristiques",
+   "rubriques": []
+  },
+  {
+   "id": "A21",
+   "annexe": "A",
+   "number": 21,
+   "text": "Unités de thalassothérapie et de thermalisme",
+   "rubriques": []
+  },
+  {
+   "id": "A22",
+   "annexe": "A",
+   "number": 22,
+   "text": "Unités d'hôtels d'une capacité supérieure à trois cent lits (300 lits)",
+   "rubriques": []
+  },
+  {
+   "id": "A23",
+   "annexe": "A",
+   "number": 23,
+   "text": "Unités de fabrication de papier et de carton",
+   "rubriques": [
+    "1305",
+    "1306"
+   ]
+  },
+  {
+   "id": "A24",
+   "annexe": "A",
+   "number": 24,
+   "text": "Unités de fabrication d'élastomère et de peroxydes",
+   "rubriques": [
+    "1419",
+    "1419 bis 1",
+    "2104",
+    "2105"
+   ]
+  },
+  {
+   "id": "B1",
+   "annexe": "B",
+   "number": 1,
+   "text": "Unités de raffineries de pétrole brut et installations de gazéification et de liquéfaction d'au moins cinq cent tonnes (500 tonnes/jour) de charbon ou de schistes bitumineux par jour",
+   "rubriques": []
+  },
+  {
+   "id": "B2",
+   "annexe": "B",
+   "number": 2,
+   "text": "Unités de production d'électricité d'une puissance d'au moins trois cent MW (300 MW)",
+   "rubriques": [
+    "1605"
+   ]
+  },
+  {
+   "id": "B3",
+   "annexe": "B",
+   "number": 3,
+   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité d'au moins vingt tonnes par jour (20 tonnes / jour)",
+   "rubriques": [
+    "1507",
+    "1511",
+    "1512",
+    "1513",
+    "1514"
+   ]
+  },
+  {
+   "id": "B4",
+   "annexe": "B",
+   "number": 4,
+   "text": "Unités de gestion des déchets dangereux",
+   "rubriques": [
+    "1501",
+    "1502",
+    "1503",
+    "1505",
+    "1506"
+   ]
+  },
+  {
+   "id": "B5",
+   "annexe": "B",
+   "number": 5,
+   "text": "Unités de fabrication du ciment, chaux et du gypse",
+   "rubriques": [
+    "1708",
+    "1709"
+   ]
+  },
+  {
+   "id": "B6",
+   "annexe": "B",
+   "number": 6,
+   "text": "Unités de fabrication de produits chimiques, des pesticides, de peintures, de cirage et de l'eau de javel catégorie 2 selon la nomenclature des établissements classés dangereux, insalubres et incommodes",
+   "rubriques": [
+    "1402",
+    "1404",
+    "1405",
+    "1406",
+    "1407",
+    "1408",
+    "1408 bis",
+    "1409",
+    "1411",
+    "1412",
+    "1418",
+    "1420",
+    "1421",
+    "1422",
+    "1423",
+    "1425",
+    "2701"
+   ]
+  },
+  {
+   "id": "B7",
+   "annexe": "B",
+   "number": 7,
+   "text": "Unités sidérurgiques",
+   "rubriques": [
+    "1702",
+    "1703",
+    "1713",
+    "1714"
+   ]
+  },
+  {
+   "id": "B8",
+   "annexe": "B",
+   "number": 8,
+   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production dépassant trois cent milles tonnes /an (300000 tonnes / an), et les projets d'extraction des ressources minérales",
+   "rubriques": [
+    "1706",
+    "1717",
+    "1723"
+   ]
+  },
+  {
+   "id": "B9",
+   "annexe": "B",
+   "number": 9,
+   "text": "Unités de fabrication de pâte à papier et de traitement de cellulose",
+   "rubriques": [
+    "1307",
+    "1607"
+   ]
+  },
+  {
+   "id": "B10",
+   "annexe": "B",
+   "number": 10,
+   "text": "Projets de construction de voies ferrées, d'autoroutes, des routes expresses, des ponts et des échangeurs",
+   "rubriques": []
+  },
+  {
+   "id": "B11",
+   "annexe": "B",
+   "number": 11,
+   "text": "Projets de construction d'aéroports dont la piste de décollage et d'atterrissage ayant une longueur supérieure à deux milles cent mètres (2100 mètres)",
+   "rubriques": []
+  },
+  {
+   "id": "B12",
+   "annexe": "B",
+   "number": 12,
+   "text": "Projets de ports de commerce, de pêche et de plaisance",
+   "rubriques": []
+  },
+  {
+   "id": "B13",
+   "annexe": "B",
+   "number": 13,
+   "text": "Projets d'aménagement des zones industrielles dont la superficie dépassant les cinq hectares (5 hectares)",
+   "rubriques": []
+  },
+  {
+   "id": "B14",
+   "annexe": "B",
+   "number": 14,
+   "text": "Projets de lotissements urbains dont la superficie dépassant les vingt hectares (20 hectares)",
+   "rubriques": []
+  },
+  {
+   "id": "B15",
+   "annexe": "B",
+   "number": 15,
+   "text": "Projets d'aménagement des zones touristiques dont la superficie dépassant les trente hectares (30 hectares)",
+   "rubriques": []
+  },
+  {
+   "id": "B16",
+   "annexe": "B",
+   "number": 16,
+   "text": "Equipements de transport du pétrole brut et du gaz",
+   "rubriques": []
+  },
+  {
+   "id": "B17",
+   "annexe": "B",
+   "number": 17,
+   "text": "Unités de traitement des eaux usées urbaines",
+   "rubriques": [
+    "1509"
+   ]
+  },
+  {
+   "id": "B18",
+   "annexe": "B",
+   "number": 18,
+   "text": "Unités collectives de traitement des eaux usées industrielles",
+   "rubriques": [
+    "1510"
+   ]
+  },
+  {
+   "id": "B19",
+   "annexe": "B",
+   "number": 19,
+   "text": "Unités de tannerie et de mégisserie",
+   "rubriques": [
+    "1804",
+    "1810",
+    "1812",
+    "1814"
+   ]
+  },
+  {
+   "id": "B20",
+   "annexe": "B",
+   "number": 20,
+   "text": "Projets de périmètres irrigués par les eaux usées traitées à des fins agricoles",
+   "rubriques": []
+  },
+  {
+   "id": "B21",
+   "annexe": "B",
+   "number": 21,
+   "text": "Projets de grands barrages",
+   "rubriques": []
+  },
+  {
+   "id": "B22",
+   "annexe": "B",
+   "number": 22,
+   "text": "Projets d'aquaculture non énumérés dans la catégorie A de l'annexe 1",
+   "rubriques": [
+    "1111"
+   ]
+  },
+  {
+   "id": "B23",
+   "annexe": "B",
+   "number": 23,
+   "text": "Unités de dessalement pour l'approvisionnement en eau potable des villes",
+   "rubriques": []
+  },
+  {
+   "id": "B24",
+   "annexe": "B",
+   "number": 24,
+   "text": "Projets de villages de vacances d'une capacité supérieure à mille lits (1000 lits)",
+   "rubriques": []
+  },
+  {
+   "id": "B25",
+   "annexe": "B",
+   "number": 25,
+   "text": "Unités d'extraction, de traitement ou de lavage des produits minéraux et non minéraux",
+   "rubriques": [
+    "1705",
+    "1717",
+    "1724",
+    "1726"
+   ]
+  },
+  {
+   "id": "B26",
+   "annexe": "B",
+   "number": 26,
+   "text": "Unités de transformation de phosphate et de ses dérivés",
+   "rubriques": [
+    "1418",
+    "1423",
+    "1425"
+   ]
+  },
+  {
+   "id": "CDC1",
+   "annexe": "CDC",
+   "number": 1,
+   "text": "Les projets de lotissement urbain dont la superficie ne dépassant pas les cinq (5) hectares et les projets d'aménagement des zones touristiques dont la superficie ne dépassant pas les dix (10) hectares",
+   "rubriques": []
+  },
+  {
+   "id": "CDC2",
+   "annexe": "CDC",
+   "number": 2,
+   "text": "Les projets de réalisation des établissements scolaires et d'enseignement",
+   "rubriques": []
+  },
+  {
+   "id": "CDC3",
+   "annexe": "CDC",
+   "number": 3,
+   "text": "Les projets d'installation des canaux de transport ou de transfert des eaux",
+   "rubriques": []
+  },
+  {
+   "id": "CDC4",
+   "annexe": "CDC",
+   "number": 4,
+   "text": "Les projets de transport d'énergie non énumérés à l'annexe 1 et qui ne traversent pas par les zones naturelles ou sensibles (les zones bénéficiant d'une protection juridique)",
+   "rubriques": []
+  },
+  {
+   "id": "CDC5",
+   "annexe": "CDC",
+   "number": 5,
+   "text": "Les projets d'aménagement côtier non énumérés à l'annexe 1",
+   "rubriques": []
+  },
+  {
+   "id": "CDC6",
+   "annexe": "CDC",
+   "number": 6,
+   "text": "Les unités de trituration d'olive (huileries)",
+   "rubriques": [
+    "1213"
+   ]
+  },
+  {
+   "id": "CDC7",
+   "annexe": "CDC",
+   "number": 7,
+   "text": "Les unités d'extraction des huiles végétales et animales",
+   "rubriques": [
+    "1213"
+   ]
+  },
+  {
+   "id": "CDC8",
+   "annexe": "CDC",
+   "number": 8,
+   "text": "Les unités classées d'élevage d'animaux",
+   "rubriques": [
+    "1101",
+    "1102",
+    "1104",
+    "1105",
+    "1108",
+    "1110",
+    "1112",
+    "1113",
+    "1116",
+    "1117"
+   ]
+  },
+  {
+   "id": "CDC9",
+   "annexe": "CDC",
+   "number": 9,
+   "text": "Les unités d'industrie textile non énumérés à l'annexe 1",
+   "rubriques": [
+    "1803",
+    "1806",
+    "1807",
+    "1808",
+    "1815",
+    "1815 bis"
+   ]
+  },
+  {
+   "id": "CDC10",
+   "annexe": "CDC",
+   "number": 10,
+   "text": "Les unités d'emboutissage, découpage de grosses pièces métalliques",
+   "rubriques": [
+    "1718"
+   ]
+  },
+  {
+   "id": "CDC11",
+   "annexe": "CDC",
+   "number": 11,
+   "text": "Les unités de stockage, de distribution des hydrocarbures ou les stations de lavage et graissage des véhicules",
+   "rubriques": [
+    "1613",
+    "2208",
+    "2510",
+    "2511",
+    "2512",
+    "2513",
+    "2514"
+   ]
+  },
+  {
+   "id": "CDC12",
+   "annexe": "CDC",
+   "number": 12,
+   "text": "Les unités de fabrication de féculents",
+   "rubriques": [
+    "1206"
+   ]
+  },
+  {
+   "id": "CDC13",
+   "annexe": "CDC",
+   "number": 13,
+   "text": "Les carrières traditionnelles",
+   "rubriques": [
+    "1706"
+   ]
+  },
+  {
+   "id": "CDC14",
+   "annexe": "CDC",
+   "number": 14,
+   "text": "Les unités de stockage de gaz ou de produits chimiques",
+   "rubriques": [
+    "2101",
+    "2102",
+    "2204",
+    "2301",
+    "2302",
+    "2303",
+    "2305",
+    "2306",
+    "2501",
+    "2502",
+    "2504",
+    "2505",
+    "2506",
+    "2507",
+    "2507 bis",
+    "2508",
+    "2509",
+    "2703",
+    "2704",
+    "2706",
+    "2707",
+    "2713",
+    "2715",
+    "2720",
+    "2722 bis 1",
+    "2722 bis 2",
+    "2724 bis 1",
+    "2724 bis 2",
+    "2725",
+    "2726"
+   ]
+  },
+  {
+   "id": "CDC15",
+   "annexe": "CDC",
+   "number": 15,
+   "text": "chaudronnerie, construction de réservoirs et d'autres pièces de tôlerie",
+   "rubriques": [
+    "1718"
+   ]
+  },
+  {
+   "id": "CDC16",
+   "annexe": "CDC",
+   "number": 16,
+   "text": "Buanderies utilisant l'eau pour le lavage des vêtements et des couvertures",
+   "rubriques": [
+    "1801"
+   ]
+  },
+  {
+   "id": "CDC17",
+   "annexe": "CDC",
+   "number": 17,
+   "text": "Les Lacs collinaires",
+   "rubriques": []
+  },
+  {
+   "id": "CDC18",
+   "annexe": "CDC",
+   "number": 18,
+   "text": "Les unités de fabrication de produits parapharmaceutiques",
+   "rubriques": [
+    "1417"
+   ]
+  }
+ ]
+}
