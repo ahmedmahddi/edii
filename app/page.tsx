@@ -31,6 +31,7 @@ import {
   type Situation,
   type StudyKind,
 } from "@/lib/studies";
+import { Veille } from "./components/veille";
 
 import {
   createClassificationReport,
@@ -65,7 +66,7 @@ export default function EdiiPage() {
   );
 }
 
-type View = "search" | "establishment" | "guide" | "sources";
+type View = "search" | "establishment" | "guide" | "sources" | "veille";
 
 function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, React.ReactNode> = {
@@ -110,6 +111,12 @@ function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <rect x="15" y="3" width="6" height="6" rx="1" />
         <rect x="3" y="15" width="6" height="6" rx="1" />
         <rect x="15" y="15" width="6" height="6" rx="1" />
+      </>
+    ),
+    bell: (
+      <>
+        <path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z" />
+        <path d="M10 20a2 2 0 0 0 4 0" />
       </>
     ),
     shield: (
@@ -263,6 +270,7 @@ function Edii() {
     ["establishment", "building", "Mon établissement"],
     ["guide", "help", "Mode d’emploi"],
     ["sources", "book", "Textes de référence"],
+    ["veille", "bell", "Veille réglementaire"],
   ];
 
   return (
@@ -327,7 +335,9 @@ function Edii() {
                       ? "VOTRE DOSSIER"
                       : view === "guide"
                         ? "MODE D’EMPLOI"
-                        : "DOCUMENTATION")}
+                        : view === "veille"
+                          ? "VEILLE RÉGLEMENTAIRE"
+                          : "DOCUMENTATION")}
               </div>
               <h1>
                 {view === "search"
@@ -336,14 +346,18 @@ function Edii() {
                     ? "Mon établissement"
                     : view === "guide"
                       ? "Comprendre votre classement"
-                      : "Textes de référence"}
+                      : view === "veille"
+                        ? "Veille réglementaire"
+                        : "Textes de référence"}
               </h1>
               <p>
                 {view === "search"
                   ? "Identifiez vos activités, renseignez les quantités et consultez votre classement."
                   : view === "establishment"
                     ? "Vos activités, leur catégorie et les démarches environnementales associées."
-                    : "Les informations utiles pour préparer votre dossier."}
+                    : view === "veille"
+                      ? "Les textes parus au Journal Officiel qui touchent la nomenclature, l’étude d’impact et les procédures."
+                      : "Les informations utiles pour préparer votre dossier."}
               </p>
             </div>
             <div className="reference-total">
@@ -359,6 +373,8 @@ function Edii() {
             <Intro />
           ) : view === "sources" ? (
             <Sources />
+          ) : view === "veille" ? (
+            <Veille />
           ) : (
             <div className={`edii-layout view-${view}`}>
               <section
@@ -766,7 +782,9 @@ function Edii() {
                   ? `Établissement (${activities.length})`
                   : id === "guide"
                     ? "Guide"
-                    : "Textes"}
+                    : id === "veille"
+                      ? "Veille"
+                      : "Textes"}
             </span>
           </button>
         ))}
