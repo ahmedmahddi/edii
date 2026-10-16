@@ -1,0 +1,28 @@
+{
+  "colors": {
+    "--bg": "#fff",
+    "--surface": "#fff",
+    "--surface-2": "#f3f5f7",
+    "--border": "#dbe1e6",
+    "--text": "#202e3a",
+    "--muted": "#606d79",
+    "--accent": "#155a83",
+    "--accent-text": "#fff",
+    "--navy": "#123650",
+    "--ok": "#286044",
+    "--warn": "#855516",
+    "--bad": "#a63a38",
+    "--ok-bg": "#edf5ef",
+    "--warn-bg": "#faf2e3",
+    "--bad-bg": "#fbeeee",
+    "--info-bg": "#eef4f8"
+  },
+  "fonts": {
+    "body": "DM Sans",
+    "headings": "Manrope"
+  },
+  "radius": 3,
+  "touchTarget": 44,
+  "breakpoints": [560, 1000, 1280],
+  "spacing": [4, 8, 12, 16, 20, 24, 28, 32, 36, 44]
+}
