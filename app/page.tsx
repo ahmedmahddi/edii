@@ -422,7 +422,9 @@ function StudyCard({
           <tbody>
             {activities.map((a, i) => {
               const rub = rubrique(a.code)!;
-              const { suggested, others } = entriesFor(a.code);
+              const cases = variants(rub);
+              const variant = cases.length === 1 ? cases[0] : a.variant !== undefined ? cases[a.variant] : undefined;
+              const { suggested, note, others } = entriesFor(a.code, variant);
               const kind = result.perActivity[i];
               const entry = eieEntry(a.eie);
               return (
@@ -440,15 +442,15 @@ function StudyCard({
                       <option value="">Choisir…</option>
                       {suggested.length ? (
                         <optgroup label="Suggérées pour cette rubrique">
-                          {suggested.map((e) => (
+                          {suggested.map(({ entry: e, when }) => (
                             <option key={e.id} value={e.id}>
-                              {entryLabel(e.id, e.text)}
+                              {entryLabel(e.id, when)}
                             </option>
                           ))}
                         </optgroup>
                       ) : null}
                       <optgroup label="Aucune entrée">
-                        <option value="none">L&apos;activité ne figure dans aucune annexe</option>
+                        <option value="none">Aucune entrée propre (activité annexe, ou dans aucune annexe)</option>
                       </optgroup>
                       {(["A", "B", "CDC"] as const).map((k) => (
                         <optgroup key={k} label={eie.annexes[k]}>
@@ -462,7 +464,29 @@ function StudyCard({
                         </optgroup>
                       ))}
                     </select>
-                    {entry ? <div className="muted small edii-why">{entry.text}</div> : null}
+                    {entry ? (
+                      <div className="muted small edii-why">{entry.text}</div>
+                    ) : a.eie === "none" ? null : (
+                      <ul className="edii-suggest">
+                        {suggested.map(({ entry: e, when }) => (
+                          <li key={e.id}>
+                            <button className="edii-link" onClick={() => update(i, { eie: e.id })}>
+                              {entryRef(e.id)}
+                            </button>{" "}
+                            <span className="small">{when}</span>
+                          </li>
+                        ))}
+                        <li>
+                          <button className="edii-link" onClick={() => update(i, { eie: "none" })}>
+                            Aucune entrée propre
+                          </button>{" "}
+                          <span className="small muted">
+                            {note ??
+                              "si aucune suggestion ne s'applique : l'activité est annexe à l'activité principale de l'unité, ou ne figure dans aucune annexe."}
+                          </span>
+                        </li>
+                      </ul>
+                    )}
                   </td>
                   <td>{kind ? <span className={`badge edii-s-${kind}`}>{STUDY_SHORT[kind]}</span> : <span className="muted small">à choisir</span>}</td>
                 </tr>
@@ -472,8 +496,9 @@ function StudyCard({
         </table>
       </div>
       <p className="muted small">
-        Les suggestions rapprochent la rubrique des entrées du décret ; c&apos;est une lecture à confirmer, d&apos;où le choix laissé à
-        l&apos;utilisateur.
+        Le décret classe les unités selon leur activité principale ; la nomenclature, les activités et substances qu&apos;elles
+        contiennent. Les suggestions rapprochent les deux textes avec la condition dont elles dépendent : c&apos;est une lecture, à
+        confirmer pour chaque activité.
       </p>
 
       {result.study ? (
@@ -508,10 +533,11 @@ function StudyCard({
   );
 }
 
+const entryRef = (id: string) => (id.startsWith("CDC") ? `Annexe 2, n° ${id.slice(3)}` : `Annexe 1 cat. ${id[0]}, n° ${id.slice(1)}`);
+
 function entryLabel(id: string, text: string) {
-  const ref = id.startsWith("CDC") ? `Annexe 2, n° ${id.slice(3)}` : `Annexe 1 cat. ${id[0]}, n° ${id.slice(1)}`;
   const short = text.length > 110 ? `${text.slice(0, 110)}…` : text;
-  return `${ref} · ${short}`;
+  return `${entryRef(id)} · ${short}`;
 }
 
 function AdditionPanel({ a }: { a: AdditionResult }) {

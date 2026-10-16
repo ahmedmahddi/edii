@@ -22,19 +22,42 @@ export interface EieEntry {
   annexe: Annexe;
   number: number;
   text: string;
-  rubriques: string[]; // suggested EDII rubriques (data/eie-links.json), a reading to confirm
 }
 
-export const eie = data as unknown as { title: string; source: string; annexes: Record<Annexe, string>; entries: EieEntry[] };
+/** A suggested entry for a rubrique (data/eie-links.json): a reading of the two texts, to confirm. */
+export interface Suggestion {
+  entry: string;
+  when: string; // the condition it depends on, e.g. "si l'unité est un dépôt…"
+  case?: string; // only for the case of the rubrique whose label starts with this, e.g. "2)"
+}
+
+export const eie = data as unknown as {
+  title: string;
+  source: string;
+  annexes: Record<Annexe, string>;
+  entries: EieEntry[];
+  suggestions: Record<string, { links: Suggestion[]; note?: string }>;
+};
 
 export function eieEntry(id: string | undefined): EieEntry | undefined {
   return id ? eie.entries.find((e) => e.id === id) : undefined;
 }
 
-/** Entries suggested for a rubrique first, then the rest, in the decree's order. */
-export function entriesFor(code: string): { suggested: EieEntry[]; others: EieEntry[] } {
-  const suggested = eie.entries.filter((e) => e.rubriques.includes(code));
-  return { suggested, others: eie.entries.filter((e) => !suggested.includes(e)) };
+export interface Suggested {
+  entry: EieEntry;
+  when: string;
+}
+
+/**
+ * The entries suggested for a rubrique, with their conditions, then every other entry in the
+ * decree's order. With the activity's case (variant), links tied to another case are left out.
+ */
+export function entriesFor(code: string, variant?: string): { suggested: Suggested[]; note: string | null; others: EieEntry[] } {
+  const s = eie.suggestions[code];
+  const links = (s?.links ?? []).filter((l) => !l.case || variant === undefined || variant.startsWith(l.case));
+  const suggested = links.map((l) => ({ entry: eieEntry(l.entry)!, when: l.when })).filter((x) => x.entry);
+  const ids = new Set(suggested.map((x) => x.entry.id));
+  return { suggested, note: s?.note ?? null, others: eie.entries.filter((e) => !ids.has(e.id)) };
 }
 
 export const SITUATIONS: Record<Situation, string> = {

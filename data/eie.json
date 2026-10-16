@@ -11,689 +11,2181 @@
    "id": "A1",
    "annexe": "A",
    "number": 1,
-   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité ne dépassant pas vingt tonnes par jour (20T/j)",
-   "rubriques": [
-    "1507",
-    "1511",
-    "1512",
-    "1513",
-    "1514"
-   ]
+   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité ne dépassant pas vingt tonnes par jour (20T/j)"
   },
   {
    "id": "A2",
    "annexe": "A",
    "number": 2,
-   "text": "Unités de traitement et fabrication des matériaux de construction, de céramique et de verre",
-   "rubriques": [
-    "1707",
-    "1712",
-    "1724",
-    "1728",
-    "1729",
-    "1730"
-   ]
+   "text": "Unités de traitement et fabrication des matériaux de construction, de céramique et de verre"
   },
   {
    "id": "A3",
    "annexe": "A",
    "number": 3,
-   "text": "Unités de fabrication des médicaments",
-   "rubriques": [
-    "1413",
-    "1415"
-   ]
+   "text": "Unités de fabrication des médicaments"
   },
   {
    "id": "A4",
    "annexe": "A",
    "number": 4,
-   "text": "Unités de fabrication des métaux non ferreux",
-   "rubriques": [
-    "1403",
-    "1715",
-    "1716",
-    "1723",
-    "1727"
-   ]
+   "text": "Unités de fabrication des métaux non ferreux"
   },
   {
    "id": "A5",
    "annexe": "A",
    "number": 5,
-   "text": "Unités de traitement des métaux et de traitement de surface",
-   "rubriques": [
-    "1501",
-    "1701",
-    "1704",
-    "1711",
-    "1718",
-    "1719",
-    "1720",
-    "1721",
-    "1722"
-   ]
+   "text": "Unités de traitement des métaux et de traitement de surface"
   },
   {
    "id": "A6",
    "annexe": "A",
    "number": 6,
-   "text": "Projets d'exploration et d'extraction du pétrole et du gaz naturel",
-   "rubriques": [
-    "1426",
-    "2517"
-   ]
+   "text": "Projets d'exploration et d'extraction du pétrole et du gaz naturel"
   },
   {
    "id": "A7",
    "annexe": "A",
    "number": 7,
-   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production ne dépassant pas trois cent milles tonnes /an (300000 tonnes/an), et les carrières industrielles d'argile et des pierres marbrières",
-   "rubriques": [
-    "1706"
-   ]
+   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production ne dépassant pas trois cent milles tonnes /an (300000 tonnes/an), et les carrières industrielles d'argile et des pierres marbrières"
   },
   {
    "id": "A8",
    "annexe": "A",
    "number": 8,
-   "text": "Unités de fabrication de sucreries et de levure",
-   "rubriques": [
-    "1215",
-    "1216"
-   ]
+   "text": "Unités de fabrication de sucreries et de levure"
   },
   {
    "id": "A9",
    "annexe": "A",
    "number": 9,
-   "text": "Unités de teinture du textile, du fil et des vêtements, de tricotage et de délavage de jeans et de finition",
-   "rubriques": [
-    "1813"
-   ]
+   "text": "Unités de teinture du textile, du fil et des vêtements, de tricotage et de délavage de jeans et de finition"
   },
   {
    "id": "A10",
    "annexe": "A",
    "number": 10,
-   "text": "Projets d'aménagement des zones industrielles dont la superficie ne dépassant pas les cinq (5) hectares",
-   "rubriques": []
+   "text": "Projets d'aménagement des zones industrielles dont la superficie ne dépassant pas les cinq (5) hectares"
   },
   {
    "id": "A11",
    "annexe": "A",
    "number": 11,
-   "text": "Projets de lotissements urbains dont la superficie est comprise entre cinq (5) et vingt (20) hectares",
-   "rubriques": []
+   "text": "Projets de lotissements urbains dont la superficie est comprise entre cinq (5) et vingt (20) hectares"
   },
   {
    "id": "A12",
    "annexe": "A",
    "number": 12,
-   "text": "Projets d'aménagement des zones touristiques dont la superficie est comprise entre dix (10) et trente (30) hectares",
-   "rubriques": []
+   "text": "Projets d'aménagement des zones touristiques dont la superficie est comprise entre dix (10) et trente (30) hectares"
   },
   {
    "id": "A13",
    "annexe": "A",
    "number": 13,
-   "text": "Unités de fabrication de fibres minérales",
-   "rubriques": [
-    "1805"
-   ]
+   "text": "Unités de fabrication de fibres minérales"
   },
   {
    "id": "A14",
    "annexe": "A",
    "number": 14,
-   "text": "Unités de fabrication, de transformation, de conditionnement et de conservation des produits alimentaires",
-   "rubriques": [
-    "1114",
-    "1202",
-    "1203",
-    "1204",
-    "1205",
-    "1206",
-    "1207",
-    "1208",
-    "1209",
-    "1210",
-    "1211",
-    "1212",
-    "1213",
-    "1214",
-    "1217"
-   ]
+   "text": "Unités de fabrication, de transformation, de conditionnement et de conservation des produits alimentaires"
   },
   {
    "id": "A15",
    "annexe": "A",
    "number": 15,
-   "text": "Les abattoirs",
-   "rubriques": [
-    "1201"
-   ]
+   "text": "Les abattoirs"
   },
   {
    "id": "A16",
    "annexe": "A",
    "number": 16,
-   "text": "Unités de fabrication ou de construction des automobiles, camions ou leurs moteurs",
-   "rubriques": []
+   "text": "Unités de fabrication ou de construction des automobiles, camions ou leurs moteurs"
   },
   {
    "id": "A17",
    "annexe": "A",
    "number": 17,
-   "text": "Projets de chantiers navals",
-   "rubriques": []
+   "text": "Projets de chantiers navals"
   },
   {
    "id": "A18",
    "annexe": "A",
    "number": 18,
-   "text": "Unités de fabrication et d'entretien d'aéronefs",
-   "rubriques": []
+   "text": "Unités de fabrication et d'entretien d'aéronefs"
   },
   {
    "id": "A19",
    "annexe": "A",
    "number": 19,
-   "text": "Unités de conchyliculture",
-   "rubriques": [
-    "1111"
-   ]
+   "text": "Unités de conchyliculture"
   },
   {
    "id": "A20",
    "annexe": "A",
    "number": 20,
-   "text": "Unités de dessalement de l'eau dans les unités industrielles et touristiques",
-   "rubriques": []
+   "text": "Unités de dessalement de l'eau dans les unités industrielles et touristiques"
   },
   {
    "id": "A21",
    "annexe": "A",
    "number": 21,
-   "text": "Unités de thalassothérapie et de thermalisme",
-   "rubriques": []
+   "text": "Unités de thalassothérapie et de thermalisme"
   },
   {
    "id": "A22",
    "annexe": "A",
    "number": 22,
-   "text": "Unités d'hôtels d'une capacité supérieure à trois cent lits (300 lits)",
-   "rubriques": []
+   "text": "Unités d'hôtels d'une capacité supérieure à trois cent lits (300 lits)"
   },
   {
    "id": "A23",
    "annexe": "A",
    "number": 23,
-   "text": "Unités de fabrication de papier et de carton",
-   "rubriques": [
-    "1305",
-    "1306"
-   ]
+   "text": "Unités de fabrication de papier et de carton"
   },
   {
    "id": "A24",
    "annexe": "A",
    "number": 24,
-   "text": "Unités de fabrication d'élastomère et de peroxydes",
-   "rubriques": [
-    "1419",
-    "1419 bis 1",
-    "2104",
-    "2105"
-   ]
+   "text": "Unités de fabrication d'élastomère et de peroxydes"
   },
   {
    "id": "B1",
    "annexe": "B",
    "number": 1,
-   "text": "Unités de raffineries de pétrole brut et installations de gazéification et de liquéfaction d'au moins cinq cent tonnes (500 tonnes/jour) de charbon ou de schistes bitumineux par jour",
-   "rubriques": []
+   "text": "Unités de raffineries de pétrole brut et installations de gazéification et de liquéfaction d'au moins cinq cent tonnes (500 tonnes/jour) de charbon ou de schistes bitumineux par jour"
   },
   {
    "id": "B2",
    "annexe": "B",
    "number": 2,
-   "text": "Unités de production d'électricité d'une puissance d'au moins trois cent MW (300 MW)",
-   "rubriques": [
-    "1605"
-   ]
+   "text": "Unités de production d'électricité d'une puissance d'au moins trois cent MW (300 MW)"
   },
   {
    "id": "B3",
    "annexe": "B",
    "number": 3,
-   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité d'au moins vingt tonnes par jour (20 tonnes / jour)",
-   "rubriques": [
-    "1507",
-    "1511",
-    "1512",
-    "1513",
-    "1514"
-   ]
+   "text": "Unités de gestion des déchets ménagers et assimilés d'une capacité d'au moins vingt tonnes par jour (20 tonnes / jour)"
   },
   {
    "id": "B4",
    "annexe": "B",
    "number": 4,
-   "text": "Unités de gestion des déchets dangereux",
-   "rubriques": [
-    "1501",
-    "1502",
-    "1503",
-    "1505",
-    "1506"
-   ]
+   "text": "Unités de gestion des déchets dangereux"
   },
   {
    "id": "B5",
    "annexe": "B",
    "number": 5,
-   "text": "Unités de fabrication du ciment, chaux et du gypse",
-   "rubriques": [
-    "1708",
-    "1709"
-   ]
+   "text": "Unités de fabrication du ciment, chaux et du gypse"
   },
   {
    "id": "B6",
    "annexe": "B",
    "number": 6,
-   "text": "Unités de fabrication de produits chimiques, des pesticides, de peintures, de cirage et de l'eau de javel catégorie 2 selon la nomenclature des établissements classés dangereux, insalubres et incommodes",
-   "rubriques": [
-    "1402",
-    "1404",
-    "1405",
-    "1406",
-    "1407",
-    "1408",
-    "1408 bis",
-    "1409",
-    "1411",
-    "1412",
-    "1418",
-    "1420",
-    "1421",
-    "1422",
-    "1423",
-    "1425",
-    "2701"
-   ]
+   "text": "Unités de fabrication de produits chimiques, des pesticides, de peintures, de cirage et de l'eau de javel catégorie 2 selon la nomenclature des établissements classés dangereux, insalubres et incommodes"
   },
   {
    "id": "B7",
    "annexe": "B",
    "number": 7,
-   "text": "Unités sidérurgiques",
-   "rubriques": [
-    "1702",
-    "1703",
-    "1713",
-    "1714"
-   ]
+   "text": "Unités sidérurgiques"
   },
   {
    "id": "B8",
    "annexe": "B",
    "number": 8,
-   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production dépassant trois cent milles tonnes /an (300000 tonnes / an), et les projets d'extraction des ressources minérales",
-   "rubriques": [
-    "1706",
-    "1717",
-    "1723"
-   ]
+   "text": "Les carrières industrielles des granulats et du sable dont la capacité de production dépassant trois cent milles tonnes /an (300000 tonnes / an), et les projets d'extraction des ressources minérales"
   },
   {
    "id": "B9",
    "annexe": "B",
    "number": 9,
-   "text": "Unités de fabrication de pâte à papier et de traitement de cellulose",
-   "rubriques": [
-    "1307",
-    "1607"
-   ]
+   "text": "Unités de fabrication de pâte à papier et de traitement de cellulose"
   },
   {
    "id": "B10",
    "annexe": "B",
    "number": 10,
-   "text": "Projets de construction de voies ferrées, d'autoroutes, des routes expresses, des ponts et des échangeurs",
-   "rubriques": []
+   "text": "Projets de construction de voies ferrées, d'autoroutes, des routes expresses, des ponts et des échangeurs"
   },
   {
    "id": "B11",
    "annexe": "B",
    "number": 11,
-   "text": "Projets de construction d'aéroports dont la piste de décollage et d'atterrissage ayant une longueur supérieure à deux milles cent mètres (2100 mètres)",
-   "rubriques": []
+   "text": "Projets de construction d'aéroports dont la piste de décollage et d'atterrissage ayant une longueur supérieure à deux milles cent mètres (2100 mètres)"
   },
   {
    "id": "B12",
    "annexe": "B",
    "number": 12,
-   "text": "Projets de ports de commerce, de pêche et de plaisance",
-   "rubriques": []
+   "text": "Projets de ports de commerce, de pêche et de plaisance"
   },
   {
    "id": "B13",
    "annexe": "B",
    "number": 13,
-   "text": "Projets d'aménagement des zones industrielles dont la superficie dépassant les cinq hectares (5 hectares)",
-   "rubriques": []
+   "text": "Projets d'aménagement des zones industrielles dont la superficie dépassant les cinq hectares (5 hectares)"
   },
   {
    "id": "B14",
    "annexe": "B",
    "number": 14,
-   "text": "Projets de lotissements urbains dont la superficie dépassant les vingt hectares (20 hectares)",
-   "rubriques": []
+   "text": "Projets de lotissements urbains dont la superficie dépassant les vingt hectares (20 hectares)"
   },
   {
    "id": "B15",
    "annexe": "B",
    "number": 15,
-   "text": "Projets d'aménagement des zones touristiques dont la superficie dépassant les trente hectares (30 hectares)",
-   "rubriques": []
+   "text": "Projets d'aménagement des zones touristiques dont la superficie dépassant les trente hectares (30 hectares)"
   },
   {
    "id": "B16",
    "annexe": "B",
    "number": 16,
-   "text": "Equipements de transport du pétrole brut et du gaz",
-   "rubriques": []
+   "text": "Equipements de transport du pétrole brut et du gaz"
   },
   {
    "id": "B17",
    "annexe": "B",
    "number": 17,
-   "text": "Unités de traitement des eaux usées urbaines",
-   "rubriques": [
-    "1509"
-   ]
+   "text": "Unités de traitement des eaux usées urbaines"
   },
   {
    "id": "B18",
    "annexe": "B",
    "number": 18,
-   "text": "Unités collectives de traitement des eaux usées industrielles",
-   "rubriques": [
-    "1510"
-   ]
+   "text": "Unités collectives de traitement des eaux usées industrielles"
   },
   {
    "id": "B19",
    "annexe": "B",
    "number": 19,
-   "text": "Unités de tannerie et de mégisserie",
-   "rubriques": [
-    "1804",
-    "1810",
-    "1812",
-    "1814"
-   ]
+   "text": "Unités de tannerie et de mégisserie"
   },
   {
    "id": "B20",
    "annexe": "B",
    "number": 20,
-   "text": "Projets de périmètres irrigués par les eaux usées traitées à des fins agricoles",
-   "rubriques": []
+   "text": "Projets de périmètres irrigués par les eaux usées traitées à des fins agricoles"
   },
   {
    "id": "B21",
    "annexe": "B",
    "number": 21,
-   "text": "Projets de grands barrages",
-   "rubriques": []
+   "text": "Projets de grands barrages"
   },
   {
    "id": "B22",
    "annexe": "B",
    "number": 22,
-   "text": "Projets d'aquaculture non énumérés dans la catégorie A de l'annexe 1",
-   "rubriques": [
-    "1111"
-   ]
+   "text": "Projets d'aquaculture non énumérés dans la catégorie A de l'annexe 1"
   },
   {
    "id": "B23",
    "annexe": "B",
    "number": 23,
-   "text": "Unités de dessalement pour l'approvisionnement en eau potable des villes",
-   "rubriques": []
+   "text": "Unités de dessalement pour l'approvisionnement en eau potable des villes"
   },
   {
    "id": "B24",
    "annexe": "B",
    "number": 24,
-   "text": "Projets de villages de vacances d'une capacité supérieure à mille lits (1000 lits)",
-   "rubriques": []
+   "text": "Projets de villages de vacances d'une capacité supérieure à mille lits (1000 lits)"
   },
   {
    "id": "B25",
    "annexe": "B",
    "number": 25,
-   "text": "Unités d'extraction, de traitement ou de lavage des produits minéraux et non minéraux",
-   "rubriques": [
-    "1705",
-    "1717",
-    "1724",
-    "1726"
-   ]
+   "text": "Unités d'extraction, de traitement ou de lavage des produits minéraux et non minéraux"
   },
   {
    "id": "B26",
    "annexe": "B",
    "number": 26,
-   "text": "Unités de transformation de phosphate et de ses dérivés",
-   "rubriques": [
-    "1418",
-    "1423",
-    "1425"
-   ]
+   "text": "Unités de transformation de phosphate et de ses dérivés"
   },
   {
    "id": "CDC1",
    "annexe": "CDC",
    "number": 1,
-   "text": "Les projets de lotissement urbain dont la superficie ne dépassant pas les cinq (5) hectares et les projets d'aménagement des zones touristiques dont la superficie ne dépassant pas les dix (10) hectares",
-   "rubriques": []
+   "text": "Les projets de lotissement urbain dont la superficie ne dépassant pas les cinq (5) hectares et les projets d'aménagement des zones touristiques dont la superficie ne dépassant pas les dix (10) hectares"
   },
   {
    "id": "CDC2",
    "annexe": "CDC",
    "number": 2,
-   "text": "Les projets de réalisation des établissements scolaires et d'enseignement",
-   "rubriques": []
+   "text": "Les projets de réalisation des établissements scolaires et d'enseignement"
   },
   {
    "id": "CDC3",
    "annexe": "CDC",
    "number": 3,
-   "text": "Les projets d'installation des canaux de transport ou de transfert des eaux",
-   "rubriques": []
+   "text": "Les projets d'installation des canaux de transport ou de transfert des eaux"
   },
   {
    "id": "CDC4",
    "annexe": "CDC",
    "number": 4,
-   "text": "Les projets de transport d'énergie non énumérés à l'annexe 1 et qui ne traversent pas par les zones naturelles ou sensibles (les zones bénéficiant d'une protection juridique)",
-   "rubriques": []
+   "text": "Les projets de transport d'énergie non énumérés à l'annexe 1 et qui ne traversent pas par les zones naturelles ou sensibles (les zones bénéficiant d'une protection juridique)"
   },
   {
    "id": "CDC5",
    "annexe": "CDC",
    "number": 5,
-   "text": "Les projets d'aménagement côtier non énumérés à l'annexe 1",
-   "rubriques": []
+   "text": "Les projets d'aménagement côtier non énumérés à l'annexe 1"
   },
   {
    "id": "CDC6",
    "annexe": "CDC",
    "number": 6,
-   "text": "Les unités de trituration d'olive (huileries)",
-   "rubriques": [
-    "1213"
-   ]
+   "text": "Les unités de trituration d'olive (huileries)"
   },
   {
    "id": "CDC7",
    "annexe": "CDC",
    "number": 7,
-   "text": "Les unités d'extraction des huiles végétales et animales",
-   "rubriques": [
-    "1213"
-   ]
+   "text": "Les unités d'extraction des huiles végétales et animales"
   },
   {
    "id": "CDC8",
    "annexe": "CDC",
    "number": 8,
-   "text": "Les unités classées d'élevage d'animaux",
-   "rubriques": [
-    "1101",
-    "1102",
-    "1104",
-    "1105",
-    "1108",
-    "1110",
-    "1112",
-    "1113",
-    "1116",
-    "1117"
-   ]
+   "text": "Les unités classées d'élevage d'animaux"
   },
   {
    "id": "CDC9",
    "annexe": "CDC",
    "number": 9,
-   "text": "Les unités d'industrie textile non énumérés à l'annexe 1",
-   "rubriques": [
-    "1803",
-    "1806",
-    "1807",
-    "1808",
-    "1815",
-    "1815 bis"
-   ]
+   "text": "Les unités d'industrie textile non énumérés à l'annexe 1"
   },
   {
    "id": "CDC10",
    "annexe": "CDC",
    "number": 10,
-   "text": "Les unités d'emboutissage, découpage de grosses pièces métalliques",
-   "rubriques": [
-    "1718"
-   ]
+   "text": "Les unités d'emboutissage, découpage de grosses pièces métalliques"
   },
   {
    "id": "CDC11",
    "annexe": "CDC",
    "number": 11,
-   "text": "Les unités de stockage, de distribution des hydrocarbures ou les stations de lavage et graissage des véhicules",
-   "rubriques": [
-    "1613",
-    "2208",
-    "2510",
-    "2511",
-    "2512",
-    "2513",
-    "2514"
-   ]
+   "text": "Les unités de stockage, de distribution des hydrocarbures ou les stations de lavage et graissage des véhicules"
   },
   {
    "id": "CDC12",
    "annexe": "CDC",
    "number": 12,
-   "text": "Les unités de fabrication de féculents",
-   "rubriques": [
-    "1206"
-   ]
+   "text": "Les unités de fabrication de féculents"
   },
   {
    "id": "CDC13",
    "annexe": "CDC",
    "number": 13,
-   "text": "Les carrières traditionnelles",
-   "rubriques": [
-    "1706"
-   ]
+   "text": "Les carrières traditionnelles"
   },
   {
    "id": "CDC14",
    "annexe": "CDC",
    "number": 14,
-   "text": "Les unités de stockage de gaz ou de produits chimiques",
-   "rubriques": [
-    "2101",
-    "2102",
-    "2204",
-    "2301",
-    "2302",
-    "2303",
-    "2305",
-    "2306",
-    "2501",
-    "2502",
-    "2504",
-    "2505",
-    "2506",
-    "2507",
-    "2507 bis",
-    "2508",
-    "2509",
-    "2703",
-    "2704",
-    "2706",
-    "2707",
-    "2713",
-    "2715",
-    "2720",
-    "2722 bis 1",
-    "2722 bis 2",
-    "2724 bis 1",
-    "2724 bis 2",
-    "2725",
-    "2726"
-   ]
+   "text": "Les unités de stockage de gaz ou de produits chimiques"
   },
   {
    "id": "CDC15",
    "annexe": "CDC",
    "number": 15,
-   "text": "chaudronnerie, construction de réservoirs et d'autres pièces de tôlerie",
-   "rubriques": [
-    "1718"
-   ]
+   "text": "chaudronnerie, construction de réservoirs et d'autres pièces de tôlerie"
   },
   {
    "id": "CDC16",
    "annexe": "CDC",
    "number": 16,
-   "text": "Buanderies utilisant l'eau pour le lavage des vêtements et des couvertures",
-   "rubriques": [
-    "1801"
-   ]
+   "text": "Buanderies utilisant l'eau pour le lavage des vêtements et des couvertures"
   },
   {
    "id": "CDC17",
    "annexe": "CDC",
    "number": 17,
-   "text": "Les Lacs collinaires",
-   "rubriques": []
+   "text": "Les Lacs collinaires"
   },
   {
    "id": "CDC18",
    "annexe": "CDC",
    "number": 18,
-   "text": "Les unités de fabrication de produits parapharmaceutiques",
-   "rubriques": [
-    "1417"
+   "text": "Les unités de fabrication de produits parapharmaceutiques"
+  }
+ ],
+ "suggestions": {
+  "1101": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1102": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1103": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1104": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1105": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1106": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "dépôt d'engrais chimiques (produits chimiques)"
+    }
+   ]
+  },
+  "1107": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "si les engrais sont produits à partir de déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "même cas, 20 t/j ou plus"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1108": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1109": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1110": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1111": {
+   "links": [
+    {
+     "entry": "B22",
+     "when": "aquaculture (pisciculture)"
+    }
+   ]
+  },
+  "1112": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1113": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1114": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "silo de conservation de céréales, grains ou produits alimentaires"
+    }
+   ]
+  },
+  "1115": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1116": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1117": {
+   "links": [
+    {
+     "entry": "CDC8",
+     "when": "unité classée d'élevage d'animaux"
+    }
+   ]
+  },
+  "1201": {
+   "links": [
+    {
+     "entry": "A15",
+     "when": "abattoir"
+    }
+   ]
+  },
+  "1202": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "acides destinés à l'alimentation"
+    },
+    {
+     "entry": "B6",
+     "when": "si l'unité est une usine de produits chimiques"
+    }
+   ]
+  },
+  "1203": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1204": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1205": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1206": {
+   "links": [
+    {
+     "entry": "CDC12",
+     "when": "fabrication de féculents (amidon, fécule)"
+    }
+   ]
+  },
+  "1207": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1208": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "si les substances traitées sont des produits alimentaires"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1209": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1210": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1211": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1212": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1213": {
+   "links": [
+    {
+     "entry": "CDC6",
+     "when": "huilerie : trituration d'olives"
+    },
+    {
+     "entry": "CDC7",
+     "when": "extraction d'huiles végétales (autres que l'olive) ou animales"
+    },
+    {
+     "entry": "A14",
+     "when": "raffinage ou conditionnement d'huiles alimentaires, sans extraction"
+    }
+   ]
+  },
+  "1214": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1215": {
+   "links": [
+    {
+     "entry": "A8",
+     "when": "fabrication de levure"
+    }
+   ]
+  },
+  "1216": {
+   "links": [
+    {
+     "entry": "A8",
+     "when": "sucrerie ou raffinerie de sucre"
+    },
+    {
+     "entry": "A14",
+     "when": "malterie"
+    }
+   ]
+  },
+  "1217": {
+   "links": [
+    {
+     "entry": "A14",
+     "when": "fabrication, transformation, conditionnement ou conservation de produits alimentaires"
+    }
+   ]
+  },
+  "1301": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1302": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1303": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1304": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1305": {
+   "links": [
+    {
+     "entry": "A23",
+     "when": "fabrication de papier ou de carton"
+    }
+   ]
+  },
+  "1306": {
+   "links": [
+    {
+     "entry": "A23",
+     "when": "si l'unité fabrique aussi le papier ou le carton"
+    }
+   ],
+   "note": "Transformation seule (emballages, articles en papier) : aucune entrée du décret, demande d'avis."
+  },
+  "1307": {
+   "links": [
+    {
+     "entry": "B9",
+     "when": "fabrication de pâte à papier, traitement de cellulose"
+    }
+   ]
+  },
+  "1401": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1402": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1403": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1404": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1405": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1406": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de colorants ou pigments"
+    }
+   ],
+   "note": "Emploi de colorants dans une autre activité : retenir l'entrée de l'activité principale."
+  },
+  "1407": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1408": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1408 bis": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "le décret vise l'eau de Javel de 2ème catégorie de la nomenclature"
+    }
+   ]
+  },
+  "1409": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    },
+    {
+     "entry": "A14",
+     "when": "dextrines destinées à l'alimentation"
+    }
+   ]
+  },
+  "1410": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "traitement du verre (étamage des glaces)"
+    }
+   ]
+  },
+  "1411": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1412": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1413": {
+   "links": [
+    {
+     "entry": "A3",
+     "when": "fabrication de médicaments"
+    }
+   ]
+  },
+  "1414": {
+   "links": [
+    {
+     "entry": "A3",
+     "when": "si les micro-organismes servent à fabriquer des médicaments ou vaccins"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1415": {
+   "links": [
+    {
+     "entry": "A3",
+     "when": "produits opothérapiques (médicaments)"
+    }
+   ]
+  },
+  "1416": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1417": {
+   "links": [
+    {
+     "entry": "CDC18",
+     "when": "si les huiles essentielles servent à des produits parapharmaceutiques ou cosmétiques"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1418": {
+   "links": [
+    {
+     "entry": "B26",
+     "when": "enrichissement du phosphate de chaux"
+    }
+   ]
+  },
+  "1419": {
+   "links": [
+    {
+     "entry": "A24",
+     "when": "fabrication d'élastomères"
+    },
+    {
+     "entry": "B6",
+     "when": "fabrication de peintures, vernis, résines ou adhésifs"
+    },
+    {
+     "entry": "CDC14",
+     "when": "dépôt de ces matières (produits chimiques)"
+    }
+   ],
+   "note": "Emploi ou transformation de plastiques dans une autre activité : retenir l'entrée de l'activité principale."
+  },
+  "1419 bis 1": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "dépôt de peintures, vernis, résines ou adhésifs (produits chimiques)"
+    }
+   ]
+  },
+  "1419 bis 2": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1420": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1421": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1422": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1423": {
+   "links": [
+    {
+     "entry": "B26",
+     "when": "transformation du phosphate"
+    },
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "1425": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication d'engrais chimiques"
+    },
+    {
+     "entry": "B26",
+     "when": "engrais phosphatés à partir du phosphate"
+    }
+   ]
+  },
+  "1426": {
+   "links": [
+    {
+     "entry": "A6",
+     "when": "exploration ou extraction de pétrole ou de gaz naturel"
+    }
+   ]
+  },
+  "1501": {
+   "links": [
+    {
+     "entry": "B4",
+     "when": "gestion de déchets dangereux (bains et boues de dérochage)"
+    }
+   ]
+  },
+  "1502": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1503": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1504": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1505": {
+   "links": [
+    {
+     "entry": "B4",
+     "when": "si les déchets sont dangereux"
+    },
+    {
+     "entry": "A1",
+     "when": "déchets industriels ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets industriels ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1506": {
+   "links": [
+    {
+     "entry": "B4",
+     "when": "gestion de déchets dangereux"
+    }
+   ]
+  },
+  "1507": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1508": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1509": {
+   "links": [
+    {
+     "entry": "B17",
+     "when": "traitement des eaux usées urbaines"
+    }
+   ]
+  },
+  "1510": {
+   "links": [
+    {
+     "entry": "B18",
+     "when": "station collective, recevant les eaux de plusieurs unités"
+    }
+   ],
+   "note": "Station propre à une usine : retenir l'entrée de l'activité principale."
+  },
+  "1511": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1512": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1513": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1514": {
+   "links": [
+    {
+     "entry": "A1",
+     "when": "déchets ménagers et assimilés, moins de 20 t/j"
+    },
+    {
+     "entry": "B3",
+     "when": "déchets ménagers et assimilés, 20 t/j ou plus"
+    }
+   ]
+  },
+  "1601": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1602": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1603": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1604": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1605": {
+   "links": [
+    {
+     "entry": "B2",
+     "when": "centrale de production d'électricité d'au moins 300 MW"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1606": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1607": {
+   "links": [
+    {
+     "entry": "B9",
+     "when": "dans une unité de pâte à papier"
+    }
+   ]
+  },
+  "1608": {
+   "links": [
+    {
+     "entry": "A16",
+     "when": "si l'unité construit des automobiles, camions ou leurs moteurs"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1609": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de colorant (orseille)"
+    }
+   ]
+  },
+  "1610": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1611": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1612": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1613": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "station de lavage et graissage de véhicules"
+    }
+   ],
+   "note": "Atelier de réparation seul : aucune entrée du décret, demande d'avis."
+  },
+  "1614": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "si l'unité fait du traitement de surface des métaux"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "1615": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de ces substances"
+    },
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "1616": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de ces substances"
+    },
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "1701": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement de surface (sablage, grenaillage)"
+    }
+   ]
+  },
+  "1702": {
+   "links": [
+    {
+     "entry": "B7",
+     "when": "unité sidérurgique"
+    }
+   ]
+  },
+  "1703": {
+   "links": [
+    {
+     "entry": "B7",
+     "when": "agglomération de minerai de fer en sidérurgie"
+    }
+   ],
+   "note": "Agglomération de houille, de charbon de bois ou fabrication de graphite : aucune entrée du décret, demande d'avis."
+  },
+  "1704": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement des métaux"
+    }
+   ]
+  },
+  "1705": {
+   "links": [
+    {
+     "entry": "B25",
+     "when": "traitement de produits minéraux"
+    },
+    {
+     "entry": "A2",
+     "when": "si l'unité fabrique des matériaux de construction"
+    }
+   ]
+  },
+  "1706": {
+   "links": [
+    {
+     "entry": "A7",
+     "when": "granulats et sable jusqu'à 300 000 t/an, argile ou pierres marbrières"
+    },
+    {
+     "entry": "B8",
+     "when": "granulats et sable au-delà de 300 000 t/an, ou extraction de ressources minérales"
+    },
+    {
+     "entry": "CDC13",
+     "when": "carrière traditionnelle"
+    }
+   ]
+  },
+  "1707": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication de céramique ou de matériaux de construction"
+    }
+   ]
+  },
+  "1708": {
+   "links": [
+    {
+     "entry": "B5",
+     "when": "fabrication de chaux ou de plâtre (gypse)"
+    }
+   ]
+  },
+  "1709": {
+   "links": [
+    {
+     "entry": "B5",
+     "when": "fabrication de ciment"
+    }
+   ]
+  },
+  "1710": {
+   "links": [
+    {
+     "entry": "B7",
+     "when": "cokerie d'une unité sidérurgique"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1711": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "émaillage de métaux (traitement de surface)"
+    },
+    {
+     "entry": "A2",
+     "when": "émaillage de céramique ou de verre"
+    }
+   ]
+  },
+  "1712": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication de matériaux de construction (enrobés)"
+    }
+   ]
+  },
+  "1713": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, sauf si l'unité est une usine sidérurgique."
+  },
+  "1714": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "fonderie : traitement des métaux"
+    },
+    {
+     "entry": "B7",
+     "when": "si l'unité produit l'acier ou la fonte"
+    }
+   ]
+  },
+  "1715": {
+   "links": [
+    {
+     "entry": "A4",
+     "when": "si l'unité produit le métal non ferreux"
+    },
+    {
+     "entry": "A5",
+     "when": "fonderie : traitement des métaux"
+    }
+   ]
+  },
+  "1716": {
+   "links": [
+    {
+     "entry": "A4",
+     "when": "si l'unité produit le plomb"
+    },
+    {
+     "entry": "A5",
+     "when": "fonderie : traitement des métaux"
+    }
+   ]
+  },
+  "1717": {
+   "links": [
+    {
+     "entry": "B25",
+     "when": "lavage de produits minéraux"
+    }
+   ]
+  },
+  "1718": {
+   "links": [
+    {
+     "entry": "CDC10",
+     "when": "emboutissage ou découpage de grosses pièces métalliques"
+    },
+    {
+     "entry": "CDC15",
+     "when": "chaudronnerie, construction de réservoirs ou tôlerie"
+    },
+    {
+     "entry": "A16",
+     "when": "construction d'automobiles, de camions ou de leurs moteurs"
+    },
+    {
+     "entry": "A17",
+     "when": "chantier naval"
+    },
+    {
+     "entry": "A18",
+     "when": "fabrication ou entretien d'aéronefs"
+    }
+   ],
+   "note": "Autre travail mécanique (usinage) : aucune entrée du décret, demande d'avis."
+  },
+  "1719": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement des métaux ou traitement de surface"
+    }
+   ]
+  },
+  "1720": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement des métaux ou traitement de surface"
+    }
+   ]
+  },
+  "1721": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement des métaux ou traitement de surface"
+    }
+   ]
+  },
+  "1722": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "traitement des métaux ou traitement de surface"
+    }
+   ]
+  },
+  "1723": {
+   "links": [
+    {
+     "entry": "A4",
+     "when": "élaboration ou affinage de métaux non ferreux"
+    },
+    {
+     "entry": "B25",
+     "when": "traitement de minerais"
+    }
+   ]
+  },
+  "1724": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "traitement de matériaux de construction ou de verre (marbre, granite…)"
+    }
+   ]
+  },
+  "1725": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, sauf si l'unité fabrique ces matériaux (ciment, chaux, plâtre)."
+  },
+  "1726": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, demande d'avis."
+  },
+  "1727": {
+   "links": [
+    {
+     "entry": "A4",
+     "when": "fabrication d'alliages non ferreux (silico-alliages)"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1728": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication ou traitement du verre"
+    }
+   ]
+  },
+  "1729": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication ou traitement du verre"
+    }
+   ]
+  },
+  "1730": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication de matériaux de construction (béton, agglomérés)"
+    }
+   ]
+  },
+  "1801": {
+   "links": [
+    {
+     "entry": "CDC16",
+     "when": "buanderie utilisant l'eau"
+    }
+   ]
+  },
+  "1802": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "1803": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "1804": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication d'extraits tannants (produits chimiques)"
+    }
+   ]
+  },
+  "1805": {
+   "links": [
+    {
+     "entry": "A13",
+     "when": "fabrication de fibres minérales"
+    },
+    {
+     "entry": "CDC9",
+     "when": "fibres textiles artificielles"
+    }
+   ]
+  },
+  "1806": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "1807": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "1808": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "1809": {
+   "links": [],
+   "note": "Nettoyage à sec, sans eau : aucune entrée du décret, demande d'avis."
+  },
+  "1810": {
+   "links": [
+    {
+     "entry": "B19",
+     "when": "dépôt annexé à une tannerie ou mégisserie"
+    }
+   ],
+   "note": "Dépôt seul : aucune entrée du décret, demande d'avis."
+  },
+  "1811": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "1812": {
+   "links": [
+    {
+     "entry": "B19",
+     "when": "tannerie ou mégisserie"
+    }
+   ]
+  },
+  "1813": {
+   "links": [
+    {
+     "entry": "A9",
+     "when": "teinture du textile, délavage de jeans, finition"
+    }
+   ]
+  },
+  "1814": {
+   "links": [
+    {
+     "entry": "B19",
+     "when": "tannerie ou mégisserie"
+    }
+   ]
+  },
+  "1815": {
+   "links": [
+    {
+     "entry": "A9",
+     "when": "tricotage (articles de maille)"
+    },
+    {
+     "entry": "CDC9",
+     "when": "autre industrie textile (tissage, cordages…)"
+    }
+   ]
+  },
+  "1815 bis": {
+   "links": [
+    {
+     "entry": "CDC9",
+     "when": "industrie textile"
+    }
+   ]
+  },
+  "2101": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques",
+     "case": "1)"
+    },
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale",
+     "case": "2)"
+    }
+   ]
+  },
+  "2102": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2104": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2105": {
+   "links": [
+    {
+     "entry": "A24",
+     "when": "fabrication de peroxydes"
+    }
+   ]
+  },
+  "2201": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, demande d'avis."
+  },
+  "2202": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2203": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2204": {
+   "links": [],
+   "note": "Entrepôt de matières combustibles (non chimiques) : aucune entrée du décret, demande d'avis."
+  },
+  "2205": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "distillation ou traitement chimique du goudron"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2206": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, demande d'avis."
+  },
+  "2207": {
+   "links": [],
+   "note": "Dépôt : aucune entrée du décret, demande d'avis."
+  },
+  "2208": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "si l'unité stocke ou distribue des hydrocarbures"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2301": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "2302": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2303": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2304": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "2305": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2306": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2401": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2402": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2403": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits explosifs (produits chimiques)"
+    }
+   ]
+  },
+  "2404": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2405": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2406": {
+   "links": [
+    {
+     "entry": "B4",
+     "when": "destruction de matières dangereuses (déchets dangereux)"
+    }
+   ]
+  },
+  "2407": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques"
+    }
+   ]
+  },
+  "2408": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2501": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de gaz (produits chimiques)"
+    }
+   ]
+  },
+  "2502": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2503": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2504": {
+   "links": [
+    {
+     "entry": "B1",
+     "when": "gazéification de charbon ou de schistes, au moins 500 t/j"
+    },
+    {
+     "entry": "B6",
+     "when": "fabrication de gaz (produits chimiques)"
+    }
+   ]
+  },
+  "2505": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "stockage ou distribution d'hydrocarbures (GPL)"
+    },
+    {
+     "entry": "CDC14",
+     "when": "dépôt de gaz"
+    }
+   ]
+  },
+  "2506": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "distribution d'hydrocarbures (station de remplissage ou de service)"
+    }
+   ]
+  },
+  "2507": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2507 bis": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "distribution d'hydrocarbures (station de remplissage ou de service)"
+    }
+   ]
+  },
+  "2508": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de gaz (produits chimiques)"
+    }
+   ]
+  },
+  "2509": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2511": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "dépôt d'hydrocarbures (carburants, fiouls)"
+    },
+    {
+     "entry": "CDC14",
+     "when": "dépôt d'autres liquides inflammables (solvants, produits chimiques)"
+    }
+   ]
+  },
+  "2512": {
+   "links": [
+    {
+     "entry": "B1",
+     "when": "raffinerie de pétrole brut"
+    },
+    {
+     "entry": "B6",
+     "when": "fabrication de liquides inflammables (produits chimiques)"
+    }
+   ]
+  },
+  "2513": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2514": {
+   "links": [
+    {
+     "entry": "CDC11",
+     "when": "distribution d'hydrocarbures (station de remplissage ou de service)"
+    }
+   ]
+  },
+  "2515": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2516": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "2517": {
+   "links": [
+    {
+     "entry": "A6",
+     "when": "exploration ou extraction de pétrole ou de gaz naturel"
+    }
+   ]
+  },
+  "2601": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "2602": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "2603": {
+   "links": [],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "2701": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "dépôt de produits agro-pharmaceutiques (pesticides)"
+    }
+   ]
+  },
+  "2702": {
+   "links": [
+    {
+     "entry": "A2",
+     "when": "fabrication d'amiante-ciment ou d'autres matériaux de construction"
+    }
+   ],
+   "note": "Aucune entrée du décret ne vise cette activité : demande d'avis, sauf si l'activité principale de l'unité figure dans une annexe."
+  },
+  "2703": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2704": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2705": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2706": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2707": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2708": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "dépôt de fluides neufs ou régénérés",
+     "case": "2)"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2710": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2711": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2712": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2713": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2714": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2715": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de dioxyde de chlore"
+    },
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2716": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de MDI"
+    },
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2717": {
+   "links": [],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2718": {
+   "links": [
+    {
+     "entry": "A5",
+     "when": "dégraissage de métaux (traitement de surface)"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2719": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2720": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2721": {
+   "links": [
+    {
+     "entry": "B4",
+     "when": "élimination ou décontamination de PCB (déchets dangereux)"
+    }
+   ],
+   "note": "Activité annexe : l'entrée du décret dépend de l'activité principale de l'unité."
+  },
+  "2722 bis 1": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2722 bis 2": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2723": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2724 bis 1": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2724 bis 2": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
+   ]
+  },
+  "2725": {
+   "links": [
+    {
+     "entry": "B6",
+     "when": "fabrication de produits chimiques ou de pesticides"
+    }
+   ]
+  },
+  "2726": {
+   "links": [
+    {
+     "entry": "CDC14",
+     "when": "si l'unité est un dépôt (stockage) de ce produit ; utilisé dans une usine, retenir l'entrée de l'activité principale"
+    }
    ]
   }
- ]
+ }
 }

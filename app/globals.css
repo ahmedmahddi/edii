@@ -148,6 +148,9 @@ button.ghost { background: transparent; color: var(--text); border-color: var(--
 .edii-eie-wrap { margin-top: 14px; }
 .edii-eie td { white-space: normal; max-width: none; vertical-align: top; }
 .edii-eie td:first-child { width: 30%; }
+.edii-suggest { list-style: none; margin: 4px 0 0; padding: 0; }
+.edii-suggest li { padding: 2px 0; line-height: 1.4; }
+.edii-suggest .edii-link { font-weight: 500; }
 .edii-study-result { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
 .edii-s-eie_b { background: var(--bad-bg); color: var(--bad); }
 .edii-s-eie_a { background: var(--warn-bg); color: var(--warn); }
