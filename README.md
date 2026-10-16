@@ -50,7 +50,7 @@ Everything entered is kept in the page address, so a classification can be bookm
 | `data/sources/` | The official texts (PDF). |
 | `data/pipeline/` | `ocr.py` (scans → `data/ocr/`), `parse.py` (→ `data/nomenclature.json`, `data/review.md`), `eie.py` (decree → `data/eie.json`). |
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
-| `data/eie-links.json` | Rubriques suggested for each entry of décret n° 2005-1991 (a reading; the user chooses). |
+| `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
 ## Texts
@@ -168,9 +168,28 @@ npm run data:eie     # decree → data/eie.json  (needs pdftotext)
 
 These lists are separate from the EDII nomenclature: mostly sectors, some with their own
 thresholds (t/j, t/an, ha, lits, MW), and some projects outside it (roads, lotissements, hotels).
-`data/eie-links.json` suggests, for each entry, the rubriques it may cover. That is a reading of two
-texts, so the page lists the suggested entries first but **the user chooses** each activity's
-entry, or "none".
+The decree classes **units by their main activity**; the nomenclature lists **activities and
+substances inside a unit**. `data/eie-links.json` bridges the two, rubrique by rubrique, following
+these rules:
+
+* **Fabrication** of a product → the sector entry (chemicals → B6, médicaments → A3, ciment,
+  chaux, plâtre → B5…).
+* **Stockage or emploi** of a substance → annexe 2 n° 14 (stockage de gaz ou de produits
+  chimiques) only if the unit is a depot. Used inside a factory, the factory's own entry applies.
+* **Ancillary activities** (chauffage, combustion, réfrigération, moteurs, parkings…) → no entry of
+  their own, unless the unit is that activity (a power plant of at least 300 MW for combustion).
+* A **specific annexe 2 entry** wins over a general annexe 1 one (féculeries → annexe 2 n° 12).
+* Entries split by a threshold (déchets below or above 20 t/j, carrières below or above
+  300 000 t/an) are both listed, each with its condition.
+
+Each suggestion has a `when` (the condition it depends on), and optionally a `case` when it only
+applies to one case of the rubrique (2101: "1) fabrication" → B6, "2) emploi ou stockage" → annexe 2
+n° 14). A rubrique without a suggestion has a `note` saying what applies. The page shows the
+suggestions with their conditions, a "no entry of its own" choice, and every other entry: **the user
+chooses** each activity's entry.
+
+`npm run data:eie` checks the file (every activity rubrique covered, every entry and case real) and
+writes `data/eie-links.md`, the same suggestions as a table to review against both texts.
 
 `lib/studies.ts` then decides:
 
