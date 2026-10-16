@@ -1,0 +1,90 @@
+{
+  "comment": "Manual fixes for OCR misreads, applied by parse.py after checking the scan. text: replace 'find' with 'replace' in the OCR lines of that source page. category: set (or confirm, after checking the scan) the category of the line starting with 'line_starts'.",
+  "text": [
+    {
+      "source": "2005",
+      "page": 8,
+      "find": "à 10001",
+      "replace": "à 1000 l",
+      "why": "litre glued to the number"
+    },
+    {
+      "source": "2005",
+      "page": 14,
+      "find": "inférieure à SO t",
+      "replace": "inférieure à 50 t",
+      "why": "50 read as SO"
+    },
+    {
+      "source": "2005",
+      "page": 23,
+      "find": "inférieure ou égale à St",
+      "replace": "inférieure ou égale à 5 t",
+      "why": "5 t read as St"
+    },
+    {
+      "source": "2005",
+      "page": 18,
+      "find": "supérieure à 12001",
+      "replace": "supérieure à 1200 l",
+      "why": "litre glued to the number"
+    },
+    {
+      "source": "2005",
+      "page": 24,
+      "find": "loxiques particulières",
+      "replace": "Toxiques particulières",
+      "why": "T read as l"
+    }
+  ],
+  "category": [
+    {
+      "source": "2005",
+      "page": 6,
+      "line_starts": "Accumulateurs et piles",
+      "category": 1
+    },
+    {
+      "source": "2005",
+      "page": 7,
+      "line_starts": "de transit, décharge",
+      "category": 1
+    },
+    {
+      "source": "2005",
+      "page": 17,
+      "line_starts": "2) supérieure à 500 t",
+      "category": 2
+    },
+    {
+      "source": "2005",
+      "page": 18,
+      "line_starts": "1) supérieure ou égale à 50 t",
+      "category": 1
+    },
+    {
+      "source": "2005",
+      "page": 20,
+      "line_starts": "1) supérieure ou égale à 200 t",
+      "category": 1
+    },
+    {
+      "source": "2010",
+      "page": 9,
+      "line_starts": "2) inférieure à 10 t",
+      "category": 2
+    },
+    {
+      "source": "2010",
+      "page": 11,
+      "line_starts": "a) supérieure ou égale à 20 t",
+      "category": 1
+    },
+    {
+      "source": "2010",
+      "page": 12,
+      "line_starts": "a) Supérieur ou égal à 2000 m3",
+      "category": 2
+    }
+  ]
+}
