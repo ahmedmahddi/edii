@@ -198,15 +198,27 @@ describe("règle d'addition (arrêté 2010, art. 2 bis)", () => {
   });
 });
 
-it("data/nomenclature.json matches the OCR output and corrections", () => {
+/** The first command that runs, or null. Windows' "python3" may be a Microsoft Store stub that only fails. */
+function firstWorking(candidates: string[], args: string[]): string | null {
+  for (const cmd of candidates) {
+    try {
+      execFileSync(cmd, args, { stdio: "pipe" });
+      return cmd;
+    } catch {
+      // not installed, or not usable: try the next one
+    }
+  }
+  return null;
+}
+const PYTHON = firstWorking(["python3", "python", "py"], ["-c", "import sys; assert sys.version_info >= (3, 9)"]);
+const PDFTOTEXT = firstWorking(["pdftotext"], ["-v"]);
+
+// These two re-run the data pipeline: they need Python 3.9+ (and pdftotext for the decree), and
+// are skipped without them. CI installs both.
+it.skipIf(!PYTHON)("data/nomenclature.json matches the OCR output and corrections", () => {
   const file = path.join(__dirname, "..", "data", "nomenclature.json");
   const before = readFileSync(file, "utf8");
-  try {
-    execFileSync("python3", ["-I", path.join(__dirname, "..", "data", "pipeline", "parse.py")], { stdio: "pipe" });
-  } catch (e) {
-    if ((e as NodeJS.ErrnoException).code === "ENOENT") return; // no python: CI runs this check
-    throw e;
-  }
+  execFileSync(PYTHON!, ["-I", path.join(__dirname, "..", "data", "pipeline", "parse.py")], { stdio: "pipe" });
   expect(readFileSync(file, "utf8"), "data/nomenclature.json is stale: run `npm run data:parse` and commit").toBe(before);
 });
 
@@ -284,15 +296,9 @@ describe("études ANPE (décret n° 2005-1991)", () => {
   });
 });
 
-it("data/eie.json matches the decree and data/eie-links.json", () => {
+it.skipIf(!PYTHON || !PDFTOTEXT)("data/eie.json matches the decree and data/eie-links.json", () => {
   const file = path.join(__dirname, "..", "data", "eie.json");
   const before = readFileSync(file, "utf8");
-  try {
-    execFileSync("pdftotext", ["-v"], { stdio: "pipe" });
-    execFileSync("python3", ["-I", path.join(__dirname, "..", "data", "pipeline", "eie.py")], { stdio: "pipe" });
-  } catch (e) {
-    if ((e as NodeJS.ErrnoException).code === "ENOENT") return; // no python or no pdftotext (poppler-utils)
-    throw e;
-  }
+  execFileSync(PYTHON!, ["-I", path.join(__dirname, "..", "data", "pipeline", "eie.py")], { stdio: "pipe" });
   expect(readFileSync(file, "utf8"), "data/eie.json is stale: run `npm run data:eie` and commit").toBe(before);
 });
