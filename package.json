@@ -10,9 +10,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "data:ocr": "python3 -I data/pipeline/ocr.py",
-    "data:parse": "python3 -I data/pipeline/parse.py",
-    "data:eie": "python3 -I data/pipeline/eie.py"
+    "data:ocr": "node scripts/python.mjs data/pipeline/ocr.py",
+    "data:parse": "node scripts/python.mjs data/pipeline/parse.py",
+    "data:eie": "node scripts/python.mjs data/pipeline/eie.py"
   },
   "dependencies": {
     "next": "^15.5.27",

@@ -24,6 +24,11 @@ npm test           # classification, addition rule, ANPE study, and data in sync
 npm run build && npm start
 ```
 
+Two tests re-run the data pipeline to check the JSON files still match the texts. They need
+Python 3.9+ (and `pdftotext` from poppler for the decree) and are skipped without them, which is
+fine on a laptop; CI installs both. The `npm run data:*` scripts find Python on any system
+(`python3`, `python` or `py` on Windows).
+
 It deploys as is on Vercel (import the repository, keep the defaults): the page is static.
 
 ## How to use it
