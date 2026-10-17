@@ -111,6 +111,38 @@ Système, domaine, type, reference and frequency are filled in (`registre` in `w
 système each domain belongs to); the summary of the requirement, conformity, risk and action plan are
 left to whoever reads the text.
 
+## Registers of the establishments
+
+The classification leads to the veille. Once the synthèse is validated, "Créer le registre de veille"
+opens the establishment's register in the Veille réglementaire view:
+
+1. **Site profile.** The classification gives the category, the rubriques, the sectors and the ANPE
+   study; the consultant adds the workforce and what the site has (vehicles, pressure equipment,
+   lifting gear, chemicals, hydrocarbons, food, discharges, emissions, public, imports…). Facts the
+   rubriques imply are ticked already (section 2500 → hydrocarbures, 1200 → denrées…).
+2. **Texts proposed.** Every text of the référentiel that applies to the profile is proposed, ticked,
+   with why ("Personnel salarié", "1ère catégorie", "Rubrique 2505", "Étude d'impact"…); sector news
+   is listed as unticked suggestions. Any other text of the référentiel or of the JORT can be added by
+   search.
+3. **Evaluation**, text by text, as in an ID-QSE-002 register: conformity (C / NC / non applicable),
+   date of the last evaluation and frequency, summary of the requirements, risk, action plan,
+   responsible and deadline. The register is exported to Excel in the ID-QSE-002 layout.
+4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
+   which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…", until marked
+   as taken into account), and which new texts apply to the site (to add or set aside).
+
+The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated (seeded
+from an ID-QSE-002 register: title, summary, risk, and `when`, the conditions under which a text
+applies), and every text the veille finds in the JORT, whose conditions are those of the rule that
+found it (`when` in `data/veille/watch.json`). Conditions are listed in `lib/registre/profil.ts`:
+`tous`, `classe`, `categorie:1`, `secteur:1200`, `rubrique:2505`, `etude:eie`, `effectif`,
+`effectif:50`, or a fact of the profile (`vehicules`, `levage`…); `a+b` needs both. To widen the
+référentiel, add texts to `textes.json`, or read older JORT years with `npm run veille -- --year 2015`.
+
+Registers are kept in the browser that created them (no account, no server). "Sauvegarder les
+registres" saves them all to a file, and "Restaurer une sauvegarde" brings them back, on this computer
+or another: save regularly.
+
 ## Layout
 
 | Path | What |
@@ -126,7 +158,10 @@ left to whoever reads the text.
 | `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
 | `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `data/veille/feed.json`. |
 | `data/veille/` | `watch.json` (the rules), `sommaires/` (every sommaire read) and `feed.json` (the texts found; derived, not in git). |
-| `app/components/veille.tsx` | The Veille réglementaire view. |
+| `app/components/veille.tsx` | The Veille réglementaire view: registers and Journal officiel tabs. |
+| `lib/registre/` | Registers of the establishments: the site profile and its conditions (`profil.ts`), the référentiel (`referentiel.ts`), a register, its alerts and due evaluations (`registre.ts`). |
+| `data/referentiel/textes.json` | The curated référentiel. |
+| `app/components/registres.tsx` | The registers: list, site profile, register and evaluation. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
 ## Texts

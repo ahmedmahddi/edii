@@ -1,0 +1,872 @@
+{
+ "comment": "Référentiel of the veille: law references a register can hold (kind, number, date, title, domain) and when they apply (conditions of lib/registre/profil.ts). The summary of requirements and the risk are written by the consultant in each register. Texts found in the JORT are added by lib/registre/referentiel.ts.",
+ "textes": [
+  {
+   "id": "decret-2019-1130",
+   "type": "Décret",
+   "numero": "2019-1130",
+   "date": "2019-11-16",
+   "titre": "Décret n° 2019-1130 du 16 novembre 2019, portant modification de la rémunération des personnes victimes des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-2018-03-29",
+   "type": "Arrêté",
+   "date": "2018-03-29",
+   "titre": "Arrêté du 29 mars 2018, modifiant et complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-2015-12-01",
+   "type": "Arrêté",
+   "date": "2015-12-01",
+   "titre": "Arrêté du 1er décembre 2015, fixant la liste des maladies transmissibles à déclaration obligatoire",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "arrete-1995-01-10",
+   "type": "Arrêté",
+   "date": "1995-01-10",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 10 janvier 1995, fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-95-538",
+   "type": "Décret",
+   "numero": "95-538",
+   "date": "1995-04-01",
+   "titre": "Décret n° 95-538 du 1er avril 1995, relatif à la fixation des taux de cotisations au régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-2008-87",
+   "type": "Décret",
+   "numero": "2008-87",
+   "date": "2008-01-08",
+   "titre": "Décret n° 2008-87 du 8 janvier 2008, portant prorogation du délai de bénéfice de la remise intégrale des pénalités de retard au titre des cotisations",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-2007-1487",
+   "type": "Décret",
+   "numero": "2007-1487",
+   "date": "2007-06-25",
+   "titre": "Décret n° 2007-1487 du 25 juin 2007, portant approbation de la convention qui fixe les droits et obligations des assureurs et de la caisse nationale d'assurance maladie",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-1995-04-29",
+   "type": "Arrêté",
+   "date": "1995-04-29",
+   "titre": "Arrêté du ministre des affaires sociales du 29 avril 1995, fixant le barème de conversion des rentes allouées aux victimes d'accidents du travail et de maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-95-103",
+   "type": "Loi",
+   "numero": "95-103",
+   "date": "1995-11-27",
+   "titre": "Loi n° 95-103 du 27 novembre 1995, modifiant et complétant la loi n° 94-28 du 21 février 1994 relative à la réparation des préjudices résultant des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-1995-02-23",
+   "type": "Arrêté",
+   "date": "1995-02-23",
+   "titre": "Arrêté du ministre des affaires sociales du 23 février 1995, fixant la formule de la déclaration des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-1999-04-15",
+   "type": "Arrêté",
+   "date": "1999-04-15",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 15 avril 1999, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-2007-08-15",
+   "type": "Arrêté",
+   "date": "2007-08-15",
+   "titre": "Arrêté du ministre des affaires sociales du 15 août 2007, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-1995-04-13",
+   "type": "Arrêté",
+   "date": "1995-04-13",
+   "titre": "Arrêté du ministre des affaires sociales du 13 avril 1995, portant dispense de l'obligation de la déclaration",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-2003-06-05",
+   "type": "Arrêté",
+   "date": "2003-06-05",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 5 juin 2003, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-1994-12-21",
+   "type": "Arrêté",
+   "date": "1994-12-21",
+   "titre": "Arrêté du ministre des affaires sociales du 21 décembre 1994, fixant le modèle des formules de déclaration des travailleurs nouvellement recrutés et de déclaration trimestrielle des salaires",
+   "domaine": "travail",
+   "theme": "Sécurité sociale, CNSS",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-2000-1985",
+   "type": "Décret",
+   "numero": "2000-1985",
+   "date": "2000-09-12",
+   "titre": "Décret n° 2000-1985 du 12 septembre 2000, relatif à l'organisation, au fonctionnement et au financement des services de médecine du travail",
+   "domaine": "sst",
+   "theme": "Médecine du travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "arrete-2013-09-16",
+   "type": "Arrêté",
+   "date": "2013-09-16",
+   "titre": "Arrêté du ministre de l'intérieur du 16 septembre 2013, fixant le contenu du plan intérieur d'intervention",
+   "domaine": "incendie",
+   "theme": "Protection civile",
+   "when": [
+    "classe"
+   ]
+  },
+  {
+   "id": "decret-2004-1876",
+   "type": "Décret",
+   "numero": "2004-1876",
+   "date": "2004-08-11",
+   "titre": "Décret n° 2004-1876 du 11 août 2004, relatif à la conformité des locaux et à l'attestation de prévention",
+   "domaine": "incendie",
+   "theme": "Prévention des incendies",
+   "when": [
+    "classe",
+    "erp"
+   ]
+  },
+  {
+   "id": "decret-2005-1991",
+   "type": "Décret",
+   "numero": "2005-1991",
+   "date": "2005-07-11",
+   "titre": "Décret n° 2005-1991 du 11 juillet 2005, relatif à l'étude d'impact sur l'environnement et fixant les catégories d'unités soumises à l'étude d'impact sur l'environnement et les catégories d'unités soumises aux cahiers des charges",
+   "domaine": "etablissements-classes",
+   "theme": "Étude d'impact sur l'environnement",
+   "when": [
+    "classe",
+    "etude:eie",
+    "etude:cahier_des_charges"
+   ]
+  },
+  {
+   "id": "arrete-2010-02-20",
+   "type": "Arrêté",
+   "date": "2010-02-20",
+   "titre": "Arrêté conjoint du ministre de l'intérieur et du développement local et du ministre de l'industrie et de la technologie du 20 février 2010, fixant les termes de référence de l'étude de dangers et du plan d'opération interne relatifs aux établissements dangereux, insalubres ou incommodes de première catégorie",
+   "domaine": "etablissements-classes",
+   "theme": "Étude de dangers, risques industriels",
+   "when": [
+    "categorie:1"
+   ]
+  },
+  {
+   "id": "loi-2009-11",
+   "type": "Loi",
+   "numero": "2009-11",
+   "date": "2009-03-02",
+   "titre": "Loi n° 2009-11 du 2 mars 2009, portant promulgation du code de la sécurité et de la prévention des risques d'incendie, d'explosion et de panique dans les bâtiments",
+   "domaine": "incendie",
+   "theme": "Prévention des incendies",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "decret-2006-2687",
+   "type": "Décret",
+   "numero": "2006-2687",
+   "date": "2006-10-09",
+   "titre": "Décret n° 2006-2687 du 9 octobre 2006, relatif aux procédures d'ouverture et d'exploitation des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ]
+  },
+  {
+   "id": "arrete-2017-08-08",
+   "type": "Arrêté",
+   "date": "2017-08-08",
+   "titre": "Arrêté du 8 août 2017, fixant les critères pour bénéficier du contrat « KARAMA »",
+   "domaine": "travail",
+   "theme": "Emploi, formation professionnelle"
+  },
+  {
+   "id": "decret-2017-399",
+   "type": "Décret",
+   "numero": "2017-399",
+   "date": "2017-03-29",
+   "titre": "Décret n° 2017-399 du 29 mars 2017, portant remise des pénalités de retard exigées au titre des régimes de sécurité sociale",
+   "domaine": "travail",
+   "theme": "Sécurité sociale, CNSS",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-2002-583",
+   "type": "Décret",
+   "numero": "2002-583",
+   "date": "2002-03-12",
+   "titre": "Décret n° 2002-583 du 12 mars 2002, portant modification du décret n° 96-1050 du 3 juin 1996",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-96-62",
+   "type": "Loi",
+   "numero": "96-62",
+   "date": "1996-07-15",
+   "titre": "Loi n° 96-62 du 15 juillet 1996, portant modification de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decretloi-2020-2",
+   "type": "Décret-loi",
+   "numero": "2020-2",
+   "date": "2020-04-14",
+   "titre": "Décret-loi n° 2020-2 du 14 avril 2020, portant suspension exceptionnelle et provisoire de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-91-15",
+   "type": "Loi",
+   "numero": "91-15",
+   "date": "1991-02-25",
+   "titre": "Loi n° 91-15 du 25 février 1991, portant modification du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-70-20",
+   "type": "Loi",
+   "numero": "70-20",
+   "date": "1970-04-30",
+   "titre": "Loi n° 70-20 du 30 avril 1970, portant modification du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-2007-19",
+   "type": "Loi",
+   "numero": "2007-19",
+   "date": "2007-04-02",
+   "titre": "Loi n° 2007-19 du 2 avril 2007, portant modification de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-66-27",
+   "type": "Loi",
+   "numero": "66-27",
+   "date": "1966-04-30",
+   "titre": "Loi n° 66-27 du 30 avril 1966, portant promulgation du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-68-328",
+   "type": "Décret",
+   "numero": "68-328",
+   "date": "1968-10-22",
+   "titre": "Décret n° 68-328 du 22 octobre 1968, fixant les règles générales d'hygiène applicables dans les entreprises soumises au code du travail",
+   "domaine": "sst",
+   "theme": "Santé et sécurité au travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-2005-3395",
+   "type": "Décret",
+   "numero": "2005-3395",
+   "date": "2005-12-26",
+   "titre": "Décret n° 2005-3395 du 26 décembre 2005, fixant les conditions et les modalités de collecte des accumulateurs et piles usagés",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ]
+  },
+  {
+   "id": "decret-2008-2745",
+   "type": "Décret",
+   "numero": "2008-2745",
+   "date": "2008-07-28",
+   "titre": "Décret n° 2008-2745 du 28 juillet 2008, fixant les conditions et modalités de gestion des déchets des activités sanitaires",
+   "domaine": "environnement",
+   "theme": "Déchets"
+  },
+  {
+   "id": "decret-2000-2339",
+   "type": "Décret",
+   "numero": "2000-2339",
+   "date": "2000-10-10",
+   "titre": "Décret n° 2000-2339 du 10 octobre 2000, fixant la liste des déchets dangereux",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ]
+  },
+  {
+   "id": "loi-96-41",
+   "type": "Loi",
+   "numero": "96-41",
+   "date": "1996-06-10",
+   "titre": "Loi n° 96-41 du 10 juin 1996, relative aux déchets et au contrôle de leur gestion et de leur élimination",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ]
+  },
+  {
+   "id": "decret-2017-433",
+   "type": "Décret",
+   "numero": "2017-433",
+   "date": "2017-04-10",
+   "titre": "Décret n° 2017-433 du 10 avril 2017, fixant les infractions et les pénalités relatives à la santé, à l'hygiène et à la salubrité dans le territoire des collectivités locales",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "loi-2007-34",
+   "type": "Loi",
+   "numero": "2007-34",
+   "date": "2007-06-04",
+   "titre": "Loi n° 2007-34 du 4 juin 2007, sur la qualité de l'air",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ]
+  },
+  {
+   "id": "decret-2018-928",
+   "type": "Décret",
+   "numero": "2018-928",
+   "date": "2018-11-07",
+   "titre": "Décret n° 2018-928 du 7 novembre 2018, modifiant et complétant le décret n° 2010-2519 du 28 septembre 2010 fixant les valeurs limites à la source des polluants de l'air de sources fixes",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ]
+  },
+  {
+   "id": "decret-2018-447",
+   "type": "Décret",
+   "numero": "2018-447",
+   "date": "2018-05-18",
+   "titre": "Décret n° 2018-447 du 18 mai 2018, fixant les valeurs limites et les valeurs d'avertissement de la qualité de l'air ambiant",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ]
+  },
+  {
+   "id": "decret-2000-148",
+   "type": "Décret",
+   "numero": "2000-148",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-148 du 24 janvier 2000, fixant la périodicité et les procédures de la visite technique des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2010-2519",
+   "type": "Décret",
+   "numero": "2010-2519",
+   "date": "2010-09-28",
+   "titre": "Décret n° 2010-2519 du 28 septembre 2010, fixant les valeurs limites à la source des polluants de l'air de sources fixes",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ]
+  },
+  {
+   "id": "decret-2022-335",
+   "type": "Décret",
+   "numero": "2022-335",
+   "date": "2022-02-14",
+   "titre": "Décret n° 2022-335 du 14 février 2022, fixant le seuil à partir duquel la consommation des eaux est soumise à un diagnostic technique, périodique et obligatoire",
+   "domaine": "environnement",
+   "theme": "Rejets dans l'eau, assainissement",
+   "when": [
+    "classe",
+    "forage"
+   ]
+  },
+  {
+   "id": "decret-75-503",
+   "type": "Décret",
+   "numero": "75-503",
+   "date": "1975-07-28",
+   "titre": "Décret n° 75-503 du 28 juillet 1975, portant réglementation des mesures de protection des travailleurs dans les établissements qui mettent en œuvre des courants électriques",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "decret-62-129",
+   "type": "Décret",
+   "numero": "62-129",
+   "date": "1962-04-18",
+   "titre": "Décret n° 62-129 du 18 avril 1962, relatif au contrôle réglementaire des appareils de levage",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "levage"
+   ]
+  },
+  {
+   "id": "decret-2001-329",
+   "type": "Décret",
+   "numero": "2001-329",
+   "date": "2001-01-23",
+   "titre": "Décret n° 2001-329 du 23 janvier 2001, modifiant le décret n° 87-50 du 13 janvier 1987 portant institution des audits énergétiques obligatoires et périodiques",
+   "domaine": "environnement",
+   "theme": "Maîtrise de l'énergie",
+   "when": [
+    "energie"
+   ]
+  },
+  {
+   "id": "decret-2004-2144",
+   "type": "Décret",
+   "numero": "2004-2144",
+   "date": "2004-09-02",
+   "titre": "Décret n° 2004-2144 du 2 septembre 2004, fixant les conditions d'assujettissement des établissements consommateurs d'énergie à l'audit énergétique obligatoire et périodique",
+   "domaine": "environnement",
+   "theme": "Maîtrise de l'énergie",
+   "when": [
+    "energie"
+   ]
+  },
+  {
+   "id": "decret-98-2248",
+   "type": "Décret",
+   "numero": "98-2248",
+   "date": "1998-11-16",
+   "titre": "Décret n° 98-2248 du 16 novembre 1998, fixant les lieux affectés à l'usage collectif dans lesquels il est interdit de fumer",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "loi-2018-35",
+   "type": "Loi",
+   "numero": "2018-35",
+   "date": "2018-06-11",
+   "titre": "Loi n° 2018-35 du 11 juin 2018, relative à la responsabilité sociale des entreprises",
+   "domaine": "travail",
+   "theme": "Responsabilité sociale des entreprises",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "arrete-2018-08-31",
+   "type": "Arrêté",
+   "date": "2018-08-31",
+   "titre": "Arrêté du 31 août 2018, portant approbation de la procédure de passation des marchés publics en ligne",
+   "domaine": "finance",
+   "theme": "Investissement, change, crédit, marchés publics"
+  },
+  {
+   "id": "arrete-2019-03-05",
+   "type": "Arrêté",
+   "date": "2019-03-05",
+   "titre": "Arrêté du 5 mars 2019, fixant le contrôle métrologique légal sur les appareils de mesure de vitesse sur routes",
+   "domaine": "secteurs",
+   "theme": "Normes, conformité des produits, métrologie"
+  },
+  {
+   "id": "arrete-1966-01-08",
+   "type": "Arrêté",
+   "date": "1966-01-08",
+   "titre": "Arrêté du 8 janvier 1966, relatif à la mesure du bruit produit par un véhicule automobile",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "arrete-1984-08-27",
+   "type": "Arrêté",
+   "date": "1984-08-27",
+   "titre": "Arrêté des ministres des transports et des communications et de la santé publique du 27 août 1984, relatif au contrôle au point fixe du niveau sonore des véhicules automobiles",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-84-1556",
+   "type": "Décret",
+   "numero": "84-1556",
+   "date": "1984-12-29",
+   "titre": "Décret n° 84-1556 du 29 décembre 1984, relatif au niveau de bruit de jour et de nuit",
+   "domaine": "environnement",
+   "theme": "Bruit et nuisances sonores",
+   "when": [
+    "classe",
+    "bruit"
+   ]
+  },
+  {
+   "id": "decret-2000-155",
+   "type": "Décret",
+   "numero": "2000-155",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-155 du 24 janvier 2000, définissant les équipements et les moyens destinés à prouver certaines infractions à la circulation et fixant les conditions de leur utilisation",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2012-2759",
+   "type": "Décret",
+   "numero": "2012-2759",
+   "date": "2012-11-13",
+   "titre": "Décret n° 2012-2759 du 13 novembre 2012, modifiant le décret n° 2000-147 du 24 janvier 2000 fixant les règles techniques d'équipement et d'aménagement des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2006-54",
+   "type": "Loi",
+   "numero": "2006-54",
+   "date": "2006-07-28",
+   "titre": "Loi n° 2006-54 du 28 juillet 2006, modifiant et complétant le code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2005-117",
+   "type": "Décret",
+   "numero": "2005-117",
+   "date": "2005-01-19",
+   "titre": "Décret n° 2005-117 du 19 janvier 2005, fixant la liste des infractions ordinaires aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2004-74",
+   "type": "Loi",
+   "numero": "2004-74",
+   "date": "2004-08-20",
+   "titre": "Loi n° 2004-74 du 20 août 2004, portant modification du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2001-2282",
+   "type": "Décret",
+   "numero": "2001-2282",
+   "date": "2001-09-25",
+   "titre": "Décret n° 2001-2282 du 25 septembre 2001, fixant la liste des infractions ordinaires aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2001-2281",
+   "type": "Décret",
+   "numero": "2001-2281",
+   "date": "2001-09-25",
+   "titre": "Décret n° 2001-2281 du 25 septembre 2001, relatif aux règles générales de la circulation routière",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2001-101",
+   "type": "Loi",
+   "numero": "2001-101",
+   "date": "2001-10-22",
+   "titre": "Loi n° 2001-101 du 22 octobre 2001, modifiant le code de la route promulgué par la loi n° 99-71 du 26 juillet 1999",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2000-152",
+   "type": "Décret",
+   "numero": "2000-152",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-152 du 24 janvier 2000, fixant la liste des pièces nécessaires pour la mise en circulation d'un véhicule et sa conduite",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2000-151",
+   "type": "Décret",
+   "numero": "2000-151",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-151 du 24 janvier 2000, relatif aux règles générales de la circulation routière",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2017-811",
+   "type": "Décret",
+   "numero": "2017-811",
+   "date": "2017-06-30",
+   "titre": "Décret n° 2017-811 du 30 juin 2017, modifiant le décret n° 2010-262 du 15 février 2010 fixant la liste des contraventions aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2017-132",
+   "type": "Décret",
+   "numero": "2017-132",
+   "date": "2017-01-06",
+   "titre": "Décret n° 2017-132 du 6 janvier 2017, modifiant le décret n° 2000-147 du 24 janvier 2000 fixant les règles techniques d'équipement et d'aménagement des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-99-71",
+   "type": "Loi",
+   "numero": "99-71",
+   "date": "1999-07-26",
+   "titre": "Loi n° 99-71 du 26 juillet 1999, portant promulgation du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2024-41",
+   "type": "Loi",
+   "numero": "2024-41",
+   "titre": "Loi n° 2024-41, relative aux chèques (chèques sans provision)",
+   "domaine": "finance",
+   "theme": "Droit des sociétés, obligations des entreprises",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "loi-2025-9",
+   "type": "Loi",
+   "numero": "2025-9",
+   "date": "2025-05-21",
+   "titre": "Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ]
+  },
+  {
+   "id": "loi-2025-17",
+   "type": "Loi",
+   "numero": "2025-17",
+   "date": "2025-12-12",
+   "titre": "Loi n° 2025-17 du 12 décembre 2025, portant loi de finances pour l'année 2026",
+   "domaine": "finance",
+   "theme": "Loi de finances",
+   "when": [
+    "tous"
+   ]
+  },
+  {
+   "id": "arrete-2005-11-15",
+   "type": "Arrêté",
+   "date": "2005-11-15",
+   "titre": "Arrêté du ministre de l'industrie, de l'énergie et des PME du 15 novembre 2005, fixant la nomenclature des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 94 du 25 novembre 2005"
+  },
+  {
+   "id": "arrete-2010-02-23",
+   "type": "Arrêté",
+   "date": "2010-02-23",
+   "titre": "Arrêté du ministre de l'industrie et de la technologie du 23 février 2010, modifiant et complétant l'arrêté du 15 novembre 2005 fixant la nomenclature des établissements dangereux, insalubres ou incommodes (règle d'addition)",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 18 du 2 mars 2010",
+   "source": "https://lake.jort.tn/journal-officiel/fr/2010/018.pdf#page=7"
+  },
+  {
+   "id": "arrete-2012-10-24",
+   "type": "Arrêté",
+   "date": "2012-10-24",
+   "titre": "Arrêté du ministre de l'industrie du 24 octobre 2012, modifiant et complétant l'arrêté du 15 novembre 2005 fixant la nomenclature des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 88 du 6 novembre 2012"
+  },
+  {
+   "id": "decret-68-88",
+   "type": "Décret",
+   "numero": "68-88",
+   "date": "1968-03-28",
+   "titre": "Décret n° 68-88 du 28 mars 1968, relatif aux établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ]
+  }
+ ]
+}
