@@ -101,6 +101,14 @@ npm run veille -- --list --year 2026 > titres.txt   # every title read, flagged 
 
 A flagged text is something to read, not a legal conclusion.
 
+**Export to the QSE register.** "Exporter vers le registre (Excel)" saves the texts shown (filters
+included; pick the status "Pertinent" to export only those kept) as rows of the register de veille
+légale et réglementaire, in the ID-QSE-002 layout: Système, Domaine, Type, Réf, Titre (linked to the
+JORT page), Résumé exigence, Conformité, Fréquence d'évaluation, Risque, Plan d'action, Responsable.
+Système, domaine, type, reference and frequency are filled in (`registre` in `watch.json` says which
+système each domain belongs to); the summary of the requirement, conformity, risk and action plan are
+left to whoever reads the text.
+
 ## Layout
 
 | Path | What |
@@ -113,7 +121,7 @@ A flagged text is something to read, not a legal conclusion.
 | `data/pipeline/` | `ocr.py` (scans → `data/ocr/`), `parse.py` (→ `data/nomenclature.json`, `data/review.md`), `eie.py` (decree → `data/eie.json`). |
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
-| `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), and the watch rules (`watch.ts`). |
+| `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
 | `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/feed.json`. |
 | `data/veille/` | `watch.json` (the rules), `feed.json` (the texts found) and `sommaires/` (every sommaire read). |
 | `app/components/veille.tsx` | The Veille réglementaire view. |
