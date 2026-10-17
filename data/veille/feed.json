@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T08:41:55.229Z",
+ "updated": "2026-10-17T08:49:14.065Z",
  "scanned": {
   "2026": [
    1,
@@ -22,7 +22,8 @@
    "title": "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant et complétant l’arrêté du ministre de l'agriculture du 19 septembre 1998, fixant les modalités de contrôle sanitaire et de surveillance des conditions de production des produits de la pêche et de leur mise sur le marché",
    "severity": "important",
    "domains": [
-    "hygiene"
+    "hygiene",
+    "secteurs"
    ],
    "sectors": [
     "1200"
@@ -34,6 +35,95 @@
      "label": "Sécurité sanitaire des aliments",
      "terms": [
       "contrôle sanitaire"
+     ]
+    },
+    {
+     "rule": "secteur-agroalimentaire",
+     "label": "Industries agroalimentaires",
+     "terms": [
+      "produits de la pêche"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-003-35-4",
+   "year": 2026,
+   "issue": 3,
+   "date": "2026-01-08",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/003.pdf#page=4",
+   "page": 35,
+   "institution": "Ministère des Domaines de l'Etat et des Affaires Foncières",
+   "kind": "Décret",
+   "title": "Décret n° 2026-6 du 7 janvier 2026, relatif à l’approbation de la vente au dinar symbolique au profit de l’Agence foncière industrielle d’une parcelle de terre domaniale sise à la région de Bourbiaa dans la délégation de Mohammadia du gouvernorat de Ben Arous pour réaliser et aménager une zone industrielle",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels",
+     "terms": [
+      "zone industrielle",
+      "Agence foncière industrielle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-001-9-8",
+   "year": 2026,
+   "issue": 1,
+   "date": "2026-01-02",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/001.pdf#page=9",
+   "page": 9,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime et du ministre de l’équipement et de l’habitat du 31 décembre 2025, modifiant l’arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime et de la ministre de l’équipement et de l’habitat du 3 mai 2023 fixant les conditions et les critères du changement de vocation des terres agricoles sur lesquelles sont implantés des projets industriels",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels",
+     "terms": [
+      "projets industriels",
+      "vocation des terres agricoles"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-001-11-10",
+   "year": 2026,
+   "issue": 1,
+   "date": "2026-01-02",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/001.pdf#page=11",
+   "page": 11,
+   "institution": "Ministère de l’Agriculture, des Ressources Hydrauliques et de la Pêche Maritime",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 31 décembre 2025, modifiant l’arrêté du ministre de l'agriculture et des ressources hydrauliques du 9 juillet 2005, portant approbation du cahier des charges types de la production animale selon le mode biologique",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1100"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-agriculture",
+     "label": "Élevage, abattage, santé animale",
+     "terms": [
+      "production animale"
      ]
     }
    ]

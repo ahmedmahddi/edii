@@ -38,6 +38,9 @@ const DATE = new RegExp(`(\\d{1,2})(?:er)?\\s+(${MONTHS.join("|")})\\s+(\\d{4})`
 const LEADER_PAGE = /\s*(?:[.…·•_]\s*){2,}\s*(\d{1,5})\s*$/;
 const SECTION = /^(lois?|décrets?(?:-lois?)?(?: et arrêtés)?|arrêtés|décisions?|avis(?: et communications)?|circulaires?|textes? généraux|conventions?|accords?)\s*$/i;
 const SUPERSCRIPT = /^(ème|ère|er|e|bis)\s*$/i;
+// An institution heading is usually less indented than the titles, but not always (the Instance
+// supérieure indépendante pour les élections is centred): its first words tell it too.
+const INSTITUTION = /^(Présidence|Ministère|Instance|Haute Instance|Conseil|Cour|Banque Centrale|Assemblée)\b/;
 
 export function isoDate(text: string): string | null {
   const m = DATE.exec(text);
@@ -140,7 +143,7 @@ export function parseIssue(pages: Line[][]): Issue {
         continue;
       }
       const lessIndented = indent !== null && line.x < indent - 8;
-      if (!pending.length && lessIndented) {
+      if (!pending.length && (lessIndented || INSTITUTION.test(text))) {
         institution = lastWasInstitution && institution ? clean(`${institution} ${text}`) : text;
         lastWasInstitution = true;
         continue;
