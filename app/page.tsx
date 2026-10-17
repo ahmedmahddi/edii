@@ -336,7 +336,7 @@ function Edii() {
                   : view === "establishment"
                     ? "Vos activités, leur catégorie et les démarches environnementales associées."
                     : view === "veille"
-                      ? "Les textes parus au Journal Officiel sur les établissements classés, l’environnement, la santé et sécurité au travail, l’hygiène, la sécurité incendie, les produits dangereux et les secteurs de la nomenclature."
+                      ? "Les textes parus au Journal Officiel sur les établissements classés, l’environnement, la santé et sécurité au travail, l’hygiène, la sécurité incendie, les produits dangereux, le droit du travail, le code de la route, la fiscalité et les secteurs de la nomenclature."
                       : "Les informations utiles pour préparer votre dossier."}
               </p>
             </div>

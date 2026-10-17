@@ -64,6 +64,20 @@ describe("reading a JORT sommaire", () => {
     expect(isie.title).toMatch(/^Décision de l'Instance .* portant déclaration des résultats$/);
   });
 
+  it("does not take the first line of a law for an institution, though it is as far left", () => {
+    const lines = [
+      { x: 60, y: 700, text: "Sommaire" },
+      { x: 40, y: 680, text: "Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et" },
+      { x: 60, y: 665, text: "interdiction de la sous-traitance de main-d'œuvre ............................ 1210" },
+      { x: 40, y: 650, text: "Présidence de la République" },
+      { x: 60, y: 635, text: "Décret n° 2025-263 du 26 mai 2025, portant ratification ........................ 1215" },
+    ];
+    const [law, decree] = parseIssue([lines]).entries;
+    expect(law).toMatchObject({ institution: null, kind: "Loi", page: 1210, numbers: ["2025-9"] });
+    expect(law.title).toBe("Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre");
+    expect(decree.institution).toBe("Présidence de la République");
+  });
+
   it("knows dates, kinds of text and where an issue is published", () => {
     expect(isoDate("Mardi 16 rabia I 1431 – 2 mars 2010")).toBe("2010-03-02");
     expect(isoDate("1er juillet 1991")).toBe("1991-07-01");
@@ -115,7 +129,7 @@ describe("picking the texts that concern the app", () => {
     expect(assess({ title: "Décret n° 2026-81, relatif au stockage des produits pétroliers" })).toMatchObject({ severity: "important", sectors: ["2500"] });
   });
 
-  it("flags, among the 102 texts of JORT 2026 n° 1 to 5, the four that concern establishments", () => {
+  it("flags, among the 102 texts of JORT 2026 n° 1 to 5, the ones that concern establishments", () => {
     expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant et complétant l’arrêté du ministre de l'agriculture du 19 septembre 1998, fixant les modalités de contrôle sanitaire et de surveillance des conditions de production des produits de la pêche et de leur mise sur le marché" })).toMatchObject({ severity: "important", domains: ["hygiene", "secteurs"], sectors: ["1200"] });
     expect(assess({ title: "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime et du ministre de l’équipement et de l’habitat du 31 décembre 2025, modifiant l’arrêté conjoint […] du 3 mai 2023 fixant les conditions et les critères du changement de vocation des terres agricoles sur lesquelles sont implantés des projets industriels" })).toMatchObject({ severity: "information", domains: ["etablissements-classes"] });
     expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 31 décembre 2025, modifiant l’arrêté du ministre de l'agriculture et des ressources hydrauliques du 9 juillet 2005, portant approbation du cahier des charges types de la production animale selon le mode biologique" })).toMatchObject({ severity: "information", sectors: ["1100"] });
@@ -123,12 +137,37 @@ describe("picking the texts that concern the app", () => {
     for (const title of [
       "Arrêté de la ministre des finances du 6 janvier 2026, complétant l’arrêté du 21 août 2023 relatif à la nomenclature des produits monopolisés et leurs prix",
       "Arrêté du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime du 9 janvier 2026, portant ouverture de la procédure de réaménagement foncier dans les périmètres publics irrigués situés au gouvernorat de Nabeul",
-      "Arrêté de la Cheffe du Gouvernement du 13 janvier 2026, fixant la procédure d’obtention des informations relatives au bénéficiaire effectif des personnes morales et des constructions juridiques",
       "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant l’arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche du 9 février 2016, fixant la durée de la période d'autorisation d'utilisation des semences et des produits de multiplication végétative non obtenus selon le mode de production biologique",
       "Arrêté du ministre des affaires sociales du 31 décembre 2025, fixant les modalités d’organisation du concours externe sur épreuves pour le recrutement de travailleurs sociaux conseillers du ministère des affaires sociales",
     ])
       expect(assess({ title }), title).toBeNull();
     expect(assess({ title: "Nomination d’un sous-directeur", institution: "Ministère de l’Environnement" })).toBeNull();
+    expect(assess({ title: "Arrêté de la Cheffe du Gouvernement du 13 janvier 2026, fixant la procédure d’obtention des informations relatives au bénéficiaire effectif des personnes morales et des constructions juridiques" })).toMatchObject({ severity: "important", domains: ["finance"] });
+  });
+
+  it("follows droit du travail, code de la route and fiscalité (JORT 2025 and 2026)", () => {
+    expect(assess({ title: "Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre" })).toMatchObject({ severity: "important", domains: ["travail"] });
+    expect(assess({ title: "Arrêté du ministre des affaires sociales du 16 avril 2025, portant agrément de l’avenant n° 17 à la convention collective sectorielle des pharmacies d’officines" })).toMatchObject({ severity: "important", domains: ["travail"] });
+    expect(assess({ title: "Loi n° 2025-17 du 12 décembre 2025, portant loi de finances pour l’année 2026" })).toMatchObject({ severity: "important", domains: ["finance"] });
+    expect(assess({ title: "Arrêté de la ministre des finances du 30 décembre 2025, fixant les calendriers de paiement des créances fiscales et des amendes fiscales administratives revenant à l’Etat, prévus par la loi n° 2025-17 du 12 décembre 2025 portant loi de finances pour l’année 2026" })?.domains).toEqual(["finance"]);
+    expect(assess({ title: "Décret n° 2025-345 du 11 juillet 2025, modifiant et complétant le décret n° 2000-147 du 24 janvier 2000, fixant les règles techniques d'équipement et d'aménagement des véhicules" })).toMatchObject({ severity: "important", domains: ["route"] });
+    expect(assess({ title: "Arrêté du ministre des transports du 30 septembre 2025, portant approbation de la modification du cahier des charges relatif à l’exercice par des personnes morales de l’activité de transport routier de marchandises pour le compte d’autrui" })?.domains).toEqual(["route"]);
+    // An international agreement is information, however important its subject.
+    expect(assess({ title: "Loi organique n° 2025-8 du 16 mai 2025, portant approbation de l’accord entre la République tunisienne et la République italienne relatif à la reconnaissance mutuelle des permis de conduire en vue de conversion" })).toMatchObject({ severity: "information", domains: ["route"] });
+  });
+
+  it("ignores one-off acts, State finances and awards", () => {
+    for (const title of [
+      "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 5 mars 2026, portant institution d’un permis de recherche de substances minérales du 4 groupe (sel) dit permis « Sabkhet »",
+      "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 5 mai 2026, portant autorisation de cession totale des droits et des obligations dans la concession d’exploitation d’hydrocarbures dite concession d’exploitation « Sabeh »",
+      "Loi n° 2026-17 du 30 juillet 2026, portant approbation de la convention de garantie conclue le 3 novembre 2025 entre la République tunisienne et la Banque européenne pour la reconstruction et le développement relative au prêt accordé à la Compagnie des phosphates de Gafsa",
+      "Décret n° 2026-11 du 13 janvier 2026, portant expropriation pour cause d’utilité publique d’une parcelle de terre sise à la région de Zitouna pour l’eau potable",
+      "Arrêté de la ministre des finances du 28 avril 2025, portant virement de crédits entre programmes au titre du budget de l’Etat pour l’année 2024",
+      "Situation générale décadaire de la Banque Centrale de Tunisie",
+      "Décret n° 2025-111 du 7 février 2025, portant attribution des médailles du travail au titre de l’année 2023",
+      "Arrêté du ministre des affaires sociales du 15 avril 2025, portant attribution du prix national de santé et de sécurité au travail au titre de l'année 2023",
+    ])
+      expect(assess({ title }), title).toBeNull();
   });
 
   it("leaves out the issuer: a ministry's name is not a subject", () => {
