@@ -2,7 +2,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Registres } from "@/app/components/registres";
-import feedData from "@/data/veille/feed.json";
 import { catalogue } from "@/lib/registre/referentiel";
 import { aTraiter, CHANGED, loadRegistres } from "@/lib/registre/registre";
 import type { ClassificationReport } from "@/lib/report";
@@ -10,9 +9,31 @@ import { SECTORS } from "@/lib/sectors";
 import { fillRegister, registerRow } from "@/lib/veille/registre";
 import { type Feed, fold, type Hit, type Impact, rules, type Severity } from "@/lib/veille/watch";
 
-const feed = feedData as unknown as Feed;
-// Every text a register can hold: the curated référentiel and what the veille found in the JORT.
-const TEXTS = catalogue(feed.hits);
+const EMPTY: Feed = { updated: null, scanned: {}, hits: [] };
+let feedRequest: Promise<Feed> | null = null;
+
+/**
+ * The texts the veille found (public/veille/feed.json, written by npm run veille). Fetched once,
+ * when first needed, rather than carried by the page: forty years of the JORT weigh a megabyte.
+ */
+function fetchFeed(): Promise<Feed> {
+  feedRequest ??= fetch("/veille/feed.json")
+    .then((r) => (r.ok ? (r.json() as Promise<Feed>) : EMPTY))
+    .catch(() => EMPTY);
+  return feedRequest;
+}
+
+function useFeed(): Feed | null {
+  const [feed, setFeed] = useState<Feed | null>(null);
+  useEffect(() => {
+    let live = true;
+    fetchFeed().then((f) => live && setFeed(f));
+    return () => {
+      live = false;
+    };
+  }, []);
+  return feed;
+}
 
 const IMPACTS: Record<Impact, string> = {
   nomenclature: "Nomenclature",
@@ -40,7 +61,7 @@ const PAGE = 20; // texts shown at once in the Journal officiel
 export function useVeilleCount(): number {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const recount = () => setCount(aTraiter(loadRegistres(), feed.amendments ?? []));
+    const recount = () => fetchFeed().then((feed) => setCount(aTraiter(loadRegistres(), feed.amendments ?? [])));
     recount();
     window.addEventListener(CHANGED, recount);
     window.addEventListener("storage", recount); // another tab
@@ -58,6 +79,9 @@ export function useVeilleCount(): number {
  */
 export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null; onSeedUsed: () => void }) {
   const [tab, setTab] = useState<Tab>("registres");
+  const feed = useFeed();
+  // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
+  const texts = useMemo(() => catalogue(feed?.hits ?? []), [feed]);
   useEffect(() => {
     if (seed) setTab("registres");
   }, [seed]);
@@ -82,10 +106,14 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
           </button>
         ))}
       </div>
-      {tab === "registres" ? (
-        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={TEXTS} amendments={feed.amendments ?? []} />
+      {!feed ? (
+        <p className="muted" role="status">
+          Chargement de la veille…
+        </p>
+      ) : tab === "registres" ? (
+        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={texts} amendments={feed.amendments ?? []} />
       ) : (
-        <Journal />
+        <Journal feed={feed} />
       )}
     </div>
   );
@@ -114,7 +142,7 @@ function useStatuses(): [Record<string, Status>, (id: string, s: Status) => void
   return [statuses, set];
 }
 
-function Journal() {
+function Journal({ feed }: { feed: Feed }) {
   const [statuses, setStatus] = useStatuses();
   const [level, setLevel] = useState<"all" | "critique" | "important">("all");
   const [domain, setDomain] = useState<string>("all");
@@ -134,7 +162,7 @@ function Journal() {
         (status === "all" || (statuses[h.id] ?? "a-lire") === status) &&
         (!q || fold(`${h.title} ${h.institution ?? ""}`).includes(q)),
     );
-  }, [level, domain, sector, status, query, statuses]);
+  }, [feed, level, domain, sector, status, query, statuses]);
   const [limit, setLimit] = useState(PAGE);
   useEffect(() => setLimit(PAGE), [level, domain, sector, status, query]); // a new filter starts from the top
   const visible = shown.slice(0, limit);
