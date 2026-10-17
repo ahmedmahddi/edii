@@ -31,6 +31,7 @@ interface Rule {
 
 export const rules = watch as unknown as {
   domains: Record<string, string>;
+  registre: { systemes: Record<string, string>; frequence: string };
   ignore: string[];
   ignoreAnywhere: string[];
   demote: string[];
