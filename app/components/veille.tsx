@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import feedData from "@/data/veille/feed.json";
 import { SECTORS } from "@/lib/sectors";
+import { fillRegister } from "@/lib/veille/registre";
 import { type Feed, fold, type Hit, type Impact, rules, type Severity } from "@/lib/veille/watch";
 
 const feed = feedData as unknown as Feed;
@@ -20,6 +21,20 @@ const STORAGE = "abclassement-veille-statuts";
 
 const dateFr = (iso: string | null) =>
   iso ? new Date(`${iso}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "date inconnue";
+
+/** The texts as rows of the QSE register (ID-QSE-002), as an Excel file to save. */
+async function exportRegister(hits: Hit[]): Promise<void> {
+  const { default: ExcelJS } = await import("exceljs"); // loaded on demand: the page does not carry it
+  const workbook = new ExcelJS.Workbook();
+  fillRegister(workbook, hits, new Date());
+  const data = await workbook.xlsx.writeBuffer();
+  const url = URL.createObjectURL(new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `ID-QSE-002_veille_${new Date().toISOString().slice(0, 10)}.xlsx`;
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 
 /** Statuses are this browser's own reading notes: kept in localStorage, never sent anywhere. */
 function useStatuses(): [Record<string, Status>, (id: string, s: Status) => void] {
@@ -51,6 +66,7 @@ export function Veille() {
   const [sector, setSector] = useState<string>("all");
   const [status, setStatusFilter] = useState<Status | "all">("all");
   const [query, setQuery] = useState("");
+  const [exporting, setExporting] = useState(false);
 
   const statusOf = (h: Hit): Status => statuses[h.id] ?? "a-lire";
   const shown = useMemo(() => {
@@ -164,9 +180,26 @@ export function Veille() {
               </select>
             </label>
           </div>
-          <p className="muted small" aria-live="polite">
-            {shown.length} texte{shown.length > 1 ? "s" : ""} affiché{shown.length > 1 ? "s" : ""} sur {feed.hits.length}
-          </p>
+          <div className="veille-toolbar">
+            <p className="muted small" aria-live="polite">
+              {shown.length} texte{shown.length > 1 ? "s" : ""} affiché{shown.length > 1 ? "s" : ""} sur {feed.hits.length}
+            </p>
+            <button
+              type="button"
+              className="secondary-button"
+              disabled={!shown.length || exporting}
+              onClick={async () => {
+                setExporting(true);
+                try {
+                  await exportRegister(shown);
+                } finally {
+                  setExporting(false);
+                }
+              }}
+            >
+              {exporting ? "Préparation du fichier…" : "Exporter vers le registre (Excel)"}
+            </button>
+          </div>
           <ol className="veille-list">
             {shown.map((h) => (
               <li key={h.id} className={`card veille-hit sev-${h.severity} st-${statusOf(h)}`}>
@@ -275,6 +308,11 @@ export function Veille() {
           <li>
             Un repérage est une alerte à lire, pas une conclusion juridique : le texte officiel fait foi. Les statuts « pertinent » et «
             sans objet » restent dans ce navigateur.
+          </li>
+          <li>
+            « Exporter vers le registre » enregistre les textes affichés comme lignes du registre de veille ID-QSE-002 (système,
+            domaine, type, référence, titre avec lien vers le JORT, fréquence d’évaluation) ; le résumé de l’exigence, la conformité,
+            le risque et le plan d’action restent à remplir. Filtrez sur le statut « Pertinent » pour n’exporter que les textes retenus.
           </li>
           <li>
             Les règles se modifient dans <code>data/veille/watch.json</code> ; <code>npm run veille -- --reassess</code> les applique
