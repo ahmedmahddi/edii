@@ -112,7 +112,7 @@ def tesseract_lines(img: Image.Image, args: list[str]) -> list[dict]:
         img.save(f.name)
         # One thread per call: Tesseract's OpenMP threading makes small images 100x slower here.
         env = {**os.environ, "OMP_THREAD_LIMIT": "1"}
-        out = subprocess.run(["tesseract", f.name, "-", *args, "tsv"], check=True, capture_output=True, text=True, env=env).stdout
+        out = subprocess.run(["tesseract", f.name, "-", *args, "tsv"], check=True, capture_output=True, text=True, encoding="utf-8", env=env).stdout
     lines: dict[tuple[int, int, int], dict] = {}
     for row in csv.DictReader(io.StringIO(out), delimiter="\t", quoting=csv.QUOTE_NONE):
         text = (row.get("text") or "").strip()
@@ -251,10 +251,10 @@ def ocr_page(pdf: Path, page: int, tmp: Path) -> dict:
 
 
 def main(only: list[str]) -> None:
-    manifest = json.loads((ROOT / "sources.json").read_text())
+    manifest = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
     out_dir = ROOT / "ocr"
     out_dir.mkdir(exist_ok=True)
-    version = subprocess.run(["tesseract", "--version"], capture_output=True, text=True).stdout.splitlines()[0]
+    version = subprocess.run(["tesseract", "--version"], capture_output=True, text=True, encoding="utf-8").stdout.splitlines()[0]
     for src in manifest["sources"]:
         if only and src["id"] not in only:
             continue
@@ -265,7 +265,7 @@ def main(only: list[str]) -> None:
                 print(f"OCR {src['id']} page {page}", file=sys.stderr)
                 pages.append(ocr_page(ROOT / "sources" / src["file"], page, Path(tmp)))
         doc = {"source": src["id"], "engine": version, "dpi": DPI, "pages": pages}
-        (out_dir / f"{src['id']}.json").write_text(json.dumps(doc, ensure_ascii=False, separators=(",", ":")) + "\n")
+        (out_dir / f"{src['id']}.json").write_text(json.dumps(doc, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":

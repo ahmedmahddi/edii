@@ -210,10 +210,10 @@ function firstWorking(candidates: string[], args: string[]): string | null {
   }
   return null;
 }
-const PYTHON = firstWorking(["python3", "python", "py"], ["-c", "import sys; assert sys.version_info >= (3, 9)"]);
+const PYTHON = firstWorking(["python3", "python", "py"], ["-c", "import sys; assert sys.version_info >= (3, 10)"]);
 const PDFTOTEXT = firstWorking(["pdftotext"], ["-v"]);
 
-// These two re-run the data pipeline: they need Python 3.9+ (and pdftotext for the decree), and
+// These two re-run the data pipeline: they need Python 3.10+ (and pdftotext for the decree), and
 // are skipped without them. CI installs both.
 it.skipIf(!PYTHON)("data/nomenclature.json matches the OCR output and corrections", () => {
   const file = path.join(__dirname, "..", "data", "nomenclature.json");
