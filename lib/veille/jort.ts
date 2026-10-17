@@ -80,6 +80,11 @@ function titleIndent(lines: Line[]): number | null {
   return best;
 }
 
+/** A page of the sommaire lists texts with their page numbers (two at least). */
+export function isSommairePage(lines: Line[]): boolean {
+  return lines.filter((l) => LEADER_PAGE.test(l.text)).length >= 2;
+}
+
 /**
  * Parse the sommaire of an issue from its pages' lines (page 1 first). The sommaire runs over the
  * first pages that list texts with their page numbers.
@@ -111,8 +116,7 @@ export function parseIssue(pages: Line[][]): Issue {
   let lastWasInstitution = false;
 
   for (const [index, lines] of pages.entries()) {
-    const listed = lines.filter((l) => LEADER_PAGE.test(l.text)).length;
-    if (listed < 2) break; // the sommaire is over: the texts themselves start
+    if (!isSommairePage(lines)) break; // the sommaire is over: the texts themselves start
     const indent = titleIndent(lines);
     const ordered = [...lines].sort((a, b) => b.y - a.y || a.x - b.x);
     let started = index > 0; // on page 1, skip the masthead until "Sommaire"

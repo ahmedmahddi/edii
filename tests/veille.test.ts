@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl } from "@/lib/veille/jort";
+import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
 
@@ -76,6 +77,44 @@ describe("reading a JORT sommaire", () => {
     expect(law).toMatchObject({ institution: null, kind: "Loi", page: 1210, numbers: ["2025-9"] });
     expect(law.title).toBe("Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre");
     expect(decree.institution).toBe("Présidence de la République");
+  });
+
+  it("reads the fonts of 2000-2005 that write glyph numbers instead of letters", () => {
+    expect(isGlyphCoded("6RPPDLUH\u0003")).toBe(true);
+    expect(isGlyphCoded("Sommaire")).toBe(false);
+    expect(decodeGlyphs("6RPPDLUH\u0003")).toBe("Sommaire ");
+    expect(decodeGlyphs("'pFUHWV\u0003HW\u0003$UUrWpV")).toBe("Décrets et Arrêtés");
+    expect(decodeGlyphs("75$'8&7,21\u0003)5$1d$,6(")).toBe("TRADUCTION FRANÇAISE");
+    expect(decodeGlyphs("'pFUHW\u0003QÉ\u0003\u001c\u001c\u0010\u0015\u001b\u0015\u0018")).toBe("Décret n° 99-2825");
+    expect(decodeGlyphs("0LQLVWqUH\u0003GH\u0003O $JULFXOWXUH")).toBe("Ministère de l'Agriculture");
+    expect(decodeGlyphs("FUpDWLRQ\u0003G pWDEOLVVHPHQWV\u0011\u0011\u0011\u0003 \u0014\u0013")).toBe("création d'établissements...  10");
+  });
+
+  it("puts a page number printed a little lower back on its title's line", () => {
+    const lines = toLines([
+      { str: "Nomination de chefs de service............", x: 129, y: 224, width: 300 },
+      { str: "1068", x: 471, y: 221, width: 20 },
+      { str: "Nomination d'ingénieurs généraux...........", x: 129, y: 211, width: 300 },
+      { str: "1069", x: 471, y: 211, width: 20 },
+    ]);
+    expect(lines.map((l) => l.text)).toEqual(["Nomination de chefs de service............ 1068", "Nomination d'ingénieurs généraux........... 1069"]);
+  });
+
+  it("reads a real issue of 2000 sampled by the probe (glyph-numbered fonts, page numbers set lower)", () => {
+    const probe = JSON.parse(readFileSync(path.join(__dirname, "..", "data", "veille", "probe", "2000-040.json"), "utf8"));
+    // The probe kept lines; cut back into items, decoded as pdfLines does, then read again.
+    const pages = probe.pages.map((p: [number, number, string][]) =>
+      toLines(p.map(([x, y, t]) => ({ str: isGlyphCoded(t) ? decodeGlyphs(t) : t, x, y, width: t.length * 4.5 }))),
+    );
+    const issue = parseIssue(pages);
+    expect([issue.number, issue.date, issue.firstPage]).toEqual([40, "2000-05-19", 1065]);
+    expect(issue.entries.length).toBeGreaterThan(40);
+    expect(issue.entries.filter((e) => /\.{4,}\s*\d/.test(e.title))).toEqual([]);
+    expect(issue.entries[0]).toMatchObject({
+      institution: "Premier Ministère",
+      page: 1068,
+      title: "Décret n° 2000-1073 du 17 mai 2000, relatif à l'octroi d'un congé aux agents publics candidats aux élections du 28 mai 2000",
+    });
   });
 
   it("knows dates, kinds of text and where an issue is published", () => {
