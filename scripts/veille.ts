@@ -6,17 +6,22 @@
  *   npm run veille -- --year 2025          new issues of 2025
  *   npm run veille -- --year 2025 --from 1 --to 40     re-read issues 1 to 40 of 2025
  *   npm run veille -- --file jort.pdf --year 2010 --number 18   read a PDF already on disk
+ *   npm run veille -- --reassess           apply edited rules (data/veille/watch.json) to every
+ *                                          sommaire already read, without downloading anything
  *
  * Issues are numbered from 1 each year at https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf;
- * the first number that is not there yet ends the run. Only the sommaire (first pages) is read.
+ * the first number that is not there yet ends the run. Only the sommaire (first pages) is read; it
+ * is kept in data/veille/sommaires/<year>.json, so the rules can be applied again later.
  */
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { parseIssue, pdfUrl } from "../lib/veille/jort";
+import { type Issue, parseIssue, pdfUrl } from "../lib/veille/jort";
 import { pdfLines } from "../lib/veille/pdf";
-import { type Feed, record } from "../lib/veille/watch";
+import { type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
 
-const FEED = path.join(process.cwd(), "data", "veille", "feed.json");
+const DIR = path.join(process.cwd(), "data", "veille");
+const FEED = path.join(DIR, "feed.json");
+const SOMMAIRES = path.join(DIR, "sommaires");
 const SOMMAIRE_PAGES = 8;
 const PAUSE_MS = 400; // between downloads, to stay gentle with the server
 
@@ -32,6 +37,23 @@ function loadFeed(): Feed {
 
 function saveFeed(feed: Feed): void {
   writeFileSync(FEED, JSON.stringify({ ...feed, updated: new Date().toISOString() }, null, 1) + "\n");
+}
+
+function sommairesFile(year: number): string {
+  return path.join(SOMMAIRES, `${year}.json`);
+}
+
+function loadSommaires(year: number): Sommaires {
+  const file = sommairesFile(year);
+  return existsSync(file) ? (JSON.parse(readFileSync(file, "utf8")) as Sommaires) : { year, issues: {} };
+}
+
+function saveSommaire(year: number, issue: Issue): void {
+  const all = loadSommaires(year);
+  all.issues[String(issue.number)] = issue;
+  const issues = Object.fromEntries(Object.entries(all.issues).sort(([a], [b]) => Number(a) - Number(b)));
+  mkdirSync(SOMMAIRES, { recursive: true });
+  writeFileSync(sommairesFile(year), JSON.stringify({ year, issues }) + "\n");
 }
 
 /** The issue's PDF, or null when it is not published (yet). */
@@ -59,9 +81,10 @@ async function readIssue(feed: Feed, year: number, number: number, data: Uint8Ar
   }
   issue.number = number;
   if (!issue.entries.length) console.warn(`  ! n° ${number}: no sommaire found (scanned issue, or a new layout)`);
+  saveSommaire(year, issue);
   const next = record(feed, year, issue);
   const found = next.hits.filter((h) => h.year === year && h.issue === number);
-  const flag = found.some((h) => h.severity === "critique") ? " ← CRITIQUE" : "";
+  const flag = found.some((h) => h.severity === "critique") ? " ← CRITIQUE" : found.some((h) => h.severity === "important") ? " ← important" : "";
   console.log(`  n° ${String(number).padStart(3, "0")} ${issue.date ?? ""}: ${issue.entries.length} textes, ${found.length} à lire${flag}`);
   for (const h of found) console.log(`      [${h.severity}] p. ${h.page} ${h.title.slice(0, 110)}`);
   return next;
@@ -87,6 +110,19 @@ async function scanYear(feed: Feed, year: number, from?: number, to?: number): P
 
 async function main(): Promise<void> {
   let feed = loadFeed();
+  if (process.argv.includes("--reassess")) {
+    const years = existsSync(SOMMAIRES)
+      ? readdirSync(SOMMAIRES)
+          .filter((f) => /^\d{4}\.json$/.test(f))
+          .map((f) => loadSommaires(Number(f.slice(0, 4))))
+      : [];
+    const before = feed.hits.length;
+    feed = reassess(feed, years);
+    saveFeed(feed);
+    const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
+    console.log(`Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés.`);
+    return;
+  }
   const file = option("file");
   const year = option("year") ? Number(option("year")) : undefined;
   if (file) {
@@ -101,8 +137,10 @@ async function main(): Promise<void> {
     const years = year ? [year] : now.getMonth() === 0 ? [now.getFullYear() - 1, now.getFullYear()] : [now.getFullYear()];
     for (const y of years) feed = await scanYear(feed, y, from, to);
   }
-  const critical = feed.hits.filter((h) => h.severity === "critique").length;
-  console.log(`\n${feed.hits.length} textes à lire dans la veille, dont ${critical} critiques. Détail : page /veille.`);
+  const count = (s: string) => feed.hits.filter((h) => h.severity === s).length;
+  console.log(
+    `\n${feed.hits.length} textes repérés : ${count("critique")} critiques, ${count("important")} importants, ${count("information")} pour information. Détail : vue Veille réglementaire.`,
+  );
 }
 
 main().catch((error) => {

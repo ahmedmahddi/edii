@@ -1765,6 +1765,18 @@ p {
 .veille-institution { font-size: 13px; color: var(--navy); font-weight: 600; margin-top: 8px; }
 .veille-why { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
 .veille-impact { background: var(--info-bg); color: var(--accent); }
+.veille-sev-information { background: var(--surface-2); color: var(--muted); }
+.veille-hit.sev-information { border-left-color: #b8c6d1; }
+.veille-domain { background: #eef1f4; color: var(--navy); }
+.veille-sector { background: var(--ok-bg); color: var(--ok); }
+.veille-tags { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.veille-tags > div { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.veille-tags dt { font-size: 13px; color: var(--muted); min-width: 120px; }
+.veille-tags dd { margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.veille-domains { margin: 0 0 12px; }
+.veille-domains > div { padding: 6px 0; border-bottom: 1px solid var(--border); }
+.veille-domains dt { font-weight: 600; }
+.veille-domains dd { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
 .veille-rules { margin: 10px 0; padding-left: 18px; color: var(--text); }
 .veille-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 12px; }
 .veille-actions a { font-weight: 600; }

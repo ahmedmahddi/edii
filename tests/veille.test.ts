@@ -5,7 +5,7 @@ import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl } from "@/lib/veille/jort";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
-import { assess, type Feed, hitsOf, record } from "@/lib/veille/watch";
+import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
 
 const source = (f: string) => new Uint8Array(readFileSync(path.join(__dirname, "..", "data", "sources", f)));
 let jort2006: Issue;
@@ -63,16 +63,21 @@ describe("reading a JORT sommaire", () => {
 });
 
 describe("picking the texts that concern the app", () => {
-  it("finds the one text of each issue, and nothing else", () => {
+  it("finds, in two real issues, exactly the texts on the domains followed", () => {
     const h2006 = hitsOf(2006, jort2006);
     const h2010 = hitsOf(2010, jort2010);
-    expect(h2006.map((h) => h.title.slice(0, 31))).toEqual(["Décret n° 2006-2687 du 9 octobr"]);
-    expect(h2010.map((h) => h.page)).toEqual([559]);
-    expect(h2010[0]).toMatchObject({
-      severity: "critique",
+    expect(h2006.map((h) => [h.page, h.severity])).toEqual([[3591, "critique"]]);
+    expect(h2010.map((h) => [h.page, h.severity])).toEqual([
+      [557, "information"], // convention sur la sûreté nucléaire
+      [558, "information"], // statut de l'Agence internationale de l'énergie atomique
+      [559, "critique"], // the arrêté amending the nomenclature
+    ]);
+    expect(h2010[2]).toMatchObject({
       pdf: "https://lake.jort.tn/journal-officiel/fr/2010/018.pdf#page=7",
+      domains: ["etablissements-classes"],
       impacts: expect.arrayContaining(["nomenclature", "addition"]),
     });
+    expect(h2010[0]).toMatchObject({ domains: ["produits-dangereux"], sectors: ["2600"] });
   });
 
   it("marks as critique a text that cites a text the app is built on", () => {
@@ -80,25 +85,52 @@ describe("picking the texts that concern the app", () => {
     expect(assess({ title: "Décret n° 2026-100 du 2 février 2026, modifiant le décret n° 2005-1991 du 11 juillet 2005" })).toMatchObject({ severity: "critique", impacts: ["etude"] });
   });
 
-  it("marks as important a text on one of the app's subjects", () => {
-    expect(assess({ title: "Décret n° 2026-12, relatif à l'étude d'impact sur l'environnement des projets miniers" })).toMatchObject({ severity: "important", impacts: ["etude"] });
-    expect(assess({ title: "Arrêté portant approbation du cahier des charges relatif aux mesures environnementales des huileries" })?.severity).toBe("important");
-    expect(assess({ title: "Décret fixant la liste des DÉCHETS DANGEREUX" })?.severity).toBe("important");
+  it("follows santé et sécurité au travail, hygiène and sécurité incendie", () => {
+    expect(assess({ title: "Décret n° 2026-40 du 12 janvier 2026, relatif à la médecine du travail" })).toMatchObject({ severity: "important", domains: ["sst"] });
+    expect(assess({ title: "Arrêté du ministre des affaires sociales du 2 mai 2026, fixant la liste des maladies professionnelles" })?.domains).toEqual(["sst"]);
+    expect(assess({ title: "Arrêté du 5 juin 2026, relatif aux équipements de protection individuelle" })?.domains).toEqual(["sst"]);
+    expect(assess({ title: "Arrêté du ministre de la santé du 1er juin 2026, fixant les règles d'hygiène applicables aux établissements de restauration" })).toMatchObject({ severity: "important", domains: ["hygiene"] });
+    expect(assess({ title: "Décret n° 2026-55, relatif à la prévention des incendies dans les établissements industriels" })?.domains).toEqual(["incendie"]);
   });
 
-  it("ignores nominations, other cahiers des charges, and words that only contain a keyword", () => {
+  it("follows the environment and the sectors of the nomenclature", () => {
+    expect(assess({ title: "Arrêté du 4 avril 2026, fixant les valeurs limites des rejets d'effluents dans le milieu hydrique" })).toMatchObject({ severity: "important", domains: ["environnement"] });
+    expect(assess({ title: "Décret n° 2026-70, relatif à la gestion des déchets d'emballages" })).toMatchObject({ domains: ["environnement"], sectors: ["1500"] });
+    expect(assess({ title: "Arrêté du 9 mars 2026, portant approbation du cahier des charges relatif à l'exploitation des carrières" })).toMatchObject({ severity: "information", sectors: ["1700"] });
+    expect(assess({ title: "Décret n° 2026-80, relatif à l'organisation des élevages avicoles" })).toMatchObject({ severity: "information", sectors: ["1100"] });
+    expect(assess({ title: "Décret n° 2026-81, relatif au stockage des produits pétroliers" })).toMatchObject({ severity: "important", sectors: ["2500"] });
+  });
+
+  it("leaves out the issuer: a ministry's name is not a subject", () => {
+    expect(subject("Arrêté de la ministre de l'industrie, des mines et de l'énergie du 3 mars 2026, fixant le calendrier")).toBe("fixant le calendrier");
+    expect(subject("Arrêté conjoint du ministre de l'agriculture et du ministre de la santé du 1er juin 2025, relatif à l'hygiène")).toBe("relatif a l'hygiene");
+    expect(assess({ title: "Arrêté de la ministre de l'industrie, des mines et de l'énergie du 3 mars 2026, relatif au statut des ingénieurs" })).toBeNull();
+  });
+
+  it("counts a text found by its institution alone as information", () => {
+    expect(assess({ title: "Décret n° 2026-90, fixant les attributions du ministère", institution: "Ministère de l'Environnement" })?.severity).toBe("information");
+  });
+
+  it("ignores nominations, concours, prices, other cahiers des charges, and words that only contain a keyword", () => {
     expect(assess({ title: "Nomination d'un directeur à l'Agence nationale de protection de l'environnement" })).toBeNull();
     expect(assess({ title: "Arrêtés portant délégation de signature" })).toBeNull();
+    expect(assess({ title: "Arrêté du 2 mars 2026, portant ouverture d'un concours interne pour le recrutement d'inspecteurs du travail" })).toBeNull();
+    expect(assess({ title: "Arrêté du 2 mars 2026, fixant le prix de vente de l'huile d'olive" })).toBeNull();
     expect(assess({ title: "Arrêté portant approbation du cahier des charges relatif au transport par taxi" })).toBeNull();
     expect(assess({ title: "Arrêté relatif à la campanpe annuelle" })).toBeNull(); // contains "anpe", not the word
   });
 
-  it("records each issue once, newest first", () => {
+  it("records each issue once, newest first, and applies edited rules again from stored sommaires", () => {
     let feed: Feed = { updated: null, scanned: {}, hits: [] };
     feed = record(feed, 2006, jort2006);
     feed = record(feed, 2010, jort2010);
     feed = record(feed, 2010, jort2010); // read again: replaced, not duplicated
     expect(feed.scanned).toEqual({ "2006": [83], "2010": [18] });
-    expect(feed.hits.map((h) => h.year)).toEqual([2010, 2006]);
+    expect(feed.hits.map((h) => h.year)).toEqual([2010, 2010, 2010, 2006]);
+    const again = reassess({ ...feed, hits: [] }, [
+      { year: 2006, issues: { "83": jort2006 } },
+      { year: 2010, issues: { "18": jort2010 } },
+    ]);
+    expect(again.hits.map((h) => h.id)).toEqual(feed.hits.map((h) => h.id));
   });
 });

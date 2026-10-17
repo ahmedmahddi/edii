@@ -47,7 +47,7 @@ Everything entered is kept in the page address, so a classification can be bookm
 ## Veille réglementaire
 
 The **Veille réglementaire** view lists the texts published in the Journal Officiel (JORT) that
-concern the app. They're read from each issue's sommaire, in the French translation published at
+concern the establishments the app classifies. They're read from each issue's sommaire, in the French translation published at
 `https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf`.
 
 ```bash
@@ -62,19 +62,35 @@ pdf.js, with no Python or poppler. Each run starts where the last one stopped an
 if interrupted. Results go to `data/veille/feed.json`: commit that file to share them, and the page
 shows them.
 
-A text is flagged when its sommaire title:
+The veille follows seven domains: établissements classés, environnement (eau, air, bruit, déchets,
+énergie), santé et sécurité au travail (médecine du travail, accidents du travail et maladies
+professionnelles, prévention, code du travail), hygiène et sécurité sanitaire, sécurité incendie et
+protection civile, produits et substances dangereux, and the sectors of the nomenclature (élevage,
+agroalimentaire, bois et papier, chimie, carrières et métaux, textile, hydrocarbures, radioactifs…).
+Each flagged text has a level:
 
-* cites a text the app is built on (the nomenclature of 15 novembre 2005, its 2010 and 2012
-  amendments, décret n° 2005-1991, décret n° 2006-2687, décret n° 68-88): **critique**, the app may
-  have to change;
-* or is on one of the app's subjects (établissements classés, étude d'impact, environmental cahiers
-  des charges, ANPE and dépollution, déchets dangereux, matières dangereuses, étude de dangers):
-  **important**.
+* **critique**: its title cites a text the app is built on (the nomenclature of 15 novembre 2005,
+  its 2010 and 2012 amendments, décret n° 2005-1991, décret n° 2006-2687, décret n° 68-88); the app
+  may have to change;
+* **important**: an obligation for establishments (rejets, déchets, médecine du travail, hygiène,
+  prévention des incendies, matières dangereuses…);
+* **information**: the news of a sector, or a text found only through the ministry that signs it.
 
-Nominations, délégations de signature and concours are ignored. The rules are in
-`data/veille/watch.json`. Matching ignores accents and case, and only on whole words. Each hit
-links to its page in the JORT PDF and says which part of the app it concerns. On the page, each
-reader can mark a text as "pertinent" or "sans objet"; that is kept in their browser only.
+A hit says its domain, the sections of the nomenclature it concerns (so it can be filtered by
+sector) and, when it applies, which part of the app it touches. The issuer ("Arrêté du ministre de
+l'industrie, des mines et de l'énergie du 3 mars 2026,") is left out before matching, so a ministry's
+name is not taken for a subject. Nominations, délégations de signature, concours, organigrammes,
+statuts particuliers and price fixings are ignored. Matching ignores accents and case, and only on
+whole words. On the page, each reader can mark a text as "pertinent" or "sans objet"; that is kept
+in their browser only.
+
+The rules are in `data/veille/watch.json` (`domains`, `references`, `rules`, `ignore`,
+`ignoreAnywhere`). Every sommaire read is kept in `data/veille/sommaires/<year>.json`, so edited
+rules can be applied again without downloading anything:
+
+```bash
+npm run veille -- --reassess
+```
 
 A flagged text is something to read, not a legal conclusion.
 
@@ -92,7 +108,7 @@ A flagged text is something to read, not a legal conclusion.
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
 | `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), and the watch rules (`watch.ts`). |
 | `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/feed.json`. |
-| `data/veille/` | `watch.json` (the rules) and `feed.json` (the texts found). |
+| `data/veille/` | `watch.json` (the rules), `feed.json` (the texts found) and `sommaires/` (every sommaire read). |
 | `app/components/veille.tsx` | The Veille réglementaire view. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
