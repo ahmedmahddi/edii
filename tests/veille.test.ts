@@ -50,6 +50,20 @@ describe("reading a JORT sommaire", () => {
     expect(line[0].text).toMatch(/3595$/);
   });
 
+  it("knows an institution heading by its words when it is not less indented (JORT 2026 n° 2)", () => {
+    const lines = [
+      { x: 60, y: 700, text: "Sommaire" },
+      { x: 40, y: 680, text: "Ministère de l'Emploi et de la Formation Professionnelle" },
+      { x: 60, y: 665, text: "Nomination d'un chef de service ............................ 29" },
+      { x: 120, y: 650, text: "Instance Supérieure Indépendante pour les Elections" },
+      { x: 60, y: 635, text: "Décision de l'Instance supérieure indépendante pour les élections n° 2026-1" },
+      { x: 60, y: 620, text: "du 5 janvier 2026, portant déclaration des résultats ................... 30" },
+    ];
+    const [, isie] = parseIssue([lines]).entries;
+    expect(isie).toMatchObject({ institution: "Instance Supérieure Indépendante pour les Elections", kind: "Décision", page: 30 });
+    expect(isie.title).toMatch(/^Décision de l'Instance .* portant déclaration des résultats$/);
+  });
+
   it("knows dates, kinds of text and where an issue is published", () => {
     expect(isoDate("Mardi 16 rabia I 1431 – 2 mars 2010")).toBe("2010-03-02");
     expect(isoDate("1er juillet 1991")).toBe("1991-07-01");
@@ -99,6 +113,22 @@ describe("picking the texts that concern the app", () => {
     expect(assess({ title: "Arrêté du 9 mars 2026, portant approbation du cahier des charges relatif à l'exploitation des carrières" })).toMatchObject({ severity: "information", sectors: ["1700"] });
     expect(assess({ title: "Décret n° 2026-80, relatif à l'organisation des élevages avicoles" })).toMatchObject({ severity: "information", sectors: ["1100"] });
     expect(assess({ title: "Décret n° 2026-81, relatif au stockage des produits pétroliers" })).toMatchObject({ severity: "important", sectors: ["2500"] });
+  });
+
+  it("flags, among the 102 texts of JORT 2026 n° 1 to 5, the four that concern establishments", () => {
+    expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant et complétant l’arrêté du ministre de l'agriculture du 19 septembre 1998, fixant les modalités de contrôle sanitaire et de surveillance des conditions de production des produits de la pêche et de leur mise sur le marché" })).toMatchObject({ severity: "important", domains: ["hygiene", "secteurs"], sectors: ["1200"] });
+    expect(assess({ title: "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime et du ministre de l’équipement et de l’habitat du 31 décembre 2025, modifiant l’arrêté conjoint […] du 3 mai 2023 fixant les conditions et les critères du changement de vocation des terres agricoles sur lesquelles sont implantés des projets industriels" })).toMatchObject({ severity: "information", domains: ["etablissements-classes"] });
+    expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 31 décembre 2025, modifiant l’arrêté du ministre de l'agriculture et des ressources hydrauliques du 9 juillet 2005, portant approbation du cahier des charges types de la production animale selon le mode biologique" })).toMatchObject({ severity: "information", sectors: ["1100"] });
+    expect(assess({ title: "Décret n° 2026-6 du 7 janvier 2026, relatif à l’approbation de la vente au dinar symbolique au profit de l’Agence foncière industrielle d’une parcelle de terre domaniale sise à la région de Bourbiaa dans la délégation de Mohammadia du gouvernorat de Ben Arous pour réaliser et aménager une zone industrielle" })?.severity).toBe("information");
+    for (const title of [
+      "Arrêté de la ministre des finances du 6 janvier 2026, complétant l’arrêté du 21 août 2023 relatif à la nomenclature des produits monopolisés et leurs prix",
+      "Arrêté du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime du 9 janvier 2026, portant ouverture de la procédure de réaménagement foncier dans les périmètres publics irrigués situés au gouvernorat de Nabeul",
+      "Arrêté de la Cheffe du Gouvernement du 13 janvier 2026, fixant la procédure d’obtention des informations relatives au bénéficiaire effectif des personnes morales et des constructions juridiques",
+      "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant l’arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche du 9 février 2016, fixant la durée de la période d'autorisation d'utilisation des semences et des produits de multiplication végétative non obtenus selon le mode de production biologique",
+      "Arrêté du ministre des affaires sociales du 31 décembre 2025, fixant les modalités d’organisation du concours externe sur épreuves pour le recrutement de travailleurs sociaux conseillers du ministère des affaires sociales",
+    ])
+      expect(assess({ title }), title).toBeNull();
+    expect(assess({ title: "Nomination d’un sous-directeur", institution: "Ministère de l’Environnement" })).toBeNull();
   });
 
   it("leaves out the issuer: a ministry's name is not a subject", () => {
