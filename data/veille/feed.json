@@ -1,6 +1,167 @@
 {
- "updated": "2026-10-17T09:06:56.320Z",
+ "updated": "2026-10-17T09:27:33.075Z",
  "scanned": {
+  "2024": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36,
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43,
+   44,
+   45,
+   46,
+   47,
+   48,
+   49,
+   50,
+   51,
+   52,
+   53,
+   54,
+   55,
+   56,
+   57,
+   58,
+   59,
+   60,
+   61,
+   62,
+   63,
+   64,
+   65,
+   66,
+   67,
+   68,
+   69,
+   70,
+   71,
+   72,
+   73,
+   74,
+   75,
+   76,
+   77,
+   78,
+   79,
+   80,
+   81,
+   82,
+   83,
+   84,
+   85,
+   86,
+   87,
+   88,
+   89,
+   90,
+   91,
+   92,
+   93,
+   94,
+   95,
+   96,
+   97,
+   98,
+   99,
+   100,
+   101,
+   102,
+   103,
+   104,
+   105,
+   106,
+   107,
+   108,
+   109,
+   110,
+   111,
+   112,
+   113,
+   114,
+   115,
+   116,
+   117,
+   118,
+   119,
+   120,
+   121,
+   122,
+   123,
+   124,
+   125,
+   126,
+   127,
+   128,
+   129,
+   130,
+   131,
+   132,
+   133,
+   134,
+   135,
+   136,
+   137,
+   138,
+   139,
+   140,
+   141,
+   142,
+   143,
+   144,
+   145,
+   146,
+   147,
+   148,
+   149,
+   150,
+   151,
+   152,
+   153,
+   154,
+   155,
+   156,
+   157,
+   158,
+   159
+  ],
   "2025": [
    1,
    2,
@@ -2159,6 +2320,1599 @@
      "label": "Industries agroalimentaires",
      "terms": [
       "lait"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-156-3751-0",
+   "year": 2024,
+   "issue": 156,
+   "date": "2024-12-25",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/156.pdf#page=2",
+   "page": 3751,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 25 décembre 2024, fixant les calendriers de paiement des créances fiscales, des amendes fiscales administratives, des droits et taxes et amendes douanières, et des créances revenant aux collectivités locales, prévus par la loi n° 2024-48 du 9 décembre 2024, portant loi de finances pour l’année 2025",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscales",
+      "taxes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-153-3653-13",
+   "year": 2024,
+   "issue": 153,
+   "date": "2024-12-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/153.pdf#page=8",
+   "page": 3653,
+   "institution": "Ministère de l’Equipement et de l’Habitat",
+   "kind": "Autre",
+   "title": "Arrête de la ministre de l'équipement et de l'habitat du 18 décembre 2024, portant les règlements d'urbanisme spécifiques applicables aux lotissements établies sur les terrains destinés à l'aménagement des zones industrielles d'une superficie égale ou inférieure à 100 hectares",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "zones industrielles",
+      "lotissements"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-152-3635-7",
+   "year": 2024,
+   "issue": 152,
+   "date": "2024-12-18",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/152.pdf#page=3",
+   "page": 3635,
+   "institution": "Ministère de la Santé",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de la santé du 16 décembre 2024, fixant la liste des substituts du lait maternel",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1200"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-agroalimentaire",
+     "label": "Industries agroalimentaires",
+     "terms": [
+      "lait"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-150-3603-18",
+   "year": 2024,
+   "issue": 150,
+   "date": "2024-12-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/150.pdf#page=8",
+   "page": 3603,
+   "institution": "Ministère de l’Economie et de la Planification",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie et le ministre de l’économie et de la planification du 11 décembre 2024, portant modification de l’arrêté du ministre de l’industrie et des petites et moyennes entreprises et du ministre du développement, de l'investissement et de la coopération internationale du 17 avril 2020, portant approbation du cahier des charges relatives à l’exercice de l’activité du contrôle technique",
+   "severity": "important",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
+     "terms": [
+      "contrôle technique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-150-3608-24",
+   "year": 2024,
+   "issue": 150,
+   "date": "2024-12-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/150.pdf#page=13",
+   "page": 3608,
+   "institution": "Ministère du Commerce et du Développement des Exportations",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre du commerce et du développement des exportations du 11 décembre 2024, relatif aux opérations de vérification et de poinçonnage des instruments de mesure pour l’année 2025",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "normes-produits",
+     "label": "Normes, conformité des produits, métrologie",
+     "terms": [
+      "instruments de mesure"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-150-3617-48",
+   "year": 2024,
+   "issue": 150,
+   "date": "2024-12-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/150.pdf#page=22",
+   "page": 3617,
+   "institution": "Ministère de l’Environnement",
+   "kind": "Autre",
+   "title": "Attribution de la clase exceptionnelle à l’emploi de sous-directeur",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "ministere-environnement",
+     "label": "Texte du ministère de l'environnement",
+     "terms": [
+      "environnement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-149-3420-0",
+   "year": 2024,
+   "issue": 149,
+   "date": "2024-12-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/149.pdf#page=2",
+   "page": 3420,
+   "institution": null,
+   "kind": "Loi",
+   "title": "Loi n° 2024-48 du 9 décembre 2024, portant loi de finances pour l’année 2025",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-146-3336-11",
+   "year": 2024,
+   "issue": 146,
+   "date": "2024-12-03",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/146.pdf#page=8",
+   "page": 3336,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de la justice, du ministre de la défense nationale, du ministre de l’intérieur, du ministre des affaires étrangères, de la migration et des tunisiens à l’étranger, de la ministre des finances, du ministre des affaires sociales, de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime, du ministre de la santé, du ministre de l'enseignement supérieur et de la recherche scientifique, du ministre de la jeunesse et des sports, du ministre des technologies de la communication, de la ministre de l'équipement et de l'habitat, du ministre de l’environnement, du ministre du tourisme et de la ministre des affaires culturelles du 26 novembre 2024, portant la mise en œuvre du programme de la transition énergétique dans les établissements publics (phase 2)",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "energie",
+     "label": "Maîtrise de l'énergie",
+     "terms": [
+      "transition énergétique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-146-3356-33",
+   "year": 2024,
+   "issue": 146,
+   "date": "2024-12-03",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/146.pdf#page=28",
+   "page": 3356,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire de la Banque Centrale de Tunisie n° 2024-14",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "Banque centrale de Tunisie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-142-3212-4",
+   "year": 2024,
+   "issue": 142,
+   "date": "2024-11-26",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/142.pdf#page=13",
+   "page": 3212,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2024-589 du 20 novembre 2024, portant ratification du mémorandum d’entente en matière d’enseignement technique et de formation professionnelle entre la République tunisienne et l’Etat de Burkina Faso",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "formation professionnelle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-130-2916-10",
+   "year": 2024,
+   "issue": 130,
+   "date": "2024-10-25",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/130.pdf#page=14",
+   "page": 2916,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Décret",
+   "title": "Décret n° 2024-503 du 24 octobre 2024, portant remise des pénalités de retard exigés au titre des régimes de sécurité sociale et du régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles",
+   "severity": "important",
+   "domains": [
+    "sst",
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "at-mp",
+     "label": "Accidents du travail, maladies professionnelles",
+     "terms": [
+      "accidents du travail",
+      "maladies professionnelles",
+      "réparation des préjudices"
+     ]
+    },
+    {
+     "rule": "securite-sociale",
+     "label": "Sécurité sociale, CNSS",
+     "terms": [
+      "sécurité sociale",
+      "régimes de sécurité sociale"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-126-2806-0",
+   "year": 2024,
+   "issue": 126,
+   "date": "2024-10-15",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/126.pdf#page=2",
+   "page": 2806,
+   "institution": null,
+   "kind": "Décret-loi",
+   "title": "Décret-loi n° 2024-3 du 14 octobre 2024, modifiant la loi n° 2014-54 du 19 août 2014 relative à la loi de finances complémentaire pour l’année 2014",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances",
+      "loi de finances complémentaire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-115-2538-42",
+   "year": 2024,
+   "issue": 115,
+   "date": "2024-09-20",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/115.pdf#page=36",
+   "page": 2538,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 16 septembre 2024, portant agrément de l’avenant n° 18 à la convention collective sectorielle des hôtels classés touristiques et établissements similaires",
+   "severity": "important",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-115-2592-52",
+   "year": 2024,
+   "issue": 115,
+   "date": "2024-09-20",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/115.pdf#page=90",
+   "page": 2592,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire aux Banques n° 2024-11",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "circulaire aux banques"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-110-2392-2",
+   "year": 2024,
+   "issue": 110,
+   "date": "2024-09-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/110.pdf#page=4",
+   "page": 2392,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2024-474 du 6 septembre 2024, portant ratification du mémorandum d'entente dans le domaine de la formation professionnelle et de l'emploi entre la République tunisienne et le la République d'Irak",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "formation professionnelle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-110-2393-5",
+   "year": 2024,
+   "issue": 110,
+   "date": "2024-09-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/110.pdf#page=5",
+   "page": 2393,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 9 septembre 2024, portant publication des taux d’intérêt effectifs moyens et des seuils des taux d’intérêt excessifs correspondants",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "taux d'intérêt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-109-2360-4",
+   "year": 2024,
+   "issue": 109,
+   "date": "2024-09-06",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/109.pdf#page=5",
+   "page": 2360,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-471 du 6 septembre 2024, modifiant le décret gouvernemental n° 2017-419 du 10 avril 2017, fixant les listes des équipements et les conditions de bénéfice des incitations prévues par les articles 3, 4 et 5 de la loi n° 2017-8 du 14 février 2017 relative à la refonte du dispositif des avantages fiscaux",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-104-2296-3",
+   "year": 2024,
+   "issue": 104,
+   "date": "2024-08-26",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/104.pdf#page=4",
+   "page": 2296,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-467 du 21 août 2024, modifiant et complétant le décret n°2023-545 du 20 juillet 2023 fixant les conditions et les modalités de bénéfice de la mesure de la prise en charge par l’Etat de la différence entre le taux d’intérêt des crédits saisonniers de la céréaliculture et le taux moyen du marché monétaire dans la limite de trois points pour les crédits octroyés par les banques sur leurs ressources propres au profit des petits agriculteurs dans le secteur de la céréaliculture",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "taux d'intérêt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-103-2288-3",
+   "year": 2024,
+   "issue": 103,
+   "date": "2024-08-23",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/103.pdf#page=4",
+   "page": 2288,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-463 du 21 août 2024, portant fixation du champ et des modalités d’application des dispositions de l’article 128 du code des douanes",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
+     "terms": [
+      "douanes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-096-2149-0",
+   "year": 2024,
+   "issue": 96,
+   "date": "2024-08-07",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/096.pdf#page=2",
+   "page": 2149,
+   "institution": "Ministère de l’Agriculture, des Ressources Hydrauliques et de la Pêche Maritime",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 5 août 2024, complétant l’arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche du 19 octobre 2018, fixant la liste des laboratoires habilités à effectuer les analyses et examens dans le cadre du contrôle sanitaire vétérinaire à l'importation et à l'exportation",
+   "severity": "important",
+   "domains": [
+    "hygiene"
+   ],
+   "sectors": [
+    "1200"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "securite-sanitaire",
+     "label": "Sécurité sanitaire des aliments",
+     "terms": [
+      "contrôle sanitaire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-096-2153-2",
+   "year": 2024,
+   "issue": 96,
+   "date": "2024-08-07",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/096.pdf#page=6",
+   "page": 2153,
+   "institution": "Ministère de l’Equipement et de l’Habitat",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre de l’équipement et de l’habitat du 24 juillet 2024, portant les règlements d’urbanisme spécifiques applicables aux lotissements établies sur les terrains destinés à l’aménagement des zones urbaines d’une superficie égale ou inférieure à 50 hectares",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "lotissements"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-095-2145-11",
+   "year": 2024,
+   "issue": 95,
+   "date": "2024-08-06",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/095.pdf#page=27",
+   "page": 2145,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire aux banques n° 2024-9",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "circulaire aux banques"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-093-2056-3",
+   "year": 2024,
+   "issue": 93,
+   "date": "2024-07-30",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/093.pdf#page=6",
+   "page": 2056,
+   "institution": "Ministère de l'Intérieur",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l’intérieur du 30 juillet 2024, portant délégation de pouvoir en matière disciplinaire aux agents du corps de la protection civile",
+   "severity": "important",
+   "domains": [
+    "incendie"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "protection-civile",
+     "label": "Protection civile",
+     "terms": [
+      "protection civile"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-092-2000-2",
+   "year": 2024,
+   "issue": 92,
+   "date": "2024-07-26",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/092.pdf#page=6",
+   "page": 2000,
+   "institution": "Présidence de la République",
+   "kind": "Décret",
+   "title": "Décret n° 2024-441 du 24 juillet 2024, portant ratification de l’accord de garantie à première demande conclu le 31 janvier 2024 entre la République tunisienne et la Banque africaine de développement, relatif au prêt accordé à l’Office national de l’assainissement, pour la contribution au financement du projet d’amélioration de la qualité des eaux usées épurées pour une meilleure résilience aux changements climatiques",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "eau",
+     "label": "Rejets dans l'eau, assainissement",
+     "terms": [
+      "eaux usées",
+      "assainissement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-091-1985-4",
+   "year": 2024,
+   "issue": 91,
+   "date": "2024-07-23",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/091.pdf#page=4",
+   "page": 1985,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l'industrie, des mines et de l’énergie, du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime, de la ministre des finances et de la ministre du commerce et du développement des exportations du 22 juillet 2024, fixant le stock de régulation du lait frais stérilisé et de la période de haute lactation pour l'année 2024 et la période de bénéfice des centrales laitières de la prime de stockage pour l’année 2024",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1200"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-agroalimentaire",
+     "label": "Industries agroalimentaires",
+     "terms": [
+      "lait"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-091-1986-5",
+   "year": 2024,
+   "issue": 91,
+   "date": "2024-07-23",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/091.pdf#page=5",
+   "page": 1986,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l’industrie, des mines et de l'énergie et du ministre de l'intérieur du 22 juillet 2024, portant modification de l'arrêté de la ministre de l’industrie, des mines et de l’énergie et du ministre de l’intérieur du 1 août 2022, portant exécution du programme national de réalisation de l'audit énergétique des communes",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "energie",
+     "label": "Maîtrise de l'énergie",
+     "terms": [
+      "audit énergétique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-088-1870-1",
+   "year": 2024,
+   "issue": 88,
+   "date": "2024-07-16",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/088.pdf#page=5",
+   "page": 1870,
+   "institution": null,
+   "kind": "Loi",
+   "title": "Loi n° 2024-36 du 15 juillet 2024, portant approbation de l’accord de garantie à première demande conclu le 31 janvier 2024 entre la République tunisienne et la Banque africaine de développement,relatif au prêt accordé à l’Office national de l’assainissement pour la contribution au financement du projet d’amélioration de la qualité des eaux usées épurées pour une meilleure résilience aux changements climatiques",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "eau",
+     "label": "Rejets dans l'eau, assainissement",
+     "terms": [
+      "eaux usées",
+      "assainissement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-085-1800-0",
+   "year": 2024,
+   "issue": 85,
+   "date": "2024-07-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/085.pdf#page=7",
+   "page": 1800,
+   "institution": "Présidence du Gouvernement",
+   "kind": "Arrêté",
+   "title": "Arrêté du Chef du Gouvernement du 4 juillet 2024, fixant les conditions et les procédures de recours à des experts ou à des bureaux d’assistance technique au cours du processus de préparation, de la conclusion et de l'exécution des marchés publics",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "marchés publics"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-085-1801-5",
+   "year": 2024,
+   "issue": 85,
+   "date": "2024-07-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/085.pdf#page=8",
+   "page": 1801,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Décret",
+   "title": "Décret n° 2024-419 du 9 juillet 2024, fixant le salaire minimum interprofessionnel garanti dans les secteurs non agricoles régis par le code du travail",
+   "severity": "important",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "code-travail",
+     "label": "Code du travail, contrats de travail",
+     "terms": [
+      "code du travail"
+     ]
+    },
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "salaire minimum",
+      "salaire minimum interprofessionnel garanti"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-085-1802-6",
+   "year": 2024,
+   "issue": 85,
+   "date": "2024-07-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/085.pdf#page=9",
+   "page": 1802,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Décret",
+   "title": "Décret n° 2024-420 du 9 juillet 2024, fixant le salaire minimum agricole garanti",
+   "severity": "important",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "salaire minimum",
+      "salaire minimum agricole garanti"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-075-1657-4",
+   "year": 2024,
+   "issue": 75,
+   "date": "2024-06-20",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/075.pdf#page=8",
+   "page": 1657,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-370 du 19 juin 2024, fixant des avantages fiscaux au profit des tunisiens résidents à l’étranger, les conditions et les procédures de leur octroi",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-063-1466-3",
+   "year": 2024,
+   "issue": 63,
+   "date": "2024-05-21",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/063.pdf#page=4",
+   "page": 1466,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-315 du 20 mai 2024, modifiant et complétant le décret n° 94-1845 du 6 septembre 1994 portant organisation de la direction générale des douanes",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
+     "terms": [
+      "douanes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-063-1512-36",
+   "year": 2024,
+   "issue": 63,
+   "date": "2024-05-21",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/063.pdf#page=50",
+   "page": 1512,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Décret",
+   "title": "Décret n° 2024-332 du 20 mai 2024, portant nomination d’un membre au conseil d’administration de la Banque centrale de Tunisie",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "Banque centrale de Tunisie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-061-1428-4",
+   "year": 2024,
+   "issue": 61,
+   "date": "2024-05-14",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/061.pdf#page=6",
+   "page": 1428,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2024-304 du 8 mai 2024, portant ratification de l’accord-cadre sectoriel de coopération dans le domaine de la formation professionnelle entre la République Tunisienne et la principauté de Monaco",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "formation professionnelle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-061-1431-10",
+   "year": 2024,
+   "issue": 61,
+   "date": "2024-05-14",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/061.pdf#page=9",
+   "page": 1431,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Décret",
+   "title": "Décret n° 2024-308 du 10 mai 2024, déclarant d’utilité publique les travaux de réhabilitation de la zone industrielle Oued Chaabouni du gouvernorat de Sfax",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "zone industrielle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-060-1414-40",
+   "year": 2024,
+   "issue": 60,
+   "date": "2024-05-10",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/060.pdf#page=23",
+   "page": 1414,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2024-301 du 8 mai 2024, portant ratification du mémorandum d’entente dans le domaine de la protection de l’environnement entre la République tunisienne et le Royaume d’Arabie Saoudite",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "environnement-general",
+     "label": "Protection de l'environnement",
+     "terms": [
+      "protection de l'environnement"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-060-1416-44",
+   "year": 2024,
+   "issue": 60,
+   "date": "2024-05-10",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/060.pdf#page=25",
+   "page": 1416,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 10 mai 2024, fixant le champ d’application de la procédure de l’élaboration des certificats de retenue à la source à travers la plateforme électronique prévue par l'article 41 de la loi de finances pour l’année 2022 et ses modalités pratiques et les délais de son application",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "retenue à la source"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-056-1347-6",
+   "year": 2024,
+   "issue": 56,
+   "date": "2024-04-30",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/056.pdf#page=7",
+   "page": 1347,
+   "institution": "Ministère de l’Economie et de la Planification",
+   "kind": "Décret",
+   "title": "Décret n° 2024-226 du 26 avril 2024, portant ratification de l’échange de lettres entre le gouvernement de la République Tunisienne et le mécanisme mondial de financement des infrastructures du groupe de la Banque internationale de développement et de reconstruction relatif à l’octroi d’une subvention pour l’appui au secteur des phosphates en Tunisie",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1400"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-chimie",
+     "label": "Chimie, plastiques, médicaments",
+     "terms": [
+      "phosphates"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-055-1324-2",
+   "year": 2024,
+   "issue": 55,
+   "date": "2024-04-29",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/055.pdf#page=3",
+   "page": 1324,
+   "institution": "Ministère de la Défense Nationale",
+   "kind": "Décret",
+   "title": "Décret n° 2024-213 du 26 avril 2024, portant création du laboratoire de métrologie du ministère de la défense nationale et fixant son organisation administrative et financière et les modalités de son fonctionnement",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "normes-produits",
+     "label": "Normes, conformité des produits, métrologie",
+     "terms": [
+      "métrologie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-053-1303-2",
+   "year": 2024,
+   "issue": 53,
+   "date": "2024-04-25",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/053.pdf#page=6",
+   "page": 1303,
+   "institution": "Ministère de l’Agriculture, des Ressources Hydrauliques et de la Pêche Maritime",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre des finances et du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime du 25 avril 2024, fixant la modalité de perception des ressources provenant du quota national annuel de la pêche au thon rouge, de la déduction des bénéfices de la pêche au thon rouge et de la déduction des bénéfices des fermes d'élevage, d'engraissement et d'exportation de thon rouge",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1100"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-agriculture",
+     "label": "Élevage, abattage, santé animale",
+     "terms": [
+      "élevage"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-049-1257-14",
+   "year": 2024,
+   "issue": 49,
+   "date": "2024-04-16",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/049.pdf#page=7",
+   "page": 1257,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 8 avril 2024, portant agrément de l’avenant n° 18 à la convention collective sectorielle du textile",
+   "severity": "important",
+   "domains": [
+    "travail",
+    "secteurs"
+   ],
+   "sectors": [
+    "1800"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
+     ]
+    },
+    {
+     "rule": "secteur-textile-cuir",
+     "label": "Textile, habillement, cuir",
+     "terms": [
+      "textile"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-049-1258-15",
+   "year": 2024,
+   "issue": 49,
+   "date": "2024-04-16",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/049.pdf#page=8",
+   "page": 1258,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 8 avril 2024, portant agrément de l’avenant n° 18 à la convention collective sectorielle de la confection et de la bonneterie",
+   "severity": "important",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-028-708-6",
+   "year": 2024,
+   "issue": 28,
+   "date": "2024-02-22",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/028.pdf#page=4",
+   "page": 708,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 21 février 2024, modifiant et complétant l’arrêté du 3 juin 2008, portant fixation du plafond annuel des montants des prestations de soins ambulatoires prises en charge par le régime de base d’assurance maladie, au titre de la filière privée de soins ou du système de remboursement",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "assurance-maladie",
+     "label": "Assurance maladie, CNAM",
+     "terms": [
+      "assurance maladie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-025-674-4",
+   "year": 2024,
+   "issue": 25,
+   "date": "2024-02-15",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/025.pdf#page=5",
+   "page": 674,
+   "institution": "Présidence de la République",
+   "kind": "Décret",
+   "title": "Décret n° 2024-122 du 15 février 2024, portant nomination du gouverneur de la Banque centrale de Tunisie",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "Banque centrale de Tunisie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-025-675-8",
+   "year": 2024,
+   "issue": 25,
+   "date": "2024-02-15",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/025.pdf#page=6",
+   "page": 675,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 14 février 2024, portant publication des taux d’intérêt effectifs moyens et des seuils des taux d’intérêt excessifs correspondants",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "taux d'intérêt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-014-374-7",
+   "year": 2024,
+   "issue": 14,
+   "date": "2024-01-24",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/014.pdf#page=4",
+   "page": 374,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2024-81 du 23 janvier 2024, portant ratification d’un accord de coopération entre le Gouvernement de la République tunisienne et le Gouvernement de la République algérienne démocratique et populaire dans le domaine de la formation professionnelle",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "formation professionnelle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-009-297-5",
+   "year": 2024,
+   "issue": 9,
+   "date": "2024-01-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/009.pdf#page=5",
+   "page": 297,
+   "institution": "Ministère de la Défense Nationale",
+   "kind": "Décret",
+   "title": "Décret n° 2024-48 du 11 janvier 2024, portant création de l’établissement de formation professionnelle en plongée et fixant son organisation administrative, financière et les modalités de son fonctionnement",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "formation professionnelle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-009-304-9",
+   "year": 2024,
+   "issue": 9,
+   "date": "2024-01-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/009.pdf#page=12",
+   "page": 304,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 19 janvier 2024, fixant les calendriers de paiement des créances fiscales revenant à l’Etat, des amendes et condamnations pécuniaires et des amendes fiscales administratives et des créances revenant aux collectivités locales, prévus par les articles 58 et 59 de la loi n° 2023-13 du 11 décembre 2023, portant loi de finances pour l’année 2024",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscales"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-009-331-30",
+   "year": 2024,
+   "issue": 9,
+   "date": "2024-01-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/009.pdf#page=39",
+   "page": 331,
+   "institution": "Ministère de l’Equipement et de l’Habitat",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre de l'équipement et de l'habitat et de la chargée de diriger le ministère de l'économie et de la planification du 19 janvier 2024, fixant le cahier des charges relatif à l'activité d'exploitation des unités de concassage et de criblage des matériaux de construction",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [
+    "1700"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "secteur-materiaux-metaux",
+     "label": "Carrières, mines, matériaux et métaux",
+     "terms": [
+      "matériaux de construction"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-006-217-6",
+   "year": 2024,
+   "issue": 6,
+   "date": "2024-01-12",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/006.pdf#page=12",
+   "page": 217,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 11 janvier 2024, fixant les informations communiquées par les services fiscaux à la direction générale de la concurrence et des enquêtes économiques au ministère du commerce et de la promotion des exportations et les modalités de leur communication",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-006-219-7",
+   "year": 2024,
+   "issue": 6,
+   "date": "2024-01-12",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/006.pdf#page=14",
+   "page": 219,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 11 janvier 2024, fixant la compétence territoriale des centres régionaux de contrôle des impôts Sousse 1 et Sousse 2, relevant des services extérieurs de la direction générale des impôts au ministère des finances",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "impôts"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-006-220-8",
+   "year": 2024,
+   "issue": 6,
+   "date": "2024-01-12",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/006.pdf#page=15",
+   "page": 220,
+   "institution": "Ministère de l’Economie et de la Planification",
+   "kind": "Décret",
+   "title": "Décret n° 2024-3 du 4 janvier 2024, portant approbation de don conclu entre la République Tunisienne et la Banque Internationale pour la Reconstruction et le Développement pour la contribution au financement du projet de digitalisation des services de l’emploi à l’Agence Nationale pour l’Emploi et le Travail Indépendant",
+   "severity": "information",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "emploi-formation",
+     "label": "Emploi, formation professionnelle",
+     "terms": [
+      "Agence nationale pour l'emploi et le travail indépendant"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-004-90-1",
+   "year": 2024,
+   "issue": 4,
+   "date": "2024-01-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/004.pdf#page=4",
+   "page": 90,
+   "institution": null,
+   "kind": "Loi",
+   "title": "Loi n° 2024-2 du 4 janvier 2024, modifiant la loi n° 96-41 du 10 juin 1996 relative aux déchets et au contrôle de leur gestion et de leur élimination",
+   "severity": "important",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [
+    "1500"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "dechets",
+     "label": "Déchets",
+     "terms": [
+      "déchets"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-004-92-5",
+   "year": 2024,
+   "issue": 4,
+   "date": "2024-01-09",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/004.pdf#page=6",
+   "page": 92,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-1 du 4 janvier 2024, fixant les conditions d'application de la déduction supplémentaire des dépenses d'innovation prévue à l'article 27 du décret-loi n° 2022-79 du 22 décembre 2022, portant loi de finances pour l'année 2023",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-001-4-4",
+   "year": 2024,
+   "issue": 1,
+   "date": "2024-01-02",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/001.pdf#page=4",
+   "page": 4,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2023-789 du 27 décembre 2023, modifiant et complétant le décret gouvernemental n° 2017-419 du 10 avril 2017, fixant les listes des équipements et les conditions de bénéfice des incitations prévues par les articles 3, 4 et 5 de la loi n° 2017-8 du 14 février 2017 relative à la refonte du dispositif des avantages fiscaux",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-001-16-5",
+   "year": 2024,
+   "issue": 1,
+   "date": "2024-01-02",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/001.pdf#page=16",
+   "page": 16,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2023-790 du 27 décembre 2023, modifiant le décret gouvernemental n°2015-2605 du 29 décembre 2015 relatif aux modalités et procédures d’octroi des avantages fiscaux prévus par les articles 31 et 75 de la loi n° 2015-53 du 25 décembre 2015 portant loi de finances pour l’année 2016",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-039-925-3",
+   "year": 2024,
+   "issue": 39,
+   "date": "2015-12-25",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/039.pdf#page=5",
+   "page": 925,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-153 du 13 mars 2024, modifiant et complétant le décret gouvernemental n° 2015-2605 du 29 décembre 2015 relatif aux modalités et procédures d’octroi des avantages fiscaux prévus par les articles 31 et 75 de la loi n° 2015-53 du 25 décembre 2015 portant loi de finances pour l’année 2016",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscaux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2024-039-928-4",
+   "year": 2024,
+   "issue": 39,
+   "date": "2015-12-25",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2024/039.pdf#page=8",
+   "page": 928,
+   "institution": "Ministère des Finances",
+   "kind": "Décret",
+   "title": "Décret n° 2024-154 du 13 mars 2024, modifiant le décret Présidentiel n° 2022-677 du 3 août 2022 fixant les listes des parties, pièces détachées, accessoires et produits utilisés dans la réparation ou l'entretien ou entrant dans le montage des équipements et appareils agricoles, des navires et bateaux de pêche bénéficiant de l'exonération de la taxe sur la valeur ajoutée à l’importation, et à la fabrication locale, et les conditions et procédures du bénéfice de l’exonération de la taxe sur la valeur ajoutée au titre desdits produits",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "taxe sur la valeur ajoutée",
+      "taxe"
      ]
     }
    ]
