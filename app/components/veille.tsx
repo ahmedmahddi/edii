@@ -4,6 +4,7 @@ import { downloadWorkbook, today } from "@/app/components/download";
 import { Registres } from "@/app/components/registres";
 import feedData from "@/data/veille/feed.json";
 import { catalogue } from "@/lib/registre/referentiel";
+import { aTraiter, CHANGED, loadRegistres } from "@/lib/registre/registre";
 import type { ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
 import { fillRegister, registerRow } from "@/lib/veille/registre";
@@ -33,6 +34,23 @@ const exportRegister = (hits: Hit[]) =>
   downloadWorkbook((wb) => fillRegister(wb, hits.map(registerRow), new Date()), `ID-QSE-002_veille_${today()}.xlsx`);
 
 type Tab = "registres" | "journal";
+const PAGE = 20; // texts shown at once in the Journal officiel
+
+/** What waits in the registers of this browser (evaluations due, texts modified at the JORT), kept up to date. */
+export function useVeilleCount(): number {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const recount = () => setCount(aTraiter(loadRegistres(), feed.amendments ?? []));
+    recount();
+    window.addEventListener(CHANGED, recount);
+    window.addEventListener("storage", recount); // another tab
+    return () => {
+      window.removeEventListener(CHANGED, recount);
+      window.removeEventListener("storage", recount);
+    };
+  }, []);
+  return count;
+}
 
 /**
  * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
@@ -117,6 +135,9 @@ function Journal() {
         (!q || fold(`${h.title} ${h.institution ?? ""}`).includes(q)),
     );
   }, [level, domain, sector, status, query, statuses]);
+  const [limit, setLimit] = useState(PAGE);
+  useEffect(() => setLimit(PAGE), [level, domain, sector, status, query]); // a new filter starts from the top
+  const visible = shown.slice(0, limit);
 
   const years = Object.entries(feed.scanned).sort(([a], [b]) => Number(b) - Number(a));
   const count = (s: Severity) => feed.hits.filter((h) => h.severity === s).length;
@@ -238,16 +259,21 @@ function Journal() {
             </button>
           </div>
           <ol className="veille-list">
-            {shown.map((h) => (
+            {visible.map((h) => (
               <li key={h.id} className={`card veille-hit sev-${h.severity} st-${statusOf(h)}`}>
-                <div className="veille-hit-head">
-                  <span className={`badge veille-sev-${h.severity}`}>{SEVERITIES[h.severity]}</span>
-                  <span className="veille-ref">
-                    JORT n° {h.issue}/{h.year} · {dateFr(h.date)} · p. {h.page}
-                  </span>
-                </div>
+                {/* One line per text; its details open on demand: the JORT lists hundreds. */}
+                <details>
+                  <summary>
+                    <span className="veille-hit-head">
+                      <span className={`badge veille-sev-${h.severity}`}>{SEVERITIES[h.severity]}</span>
+                      <span className="veille-ref">
+                        JORT n° {h.issue}/{h.year} · {dateFr(h.date)} · p. {h.page}
+                      </span>
+                      {statusOf(h) !== "a-lire" ? <span className="badge veille-status">{STATUSES[statusOf(h)]}</span> : null}
+                    </span>
+                    <span className="veille-hit-title">{h.title}</span>
+                  </summary>
                 {h.institution ? <div className="veille-institution">{h.institution}</div> : null}
-                <h3>{h.title}</h3>
                 <dl className="veille-tags">
                   <div>
                     <dt>Domaine</dt>
@@ -306,14 +332,20 @@ function Journal() {
                     </select>
                   </label>
                 </div>
+                </details>
               </li>
             ))}
           </ol>
+          {shown.length > visible.length ? (
+            <button type="button" className="secondary-button veille-more" onClick={() => setLimit(limit + PAGE)}>
+              Afficher {Math.min(PAGE, shown.length - visible.length)} textes de plus ({shown.length - visible.length} restants)
+            </button>
+          ) : null}
         </>
       )}
 
-      <article className="card veille-method">
-        <h2>Comment la veille fonctionne</h2>
+      <details className="card veille-method">
+        <summary>Comment la veille fonctionne</summary>
         <p>
           Chaque numéro du JORT (version française) est lu par son sommaire. Un texte est repéré quand son titre, sans l’autorité qui le
           signe, traite d’un des domaines suivis :
@@ -356,7 +388,7 @@ function Journal() {
             aux numéros déjà lus, <code>npm run veille</code> lit les nouveaux.
           </li>
         </ul>
-      </article>
+      </details>
     </div>
   );
 }

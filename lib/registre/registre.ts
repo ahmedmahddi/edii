@@ -12,9 +12,10 @@
 import type { Classe } from "../classify";
 import type { ClassificationReport } from "../report";
 import type { Situation, StudyKind } from "../studies";
-import type { Amendment } from "../veille/watch";
-import { derivedFlags, type Site } from "./profil";
-import { keysOf, proposals, type Texte } from "./referentiel";
+import { isoDate, kindOf } from "../veille/jort";
+import { type Amendment, fold } from "../veille/watch";
+import { applies, derivedFlags, type Site } from "./profil";
+import { keysOf, namedKeys, proposals, type Texte } from "./referentiel";
 
 export type Conformite = "" | "C" | "NC" | "NA";
 export const CONFORMITES: Record<Conformite, string> = { "": "À évaluer", C: "Conforme", NC: "Non conforme", NA: "Non applicable" };
@@ -36,6 +37,7 @@ export interface Ligne {
   frequence: string;
   evalue: string; // ISO date of the last evaluation, "" if never
   vus: string[]; // JORT modifications already taken into account
+  garde?: boolean; // kept although it no longer applies to the profile
 }
 
 export interface Registre {
@@ -104,6 +106,63 @@ export function createRegistre(report: ClassificationReport, site: Site, texts: 
   };
 }
 
+/** A register of the same establishment, by name (case and accents aside). */
+export function sameName(list: Registre[], nom: string): Registre | undefined {
+  const n = fold(nom);
+  return n ? list.find((r) => fold(r.nom) === n) : undefined;
+}
+
+/**
+ * The register after its establishment's classification changed: category, rubriques, study and
+ * sectors follow the new classification; workforce and the facts ticked by hand are kept, the facts
+ * implied by new rubriques are added and those implied by rubriques gone are dropped. The texts that now apply come as new texts
+ * (nouveautes), those that no longer do are flagged (plusApplicables).
+ */
+export function updateFromReport(reg: Registre, report: ClassificationReport, now = new Date()): Registre {
+  const fresh = siteFromReport(report, reg.site.effectif, []);
+  const before = derivedFlags(reg.site.sections);
+  const after = derivedFlags(fresh.sections);
+  // Facts implied by rubriques gone are dropped, those of new rubriques added; the rest is kept.
+  const dropped = new Set(before.filter((f) => !after.includes(f)));
+  const flags = [...new Set([...reg.site.flags.filter((f) => !dropped.has(f)), ...after.filter((f) => !before.includes(f))])];
+  return {
+    ...reg,
+    nom: report.name || reg.nom,
+    maj: now.toISOString(),
+    classe: report.establishment.classe,
+    etude: report.environment.study?.kind ?? null,
+    situation: report.situation,
+    activites: report.activities.map((a) => ({ code: a.rubrique.code, categorie: a.category })),
+    restauration: report.restorationPath,
+    site: { ...fresh, flags },
+  };
+}
+
+/** Texts kept in the register that no longer apply to the site, unless kept on purpose or added by hand. */
+export function plusApplicables(reg: Registre): Ligne[] {
+  return reg.lignes.filter((l) => l.retenu && l.origine !== "ajoute" && !l.garde && !applies(l.texte.when, reg.site));
+}
+
+/** The JORT text that modifies a text of the register, as a text to add to it. */
+export function texteFromAmendment(a: Amendment, modified: Texte, texts: Texte[]): Texte {
+  const own = namedKeys(a.title)[0];
+  const known = own ? texts.find((t) => keysOf(t).includes(own)) : undefined;
+  if (known) return known;
+  return {
+    id: `jort-${a.id}`,
+    type: kindOf(a.title) === "Autre" ? "Texte" : kindOf(a.title),
+    numero: /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(a.title)?.[1].replace(/\s/g, ""),
+    date: isoDate(a.title) ?? undefined,
+    titre: a.title,
+    domaine: modified.domaine,
+    theme: modified.theme,
+    when: modified.when,
+    source: a.pdf,
+    publie: `JORT n° ${a.issue}/${a.year}, p. ${a.page}`,
+    origine: "jort",
+  };
+}
+
 /** A text added by hand, from the référentiel or the JORT. */
 export function addTexte(reg: Registre, texte: Texte): Registre {
   const existing = reg.lignes.find((l) => l.texte.id === texte.id);
@@ -159,6 +218,18 @@ export function dues(reg: Registre, today = new Date()): Ligne[] {
 
 // Kept in this browser. Reading may fail (private window, blocked storage): then nothing is kept.
 const STORAGE = "abclassement-registres";
+/** Sent on window when the registers are saved: what counts them (the menu's badge) counts again. */
+export const CHANGED = "abclassement-registres";
+
+/**
+ * What calls for attention in every register: texts modified at the JORT, and evaluations late or
+ * due within 30 days. Texts never evaluated are the register's first work, not a reminder: they
+ * are left out.
+ */
+export function aTraiter(list: Registre[], amendments: Amendment[], today = new Date()): number {
+  const late = (r: Registre) => dues(r, today).filter((l) => prochaine(l, today).etat !== "a-evaluer").length;
+  return list.reduce((n, r) => n + late(r) + alertes(r, amendments).length, 0);
+}
 
 export function loadRegistres(): Registre[] {
   try {
@@ -172,6 +243,7 @@ export function loadRegistres(): Registre[] {
 export function saveRegistres(list: Registre[]): boolean {
   try {
     localStorage.setItem(STORAGE, JSON.stringify(list));
+    window.dispatchEvent(new Event(CHANGED));
     return true;
   } catch {
     return false;

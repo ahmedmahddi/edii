@@ -123,6 +123,19 @@ export function ClassificationReportView({
           </button>
         </div>
       </div>
+      <nav className="report-toc" aria-label="Sections de la synthèse">
+        {[
+          ["report-s1", "1. Résultat"],
+          ["report-s2", "2. Activités et seuils"],
+          ["report-s3", "3. Règle d’addition"],
+          ["report-s4", "4. Étude ANPE"],
+          ["report-s5", "5. Références"],
+        ].map(([id, label]) => (
+          <a key={id} href={`#${id}`}>
+            {label}
+          </a>
+        ))}
+      </nav>
       <p className="report-export-help">
         Pour un PDF, choisissez « Enregistrer au format PDF » dans la fenêtre
         d’impression. Le rapport HTML est un document complet à conserver ou à
@@ -180,7 +193,7 @@ export function ClassificationReportView({
             art. 5).
           </p>
         </div>
-        <h3>1. Situation et résultat d’ensemble</h3>
+        <h3 id="report-s1">1. Situation et résultat d’ensemble</h3>
         <dl>
           <dt>Situation déclarée</dt>
           <dd>{SITUATIONS[report.situation]}</dd>
@@ -229,7 +242,7 @@ export function ClassificationReportView({
             </tbody>
           </table>
         </div>
-        <h3>2. Détail des activités et des seuils</h3>
+        <h3 id="report-s2">2. Détail des activités et des seuils</h3>
         <p>
           Les tableaux ci-dessous reproduisent tous les cas et seuils de chaque
           rubrique sélectionnée. Les lignes retenues pour le calcul sont
@@ -385,7 +398,7 @@ export function ClassificationReportView({
             <p className="report-small">Base : {a.environmentalStudy.basis}.</p>
           </section>
         ))}
-        <h3 className="report-break">3. Règles d’addition et calculs</h3>
+        <h3 id="report-s3" className="report-break">3. Règles d’addition et calculs</h3>
         <p>
           Pour les substances d’un même groupe, la règle d’addition compare la
           somme des rapports qx/Qx à 1. Base : arrêté du 23 février 2010, art. 2
@@ -455,7 +468,7 @@ export function ClassificationReportView({
             <p>{a.reason}</p>
           </section>
         ))}
-        <h3>4. Étude environnementale et démarches</h3>
+        <h3 id="report-s4">4. Étude environnementale et démarches</h3>
         <p>
           <strong>{study.title}</strong>
         </p>
@@ -489,7 +502,7 @@ export function ClassificationReportView({
           les conditions déclarées par l’utilisateur. Elles doivent être
           confirmées pour chaque activité.
         </p>
-        <h3>5. Références et traçabilité</h3>
+        <h3 id="report-s5">5. Références et traçabilité</h3>
         <ul>
           {report.sources.map((s) => (
             <li key={s.id}>

@@ -3,19 +3,34 @@
 import { describe, expect, it } from "vitest";
 import { applies, derivedFlags, type Site } from "@/lib/registre/profil";
 import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte } from "@/lib/registre/referentiel";
-import { addTexte, alertes, createRegistre, dues, nouveautes, prochaine, restore, backup, siteFromReport } from "@/lib/registre/registre";
+import {
+  addTexte,
+  alertes,
+  aTraiter,
+  backup,
+  createRegistre,
+  dues,
+  nouveautes,
+  plusApplicables,
+  prochaine,
+  restore,
+  sameName,
+  siteFromReport,
+  texteFromAmendment,
+  updateFromReport,
+} from "@/lib/registre/registre";
 import { createClassificationReport } from "@/lib/report";
 import { ligneRow } from "@/lib/veille/registre";
 import { assess, type Hit, type Sommaires } from "@/lib/veille/watch";
 
 const site = (patch: Partial<Site> = {}): Site => ({ classe: 2, sections: ["1200"], rubriques: ["1214"], etude: "eie_a", effectif: 40, flags: [], ...patch });
 
-function report() {
+const LAIT = { code: "1214", variant: 0, quantity: "50000", eie: "A14" };
+const GPL = { code: "2505", variant: 0, quantity: "50000", eie: "CDC11" };
+
+function report(activities = [LAIT, GPL]) {
   const r = createClassificationReport(
-    [
-      { code: "1214", variant: 0, quantity: "50000", eie: "A14" },
-      { code: "2505", variant: 0, quantity: "50000", eie: "CDC11" },
-    ],
+    activities,
     "projet",
     false,
     "Laiterie du Cap Bon",
@@ -155,5 +170,46 @@ describe("an establishment's register", () => {
     const reg = createRegistre(report(), site(), texts, now);
     expect(restore([], backup([reg]))).toEqual([reg]);
     expect(() => restore([], "{}")).toThrow(/sauvegarde/);
+  });
+
+  it("finds the register of the same establishment, whatever the case and accents", () => {
+    const reg = createRegistre(report(), site(), texts, now);
+    expect(sameName([reg], "  laiterie du cap bon")?.id).toBe(reg.id);
+    expect(sameName([reg], "LAITERIE DU CAP BÔN")?.id).toBe(reg.id);
+    expect(sameName([reg], "Autre usine")).toBeUndefined();
+  });
+
+  it("follows a changed classification, keeps the evaluations, and flags the texts that no longer apply", () => {
+    const start = siteFromReport(report(), 40, ["vehicules", "hydrocarbures", "denrees"]);
+    let reg = createRegistre(report(), start, catalogue([hit("Décret n° 2026-81, relatif au stockage des produits pétroliers")]), now);
+    const petroleum = reg.lignes.find((l) => l.texte.numero === "2026-81")!;
+    expect(petroleum.retenu).toBe(true);
+    reg = { ...reg, lignes: reg.lignes.map((l) => (l.texte.id === "decret-2006-2687" ? { ...l, conformite: "C" as const, evalue: "2026-10-01" } : l)) };
+
+    const updated = updateFromReport(reg, report([LAIT]), now);
+    expect(updated.site).toMatchObject({ rubriques: ["1214"], sections: ["1200"], effectif: 40 });
+    expect(updated.site.flags).toEqual(["vehicules", "denrees"]); // hydrocarbures came with 2505
+    expect(updated.lignes.find((l) => l.texte.id === "decret-2006-2687")).toMatchObject({ conformite: "C", evalue: "2026-10-01" });
+    expect(plusApplicables(updated).map((l) => l.texte.numero)).toEqual(["2026-81"]);
+    const kept = { ...updated, lignes: updated.lignes.map((l) => (l.texte.numero === "2026-81" ? { ...l, garde: true } : l)) };
+    expect(plusApplicables(kept)).toEqual([]);
+  });
+
+  it("adds the JORT text that modifies one of its texts", () => {
+    const reg = createRegistre(report(), site(), texts, now);
+    const list = reg.lignes.find((l) => l.texte.id === "arrete-1995-01-10")!.texte;
+    const a = { id: "2025-115-2331-0", year: 2025, issue: 115, date: "2025-09-23", page: 2331, title: "Arrêté conjoint du ministre des affaires sociales et du ministre de la santé du 18 septembre 2025, modifiant et complétant l'arrêté du 10 janvier 1995, fixant la liste des maladies professionnelles", pdf: "https://lake.jort.tn/x.pdf#page=5", cites: ["d:arrete:1995-01-10"] };
+    const t = texteFromAmendment(a, list, texts);
+    expect(t).toMatchObject({ type: "Arrêté", date: "2025-09-18", domaine: "sst", when: ["effectif"], source: a.pdf, publie: "JORT n° 115/2025, p. 2331" });
+    expect(addTexte(reg, t).lignes.at(-1)).toMatchObject({ retenu: true, origine: "ajoute" });
+  });
+
+  it("counts, for the menu, the modified texts and the late evaluations, not the texts never evaluated", () => {
+    const reg = createRegistre(report(), site(), texts, now);
+    const a = { id: "x", year: 2025, issue: 1, date: null, page: 1, title: "", pdf: "", cites: ["d:arrete:1995-01-10"] };
+    expect(aTraiter([reg], [], now)).toBe(0);
+    expect(aTraiter([reg], [a], now)).toBe(1);
+    const late = { ...reg, lignes: reg.lignes.map((l, i) => (i < 3 ? { ...l, evalue: "2024-01-01" } : l)) };
+    expect(aTraiter([late], [], now)).toBe(3);
   });
 });

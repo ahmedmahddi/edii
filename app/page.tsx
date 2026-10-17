@@ -31,10 +31,11 @@ import {
   type Situation,
   type StudyKind,
 } from "@/lib/studies";
-import { Veille } from "./components/veille";
+import { useVeilleCount, Veille } from "./components/veille";
 import { SECTORS } from "@/lib/sectors";
 
 import {
+  categoryLabel,
   createClassificationReport,
   reportFingerprint,
   type ClassificationReport,
@@ -67,7 +68,7 @@ export default function EdiiPage() {
   );
 }
 
-type View = "search" | "establishment" | "guide" | "sources" | "veille";
+type View = "search" | "establishment" | "guide" | "sources" | "veille" | "report";
 
 function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, React.ReactNode> = {
@@ -160,6 +161,7 @@ function Edii() {
   // A validated classification on its way to the veille, to start the establishment's register.
   const [registreSeed, setRegistreSeed] = useState<ClassificationReport | null>(null);
   const seedUsed = useCallback(() => setRegistreSeed(null), []);
+  const veilleCount = useVeilleCount();
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const reportRef = useRef<HTMLDivElement>(null);
   const validationRef = useRef<HTMLDivElement>(null);
@@ -198,6 +200,14 @@ function Edii() {
     }
     setValidationErrors([]);
     setReport(result.report);
+    setView("report");
+    window.scrollTo({ top: 0 });
+  };
+  const startRegister = () => {
+    if (!report) return;
+    setRegistreSeed(report);
+    setView("veille");
+    window.scrollTo({ top: 0 });
   };
   const selected = rubrique(code ?? "");
   const est = useMemo(() => classifyEstablishment(activities), [activities]);
@@ -291,7 +301,7 @@ function Edii() {
             {nav.map(([id, icon, label]) => (
               <button
                 key={id}
-                className={view === id ? "active" : ""}
+                className={view === id || (id === "establishment" && view === "report") ? "active" : ""}
                 aria-current={view === id ? "page" : undefined}
                 onClick={() => setView(id)}
               >
@@ -299,6 +309,14 @@ function Edii() {
                 <span>{id === "search" ? "Nomenclature" : label}</span>
                 {id === "establishment" && (
                   <span className="nav-count">{activities.length}</span>
+                )}
+                {id === "veille" && veilleCount > 0 && (
+                  <span
+                    className="nav-count is-alert"
+                    title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours"
+                  >
+                    {veilleCount}
+                  </span>
                 )}
               </button>
             ))}
@@ -316,6 +334,8 @@ function Edii() {
                   : "ABCLASSEMENT / " +
                     (view === "establishment"
                       ? "VOTRE DOSSIER"
+                      : view === "report"
+                        ? "SYNTHÈSE"
                       : view === "guide"
                         ? "MODE D’EMPLOI"
                         : view === "veille"
@@ -327,7 +347,9 @@ function Edii() {
                   ? "Répertoire des activités"
                   : view === "establishment"
                     ? "Mon établissement"
-                    : view === "guide"
+                    : view === "report"
+                      ? "Synthèse de classement"
+                      : view === "guide"
                       ? "Comprendre votre classement"
                       : view === "veille"
                         ? "Veille réglementaire"
@@ -335,12 +357,14 @@ function Edii() {
               </h1>
               <p>
                 {view === "search"
-                  ? "Identifiez vos activités, renseignez les quantités et consultez votre classement."
+                  ? "Trouvez vos activités et leurs seuils de classement."
                   : view === "establishment"
-                    ? "Vos activités, leur catégorie et les démarches environnementales associées."
-                    : view === "veille"
-                      ? "Les textes parus au Journal Officiel sur les établissements classés, l’environnement, la santé et sécurité au travail, l’hygiène, la sécurité incendie, les produits dangereux, le droit du travail, le code de la route, la fiscalité et les secteurs de la nomenclature."
-                      : "Les informations utiles pour préparer votre dossier."}
+                    ? "Vos activités, leur catégorie et l’étude ANPE."
+                    : view === "report"
+                      ? "La synthèse de votre classement, à imprimer ou à exporter."
+                      : view === "veille"
+                        ? "Les registres de vos établissements et les textes du Journal officiel qui les concernent."
+                        : "Les informations utiles pour préparer votre dossier."}
               </p>
             </div>
             <div className="reference-total">
@@ -358,7 +382,7 @@ function Edii() {
             <Sources />
           ) : view === "veille" ? (
             <Veille seed={registreSeed} onSeedUsed={seedUsed} />
-          ) : (
+          ) : view === "report" ? null : (
             <div className={`edii-layout view-${view}`}>
               <section
                 className="search-workspace"
@@ -405,6 +429,28 @@ function Edii() {
                       <button onClick={() => setQuery("inflammables")}>
                         inflammables
                       </button>
+                    </div>
+                  )}
+                  {selected && (
+                    <div
+                      ref={detailRef}
+                      className="rubrique-detail"
+                      tabIndex={-1}
+                      aria-label="Détail de la rubrique"
+                    >
+                      <button
+                        className="back-button"
+                        onClick={() => setCode(null)}
+                      >
+                        ← Fermer le détail de la rubrique
+                      </button>
+                      <RubriqueView
+                        key={selected.code}
+                        rub={selected}
+                        count={count(selected.code)}
+                        onAdd={() => add(selected.code)}
+                        onOpen={open}
+                      />
                     </div>
                   )}
                   {query.trim() || section ? (
@@ -487,7 +533,7 @@ function Edii() {
                         ))}
                       </ul>
                     </>
-                  ) : (
+                  ) : selected ? null : (
                     <>
                       <div className="browse-heading">
                         <h3>Parcourir la nomenclature</h3>
@@ -550,28 +596,6 @@ function Edii() {
                     </>
                   )}
                 </div>
-                {selected && (
-                  <div
-                    ref={detailRef}
-                    className="rubrique-detail"
-                    tabIndex={-1}
-                    aria-label="Détail de la rubrique"
-                  >
-                    <button
-                      className="back-button"
-                      onClick={() => setCode(null)}
-                    >
-                      ← Fermer le détail de la rubrique
-                    </button>
-                    <RubriqueView
-                      key={selected.code}
-                      rub={selected}
-                      count={count(selected.code)}
-                      onAdd={() => add(selected.code)}
-                      onOpen={open}
-                    />
-                  </div>
-                )}
                 <div className="reference-note">
                   <Icon name="book" size={19} />
                   <p>
@@ -598,7 +622,14 @@ function Edii() {
                       est={est}
                       update={update}
                       remove={remove}
-                      clear={() => setActivities([])}
+                      clear={() => {
+                        if (
+                          confirm(
+                            `Retirer ${activities.length > 1 ? `les ${activities.length} activités` : "l’activité"} de l’établissement ? Les quantités et les choix ANPE seront perdus.`,
+                          )
+                        )
+                          setActivities([]);
+                      }}
                       open={open}
                     />
                     <StudyCard
@@ -609,6 +640,36 @@ function Edii() {
                       setSensitive={setSensitive}
                       update={update}
                     />
+                    {report && (
+                      <div className={`card report-summary${reportStale ? " is-stale" : ""}`}>
+                        <div>
+                          <p className="eyebrow">Synthèse validée</p>
+                          <strong>
+                            {categoryLabel(report.establishment.classe)}
+                            {report.environment.study ? ` · ${report.environment.study.title}` : ""}
+                          </strong>
+                          <p className="small">
+                            {reportStale
+                              ? "Le dossier a changé depuis : validez à nouveau pour mettre la synthèse à jour."
+                              : `${report.name || "Établissement sans nom"} · générée le ${new Date(report.generatedAt).toLocaleDateString("fr-FR")}`}
+                          </p>
+                        </div>
+                        <div className="report-summary-actions">
+                          <button
+                            className="secondary-button"
+                            onClick={() => {
+                              setView("report");
+                              window.scrollTo({ top: 0 });
+                            }}
+                          >
+                            Voir la synthèse
+                          </button>
+                          <button disabled={reportStale} onClick={startRegister}>
+                            Créer le registre de veille
+                          </button>
+                        </div>
+                      </div>
+                    )}
                     <div
                       id="dossier-validation"
                       className="validation-panel"
@@ -647,9 +708,8 @@ function Edii() {
                         <Icon name="arrow" size={18} />
                       </button>
                       <small>
-                        Le rapport est disponible à la fin de la page, puis
-                        exportable en HTML, en données JSON ou en PDF via
-                        l’impression.
+                        La synthèse s’ouvre sur sa propre page : imprimable en
+                        PDF, exportable en HTML et en données JSON.
                       </small>
                     </div>
                     <button
@@ -722,18 +782,24 @@ function Edii() {
               </section>
             </div>
           )}
-          {report && (view === "search" || view === "establishment") && (
+          {view === "report" && !report && (
+            <div className="card dossier-empty">
+              <p>Aucune synthèse : validez d’abord votre établissement.</p>
+              <button className="secondary-button" onClick={() => setView("establishment")}>
+                Aller à Mon établissement
+              </button>
+            </div>
+          )}
+          {report && view === "report" && (
             <div
               ref={reportRef}
               className="report-host"
               tabIndex={-1}
               aria-label="Rapport de classement généré"
             >
-              <ClassificationReportView
-                key={report.generatedAt}
-                report={report}
-                stale={reportStale}
-              />
+              <button className="edii-link report-back" onClick={() => setView("establishment")}>
+                <span aria-hidden="true">←</span> Revenir au dossier
+              </button>
               <section className="card registre-next" aria-labelledby="registre-next-title">
                 <div>
                   <p className="eyebrow">Étape suivante</p>
@@ -743,20 +809,18 @@ function Edii() {
                     profil du site, puis évaluez la conformité texte par texte.
                   </p>
                 </div>
-                <button
-                  disabled={reportStale}
-                  onClick={() => {
-                    setRegistreSeed(report);
-                    setView("veille");
-                    window.scrollTo({ top: 0 });
-                  }}
-                >
+                <button disabled={reportStale} onClick={startRegister}>
                   Créer le registre de veille <Icon name="arrow" size={18} />
                 </button>
                 {reportStale ? (
                   <small>Validez à nouveau la synthèse : le dossier a changé depuis.</small>
                 ) : null}
               </section>
+              <ClassificationReportView
+                key={report.generatedAt}
+                report={report}
+                stale={reportStale}
+              />
             </div>
           )}
           <footer className="workspace-footer">
@@ -778,7 +842,7 @@ function Edii() {
               window.scrollTo({ top: 0 });
             }}
             aria-current={view === id ? "page" : undefined}
-            className={view === id ? "active" : ""}
+            className={view === id || (id === "establishment" && view === "report") ? "active" : ""}
           >
             <Icon name={icon} />
             <span>
@@ -789,7 +853,9 @@ function Edii() {
                   : id === "guide"
                     ? "Guide"
                     : id === "veille"
-                      ? "Veille"
+                      ? veilleCount
+                        ? `Veille (${veilleCount})`
+                        : "Veille"
                       : "Textes"}
             </span>
           </button>
@@ -1327,12 +1393,16 @@ function StudyCard({
           </tbody>
         </table>
       </div>
-      <p className="muted small">
-        Le décret classe les unités selon leur activité principale ; la
-        nomenclature, les activités et substances qu&apos;elles contiennent. Les
-        suggestions rapprochent les deux textes avec la condition dont elles
-        dépendent : c&apos;est une lecture, à confirmer pour chaque activité.
-      </p>
+      <details className="edii-steps-details">
+        <summary>Comment les entrées sont suggérées</summary>
+        <p className="muted small">
+          Le décret classe les unités selon leur activité principale ; la
+          nomenclature, les activités et substances qu&apos;elles contiennent.
+          Les suggestions rapprochent les deux textes avec la condition dont
+          elles dépendent : c&apos;est une lecture, à confirmer pour chaque
+          activité.
+        </p>
+      </details>
 
       {result.study ? (
         <div className="edii-study-result">
@@ -1350,12 +1420,18 @@ function StudyCard({
               activités.
             </p>
           ) : null}
-          <ol className="edii-steps small">
-            {result.study.steps.map((step) => (
-              <li key={step}>{step}</li>
-            ))}
-          </ol>
-          <p className="muted small">Base : {result.study.basis}.</p>
+          <details className="edii-steps-details">
+            <summary>
+              Les démarches ({result.study.steps.length} étape
+              {result.study.steps.length > 1 ? "s" : ""})
+            </summary>
+            <ol className="edii-steps small">
+              {result.study.steps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
+            </ol>
+            <p className="muted small">Base : {result.study.basis}.</p>
+          </details>
           {result.study.kind === "depollution" ? (
             <p className="edii-note small">
               La circulaire n° 27 du 7 novembre 2024 ouvrait cette
