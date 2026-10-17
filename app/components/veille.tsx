@@ -265,9 +265,13 @@ export function Veille() {
           <li>
             <strong>Critique</strong> : le titre cite un texte de référence de l’application (la nomenclature du 15 novembre 2005, ses
             modifications de 2010 et 2012, les décrets n° 2005-1991, n° 2006-2687 et n° 68-88). <strong>Important</strong> : une
-            obligation pour les établissements. <strong>Information</strong> : l’actualité d’un secteur.
+            obligation pour les entreprises. <strong>Information</strong> : l’actualité d’un secteur, un accord international, un
+            acte ponctuel.
           </li>
-          <li>Les nominations, délégations de signature, concours, organigrammes et fixations de prix sont ignorés.</li>
+          <li>
+            Sont ignorés : nominations, concours et carrière des agents publics, budget et comptes de l’État, prêts et garanties de
+            l’État, permis miniers et pétroliers, expropriations, fixations de prix, prix et médailles.
+          </li>
           <li>
             Un repérage est une alerte à lire, pas une conclusion juridique : le texte officiel fait foi. Les statuts « pertinent » et «
             sans objet » restent dans ce navigateur.

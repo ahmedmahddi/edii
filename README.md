@@ -62,30 +62,36 @@ pdf.js, with no Python or poppler. Each run starts where the last one stopped an
 if interrupted. Results go to `data/veille/feed.json`: commit that file to share them, and the page
 shows them.
 
-The veille follows seven domains: établissements classés, environnement (eau, air, bruit, déchets,
-énergie), santé et sécurité au travail (médecine du travail, accidents du travail et maladies
-professionnelles, prévention, code du travail), hygiène et sécurité sanitaire, sécurité incendie et
-protection civile, produits et substances dangereux, and the sectors of the nomenclature (élevage,
-agroalimentaire, bois et papier, chimie, carrières et métaux, textile, hydrocarbures, radioactifs…).
+The veille follows ten domains: établissements classés (with zones industrielles and permis de
+bâtir), environnement (eau, air, bruit, déchets, énergie), santé et sécurité au travail (médecine du
+travail, accidents du travail et maladies professionnelles, prévention), hygiène et sécurité
+sanitaire, sécurité incendie et protection civile, produits et substances dangereux, droit du travail
+et RH (code du travail, contrats, conventions collectives, salaire minimum, CNSS, formation
+professionnelle), code de la route et transport (circulation, véhicules, visite technique, transport
+routier), fiscalité, finances et entreprises (loi de finances, impôts et taxes, douane, bénéficiaire
+effectif, investissement, change), and the sectors of the nomenclature (élevage, agroalimentaire,
+bois et papier, chimie, carrières et métaux, textile, hydrocarbures, radioactifs, normes…).
 Each flagged text has a level:
 
 * **critique**: its title cites a text the app is built on (the nomenclature of 15 novembre 2005,
   its 2010 and 2012 amendments, décret n° 2005-1991, décret n° 2006-2687, décret n° 68-88); the app
   may have to change;
-* **important**: an obligation for establishments (rejets, déchets, médecine du travail, hygiène,
-  prévention des incendies, matières dangereuses…);
-* **information**: the news of a sector, or a text found only through the ministry that signs it.
+* **important**: an obligation for companies (rejets, déchets, médecine du travail, hygiène,
+  prévention des incendies, contrats de travail, loi de finances, véhicules…);
+* **information**: the news of a sector, an international agreement, a one-off act (a centre de
+  visite technique opened), or a text found only through the ministry that signs it.
 
 A hit says its domain, the sections of the nomenclature it concerns (so it can be filtered by
 sector) and, when it applies, which part of the app it touches. The issuer ("Arrêté du ministre de
 l'industrie, des mines et de l'énergie du 3 mars 2026,") is left out before matching, so a ministry's
-name is not taken for a subject. Nominations, délégations de signature, concours, organigrammes,
-statuts particuliers and price fixings are ignored. Matching ignores accents and case, and only on
+name is not taken for a subject. Ignored: nominations, concours and other careers of public
+agents, the State's budget and accounts, the State's loans and guarantees, mining and oil permits,
+expropriations, price fixings, awards and medals. Matching ignores accents and case, and only on
 whole words. On the page, each reader can mark a text as "pertinent" or "sans objet"; that is kept
 in their browser only.
 
 The rules are in `data/veille/watch.json` (`domains`, `references`, `rules`, `ignore`,
-`ignoreAnywhere`). Every sommaire read is kept in `data/veille/sommaires/<year>.json`, so edited
+`ignoreAnywhere`, `demote`). Every sommaire read is kept in `data/veille/sommaires/<year>.json`, so edited
 rules can be applied again without downloading anything:
 
 ```bash

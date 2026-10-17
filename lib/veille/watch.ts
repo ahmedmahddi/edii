@@ -3,7 +3,8 @@
  *
  * Rules are in data/veille/watch.json, by domain: établissements classés, environnement, santé et
  * sécurité au travail, hygiène, sécurité incendie, produits dangereux, and the sectors of the
- * nomenclature. A title citing a text the app is built on is "critique"; other rules are
+ * nomenclature, and for companies in general droit du travail, code de la route and fiscalité. A
+ * title citing a text the app is built on is "critique"; other rules are
  * "important" (an obligation for establishments) or "information" (sector news). The issuer
  * ("Arrêté du ministre de l'industrie, des mines et de l'énergie du 3 mars 2026,") is left out
  * before matching, so a ministry's name does not count as a subject. A hit is something to read,
@@ -32,6 +33,7 @@ export const rules = watch as unknown as {
   domains: Record<string, string>;
   ignore: string[];
   ignoreAnywhere: string[];
+  demote: string[];
   references: Rule[];
   rules: Rule[];
 };
@@ -132,10 +134,11 @@ export function assess(
   const refs = rules.references.map((r) => [r, apply(r, full, institution)] as const).filter(([, m]) => m);
   const others = rules.rules.map((r) => [r, apply(r, text, institution)] as const).filter(([, m]) => m);
   if (!refs.length && !others.length) return null;
-  // A text found only by its institution, with nothing in its title, is information at most.
+  // A text found only by its institution, with nothing in its title, is information at most; so is
+  // an international agreement or a one-off act (rules.demote).
   const severity: Severity = refs.length
     ? "critique"
-    : others.some(([r]) => r.level === "important" && !r.institution)
+    : others.some(([r]) => r.level === "important" && !r.institution) && !rules.demote.some((p) => contains(full, p))
       ? "important"
       : "information";
   const all = [...refs, ...others];

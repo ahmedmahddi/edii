@@ -41,6 +41,8 @@ const SUPERSCRIPT = /^(ème|ère|er|e|bis)\s*$/i;
 // An institution heading is usually less indented than the titles, but not always (the Instance
 // supérieure indépendante pour les élections is centred): its first words tell it too.
 const INSTITUTION = /^(Présidence|Ministère|Instance|Haute Instance|Conseil|Cour|Banque Centrale|Assemblée)\b/;
+// A law has no institution above it, and its first line is as far left as an institution heading.
+const TEXT_START = /^(lois?|loi organique|décrets?(?:-lois?)?|arrêtés?|décisions?|circulaires?|ordonnances?)\b/i;
 
 export function isoDate(text: string): string | null {
   const m = DATE.exec(text);
@@ -143,7 +145,7 @@ export function parseIssue(pages: Line[][]): Issue {
         continue;
       }
       const lessIndented = indent !== null && line.x < indent - 8;
-      if (!pending.length && (lessIndented || INSTITUTION.test(text))) {
+      if (!pending.length && !TEXT_START.test(text) && (lessIndented || INSTITUTION.test(text))) {
         institution = lastWasInstitution && institution ? clean(`${institution} ${text}`) : text;
         lastWasInstitution = true;
         continue;

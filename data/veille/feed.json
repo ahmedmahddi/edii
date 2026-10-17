@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-17T08:56:05.407Z",
+ "updated": "2026-10-17T09:06:56.320Z",
  "scanned": {
   "2025": [
    1,
@@ -265,113 +265,27 @@
  },
  "hits": [
   {
-   "id": "2026-097-2000-42",
+   "id": "2026-097-1990-31",
    "year": 2026,
    "issue": 97,
    "date": "2026-10-02",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/097.pdf#page=32",
-   "page": 2000,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/097.pdf#page=22",
+   "page": 1990,
+   "institution": "Ministère des Finances",
    "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 23 septembre 2026, portant institution d’une concession d’exploitation de substances minérales du 4 groupe (Sels) dite concession \" Exsel Jerid\"au gouvernorat de Kébili",
+   "title": "Arrêté de la ministre des finances du 30 septembre 2026, portant création et classement du bureau de contrôle des impôts Ain Zaghouan",
    "severity": "information",
    "domains": [
-    "secteurs"
+    "finance"
    ],
-   "sectors": [
-    "1700"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
      "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-097-2001-43",
-   "year": 2026,
-   "issue": 97,
-   "date": "2026-10-02",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/097.pdf#page=33",
-   "page": 2001,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 23 septembre 2026, portant institution d’une concession d’exploitation de substances minérales du 6 groupe (Carbonate de calcium) dite concession « Jebel Feriana » au gouvernorat de Kasserine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-097-2003-44",
-   "year": 2026,
-   "issue": 97,
-   "date": "2026-10-02",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/097.pdf#page=35",
-   "page": 2003,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 23 septembre 2026, portant institution d’une concession d’exploitation de substances minérales du 4 groupe (Gypse) dite concession « Oued Khouibat » au gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-097-2004-45",
-   "year": 2026,
-   "issue": 97,
-   "date": "2026-10-02",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/097.pdf#page=36",
-   "page": 2004,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 23 septembre 2026, portant autorisation de cession totale des droits et obligations dans la concession d’exploitation de substances minérales du 4 groupe dite concession « Adam » au gouvernorat de Tozeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
+      "impôts"
      ]
     }
    ]
@@ -433,213 +347,86 @@
    ]
   },
   {
-   "id": "2026-078-1524-0",
+   "id": "2026-091-1857-17",
    "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=8",
-   "page": 1524,
-   "institution": "Loi n° 2026-17 du 30 juillet 2026, portant approbation de la convention de",
-   "kind": "Autre",
-   "title": "garantie conclue le 3 novembre 2025 entre la République tunisienne et la Banque européenne pour la reconstruction et le développement relative au prêt accordé à la Compagnie des phosphates de Gafsa pour la contribution au financement du projet d’acquisition de nouveaux équipements miniers et l'installation de systèmes de filtres-presses pour le recyclage de l'eau « CAPSA »",
-   "severity": "important",
-   "domains": [
-    "environnement",
-    "secteurs"
-   ],
-   "sectors": [
-    "1400",
-    "1500"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "dechets",
-     "label": "Déchets",
-     "terms": [
-      "recyclage"
-     ]
-    },
-    {
-     "rule": "secteur-chimie",
-     "label": "Chimie, plastiques, médicaments",
-     "terms": [
-      "phosphates"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-078-1524-1",
-   "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=8",
-   "page": 1524,
-   "institution": "Loi n° 2026-18 du 30 juillet 2026, portant approbation de la convention de",
-   "kind": "Autre",
-   "title": "garantie conclue le 1 décembre 2025, entre la République tunisienne et la Société internationale islamique de financement du commerce, relative à la convention de Mourabaha conclue entre le Groupe chimique tunisien et la société précitée, pour la contribution au financement des importations d’engrais",
+   "issue": 91,
+   "date": "2026-09-11",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/091.pdf#page=38",
+   "page": 1857,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire aux banques n°2026-9",
    "severity": "information",
    "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1100"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-agriculture",
-     "label": "Élevage, abattage, santé animale",
-     "terms": [
-      "engrais"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-078-1525-2",
-   "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=9",
-   "page": 1525,
-   "institution": "Loi n° 2026-19 du 30 juillet 2026, portant approbation de la convention de",
-   "kind": "Autre",
-   "title": "garantie conclue le 2 décembre 2025, entre la République tunisienne et la Société internationale islamique de financement du commerce, relative à la convention de Mourabaha conclue entre le Groupe chimique tunisien et la société précitée, pour la contribution au financement des importations d’engrais",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1100"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-agriculture",
-     "label": "Élevage, abattage, santé animale",
-     "terms": [
-      "engrais"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-078-1526-4",
-   "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=10",
-   "page": 1526,
-   "institution": "Présidence de la République",
-   "kind": "Décret",
-   "title": "Décret n° 2026-193 du 30 juillet 2026, portant ratification de la convention de garantie conclue le 3 novembre 2025 entre la République tunisienne et la Banque européenne pour la reconstruction et le développement relative au prêt accordé à la Compagnie des phosphates de Gafsa pour la contribution au financement du projet d’acquisition de nouveaux équipements miniers et l'installation de systèmes de filtres-presses pour le recyclage de l'eau «CAPSA»",
-   "severity": "important",
-   "domains": [
-    "environnement",
-    "secteurs"
-   ],
-   "sectors": [
-    "1400",
-    "1500"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "dechets",
-     "label": "Déchets",
-     "terms": [
-      "recyclage"
-     ]
-    },
-    {
-     "rule": "secteur-chimie",
-     "label": "Chimie, plastiques, médicaments",
-     "terms": [
-      "phosphates"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-078-1526-5",
-   "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=10",
-   "page": 1526,
-   "institution": "Présidence de la République",
-   "kind": "Décret",
-   "title": "Décret n° 2026-194 du 30 juillet 2026, portant ratification de la convention de garantie conclue le 1 décembre 2025, entre la République tunisienne et la Société internationale islamique de financement du commerce, relative à la convention de Mourabaha conclue entre le Groupe chimique tunisien et la société précitée, pour la contribution au financement des importations d’engrais",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1100"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-agriculture",
-     "label": "Élevage, abattage, santé animale",
-     "terms": [
-      "engrais"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-078-1527-6",
-   "year": 2026,
-   "issue": 78,
-   "date": "2026-07-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/078.pdf#page=11",
-   "page": 1527,
-   "institution": "Présidence de la République",
-   "kind": "Décret",
-   "title": "Décret n° 2026-195 du 30 juillet 2026, portant ratification de la convention de garantie conclue le 2 décembre 2025, entre la République tunisienne et la Société internationale islamique de financement du commerce, relative à la convention de Mourabaha conclue entre le Groupe chimique tunisien et la société précitée, pour la contribution au financement des importations d’engrais",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1100"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-agriculture",
-     "label": "Élevage, abattage, santé animale",
-     "terms": [
-      "engrais"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-070-1327-3",
-   "year": 2026,
-   "issue": 70,
-   "date": "2026-07-14",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/070.pdf#page=4",
-   "page": 1327,
-   "institution": "Ministère des Affaires Sociales",
-   "kind": "Arrêté",
-   "title": "Arrêté conjoint du ministre des affaires sociales, du ministre de la santé et de la ministre des finances du 14 juillet 2026, fixant les procédures et les conditions d'octroi de l’allocation destinée à la prise en charge d'une partie des frais d'acquisition des équipements de protection au profit des personnes atteintes de la maladie « Xeroderma pigmentosum » et de l’allocation destinée à la prise en charge des dépenses alimentaires au profit des personnes atteintes de l’allergie au gluten",
-   "severity": "important",
-   "domains": [
-    "sst"
+    "finance"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "risques-professionnels",
-     "label": "Prévention des risques professionnels",
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
      "terms": [
-      "équipements de protection"
+      "circulaire aux banques"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-083-1694-43",
+   "year": 2026,
+   "issue": 83,
+   "date": "2026-08-18",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/083.pdf#page=26",
+   "page": 1694,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire aux banques n° 2026-7",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "circulaire aux banques"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-073-1407-23",
+   "year": 2026,
+   "issue": 73,
+   "date": "2026-07-21",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/073.pdf#page=20",
+   "page": 1407,
+   "institution": "Ministère des Transports",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des transports du 20 juillet 2026, relatif à l’entrée en vigueur du modèle définitif de la carte de travailleur agricole destinée au déplacement par véhicules de transport des travailleurs agricoles",
+   "severity": "important",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
+     "terms": [
+      "véhicules de transport"
+     ]
+    },
+    {
+     "rule": "transport-routier",
+     "label": "Transport routier de marchandises et de personnes",
+     "terms": [
+      "transport des travailleurs"
      ]
     }
    ]
@@ -673,6 +460,39 @@
    ]
   },
   {
+   "id": "2026-057-1059-23",
+   "year": 2026,
+   "issue": 57,
+   "date": "2026-06-05",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/057.pdf#page=12",
+   "page": 1059,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 5 juin 2026, modifiant l’arrêté du 25 mars 2019 portant fixation de la liste des Etats et territoires dont le régime fiscal est privilégié telle que prévue par l'article 35 de la loi n° 2018-56 du 27 décembre 2018 portant loi de finances pour l'année 2019",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscal"
+     ]
+    }
+   ]
+  },
+  {
    "id": "2026-049-909-6",
    "year": 2026,
    "issue": 49,
@@ -701,113 +521,27 @@
    ]
   },
   {
-   "id": "2026-046-859-6",
+   "id": "2026-029-520-8",
    "year": 2026,
-   "issue": 46,
-   "date": "2026-05-08",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/046.pdf#page=4",
-   "page": 859,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "issue": 29,
+   "date": "2026-03-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/029.pdf#page=14",
+   "page": 520,
+   "institution": "Ministère des Finances",
    "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 5 mai 2026, portant autorisation de cession totale des droits et des obligations dans la concession d’exploitation d’hydrocarbures dite concession d’exploitation « Baraka »",
+   "title": "Arrêté de la ministre des finances du 13 mars 2026, fixant les informations communiquées par les services fiscaux au ministère de l’équipement et de l’habitat et les modalités de leur communication",
    "severity": "important",
    "domains": [
-    "produits-dangereux"
+    "finance"
    ],
-   "sectors": [
-    "2500"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
      "terms": [
-      "hydrocarbures"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-046-860-7",
-   "year": 2026,
-   "issue": 46,
-   "date": "2026-05-08",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/046.pdf#page=5",
-   "page": 860,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre chargé à titre temporaire de diriger le ministère de l’industrie, des mines et de l’énergie du 5 mai 2026, portant autorisation de cession totale des droits et des obligations dans la concession d’exploitation d’hydrocarbures dite concession d’exploitation « Maamoura »",
-   "severity": "important",
-   "domains": [
-    "produits-dangereux"
-   ],
-   "sectors": [
-    "2500"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
-     "terms": [
-      "hydrocarbures"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-035-642-18",
-   "year": 2026,
-   "issue": 35,
-   "date": "2026-04-03",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/035.pdf#page=22",
-   "page": 642,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 5 mars 2026, portant institution d’un permis de recherche de substances minérales du 4 groupe (sel) dit permis \" Chott El Gharsa \" au gouvernorat de Tozeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-035-643-19",
-   "year": 2026,
-   "issue": 35,
-   "date": "2026-04-03",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/035.pdf#page=23",
-   "page": 643,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 23 mars 2026, portant extension de la durée de validité de la concession d’exploitation de substances minérales du 4 groupe (Sel) dite \"Sidi El Hani\" aux gouvernorats de Sousse et Monastir",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
+      "fiscaux"
      ]
     }
    ]
@@ -831,7 +565,7 @@
    "matches": [
     {
      "rule": "implantation-industrielle",
-     "label": "Zones et projets industriels",
+     "label": "Zones et projets industriels, permis de bâtir",
      "terms": [
       "zone industrielle"
      ]
@@ -839,281 +573,105 @@
    ]
   },
   {
-   "id": "2026-019-269-12",
+   "id": "2026-019-267-8",
+   "year": 2026,
+   "issue": 19,
+   "date": "2026-02-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/019.pdf#page=9",
+   "page": 267,
+   "institution": "Présidence de la République",
+   "kind": "Décret",
+   "title": "Décret n° 2026-26 du 13 février 2026, portant ratification de l'accord relatif à la coopération et à l'assistance mutuelle en matière douanière entre la République Tunisienne et le Royaume d'Arabie Saoudite",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
+     "terms": [
+      "douanière"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-019-269-11",
    "year": 2026,
    "issue": 19,
    "date": "2026-02-13",
    "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/019.pdf#page=11",
    "page": 269,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "institution": "Ministère des Finances",
    "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 5 février 2026, portant institution d’une concession d’exploitation de substances minérales du 6 groupe (Carbonate de calcium) dite concession « Lekbar Mezara » au gouvernorat de Sidi Bouzid",
+   "title": "Arrêté de la ministre des finances du 12 février 2026, fixant le champ d’application de la procédure de la déclaration d’existence des sociétés à distance, ses modalités pratiques et les délais de son application.................. 268 Ministère de l’Economie et de la Planification Cessation de fonctions de la présidente de l’Instance tunisienne de l’investissement",
    "severity": "information",
    "domains": [
-    "secteurs"
+    "finance"
    ],
-   "sectors": [
-    "1700"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
      "terms": [
-      "substances minérales"
+      "Instance tunisienne de l'investissement"
      ]
     }
    ]
   },
   {
-   "id": "2026-016-226-9",
+   "id": "2026-012-178-6",
    "year": 2026,
-   "issue": 16,
-   "date": "2026-02-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/016.pdf#page=4",
-   "page": 226,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "issue": 12,
+   "date": "2026-01-29",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/012.pdf#page=4",
+   "page": 178,
+   "institution": "Ministère des Finances",
    "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 6 février 2026, portant autorisation de cession totale des droits et des obligations dans la concession d’exploitation d’hydrocarbures dite concession d’exploitation « Sabeh »",
+   "title": "Arrêté de la ministre des finances du 27 janvier 2026, portant publication des taux d’intérêt effectifs moyens et des seuils des taux d’intérêt excessifs correspondants",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "taux d'intérêt"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-005-49-0",
+   "year": 2026,
+   "issue": 5,
+   "date": "2026-01-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/005.pdf#page=4",
+   "page": 49,
+   "institution": "Présidence du Gouvernement",
+   "kind": "Arrêté",
+   "title": "Arrêté de la Cheffe du Gouvernement du 13 janvier 2026, fixant la procédure d’obtention des informations relatives au bénéficiaire effectif des personnes morales et des constructions juridiques",
    "severity": "important",
    "domains": [
-    "produits-dangereux"
+    "finance"
    ],
-   "sectors": [
-    "2500"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
+     "rule": "entreprises",
+     "label": "Droit des sociétés, obligations des entreprises",
      "terms": [
-      "hydrocarbures"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-016-227-10",
-   "year": 2026,
-   "issue": 16,
-   "date": "2026-02-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/016.pdf#page=5",
-   "page": 227,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 6 février 2026, portant extension de la durée de validité du premier renouvellement du permis de recherche d’hydrocarbures dit permis « Araifa » et extension de sa superficie",
-   "severity": "important",
-   "domains": [
-    "produits-dangereux"
-   ],
-   "sectors": [
-    "2500"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
-     "terms": [
-      "hydrocarbures"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-016-228-11",
-   "year": 2026,
-   "issue": 16,
-   "date": "2026-02-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/016.pdf#page=6",
-   "page": 228,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 6 février 2026, portant extension de la validité de la période initiale du permis de recherche d’hydrocarbures dit permis « Nefzaoua »",
-   "severity": "important",
-   "domains": [
-    "produits-dangereux"
-   ],
-   "sectors": [
-    "2500"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
-     "terms": [
-      "hydrocarbures"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-009-122-12",
-   "year": 2026,
-   "issue": 9,
-   "date": "2026-01-23",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/009.pdf#page=6",
-   "page": 122,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 15 janvier 2026, portant deuxième renouvellement du permis de recherche de substances minérales du 5 groupe (phosphate) dit permis \" Jebel Gouraia\" au gouvernorat de Kasserine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-009-123-13",
-   "year": 2026,
-   "issue": 9,
-   "date": "2026-01-23",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/009.pdf#page=7",
-   "page": 123,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 15 janvier 2026, portant premier renouvellement du permis de recherche de substances minérales du 3 groupe dit permis \" Sidi Mbarek \" au gouvernorat de Béja",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-009-126-14",
-   "year": 2026,
-   "issue": 9,
-   "date": "2026-01-23",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/009.pdf#page=10",
-   "page": 126,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l'énergie du 15 janvier 2026, portant institution d’une concession d’exploitation de substances minérales du 4 groupe (Sel) dite \"Sabkhet El Brigua\" au gouvernorat de 123 Médenine.......................................................................................................... Ministère de l’Equipement et de l’Habitat 125 Nomination de chefs de services...................................................................... Ministère de l’Environnement 125 Nomination de sous-directeurs......................................................................... Ministère des Affaires Religieuses 125 Nomination d’un directeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-007-102-9",
-   "year": 2026,
-   "issue": 7,
-   "date": "2026-01-16",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/007.pdf#page=10",
-   "page": 102,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 30 décembre 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (Gypse) dit permis \" El Hachana\" au gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-007-103-10",
-   "year": 2026,
-   "issue": 7,
-   "date": "2026-01-16",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/007.pdf#page=11",
-   "page": 103,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 30 décembre 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (Sel) dit permis \" Bison Peak\" au gouvernorat de Tozeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2026-006-92-2",
-   "year": 2026,
-   "issue": 6,
-   "date": "2026-01-14",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/006.pdf#page=4",
-   "page": 92,
-   "institution": "Ministère des Domaines de l'Etat et des Affaires Foncières",
-   "kind": "Décret",
-   "title": "Décret n° 2026-11 du 13 janvier 2026, portant expropriation pour cause d’utilité publique d’une parcelle de terre sise à la région de Zitouna délégation de Ksour, gouvernorat du Kef pour la construction d’un puits profond pour l’approvisionnement de la région en eau potable",
-   "severity": "information",
-   "domains": [
-    "hygiene"
-   ],
-   "sectors": [
-    "1200"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "eau-potable",
-     "label": "Eau destinée à la consommation",
-     "terms": [
-      "eau potable"
+      "bénéficiaire effectif"
      ]
     }
    ]
@@ -1173,10 +731,37 @@
    "matches": [
     {
      "rule": "implantation-industrielle",
-     "label": "Zones et projets industriels",
+     "label": "Zones et projets industriels, permis de bâtir",
      "terms": [
       "zone industrielle",
       "Agence foncière industrielle"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2026-002-25-6",
+   "year": 2026,
+   "issue": 2,
+   "date": "2026-01-06",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/002.pdf#page=11",
+   "page": 25,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 6 janvier 2026, complétant l’arrêté du 23 mai 2022 relatif à l’acquittement du droit de timbre fiscal dû sur certaines formules administratives au moyen de quittances",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscal",
+      "droit de timbre"
      ]
     }
    ]
@@ -1200,7 +785,7 @@
    "matches": [
     {
      "rule": "implantation-industrielle",
-     "label": "Zones et projets industriels",
+     "label": "Zones et projets industriels, permis de bâtir",
      "terms": [
       "projets industriels",
       "vocation des terres agricoles"
@@ -1237,365 +822,562 @@
    ]
   },
   {
-   "id": "2025-155-3656-2",
+   "id": "2025-156-3680-0",
    "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=5",
-   "page": 3656,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 8 décembre 2025, portant délimitation de la concession d’exploitation de substances minérales du 4 groupe (sel) au lieu-dit \"Sabkhet Tader\" au gouvernorat de Médenine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-155-3656-3",
-   "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=5",
-   "page": 3656,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 8 décembre 2025, portant institution d’un permis de recherche de substances minérales du 6 groupe (carbonate de calcium) dit permis \"Jebel Feriana\" au gouvernorat de Kasserine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-155-3657-4",
-   "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=6",
-   "page": 3657,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 11 décembre 2025, portant premier renouvellement du permis de recherche de substances minérales du 3 groupe dit permis \"Koudiat Hamra 2\" au gouvernorat du Kef",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-155-3658-5",
-   "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=7",
-   "page": 3658,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’Industrie, des mines et de l’énergie du 11 décembre 2025, portant institution d’un permis de recherche de substances minérales du 5 groupe (Phosphate) dit permis \" Sra Ouertane\" au gouvernorat du Kef",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-155-3659-6",
-   "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=8",
-   "page": 3659,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 11 décembre 2025, portant premier renouvellement du permis de recherche de substances minérales du 3 groupe dit permis \"Kef Lasfar\" au gouvernorat de Béja",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-155-3660-7",
-   "year": 2025,
-   "issue": 155,
-   "date": "2025-12-30",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=9",
-   "page": 3660,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 11 décembre 2025, portant institution d’un permis de recherche de substances minérales du 5 groupe (Phosphate) dit permis \"ABIDA\" au gouvernorat du Kef",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2907-6",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=7",
-   "page": 2907,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 3 octobre 2025, portant premier renouvellement du permis de recherche de substances minérales du 6 groupe (carbonate de calcium) dit permis \"Jebel Kharrouba\" dans le gouvernorat de Gabès",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2908-7",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=8",
-   "page": 2908,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 3 octobre 2025, portant premier renouvellement du permis de recherche de substances minérales du 5 groupe dit permis \" Bouzer Lahzem \" dans le gouvernorat de Sidi Bouzid",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2909-8",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=9",
-   "page": 2909,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 3 octobre 2025, portant premier renouvellement du permis de recherche de substances minérales du 6 groupe (bentonite) dit permis \" El Hamri \" dans le gouvernorat de Gabès",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2909-9",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=9",
-   "page": 2909,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 3 octobre 2025, portant institution d’une concession d’exploitation de substances minérales du 4 groupe (SEL) dite concession \" Sabkhet Sidi Khlifa \" dans le gouvernorat de Sousse",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2911-10",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=11",
-   "page": 2911,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 3 octobre 2025, portant institution d’une concession d’exploitation de substances minérales du 4 groupe (SEL) dite concession \" Sebkhet Menikhra 2 \" au gouvernorat de Médenine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-131-2912-11",
-   "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=12",
-   "page": 2912,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 7 octobre 2025, portant institution d’une concession d’exploitation d’hydrocarbures dite concession d’exploitation « Sabeh »",
+   "issue": 156,
+   "date": "2025-12-31",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/156.pdf#page=3",
+   "page": 3680,
+   "institution": null,
+   "kind": "Loi organique",
+   "title": "Loi organique n° 2025-19 du 31 décembre 2025, portant approbation des modifications apportées à la convention régionale sur les règles d’origine préférentielles pan-euro-méditerranéennes",
    "severity": "important",
    "domains": [
-    "produits-dangereux"
+    "finance"
    ],
-   "sectors": [
-    "2500"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
      "terms": [
-      "hydrocarbures"
+      "règles d'origine"
      ]
     }
    ]
   },
   {
-   "id": "2025-131-2913-12",
+   "id": "2025-156-3684-7",
    "year": 2025,
-   "issue": 131,
-   "date": "2025-10-31",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=13",
-   "page": 2913,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 7 octobre 2025, portant extension de la durée de validité du deuxième renouvellement du permis de recherche d'hydrocarbures dit permis «Zaafrane»",
-   "severity": "important",
+   "issue": 156,
+   "date": "2025-12-31",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/156.pdf#page=7",
+   "page": 3684,
+   "institution": "Présidence de la République",
+   "kind": "Décret",
+   "title": "Décret n° 2025-486 du 31 décembre 2025, portant ratification des modifications apportées à la convention régionale sur les règles d’origine préférentielles pan-euro-méditerranéennes",
+   "severity": "information",
    "domains": [
-    "produits-dangereux"
+    "finance"
    ],
-   "sectors": [
-    "2500"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "hydrocarbures",
-     "label": "Hydrocarbures, gaz, produits pétroliers",
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
      "terms": [
-      "hydrocarbures"
+      "règles d'origine"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-155-3654-1",
+   "year": 2025,
+   "issue": 155,
+   "date": "2025-12-30",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/155.pdf#page=3",
+   "page": 3654,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 30 décembre 2025, fixant les calendriers de paiement des créances fiscales et des amendes fiscales administratives revenant à l’Etat, prévus par la loi n° 2025-17 du 12 décembre 2025, portant loi de finances pour l’année 2026",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    },
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "fiscales"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-151-3595-2",
+   "year": 2025,
+   "issue": 151,
+   "date": "2025-12-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/151.pdf#page=3",
+   "page": 3595,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre des finances, du ministre de l’intérieur, du ministre des transports et du ministre des technologies de la communication du 19 décembre 2025, fixant les modalités de paiement des taxes de circulation",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "fiscalite",
+     "label": "Impôts et taxes",
+     "terms": [
+      "taxes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-151-3601-30",
+   "year": 2025,
+   "issue": 151,
+   "date": "2025-12-19",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/151.pdf#page=9",
+   "page": 3601,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire de la Banque centrale de Tunisie n° 2025-15",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "Banque centrale de Tunisie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-149-3512-7",
+   "year": 2025,
+   "issue": 149,
+   "date": "2025-12-15",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/149.pdf#page=10",
+   "page": 3512,
+   "institution": "Ministère du Commerce et du Développement des Exportations",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre du commerce et du développement des exportations du 11 décembre 2025, relatif aux opérations de vérification et de poinçonnage des instruments de mesure pour l’année 2026",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "normes-produits",
+     "label": "Normes, conformité des produits, métrologie",
+     "terms": [
+      "instruments de mesure"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-148-3343-0",
+   "year": 2025,
+   "issue": 148,
+   "date": "2025-12-12",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/148.pdf#page=2",
+   "page": 3343,
+   "institution": null,
+   "kind": "Loi",
+   "title": "Loi n° 2025-17 du 12 décembre 2025, portant loi de finances pour l’année 2026",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "loi-finances",
+     "label": "Loi de finances",
+     "terms": [
+      "loi de finances"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-146-3303-24",
+   "year": 2025,
+   "issue": 146,
+   "date": "2025-12-05",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/146.pdf#page=12",
+   "page": 3303,
+   "institution": "Ministère des Transports",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des transports du 3 décembre 2025, portant création d'un centre de visite technique des véhicules à « Menzel Bourguiba » du gouvernorat de Bizerte",
+   "severity": "information",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
+     "terms": [
+      "visite technique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-146-3303-25",
+   "year": 2025,
+   "issue": 146,
+   "date": "2025-12-05",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/146.pdf#page=12",
+   "page": 3303,
+   "institution": "Ministère des Transports",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des transports du 3 décembre 2025, portant création d'un centre de visite technique des véhicules à « Grombalia » du gouvernorat de Nabeul",
+   "severity": "information",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
+     "terms": [
+      "visite technique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-145-3286-9",
+   "year": 2025,
+   "issue": 145,
+   "date": "2025-12-02",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/145.pdf#page=14",
+   "page": 3286,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie et du ministre des transports du 27 novembre 2025, portant exécution du programme de la transition énergétique dans les établissements publics",
+   "severity": "information",
+   "domains": [
+    "environnement"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "energie",
+     "label": "Maîtrise de l'énergie",
+     "terms": [
+      "transition énergétique"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-137-3134-25",
+   "year": 2025,
+   "issue": 137,
+   "date": "2025-11-18",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/137.pdf#page=17",
+   "page": 3134,
+   "institution": "Ministère de l’Equipement et de l’Habitat",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l’équipement et de l'habitat du 18 novembre 2025, complétant l'arrêté de la ministre de l’équipement, de l’habitat et de l’aménagement du territoire du 17 avril 2007, portant définition des pièces constitutives du dossier de permis de bâtir, des délais de validité et prorogation et des conditions de son renouvellement",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "permis de bâtir"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-137-3135-26",
+   "year": 2025,
+   "issue": 137,
+   "date": "2025-11-18",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/137.pdf#page=18",
+   "page": 3135,
+   "institution": "Ministère de l’Equipement et de l’Habitat",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l’équipement et de l'habitat du 18 novembre 2025, complétant l'arrêté du ministre de l’équipement, et de l’habitat du 19 octobre 1995, fixant les pièces constitutives du dossier de lotissements y compris le cahier des charges ainsi que les formes et modalités de son approbation",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "lotissements"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-132-2956-0",
+   "year": 2025,
+   "issue": 132,
+   "date": "2025-11-04",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/132.pdf#page=3",
+   "page": 2956,
+   "institution": "Ministère de l'Intérieur",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l’intérieur du 4 novembre 2025, portant fixation des conditions et procédures de la location de gré à gré des immeubles relevant du domaine municipal privé au profit des sociétés communautaires",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-132-2957-1",
+   "year": 2025,
+   "issue": 132,
+   "date": "2025-11-04",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/132.pdf#page=4",
+   "page": 2957,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 4 novembre 2025, fixant les modalités de garantie du fonds national de garantie des financements accordés aux sociétés communautaires",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-132-2966-12",
+   "year": 2025,
+   "issue": 132,
+   "date": "2025-11-04",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/132.pdf#page=13",
+   "page": 2966,
+   "institution": "Ministère des Transports",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint du ministre des transports et du ministre de l’emploi et de la formation professionnelle du 4 novembre 2025, fixant les conditions d’exercice de l’activité de transport public collectif régulier de personnes par les sociétés communautaires",
+   "severity": "important",
+   "domains": [
+    "route",
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "transport-routier",
+     "label": "Transport routier de marchandises et de personnes",
+     "terms": [
+      "transport public collectif"
+     ]
+    },
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-132-2969-14",
+   "year": 2025,
+   "issue": 132,
+   "date": "2025-11-04",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/132.pdf#page=16",
+   "page": 2969,
+   "institution": "Ministère des Domaines de l'Etat et des Affaires Foncières",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint du ministre des domaines de l'État et des affaires foncières et du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime du 4 novembre 2025, fixant les conditions et procédures d’octroi de la priorité de location des immeubles domaniaux agricoles de gré à gré au profit des sociétés communautaires",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-132-2971-15",
+   "year": 2025,
+   "issue": 132,
+   "date": "2025-11-04",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/132.pdf#page=18",
+   "page": 2971,
+   "institution": "Ministère des Domaines de l'Etat et des Affaires Foncières",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des domaines de l’État et des affaires foncières du 4 novembre 2025, fixant les conditions et procédures de la location de gré à gré des immeubles domaniaux non agricoles au profit des sociétés communautaires",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-131-2906-3",
+   "year": 2025,
+   "issue": 131,
+   "date": "2025-10-31",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/131.pdf#page=6",
+   "page": 2906,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 30 octobre 2025, fixant le tarif de la redevance sur les informations extraites du système d’information douanier automatisé « SINDA »",
+   "severity": "important",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
+     "terms": [
+      "douanier"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-128-2792-61",
+   "year": 2025,
+   "issue": 128,
+   "date": "2025-10-24",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/128.pdf#page=40",
+   "page": 2792,
+   "institution": "Banque Centrale de Tunisie",
+   "kind": "Circulaire",
+   "title": "Circulaire de la Banque Centrale de Tunisie n° 2025-12",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "Banque centrale de Tunisie"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-122-2532-5",
+   "year": 2025,
+   "issue": 122,
+   "date": "2025-10-07",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/122.pdf#page=7",
+   "page": 2532,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 7 octobre 2025, portant création du bureau des douanes du guichet unique de Monastir",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "douane",
+     "label": "Douane, commerce extérieur",
+     "terms": [
+      "douanes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-121-2508-0",
+   "year": 2025,
+   "issue": 121,
+   "date": "2025-10-03",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/121.pdf#page=4",
+   "page": 2508,
+   "institution": null,
+   "kind": "Décret-loi",
+   "title": "Décret-loi n° 2025-3 du 2 octobre 2025, modifiant le décret-loi n° 2022-15 du 20 mars 2022, relatif aux sociétés communautaires",
+   "severity": "information",
+   "domains": [
+    "finance"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
+     "terms": [
+      "sociétés communautaires"
      ]
     }
    ]
@@ -1651,6 +1433,32 @@
      "label": "Pesticides, produits agro-pharmaceutiques",
      "terms": [
       "pesticides"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-121-2523-23",
+   "year": 2025,
+   "issue": 121,
+   "date": "2025-10-03",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/121.pdf#page=19",
+   "page": 2523,
+   "institution": "Ministère des Transports",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des transports du 30 septembre 2025, portant approbation de la modification du cahier des charges relatif à l’exercice par des personnes morales de l’activité de transport routier de marchandises pour le compte d’autrui approuvé par l’arrêté du ministre du transport du 10 décembre 2008",
+   "severity": "important",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "transport-routier",
+     "label": "Transport routier de marchandises et de personnes",
+     "terms": [
+      "transport routier"
      ]
     }
    ]
@@ -1728,14 +1536,14 @@
    "title": "Arrêté du ministre des affaires sociales du 23 septembre 2025, fixant les conditions, modalités et procédures d'application de l'article 30 quater du Code du travail",
    "severity": "important",
    "domains": [
-    "sst"
+    "travail"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
      "rule": "code-travail",
-     "label": "Code du travail, inspection du travail",
+     "label": "Code du travail, contrats de travail",
      "terms": [
       "code du travail"
      ]
@@ -1769,122 +1577,27 @@
    ]
   },
   {
-   "id": "2025-114-2297-4",
+   "id": "2025-113-2252-2",
    "year": 2025,
-   "issue": 114,
-   "date": "2025-09-17",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/114.pdf#page=9",
-   "page": 2297,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "issue": 113,
+   "date": "2025-09-16",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/113.pdf#page=5",
+   "page": 2252,
+   "institution": "Ministère des Finances",
    "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 2 septembre 2025, portant institution d’un permis de recherche de substances minérales du 6 groupe (carbonate de calcium) dit permis \" EL HOURI\" au gouvernorat de Kasserine",
+   "title": "Arrêté de la ministre des finances du 16 septembre 2025, portant publication des taux d'intérêt effectifs moyens et des seuils des taux d'intérêt excessifs correspondants",
    "severity": "information",
    "domains": [
-    "secteurs"
+    "finance"
    ],
-   "sectors": [
-    "1700"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
      "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-114-2298-5",
-   "year": 2025,
-   "issue": 114,
-   "date": "2025-09-17",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/114.pdf#page=10",
-   "page": 2298,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 2 septembre 2025, portant institution d’un permis de recherche de substances minérales du 6 groupe (carbonate de calcium) dit permis \" JEBEL FERIANA \" au gouvernorat de Kasserine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-114-2299-6",
-   "year": 2025,
-   "issue": 114,
-   "date": "2025-09-17",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/114.pdf#page=11",
-   "page": 2299,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 2 septembre 2025, portant institution d’un permis de recherche de substances minérales du 3 groupe (plomb, cuivre et zinc) dit permis \" OUED EL MAADEN \" au gouvernorat de Jendouba",
-   "severity": "important",
-   "domains": [
-    "produits-dangereux",
-    "secteurs"
-   ],
-   "sectors": [
-    "1700",
-    "2700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "amiante-toxiques",
-     "label": "Amiante, substances toxiques",
-     "terms": [
-      "plomb"
-     ]
-    },
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-114-2300-7",
-   "year": 2025,
-   "issue": 114,
-   "date": "2025-09-17",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/114.pdf#page=12",
-   "page": 2300,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 2 septembre 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (Gypse) dit permis \"Jbel El Khabta\" au gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
+      "taux d'intérêt"
      ]
     }
    ]
@@ -1946,83 +1659,80 @@
    ]
   },
   {
-   "id": "2025-097-1889-14",
+   "id": "2025-092-1734-7",
    "year": 2025,
-   "issue": 97,
-   "date": "2025-08-01",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/097.pdf#page=6",
-   "page": 1889,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 14 juillet 2025, portant institution d’un permis de recherche de substances minérales du 5 groupe (Phosphate) dit permis \" Nefta Tozeur \" au gouvernorat de Tozeur",
+   "issue": 92,
+   "date": "2025-07-18",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/092.pdf#page=5",
+   "page": 1734,
+   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
+   "kind": "Décret",
+   "title": "Décret n° 2025-358 du 15 juillet 2025, portant ratification de l’accord en matière de transition énergétique entre la République tunisienne et la République italienne",
    "severity": "information",
    "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-086-1580-0",
-   "year": 2025,
-   "issue": 86,
-   "date": "2025-07-04",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/086.pdf#page=3",
-   "page": 1580,
-   "institution": "Loi n° 2025-11 du 2 juillet 2025, portant approbation de la convention de prêt conclue le 24 septembre 2024 entre la République tunisienne et l’Agence française de développement pour la contribution au financement du projet de la",
-   "kind": "Autre",
-   "title": "modernisation de l'Office national de la protection civile",
-   "severity": "important",
-   "domains": [
-    "incendie"
+    "environnement"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "protection-civile",
-     "label": "Protection civile",
+     "rule": "energie",
+     "label": "Maîtrise de l'énergie",
      "terms": [
-      "protection civile",
-      "Office national de la protection civile"
+      "transition énergétique"
      ]
     }
    ]
   },
   {
-   "id": "2025-086-1581-1",
+   "id": "2025-091-1723-0",
    "year": 2025,
-   "issue": 86,
-   "date": "2025-07-04",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/086.pdf#page=4",
-   "page": 1581,
-   "institution": "Présidence de la République",
+   "issue": 91,
+   "date": "2025-07-16",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/091.pdf#page=3",
+   "page": 1723,
+   "institution": "Ministère de l'Intérieur",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint du ministre de l’intérieur et du ministre de l’équipement et de l’habitat du 16 juillet 2025, portant création des commissions techniques de lotissements et des commissions techniques des permis de bâtir et fixant leur composition et les modalités de leur fonctionnement",
+   "severity": "information",
+   "domains": [
+    "etablissements-classes"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "implantation-industrielle",
+     "label": "Zones et projets industriels, permis de bâtir",
+     "terms": [
+      "permis de bâtir",
+      "lotissements"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-089-1659-3",
+   "year": 2025,
+   "issue": 89,
+   "date": "2025-07-14",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/089.pdf#page=10",
+   "page": 1659,
+   "institution": "Ministère des Transports",
    "kind": "Décret",
-   "title": "Décret n° 2025-343 du 2 juillet 2025, portant ratification de la convention de prêt conclue le 24 septembre 2024 entre la République tunisienne et l’Agence française de développement pour la contribution au financement du projet de la modernisation de l’Office national de la protection civile",
+   "title": "Décret n° 2025-345 du 11 juillet 2025, modifiant et complétant le décret n° 2000-147 du 24 janvier 2000, fixant les règles techniques d'équipement et d'aménagement des véhicules",
    "severity": "important",
    "domains": [
-    "incendie"
+    "route"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "protection-civile",
-     "label": "Protection civile",
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
      "terms": [
-      "protection civile",
-      "Office national de la protection civile"
+      "aménagement des véhicules"
      ]
     }
    ]
@@ -2054,55 +1764,140 @@
    ]
   },
   {
-   "id": "2025-065-1329-8",
+   "id": "2025-061-1296-0",
    "year": 2025,
-   "issue": 65,
-   "date": "2025-05-29",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/065.pdf#page=11",
-   "page": 1329,
-   "institution": "Ministère des Domaines de l'Etat et des Affaires Foncières",
-   "kind": "Décret",
-   "title": "Décret n° 2025-298 du 28 mai 2025, portant expropriation pour cause d’utilité publique des parcelles de terres sises à Sidi Toumi, délégation de Beni Khalled, gouvernorat de Nabeul, nécessaires à la réalisation du projet de liaison de la zone industrielle de Sidi Toumi à la route régionale n° 44",
-   "severity": "information",
+   "issue": 61,
+   "date": "2025-05-23",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/061.pdf#page=2",
+   "page": 1296,
+   "institution": null,
+   "kind": "Loi",
+   "title": "Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre",
+   "severity": "important",
    "domains": [
-    "etablissements-classes"
+    "travail"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "implantation-industrielle",
-     "label": "Zones et projets industriels",
+     "rule": "code-travail",
+     "label": "Code du travail, contrats de travail",
      "terms": [
-      "zone industrielle"
+      "contrats de travail",
+      "sous-traitance de main-d'œuvre"
      ]
     }
    ]
   },
   {
-   "id": "2025-059-1276-11",
+   "id": "2025-059-1279-19",
    "year": 2025,
    "issue": 59,
    "date": "2025-05-20",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/059.pdf#page=13",
-   "page": 1276,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/059.pdf#page=16",
+   "page": 1279,
+   "institution": "Ministère des Transports",
    "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l'énergie du 13 mai 2025, portant annulation de la concession d'exploitation de substances minérales du 2 groupe dite concession d’exploitation « Birsa »",
-   "severity": "information",
+   "title": "Arrêté du ministre des transports 19 mai 2025, relatif à l’utilisation des véhicules de transport pour propre compte ou d’une catégorie de ces véhicules pour effectuer des transports pour le compte d’autrui de certains produits pendant les saisons de leur production ou de leur transformation",
+   "severity": "important",
    "domains": [
-    "secteurs"
+    "route"
    ],
-   "sectors": [
-    "1700"
-   ],
+   "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
+     "rule": "vehicules",
+     "label": "Véhicules, visite technique",
      "terms": [
-      "substances minérales"
+      "véhicules de transport"
+     ]
+    },
+    {
+     "rule": "transport-routier",
+     "label": "Transport routier de marchandises et de personnes",
+     "terms": [
+      "transport pour propre compte",
+      "transports pour le compte d'autrui"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-058-1262-0",
+   "year": 2025,
+   "issue": 58,
+   "date": "2025-05-17",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/058.pdf#page=2",
+   "page": 1262,
+   "institution": null,
+   "kind": "Loi organique",
+   "title": "Loi organique n° 2025-8 du 16 mai 2025, portant approbation de l’accord entre la République tunisienne et la République italienne relatif à la reconnaissance mutuelle des permis de conduire en vue de conversion",
+   "severity": "information",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "code-route",
+     "label": "Code de la route, sécurité routière",
+     "terms": [
+      "permis de conduire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-058-1263-1",
+   "year": 2025,
+   "issue": 58,
+   "date": "2025-05-17",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/058.pdf#page=3",
+   "page": 1263,
+   "institution": "Présidence de la République",
+   "kind": "Décret",
+   "title": "Décret n° 2025-250 du 16 mai 2025, portant ratification de l’accord entre la République tunisienne et la République italienne relatif à la reconnaissance mutuelle des permis de conduire en vue de conversion",
+   "severity": "information",
+   "domains": [
+    "route"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "code-route",
+     "label": "Code de la route, sécurité routière",
+     "terms": [
+      "permis de conduire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-046-917-4",
+   "year": 2025,
+   "issue": 46,
+   "date": "2025-04-17",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/046.pdf#page=35",
+   "page": 917,
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 16 avril 2025, portant agrément de l’avenant n° 17 à la convention collective sectorielle des pharmacies d’officines",
+   "severity": "important",
+   "domains": [
+    "travail"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
      ]
     }
    ]
@@ -2119,7 +1914,8 @@
    "title": "Arrêté du ministre des affaires sociales du 14 mars 2025, portant agrément de l’avenant n° 16 à la convention collective sectorielle concernant le secteur des explosifs",
    "severity": "important",
    "domains": [
-    "produits-dangereux"
+    "produits-dangereux",
+    "travail"
    ],
    "sectors": [
     "2400"
@@ -2131,6 +1927,39 @@
      "label": "Explosifs, artifices",
      "terms": [
       "explosifs"
+     ]
+    },
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "2025-031-713-11",
+   "year": 2025,
+   "issue": 31,
+   "date": "2025-03-14",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/031.pdf#page=6",
+   "page": 713,
+   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
+   "kind": "Arrêté",
+   "title": "Arrêté conjoint de la ministre de l'industrie, des mines et de l’énergie et du ministre du commerce et du développement des exportations du 13 mars 2025, relatif aux aciers pour armatures passives",
+   "severity": "information",
+   "domains": [
+    "secteurs"
+   ],
+   "sectors": [],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "normes-produits",
+     "label": "Normes, conformité des produits, métrologie",
+     "terms": [
+      "aciers"
      ]
     }
    ]
@@ -2166,258 +1995,6 @@
    ]
   },
   {
-   "id": "2025-026-543-1",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=3",
-   "page": 543,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 20 février 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (Sel) dit permis \" Sabkhet Boujmal 1\" au gouvernorat de Médenine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-544-2",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=4",
-   "page": 544,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 20 février 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (Sel) dit permis \"Al Adhibate Sud \" au gouvernorat de Médenine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-545-3",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=5",
-   "page": 545,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 20 février 2025, portant institution d’un permis de recherche de substances minérales du 4 groupe (sel) dit permis \" Saumures El-jérid\" aux gouvernorats de Tozeur et de Kébili",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-546-4",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=6",
-   "page": 546,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Merbeh Chtioua\" dans le gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-546-5",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=6",
-   "page": 546,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"El Benia\" dans le gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-547-6",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=7",
-   "page": 547,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Neptus\" dans le gouvernorat de Tozeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-547-7",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=7",
-   "page": 547,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"El Nekhla\" dans le gouvernorat de Tozeur",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-548-8",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=8",
-   "page": 548,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant institution d’un permis de recherche de substances minérales du 5 groupe (Phosphate) dit permis \"GASAAT\" dans les gouvernorats du Kasserine, du Kef et de Siliana",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-026-549-9",
-   "year": 2025,
-   "issue": 26,
-   "date": "2025-03-06",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/026.pdf#page=9",
-   "page": 549,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l'industrie, des mines et de l’énergie du 20 février 2025, portant deuxième renouvellement d’un permis de recherche de substances minérales du 5 groupe au lieu-dit \"Jebel El Krissa\" au gouvernorat de Kasserine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
    "id": "2025-024-524-9",
    "year": 2025,
    "issue": 24,
@@ -2444,81 +2021,27 @@
    ]
   },
   {
-   "id": "2025-021-423-7",
+   "id": "2025-011-234-0",
    "year": 2025,
-   "issue": 21,
-   "date": "2025-02-18",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/021.pdf#page=9",
-   "page": 423,
-   "institution": "Ministère des Affaires Etrangères, de la Migration et des Tunisiens à l’Etranger",
-   "kind": "Décret",
-   "title": "Décret n° 2025-133 du 17 février 2025, portant ratification des deux contrats d’aide financière et d’exécution du projet « amélioration du taux de desserte en eau potable dans le milieu rural du gouvernorat de Béja (Phase II) » entre la République tunisienne et l’Institut allemand de crédit pour la reconstruction (Kfw)",
+   "issue": 11,
+   "date": "2025-01-29",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/011.pdf#page=3",
+   "page": 234,
+   "institution": "Ministère des Finances",
+   "kind": "Arrêté",
+   "title": "Arrêté de la ministre des finances du 28 janvier 2025, portant publication des taux d’intérêt effectifs moyens et des seuils des taux d’intérêt excessifs correspondants",
    "severity": "information",
    "domains": [
-    "hygiene"
-   ],
-   "sectors": [
-    "1200"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "eau-potable",
-     "label": "Eau destinée à la consommation",
-     "terms": [
-      "eau potable"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-017-321-8",
-   "year": 2025,
-   "issue": 17,
-   "date": "2025-02-07",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/017.pdf#page=4",
-   "page": 321,
-   "institution": "Ministère des Affaires Sociales",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre des affaires sociales du 7 février 2025, portant attribution du prix du travailleur exemplaire aux travailleurs salariés dans les secteurs privés et publics régis par le code du travail au titre de l’année 2023",
-   "severity": "important",
-   "domains": [
-    "sst"
+    "finance"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "code-travail",
-     "label": "Code du travail, inspection du travail",
+     "rule": "finance-information",
+     "label": "Investissement, change, crédit, marchés publics",
      "terms": [
-      "code du travail"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-017-322-11",
-   "year": 2025,
-   "issue": 17,
-   "date": "2025-02-07",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/017.pdf#page=5",
-   "page": 322,
-   "institution": "Ministère des Affaires Sociales",
-   "kind": "Arrêté",
-   "title": "Arrêté du ministre des affaires sociales du 7 février 2025, portant attribution du prix national de santé et de sécurité au travail au titre de l’année 2023",
-   "severity": "important",
-   "domains": [
-    "sst"
-   ],
-   "sectors": [],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "sst",
-     "label": "Santé et sécurité au travail",
-     "terms": [
-      "sécurité au travail"
+      "taux d'intérêt"
      ]
     }
    ]
@@ -2535,68 +2058,43 @@
    "title": "Arrêté du ministre des affaires sociales du 23 janvier 2025, portant approbation de l’avenant n°6 à la convention sectorielle des médecins libéraux conclue entre la Caisse nationale d'assurance maladie et le Syndicat tunisien des médecins libéraux",
    "severity": "information",
    "domains": [
-    "sst"
+    "travail"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "instituts-sst",
-     "label": "Institut de santé et sécurité au travail, CNAM",
+     "rule": "assurance-maladie",
+     "label": "Assurance maladie, CNAM",
      "terms": [
-      "caisse nationale d'assurance maladie"
+      "assurance maladie",
+      "Caisse nationale d'assurance maladie"
      ]
     }
    ]
   },
   {
-   "id": "2025-008-171-0",
-   "year": 2025,
-   "issue": 8,
-   "date": "2025-01-23",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/008.pdf#page=3",
-   "page": 171,
-   "institution": "Loi n° 2025-2 du 21 janvier 2025, portant approbation de la convention de prêt conclue le 25 juin 2024 entre la République tunisienne et l’Agence française de développement pour la contribution au financement de la 6 tranche du",
-   "kind": "Autre",
-   "title": "programme national d’assainissement des quartiers populaires-PNAQP6",
-   "severity": "important",
-   "domains": [
-    "environnement"
-   ],
-   "sectors": [],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "eau",
-     "label": "Rejets dans l'eau, assainissement",
-     "terms": [
-      "assainissement"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-008-172-1",
+   "id": "2025-008-172-2",
    "year": 2025,
    "issue": 8,
    "date": "2025-01-23",
    "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/008.pdf#page=4",
    "page": 172,
-   "institution": "Présidence de la République",
-   "kind": "Décret",
-   "title": "Décret n° 2025-33 du 21 janvier 2025, portant ratification de la convention de prêt conclue le 25 juin 2024 entre la République tunisienne et l’Agence française de développement pour la contribution au financement de la 6 tranche du programme national d’assainissement des quartiers populaires- PNAQP6",
+   "institution": "Ministère des Affaires Sociales",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre des affaires sociales du 21 janvier 2025, portant agrément de l'avenant n°12 à la convention collective sectorielle des agences de voyages",
    "severity": "important",
    "domains": [
-    "environnement"
+    "travail"
    ],
    "sectors": [],
    "impacts": [],
    "matches": [
     {
-     "rule": "eau",
-     "label": "Rejets dans l'eau, assainissement",
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
      "terms": [
-      "assainissement"
+      "convention collective"
      ]
     }
    ]
@@ -2613,7 +2111,8 @@
    "title": "Arrêté du ministre des affaires sociales du 21 janvier 2025, portant agrément de l'avenant n°4 à la convention collective sectorielle de gestion des déchets solides et liquides",
    "severity": "important",
    "domains": [
-    "environnement"
+    "environnement",
+    "travail"
    ],
    "sectors": [
     "1500"
@@ -2625,6 +2124,13 @@
      "label": "Déchets",
      "terms": [
       "déchets"
+     ]
+    },
+    {
+     "rule": "conventions-collectives",
+     "label": "Conventions collectives, salaires",
+     "terms": [
+      "convention collective"
      ]
     }
    ]
@@ -2653,258 +2159,6 @@
      "label": "Industries agroalimentaires",
      "terms": [
       "lait"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-110-28",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=31",
-   "page": 110,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Bir Mguebla\" dans le gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-110-29",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=31",
-   "page": 110,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Jbel Hachana\" dans le gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-111-30",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=32",
-   "page": 111,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant annulation de la concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Oued Echoga\" dans le gouvernorat de Gafsa",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-111-31",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=32",
-   "page": 111,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant annulation d’une concession d’exploitation de substances minérales du 4 groupe au lieu-dit \"Oued Esabat\" dans le gouvernorat de Tataouine",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-112-32",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=33",
-   "page": 112,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant institution d’une concession d’exploitation de substances minérales du 6 groupe dite concession \"Oued El koucha\" au gouvernorat de Gabès",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-113-33",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=34",
-   "page": 113,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant institution d’une concession d’exploitation de substances minérales du 4 groupe dite concession \" Sabkhet Sidi el Heni Nord \" au gouvernorat de Sousse",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-114-34",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=35",
-   "page": 114,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant institution d’une concession d’exploitation de substances minérales du 4 groupe dite concession \"Sabkhet Sidi el Heni Sud\" aux gouvernorats de Sousse et Mahdia",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-115-35",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=36",
-   "page": 115,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 26 décembre 2024, portant institution d’une concession d’exploitation de substances minérales du 6 groupe dite concession \"Jebel Merfeg \" au gouvernorat de Sidi Bouzid",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "2025-004-117-36",
-   "year": 2025,
-   "issue": 4,
-   "date": "2025-01-10",
-   "pdf": "https://lake.jort.tn/journal-officiel/fr/2025/004.pdf#page=38",
-   "page": 117,
-   "institution": "Ministère de l’Industrie, des Mines et de l’Energie",
-   "kind": "Arrêté",
-   "title": "Arrêté de la ministre de l’industrie, des mines et de l’énergie du 10 janvier 2025, portant institution d’un permis de recherche de substances minérales du 5 groupe dit permis \" SKARNA \" aux gouvernorats du Kef et Siliana",
-   "severity": "information",
-   "domains": [
-    "secteurs"
-   ],
-   "sectors": [
-    "1700"
-   ],
-   "impacts": [],
-   "matches": [
-    {
-     "rule": "secteur-materiaux-metaux",
-     "label": "Carrières, mines, matériaux et métaux",
-     "terms": [
-      "substances minérales"
      ]
     }
    ]
