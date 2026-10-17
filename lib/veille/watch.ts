@@ -73,6 +73,7 @@ export interface Feed {
 /** Every sommaire read, kept so that edited rules can be applied again without downloading. */
 export interface Sommaires {
   year: number;
+  updated?: string; // when an issue of that year was last read
   issues: Record<string, Issue>; // issue number → its sommaire
 }
 

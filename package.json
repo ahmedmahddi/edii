@@ -5,9 +5,12 @@
   "type": "module",
   "description": "Classement des établissements dangereux, insalubres ou incommodes (Tunisie) et étude environnementale ANPE",
   "scripts": {
+    "predev": "tsx scripts/veille.ts --reassess",
     "dev": "next dev",
+    "prebuild": "tsx scripts/veille.ts --reassess",
     "build": "next build",
     "start": "next start",
+    "pretypecheck": "tsx scripts/veille.ts --reassess",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "data:ocr": "node scripts/python.mjs data/pipeline/ocr.py",

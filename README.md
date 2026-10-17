@@ -59,8 +59,10 @@ npm run veille -- --file jort.pdf --year 2010 --number 18   # a PDF already on d
 
 The command runs on any computer that reaches jort.tn. It needs Node.js only: PDFs are read with
 pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
-if interrupted. Results go to `data/veille/feed.json`: commit that file to share them, and the page
-shows them.
+if interrupted. Every sommaire read is kept in `data/veille/sommaires/<year>.json`: commit
+`data/veille` to share them. The texts found (`data/veille/feed.json`) are derived from the sommaires
+and the rules, so that file is not kept in git: it is rebuilt by `npm run veille`, and before
+`npm run dev`, `build` and `typecheck`.
 
 The veille follows ten domains: établissements classés (with zones industrielles and permis de
 bâtir), environnement (eau, air, bruit, déchets, énergie), santé et sécurité au travail (médecine du
@@ -122,8 +124,8 @@ left to whoever reads the text.
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
 | `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
-| `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/feed.json`. |
-| `data/veille/` | `watch.json` (the rules), `feed.json` (the texts found) and `sommaires/` (every sommaire read). |
+| `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `data/veille/feed.json`. |
+| `data/veille/` | `watch.json` (the rules), `sommaires/` (every sommaire read) and `feed.json` (the texts found; derived, not in git). |
 | `app/components/veille.tsx` | The Veille réglementaire view. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 

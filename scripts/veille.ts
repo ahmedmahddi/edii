@@ -8,6 +8,8 @@
  *   npm run veille -- --file jort.pdf --year 2010 --number 18   read a PDF already on disk
  *   npm run veille -- --reassess           apply edited rules (data/veille/watch.json) to every
  *                                          sommaire already read, without downloading anything
+ *                                          (run before dev, build and typecheck: feed.json is
+ *                                          derived from the sommaires and not kept in git)
  *   npm run veille -- --list --year 2026   every title already read, flagged or not, to check the rules
  *
  * Issues are numbered from 1 each year at https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf;
@@ -54,7 +56,7 @@ function saveSommaire(year: number, issue: Issue): void {
   all.issues[String(issue.number)] = issue;
   const issues = Object.fromEntries(Object.entries(all.issues).sort(([a], [b]) => Number(a) - Number(b)));
   mkdirSync(SOMMAIRES, { recursive: true });
-  writeFileSync(sommairesFile(year), JSON.stringify({ year, issues }) + "\n");
+  writeFileSync(sommairesFile(year), JSON.stringify({ year, updated: new Date().toISOString(), issues }) + "\n");
 }
 
 /** The issue's PDF, or null when it is not published (yet). */
@@ -131,10 +133,12 @@ async function main(): Promise<void> {
     return;
   }
   if (process.argv.includes("--reassess")) {
+    // feed.json is derived from the stored sommaires: rebuilt from them alone, dated by the last read.
     const years = stored();
     const before = feed.hits.length;
-    feed = reassess(feed, years);
-    saveFeed(feed);
+    feed = reassess({ updated: null, scanned: {}, hits: [] }, years);
+    const updated = years.map((y) => y.updated ?? "").sort().at(-1) || null;
+    writeFileSync(FEED, JSON.stringify({ ...feed, updated }, null, 1) + "\n");
     const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
     console.log(`Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés.`);
     return;
