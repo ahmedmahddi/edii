@@ -1,5 +1,42 @@
 {
- "updated": null,
- "scanned": {},
- "hits": []
+ "updated": "2026-10-17T08:41:55.229Z",
+ "scanned": {
+  "2026": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ "hits": [
+  {
+   "id": "2026-005-79-18",
+   "year": 2026,
+   "issue": 5,
+   "date": "2026-01-13",
+   "pdf": "https://lake.jort.tn/journal-officiel/fr/2026/005.pdf#page=34",
+   "page": 79,
+   "institution": "Ministère de l’Agriculture, des Ressources Hydrauliques et de la Pêche Maritime",
+   "kind": "Arrêté",
+   "title": "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant et complétant l’arrêté du ministre de l'agriculture du 19 septembre 1998, fixant les modalités de contrôle sanitaire et de surveillance des conditions de production des produits de la pêche et de leur mise sur le marché",
+   "severity": "important",
+   "domains": [
+    "hygiene"
+   ],
+   "sectors": [
+    "1200"
+   ],
+   "impacts": [],
+   "matches": [
+    {
+     "rule": "securite-sanitaire",
+     "label": "Sécurité sanitaire des aliments",
+     "terms": [
+      "contrôle sanitaire"
+     ]
+    }
+   ]
+  }
+ ]
 }
