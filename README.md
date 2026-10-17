@@ -58,7 +58,8 @@ npm run veille                                   # the issues of this year not r
 npm run veille -- --year 2025                    # the issues of 2025 not read yet
 npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
 npm run veille -- --file jort.pdf --year 2010 --number 18   # a PDF already on disk
-npm run veille -- --years 1990-2023              # older years, most recent first
+npm run veille -- --years 1995-2023              # older years, most recent first
+npm run veille -- --reread                       # read again the issues that gave no text
 npm run veille -- --probe                        # sample old issues before reading whole years
 ```
 
@@ -68,7 +69,22 @@ whether the server sends part of a file, whether the PDF has a text layer, and h
 sommaire gives. It keeps the first pages of each in `data/veille/probe/`, to adapt the reading to
 old layouts. A past year ends after three missing numbers in a row ("fin de l'année", or "année
 absente en français" if none was found). An issue whose pages are images (a scan, with no text
-layer) is kept in its year's sommaires as `sansTexte`, not read: those will need OCR.
+layer) is kept in its year's sommaires as `sansTexte`, not read: those will need OCR; the probe
+saves the first two pages of such issues as images (`<year>-<nnn>-p1.jpg`).
+
+Only the parts of a PDF that its sommaire pages need are downloaded (the server sends parts of
+files), and reading stops at the first page that is no longer the sommaire: an issue of 100 MB
+costs a few hundred kilobytes. What the probe found, in October 2026:
+
+| Years | French edition | Text layer | Sommaire read |
+|---|---|---|---|
+| 1960–1990 | yes | no: scans (images) | needs OCR |
+| 1995–2025 | yes | yes | yes |
+
+Issues of about 2000 to 2005 use fonts that write glyph numbers instead of letters ("6RPPDLUH" for
+"Sommaire"): `lib/veille/glyphs.ts` decodes them. Some issues set their page numbers a few points
+lower than their titles' leader dots; they are put back on their line. Issues read before these
+fixes are read again with `--reread`.
 
 The command runs on any computer that reaches jort.tn. It needs Node.js only: PDFs are read with
 pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
