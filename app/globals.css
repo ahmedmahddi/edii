@@ -1749,6 +1749,17 @@ p {
   font-size: 14px;
   display: inline-block;
 }
+.veille-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 4px 0 12px;
+}
+.veille-toolbar p {
+  margin: 0;
+}
 .veille-filters { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 8px; }
 .veille-filters label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; min-width: 0; }
 .veille-filters input { min-width: 220px; }
