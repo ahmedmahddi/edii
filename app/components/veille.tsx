@@ -1,11 +1,17 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import { downloadWorkbook, today } from "@/app/components/download";
+import { Registres } from "@/app/components/registres";
 import feedData from "@/data/veille/feed.json";
+import { catalogue } from "@/lib/registre/referentiel";
+import type { ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
-import { fillRegister } from "@/lib/veille/registre";
+import { fillRegister, registerRow } from "@/lib/veille/registre";
 import { type Feed, fold, type Hit, type Impact, rules, type Severity } from "@/lib/veille/watch";
 
 const feed = feedData as unknown as Feed;
+// Every text a register can hold: the curated référentiel and what the veille found in the JORT.
+const TEXTS = catalogue(feed.hits);
 
 const IMPACTS: Record<Impact, string> = {
   nomenclature: "Nomenclature",
@@ -23,17 +29,48 @@ const dateFr = (iso: string | null) =>
   iso ? new Date(`${iso}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "date inconnue";
 
 /** The texts as rows of the QSE register (ID-QSE-002), as an Excel file to save. */
-async function exportRegister(hits: Hit[]): Promise<void> {
-  const { default: ExcelJS } = await import("exceljs"); // loaded on demand: the page does not carry it
-  const workbook = new ExcelJS.Workbook();
-  fillRegister(workbook, hits, new Date());
-  const data = await workbook.xlsx.writeBuffer();
-  const url = URL.createObjectURL(new Blob([data], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }));
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = `ID-QSE-002_veille_${new Date().toISOString().slice(0, 10)}.xlsx`;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
+const exportRegister = (hits: Hit[]) =>
+  downloadWorkbook((wb) => fillRegister(wb, hits.map(registerRow), new Date()), `ID-QSE-002_veille_${today()}.xlsx`);
+
+type Tab = "registres" | "journal";
+
+/**
+ * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
+ * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
+ */
+export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null; onSeedUsed: () => void }) {
+  const [tab, setTab] = useState<Tab>("registres");
+  useEffect(() => {
+    if (seed) setTab("registres");
+  }, [seed]);
+  return (
+    <div className="veille-tabs">
+      <div className="registre-tablist" role="tablist" aria-label="Veille réglementaire">
+        {(
+          [
+            ["registres", "Registres des établissements"],
+            ["journal", "Journal officiel"],
+          ] as const
+        ).map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={tab === id}
+            className={tab === id ? "active" : ""}
+            onClick={() => setTab(id)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
+      {tab === "registres" ? (
+        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={TEXTS} amendments={feed.amendments ?? []} />
+      ) : (
+        <Journal />
+      )}
+    </div>
+  );
 }
 
 /** Statuses are this browser's own reading notes: kept in localStorage, never sent anywhere. */
@@ -59,7 +96,7 @@ function useStatuses(): [Record<string, Status>, (id: string, s: Status) => void
   return [statuses, set];
 }
 
-export function Veille() {
+function Journal() {
   const [statuses, setStatus] = useStatuses();
   const [level, setLevel] = useState<"all" | "critique" | "important">("all");
   const [domain, setDomain] = useState<string>("all");

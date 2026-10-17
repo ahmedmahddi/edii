@@ -1,0 +1,952 @@
+{
+ "comment": "Référentiel of the veille: texts a register can hold, with when they apply (conditions of lib/registre/profil.ts), the summary of their requirements (resume) and the risk of not meeting them. Seeded from an ID-QSE-002 register; texts found in the JORT are added from data/veille/feed.json by lib/registre/referentiel.ts.",
+ "textes": [
+  {
+   "id": "decret-2019-1130",
+   "type": "Décret",
+   "numero": "2019-1130",
+   "date": "2019-11-16",
+   "titre": "Décret n° 2019-1130 du 16 novembre 2019, portant modification de la rémunération des personnes victimes des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Selon ce décret la rémunération des accidents de travail et des maladies professionnels est augmenté proportionnellement à l'augmentation des salaires minimums garanties selon le régime de 48 heures ."
+  },
+  {
+   "id": "arrete-2018-03-29",
+   "type": "Arrêté",
+   "date": "2018-03-29",
+   "titre": "Arrêté du 29 mars 2018, modifiant et complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Cet arrêté Modifie et complète l'article n°3 de la loi n°94-28 du 21 février 1994 fixant la liste des maladies professionnelles et plus précisément les tableaux n°1,11,17,18,23,25,28,29,33,34,40,41,49,58,63,74,76,77,80,82,et 85 nouveau ."
+  },
+  {
+   "id": "arrete-2015-12-01",
+   "type": "Arrêté",
+   "date": "2015-12-01",
+   "titre": "Arrêté du 1er décembre 2015, fixant la liste des maladies transmissibles à déclaration obligatoire",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ],
+   "resume": "Cet fixant la liste des maladies professionnelles."
+  },
+  {
+   "id": "arrete-1995-01-10",
+   "type": "Arrêté",
+   "date": "1995-01-10",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 10 janvier 1995, fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Cette Arrête a pour objet  de fixer La liste des maladies professionnelles, prévue\nListe des maladies professionnelles",
+   "risque": "Sanctions pénales : \nl’employeur peut être poursuivi et encourir des sanctions pénales, notamment des amendes ou des peines de prison.\nSanctions administratives:\nrmer temporairement l’établissement ou de suspendre certaines activités jugées dangereuses pour les travailleurs.\nSanctions financières :\nL’employeur peut être contraint de payer des indemnités supplémentaires aux travailleurs victimes de maladies professionnelles ou d’accidents du travail."
+  },
+  {
+   "id": "decret-95-538",
+   "type": "Décret",
+   "numero": "95-538",
+   "date": "1995-04-01",
+   "titre": "Décret n° 95-538 du 1er avril 1995, relatif à la fixation des taux de cotisations au régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Ces textes fixent : - les taux de cotisation en régime de réparation des préjudices résultant des accidents de travail et des maladies professionnelles, - le barème/ tableau de conversion des rentes alloués aux victimes d'accidents de travail et de maladies professionnelles ou à leurs ayant droit."
+  },
+  {
+   "id": "decret-2008-87",
+   "type": "Décret",
+   "numero": "2008-87",
+   "date": "2008-01-08",
+   "titre": "Décret n° 2008-87 du 8 janvier 2008, portant prorogation du délai de bénéfice de la remise intégrale des pénalités de retard au titre des cotisations",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Est prorogé, le délai de bénéfice de la  remise intégrale des pénalités de retard au titre des cotisations des régimes de sécurité sociale et le régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles, prévu à l’article 2 du décret n° 2007-1507 du 25 juin 2007 susvisé selon les mêmes modalités et procédures régissant cette mesure, et ce, jus qu au 30 avril 2008 inclus."
+  },
+  {
+   "id": "decret-2007-1487",
+   "type": "Décret",
+   "numero": "2007-1487",
+   "date": "2007-06-25",
+   "titre": "Décret n° 2007-1487 du 25 juin 2007, portant approbation de la convention qui fixe les droits et obligations des assureurs et de la caisse nationale d'assurance maladie",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Est approuvée, la convention fixant les droits et obligations des assureurs et de la caisse nationale d’assurance maladie en ce qui concerne le remboursement des montants versés ou exigibles au profit de la victime et résultant des accidents de la circulation  revêtant le caractère d’accidents de travail, annexée au présent décret."
+  },
+  {
+   "id": "arrete-1995-04-29",
+   "type": "Arrêté",
+   "date": "1995-04-29",
+   "titre": "Arrêté du ministre des affaires sociales du 29 avril 1995, fixant le barème de conversion des rentes allouées aux victimes d'accidents du travail et de maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Fixant le barème de conversion des rentes allouées aux victimes d'accidents du travail et de maladies professionnelles ou leurs ayants droit."
+  },
+  {
+   "id": "loi-95-103",
+   "type": "Loi",
+   "numero": "95-103",
+   "date": "1995-11-27",
+   "titre": "Loi n° 95-103 du 27 novembre 1995, modifiant et complétant la loi n° 94-28 du 21 février 1994 relative à la réparation des préjudices résultant des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "L'article 7 de la loi n° 94-28 du 21 février 1994 est abrogé et remplacé par les dispositions suivantes : Les employeurs régis par les dispositions de la présente loi sont tenus de s'affilier à la caisse nationale. Ils doivent aussi lui déclarer les travailleurs nouvellement recrutés, à quel que titre que ce soit, et ce dans un délai n'excédant pas 48 heures ouvrables à partir de la"
+  },
+  {
+   "id": "arrete-1995-02-23",
+   "type": "Arrêté",
+   "date": "1995-02-23",
+   "titre": "Arrêté du ministre des affaires sociales du 23 février 1995, fixant la formule de la déclaration des accidents du travail et des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Fixant la formule de la déclaration des accidents du travail et des maladies professionnelles."
+  },
+  {
+   "id": "arrete-1999-04-15",
+   "type": "Arrêté",
+   "date": "1999-04-15",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 15 avril 1999, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "complétant l'arrêté du 10 janvier 1995, fixant la liste des maladies professionnelles."
+  },
+  {
+   "id": "arrete-2007-08-15",
+   "type": "Arrêté",
+   "date": "2007-08-15",
+   "titre": "Arrêté du ministre des affaires sociales du 15 août 2007, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "La liste des maladies professionnelles prévue par l'article 3 de la loi n° 94-28 du 21 février 1994, portant régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles, est amendée et complétée par les tableaux n° 6, 7, 28, 44, 56, 58, 59, 75, 80, et 82 annexés à l'arrêté."
+  },
+  {
+   "id": "arrete-1995-04-13",
+   "type": "Arrêté",
+   "date": "1995-04-13",
+   "titre": "Arrêté du ministre des affaires sociales du 13 avril 1995, portant dispense de l'obligation de la déclaration",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Article unique. - En application des dispositions de l'article 105 de la loi n° 94-28 du 21 février 1994, portant régime de réparation des préjudices résultant des accidents du travail et des maladies professionnelles, les branches d'activité suivantes sont dispensées de l'obligation de la déclaration nominative des travailleurs : 1) le secteur agricole non régi par les dispositions de la loi n° 89-73 du 2 septembre 1989, modifiant et complétant la loi n° 81-6 du 12 février 1981, organisant les régimes de sécurité sociale dans le secteur agricole, 2) les bateaux de pêche dont la jauge brute est inférieure à 30 tonneaux, et dont les travailleurs sont payés à la part, 3) les chauffeurs de louages et de taxis, 4) les 'masseurs' des bains maures, 5) les travailleurs employés temporairement par les individus, 6) les gens de maisons"
+  },
+  {
+   "id": "arrete-2003-06-05",
+   "type": "Arrêté",
+   "date": "2003-06-05",
+   "titre": "Arrêté des ministres de la santé publique et des affaires sociales du 5 juin 2003, complétant l'arrêté du 10 janvier 1995 fixant la liste des maladies professionnelles",
+   "domaine": "sst",
+   "theme": "Accidents du travail, maladies professionnelles",
+   "when": [
+    "effectif"
+   ],
+   "resume": "complétant l'arrêté du 10 janvier 1995, fixant la liste des maladies professionnelles."
+  },
+  {
+   "id": "arrete-1994-12-21",
+   "type": "Arrêté",
+   "date": "1994-12-21",
+   "titre": "Arrêté du ministre des affaires sociales du 21 décembre 1994, fixant le modèle des formules de déclaration des travailleurs nouvellement recrutés et de déclaration trimestrielle des salaires",
+   "domaine": "travail",
+   "theme": "Sécurité sociale, CNSS",
+   "when": [
+    "effectif"
+   ],
+   "resume": "fixant le modèle des formules de déclaration des travailleurs nouvellement recrutés et de déclaration trimestrielle des travailleurs\nArticle unique. - Les formules de déclaration des travailleurs nouvellement recrutés et de déclaration trimestrielle des travailleurs à la caisse nationale de sécurité sociale prévues par les articles 7 et 13 de la loi susvisée n° 94-28 du 21 février 1994, sont fixées conformément aux modèles annexés au présent arrêté.",
+   "risque": "Sanctions administratives: des avertissements ou des mises en demeure de l'Inspection du travail.\nSanctions pénales : une amende ou à des peines de prison."
+  },
+  {
+   "id": "decret-2000-1985",
+   "type": "Décret",
+   "numero": "2000-1985",
+   "date": "2000-09-12",
+   "titre": "Décret n° 2000-1985 du 12 septembre 2000, relatif à l'organisation, au fonctionnement et au financement des services de médecine du travail",
+   "domaine": "sst",
+   "theme": "Médecine du travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Fiche entreprise / Rapport d'activité / Suivi médicale",
+   "risque": "Sanctions administratives et pénales: \nDes amendes ou des avertissements de la part de l'Inspection du travail.\nL'employeur pourrait être poursuivi pour négligence et exposé à des sanctions pénales, telles que des amendes et, dans certains cas, des peines de prison."
+  },
+  {
+   "id": "arrete-2013-09-16",
+   "type": "Arrêté",
+   "date": "2013-09-16",
+   "titre": "Arrêté du ministre de l'intérieur du 16 septembre 2013, fixant le contenu du plan intérieur d'intervention",
+   "domaine": "incendie",
+   "theme": "Protection civile",
+   "when": [
+    "classe"
+   ],
+   "resume": "Tous les détails et plans afférents au bâtiment, \ndestinés à y faciliter la prise des mesures préliminaires \nde sécurité afin de maîtriser les accidents lorsqu'ils \nsurviennent et d'atténuer leurs effets et conséquences \nsur les personnes, les biens et l'environnement. \n* Les mesures d'organisation et la logique \nd'intervention face aux risques divers. \n* Les plans pratiques de lutte contre les accidents \nqui peuvent survenir dans le bâtiment.",
+   "risque": "Sécurité et la santé des travailleurs: ne pas être préparée à gérer efficacement des situations d'urgence telles que des accidents du travail graves, des incendies, des explosions, des intoxications chimiques, ou encore des crises sanitaires.\nSanctions administratives:\n telles que des amendes, ou même des sanctions pénales si la situation entraîne des accidents graves\nSanctions financières \nl'entreprise peut être amenée à payer des cotisations plus élevées auprès de la Caisse nationale de sécurité sociale (CNSS), en raison du nombre accru d'accidents et de maladies."
+  },
+  {
+   "id": "decret-2004-1876",
+   "type": "Décret",
+   "numero": "2004-1876",
+   "date": "2004-08-11",
+   "titre": "Décret n° 2004-1876 du 11 août 2004, relatif à la conformité des locaux et à l'attestation de prévention",
+   "domaine": "incendie",
+   "theme": "Prévention des incendies",
+   "when": [
+    "classe",
+    "erp"
+   ],
+   "resume": "Attestation de prévention"
+  },
+  {
+   "id": "decret-2005-1991",
+   "type": "Décret",
+   "numero": "2005-1991",
+   "date": "2005-07-11",
+   "titre": "Décret n° 2005-1991 du 11 juillet 2005, relatif à l'étude d'impact sur l'environnement et fixant les catégories d'unités soumises à l'étude d'impact sur l'environnement et les catégories d'unités soumises aux cahiers des charges",
+   "domaine": "etablissements-classes",
+   "theme": "Étude d'impact sur l'environnement",
+   "when": [
+    "classe",
+    "etude:eie",
+    "etude:cahier_des_charges"
+   ],
+   "resume": "Décret n° 2005-1991 du 11 juillet 2005,relatif à l'étude d'impact sur l'environnement et fixant les catégories d'unités soumises à l'étude d'impact sur l'environnement et les catégories d'unités soumises aux cahiers des charges\n>Ce décret abroge le décret 91-362 du 13 mars 1991, relatif aux études d'impact sur l'environnement . >Ce décret s'applique aux nouveaux équipements ou projets industriels, agricoles ou commerciaux ainsi qu'aux équipements ou projets industriels, agricoles ou commerciaux existants qui font l'objet d'extension, de transformation ou de changement de leurs procédés de fabrication, cités aux deux annexes 1 et 2."
+  },
+  {
+   "id": "arrete-2010-02-20",
+   "type": "Arrêté",
+   "date": "2010-02-20",
+   "titre": "Arrêté conjoint du ministre de l'intérieur et du développement local et du ministre de l'industrie et de la technologie du 20 février 2010, fixant les termes de référence de l'étude de dangers et du plan d'opération interne relatifs aux établissements dangereux, insalubres ou incommodes de première catégorie",
+   "domaine": "etablissements-classes",
+   "theme": "Étude de dangers, risques industriels",
+   "when": [
+    "categorie:1"
+   ],
+   "resume": "Arrêté conjoint du ministre de l'intérieur et du développement local et du ministre de l'industrie et de la technologie du 20 février 2010, fixant les termes de référence de l'étude de dangers et du plan d'opération interne relatives aux établissements dangereux, insalubres ou incommodes de première et de deuxième .."
+  },
+  {
+   "id": "loi-2009-11",
+   "type": "Loi",
+   "numero": "2009-11",
+   "date": "2009-03-02",
+   "titre": "Loi n° 2009-11 du 2 mars 2009, portant promulgation du code de la sécurité et de la prévention des risques d'incendie, d'explosion et de panique dans les bâtiments",
+   "domaine": "incendie",
+   "theme": "Prévention des incendies",
+   "when": [
+    "tous"
+   ],
+   "resume": "Article 44 du code de la sécurité et de la prévention des risques\nd’incendie, d’explosion et de panique dans les bâtiments promulgué par la\nloi n° 2009-11 du 2 mars 2009.\nChapitre IV\nLes bâtiments abritant des établissements  dangereux, insalubres ou incommodes\nArticle 42 - Sans préjudice des dispositions de la \nlégislation en vigueur, les bâtiments abritant des établissements dangereux, insalubres ou incommodes sont, en ce qui relève des règles et mesures de sécurité et de prévention des risques d'incendie, d'explosion et de panique, régis par les dispositions du présent code.\nArticle 43 - Les bâtiments, abritant des établissements dangereux, insalubres ou incommodes, sont classés conformément à la législation en vigueur.\nArticle 44 - Le règlement de sécurité détermine les prescriptions propres à chacune des catégories de bâtiments abritant des établissements dangereux, insalubres ou\nincommodes, en ce qui concerne la sécurité et la prévention\narticle."
+  },
+  {
+   "id": "decret-2006-2687",
+   "type": "Décret",
+   "numero": "2006-2687",
+   "date": "2006-10-09",
+   "titre": "Décret n° 2006-2687 du 9 octobre 2006, relatif aux procédures d'ouverture et d'exploitation des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "resume": "Ce décret abroge toutes les dispositions antérieures contraires notamment le décret n° 68-88 du 28 mars 1968.\nCe décret s’applique aux établissements dangereux, insalubres ou incommodes tels que définis au code du travail (les articles 293 à 324). Ils sont désignés dans ce décret par les termes « établissements classés ».\nI./ Ouverture et exploitation des Ets classés de 1ère et 2ème Catégories :\nLe dossier doit être déposé contre un récépissé auprès du Ministère chargé des Ets classés (direction de la sécurité). Il est constitué de :\n* Une demande rédigée sur papier timbré et comportant les renseignements relatifs au pétitionnaire, à l’Ets et à l’ensemble des activités classées.\n* Un plan d'ensemble à l’échelle 1/200 en sept (07) exemplaires.\n* Un plan de situation à l’échelle 1/1000 en sept (07) exemplaires.\n* Un extrait de la carte de la Tunisie à l'échelle de 1/25000 ou 1/50000 indiquant l'emplacement de l'établissement projeté.\n* Une étude des dangers en quatre (04) exemplaires.\n* Deux copies de l'étude d'impact sur l'environnement approuvée par l’ANPE ou du cahier des charges en application du décret n° 2005-1991.\n* Une note relative aux mesures prises pour se conformer aux dispositions législatives et réglementaires concernant l'hygiène et la sécurité du personnel.\n* Un récépissé d'un mandat postal de versement des frais d'insertion d'un avis au JORT (106,000 d, y compris la TVA (18%). DT au CCP 610-15 au nom du receveur économe de l'IORT.\n* Un récépissé de versement du droit fixe exigible au titre de l'ouverture d'un établissement classé (1ère Catégorie : 100 DT et 2ème Catégorie : 50 DT).\nLes études et les documents doivent englober l’ensemble des installations et équipements exploités ou programmés.\nLes termes de référence des études de dangers et du plan d’opération interne (POI) sont fixés par arrêté.\nL’autorisation d’ouverture est accordée par arrêté du ministre chargés des Ets classés. Cet arrêté ainsi que les plans annexés doivent être timbrés au frais du bénéficiaire. L’exploitant doit afficher visiblement et permanence un extrait de cet arrêté dans l’Ets.\nLes études des dangers relatives aux Ets de 1ère catégorie sont actualisées tous les cinq (05) ans. Le POI sera actualisé chaque fois que l'étude des dangers est actualisée et dans tous les cas tous les trois (03) ans.\nII./ Ouverture et exploitation des Ets classés de 3ème Catégorie:\nLe dossier doit être déposé contre un récépissé auprès gouvernorat territorialement concerné. Il est constitué de :\n* Une demande rédigée sur papier timbré et comportant les renseignements relatifs au pétitionnaire, à l’Ets et à l’ensemble des activités classées.\n* Un plan d'ensemble à l’échelle 1/200 en trois (03) exemplaires.\n* Un plan de situation à l’échelle 1/1000 en trois (03) exemplaires.\n* Deux copies de l'étude d'impact sur l'environnement approuvée par l’ANPE ou du cahier des charges en application du décret n° 2005-1991.\n* Un récépissé de versement du droit fixe exigible (vingt dinars (20 DT) au titre de l'ouverture d'un établissement classé."
+  },
+  {
+   "id": "arrete-2017-08-08",
+   "type": "Arrêté",
+   "date": "2017-08-08",
+   "titre": "Arrêté du 8 août 2017, fixant les critères pour bénéficier du contrat « KARAMA »",
+   "domaine": "travail",
+   "theme": "Emploi, formation professionnelle",
+   "resume": "Selon cet arrêté les critères pour bénéficier du 'contrat KARAMA ' sont\n1-Inscrits aux bureaux d'emploi et l'emploi indépendants,\n2-Titulaires d'un diplôme universitaire national ou d'un certificat équivalent\nOu une qualification technicien supérieur .\n3-Leur période de chômage est supérieure à deux ans à compter de la date de\nl'obtention du certificat .\n4-Et non-bénéficiaires à la date de la candidature pour 'contrat KARAMA '\ndu programme de formation d'initiation à la vie professionnelle.",
+   "risque": "Sanctions administratives :des amendes, des avertissements, ou même la suspension temporaire des activités de l’entreprise si les infractions sont graves.\nSanctions pénales : des amendes et des peines de prison en cas d'infractions graves, comme l'exploitation de travailleurs, le travail des mineurs ou la discrimination\nActions en justice : : L'employeur peut être poursuivi pour violation des droits des salariés, ce qui peut entraîner des condamnations, des réparations financières (indemnisation des salariés) et des frais juridiques."
+  },
+  {
+   "id": "decret-2017-399",
+   "type": "Décret",
+   "numero": "2017-399",
+   "date": "2017-03-29",
+   "titre": "Décret n° 2017-399 du 29 mars 2017, portant remise des pénalités de retard exigées au titre des régimes de sécurité sociale",
+   "domaine": "travail",
+   "theme": "Sécurité sociale, CNSS",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Ce décret met k'accent sur les pénalités de retard exigées au titre des régimes de sécurité sociale et leur remise"
+  },
+  {
+   "id": "decret-2002-583",
+   "type": "Décret",
+   "numero": "2002-583",
+   "date": "2002-03-12",
+   "titre": "Décret n° 2002-583 du 12 mars 2002, portant modification du décret n° 96-1050 du 3 juin 1996",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Portant modification du décret n° 96-1050 du 03 juin 1996 relatif au financement par la caisse nationale de sécurité sociale des projets de santé et de sécurité au travail."
+  },
+  {
+   "id": "loi-96-62",
+   "type": "Loi",
+   "numero": "96-62",
+   "date": "1996-07-15",
+   "titre": "Loi n° 96-62 du 15 juillet 1996, portant modification de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": ": Le contrat de travail est une convention\npar laquelle l'une des parties appelée travailleur ou salarié s'engage\nà fournir à l'autre partie appelée employeur ses services personnels\nsous la direction et le contrôle de celle-ci , moyennant une\nrémunération .\nLa relation de travail est prouvée par tous moyens .\nArticle 6-2 : Le contrat de travail est conclu pour un",
+   "risque": "Sanctions administratives :des amendes, des avertissements, ou même la suspension temporaire des activités de l’entreprise si les infractions sont graves.\nSanctions pénales : des amendes et des peines de prison en cas d'infractions graves, comme l'exploitation de travailleurs, le travail des mineurs ou la discrimination\nActions en justice : : L'employeur peut être poursuivi pour violation des droits des salariés, ce qui peut entraîner des condamnations, des réparations financières (indemnisation des salariés) et des frais juridiques."
+  },
+  {
+   "id": "decretloi-2020-2",
+   "type": "Décret-loi",
+   "numero": "2020-2",
+   "date": "2020-04-14",
+   "titre": "Décret-loi n° 2020-2 du 14 avril 2020, portant suspension exceptionnelle et provisoire de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Ce décret met en suspension l'application de quelques articles du code du travail relatives à l’empêchement d’exécution résultant d’un cas fortuit ou de force majeure survenue avant ou pendant l’exécution du contrat."
+  },
+  {
+   "id": "loi-91-15",
+   "type": "Loi",
+   "numero": "91-15",
+   "date": "1991-02-25",
+   "titre": "Loi n° 91-15 du 25 février 1991, portant modification du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Article unique  : Les dispositions de l'article 445 du code du travail , promulgué par la loi n°66-27 du 30 avril 1966,  sont abrogées et remplacées par les dispositions suivantes:\nArticle 445(nouveau ): Sont jours fériés payés , le 20 mars , le 1 er mai , le 25 juillet, le 7 novembre ,le jour de l'aid El Fitr et le jour de l'aid El Idha."
+  },
+  {
+   "id": "loi-70-20",
+   "type": "Loi",
+   "numero": "70-20",
+   "date": "1970-04-30",
+   "titre": "Loi n° 70-20 du 30 avril 1970, portant modification du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Article unique : Les dispositions du paragraphe 3 de l'article 429 et les dispositions des articles  431,437, 440, 444 du Code du Travail sont modifiés comme suit: Article 429 (paragraphe 3 nouveau ) : La Médaille du Travail peut être attribués aux personnels de l'Etat ,  des collectivités Publiques  Locales et des Etablissements Publics à caractères administratif. Article 431 (nouveau) : La Médaille du Travail comprend 5 échelons Article 437 (nouveau) : La Médaille du Travail ne sera conférée qu'aux personnes jouissant de leurs droits civils et politiques  Article 440 (nouveau) :Toute proposition à la Médaille du Travail doit être faite par l'employeur de l'intéressé  et adressée, sauf en ce qui concerne les personnels de l'Etat , des collectivités Publiques Locales et des  Etablissements Publics à caractère administratif , au gouverneur de la circonscription dans laquelle est  domicilié le candidat . Article 444(nouveau): La liste des promus est publiée au Journal Officiel de la République Tunisienne"
+  },
+  {
+   "id": "loi-2007-19",
+   "type": "Loi",
+   "numero": "2007-19",
+   "date": "2007-04-02",
+   "titre": "Loi n° 2007-19 du 2 avril 2007, portant modification de certaines dispositions du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Cette loi modifie l'article 165, alinéa 1er (obligation pour l'employeur d'accorder les facilités nécessaires à la commission consultative d'entreprise et au délégué du personnel sans que ces facilités n'entravent le fonctionnement de l'entreprise) et l'article 166 (obligation pour l'employeur de soumettre le licenciement d'un membre représentant le personnel au sein de la commission consultative d'entreprise à celle-ci et à l'inspection du travail et de la conciliation pour requérir leurs avis. Le licenciement d'un délégué du personnel doit être soumis directement à l'inspection du travail et de la conciliation. Cette loi ajoute au code du travail trois articles nouveaux : l'article 166 bis (la priorité au maintien en emploi en cas de chômage pour des raisons économiques ou technologiques est accordée aux représentant du personnel), l'article 169 bis (extension de l'application des article 165, 166 et 167 du code du travail aux représentants syndicaux) et l'article 169 ter (les facilités accordées aux représentants syndicaux sont fixées dans les conventions collectives). Les intitulés du livre III du code du travail sont modifiés comme suit: Livre III - Titre unique : Représentation du personnel dans les entreprises."
+  },
+  {
+   "id": "loi-66-27",
+   "type": "Loi",
+   "numero": "66-27",
+   "date": "1966-04-30",
+   "titre": "Loi n° 66-27 du 30 avril 1966, portant promulgation du code du travail",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Il est élu un délégué titulaire du personnel et un délégué suppléant dans les entreprises employant un nombre de travailleurs permanents égal ou supérieur à vingt et inférieur à quarante."
+  },
+  {
+   "id": "decret-68-328",
+   "type": "Décret",
+   "numero": "68-328",
+   "date": "1968-10-22",
+   "titre": "Décret n° 68-328 du 22 octobre 1968, fixant les règles générales d'hygiène applicables dans les entreprises soumises au code du travail",
+   "domaine": "sst",
+   "theme": "Santé et sécurité au travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Ce décret  fixe les dispositions  en matière d' hygiène  que doit prendre l'entreprise concernant : -l’alimentation en eau... -la propreté - des sièges et tables de travail.. - de l'éclairement - de l'aération... -des installations sanitaires... -des véstiaires... - du réfectoire..."
+  },
+  {
+   "id": "decret-2005-3395",
+   "type": "Décret",
+   "numero": "2005-3395",
+   "date": "2005-12-26",
+   "titre": "Décret n° 2005-3395 du 26 décembre 2005, fixant les conditions et les modalités de collecte des accumulateurs et piles usagés",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ],
+   "resume": "Le présent décret fixe les conditions et les modalités de collecte des accumulateurs et piles usagés en vue de garantir leur gestion rationnelle et d'éviter leur rejet dans l'environnement.\n>Tout producteur et tout distributeur de piles neuves, incorporées ou non à des appareils, sur le marché intérieur, est tenu d’installer des conteneurs conformes aux normes, qui seront fixées par arrêté du ministre chargé de l’environnement.\n> Les conteneurs destinés à la collecte des piles usagées doivent être placés dans des endroits réservés à cette fin, et notamment dans les entrées des espaces commerciaux dans lesquels sont mises en vente les piles, les appareils électriques et électroniques, ateliers et locaux de vente et de réparation des appareils électriques et électroniques …\n> Ces conteneurs sont placés sous la responsabilité du propriétaire du local qui veille à ce que les piles usagées ne soient pas mélangées avec d’autres déchets et à ce que les conteneurs soient fermés et ne s’ouvrent que par les agents chargés de la collecte.\n> L’agence Nationale de gestion des déchets est chargée du suivi du système de reprise des accumulateurs usagés.\n> Les producteurs et les distributeurs des accumulateurs neufs sur le marché intérieur sont tenus de faire porter sur leurs produits la mention 'soumis à la consigne obligatoire'.\n> Les détenteurs des accumulateurs usagés ou des accumulateurs qui n'ont pas été utilisés pour défaut de fabrication ou pour avoir dépassé la date limite de validité sont tenus de les restituer aux revendeurs des accumulateurs neufs.",
+   "risque": "Sanctions administratives : amendes, mise en demeure de l'ANPE, ou retrait d'autorisation environnementale\n\nRisque environnemental : pollution des sols, eaux ou atmosphère due à une mauvaise gestion des déchets dangereux\n\nRisque d'image : perte de crédibilité auprès des parties prenantes (clients, autorités, partenaires)"
+  },
+  {
+   "id": "decret-2008-2745",
+   "type": "Décret",
+   "numero": "2008-2745",
+   "date": "2008-07-28",
+   "titre": "Décret n° 2008-2745 du 28 juillet 2008, fixant les conditions et modalités de gestion des déchets des activités sanitaires",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "resume": "Le présent décret fixe les conditions et modalités de gestion de déchets des activités sanitaires, de manière à assurer leur traitement et leur élimination sans porter atteinte à la santé publique et à l'environnement."
+  },
+  {
+   "id": "decret-2000-2339",
+   "type": "Décret",
+   "numero": "2000-2339",
+   "date": "2000-10-10",
+   "titre": "Décret n° 2000-2339 du 10 octobre 2000, fixant la liste des déchets dangereux",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ],
+   "resume": "fixant la composition, les attributions et les modalités de fonctionnement du comité spécial des établissements dangereux, insalubres ou incommodes.\nListe des déchets dangereux"
+  },
+  {
+   "id": "loi-96-41",
+   "type": "Loi",
+   "numero": "96-41",
+   "date": "1996-06-10",
+   "titre": "Loi n° 96-41 du 10 juin 1996, relative aux déchets et au contrôle de leur gestion et de leur élimination",
+   "domaine": "environnement",
+   "theme": "Déchets",
+   "when": [
+    "classe",
+    "dechets-dangereux"
+   ],
+   "resume": "Article Premier. - La présente loi a pour objet de fixer le cadre\napproprié dans le domaine des déchets et de leurs modes de\ngestion permettant de réaliser les objectifs de base ci-après :\n- la prévention et la réduction de la production des déchets et\nde leur nocivité notamment en agissant au niveau de la fabrication\net de la distribution des produits\n- la valorisation des déchets par la réutilisation, le recyclage et\ntoutes autres actions visant la récupération des matériaux\nréutilisables et leur utilisation comme source d'énergie,\n- la réservation de décharges contrôlées pour le dépôt des\ndéchets ultimes, soit après épuisement de toutes les possibilités de\nvalorisation ."
+  },
+  {
+   "id": "decret-2017-433",
+   "type": "Décret",
+   "numero": "2017-433",
+   "date": "2017-04-10",
+   "titre": "Décret n° 2017-433 du 10 avril 2017, fixant les infractions et les pénalités relatives à la santé, à l'hygiène et à la salubrité dans le territoire des collectivités locales",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ],
+   "resume": "Ce décret fixe  les pénalités et les infractions concernant la sécurité de la santé et l'hygiène pour les communautés locales."
+  },
+  {
+   "id": "loi-2007-34",
+   "type": "Loi",
+   "numero": "2007-34",
+   "date": "2007-06-04",
+   "titre": "Loi n° 2007-34 du 4 juin 2007, sur la qualité de l'air",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ],
+   "resume": "La présente loi vise à prévenir, limiter\net réduire la pollution de l’air et ses impacts négatifs sur la\nsanté de l’Homme et sur l’environnement ainsi qu’à fixer\nles procédures de contrôle de la qualité de l’air, afin de\nrendre effectif le droit du citoyen à un environnement sain\net assurer un développement durable.",
+   "risque": "Risques Juridiques et Sanctions: des amendes administratives ou des sanctions pénales, notamment en cas de non-respect des seuils d'émission de polluants ou de non-dépôt de rapports relatifs à la qualité de l'air. \nRisques Financiers: Des sanctions financières directes (amendes, pénalités) peuvent avoir un impact significatif sur la rentabilité de l'entreprise.\nRisques Environnementaux: dégradation de la qualité de l'air et à des niveaux de pollution accrus, ce qui affecte directement l'environnement local.\nRisques Sanitaires: auser des effets sanitaires graves, notamment des maladies respiratoires (asthme, bronchites chroniques, cancers des poumons), des maladies cardiovasculaires, et des troubles neurologiques."
+  },
+  {
+   "id": "decret-2018-928",
+   "type": "Décret",
+   "numero": "2018-928",
+   "date": "2018-11-07",
+   "titre": "Décret n° 2018-928 du 7 novembre 2018, modifiant et complétant le décret n° 2010-2519 du 28 septembre 2010 fixant les valeurs limites à la source des polluants de l'air de sources fixes",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ],
+   "resume": "Ce décret modifie et complète le décret n°2010-2519 du 28 septembre 2010 comme suit :\n-Élimination du mot 'non dangereux ' dans la définition de' l'Unité de co- incinération' et 'l'Unité d’incinération' dans l'article 2.\n- L'expression ' 10 MWth' est remplacée par '20 MWth'.\n- l'article 13 et le premier paragraphe de l'article 16  sont Abrogés et remplacés par l'article 13 nouveau et l' article 16(Paragraphe 1 nouveau).\n- Modifie l'annexe 2 et 4 .\n- Abroge l'annexe 6 et remplacé par annexe 6 nouveau ."
+  },
+  {
+   "id": "decret-2018-447",
+   "type": "Décret",
+   "numero": "2018-447",
+   "date": "2018-05-18",
+   "titre": "Décret n° 2018-447 du 18 mai 2018, fixant les valeurs limites et les valeurs d'avertissement de la qualité de l'air ambiant",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ],
+   "resume": "Ce décret fixe en son annexe  :Les valeurs limites et les valeurs d'avertissement des paramètres d'analyse relatives à la qualité de l'air ambiant pour la protection de l'environnement et les Les marges supplémentaires par rapport aux valeurs limites ."
+  },
+  {
+   "id": "decret-2000-148",
+   "type": "Décret",
+   "numero": "2000-148",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-148 du 24 janvier 2000, fixant la périodicité et les procédures de la visite technique des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "Ce décret a pour objet la fixation de la périodicité et les procédures de la visite technique des véhicules ainsi que les conditions de délivrance des certificats de visite technique et les indications qu'ils doivent porter ."
+  },
+  {
+   "id": "decret-2010-2519",
+   "type": "Décret",
+   "numero": "2010-2519",
+   "date": "2010-09-28",
+   "titre": "Décret n° 2010-2519 du 28 septembre 2010, fixant les valeurs limites à la source des polluants de l'air de sources fixes",
+   "domaine": "environnement",
+   "theme": "Qualité de l'air, émissions",
+   "when": [
+    "emissions-air"
+   ],
+   "resume": "Le Décret n° 2010-2519 du 29 septembre 2010 en Tunisie fixe les conditions d'application des normes de performance énergétique dans les bâtiments à usage de bureaux, d'enseignement, de santé, et d'autres types de bâtiments publics ou privés. Ce décret a pour objectif de promouvoir l'efficacité énergétique dans le secteur de la construction, en conformité avec les exigences environnementales et de développement durable.\nSelon cet arrêté ; - « 10 mg/m3 pour le HF » au lieu de « 5 mg/m3 pour le HF », à l'alinéa 2 du paragraphe 4 de l'annexe 2 du décret susvisé n° 2010-2519 du 28 septembre 2010 dans sa version française.\n- « 10 mg/Nm3 » au lieu de « 30mg/Nm3 » au paragraphe 2 de l'annexe 5 du décret susvisé n° 2010-2519 du 28 septembre 2010 dans sa version arabe."
+  },
+  {
+   "id": "decret-2022-335",
+   "type": "Décret",
+   "numero": "2022-335",
+   "date": "2022-02-14",
+   "titre": "Décret n° 2022-335 du 14 février 2022, fixant le seuil à partir duquel la consommation des eaux est soumise à un diagnostic technique, périodique et obligatoire",
+   "domaine": "environnement",
+   "theme": "Rejets dans l'eau, assainissement",
+   "when": [
+    "classe",
+    "forage"
+   ],
+   "resume": "Usages domestiques, touristiques, commerciaux, établissements collectifs et activités industrielles où l'eau n'entre pas dans le procédé de fabrication > 5 000 m³/an",
+   "risque": "Risque: Sanctions administratives ou financières."
+  },
+  {
+   "id": "decret-75-503",
+   "type": "Décret",
+   "numero": "75-503",
+   "date": "1975-07-28",
+   "titre": "Décret n° 75-503 du 28 juillet 1975, portant réglementation des mesures de protection des travailleurs dans les établissements qui mettent en œuvre des courants électriques",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Réglementant les mesures de protection des travailleurs dans les établissements qui mettent en oeuvre des courants électriques : Les responsables de l'établissement doivent observer toutes les indications et les règles de bon usage technique pour prémunir les travailleurs contre les dangers d'origine électrique (danger d'électrocution, accidents mécaniques consécutifs à des brûlures graves ou des mouvements réflexes que provoque l'électrisation, dangers consécutifs aux échauffement excessifs, aux incendies et aux explosions, décharges atmosphériques). Les chefs d'établissement sont tenus d'assurer un entretien soigné du matériel en exploitation et de mettre en oeuvre des techniques adéquates lors de la réalisation ou la rénovation des installations électriques. Assurer un suivi de ces installations lors de leur mise en service ou modification, puis périodiquement par un organisme de contrôle agréé (2 fois /an)...Toutes les dispositions doivent être prises pour éviter tout contact direct avec les conducteurs mis sous-tension, en mettant ceux-ci hors de portée des travailleurs soit par éloignement, soit au moyen d'obstacles, soit par isolation...\nDans le cas de canalisations enterrées, les conducteurs isolés doivent être protégés contre les dégradations résultants du tassement des terres, du contact avec les corps durs, du choc des outils métalliques à main en cas de fouille. Tout câble ou ensemble de câbles doit être signalé par un dispositif avertisseur placé au minimum 10 cm au dessus de lui.\nLe tracé des canalisations dans le sol doit être relevé sur un plan qui permet de connaître leur emplacement sans avoir à recourir à une fouille.\nCe plan doit être tenu à la disposition des agents chargés de l'inspection de travail.",
+   "risque": "Risques Juridiques et Sanctions\nRisques de Sécurité et de Santé\n Risques Financiers: Coûts liés à un accident ou une sinistralité \n Risques d'Interruption d'Activité"
+  },
+  {
+   "id": "decret-62-129",
+   "type": "Décret",
+   "numero": "62-129",
+   "date": "1962-04-18",
+   "titre": "Décret n° 62-129 du 18 avril 1962, relatif au contrôle réglementaire des appareils de levage",
+   "domaine": "sst",
+   "theme": "Prévention des risques professionnels",
+   "when": [
+    "levage"
+   ],
+   "resume": "ce décret responsabilise les employeurs quant au respect de ces règles et prévoit des contrôles et sanctions en cas de non-conformité, marquant une étape importante dans la réglementation du travail en Tunisie."
+  },
+  {
+   "id": "decret-2001-329",
+   "type": "Décret",
+   "numero": "2001-329",
+   "date": "2001-01-23",
+   "titre": "Décret n° 2001-329 du 23 janvier 2001, modifiant le décret n° 87-50 du 13 janvier 1987 portant institution des audits énergétiques obligatoires et périodiques",
+   "domaine": "environnement",
+   "theme": "Maîtrise de l'énergie",
+   "when": [
+    "energie"
+   ],
+   "resume": "Les dispositions des paragraphes 1 et 2 de l’article 6, et les articles 11 et 12 du décret susvisé n° 87-50 du 13 janvier 1987, sont abrogées et remplacées.",
+   "risque": "Risques Juridiques et Sanctions: Des amendes peuvent être appliquées par les autorités compétentes (souvent les services de l'État ou les autorités locales)\nRisques Financiers: des coûts supplémentaires pour se conformer à la réglementation dans un délai court, ce qui peut engendrer des dépenses imprévues (embauche d'experts, réalisation des audits de manière accélérée, etc.)."
+  },
+  {
+   "id": "decret-2004-2144",
+   "type": "Décret",
+   "numero": "2004-2144",
+   "date": "2004-09-02",
+   "titre": "Décret n° 2004-2144 du 2 septembre 2004, fixant les conditions d'assujettissement des établissements consommateurs d'énergie à l'audit énergétique obligatoire et périodique",
+   "domaine": "environnement",
+   "theme": "Maîtrise de l'énergie",
+   "when": [
+    "energie"
+   ],
+   "resume": "[Modifié par Décret n° 2009-2269 du 31 juillet 2009,]\n>Les 'établissements assujettis' à l'audit énergétique obligatoire et périodique sont :\n* les Ets appartenant au secteur industriel  dont la consommation totale d’énergie est supérieure ou égale à mille (1000) T.E.P.\n* les Ets appartenant aux secteurs du transport, du tertiaire et du résidentiel dont la consommation totale d’énergie est supérieure ou égale à cinq cent (500) T.E.P.\n>Tout Ets non assujetti à l'audit qui dépasse les seuils sus-mentionnés est tenu d'en informer l'Agence Nationale pour la maîtrise de l'énergie dans les 03 mois suivants l'achèvement des travaux et d'entamer immédiatement un audit énergétique.\n>Tout Ets assujetti est tenu d'effectuer l'audit énergétique, tous les 05 ans, par un expert-auditeur.\n>Un nouvel audit énergétique, qui sera considéré comme le 1er audit, devient obligatoire pour les Ets ayant modifié considérablement leurs structures depuis le dernier audit.\n>L'audit énergétique aboutit à l'établissement d'un rapport d'audit qui doit être signé par l'auditeur-expert et qui servira de base pour bénéficier des avantages prévus par les réglementations en vigueur.\n>L'Ets assujetti est chargé de remettre le rapport d'audit à l'Agence Nationale pour la maîtrise de l'énergie pour avis, celle-ci peut demander des modifications ou rejetter le rapport. En cas de rejet l'Ets doit effectuer un autre audit par un autre auditeur-expert.\n2° / La consultation obligatoire préalable :\n>La consultation obligatoire préalable incombe aux nouveaux projets consommateurs d'énergie et projets d'extension des Ets consommateurs d'énergie qui répondent\nau moins à l'un des critères suivants :\n* La puissance installée totale des équipements industriels qui s'approvisionnent en combustibles est supérieure ou égale à trois (3000) thermies par heure.\n* La puissance installée totale des équipements industriels qui s'approvisionnent en électricité est supérieure ou égale à un (01) mégawatt.\n*La consommation totale prévisionnelle d'énergie des équipements industriels qui s'approvisionnent en combustibles et en énergie électrique en même temps est supérieure ou égale à Mille (1000) tonnes équivalent pétrole.\n*La consommation totale prévisionnelle d'énergie des équipements appartenant aux secteurs du transport, du tertiaire et du résidentiel dont la consommation totale d’énergie est supérieure ou égale à cinq cent (500) T.E.P.\n>La consultation obligatoire préalable de l'Agence Nationale de Maîtrise de l'Energie consiste en la réalisation d'un audit énergétique qui aboutit à l'établissement d'un rapport et la soumission de ses résultats à l'agence avant l'exécution du projet consommateur d'énergie. Pour les Ets appartenant aux secteurs du transport, du tertiaire et du résidentiel, l'audit est effectué sur plan conformément au cahier des charges.\nEn cas d'approbation du rapport, l'Ets conclut un contrat-programme avec l'agence qui servira de base pour les avantages prévus par les réglementation en vigueur."
+  },
+  {
+   "id": "decret-98-2248",
+   "type": "Décret",
+   "numero": "98-2248",
+   "date": "1998-11-16",
+   "titre": "Décret n° 98-2248 du 16 novembre 1998, fixant les lieux affectés à l'usage collectif dans lesquels il est interdit de fumer",
+   "domaine": "hygiene",
+   "theme": "Hygiène",
+   "when": [
+    "tous"
+   ],
+   "resume": "Lieux où il formellement interdit de fumer sont :\n1. les établissements d'enseignement et de formation publics et privés ;\n2. les établissements sanitaires publics ou privés ;\n3. les salles d'attente, de diagnostic ou des soins dans les cabinets et les laboratoires médicaux privés ;\n4. les locaux des professions paramédicales,\n5. les jardins d'enfants, les crèches et les kouttebs,\n6. les espaces ouverts au public dans les officines de détail,\n7. les moyens de transport sanitaire,\n8. les locaux destinés à accueillir des mineurs pour les activités collectives de loisirs et de sport ;\n9. les salles de lecture des bibliothèques ouvertes au public,\n10. les salles de spectacle culturel,\n11. les salles de sport couvertes,\n12. les mosquées, les lieux de prière, les zaouias et tous les lieux de culte,\n13. les salles destinées aux conférences et réunions ainsi que les bureaux communs, les salles d'attente et les couloirs dans les administrations publiques,\n14. les ascenseurs installés dans les locaux ouverts au public,\n15. les stations de distribution de carburant,\n16. les lieux et espaces réservés aux non fumeurs.",
+   "risque": "Risques Juridiques et Sanctions\nPoursuites judiciaires  / Suspension d'activité \nRisques pour la Santé et la Sécurité des Travailleurs: Accidents de travail :  / Maladies professionnelles / Stress et épuisement \nRisques Financiers"
+  },
+  {
+   "id": "loi-2018-35",
+   "type": "Loi",
+   "numero": "2018-35",
+   "date": "2018-06-11",
+   "titre": "Loi n° 2018-35 du 11 juin 2018, relative à la responsabilité sociale des entreprises",
+   "domaine": "travail",
+   "theme": "Responsabilité sociale des entreprises",
+   "when": [
+    "tous"
+   ],
+   "resume": "consacrer la conciliation des entreprises avec leur environnement social à travers la participation au processus du développement durable et la bonne gouvernance.",
+   "risque": "Risques Juridiques et Sanctions: des amendes, des poursuites judiciaires, voire des interdictions d'opérer dans certains marchés\nRisques Financiers: Le manque de respect des normes RSE peut entraîner un désengagement des investisseurs, voire des difficultés d'accès aux financements à long terme.\nRisques de Relations avec les Parties Prenantes"
+  },
+  {
+   "id": "arrete-2018-08-31",
+   "type": "Arrêté",
+   "date": "2018-08-31",
+   "titre": "Arrêté du 31 août 2018, portant approbation de la procédure de passation des marchés publics en ligne",
+   "domaine": "finance",
+   "theme": "Investissement, change, crédit, marchés publics",
+   "resume": "cet arrêté liste la  procédure concernant les marchés publics à travers le système des marchés publics en ligne 'TUNEPS'.",
+   "risque": "Perte de marché étalitique"
+  },
+  {
+   "id": "arrete-2019-03-05",
+   "type": "Arrêté",
+   "date": "2019-03-05",
+   "titre": "Arrêté du 5 mars 2019, fixant le contrôle métrologique légal sur les appareils de mesure de vitesse sur routes",
+   "domaine": "secteurs",
+   "theme": "Normes, conformité des produits, métrologie",
+   "resume": "Cet arrêté fixe les exigences légales et les règles spécifiques concernant\nl'installation , la réparation et l'utilisation des indicateurs de vitesse de la route.\nIl détermine les moyens de vérification et la nature du contrôle métrologique légale sur les indicateurs de vitesse sur route.",
+   "risque": "Instrument de mesure non fiable"
+  },
+  {
+   "id": "arrete-1966-01-08",
+   "type": "Arrêté",
+   "date": "1966-01-08",
+   "titre": "Arrêté du 8 janvier 1966, relatif à la mesure du bruit produit par un véhicule automobile",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "Cet arrêté fixe les valeurs limites pour chaque véhicule comme suit :\n-cyclomoteurs: 76\n-vélomoteurs et véhicules assimilés: 80\n-motocyclettes et motoculteurs: 86\n-véhicules utilitaires d'un poids total en charge inférieur ou égal à 3.5 tonnes: 83\n-véhicule de transport en commun: 90\n-véhicules utilitaires d'un poid total en charge supérieur à 3.5 tonnes, tracteurs agricoles et machines agricoles automotrices: 90",
+   "risque": "Interdiction ou restriction de travail\nPoursuites judiciaires\nSanctions administratives et amendes \nRisques Financiers\nRisques pour la Santé des Travailleurs\nRisques Environnementaux"
+  },
+  {
+   "id": "arrete-1984-08-27",
+   "type": "Arrêté",
+   "date": "1984-08-27",
+   "titre": "Arrêté des ministres des transports et des communications et de la santé publique du 27 août 1984, relatif au contrôle au point fixe du niveau sonore des véhicules automobiles",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "relatif au contrôle au point fixe du niveau sonore des véhicules automobiles lors de la visite technique"
+  },
+  {
+   "id": "decret-84-1556",
+   "type": "Décret",
+   "numero": "84-1556",
+   "date": "1984-12-29",
+   "titre": "Décret n° 84-1556 du 29 décembre 1984, relatif au niveau de bruit de jour et de nuit",
+   "domaine": "environnement",
+   "theme": "Bruit et nuisances sonores",
+   "when": [
+    "classe",
+    "bruit"
+   ],
+   "resume": "Niveau de bruit de jour ne devra dépasser 50 décibels / Seuil tolérable suivant la zone"
+  },
+  {
+   "id": "decret-2000-155",
+   "type": "Décret",
+   "numero": "2000-155",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-155 du 24 janvier 2000, définissant les équipements et les moyens destinés à prouver certaines infractions à la circulation et fixant les conditions de leur utilisation",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ],
+   "risque": "Amendes et sanctions administratives \nSuspension ou annulation du permis de conduire \nPoursuites pénales\nResponsabilité civile \nHausse des primes d’assurance\nRemboursement des pertes d’exploitation"
+  },
+  {
+   "id": "decret-2012-2759",
+   "type": "Décret",
+   "numero": "2012-2759",
+   "date": "2012-11-13",
+   "titre": "Décret n° 2012-2759 du 13 novembre 2012, modifiant le décret n° 2000-147 du 24 janvier 2000 fixant les règles techniques d'équipement et d'aménagement des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2006-54",
+   "type": "Loi",
+   "numero": "2006-54",
+   "date": "2006-07-28",
+   "titre": "Loi n° 2006-54 du 28 juillet 2006, modifiant et complétant le code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2005-117",
+   "type": "Décret",
+   "numero": "2005-117",
+   "date": "2005-01-19",
+   "titre": "Décret n° 2005-117 du 19 janvier 2005, fixant la liste des infractions ordinaires aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2004-74",
+   "type": "Loi",
+   "numero": "2004-74",
+   "date": "2004-08-20",
+   "titre": "Loi n° 2004-74 du 20 août 2004, portant modification du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2001-2282",
+   "type": "Décret",
+   "numero": "2001-2282",
+   "date": "2001-09-25",
+   "titre": "Décret n° 2001-2282 du 25 septembre 2001, fixant la liste des infractions ordinaires aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2001-2281",
+   "type": "Décret",
+   "numero": "2001-2281",
+   "date": "2001-09-25",
+   "titre": "Décret n° 2001-2281 du 25 septembre 2001, relatif aux règles générales de la circulation routière",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "loi-2001-101",
+   "type": "Loi",
+   "numero": "2001-101",
+   "date": "2001-10-22",
+   "titre": "Loi n° 2001-101 du 22 octobre 2001, modifiant le code de la route promulgué par la loi n° 99-71 du 26 juillet 1999",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2000-152",
+   "type": "Décret",
+   "numero": "2000-152",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-152 du 24 janvier 2000, fixant la liste des pièces nécessaires pour la mise en circulation d'un véhicule et sa conduite",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2000-151",
+   "type": "Décret",
+   "numero": "2000-151",
+   "date": "2000-01-24",
+   "titre": "Décret n° 2000-151 du 24 janvier 2000, relatif aux règles générales de la circulation routière",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ]
+  },
+  {
+   "id": "decret-2017-811",
+   "type": "Décret",
+   "numero": "2017-811",
+   "date": "2017-06-30",
+   "titre": "Décret n° 2017-811 du 30 juin 2017, modifiant le décret n° 2010-262 du 15 février 2010 fixant la liste des contraventions aux dispositions du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "Selon ce décret ,est modifié, le numéro 112 du\ntableau relatif à la liste des contraventions de l'article\npremier du décret n° 2010-262 du 15 février 2010\nsusvisé"
+  },
+  {
+   "id": "decret-2017-132",
+   "type": "Décret",
+   "numero": "2017-132",
+   "date": "2017-01-06",
+   "titre": "Décret n° 2017-132 du 6 janvier 2017, modifiant le décret n° 2000-147 du 24 janvier 2000 fixant les règles techniques d'équipement et d'aménagement des véhicules",
+   "domaine": "route",
+   "theme": "Véhicules, visite technique",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "Ce décret abroge les articles 82 te 83 du décret n°2000-147 comme suit :\nArticle 82 (nouveau) - L'utilisation de la ceinture\nde sécurité est obligatoire à l'intérieur et à\nl'extérieur des agglomérations et sur les autoroutes\nd'intervention urgente lorsqu'ils utilisent les\navertisseurs sonores et lumineux."
+  },
+  {
+   "id": "loi-99-71",
+   "type": "Loi",
+   "numero": "99-71",
+   "date": "1999-07-26",
+   "titre": "Loi n° 99-71 du 26 juillet 1999, portant promulgation du code de la route",
+   "domaine": "route",
+   "theme": "Code de la route, sécurité routière",
+   "when": [
+    "vehicules"
+   ],
+   "resume": "Code de la route ."
+  },
+  {
+   "id": "loi-2024-41",
+   "type": "Loi",
+   "numero": "2024-41",
+   "titre": "Loi n° 2024-41, relative aux chèques (chèques sans provision)",
+   "domaine": "finance",
+   "theme": "Droit des sociétés, obligations des entreprises",
+   "when": [
+    "tous"
+   ],
+   "resume": "La loi prévoit des mesures plus strictes pour les entreprises et particuliers qui émettent des chèques non couverts, avec des conséquences pouvant aller jusqu’à la suspension de la possibilité d'émettre des chèques. Cette législation cherche à encourager une gestion plus rigoureuse des finances et à promouvoir l’utilisation de modes de paiement sécurisés, tout en réduisant les risques de non-paiement dans le système bancaire.",
+   "risque": "Risque: Sanctions sévères pour les chèques sans provision ller jusqu’à la suspension de la possibilité d'émettre des chèques"
+  },
+  {
+   "id": "loi-2025-9",
+   "type": "Loi",
+   "numero": "2025-9",
+   "date": "2025-05-21",
+   "titre": "Loi n° 2025-9 du 21 mai 2025, portant réglementation des contrats de travail et interdiction de la sous-traitance de main-d'œuvre",
+   "domaine": "travail",
+   "theme": "Code du travail, contrats de travail",
+   "when": [
+    "effectif"
+   ],
+   "resume": "Le CDI devient la règle\nConversion automatique de nombreux CDD en CDI\nInterdiction de la sous-traitance de main-d'œuvre",
+   "risque": "Amendes pénales\nResponsabilité du gérant\nContrôle administratifs renforcé"
+  },
+  {
+   "id": "loi-2025-17",
+   "type": "Loi",
+   "numero": "2025-17",
+   "date": "2025-12-12",
+   "titre": "Loi n° 2025-17 du 12 décembre 2025, portant loi de finances pour l'année 2026",
+   "domaine": "finance",
+   "theme": "Loi de finances",
+   "when": [
+    "tous"
+   ],
+   "resume": "Généralisation de la facturation électronique\nRenforcement de la digitalisation fiscale\nApplication Tej",
+   "risque": "Risque: Amendes fiscales directes\nRejet fiscal des factures\nContrôle fiscal renforcé\nRisques pour le gérant"
+  },
+  {
+   "id": "arrete-2005-11-15",
+   "type": "Arrêté",
+   "date": "2005-11-15",
+   "titre": "Arrêté du ministre de l'industrie, de l'énergie et des PME du 15 novembre 2005, fixant la nomenclature des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 94 du 25 novembre 2005"
+  },
+  {
+   "id": "arrete-2010-02-23",
+   "type": "Arrêté",
+   "date": "2010-02-23",
+   "titre": "Arrêté du ministre de l'industrie et de la technologie du 23 février 2010, modifiant et complétant l'arrêté du 15 novembre 2005 fixant la nomenclature des établissements dangereux, insalubres ou incommodes (règle d'addition)",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 18 du 2 mars 2010",
+   "source": "https://lake.jort.tn/journal-officiel/fr/2010/018.pdf#page=7"
+  },
+  {
+   "id": "arrete-2012-10-24",
+   "type": "Arrêté",
+   "date": "2012-10-24",
+   "titre": "Arrêté du ministre de l'industrie du 24 octobre 2012, modifiant et complétant l'arrêté du 15 novembre 2005 fixant la nomenclature des établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ],
+   "publie": "JORT n° 88 du 6 novembre 2012"
+  },
+  {
+   "id": "decret-68-88",
+   "type": "Décret",
+   "numero": "68-88",
+   "date": "1968-03-28",
+   "titre": "Décret n° 68-88 du 28 mars 1968, relatif aux établissements dangereux, insalubres ou incommodes",
+   "domaine": "etablissements-classes",
+   "theme": "Établissements classés",
+   "when": [
+    "classe"
+   ]
+  }
+ ]
+}

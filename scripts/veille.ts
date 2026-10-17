@@ -19,6 +19,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { type Issue, parseIssue, pdfUrl } from "../lib/veille/jort";
+import { amendments, catalogue } from "../lib/registre/referentiel";
 import { pdfLines } from "../lib/veille/pdf";
 import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
 
@@ -137,10 +138,13 @@ async function main(): Promise<void> {
     const years = stored();
     const before = feed.hits.length;
     feed = reassess({ updated: null, scanned: {}, hits: [] }, years);
+    feed.amendments = amendments(years, catalogue(feed.hits));
     const updated = years.map((y) => y.updated ?? "").sort().at(-1) || null;
     writeFileSync(FEED, JSON.stringify({ ...feed, updated }, null, 1) + "\n");
     const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
-    console.log(`Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés.`);
+    console.log(
+      `Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés, ${feed.amendments.length} modifiant un texte du référentiel.`,
+    );
     return;
   }
   const file = option("file");
@@ -157,6 +161,8 @@ async function main(): Promise<void> {
     const years = year ? [year] : now.getMonth() === 0 ? [now.getFullYear() - 1, now.getFullYear()] : [now.getFullYear()];
     for (const y of years) feed = await scanYear(feed, y, from, to);
   }
+  feed.amendments = amendments(stored(), catalogue(feed.hits));
+  saveFeed(feed);
   const count = (s: string) => feed.hits.filter((h) => h.severity === s).length;
   console.log(
     `\n${feed.hits.length} textes repérés : ${count("critique")} critiques, ${count("important")} importants, ${count("information")} pour information. Détail : vue Veille réglementaire.`,

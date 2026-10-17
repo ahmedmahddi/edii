@@ -27,6 +27,7 @@ interface Rule {
   with?: string[];
   institution?: string[];
   impacts?: string[];
+  when?: string[]; // to which sites a text found by this rule applies (lib/registre/profil.ts)
 }
 
 export const rules = watch as unknown as {
@@ -68,6 +69,19 @@ export interface Feed {
   updated: string | null; // last run of the scanner
   scanned: Record<string, number[]>; // year → issue numbers read
   hits: Hit[];
+  amendments?: Amendment[]; // JORT texts that modify a text of the référentiel
+}
+
+/** A JORT text that modifies or cites texts of the référentiel (keys of lib/registre/referentiel.ts). */
+export interface Amendment {
+  id: string;
+  year: number;
+  issue: number;
+  date: string | null;
+  page: number;
+  title: string;
+  pdf: string;
+  cites: string[];
 }
 
 /** Every sommaire read, kept so that edited rules can be applied again without downloading. */
@@ -122,13 +136,18 @@ function apply(rule: Rule, text: string, institution: string): Match | null {
   return { rule: rule.id, label: rule.label, terms };
 }
 
+/** Titles the veille never reports: nominations, concours, the State's budget… */
+export function ignored(title: string): boolean {
+  const full = fold(title);
+  return rules.ignore.some((p) => full.startsWith(fold(p))) || rules.ignoreAnywhere.some((p) => contains(full, p));
+}
+
 /** The rules a sommaire entry matches, and how severe; null when none (or when ignored). */
 export function assess(
   entry: Pick<SommaireEntry, "title"> & Partial<Pick<SommaireEntry, "institution">>,
 ): Pick<Hit, "severity" | "domains" | "sectors" | "impacts" | "matches"> | null {
   const full = fold(entry.title);
-  if (rules.ignore.some((p) => full.startsWith(fold(p)))) return null;
-  if (rules.ignoreAnywhere.some((p) => contains(full, p))) return null;
+  if (ignored(entry.title)) return null;
   const text = subject(entry.title);
   const institution = fold(entry.institution ?? "");
   // References are looked for in the whole title: "modifiant l'arrêté du 15 novembre 2005" is

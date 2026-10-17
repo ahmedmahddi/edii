@@ -3,9 +3,11 @@
  * ID-QSE-002 layout: Système, Domaine, Type, Réf, Titre, Résumé exigence, Conformité, Fréquence
  * d'évaluation, Risque, Plan d'action en cas de NC, Responsable et échéance), so that the texts
  * found can be pasted into an existing register. What only a reader can write (the summary of the
- * requirement, conformity, risk, action plan) is left to fill.
+ * requirement, conformity, risk, action plan) is left to fill; an establishment's register
+ * (lib/registre/registre.ts) is exported with its evaluation.
  */
 import type ExcelJS from "exceljs";
+import type { Ligne } from "../registre/registre";
 import { isoDate } from "./jort";
 import { type Hit, rules } from "./watch";
 
@@ -30,8 +32,12 @@ export interface RegisterRow {
   ref: string;
   titre: string;
   resume: string;
+  conformite: string; // C, NC, Non applicable
   frequence: string;
-  url: string;
+  risque: string;
+  plan: string;
+  responsable: string; // and échéance
+  url: string | undefined;
 }
 
 /** "2025-07-11" → "11-07-2025", as dates are written in the register. */
@@ -45,26 +51,57 @@ export function reference(hit: Pick<Hit, "kind" | "title">): string {
   return [kind, number ? `n° ${number}` : "", date ? `du ${dmy(date)}` : ""].filter(Boolean).join(" ") || hit.title;
 }
 
-export function registerRow(hit: Hit): RegisterRow {
+/** The register's SYSTEME for domains of the veille. */
+export function systeme(domains: string[]): string {
   // "HSST & Environnement" and "Environnement" make "HSST & Environnement", not the name twice.
-  const systems = [...new Set(hit.domains.flatMap((d) => (rules.registre.systemes[d] ?? rules.domains[d] ?? d).split(" & ")))];
+  return [...new Set(domains.flatMap((d) => (rules.registre.systemes[d] ?? rules.domains[d] ?? d).split(" & ")))].join(" & ");
+}
+
+export function registerRow(hit: Hit): RegisterRow {
   // The register names one domain: the first rule matched, references aside.
   const ruleLabels = hit.matches.filter((m) => !m.rule.startsWith("ref-")).map((m) => m.label);
   const source = `JORT n° ${hit.issue}/${hit.year}${hit.date ? ` du ${dmy(hit.date)}` : ""}, p. ${hit.page}`;
   return {
-    systeme: systems.join(" & "),
+    systeme: systeme(hit.domains),
     domaine: ruleLabels[0] ?? hit.matches[0]?.label ?? "",
     type: hit.kind === "Autre" ? "" : hit.kind,
     ref: reference(hit),
     titre: hit.title,
     resume: `À compléter après lecture du texte. Source : ${source}.`,
+    conformite: "",
     frequence: rules.registre.frequence,
+    risque: "",
+    plan: "",
+    responsable: "",
     url: hit.pdf,
   };
 }
 
-/** The register sheet, laid out like ID-QSE-002, with one row per hit. */
-export function fillRegister(workbook: ExcelJS.Workbook, hits: Hit[], today: Date): void {
+const CONFORMITE: Record<string, string> = { C: "C", NC: "NC", NA: "Non applicable" };
+
+/** A line of an establishment's register, with its evaluation. */
+export function ligneRow(l: Ligne): RegisterRow {
+  const t = l.texte;
+  const ref = [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dmy(t.date)}` : ""].filter(Boolean).join(" ");
+  const evaluated = l.evalue ? `Dernière évaluation : ${dmy(l.evalue)}.` : "";
+  return {
+    systeme: systeme([t.domaine]),
+    domaine: t.theme,
+    type: t.type,
+    ref,
+    titre: t.titre,
+    resume: [l.resume, t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
+    conformite: CONFORMITE[l.conformite] ?? "",
+    frequence: [l.frequence, evaluated].filter(Boolean).join("\n"),
+    risque: l.risque,
+    plan: l.plan,
+    responsable: [l.responsable, l.echeance ? dmy(l.echeance) : ""].filter(Boolean).join(" / "),
+    url: t.source,
+  };
+}
+
+/** The register sheet, laid out like ID-QSE-002, with one row per text. */
+export function fillRegister(workbook: ExcelJS.Workbook, rows: RegisterRow[], today: Date, establishment = ""): void {
   const ws = workbook.addWorksheet("Liste des textes applicables", {
     views: [{ state: "frozen", ySplit: 3, zoomScale: 80 }],
     pageSetup: { orientation: "landscape", fitToPage: true, fitToWidth: 1, fitToHeight: 0 },
@@ -80,6 +117,7 @@ export function fillRegister(workbook: ExcelJS.Workbook, hits: Hit[], today: Dat
   ws.mergeCells("C1:F1");
   ws.mergeCells("G1:K1");
   ws.mergeCells("A2:K2");
+  ws.getCell("A1").value = establishment;
   ws.getCell("C1").value = "REGISTRE DE VEILLE LEGALE, REGLEMENTAIRE ET NORMATIVE";
   ws.getCell("G1").value = `Date : ${date}\nID-QSE-002`;
   ws.getCell("A2").value = `DATE DE MISE A JOUR  ${date}`;
@@ -99,12 +137,12 @@ export function fillRegister(workbook: ExcelJS.Workbook, hits: Hit[], today: Dat
     });
   });
 
-  for (const hit of hits) {
-    const r = registerRow(hit);
-    const row = ws.addRow([r.systeme, r.domaine, r.type, r.ref, { text: r.titre, hyperlink: r.url }, r.resume, "", r.frequence, "", "", ""]);
+  for (const r of rows) {
+    const titre = r.url ? { text: r.titre, hyperlink: r.url } : r.titre;
+    const row = ws.addRow([r.systeme, r.domaine, r.type, r.ref, titre, r.resume, r.conformite, r.frequence, r.risque, r.plan, r.responsable]);
     row.eachCell({ includeEmpty: true }, (cell, col) => {
-      cell.font = col === 5 ? { ...font, color: { argb: "FF1F4E79" }, underline: true } : font;
-      cell.alignment = col === 5 || col === 6 ? { ...center, horizontal: "left" } : center;
+      cell.font = col === 5 && r.url ? { ...font, color: { argb: "FF1F4E79" }, underline: true } : font;
+      cell.alignment = [5, 6, 9, 10].includes(col) ? { ...center, horizontal: "left" } : center;
       cell.border = border;
     });
   }

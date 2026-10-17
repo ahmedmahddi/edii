@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   additionGroup,
   type Classe,
@@ -157,6 +157,9 @@ function Edii() {
   const [notice, setNotice] = useState("");
   const [establishmentName, setEstablishmentName] = useState("");
   const [report, setReport] = useState<ClassificationReport | null>(null);
+  // A validated classification on its way to the veille, to start the establishment's register.
+  const [registreSeed, setRegistreSeed] = useState<ClassificationReport | null>(null);
+  const seedUsed = useCallback(() => setRegistreSeed(null), []);
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const reportRef = useRef<HTMLDivElement>(null);
   const validationRef = useRef<HTMLDivElement>(null);
@@ -354,7 +357,7 @@ function Edii() {
           ) : view === "sources" ? (
             <Sources />
           ) : view === "veille" ? (
-            <Veille />
+            <Veille seed={registreSeed} onSeedUsed={seedUsed} />
           ) : (
             <div className={`edii-layout view-${view}`}>
               <section
@@ -731,6 +734,29 @@ function Edii() {
                 report={report}
                 stale={reportStale}
               />
+              <section className="card registre-next" aria-labelledby="registre-next-title">
+                <div>
+                  <p className="eyebrow">Étape suivante</p>
+                  <h2 id="registre-next-title">La veille réglementaire de cet établissement</h2>
+                  <p>
+                    Les textes qui s’appliquent selon la catégorie, les rubriques et l’étude ANPE sont proposés d’office ; complétez le
+                    profil du site, puis évaluez la conformité texte par texte.
+                  </p>
+                </div>
+                <button
+                  disabled={reportStale}
+                  onClick={() => {
+                    setRegistreSeed(report);
+                    setView("veille");
+                    window.scrollTo({ top: 0 });
+                  }}
+                >
+                  Créer le registre de veille <Icon name="arrow" size={18} />
+                </button>
+                {reportStale ? (
+                  <small>Validez à nouveau la synthèse : le dossier a changé depuis.</small>
+                ) : null}
+              </section>
             </div>
           )}
           <footer className="workspace-footer">
