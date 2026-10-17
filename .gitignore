@@ -10,3 +10,4 @@ __pycache__/
 *.log
 # Derived from data/veille/sommaires: rebuilt by npm run veille (and before dev, build, typecheck)
 data/veille/feed.json
+data/veille/veille-hebdo.log

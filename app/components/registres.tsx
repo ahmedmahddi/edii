@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { download, downloadWorkbook, today } from "@/app/components/download";
 import { FLAG_GROUPS, FLAGS, type Site } from "@/lib/registre/profil";
 import { proposals, type Texte } from "@/lib/registre/referentiel";
@@ -16,11 +16,15 @@ import {
   type Ligne,
   loadRegistres,
   nouveautes,
+  plusApplicables,
   prochaine,
   type Registre,
   restore,
+  sameName,
   saveRegistres,
   siteFromReport,
+  texteFromAmendment,
+  updateFromReport,
 } from "@/lib/registre/registre";
 import { categoryLabel, type ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
@@ -32,17 +36,27 @@ const dateFr = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("
 const refOf = (t: Texte) => [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dateFr(t.date)}` : ""].filter(Boolean).join(" ");
 
 /** Registers live in this browser: loaded once, saved on every change. */
-function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => void, boolean] {
+function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => void, boolean, boolean] {
   const [list, setList] = useState<Registre[]>([]);
   const [saved, setSaved] = useState(true);
-  useEffect(() => setList(loadRegistres()), []);
-  const update = (fn: (list: Registre[]) => Registre[]) =>
-    setList((prev) => {
-      const next = fn(prev);
-      setSaved(saveRegistres(next));
-      return next;
-    });
-  return [list, update, saved];
+  const [loaded, setLoaded] = useState(false);
+  const changed = useRef(false);
+  useEffect(() => {
+    setList(loadRegistres());
+    setLoaded(true);
+  }, []);
+  // Saved after rendering: saving tells the rest of the page (the menu's badge), which must not
+  // change while this renders.
+  useEffect(() => {
+    if (!changed.current) return;
+    changed.current = false;
+    setSaved(saveRegistres(list));
+  }, [list]);
+  const update = (fn: (list: Registre[]) => Registre[]) => {
+    changed.current = true;
+    setList(fn);
+  };
+  return [list, update, saved, loaded];
 }
 
 export function Registres({
@@ -56,51 +70,88 @@ export function Registres({
   texts: Texte[];
   amendments: Amendment[];
 }) {
-  const [list, update, saved] = useRegistres();
+  const [list, update, saved, loaded] = useRegistres();
   const [openId, setOpenId] = useState<string | null>(null);
-  const [draft, setDraft] = useState<{ report: ClassificationReport; site: Site } | null>(null);
+  const [draft, setDraft] = useState<{ report: ClassificationReport; site: Site; nom: string } | null>(null);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (!seed) return;
-    setDraft({ report: seed, site: siteFromReport(seed) });
+    if (!seed || !loaded) return;
+    // The same establishment already has a register: start from its profile, to update it.
+    const existing = sameName(list, seed.name);
+    setDraft({ report: seed, site: existing ? updateFromReport(existing, seed).site : siteFromReport(seed), nom: seed.name });
     setOpenId(null);
+    setMessage("");
     onSeedUsed();
-  }, [seed, onSeedUsed]);
+  }, [seed, onSeedUsed, loaded, list]);
 
   const open = list.find((r) => r.id === openId);
   const change = (id: string) => (fn: (r: Registre) => Registre) =>
     update((all) => all.map((r) => (r.id === id ? { ...fn(r), maj: new Date().toISOString() } : r)));
 
-  if (draft)
+  if (draft) {
+    const nom = draft.nom.trim();
+    const report = { ...draft.report, name: nom };
+    const existing = sameName(list, nom);
+    const create = () => {
+      const reg = createRegistre(report, draft.site, texts);
+      update((all) => [reg, ...all]);
+      setDraft(null);
+      setOpenId(reg.id);
+    };
     return (
       <section className="card registre-new" aria-labelledby="registre-new-title">
-        <p className="eyebrow">Nouveau registre</p>
-        <h2 id="registre-new-title">{draft.report.name || "Établissement sans nom"}</h2>
+        <p className="eyebrow">{existing ? "Registre existant" : "Nouveau registre"}</p>
+        <label className="registre-name">
+          <span id="registre-new-title">Nom de l’établissement</span>
+          <input value={draft.nom} onChange={(e) => setDraft({ ...draft, nom: e.target.value })} placeholder="Nom de l’établissement" required />
+        </label>
         <p>
-          Le classement donne déjà la catégorie, les rubriques et l’étude ANPE. Complétez le profil du site : chaque réponse ajoute
-          les textes qui s’y rapportent.
+          Le classement donne la catégorie, les rubriques et l’étude ANPE. Complétez le profil du site : chaque réponse ajoute les
+          textes qui s’y rapportent.
         </p>
         <Profil site={draft.site} onChange={(site) => setDraft({ ...draft, site })} />
-        <div className="registre-actions">
-          <button
-            type="button"
-            onClick={() => {
-              const reg = createRegistre(draft.report, draft.site, texts);
-              update((all) => [reg, ...all]);
-              setDraft(null);
-              setOpenId(reg.id);
-            }}
-          >
-            Créer le registre ({texts.length ? `${countProposed(texts, draft.site)} textes proposés` : "référentiel vide"})
-          </button>
-          <button type="button" className="secondary-button" onClick={() => setDraft(null)}>
-            Annuler
-          </button>
-        </div>
+        {existing ? (
+          <div className="registre-existing" role="status">
+            <p>
+              Un registre « {existing.nom} » existe déjà (créé le {dateFr(existing.cree.slice(0, 10))},{" "}
+              {existing.lignes.filter((l) => l.retenu).length} textes). Le mettre à jour garde ses évaluations : les textes que le
+              nouveau classement rend applicables vous sont proposés, ceux qui ne s’appliquent plus sont signalés.
+            </p>
+            <div className="registre-actions">
+              <button
+                type="button"
+                onClick={() => {
+                  update((all) => all.map((r) => (r.id === existing.id ? { ...updateFromReport(r, report), site: draft.site } : r)));
+                  setDraft(null);
+                  setOpenId(existing.id);
+                }}
+              >
+                Mettre à jour ce registre
+              </button>
+              <button type="button" className="secondary-button" onClick={create}>
+                Créer un autre registre
+              </button>
+              <button type="button" className="secondary-button" onClick={() => setDraft(null)}>
+                Annuler
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="registre-actions">
+            <button type="button" disabled={!nom} onClick={create}>
+              Créer le registre ({texts.length ? `${countProposed(texts, draft.site)} textes proposés` : "référentiel vide"})
+            </button>
+            <button type="button" className="secondary-button" onClick={() => setDraft(null)}>
+              Annuler
+            </button>
+            {!nom ? <span className="muted small">Donnez un nom à l’établissement.</span> : null}
+          </div>
+        )}
       </section>
     );
+  }
 
   if (open)
     return (
@@ -286,13 +337,13 @@ function RegistreView({
 
   const retenus = reg.lignes.filter((l) => l.retenu);
   const alerts = alertes(reg, amendments);
+  const gone = plusApplicables(reg);
   const news = useMemo(() => nouveautes(reg, texts), [reg, texts]);
   const due = dues(reg);
   const count = (c: Conformite) => retenus.filter((l) => l.conformite === c).length;
   const domains = Object.keys(rules.domains).filter((d) => reg.lignes.some((l) => l.texte.domaine === d));
 
-  const setLigne = (id: string, patch: Partial<Ligne>) =>
-    change((r) => ({ ...r, lignes: r.lignes.map((l) => (l.texte.id === id ? { ...l, ...patch } : l)) }));
+  const setLigne = (id: string, patch: Partial<Ligne>) => change((r) => setOn(r, id, patch));
 
   const shown = reg.lignes.filter((l) => {
     const q = fold(query);
@@ -359,60 +410,106 @@ function RegistreView({
       </header>
 
       {alerts.length ? (
-        <section className="card registre-alerts" aria-labelledby="alerts-title">
-          <h2 id="alerts-title">Textes du registre modifiés au JORT ({alerts.length})</h2>
-          <ul>
-            {alerts.map(({ ligne, amendment }) => (
-              <li key={`${ligne.texte.id}-${amendment.id}`}>
-                <p>
-                  <strong>{refOf(ligne.texte)}</strong> est visé par :{" "}
-                  <a href={amendment.pdf} target="_blank" rel="noreferrer">
-                    {amendment.title}
-                  </a>{" "}
-                  <span className="muted small">
-                    (JORT n° {amendment.issue}/{amendment.year}, p. {amendment.page})
-                  </span>
-                </p>
+        <ToDo className="registre-alerts" title={`Textes du registre modifiés au JORT (${alerts.length})`}>
+          {alerts.map(({ ligne, amendment }) => (
+            <li key={`${ligne.texte.id}-${amendment.id}`}>
+              <p>
+                <strong>{refOf(ligne.texte)}</strong> est visé par :{" "}
+                <a href={amendment.pdf} target="_blank" rel="noreferrer">
+                  {amendment.title}
+                </a>{" "}
+                <span className="muted small">
+                  (JORT n° {amendment.issue}/{amendment.year}, p. {amendment.page})
+                </span>
+              </p>
+              <div className="registre-news-actions">
+                <button
+                  type="button"
+                  onClick={() =>
+                    change((r) => {
+                      const seen = setOn(r, ligne.texte.id, { vus: [...ligne.vus, amendment.id], evalue: "", conformite: "" });
+                      return addTexte(seen, texteFromAmendment(amendment, ligne.texte, texts));
+                    })
+                  }
+                >
+                  Ajouter ce texte et réévaluer
+                </button>
                 <button
                   type="button"
                   className="secondary-button"
                   onClick={() => setLigne(ligne.texte.id, { vus: [...ligne.vus, amendment.id], evalue: "", conformite: "" })}
                 >
-                  Pris en compte : à réévaluer
+                  Réévaluer seulement
                 </button>
-              </li>
-            ))}
-          </ul>
-        </section>
+              </div>
+            </li>
+          ))}
+        </ToDo>
       ) : null}
 
       {news.length ? (
-        <section className="card registre-news" aria-labelledby="news-title">
-          <h2 id="news-title">Nouveaux textes pour ce site ({news.length})</h2>
-          <p className="muted small">Parus au JORT depuis la création du registre, ou devenus applicables avec le profil du site.</p>
-          <ul>
-            {news.map(({ texte, reasons }) => (
-              <li key={texte.id}>
-                <div>
+        <ToDo
+          className="registre-news"
+          title={`Nouveaux textes pour ce site (${news.length})`}
+          note="Parus au JORT depuis la création du registre, ou devenus applicables avec le profil ou le classement du site."
+          action={
+            <button type="button" className="secondary-button" onClick={() => change((r) => news.reduce((acc, n) => addTexte(acc, n.texte), r))}>
+              Tout ajouter
+            </button>
+          }
+        >
+          {news.map(({ texte, reasons }) => (
+            <li key={texte.id}>
+              <div>
+                {texte.source ? (
                   <a href={texte.source} target="_blank" rel="noreferrer">
                     {texte.titre}
                   </a>
-                  <p className="muted small">
-                    {texte.theme} · {reasons.join(", ")}
-                  </p>
-                </div>
-                <div className="registre-news-actions">
-                  <button type="button" onClick={() => change((r) => addTexte(r, texte))}>
-                    Ajouter
-                  </button>
-                  <button type="button" className="secondary-button" onClick={() => change((r) => ({ ...r, ecartes: [...r.ecartes, texte.id] }))}>
-                    Écarter
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </section>
+                ) : (
+                  texte.titre
+                )}
+                <p className="muted small">
+                  {texte.theme} · {reasons.join(", ")}
+                </p>
+              </div>
+              <div className="registre-news-actions">
+                <button type="button" onClick={() => change((r) => addTexte(r, texte))}>
+                  Ajouter
+                </button>
+                <button type="button" className="secondary-button" onClick={() => change((r) => ({ ...r, ecartes: [...r.ecartes, texte.id] }))}>
+                  Écarter
+                </button>
+              </div>
+            </li>
+          ))}
+        </ToDo>
+      ) : null}
+
+      {gone.length ? (
+        <ToDo
+          className="registre-gone"
+          title={`Textes qui ne s’appliquent plus au site (${gone.length})`}
+          note="Le profil ou le classement a changé : ces textes ne répondent plus à leurs conditions. Retirez-les, ou gardez-les si le site y reste soumis."
+        >
+          {gone.map((l) => (
+            <li key={l.texte.id}>
+              <div>
+                <span>{l.texte.titre}</span>
+                <p className="muted small">
+                  {l.texte.theme} · proposé pour : {l.raisons.join(", ")}
+                </p>
+              </div>
+              <div className="registre-news-actions">
+                <button type="button" onClick={() => setLigne(l.texte.id, { retenu: false })}>
+                  Retirer
+                </button>
+                <button type="button" className="secondary-button" onClick={() => setLigne(l.texte.id, { garde: true })}>
+                  Garder
+                </button>
+              </div>
+            </li>
+          ))}
+        </ToDo>
       ) : null}
 
       <details className="card registre-profil-card">
@@ -522,6 +619,32 @@ function RegistreView({
         ) : null}
       </section>
     </div>
+  );
+}
+
+const setOn = (r: Registre, id: string, patch: Partial<Ligne>): Registre => ({
+  ...r,
+  lignes: r.lignes.map((l) => (l.texte.id === id ? { ...l, ...patch } : l)),
+});
+
+/** Something waiting in the register; a long list shows its first items until asked for the rest. */
+function ToDo({ className, title, note, action, children }: { className: string; title: string; note?: string; action?: ReactNode; children: ReactNode[] }) {
+  const [all, setAll] = useState(false);
+  const FIRST = 3;
+  return (
+    <section className={`card registre-todo ${className}`}>
+      <div className="registre-todo-head">
+        <h2>{title}</h2>
+        {action}
+      </div>
+      {note ? <p className="muted small">{note}</p> : null}
+      <ul>{all ? children : children.slice(0, FIRST)}</ul>
+      {children.length > FIRST ? (
+        <button type="button" className="edii-link" onClick={() => setAll(!all)}>
+          {all ? "Réduire" : `Voir les ${children.length - FIRST} autres`}
+        </button>
+      ) : null}
+    </section>
   );
 }
 

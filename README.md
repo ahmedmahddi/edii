@@ -41,6 +41,9 @@ It deploys as is on Vercel (import the repository, keep the defaults): the page 
 3. In **Étude environnementale (ANPE)**, give the situation (new project, extension, unit already
    operating), whether the site can affect a protected area, and each activity's entry in
    décret n° 2005-1991. The page gives the study, the ANPE's review time and the steps.
+4. **Valider et générer la synthèse** opens the detailed report on a page of its own (print to PDF,
+   HTML, JSON, with a contents bar to jump to its sections); Mon établissement keeps a summary card
+   of it, which says when the dossier has changed since.
 
 Everything entered is kept in the page address, so a classification can be bookmarked or shared.
 
@@ -128,8 +131,15 @@ opens the establishment's register in the Veille réglementaire view:
    date of the last evaluation and frequency, summary of the requirements, risk, action plan,
    responsible and deadline. The register is exported to Excel in the ID-QSE-002 layout.
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
-   which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…", until marked
-   as taken into account), and which new texts apply to the site (to add or set aside).
+   which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…": add that
+   text to the register and re-evaluate, or re-evaluate only), and which new texts apply to the site
+   (to add, all at once or one by one, or set aside). The **Veille** menu shows how many modified texts
+   and late or soon-due evaluations wait in all registers.
+5. **When the classification changes**, validate it again and choose "Créer le registre de veille":
+   the app finds the register of the same name and offers to update it. Its evaluations are kept;
+   category, rubriques and study follow the new classification; the facts implied by rubriques gone
+   are unticked; texts that now apply come as new texts, and those that no longer apply are listed
+   to remove or keep.
 
 The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated (seeded
 from an ID-QSE-002 register: title, summary, risk, and `when`, the conditions under which a text
@@ -142,6 +152,16 @@ référentiel, add texts to `textes.json`, or read older JORT years with `npm ru
 Registers are kept in the browser that created them (no account, no server). "Sauvegarder les
 registres" saves them all to a file, and "Restaurer une sauvegarde" brings them back, on this computer
 or another: save regularly.
+
+**Weekly reading of the JORT.** `scripts/veille-hebdo.ps1` reads the new issues and, with `-Push`,
+commits and pushes the sommaires so that every copy of the app gets them. To run it every Monday at
+8:45 with the Windows task scheduler, from the project folder in PowerShell:
+
+```powershell
+schtasks /Create /SC WEEKLY /D MON /ST 08:45 /TN "ABClassement veille" /TR "powershell -ExecutionPolicy Bypass -File $PWD\scripts\veille-hebdo.ps1 -Push"
+```
+
+The project path must have no spaces, and the laptop must be on and connected at that time; each run is logged in `data/veille/veille-hebdo.log`.
 
 ## Layout
 

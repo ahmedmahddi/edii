@@ -1905,3 +1905,78 @@ p {
   .registre-eval label { flex: 1 1 120px; }
   .registre-group .registre-lignes { padding: 0 8px 4px; }
 }
+.nav-count.is-alert { background: var(--bad); color: #fff; }
+.registre-todo { margin-bottom: 16px; }
+.registre-todo-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; }
+.registre-todo-head h2 { margin: 0; }
+.registre-todo > .edii-link { margin-top: 8px; }
+.registre-gone { border-left: 4px solid var(--warn); }
+.registre-existing { background: var(--warn-bg); border-radius: var(--radius); padding: 12px 16px; margin-top: 16px; }
+.registre-existing p { margin: 0; }
+.registre-existing .registre-actions { margin-top: 12px; }
+.registre-new .registre-name { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 8px; }
+.registre-new .registre-name span { font-size: 13px; font-weight: 600; }
+.registre-new .registre-name input { border-color: var(--border); font-size: 18px; margin-left: 0; }
+
+/* Compact header and page heading: the content starts higher on every page */
+.masthead { padding-top: 10px; padding-bottom: 10px; }
+.page-heading { padding-bottom: 14px; margin-bottom: 18px; }
+.page-heading .eyebrow { margin-bottom: 4px; }
+.page-heading h1 { font-size: 24px; margin-bottom: 4px; }
+.report-back { margin-bottom: 12px; }
+.report-summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px; margin-bottom: 16px; border-left: 4px solid var(--ok); }
+.report-summary.is-stale { border-left-color: var(--warn); }
+.report-summary .eyebrow { margin-bottom: 2px; }
+.report-summary strong { color: var(--navy); }
+.report-summary p { margin: 2px 0 0; color: var(--muted); }
+.report-summary.is-stale p { color: var(--warn); }
+.report-summary-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (min-width: 560px) {
+  .masthead { padding-top: 12px; padding-bottom: 12px; }
+  .company-signature img { width: 110px; }
+}
+@media (min-width: 1000px) {
+  .masthead { padding-top: 12px; padding-bottom: 12px; min-height: 0; }
+  .wordmark { font-size: 28px; }
+  .company-signature img { width: 120px; }
+  .workspace { padding-top: 20px; }
+  .page-heading { padding-bottom: 16px; margin-bottom: 20px; }
+  .page-heading h1 { font-size: 26px; }
+}
+@media (max-width: 559px) {
+  .page-heading p { display: none; }
+}
+@media print {
+  .report-back, .registre-next { display: none !important; }
+}
+.edii-steps-details { margin: 10px 0; }
+.edii-steps-details > summary { cursor: pointer; font-weight: 600; color: var(--accent); font-size: 14px; }
+.edii-steps-details[open] > summary { margin-bottom: 8px; }
+@media print {
+  .edii-steps-details > :not(summary) { display: block; }
+}
+/* Journal officiel: one compact line per text, details on demand */
+.veille-hit { padding-top: 12px; padding-bottom: 12px; margin-bottom: 8px; }
+.veille-hit > details > summary { cursor: pointer; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+.veille-hit > details > summary::-webkit-details-marker { display: none; }
+.veille-hit-title { font-weight: 600; line-height: 1.45; color: var(--text); }
+.veille-hit > details > summary:hover .veille-hit-title { color: var(--accent); }
+.veille-hit > details[open] > summary { margin-bottom: 10px; }
+.veille-status { background: var(--info-bg); color: var(--accent); }
+.veille-more { display: block; margin: 0 auto 24px; }
+.veille-method > summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+.veille-method[open] > summary { margin-bottom: 12px; }
+.report-host > .registre-next { margin: 0 0 20px; }
+.registre-todo ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.registre-todo li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 10px 0; border-top: 1px solid var(--border); }
+.registre-todo li > p, .registre-todo li > div:first-child { flex: 1 1 360px; min-width: 0; margin: 0; }
+.registre-todo li p.small { margin: 2px 0 0; }
+.veille-hit > details:not([open]) .veille-hit-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.report-toc { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 12px 0; font-size: 14px; font-weight: 600; }
+.report-host [id^="report-s"] { scroll-margin-top: 16px; }
+@media print { .report-toc { display: none !important; } }
