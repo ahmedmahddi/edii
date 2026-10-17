@@ -58,14 +58,24 @@ npm run veille                                   # the issues of this year not r
 npm run veille -- --year 2025                    # the issues of 2025 not read yet
 npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
 npm run veille -- --file jort.pdf --year 2010 --number 18   # a PDF already on disk
+npm run veille -- --years 1990-2023              # older years, most recent first
+npm run veille -- --probe                        # sample old issues before reading whole years
 ```
+
+**Older years.** Before reading decades of issues, `--probe` samples two issues every five years
+since 1960 (or the years given: `--probe 1995-2005`): whether the French edition exists, its size,
+whether the server sends part of a file, whether the PDF has a text layer, and how many texts its
+sommaire gives. It keeps the first pages of each in `data/veille/probe/`, to adapt the reading to
+old layouts. A past year ends after three missing numbers in a row ("fin de l'année", or "année
+absente en français" if none was found). An issue whose pages are images (a scan, with no text
+layer) is kept in its year's sommaires as `sansTexte`, not read: those will need OCR.
 
 The command runs on any computer that reaches jort.tn. It needs Node.js only: PDFs are read with
 pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
 if interrupted. Every sommaire read is kept in `data/veille/sommaires/<year>.json`: commit
-`data/veille` to share them. The texts found (`data/veille/feed.json`) are derived from the sommaires
+`data/veille` to share them. The texts found (`public/veille/feed.json`, fetched by the page when the veille opens) are derived from the sommaires
 and the rules, so that file is not kept in git: it is rebuilt by `npm run veille`, and before
-`npm run dev`, `build` and `typecheck`.
+`npm run dev` and `build`.
 
 The veille follows ten domains: établissements classés (with zones industrielles and permis de
 bâtir), environnement (eau, air, bruit, déchets, énergie), santé et sécurité au travail (médecine du
@@ -176,7 +186,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
 | `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
-| `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `data/veille/feed.json`. |
+| `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `public/veille/feed.json`. |
 | `data/veille/` | `watch.json` (the rules), `sommaires/` (every sommaire read) and `feed.json` (the texts found; derived, not in git). |
 | `app/components/veille.tsx` | The Veille réglementaire view: registers and Journal officiel tabs. |
 | `lib/registre/` | Registers of the establishments: the site profile and its conditions (`profil.ts`), the référentiel (`referentiel.ts`), a register, its alerts and due evaluations (`registre.ts`). |

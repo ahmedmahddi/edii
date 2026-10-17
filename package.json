@@ -10,7 +10,6 @@
     "prebuild": "tsx scripts/veille.ts --reassess",
     "build": "next build",
     "start": "next start",
-    "pretypecheck": "tsx scripts/veille.ts --reassess",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "data:ocr": "node scripts/python.mjs data/pipeline/ocr.py",

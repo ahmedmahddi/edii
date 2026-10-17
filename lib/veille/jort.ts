@@ -30,6 +30,7 @@ export interface Issue {
   date: string | null; // ISO date, from the header
   firstPage: number | null; // JORT page number of the PDF's first page
   entries: SommaireEntry[];
+  sansTexte?: boolean; // a scanned issue: its pages are images, with no text to read
 }
 
 const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
