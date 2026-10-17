@@ -191,7 +191,7 @@ class Corrections:
 
     @classmethod
     def load(cls) -> "Corrections":
-        data = json.loads((ROOT / "corrections.json").read_text())
+        data = json.loads((ROOT / "corrections.json").read_text(encoding="utf-8"))
         return cls(data.get("text", []), data.get("category", []))
 
     def apply(self, lines: list[Line]) -> None:
@@ -549,7 +549,7 @@ def split_rubriques(lines: list[Line], source: str, review: list[str]) -> tuple[
 
 
 def main() -> None:
-    manifest = json.loads((ROOT / "sources.json").read_text())
+    manifest = json.loads((ROOT / "sources.json").read_text(encoding="utf-8"))
     corrections = Corrections.load()
     review: list[str] = []
     by_code: dict[str, dict] = {}
@@ -558,7 +558,7 @@ def main() -> None:
     history: list[dict] = []
 
     for src in manifest["sources"]:
-        ocr = json.loads((ROOT / "ocr" / f"{src['id']}.json").read_text())
+        ocr = json.loads((ROOT / "ocr" / f"{src['id']}.json").read_text(encoding="utf-8"))
         lines: list[Line] = []
         annex = None
         for page in ocr["pages"]:
@@ -624,7 +624,7 @@ def main() -> None:
         "sections": dict(sorted(sections.items())),
         "rubriques": rubriques,
     }
-    (ROOT / "nomenclature.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n")
+    (ROOT / "nomenclature.json").write_text(json.dumps(out, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
 
     n_items = sum(len(r["items"]) for r in rubriques)
     n_cond = sum(1 for r in rubriques for it in r["items"] if it["condition"])
@@ -638,7 +638,7 @@ def main() -> None:
         f"* {len(review)} points to check",
         "",
     ] + [f"- {r}" for r in review]
-    (ROOT / "review.md").write_text("\n".join(report) + "\n")
+    (ROOT / "review.md").write_text("\n".join(report) + "\n", encoding="utf-8", newline="\n")
     print(f"{len(rubriques)} rubriques, {n_items} items ({n_cond} with thresholds), {len(review)} review points")
 
 

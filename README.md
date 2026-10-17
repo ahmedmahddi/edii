@@ -25,7 +25,7 @@ npm run build && npm start
 ```
 
 Two tests re-run the data pipeline to check the JSON files still match the texts. They need
-Python 3.9+ (and `pdftotext` from poppler for the decree) and are skipped without them, which is
+Python 3.10+ (and `pdftotext` from poppler for the decree) and are skipped without them, which is
 fine on a laptop; CI installs both. The `npm run data:*` scripts find Python on any system
 (`python3`, `python` or `py` on Windows).
 
@@ -90,6 +90,7 @@ rules can be applied again without downloading anything:
 
 ```bash
 npm run veille -- --reassess
+npm run veille -- --list --year 2026 > titres.txt   # every title read, flagged or not
 ```
 
 A flagged text is something to read, not a legal conclusion.

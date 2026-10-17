@@ -8,6 +8,7 @@
  *   npm run veille -- --file jort.pdf --year 2010 --number 18   read a PDF already on disk
  *   npm run veille -- --reassess           apply edited rules (data/veille/watch.json) to every
  *                                          sommaire already read, without downloading anything
+ *   npm run veille -- --list --year 2026   every title already read, flagged or not, to check the rules
  *
  * Issues are numbered from 1 each year at https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf;
  * the first number that is not there yet ends the run. Only the sommaire (first pages) is read; it
@@ -17,7 +18,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from "node:path";
 import { type Issue, parseIssue, pdfUrl } from "../lib/veille/jort";
 import { pdfLines } from "../lib/veille/pdf";
-import { type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
+import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
 
 const DIR = path.join(process.cwd(), "data", "veille");
 const FEED = path.join(DIR, "feed.json");
@@ -86,7 +87,7 @@ async function readIssue(feed: Feed, year: number, number: number, data: Uint8Ar
   const found = next.hits.filter((h) => h.year === year && h.issue === number);
   const flag = found.some((h) => h.severity === "critique") ? " ← CRITIQUE" : found.some((h) => h.severity === "important") ? " ← important" : "";
   console.log(`  n° ${String(number).padStart(3, "0")} ${issue.date ?? ""}: ${issue.entries.length} textes, ${found.length} à lire${flag}`);
-  for (const h of found) console.log(`      [${h.severity}] p. ${h.page} ${h.title.slice(0, 110)}`);
+  for (const h of found) console.log(`      [${h.severity}] p. ${h.page} ${h.title}`);
   return next;
 }
 
@@ -110,12 +111,27 @@ async function scanYear(feed: Feed, year: number, from?: number, to?: number): P
 
 async function main(): Promise<void> {
   let feed = loadFeed();
-  if (process.argv.includes("--reassess")) {
-    const years = existsSync(SOMMAIRES)
+  const stored = () =>
+    existsSync(SOMMAIRES)
       ? readdirSync(SOMMAIRES)
           .filter((f) => /^\d{4}\.json$/.test(f))
           .map((f) => loadSommaires(Number(f.slice(0, 4))))
       : [];
+  if (process.argv.includes("--list")) {
+    const only = option("year") ? Number(option("year")) : undefined;
+    for (const y of stored().filter((y) => !only || y.year === only)) {
+      for (const issue of Object.values(y.issues).sort((a, b) => (a.number ?? 0) - (b.number ?? 0))) {
+        console.log(`\nJORT n° ${issue.number}/${y.year} (${issue.date ?? "date inconnue"})`);
+        for (const e of issue.entries) {
+          const level = assess(e)?.severity ?? "-";
+          console.log(`  [${level}] p. ${e.page} ${e.institution ?? "?"} | ${e.title}`);
+        }
+      }
+    }
+    return;
+  }
+  if (process.argv.includes("--reassess")) {
+    const years = stored();
     const before = feed.hits.length;
     feed = reassess(feed, years);
     saveFeed(feed);

@@ -93,11 +93,11 @@ def write_review(links: dict[str, dict], nomenclature: dict[str, dict], entries:
             when = link["when"] + (f" (cas {link['case']})" if "case" in link else "")
             first = f"**{code}** {title}" if i == 0 else ""
             rows.append(f"| {first} | {entry} | {when} | {note if i == 0 else ''} |")
-    (ROOT / "eie-links.md").write_text("\n".join(rows) + "\n")
+    (ROOT / "eie-links.md").write_text("\n".join(rows) + "\n", encoding="utf-8", newline="\n")
 
 
 def main() -> None:
-    text = subprocess.run(["pdftotext", str(ROOT / SOURCE), "-"], check=True, capture_output=True, text=True).stdout
+    text = subprocess.run(["pdftotext", str(ROOT / SOURCE), "-"], check=True, capture_output=True, text=True, encoding="utf-8").stdout
     text = re.sub(r"\n\s*\d\s*\n", "\n", text)  # page numbers
     text = text.replace("\f", "\n")
     starts = []
@@ -106,8 +106,8 @@ def main() -> None:
         if not m:
             raise SystemExit(f"{SOURCE}: no '{pattern}' in the text")
         starts.append((m.start(), m.end(), kind))
-    links: dict[str, dict] = json.loads((ROOT / "eie-links.json").read_text())["rubriques"]
-    nomenclature = {r["code"]: r for r in json.loads((ROOT / "nomenclature.json").read_text())["rubriques"]}
+    links: dict[str, dict] = json.loads((ROOT / "eie-links.json").read_text(encoding="utf-8"))["rubriques"]
+    nomenclature = {r["code"]: r for r in json.loads((ROOT / "nomenclature.json").read_text(encoding="utf-8"))["rubriques"]}
 
     out = []
     for i, (_, body_start, kind) in enumerate(starts):
@@ -136,7 +136,7 @@ def main() -> None:
         "entries": out,
         "suggestions": links,
     }
-    (ROOT / "eie.json").write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n")
+    (ROOT / "eie.json").write_text(json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     write_review(links, nomenclature, {e["id"]: e for e in out})
     print(f"{len(out)} entries: {counts}")
 

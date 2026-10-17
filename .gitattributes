@@ -1,0 +1,4 @@
+# LF everywhere, Windows included: the data pipeline writes LF and its tests compare byte for byte.
+* text=auto eol=lf
+*.pdf binary
+*.png binary
