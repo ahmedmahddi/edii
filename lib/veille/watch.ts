@@ -120,8 +120,10 @@ function contains(text: string, term: string): boolean {
 }
 
 const MONTH = "(?:janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)";
+// The issuer runs to its date, maybe followed by the Hegira date of old titles ("(15 rabia I 1378)")
+// and a comma, which some titles leave out ("… du 2 mars 1999 portant approbation …").
 const ISSUER = new RegExp(
-  `^(?:arretes?|decisions?|circulaires?)(?: conjoints?)? (?:du|de la|des|de l'|de)\\s.*?\\bdu \\d{1,2}(?:er)? ${MONTH} \\d{4}\\s*,\\s*`,
+  `^(?:arretes?|decisions?|circulaires?)(?: conjoints?)? (?:du|de la|des|de l'|de)\\s.*?\\bdu \\d{1,2}(?:er)? ${MONTH} \\d{4}(?:\\s*\\([^)]{0,40}\\))?\\s*(?:,\\s*|(?=portant |fixant |relatif |relative |modifiant |completant |instituant |approuvant ))`,
 );
 
 /** The title without its issuer: "Arrêté du ministre … du 3 mars 2026, fixant …" → "fixant …". */
@@ -164,6 +166,8 @@ const containsAr = (text: string, term: string) => text.includes(term);
 /** An Arabic title's subject: what comes from "يتعلق" ("relatif à"), else the whole title. */
 const subjectAr = (folded: string) => folded.slice(Math.max(folded.indexOf("يتعلق"), 0));
 
+const ACTS = new Set(["Loi", "Loi organique", "Décret", "Décret-loi", "Arrêté", "Décision", "Circulaire"]);
+
 /** Titles the veille never reports: nominations, concours, the State's budget… */
 export function ignored(title: string): boolean {
   if (isArabic(title.slice(0, 30))) {
@@ -187,7 +191,13 @@ export function assess(
   // References are looked for in the whole title: "modifiant l'arrêté du 15 novembre 2005" is
   // after the issuer, but a reference may also sit in it.
   const refs = (arabic ? AR_REFERENCES : rules.references).map((r) => [r, apply(r, full, institution, has)] as const).filter(([, m]) => m);
-  const others = (arabic ? AR_RULES : rules.rules).map((r) => [r, apply(r, text, institution, has)] as const).filter(([, m]) => m);
+  // A rule on an activity concerns the acts that set rules for it (lois, décrets, arrêtés…), not a
+  // company's balance sheet, a notice or a nomination that names the trade.
+  const act = ACTS.has(kindOf(entry.title));
+  const others = (arabic ? AR_RULES : rules.rules)
+    .filter((r) => act || !r.id.startsWith("act-"))
+    .map((r) => [r, apply(r, text, institution, has)] as const)
+    .filter(([, m]) => m);
   if (!refs.length && !others.length) return null;
   // A text found only by its institution, with nothing in its title, is information at most; so is
   // an international agreement or a one-off act (rules.demote).

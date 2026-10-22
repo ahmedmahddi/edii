@@ -128,8 +128,11 @@ export function fromHit(hit: Hit): Texte {
   // that only modifies another is ticked on the site's activities, or when it modifies a text the
   // app is built on; elsewhere it is suggested, and shows on its base text ("Modifié par").
   const modifies = modifiesAnother(hit.title);
+  // A tax or customs text stays a suggestion even when it names the site's activity (an export tax
+  // on olive oil, a customs duty on steel).
+  const taxed = hit.matches.some((m) => SUGGESTED.has(ruleById.get(m.rule)?.domain ?? ""));
   const coche =
-    hit.severity === "information"
+    hit.severity === "information" || taxed
       ? []
       : [
           ...new Set(

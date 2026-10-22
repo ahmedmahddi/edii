@@ -162,7 +162,8 @@ describe("reading a sommaire from the OCR text of ocr.jort.tn", () => {
     expect(issue.entries).toHaveLength(24);
     const edi = issue.entries.find((e) => /établissements dangereux/.test(e.title))!;
     expect(edi).toMatchObject({ section: "Avis et Communications", institution: "Ministère de l'Industrie, des Mines et de l'Energie", page: 18 });
-    expect(assess(edi)?.severity).toBe("important");
+    // Notices of inquiries on given establishments: news, not an obligation for every site.
+    expect(assess(edi)?.severity).toBe("information");
   });
 
   it("reads a sommaire laid out as a table (2023 n° 108)", () => {
@@ -319,7 +320,9 @@ describe("picking the texts that concern the app", () => {
   });
 
   it("counts a text found by its institution alone as information", () => {
-    expect(assess({ title: "Décret n° 2026-90, fixant les attributions du ministère", institution: "Ministère de l'Environnement" })?.severity).toBe("information");
+    expect(assess({ title: "Décret n° 2026-90, portant création d'un conseil consultatif", institution: "Ministère de l'Environnement" })?.severity).toBe("information");
+    // A ministry's own organisation is not reported at all.
+    expect(assess({ title: "Décret n° 2026-91, fixant les attributions du ministère", institution: "Ministère de l'Environnement" })).toBeNull();
   });
 
   it("ignores nominations, concours, prices, other cahiers des charges, and words that only contain a keyword", () => {
