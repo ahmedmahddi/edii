@@ -3,6 +3,7 @@
  * runs on Windows as is). Node only: used by scripts/veille.ts and the tests, never by the page.
  */
 import { getDocument, PDFDataRangeTransport, type PDFDocumentProxy } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { fetchRetry } from "./fetch";
 import { decodeGlyphs, isGlyphCoded } from "./glyphs";
 import type { Line } from "./jort";
 
@@ -34,14 +35,22 @@ export async function pdfLinesFromUrl(
   last?: (page: Line[], index: number) => boolean, // stop after this page (the sommaire is over)
 ): Promise<{ lines: Line[][]; bytes: number } | null> {
   let bytes = 0;
-  const part = async (begin: number, end: number) => {
-    const res = await fetch(url, { headers: { ...headers, Range: `bytes=${begin}-${end - 1}` } });
+  const part = async (begin: number, end: number, attempt = 0): Promise<Uint8Array> => {
+    const res = await fetchRetry(url, { headers: { ...headers, Range: `bytes=${begin}-${end - 1}` } });
     if (res.status !== 206 && res.status !== 200) throw new Error(`${url}: HTTP ${res.status}`);
-    const chunk = new Uint8Array(await res.arrayBuffer());
+    let chunk: Uint8Array;
+    try {
+      chunk = new Uint8Array(await res.arrayBuffer());
+    } catch (error) {
+      // The connection broke while the part came: ask for it again, a few times.
+      if (attempt >= 3) throw error;
+      await new Promise((r) => setTimeout(r, 3000 * (attempt + 1)));
+      return part(begin, end, attempt + 1);
+    }
     bytes += chunk.length;
     return res.status === 200 ? chunk.slice(begin, end) : chunk;
   };
-  const first = await fetch(url, { headers: { ...headers, Range: `bytes=0-${CHUNK - 1}` } });
+  const first = await fetchRetry(url, { headers: { ...headers, Range: `bytes=0-${CHUNK - 1}` } });
   if (first.status === 404) return null;
   if (!first.ok) throw new Error(`${url}: HTTP ${first.status}`);
   const head = new Uint8Array(await first.arrayBuffer());

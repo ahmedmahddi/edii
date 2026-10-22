@@ -32,6 +32,7 @@ export interface Issue {
   entries: SommaireEntry[];
   sansTexte?: boolean; // a scanned issue: its pages are images, with no text to read
   source?: "ocr" | "pdf"; // read from the OCR text of ocr.jort.tn, or from the PDF's own text
+  arabe?: boolean; // the file is the Arabic edition, filed in the French collection: nothing to read
 }
 
 export const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
