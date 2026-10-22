@@ -200,6 +200,12 @@ export function alertes(reg: Registre, amendments: Amendment[]): Alerte[] {
   });
 }
 
+/** The JORT text that repealed a text of the register as a whole, if any. */
+export function abrogePar(l: Ligne, amendments: Amendment[]): Amendment | undefined {
+  const keys = new Set(keysOf(l.texte));
+  return amendments.find((a) => a.abroge?.some((k) => keys.has(k)) && (!l.texte.date || (a.date ?? "") > l.texte.date));
+}
+
 /** The JORT texts that modified a text before the register was created, newest first. */
 export function modifiePar(reg: Registre, l: Ligne, amendments: Amendment[]): Amendment[] {
   const since = reg.cree.slice(0, 10);

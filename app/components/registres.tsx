@@ -5,6 +5,7 @@ import { FLAG_GROUPS, FLAGS, type Site } from "@/lib/registre/profil";
 import { proposals, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
+  abrogePar,
   alertes,
   modifiePar,
   backup,
@@ -585,7 +586,13 @@ function RegistreView({
             </summary>
             <ol className="registre-lignes">
               {lignes.map((l) => (
-                <LigneCard key={l.texte.id} l={l} history={modifiePar(reg, l, amendments)} set={(patch) => setLigne(l.texte.id, patch)} />
+                <LigneCard
+                  key={l.texte.id}
+                  l={l}
+                  history={modifiePar(reg, l, amendments)}
+                  repealed={abrogePar(l, amendments)}
+                  set={(patch) => setLigne(l.texte.id, patch)}
+                />
               ))}
             </ol>
           </details>
@@ -649,7 +656,7 @@ function ToDo({ className, title, note, action, children }: { className: string;
   );
 }
 
-function LigneCard({ l, history, set }: { l: Ligne; history: Amendment[]; set: (patch: Partial<Ligne>) => void }) {
+function LigneCard({ l, history, repealed, set }: { l: Ligne; history: Amendment[]; repealed?: Amendment; set: (patch: Partial<Ligne>) => void }) {
   const next = prochaine(l);
   return (
     <li className={`card registre-ligne conf-${l.conformite || "none"} ${l.retenu ? "" : "is-left"}`}>
@@ -670,6 +677,18 @@ function LigneCard({ l, history, set }: { l: Ligne; history: Amendment[]; set: (
         {l.origine === "ajoute" ? "Ajouté à la main" : `Pourquoi : ${l.raisons.join(", ")}`}
         {l.texte.publie ? ` · ${l.texte.publie}` : ""}
       </p>
+      {repealed ? (
+        // No longer in force: the consultant takes it out of the register, or keeps it for the record.
+        <p className="registre-abroge small">
+          Abrogé par{" "}
+          <a href={repealed.pdf} target="_blank" rel="noreferrer" dir="auto">
+            {repealed.title}
+          </a>{" "}
+          <span className="muted">
+            (JORT n° {repealed.issue}/{repealed.year}, p. {repealed.page})
+          </span>
+        </p>
+      ) : null}
       {history.length ? (
         // Modified before the register was made: the text as it stands now, not an alert.
         <details className="registre-details">

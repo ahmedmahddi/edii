@@ -7,6 +7,8 @@ import { beforeAll, describe, expect, it } from "vitest";
 import { INSTITUTION, type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl, TEXT_START } from "@/lib/veille/jort";
 import { ocrUrl, parseMarkdown, parseMarkdownStart } from "@/lib/veille/markdown";
 import { frenchCitations } from "@/lib/veille/arabe";
+import { repealClauses } from "@/lib/veille/abrogation";
+import { namedKeys } from "@/lib/registre/referentiel";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
@@ -228,6 +230,26 @@ describe("reading a sommaire from the OCR text of ocr.jort.tn", () => {
     expect(TEXT_START.test("Arrêté du ministre des finances")).toBe(true);
     expect(TEXT_START.test("Arrêtées")).toBe(false);
     expect(["DECRET N° 59-387", "ARRETE du Secrétaire d'Etat", "Décrets-lois", "LOI N° 62-42"].map(kindOf)).toEqual(["Décret", "Arrêté", "Décret-loi", "Loi"]);
+  });
+});
+
+describe("finding the texts repealed as a whole", () => {
+  const keys = (text: string) => repealClauses(text).map((r) => namedKeys(r.clause)[0]);
+
+  it("reads the repeals of the bodies and titles of real texts", () => {
+    expect(keys("Art. 4 - Sont abrogées les dispositions du décret n° 2008-452 du 18 février 2008 fixant l'organigramme du Centre")).toEqual(["n:decret:2008-452"]);
+    expect(keys("Art. 26 - Sont abrogées toutes les dispositions antérieures contraires au présent décret, notamment le décret n° 78-452 du 26 avril 1978 portant statut particulier")).toEqual(["n:decret:78-452"]);
+    expect(keys("Art. 19 - Est abrogé l'arrêté du Premier ministre du 30 janvier 1999, fixant les modalités d'organisation du concours externe")).toEqual(["d:arrete:1999-01-30"]);
+    expect(keys("Art. 10 - Toutes les dispositions de l'arrêté du ministre des affaires étrangères du 16 septembre 2013, susvisé sont abrogées.")).toEqual(["d:arrete:2013-09-16"]);
+    expect(keys("Art. 2 - Le présent arrêté abroge et remplace l'arrêté du ministre des affaires sociales et de la solidarité du 6 septembre 2002 susvisé.")).toEqual(["d:arrete:2002-09-06"]);
+    expect(keys("Décret n° 2024-59 du 11 janvier 2024, abrogeant le décret gouvernemental n° 2018-484 du 4 juin 2018, portant changement de la vocation")).toEqual(["n:decret:2018-484"]);
+    expect(keys("الفصل 5 - يلغى الأمر عدد 1991 لسنة 2005 المؤرخ في 11 جويلية 2005")).toEqual(["n:decret:2005-1991"]);
+  });
+
+  it("does not take the repeal of an article, a paragraph or an annex for the repeal of the text", () => {
+    expect(repealClauses("Art. 2 - Sont abrogées les dispositions de l'article 6 de l'arrêté du 8 décembre 2022 susvisé.")).toEqual([]);
+    expect(repealClauses("Article premier - Est abrogé le deuxième paragraphe de l'article 2 du décret Présidentiel n° 2022-677 du 3 août 2022")).toEqual([]);
+    expect(repealClauses("Art. 3 - Est abrogée l'annexe n°4 du décret gouvernemental n° 2017-389 du 9 mars 2017 susvisé")).toEqual([]);
   });
 });
 

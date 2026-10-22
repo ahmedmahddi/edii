@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 93 tests
+npm test                                 # 96 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 93 tests in 5 files
+npm test                 # vitest: 96 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -93,6 +93,7 @@ npm run veille -- --years 1995-2022          # those years' issues not read yet,
 npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
 npm run veille -- --ocr --years 2023-2026    # issues read from the PDF: read their OCR text, keep the longer reading
 npm run veille -- --reread                   # read again issues that gave 0 texts or glued titles
+npm run veille -- --abrogations              # read every issue's whole text for repeals (once, resumable)
 npm run veille -- --reassess                 # re-apply edited rules to stored sommaires (no download)
 npm run veille -- --list --year 2026         # every title read, with its level ("-" = not flagged)
 npm run veille -- --file x.md --year 2010 --number 18    # an OCR text (or a PDF) already on disk
@@ -126,6 +127,7 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `lib/veille/markdown.ts` | **Sommaire from the OCR text** (ocr.jort.tn): `parseMarkdown`, `parseMarkdownStart` (partial download), `markdownPages`, `ocrUrl`; `readArabic` for Arabic files. |
 | `lib/veille/arabe.ts` | Arabic titles: `arFold`, `isArabic`, `mostlyArabic`, `isoDateAr`, `kindOfAr`, `numeroAr`, `frenchCitations`, `arabicPdfMarkdown`. |
 | `lib/veille/fetch.ts` | Downloads with timeout and retries (`fetchRetry`, `fetchText`). |
+| `lib/veille/abrogation.ts` | Repeal clauses of titles and bodies (`repealClauses`). |
 | `lib/veille/jort.ts` | Shared types (`Issue`, `SommaireEntry`, `Line`), the **PDF** sommaire parser `parseIssue`, `isSommairePage`, `kindOf`, `isoDate`, `sommaireEntry`, `pdfUrl`, `pdfPage`, `INSTITUTION`, `TEXT_START`. |
 | `lib/veille/pdf.ts` | PDF → positioned lines: `pdfLines(data)`, `pdfLinesFromUrl(url)` (HTTP range requests), `pdfPageImages`, `toLines`. |
 | `lib/veille/glyphs.ts` | Decoder for 2000-2005 fonts that write glyph numbers instead of letters (PDF path only). |
@@ -141,6 +143,7 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `data/sources/ocr/` | First pages of 5 real OCR texts (1960 n° 1, 1965 n° 40, 1980 n° 1, 2023 n° 108, 2024 n° 2), for the tests. |
 | `data/veille/watch.json` | Veille rules (domains, levels, ignore lists, `when`, register mapping, `suggere`). |
 | `data/veille/watch-ar.json` | Arabic terms of the same rules (by rule id), Arabic ignore and demote lists. |
+| `data/veille/abrogations/<year>.json` | Repeal clauses found in each issue's whole OCR text (`--abrogations`). |
 | `data/veille/sommaires/<year>.json` | Every sommaire read (committed; the source of truth of the veille). Each issue says where it was read: `source: "ocr"` or `"pdf"`. |
 | `data/veille/probe/` | PDF probe samples (2 issues every 5 years, JPEG pages of the scans). Kept for reference; the OCR text made the OCR plan unnecessary. |
 | `data/referentiel/textes.json` | Curated référentiel (74 texts). |
@@ -316,6 +319,16 @@ chimiques, 1500 → déchets dangereux, 2400 → explosifs, 2600 → rayonnement
   "prorogeant", "rectificatif"; تنقيح، إتمام، إلغاء) is ticked only through an activity rule
   (`act-*`) or a reference (`ref-*`); otherwise it is suggested, and shows as "Modifié par…" on its
   base text when that text is in the register (decision of 22 October);
+* a text **repealed as a whole** by a later JORT text is not proposed (`texte.abroge`), and a
+  register's card shows "Abrogé par …" (`abrogePar`). Repeals come from titles ("abrogeant le
+  décret n° …") and from the **bodies** of the texts: `npm run veille -- --abrogations` reads the
+  whole OCR text of every issue once (795 MB for 1957-2026, about 25 minutes, resumable) and keeps
+  the repeal clauses in `data/veille/abrogations/<year>.json` (`lib/veille/abrogation.ts`: "Est
+  abrogé le décret n° …", "Sont abrogées les dispositions du décret …", "… notamment le décret …",
+  "abroge et remplace l'arrêté …", "يلغى الأمر عدد …"; the repeal of an article, a paragraph or an
+  annex is not taken for the repeal of the text). 22 October: 182 texts of the référentiel
+  repealed (e.g. décret 68-88 by décret 2006-2687). A date-keyed repeal can hit another arrêté of
+  the same date with a similar subject (seen once): compare the issuing ministry if it matters;
 * of a **series** (`seriesKey`: subject without numbers and dates, ≥ 30 characters, not a
   modification: the SMIG of each year, each loi de finances), only the newest is proposed; the older
   ones are marked `remplace` and can still be added by hand;
@@ -443,7 +456,13 @@ To get the per-year table again: count `issues`, `entries` and flags in
    (Secrétariat d'État, DECRET N°…); look at hits per rule and at what is missed (`--list`).
    Watch for OCR typos ("ARRETTES", "DECLET"). One title gave a date in "1020": OCR misreads of
    years exist.
-3. **Registers are still large** (636-1,054 ticked with 1957-2026). Decided so far: base texts +
+3. **Registers are still large**: after the activity rules were tightened and repeals detected
+   (22 October): galvanisation 466, chemical plant 723, huilerie 766, BTP 621, workshop 457
+   ticked. The bulk is general obligations over 70 years (hygiène ~103, code du travail ~91, CNSS
+   ~78, AT/MP ~52), many overtaken without a formal repeal: next lever is reading whether a text is
+   still in force (AI pass discussed with the user, offline, with reasons shown), or general texts
+   older than N years as suggestions.
+   Before (636-1,054 ticked with 1957-2026). Decided so far: base texts +
    activity. Further ideas, to put to the user with numbers: general texts older than N years as
    suggestions; detect repealed texts ("abrogeant le décret n° X" → X no longer proposed); rank
    curated + laws + decrees first in the register view.
@@ -468,7 +487,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (93 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (96 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).

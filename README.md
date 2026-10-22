@@ -64,6 +64,7 @@ npm run veille -- --year 2025                    # the issues of 2025 not read y
 npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
 npm run veille -- --years 1957-2022              # older years, most recent first
 npm run veille -- --reread                       # read again the issues that gave no text
+npm run veille -- --abrogations                  # read every issue's whole text for the texts it repeals
 npm run veille -- --ocr --years 2023-2026        # issues read from the PDF: read their OCR text, keep the longer reading
 npm run veille -- --file jort.md --year 2010 --number 18    # an OCR text (or a PDF) already on disk
 npm run veille -- --probe                        # sample old PDFs (see data/veille/probe)

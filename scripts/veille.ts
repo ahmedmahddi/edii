@@ -19,6 +19,8 @@
  *                                          read; the first pages are kept in data/veille/probe/ so
  *                                          that the reading can be adapted to old layouts
  *
+ *   npm run veille -- --abrogations        read the whole OCR text of every issue read, for the texts
+ *                                          it repeals as a whole (data/veille/abrogations/), resumable
  *   npm run veille -- --ocr --years 2023-2026   read again from the OCR text the issues first read
  *                                          from the PDF, keeping the reading with more texts
  *
@@ -34,8 +36,9 @@ import path from "node:path";
 import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../lib/veille/jort";
 import { fetchRetry, fetchText } from "../lib/veille/fetch";
 import { arabicPdfMarkdown, mostlyArabic } from "../lib/veille/arabe";
-import { ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
-import { amendments, catalogue } from "../lib/registre/referentiel";
+import { markdownPages, ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
+import { amendments, catalogue, type Repeals } from "../lib/registre/referentiel";
+import { type Repeal, repealClauses } from "../lib/veille/abrogation";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
 import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
 
@@ -43,6 +46,8 @@ const DIR = path.join(process.cwd(), "data", "veille");
 // Served to the page, which fetches it when the veille is opened (not part of the page's code).
 const FEED = path.join(process.cwd(), "public", "veille", "feed.json");
 const SOMMAIRES = path.join(DIR, "sommaires");
+// Repeals read in the issues' full OCR text (--abrogations): data/veille/abrogations/<year>.json.
+const ABROGATIONS = path.join(DIR, "abrogations");
 const PROBE = path.join(DIR, "probe");
 const UA = "ABClassement veille réglementaire";
 // Where the PDFs are fetched from: lake.jort.tn, or a copy of it (JORT_BASE, for tests or a mirror).
@@ -303,6 +308,54 @@ async function probe(years: number[]): Promise<void> {
   console.log(`\nTéléchargé : ${(downloaded / 1e6).toFixed(0)} Mo. Résultats dans data/veille/probe/ : envoyez-les (git add data/veille/probe, commit, push).`);
 }
 
+function loadRepeals(): Repeals {
+  if (!existsSync(ABROGATIONS)) return {};
+  return Object.fromEntries(
+    readdirSync(ABROGATIONS)
+      .filter((f) => /^\d{4}\.json$/.test(f))
+      .map((f) => [f.slice(0, 4), (JSON.parse(readFileSync(path.join(ABROGATIONS, f), "utf8")) as { issues: Record<string, Repeal[]> }).issues]),
+  );
+}
+
+/**
+ * Read the whole OCR text of each issue (not only its sommaire) for the texts it repeals as a whole
+ * ("Est abrogé le décret n° …"). Kept per year, issue by issue (an empty list: read, nothing found),
+ * so that a run goes on where the last one stopped. Four issues at a time.
+ */
+async function readRepeals(years: Sommaires[]): Promise<void> {
+  mkdirSync(ABROGATIONS, { recursive: true });
+  for (const y of years.sort((a, b) => b.year - a.year)) {
+    const file = path.join(ABROGATIONS, `${y.year}.json`);
+    const done: Record<string, Repeal[]> = existsSync(file) ? JSON.parse(readFileSync(file, "utf8")).issues : {};
+    const todo = Object.values(y.issues).filter((i) => i.number !== null && !(String(i.number) in done));
+    if (!todo.length) continue;
+    console.log(`JORT ${y.year} : ${todo.length} numéros à lire en entier`);
+    const save = () =>
+      writeFileSync(file, JSON.stringify({ year: y.year, issues: Object.fromEntries(Object.entries(done).sort(([a], [b]) => Number(a) - Number(b))) }) + "\n");
+    let next = 0;
+    let found = 0;
+    const worker = async () => {
+      while (next < todo.length) {
+        const issue = todo[next++];
+        const res = await fetchText(ocrFetchUrl(y.year, issue.number!), { headers: { "User-Agent": UA } });
+        if (res && res.status < 400 && /<!--\s*page/.test(res.text)) {
+          downloaded += Buffer.byteLength(res.text);
+          // Page by page, to say where the repeal is printed.
+          done[String(issue.number)] = markdownPages(res.text).flatMap((lines, i) =>
+            repealClauses(lines.join("\n"), issue.firstPage !== null ? issue.firstPage + i : null),
+          );
+          found += done[String(issue.number)].length;
+        } else done[String(issue.number)] = [];
+        if (next % 20 === 0) save();
+        await new Promise((r) => setTimeout(r, PAUSE_MS));
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    save();
+    console.log(`  ${found} abrogations trouvées`);
+  }
+}
+
 async function main(): Promise<void> {
   let feed = loadFeed();
   const stored = () =>
@@ -329,13 +382,23 @@ async function main(): Promise<void> {
     const years = stored();
     const before = feed.hits.length;
     feed = reassess({ updated: null, scanned: {}, hits: [] }, years);
-    feed.amendments = amendments(years, catalogue(feed.hits));
+    feed.amendments = amendments(years, catalogue(feed.hits), loadRepeals());
     const updated = years.map((y) => y.updated ?? "").sort().at(-1) || null;
     writeFeed({ ...feed, updated });
     const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
     console.log(
       `Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés, ${feed.amendments.length} modifiant un texte du référentiel.`,
     );
+    return;
+  }
+  if (process.argv.includes("--abrogations")) {
+    const only = option("years") ? new Set(yearsOf(option("years")!)) : null;
+    await readRepeals(stored().filter((y) => !only || only.has(y.year)));
+    feed = reassess({ updated: null, scanned: {}, hits: [] }, stored());
+    feed.amendments = amendments(stored(), catalogue(feed.hits), loadRepeals());
+    writeFeed({ ...feed, updated: new Date().toISOString() });
+    const n = feed.amendments.filter((a) => a.abroge?.length).length;
+    console.log(`\n${n} textes du référentiel abrogés par un texte publié au JORT. Téléchargé : ${(downloaded / 1e6).toFixed(0)} Mo.`);
     return;
   }
   if (process.argv.includes("--probe")) {
@@ -406,7 +469,7 @@ async function main(): Promise<void> {
           : [now.getFullYear()];
     for (const y of years) feed = await scanYear(feed, y, from, to);
   }
-  feed.amendments = amendments(stored(), catalogue(feed.hits));
+  feed.amendments = amendments(stored(), catalogue(feed.hits), loadRepeals());
   saveFeed(feed);
   const count = (s: string) => feed.hits.filter((h) => h.severity === s).length;
   console.log(

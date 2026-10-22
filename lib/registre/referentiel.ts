@@ -8,6 +8,7 @@
  * ("arrêté du 10 janvier 1995"); that is also how a new JORT title is seen to modify it.
  */
 import curated from "@/data/referentiel/textes.json";
+import { type Repeal, repealClauses } from "../veille/abrogation";
 import { arFold, frenchCitations, isArabic } from "../veille/arabe";
 import { isoDate, pdfPage, pdfUrl } from "../veille/jort";
 import { type Amendment, fold, type Hit, ignored, rules, type Severity, type Sommaires, subject } from "../veille/watch";
@@ -30,6 +31,7 @@ export interface Texte {
   origine: "referentiel" | "jort";
   niveau?: Severity; // for a text found in the JORT
   remplace?: boolean; // a JORT text of a series (the SMIG of each year…) replaced by a newer one: not proposed
+  abroge?: { titre: string; publie: string; source: string }; // repealed as a whole, by this text: not proposed
   coche?: string[]; // for a JORT text: the sites it is ticked for (the others with 'when': suggested)
 }
 
@@ -182,8 +184,16 @@ export function seriesKey(title: string): string | null {
   return t.length >= 30 && !/modifi|complet|abrog|prorog|rectifi/.test(t) ? t : null;
 }
 
-/** The curated texts and the JORT's, a JORT text that is already curated adding its source only. */
-export function catalogue(hits: Hit[]): Texte[] {
+/** The keys of the texts a repeal clause names first: the repealed text, when the référentiel has it. */
+function repealedBy(clauses: Repeal[], names: (n: Named) => boolean | undefined): string[] {
+  return [...new Set(clauses.map((r) => named(r.clause)[0]).filter((n): n is Named => !!n && !!names(n)).map((n) => n.key))];
+}
+
+/**
+ * The curated texts and the JORT's, a JORT text that is already curated adding its source only. A
+ * text repealed as a whole (amendments' abroge) is marked: it is no longer proposed.
+ */
+export function catalogue(hits: Hit[], amendments: Amendment[] = []): Texte[] {
   const texts: Texte[] = REFERENTIEL.map((t) => ({ ...t }));
   const byKey = new Map(texts.flatMap((t) => keysOf(t).map((k) => [k, t] as const)));
   for (const hit of hits) {
@@ -196,6 +206,13 @@ export function catalogue(hits: Hit[]): Texte[] {
     }
     texts.push(t);
     for (const k of keysOf(t)) byKey.set(k, t);
+  }
+  const repealed = new Map<string, Amendment>();
+  for (const a of amendments) for (const k of a.abroge ?? []) if (!repealed.has(k) || (a.date ?? "") < (repealed.get(k)!.date ?? "")) repealed.set(k, a);
+  for (const t of texts) {
+    const a = keysOf(t).map((k) => repealed.get(k)).find(Boolean);
+    // Repealed by a later text only: a text repealing itself, or repealed before it was published, is a misreading.
+    if (a && (!t.date || (a.date ?? "") > t.date) && !t.id.endsWith(a.id)) t.abroge = { titre: a.title, publie: `JORT n° ${a.issue}/${a.year}, p. ${a.page}`, source: a.pdf };
   }
   // Of a series, the newest text stands; the older ones are kept, to be added by hand.
   const newest = new Map<string, Texte>();
@@ -223,7 +240,7 @@ export interface Proposal {
  */
 export function proposals(texts: Texte[], site: Site): Proposal[] {
   return texts.flatMap((texte) => {
-    if (texte.remplace) return [];
+    if (texte.remplace || texte.abroge) return [];
     const reasons = applies(texte.when, site);
     const proposed = texte.origine === "referentiel" || applies(texte.coche, site) !== null;
     return reasons ? [{ texte, reasons, proposed }] : [];
@@ -234,7 +251,10 @@ export function proposals(texts: Texte[], site: Site): Proposal[] {
  * The JORT texts that modify (or cite) a text of the référentiel, from every sommaire read: what
  * tells a register that one of its texts has changed.
  */
-export function amendments(years: Sommaires[], texts: Texte[]): Amendment[] {
+/** Repeals read in the bodies of the issues (scripts/veille.ts --abrogations): year → issue → clauses. */
+export type Repeals = Record<string, Record<string, Repeal[]>>;
+
+export function amendments(years: Sommaires[], texts: Texte[], repeals: Repeals = {}): Amendment[] {
   const byKey = new Map<string, Texte[]>();
   for (const t of texts) for (const k of keysOf(t)) byKey.set(k, [...(byKey.get(k) ?? []), t]);
   // A number names one text; a date may name several: the subject must match too.
@@ -248,6 +268,7 @@ export function amendments(years: Sommaires[], texts: Texte[]): Amendment[] {
         if (!/modifi|complet|abrog|remplac|prorog|application|تنقيح|اتمام|الغاء|تعويض|التمديد|تطبيق/.test(isArabic(e.title) ? arFold(e.title) : fold(e.title)) || ignored(e.title)) return;
         const cites = cited(e.title).filter(names).map((n) => n.key);
         if (!cites.length) return;
+        const abroge = repealedBy(repealClauses(e.title), names);
         out.push({
           id: `${y.year}-${String(issue.number).padStart(3, "0")}-${e.page}-${index}`,
           year: y.year,
@@ -257,6 +278,24 @@ export function amendments(years: Sommaires[], texts: Texte[]): Amendment[] {
           title: e.title,
           pdf: `${pdfUrl(y.year, issue.number!)}${pdfPage(issue, e.page) ? `#page=${pdfPage(issue, e.page)}` : ""}`,
           cites,
+          ...(abroge.length ? { abroge } : {}),
+        });
+      });
+      // Repeals written in the texts' bodies ("Est abrogé le décret n° …").
+      (repeals[y.year]?.[issue.number] ?? []).forEach((r, index) => {
+        const abroge = repealedBy([r], names);
+        if (!abroge.length) return;
+        const page = r.page ?? issue.firstPage ?? 0;
+        out.push({
+          id: `${y.year}-${String(issue.number).padStart(3, "0")}-a${index}`,
+          year: y.year,
+          issue: issue.number!,
+          date: issue.date,
+          page,
+          title: r.line,
+          pdf: `${pdfUrl(y.year, issue.number!)}${pdfPage(issue, page) ? `#page=${pdfPage(issue, page)}` : ""}`,
+          cites: abroge,
+          abroge,
         });
       });
     }

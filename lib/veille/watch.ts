@@ -84,6 +84,7 @@ export interface Amendment {
   title: string;
   pdf: string;
   cites: string[];
+  abroge?: string[]; // the texts it repeals as a whole (keys): no longer proposed to registers
 }
 
 /** Every sommaire read, kept so that edited rules can be applied again without downloading. */

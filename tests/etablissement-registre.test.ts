@@ -5,6 +5,7 @@ import { applies, derivedFlags, type Site } from "@/lib/registre/profil";
 import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
+  abrogePar,
   alertes,
   aTraiter,
   backup,
@@ -189,6 +190,28 @@ describe("an establishment's register", () => {
       ["2026-05-03", true], // modifies a text on the site's activity (huileries)
       ["2026-05-02", true], // modifies the nomenclature: critique
     ]);
+  });
+
+  it("no longer proposes a text repealed as a whole, and says so on a register's card", () => {
+    const repeal = {
+      id: "2026-140-3100-a0",
+      year: 2026,
+      issue: 140,
+      date: "2026-12-01",
+      page: 3100,
+      title: "Art. 12 - Est abrogé le décret n° 62-129 du 2 mai 1962",
+      pdf: "x",
+      cites: ["n:decret:62-129"],
+      abroge: ["n:decret:62-129"],
+    };
+    const levage = site({ flags: ["levage"] });
+    expect(proposals(catalogue([]), levage).some((p) => p.texte.id === "decret-62-129")).toBe(true);
+    const after = catalogue([], [repeal]);
+    expect(after.find((t) => t.id === "decret-62-129")?.abroge?.publie).toBe("JORT n° 140/2026, p. 3100");
+    expect(proposals(after, levage).some((p) => p.texte.id === "decret-62-129")).toBe(false);
+    const reg = createRegistre(report(), levage, texts, now);
+    const ligne = reg.lignes.find((l) => l.texte.id === "decret-62-129")!;
+    expect(abrogePar(ligne, [repeal])?.id).toBe(repeal.id);
   });
 
   it("is saved to and restored from a backup file", () => {
