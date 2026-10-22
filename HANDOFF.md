@@ -35,8 +35,9 @@ everything comes from the official texts, stored as data.
 
 * Classification, ANPE study, report: done and tested.
 * Veille: the JORT is read from **jort.tn's OCR text** (every French issue since 1957, scans
-  included), with the PDF as fallback. **1986 (partly) to 2026 are read: 4,312 issues, 128,613
-  titles.** **1957 to 1986 are left**: the user runs that on the laptop (commands in §2).
+  included), with the PDF as fallback. **All of 1957-2026 is read: 6,390 issues, 181,291 titles**
+  (36 issues still empty, 27 of them scans with no OCR text yet; 94 Arabic files of the French
+  collection read in Arabic). 12,044 texts flagged.
 * Rules: 97 rules, of which 42 activity rules added on 22 October; 7,050 texts flagged on 1986-2026.
 * Registers: done (browser storage), with alerts, reminders, update from a new classification,
   modification history per text.
@@ -373,57 +374,25 @@ Measured with Playwright (desktop 1300 px / phone 390 px):
 
 ---
 
-## 9. Data state (22 October 2026)
+## 9. Data state (22 October 2026, evening)
 
-Totals: **4,312 issues, 128,613 titles; 3,974 read from the OCR text, 338 from the PDF; 85 issues
-with 0 titles; 3 scans with no OCR text yet.**
+**All French issues of 1957-2026 are read: 6,390 issues, 181,291 titles.** 1957-1986 were read by
+the user on the laptop (pushed as "Veille: JORT 1957-1986" and "Veille: reread"); then `--reread`
+ran in the cloud session with the Arabic reading.
 
-| Year | Issues | Titles | 0 titles | OCR / PDF |
-|---|---|---|---|---|
-| 1986 | 14 of 78 | 345 | 0 | 14 / 0 |
-| 1987 | 91 | 1,772 | 1 | 90 / 1 |
-| 1988 | 87 | 2,267 | 0 | 87 / 0 |
-| 1989 | 88 | 2,208 | 1 | 87 / 1 |
-| 1990 | 86 | 2,193 | 0 | 86 / 0 |
-| 1991 | 90 | 2,120 | 0 | 90 / 0 |
-| 1992 | 88 | 2,413 | 1 | 87 / 1 |
-| 1993 | 100 | 2,571 | 0 | 100 / 0 |
-| 1994 | 103 | 2,633 | 0 | 103 / 0 |
-| 1995 | 104 | 2,627 | 0 | 96 / 8 |
-| 1996 | 105 | 2,578 | 0 | 105 / 0 |
-| 1997 | 104 | 2,619 | 0 | 104 / 0 |
-| 1998 | 104 | 2,914 | 0 | 104 / 0 |
-| 1999 | 105 | 3,230 | 0 | 105 / 0 |
-| 2000 | 104 | 3,219 | 0 | 103 / 1 |
-| 2001 | 104 | 3,630 | 0 | 104 / 0 |
-| 2002 | 106 | 3,258 | 0 | 106 / 0 |
-| 2003 | 104 | 3,023 | 0 | 104 / 0 |
-| 2004 | 105 | 3,068 | 0 | 105 / 0 |
-| 2005 | 104 | 3,588 | 0 | 102 / 2 |
-| 2006 | 104 | 3,584 | 0 | 103 / 1 |
-| 2007 | 104 | 3,752 | 0 | 104 / 0 |
-| 2008 | 105 | 3,796 | 0 | 105 / 0 |
-| 2009 | 104 | 4,151 | 0 | 103 / 1 |
-| 2010 | 105 | 3,886 | 0 | 105 / 0 |
-| 2011 | 99 | 3,609 | 3 | 99 / 0 |
-| 2012 | 103 | 3,185 | 2 | 103 / 0 |
-| 2013 | 105 | 4,045 | 2 | 105 / 0 |
-| 2014 | 105 | 3,969 | 0 | 105 / 0 |
-| 2015 | 104 | 3,299 | 1 | 104 / 0 |
-| 2016 | 106 | 4,400 | 1 | 106 / 0 |
-| 2017 | 104 | 4,484 | 0 | 104 / 0 |
-| 2018 | 104 | 3,901 | 7 | 104 / 0 |
-| 2019 | 105 | 3,127 | **30** (Arabic files) | 104 / 1 |
-| 2020 | 130 | 3,393 | 0 | 129 / 1 |
-| 2021 | 120 | 3,048 | 1 | 120 / 0 |
-| 2022 | 143 | 3,811 | 3 | 142 / 1 |
-| 2023 | 149 | 3,259 | 10 | 148 / 1 |
-| 2024 | 159 | 3,632 | 10 | 40 / 119 |
-| 2025 | 156 | 3,605 | 5 | 33 / 123 |
-| 2026 | 102 (to n° 102) | 2,401 | 7 | 26 / 76 |
+* **36 issues with no title**, of which **27 scans with no OCR text yet** (`sansTexte`: 9 in 1958,
+  the rest spread over 1959-1987) and a few layouts not understood (2023 n° 5, 2024 n° 31, 32, 86,
+  2022 n° 92, 2025 n° 3: to look at) and Arabic files whose sommaire was not found (2023 n° 100,
+  2024 n° 12, 145).
+* **94 Arabic files** of the French collection read in Arabic (`arabe: true`): 30 in 2019, 18 in
+  1958, the rest spread out.
+* Titles per year: about 1,100-1,500 in 1957-1972, 2,000-2,500 in 1973-1995, 2,600-4,500 since.
+* Rules applied to all: **12,044 texts flagged**, **1,182** modifications of référentiel texts.
+* Most issues come from the OCR text; 2024-2026 keep most of their PDF readings where those gave
+  more titles (`--ocr` compared both).
 
-2024-2026 keep most of their PDF readings: the OCR text was read too (`--ocr`) and kept only where
-it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
+To get the per-year table again: count `issues`, `entries` and flags in
+`data/veille/sommaires/<year>.json` (a few lines of Python or Node).
 
 ---
 
@@ -452,14 +421,15 @@ it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
 
 ## 11. Next steps (in order)
 
-1. **Finish reading 1957-1986** on the laptop (§2), push `data/veille/sommaires`. Then
-   `--reassess` and check the per-year table (`npm run veille -- --list --year 1965` to eyeball).
+1. ~~Finish reading 1957-1986~~ (done 22 October). Next: run `npm run veille -- --reread` now and
+   then (scans whose OCR text comes out, Arabic files), and look at the few issues of §9 whose
+   layout is not understood.
 2. **Review the rules on the old years.** Titles of 1957-1975 are in capitals and use old names
    (Secrétariat d'État, DECRET N°…); look at hits per rule and at what is missed (`--list`).
    Watch for OCR typos ("ARRETTES", "DECLET"). One title gave a date in "1020": OCR misreads of
    years exist.
-3. **Decide with the user how many texts a register ticks** (§7 table: 430-775 today, 1957-1985
-   will add more). Options measured or discussed:
+3. **Decide with the user how many texts a register ticks** (§7 table: 430-775 with 1986-2026;
+   re-measure with 1957-2026, it will be more). Options measured or discussed:
    * do not tick texts that only modify another (−30%): they show as "Modifié par" on their base
      text when it is in the register;
    * tick general (non-activity) JORT texts only from the last N years, or only base laws/decrees;
