@@ -279,16 +279,17 @@ range downloads (a 108 MB issue costs a few hundred KB); scans with no OCR text 
   employment**: careers of civil servants are ignored.
 * **`registre`**: the ID-QSE-002 "SYSTEME" per domain, the default frequency (Annuelle), and
   **`suggere: ["finance"]`**: domains whose texts are only suggested in registers.
-* **History:** checked against a real client register (ID-QSE-002, 76 texts): 72/76 flagged. On
-  1986-2026 (4,312 issues): **7,050 texts flagged**, 855 modifications of référentiel texts.
+* **History:** checked against the titles of an example register: the rules flag nearly all of
+  them (tests/registre.test.ts). On 1986-2026 (4,312 issues): **7,050 texts flagged**, 855 modifications of référentiel texts.
 * After editing rules: `npm run veille -- --reassess` (no download), then `--list` to review.
 
 ---
 
 ## 7. Référentiel and registers
 
-**Référentiel** = `data/referentiel/textes.json` (74 curated texts: seeded from the client's
-ID-QSE-002 register with its summaries and risks, cleaned by hand, plus the app's reference texts)
+**Référentiel** = `data/referentiel/textes.json` (74 curated **law references only**: kind,
+number, date, title, domain, `when`. The summaries and risks once taken from the user's example
+register were removed on 22 October at the user's request: the consultant writes them per register)
 **∪** every JORT hit (`fromHit`). A JORT text already curated only adds its source. A text is known
 by `n:<kind>:<number>` or, without a number, `d:<kind>:<ISO date>`. With 1986-2026: 5,944 texts
 (5,870 from the JORT).
@@ -337,8 +338,8 @@ than 2006.
 | Workshop, 3rd cat., 15 employees, no facts | 429 | 46 | 1,152 |
 
 About 30% of the ticked JORT texts only modify another text; most of the rest are general labour,
-CNSS, code de la route and environment texts across 40 years. **Too many** against the client's
-76-text register: the user has to choose how to cut (§11 step 3).
+CNSS, code de la route and environment texts across 40 years. **Too many** for a register a
+consultant can work through: the user has to choose how to cut (§11 step 3).
 
 **Register lifecycle** (`lib/registre/registre.ts`, UI in `registres.tsx`):
 
@@ -409,7 +410,9 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 * Veille scope: all sectors of the nomenclature + SST, hygiène, incendie, produits dangereux; then
   code du travail, code de la route, RH, finance.
-* The client register (ID-QSE-002) is **one example**; the goal is to collect laws from the JORT and
+* The client register the user showed (ID-QSE-002) is **only an example**: do not use it as a
+  target or a benchmark, and do not copy its wording (its summaries and risks were removed from
+  `textes.json` on 22 October); the goal is to collect laws from the JORT and
   other sources so that going from classement to veille leaves only checking and adjusting.
 * Registers live **in the app** (browser storage + backup file); no client-management workflow.
 * Site criteria: all of them (workforce, vehicles, equipment, products, discharges, site), for all

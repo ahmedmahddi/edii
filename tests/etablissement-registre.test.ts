@@ -128,10 +128,10 @@ describe("an establishment's register", () => {
     expect(reg).toMatchObject({ nom: "Laiterie du Cap Bon", classe: 2, etude: "eie_a" });
   });
 
-  it("brings the register's summary and risk from the référentiel, and exports with the evaluation", () => {
+  it("leaves the summary and risk to the consultant, and exports with the evaluation", () => {
     const reg = createRegistre(report(), site(), texts, now);
     const l = reg.lignes.find((x) => x.texte.id === "decret-2006-2687")!;
-    expect(l.resume.length).toBeGreaterThan(20);
+    expect([l.resume, l.risque]).toEqual(["", ""]); // the référentiel holds references only
     const row = ligneRow({ ...l, conformite: "NC", evalue: "2026-03-01", responsable: "R QSE", echeance: "2026-12-31", plan: "Mettre à jour l'étude de dangers" });
     expect(row).toMatchObject({ systeme: "HSST & Environnement", ref: "Décret n° 2006-2687 du 09-10-2006", conformite: "NC", responsable: "R QSE / 31-12-2026", plan: "Mettre à jour l'étude de dangers" });
     expect(row.frequence).toBe("Annuelle\nDernière évaluation : 01-03-2026.");

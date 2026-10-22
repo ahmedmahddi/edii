@@ -66,7 +66,7 @@ describe("register rows", () => {
   });
 });
 
-describe("the texts of a real register (ID-QSE-002), as the JORT titled them", () => {
+describe("texts a QSE register commonly holds, as the JORT titled them", () => {
   it("would have flagged them when they were published", () => {
     const expected: [string, string][] = [
       ["Arrêté du ministre de l'intérieur du 16 septembre 2013, fixant le contenu du plan intérieur d'intervention", "incendie"],

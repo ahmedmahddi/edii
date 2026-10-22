@@ -185,9 +185,10 @@ opens the establishment's register in the Veille réglementaire view:
    are unticked; texts that now apply come as new texts, and those that no longer apply are listed
    to remove or keep.
 
-The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated (seeded
-from an ID-QSE-002 register: title, summary, risk, and `when`, the conditions under which a text
-applies), and every text the veille finds in the JORT, whose conditions are those of the rule that
+The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated law
+references (kind, number, date, title, and `when`, the conditions under which a text applies; the
+summary of requirements and the risk are written by the consultant in each register), and every
+text the veille finds in the JORT, whose conditions are those of the rule that
 found it (`when` in `data/veille/watch.json`). Conditions are listed in `lib/registre/profil.ts`:
 `tous`, `classe`, `categorie:1`, `secteur:1200`, `rubrique:2505`, `etude:eie`, `effectif`,
 `effectif:50`, or a fact of the profile (`vehicules`, `levage`…); `a+b` needs both. To widen the
