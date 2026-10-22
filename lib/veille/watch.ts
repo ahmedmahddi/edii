@@ -104,9 +104,17 @@ export function fold(s: string): string {
 }
 
 /** Whole words or phrases only: "anpe" must not match inside another word. */
+// Built once per term: the rules are applied to every title of decades of JORT.
+const TERMS = new Map<string, { folded: string; re: RegExp }>();
 function contains(text: string, term: string): boolean {
-  const t = fold(term).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  return new RegExp(`(^|[^a-z0-9])${t}($|[^a-z0-9])`).test(text);
+  let t = TERMS.get(term);
+  if (!t) {
+    const folded = fold(term);
+    t = { folded, re: new RegExp(`(^|[^a-z0-9])${folded.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|[^a-z0-9])`) };
+    TERMS.set(term, t);
+  }
+  // The substring first: most terms are not in most titles, and that is much cheaper to tell.
+  return text.includes(t.folded) && t.re.test(text);
 }
 
 const MONTH = "(?:janvier|fevrier|mars|avril|mai|juin|juillet|aout|septembre|octobre|novembre|decembre)";
@@ -212,7 +220,13 @@ export function record(feed: Feed, year: number, issue: Issue): Feed {
 /** The feed rebuilt from stored sommaires with the current rules (after editing watch.json). */
 export function reassess(feed: Feed, years: Sommaires[]): Feed {
   const kept = new Set(years.map((y) => y.year));
-  let next: Feed = { ...feed, hits: feed.hits.filter((h) => !kept.has(h.year)) };
-  for (const y of years) for (const issue of Object.values(y.issues)) next = record(next, y.year, issue);
-  return next;
+  // All at once (record() per issue would sort the whole feed each time).
+  const hits = feed.hits.filter((h) => !kept.has(h.year));
+  const scanned = { ...feed.scanned };
+  for (const y of years) {
+    const issues = Object.values(y.issues).filter((i) => i.number !== null);
+    for (const issue of issues) hits.push(...hitsOf(y.year, issue));
+    scanned[y.year] = [...new Set([...(scanned[y.year] ?? []), ...issues.map((i) => i.number!)])].sort((a, b) => a - b);
+  }
+  return { ...feed, scanned, hits: sortHits(hits) };
 }

@@ -1,9 +1,10 @@
 # ABClassement (repo `edii`): project handoff
 
-State on **18 October 2026**, branch **`claude/veille`** (commit after `c030ad2`). This file is for a
-new working session: what the app is, how it is built, what has been decided, what the data holds
-today, and what comes next. `README.md` stays the reference for the classification pipeline and the
-ANPE study; this file covers the whole project and its history, and does not repeat those details.
+State on **22 October 2026**, branch **`claude/veille`**. This file is for a new working session:
+what the app is, how it is built, what has been decided, what the data holds today, and what comes
+next. `README.md` stays the reference for the classification pipeline, the ANPE study and the
+veille commands; this file covers the whole project and its history, and does not repeat those
+details.
 
 ---
 
@@ -19,24 +20,28 @@ everything comes from the official texts, stored as data.
    B, cahier des charges, étude de dépollution (unit already operating) or demande d'avis.
 3. **Synthèse.** A validated classification gives a detailed report (print/PDF, HTML, JSON).
 4. **Veille réglementaire.** A scanner reads the *Journal Officiel de la République Tunisienne*
-   (JORT, French edition, `lake.jort.tn`) issue by issue, from each issue's sommaire, and flags the
-   texts that concern companies: établissements classés, environnement, santé et sécurité au
-   travail, hygiène, incendie, produits dangereux, droit du travail et RH, code de la route,
-   fiscalité, and the sectors of the nomenclature.
+   (JORT, French edition) issue by issue, from each issue's sommaire, and flags the texts that
+   concern companies: établissements classés, environnement, santé et sécurité au travail, hygiène,
+   incendie, produits dangereux, droit du travail et RH, code de la route, fiscalité, and **every
+   activity of the nomenclature** (huileries, laiteries, carrières, BTP…).
 5. **Registres.** From a validated classification, the app creates the establishment's *registre de
-   veille légale et réglementaire*: the texts that apply are proposed with why, the consultant adds
-   or removes texts and evaluates each one (conformité C/NC/NA, risque, plan d'action, responsable,
-   échéance), is reminded when evaluations are due, and is alerted when a new JORT text modifies a
-   text of the register. Export to Excel in the client's **ID-QSE-002** layout.
+   veille légale et réglementaire*: the texts that apply are proposed with why (every text on the
+   site's activities is ticked), the consultant adds or removes texts and evaluates each one
+   (conformité C/NC/NA, risque, plan d'action, responsable, échéance), is reminded when evaluations
+   are due, and is alerted when a new JORT text modifies a text of the register. Export to Excel in
+   the client's **ID-QSE-002** layout.
 
 **Where things stand:**
 
 * Classification, ANPE study, report: done and tested.
-* Veille: JORT **2023 to 2026** read (551 issues). Issues **1995 to 2025** read correctly (probe);
-  **1995 to 2022 are not read yet** (the scan stopped after 2023). **1960 to 1990 are scans**:
-  they need OCR, not built yet.
-* Registers: done (browser storage), with alerts, reminders, update from a new classification.
-* Branch `claude/veille` is **19 commits ahead of `main`** and not merged; no pull request yet.
+* Veille: the JORT is read from **jort.tn's OCR text** (every French issue since 1957, scans
+  included), with the PDF as fallback. **1986 (partly) to 2026 are read: 4,312 issues, 128,613
+  titles.** **1957 to 1986 are left**: the user runs that on the laptop (commands in §2).
+* Rules: 97 rules, of which 42 activity rules added on 22 October; 7,050 texts flagged on 1986-2026.
+* Registers: done (browser storage), with alerts, reminders, update from a new classification,
+  modification history per text.
+* **Open decision:** registers are still offered too many texts by default (§7, §11 step 3).
+* Branch `claude/veille` is well ahead of `main` and not merged; no pull request yet.
 
 ---
 
@@ -50,31 +55,48 @@ everything comes from the official texts, stored as data.
   lived under `/edii`; `next.config.ts` still redirects `/edii` to `/`). Branches: `main`
   (last: "Remove CI workflow": the user removed CI), `claude/veille` (all recent work),
   `claude/eie-suggestions`, `claude/windows-python` (both merged into `claude/veille` already).
-* **Cloud sessions cannot reach the JORT.** `jort.tn` and `lake.jort.tn` are refused by the
-  session's network policy. Everything that downloads JORT issues runs **on the user's laptop**;
-  the user commits and pushes `data/veille/` and the session pulls it. To let a session download
-  directly, the user must add both hosts under the environment's Network access → Allowed domains
-  (https://code.claude.com/docs/en/cloud-environments#network-access).
-* **Working loop used so far:** the session changes code and pushes `claude/veille`; the user runs
-  `git pull` and the commands given, then pushes the data; the session pulls and reviews.
+* **Network.** Since 22 October the cloud environment can reach `jort.tn`, `index.jort.tn`,
+  `ocr.jort.tn`, `lake.jort.tn`. `api.jort.tn` (search) answers 403 (a Cloudflare challenge): not
+  used. In a cloud session, Node's `fetch` ignores the proxy unless the command is run with
+  **`NODE_USE_ENV_PROXY=1`** (otherwise: `getaddrinfo ENOTFOUND`). On the laptop nothing is needed.
+* **Working loop:** either the session reads the JORT itself, or the user runs the scanner on the
+  laptop and pushes `data/veille/sommaires`; the session pulls and reviews.
 
-### Commands
+### The commands to finish reading the JORT (laptop)
+
+```powershell
+git pull origin claude/veille
+npm install
+npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
+npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
+npm test                                 # 90 tests
+git add data/veille/sommaires
+git commit -m "Veille: JORT 1957-1986"
+git push origin claude/veille
+```
+
+1986 is partly read (14 of 78 issues): `--years 1957-1986` takes the missing ones only. A run can be
+stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session, prefix with
+`NODE_USE_ENV_PROXY=1` and call `npx tsx scripts/veille.ts …` instead of `npm run veille -- …`.
+
+### Other commands
 
 ```bash
-npm install
-npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first)
-npm test                 # vitest: 82 tests in 5 files
+npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
+npm test                 # vitest: 90 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
 npm run veille                               # new issues of this year
-npm run veille -- --years 1995-2022          # older years, most recent first, resumable
+npm run veille -- --years 1995-2022          # those years' issues not read yet, most recent first
+npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
+npm run veille -- --ocr --years 2023-2026    # issues read from the PDF: read their OCR text, keep the longer reading
 npm run veille -- --reread                   # read again issues that gave 0 texts or glued titles
-npm run veille -- --probe 1960,1970          # sample issues (2 per year) into data/veille/probe/
 npm run veille -- --reassess                 # re-apply edited rules to stored sommaires (no download)
 npm run veille -- --list --year 2026         # every title read, with its level ("-" = not flagged)
-npm run veille -- --file x.pdf --year 2010 --number 18   # a PDF already on disk
-JORT_BASE=http://localhost:3999 npm run veille -- …        # read from a copy of lake.jort.tn (tests)
+npm run veille -- --file x.md --year 2010 --number 18    # an OCR text (or a PDF) already on disk
+npm run veille -- --probe 1960,1970          # sample PDFs (2 per year) into data/veille/probe/
+JORT_BASE / JORT_OCR_BASE / JORT_CATALOG=…   # read from copies of lake / ocr / index (tests); JORT_OCR_BASE=none: PDFs only
 
 npm run data:ocr | data:parse | data:eie     # nomenclature / decree pipeline (Python), see README
 ```
@@ -96,28 +118,30 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `app/page.tsx` | The whole page: views `search` (Nomenclature), `establishment`, `report` (synthèse on its own page), `guide`, `sources`, `veille`. State lives in React and the dossier is mirrored in the URL (`?e=…&s=…&z=1&code=…&q=…`). Menu badge for the veille. |
 | `app/components/classification-report.tsx` | The detailed report (contents bar, exports). |
 | `app/components/veille.tsx` | Veille view: tabs **Registres des établissements** / **Journal officiel**; fetches `public/veille/feed.json` once; `useVeilleCount()` for the menu badge. |
-| `app/components/registres.tsx` | Registers: list, new-register step (name, site profile, duplicate detection), register view (to-do panels, groups by domain, evaluation cards, add a text, Excel export), backup/restore. |
+| `app/components/registres.tsx` | Registers: list, new-register step (name, site profile, duplicate detection), register view (to-do panels, groups by domain, evaluation cards with "Modifié par…" history, add a text, Excel export), backup/restore. |
 | `app/components/download.ts` | Browser downloads; `downloadWorkbook` (exceljs on demand). |
-| `app/globals.css` | All styles (design tokens on `:root`; the user's redesign, see `DESIGN.md`, `design-tokens.json`, `design-preview.html`). |
+| `app/globals.css` | All styles (design tokens on `:root`; the user's redesign, see `DESIGN.md`, `design-tokens.json`, `design-preview.html`). One-line rules. |
 | `lib/classify.ts`, `lib/establishment.ts`, `lib/studies.ts`, `lib/report.ts`, `lib/sectors.ts` | Classification, establishment and addition rule, ANPE study, report model, sector names (see README). |
-| `lib/veille/jort.ts` | JORT sommaire parser: `parseIssue`, `isSommairePage`, `kindOf`, `isoDate`, `pdfUrl`, `pdfPage`. |
-| `lib/veille/pdf.ts` | PDF → positioned lines: `pdfLines(data)`, `pdfLinesFromUrl(url)` (HTTP range requests), `pdfPageImages` (render pages to PNG/JPEG), `toLines`. |
-| `lib/veille/glyphs.ts` | Decoder for 2000-2005 fonts that write glyph numbers instead of letters. |
+| `lib/veille/markdown.ts` | **Sommaire from the OCR text** (ocr.jort.tn): `parseMarkdown`, `parseMarkdownStart` (partial download), `markdownPages`, `ocrUrl`. |
+| `lib/veille/jort.ts` | Shared types (`Issue`, `SommaireEntry`, `Line`), the **PDF** sommaire parser `parseIssue`, `isSommairePage`, `kindOf`, `isoDate`, `sommaireEntry`, `pdfUrl`, `pdfPage`, `INSTITUTION`, `TEXT_START`. |
+| `lib/veille/pdf.ts` | PDF → positioned lines: `pdfLines(data)`, `pdfLinesFromUrl(url)` (HTTP range requests), `pdfPageImages`, `toLines`. |
+| `lib/veille/glyphs.ts` | Decoder for 2000-2005 fonts that write glyph numbers instead of letters (PDF path only). |
 | `lib/veille/watch.ts` | Rules engine: `assess`, `hitsOf`, `record`, `reassess`, `ignored`, `subject`, `fold`; types `Hit`, `Feed`, `Amendment`, `Sommaires`. |
 | `lib/veille/registre.ts` | Excel export in the ID-QSE-002 layout (`fillRegister`, `registerRow` for JORT hits, `ligneRow` for register lines, `systeme`). |
-| `lib/registre/profil.ts` | Site profile: `Site`, `FLAGS` (24 facts in 5 groups), `derivedFlags`, conditions `applies(when, site)` with reasons. |
-| `lib/registre/referentiel.ts` | Référentiel: curated texts + JORT texts (`catalogue`), text keys (`keysOf`, `namedKeys`, `citedKeys`), `proposals`, `amendments` (JORT texts modifying a référentiel text). |
-| `lib/registre/registre.ts` | Register model and logic: create, add, update from a new classification, new texts, texts no longer applicable, alerts, due evaluations, menu count, localStorage, backup/restore. |
+| `lib/registre/profil.ts` | Site profile: `Site`, `FLAGS` (27 facts in 5 groups), `derivedFlags`, conditions `applies(when, site)` with reasons. |
+| `lib/registre/referentiel.ts` | Référentiel: curated texts + JORT texts (`catalogue`, `fromHit`, `seriesKey`), text keys (`keysOf`, `namedKeys`, `citedKeys`), `proposals`, `amendments`. |
+| `lib/registre/registre.ts` | Register model and logic: create, add, update from a new classification, new texts, texts no longer applicable, `alertes`, `modifiePar`, due evaluations, menu count, localStorage, backup/restore. |
 | `scripts/veille.ts` | The scanner CLI (options above). |
 | `scripts/veille-hebdo.ps1` | Weekly scan for the Windows task scheduler. |
 | `scripts/python.mjs` | Finds a working Python on any OS for `npm run data:*`. |
 | `data/sources/`, `data/ocr/`, `data/pipeline/`, `data/nomenclature.json`, `data/eie*.json`, `data/corrections.json`, `data/review.md` | Classification and decree data (see README). |
-| `data/veille/watch.json` | Veille rules (domains, levels, ignore lists, `when`, register mapping). |
-| `data/veille/sommaires/<year>.json` | Every sommaire read (committed; the source of truth of the veille). |
-| `data/veille/probe/` | Probe samples: `<year>-<nnn>.json` (lines of the first pages, parse result) and, for scans, `<year>-<nnn>-p1.jpg`, `-p2.jpg` (150 dpi). |
+| `data/sources/ocr/` | First pages of 5 real OCR texts (1960 n° 1, 1965 n° 40, 1980 n° 1, 2023 n° 108, 2024 n° 2), for the tests. |
+| `data/veille/watch.json` | Veille rules (domains, levels, ignore lists, `when`, register mapping, `suggere`). |
+| `data/veille/sommaires/<year>.json` | Every sommaire read (committed; the source of truth of the veille). Each issue says where it was read: `source: "ocr"` or `"pdf"`. |
+| `data/veille/probe/` | PDF probe samples (2 issues every 5 years, JPEG pages of the scans). Kept for reference; the OCR text made the OCR plan unnecessary. |
 | `data/referentiel/textes.json` | Curated référentiel (74 texts). |
-| `public/veille/feed.json` | Texts flagged + amendments: **derived, not in git**, rebuilt by `npm run veille` and before `dev`/`build`. |
-| `tests/` | `edii.test.ts` (classification, data in sync), `report.test.ts`, `veille.test.ts` (JORT parsing on real issues, rules, glyphs), `registre.test.ts` (Excel export, register recall), `etablissement-registre.test.ts` (profile, référentiel, registers). |
+| `public/veille/feed.json` | Texts flagged + amendments: **derived, not in git**, rebuilt by `npm run veille` and before `dev`/`build`. 5 MB with 1986-2026. |
+| `tests/` | `edii.test.ts` (classification, data in sync), `report.test.ts`, `veille.test.ts` (JORT parsing of PDFs and OCR texts, rules, glyphs), `registre.test.ts` (Excel export, register recall), `etablissement-registre.test.ts` (profile, référentiel, registers). |
 
 ---
 
@@ -140,53 +164,58 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 
 ## 5. Veille: reading the JORT
 
-**Address of an issue:** `https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf` (numbers from 1
-each year, 3 digits). A missing issue answers 404 or an HTML page.
+**Sources (jort.tn, a mirror of the JORT since 1957, synced from iort.tn every 20 minutes):**
 
-**What is read:** only the sommaire. `parseIssue(pages)`:
+* `https://index.jort.tn/catalog` (2 MB): every issue, per collection, year and language. The
+  scanner reads it once per run: a past year's issues are those listed (no more guessing where a
+  year ends; that is how 2023 n° 136-149, missed before, were found). The current year is still
+  read number by number (the catalog may lag a few minutes). `https://index.jort.tn/` gives counts.
+* `https://ocr.jort.tn/journal-officiel/fr/<year>/<nnn>.md`: the OCR text of each French issue,
+  Markdown, pages separated by `<!-- page:N -->`. Scans included (1957-1994 are images in the PDF).
+* `https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf`: the PDF.
 
-* header: issue number (`N° 18`) and date; `firstPage` from the first footer "Page N … Journal
-  Officiel" minus its PDF page index;
-* sommaire pages = pages with at least two lines ending in dot leaders + page number
-  (`isSommairePage`); reading stops at the first page that is not;
-* page 1 is skipped until the line "Sommaire";
-* **institutions** (ministries) = lines less indented than titles (title indent = most frequent x
-  of leader lines), or lines starting with Présidence/Ministère/Instance/Haute Instance/Conseil/
-  Cour/Banque Centrale/Assemblée; consecutive institution lines join; **a line starting with a kind
-  of text (Loi, Décret, Arrêté…) is never an institution** (laws sit as far left as headings);
-* entry = title lines up to the leader line; `kind` from the first word; `numbers` = `n° 2006-2687`.
+**Order:** OCR text first; the PDF when there is no OCR text (the newest issues, for minutes or
+days: 2026 n° 92-102 had none on 22 October) or no sommaire in it; if both, the reading with more
+texts. Only the first **64 KB** of the OCR text are downloaded (Range), the whole text only when the
+sommaire runs on (`parseMarkdownStart` returns null). Pause 150 ms between issues; about 3 issues per
+second in a cloud session.
 
-**Fixes from real issues** (all covered by tests):
+**`parseMarkdown`** (layouts seen from 1957 to 2026):
 
-* **Overlapping page-number digits** are split per character and re-sorted.
-* **Glyph-numbered fonts (about 2000-2005)**: codes are glyph indices in the standard Macintosh
-  order ("6RPPDLUH" = "Sommaire"; ASCII 3–97 = char + 29; 98+ = MacRoman order; pdf.js shows codes
-  ≥ 128 as MacRoman). A font is decoded when any of its items contains a code below 32. Plain
-  spaces are kept; apostrophes (code 10) come out as spaces and are restored after d/l/n/j/c/s/m/t/qu
-  before a vowel. `lib/veille/glyphs.ts`.
-* **Page numbers set 2–4 pt lower** than their leader dots (2000, 2020) are attached to the nearest
-  leader line within 4 pt (`toLines`); this was gluing two titles together and losing texts.
-* **Scans** (first pages < 200 characters of text) are stored as `sansTexte: true` with no entries.
+* header before the line "Sommaire": issue number (`N° 40`, not the masthead's postal account
+  `N° 610-15`), date; `firstPage` = the most frequent "page number − page index" over the pages
+  (`Page 315`, a number alone on a line, or `950 JOURNAL OFFICIEL…`), needs two votes;
+* **section** headings (Lois, Décrets et arrêtés, Avis et communications, Partie officielle,
+  Bilans, Annonces…), compared **without accents** (the old OCR writes "DECRETS ET ARRETES");
+  a section resets the institution (laws have none);
+* **institution** = a heading (`#`), a bold line, a line in capitals, or a line starting with
+  Ministère, Présidence, Premier ministère, Secrétariat d'État, Tribunal, Banque…, with no page
+  number and not starting with a kind of text; a heading starting with "AU", "DE", "ET"… continues
+  the one above ("SECRETARIAT D'ETAT" / "AU PLAN ET A L'ECONOMIE NATIONALE");
+* **title** = lines held until one ends with a page number (after dot leaders or a space); a year
+  closing a line ("… de l'année 2023", "décembre 1956") is not a page; a page must follow the
+  previous one (−60 … +600) or the first page;
+* a title whose page number the OCR lost ("orphan") takes the next title's page; orphans left at the
+  end are dropped (they are the start of the texts);
+* **table rows** (`| title | 2397 |`) are read as lines; list marks (`- Nomination…`) are dropped;
+* **the sommaire ends** at a body line ("Par décret…", "Nous, …", "Vu …", "Article premier",
+  "Décrète :", "Le Président de la République,"…), at a section heading seen again on a later page,
+  after 8 lines with no page, or after 8 pages.
 
-**Downloads:** `pdfLinesFromUrl` asks for the first 64 KB with a Range header, then lets pdf.js fetch
-only the chunks it needs (`PDFDataRangeTransport`, `disableAutoFetch`), and stops after the last
-sommaire page. A 108 MB issue costs a few hundred KB. A server that ignores Range still works (whole
-file). A failed chunk ends the read with a clear French error; the run is resumable.
+**Quality.** On the 566 issues of 2023-2026, the OCR reading finds **98%** of the titles the PDF
+reading found (same page 99%), and more in about 113 issues (PDFs whose text is cut up, e.g. 2024
+n° 7: 77 titles instead of 10; 2024 n° 19: 42 instead of 0). On a sample of 110 issues 1957-1994:
+24 titles per issue, 91% with their institution, one empty (an Arabic file).
 
-**Scanning years:** `--years` goes most recent first; a past year ends after 3 missing numbers in a
-row ("fin de l'année", or "année absente en français" if nothing was found); the current year stops
-at the first missing number. Each issue is saved right away (sommaire + feed).
+**Not ours to fix:** some files of the French collection are the **Arabic** edition (2019: 30
+issues; 2023 n° 138, 142; 1959 n° 30): no French sommaire, stored with 0 texts. `api.jort.tn` is
+blocked by Cloudflare from the cloud.
 
-**Probe results (October 2026, two issues every 5 years):**
-
-| Years | French edition | Text layer | Sommaire read |
-|---|---|---|---|
-| 1960–1990 | yes (1–8 MB per issue) | **no: scans** | needs OCR |
-| 1995 | yes | yes | yes (22–61 texts) |
-| 2000, 2005 | yes | yes, glyph-numbered fonts | yes after decoding (20–57) |
-| 2010–2025 | yes | yes | yes |
-
-All sampled issues 1995–2025 read with no glued titles. The server sends parts of files.
+**PDF reading** (kept as fallback, `parseIssue`): sommaire pages = pages with ≥ 2 lines ending in
+dot leaders + page number; institutions less indented than titles or by their first word; glyph-
+numbered fonts of 2000-2005 decoded (`glyphs.ts`); page numbers set 2-4 pt lower re-attached; HTTP
+range downloads (a 108 MB issue costs a few hundred KB); scans with no OCR text stored as
+`sansTexte`. Details in the README and the tests.
 
 ---
 
@@ -194,29 +223,38 @@ All sampled issues 1995–2025 read with no glued titles. The server sends parts
 
 * **Matching** on the folded title (accents, case, quotes normalised), whole words only. The
   issuer ("Arrêté du ministre de … du 3 mars 2026,") is stripped before matching rules (`subject`),
-  so a ministry's name is not a subject; references are matched on the full title.
+  so a ministry's name is not a subject; references are matched on the full title. Terms are
+  compiled once and checked as substrings first: `--reassess` on 128,000 titles takes ~13 s
+  (it took 97 s).
 * **Levels:** `critique` = cites a text the app is built on (nomenclature 15/11/2005, 2010, 2012
-  amendments, décrets 2005-1991, 2006-2687, 68-88); `important` = an obligation for companies;
-  `information` = sector news, a text found only by its institution, or anything matching `demote`
-  (international agreements, ratifications, one-off acts like opening a local office).
+  amendments, décrets 2005-1991, 2006-2687, 68-88); `important` = an obligation for companies, or a
+  text on an activity; `information` = sector news, a text found only by its institution, or
+  anything matching `demote` (international agreements, ratifications, approbations of
+  conventions, adhesions, creation of bodies, remises de pénalités…).
 * **Domains (10):** établissements classés, environnement, SST, hygiène, incendie, produits
   dangereux, droit du travail et RH, code de la route et transport, fiscalité/finances/entreprises,
-  secteurs d'activité. About 55 rules; each has `label`, `level`, `domain`, optional `sectors`
-  (nomenclature sections like 1200), `any`/`with` terms, `institution`, `impacts`, and **`when`**:
-  the conditions under which a text it finds applies to a site (used by registers).
-* **Ignored:** `ignore` (title starts with: nomination, cessation, promotion…) and `ignoreAnywhere`
-  (concours, délégation de signature, statut particulier, budget de l'État, prêts/garanties de
-  l'État, permis de recherche, concession d'exploitation, expropriation, prix et médailles,
-  fonction publique…). **RH means private-sector employment**: careers of civil servants are ignored
-  (a choice made in this project; the user can reverse it).
-* **`registre`**: the ID-QSE-002 "SYSTEME" per domain (HSST, Environnement, HSST & Environnement,
-  Social, Codes et recueils, Finance, Autres exigences) and the default frequency (Annuelle).
-* **Tuning history:** reviewed on 5,049 titles (2024-2026): 94 hits → 69 (26 important) after
-  removing mining permits, State loans, awards; laws were being missed because their first line was
-  taken for an institution (fixed). Checked against a real client register (ID-QSE-002, 76 texts):
-  55/76 flagged before, **72/76** after adding terms (the 4 left are paraphrases in the register).
-  Today, on 2023-2026 (551 issues): **189 hits** (84 important, 105 information), **6**
-  modifications of référentiel texts detected.
+  secteurs d'activité. **97 rules**; each has `label`, `level`, `domain`, optional `sectors`,
+  `any`/`with` terms, `institution`, `impacts`, and **`when`** (the sites a text it finds applies
+  to).
+* **Activity rules (`act-*`, 42, added 22 October)**, level important, domain secteurs, each tied
+  to the nomenclature's **rubriques** (`rubrique:1213`) or to an activity fact: élevage,
+  aviculture, aquaculture, engrais, céréales, tabac, abattoirs, **huileries** (huile d'olive,
+  trituration, grignons, margines, Office national de l'huile…), laiterie, boissons, eaux
+  conditionnées, sucre, boulangerie/pâtes, conserves/dattes, ingrédients, bois, papier/imprimerie,
+  piles, détergents, pharmacie, cosmétiques, plastiques/peintures, biotech, chimie minérale,
+  déchets municipaux, eaux usées, garages, pressing, carrières, ciment/matériaux, céramique/verre,
+  métallurgie, enrobés/routes, textile, cuir, gaz industriels, froid, entrepôts, **BTP** (fact
+  `chantier`), **tourisme** (`hotellerie`), **santé** (`sante`), **commerce** (`commerce`). The
+  older section rules (`secteur-*`, information) stay as sector news.
+* **Ignored:** `ignore` (title starts with: nomination, cessation, promotion…; a leading list mark
+  is skipped) and `ignoreAnywhere` (concours, délégation de signature/de pouvoir, statut
+  particulier, budget de l'État, prêts/garanties de l'État, permis de recherche, expropriation,
+  prix et médailles, fonction publique, assainissement financier…). **RH means private-sector
+  employment**: careers of civil servants are ignored.
+* **`registre`**: the ID-QSE-002 "SYSTEME" per domain, the default frequency (Annuelle), and
+  **`suggere: ["finance"]`**: domains whose texts are only suggested in registers.
+* **History:** checked against a real client register (ID-QSE-002, 76 texts): 72/76 flagged. On
+  1986-2026 (4,312 issues): **7,050 texts flagged**, 855 modifications of référentiel texts.
 * After editing rules: `npm run veille -- --reassess` (no download), then `--list` to review.
 
 ---
@@ -225,9 +263,9 @@ All sampled issues 1995–2025 read with no glued titles. The server sends parts
 
 **Référentiel** = `data/referentiel/textes.json` (74 curated texts: seeded from the client's
 ID-QSE-002 register with its summaries and risks, cleaned by hand, plus the app's reference texts)
-**∪** every JORT hit (`fromHit`: conditions from the matched rules' `when`). A JORT text already
-curated only adds its source. A text is known by `n:<kind>:<number>` or, without a number,
-`d:<kind>:<ISO date>`.
+**∪** every JORT hit (`fromHit`). A JORT text already curated only adds its source. A text is known
+by `n:<kind>:<number>` or, without a number, `d:<kind>:<ISO date>`. With 1986-2026: 5,944 texts
+(5,870 from the JORT).
 
 **Conditions** (`when`, any of them; `a+b` = both): `tous`, `classe`, `categorie:1`,
 `secteur:1200`, `rubrique:2505`, `etude:eie` / `etude:eie_a` / `etude:cahier_des_charges`…,
@@ -235,13 +273,37 @@ curated only adds its source. A text is known by `n:<kind>:<number>` or, without
 `transport-personnel`, `transport-matieres-dangereuses`, `appareils-pression`, `levage`,
 `groupe-electrogene`, `froid`, `rayonnements`, `produits-chimiques`, `hydrocarbures`, `explosifs`,
 `denrees`, `animaux`, `rejets-eau`, `emissions-air`, `dechets-dangereux`, `bruit`, `erp`,
-`restauration`, `import-export`, `forage`, `energie`, `chantier`. Some facts are ticked from the
+`restauration`, `import-export`, `forage`, `energie`, `chantier` (now "Bâtiment et travaux publics,
+chantiers"), and new on 22 October `hotellerie`, `sante`, `commerce`. Some facts are ticked from the
 rubriques' sections (1200 → denrées, 2500 → hydrocarbures, 1400/2100/2200/2300/2700 → produits
 chimiques, 1500 → déchets dangereux, 2400 → explosifs, 2600 → rayonnements, 1100 → animaux).
 
-**Proposals:** a text whose conditions hold is proposed (ticked) when curated or `important`;
-`information` texts are unticked suggestions. Texts with no `when` (conventions collectives,
-marchés publics, contrat KARAMA…) are added by hand only.
+**Proposals** (`proposals(texts, site)`):
+
+* a text **applies** to a site when one of its `when` holds (all matched rules' `when`);
+* it is **ticked** when curated, or when one of its **`coche`** conditions holds: the `when` of the
+  matched rules that are important and not in a `suggere` domain (so a text matched by a tax rule
+  and by `act-huileries` is ticked for huileries only, suggested elsewhere); a text demoted to
+  information is never ticked;
+* of a **series** (`seriesKey`: subject without numbers and dates, ≥ 30 characters, not a
+  modification: the SMIG of each year, each loi de finances), only the newest is proposed; the older
+  ones are marked `remplace` and can still be added by hand;
+* texts with no `when` (conventions collectives in general, marchés publics…) are added by hand
+  only (a sectoral convention collective is caught by the activity rules).
+
+**Measured on 1986-2026 data (22 October), ticked / suggested:**
+
+| Site | Ticked | of which curated | Suggested |
+|---|---|---|---|
+| Chemical plant, 1st cat., 120 employees, many facts | 746 | 68 | 1,576 |
+| Agro-food, 2nd cat., 60 employees | 732 | 62 | 1,316 |
+| Huilerie (1213), 25 employees | 774 | 62 | 1,290 |
+| BTP (chantier, véhicules, levage), 80 employees | 555 | 50 | 1,012 |
+| Workshop, 3rd cat., 15 employees, no facts | 429 | 46 | 1,152 |
+
+About 30% of the ticked JORT texts only modify another text; most of the rest are general labour,
+CNSS, code de la route and environment texts across 40 years. **Too many** against the client's
+76-text register: the user has to choose how to cut (§11 step 3).
 
 **Register lifecycle** (`lib/registre/registre.ts`, UI in `registres.tsx`):
 
@@ -250,28 +312,23 @@ marchés publics, contrat KARAMA…) are added by hand only.
    (evaluations kept; category, rubriques, study follow; facts of removed rubriques unticked) or
    create another.
 2. Register view: summary counters; to-do panels (each shows 3 items, "Voir les N autres"):
-   * **modified at the JORT** (`alertes`): "Ajouter ce texte et réévaluer" or "Réévaluer
-     seulement" (clears evaluation; the amendment id goes to `vus`);
+   * **modified at the JORT** (`alertes`): **only modifications published since the register was
+     created** (`cree`); "Ajouter ce texte et réévaluer" or "Réévaluer seulement" (the amendment
+     id goes to `vus`). Earlier modifications are the text's history: **"Modifié par N textes"**
+     folded on its card (`modifiePar`);
    * **new texts for this site** (`nouveautes`): Ajouter / Écarter / Tout ajouter;
    * **no longer applicable** (`plusApplicables`): Retirer / Garder (`garde`).
 3. Texts grouped by domain in collapsible sections; each card: retenu, theme, état badge, title
-   (link to the JORT page), why; conformité (sets today's date if none), last evaluation, frequency
-   (Mensuelle … Tous les deux ans); details: résumé, risque, plan, responsable, échéance.
+   (link to the JORT page), why; conformité, last evaluation, frequency; details: résumé, risque,
+   plan, responsable, échéance.
 4. Due evaluations (`prochaine`): jamais évalué / en retard / sous 30 jours / à jour. The **menu
-   badge** counts JORT modifications + late or soon-due evaluations across registers (never-evaluated
-   texts are left out, or a new register would show ~96).
-5. Excel export (ID-QSE-002 columns: SYSTEME, DOMAINE, TYPE, REF TYPE, TITRE with link, RESUME
-   EXIGENCE, CONFORMITE, Fréquence d'évaluation, RISQUE, Plan d'action, Responsable et échéance; the
-   header rows mimic the client's file).
+   badge** counts JORT modifications + late or soon-due evaluations (never-evaluated texts left out).
+5. Excel export (ID-QSE-002 columns).
 
 **Storage:** `localStorage` key `abclassement-registres` (the user chose "in the app"; no server).
 Saved after rendering (an effect), then a window event `abclassement-registres` lets the badge
 recount; "Sauvegarder les registres" / "Restaurer une sauvegarde" (JSON file, merges by id). Journal
 statuses (à lire / pertinent / sans objet) are in `abclassement-veille-statuts`.
-
-Example measured: a 2ème catégorie dairy (1214 + 2505), 40 employees, vehicles → 97 texts proposed,
-2 real JORT modifications flagged (maladies professionnelles list amended 18/09/2025; loi 96-41 on
-waste amended by loi 2024-2).
 
 ---
 
@@ -286,24 +343,62 @@ Measured with Playwright (desktop 1300 px / phone 390 px):
 * Rubrique detail directly under the search box, sector grid hidden while open.
 * ANPE steps and explanations folded; compact header; register texts grouped by domain.
 * "Tout retirer" asks first; no horizontal overflow on phone anywhere.
-* The report page is still long by nature (5,700 / 9,000 px): it is the printable document.
+* Not re-measured since the data grew to 7,050 flagged texts: the Journal is paged, but a register
+  with ~700 lines and `feed.json` at 5 MB should be checked in the browser (§11 step 4).
 
 ---
 
-## 9. Data state (18 October 2026)
+## 9. Data state (22 October 2026)
 
-| Year | Issues read | Texts in sommaires | Issues with 0 texts (not scans) | Glued titles |
+Totals: **4,312 issues, 128,613 titles; 3,974 read from the OCR text, 338 from the PDF; 85 issues
+with 0 titles; 3 scans with no OCR text yet.**
+
+| Year | Issues | Titles | 0 titles | OCR / PDF |
 |---|---|---|---|---|
-| 2023 | 135 | 2,931 | 15 | 2 |
-| 2024 | 159 | 3,321 | 18 | 0 |
-| 2025 | 156 | 3,391 | 13 | 1 |
-| 2026 | 101 (to n° 101) | 2,163 | 8 | 0 |
+| 1986 | 14 of 78 | 345 | 0 | 14 / 0 |
+| 1987 | 91 | 1,772 | 1 | 90 / 1 |
+| 1988 | 87 | 2,267 | 0 | 87 / 0 |
+| 1989 | 88 | 2,208 | 1 | 87 / 1 |
+| 1990 | 86 | 2,193 | 0 | 86 / 0 |
+| 1991 | 90 | 2,120 | 0 | 90 / 0 |
+| 1992 | 88 | 2,413 | 1 | 87 / 1 |
+| 1993 | 100 | 2,571 | 0 | 100 / 0 |
+| 1994 | 103 | 2,633 | 0 | 103 / 0 |
+| 1995 | 104 | 2,627 | 0 | 96 / 8 |
+| 1996 | 105 | 2,578 | 0 | 105 / 0 |
+| 1997 | 104 | 2,619 | 0 | 104 / 0 |
+| 1998 | 104 | 2,914 | 0 | 104 / 0 |
+| 1999 | 105 | 3,230 | 0 | 105 / 0 |
+| 2000 | 104 | 3,219 | 0 | 103 / 1 |
+| 2001 | 104 | 3,630 | 0 | 104 / 0 |
+| 2002 | 106 | 3,258 | 0 | 106 / 0 |
+| 2003 | 104 | 3,023 | 0 | 104 / 0 |
+| 2004 | 105 | 3,068 | 0 | 105 / 0 |
+| 2005 | 104 | 3,588 | 0 | 102 / 2 |
+| 2006 | 104 | 3,584 | 0 | 103 / 1 |
+| 2007 | 104 | 3,752 | 0 | 104 / 0 |
+| 2008 | 105 | 3,796 | 0 | 105 / 0 |
+| 2009 | 104 | 4,151 | 0 | 103 / 1 |
+| 2010 | 105 | 3,886 | 0 | 105 / 0 |
+| 2011 | 99 | 3,609 | 3 | 99 / 0 |
+| 2012 | 103 | 3,185 | 2 | 103 / 0 |
+| 2013 | 105 | 4,045 | 2 | 105 / 0 |
+| 2014 | 105 | 3,969 | 0 | 105 / 0 |
+| 2015 | 104 | 3,299 | 1 | 104 / 0 |
+| 2016 | 106 | 4,400 | 1 | 106 / 0 |
+| 2017 | 104 | 4,484 | 0 | 104 / 0 |
+| 2018 | 104 | 3,901 | 7 | 104 / 0 |
+| 2019 | 105 | 3,127 | **30** (Arabic files) | 104 / 1 |
+| 2020 | 130 | 3,393 | 0 | 129 / 1 |
+| 2021 | 120 | 3,048 | 1 | 120 / 0 |
+| 2022 | 143 | 3,811 | 3 | 142 / 1 |
+| 2023 | 149 | 3,259 | 10 | 148 / 1 |
+| 2024 | 159 | 3,632 | 10 | 40 / 119 |
+| 2025 | 156 | 3,605 | 5 | 33 / 123 |
+| 2026 | 102 (to n° 102) | 2,401 | 7 | 26 / 76 |
 
-`--reread` already ran on 2024-2026 (0-text issues went from 26/31/10 to 18/13/8). The remaining
-0-text issues are not understood yet (only "Avis", Arabic-only issues, another layout?).
-
-Probe samples in `data/veille/probe/` (5.4 MB): JSON for every 5th year 1960–2025 (issues 1 and
-40) and JPEG pages of the scans of 1960, 1970, 1980, 1990.
+2024-2026 keep most of their PDF readings: the OCR text was read too (`--ocr`) and kept only where
+it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
 
 ---
 
@@ -318,63 +413,65 @@ Probe samples in `data/veille/probe/` (5.4 MB): JSON for every 5th year 1960–2
   sectors.
 * Conformity is evaluated **per text** (not per requirement).
 * `feed.json` is derived and not versioned; only `data/veille/sommaires` is committed.
-* Not answered yet: should subsidies/aid to a sector (subventions, primes) appear as information?
-  (Currently ignored.)
+* **22 October:** every law related to the site's sector is **ticked automatically**, for every
+  sector ("construction & bâtiment", "agro-alimentaire (huilerie : trituration et
+  conditionnement)" were the user's examples) → the activity rules.
+* **22 October:** taxes, customs and loi de finances: **suggested, not ticked**.
+* **22 October:** the user reads 1957-1986 on the laptop (§2).
+* Not answered yet: how to cut the number of ticked texts further (§11 step 3); should subsidies/
+  aid to a sector (subventions, primes) appear as information? (Currently ignored.)
 
 ---
 
 ## 11. Next steps (in order)
 
-1. **Finish reading 1995–2022** on the laptop: `npm run veille -- --years 1995-2022`, then push
-   `data/veille`. Expect about 4,000 issues and a few hours; resumable. Then `--reread` for any
-   year that shows 0-text issues.
-2. **OCR for 1960–1990** (scans). Plan:
-   * render the sommaire pages with `pdfPageImages` at **300 dpi** (the probe JPEGs are 150 dpi:
-     fine to look at, too coarse for OCR);
-   * OCR on the laptop with **`tesseract.js`** + **`@tesseract.js-data/fra`** (npm, works offline
-     on Windows, no install); cloud sessions have system `tesseract` 5 with `fra` for prototyping;
-   * build `Line {x, y, text}` from OCR word boxes (y flipped to PDF coordinates), then
-     `parseIssue`;
-   * layout seen in the 1980 sample (`data/veille/probe/1980-001-p1.jpg`): **two columns**, ministry
-     headings **centred** (italic/bold, "Premier Ministère" too), kinds in capitals ("ARRETE",
-     "NOMINATION"), dot leaders and page numbers at the column's right. So: split columns first
-     (gap in x), treat centred lines starting with Ministère/Premier Ministère as institutions;
-     accept capitalised kinds; tolerate OCR noise in leaders ("…….", ". . .") and digits;
-   * store results like other sommaires (clear `sansTexte`, maybe `ocr: true` + confidence);
-     a `--ocr` option to process the stored `sansTexte` issues; cost: a few seconds per page,
-     2–3 pages per issue, ~3,500 issues for 1960–1990: run overnight, resumable;
-   * test on the probe images, then on a few full issues pushed by the user.
-3. **Investigate the remaining 0-text issues** (add a `--dump <year>/<n>` that saves the first
-   pages' lines like the probe, ask the user to push a few, adapt the parser).
-4. **Review the rules on the larger set** (as for 2024-2026: `--list`, count hits per rule, look for
-   misses and noise), with decades of texts the registers will grow: consider proposing only
-   curated + important texts and grouping a base text with its modifications.
+1. **Finish reading 1957-1986** on the laptop (§2), push `data/veille/sommaires`. Then
+   `--reassess` and check the per-year table (`npm run veille -- --list --year 1965` to eyeball).
+2. **Review the rules on the old years.** Titles of 1957-1975 are in capitals and use old names
+   (Secrétariat d'État, DECRET N°…); look at hits per rule and at what is missed (`--list`).
+   Watch for OCR typos ("ARRETTES", "DECLET"). One title gave a date in "1020": OCR misreads of
+   years exist.
+3. **Decide with the user how many texts a register ticks** (§7 table: 430-775 today, 1957-1985
+   will add more). Options measured or discussed:
+   * do not tick texts that only modify another (−30%): they show as "Modifié par" on their base
+     text when it is in the register;
+   * tick general (non-activity) JORT texts only from the last N years, or only base laws/decrees;
+   * a register shows ticked texts grouped by domain already; a "principaux textes" view could rank
+     curated + laws + decrees first.
+   The user's own words: sector laws ticked automatically; finance suggested. Ask before cutting.
+4. **Check the page with the large data**: open the Veille in the browser (`npm run dev`), create a
+   register for a big site, measure load time (feed.json 5 MB), the register's length and scroll,
+   on desktop and phone. Consider paging register groups or loading the journal by year.
 5. **Grow the curated référentiel**: other client registers (an importer for ID-QSE-002 files would
-   help: the seed was done by a one-off script, the register was messy), and have a QSE specialist
-   review the `when` conditions of the 74 texts.
-6. **Housekeeping:** `data/veille/feed.json` is tracked again by mistake (re-added by a
-   `git add data/veille`); it is stale and unused: `git rm --cached data/veille/feed.json` and add
-   it to `.gitignore`. Then open a pull request `claude/veille` → `main` when the user asks.
-7. Test `scripts/veille-hebdo.ps1` on Windows.
+   help), and have a QSE specialist review the `when` conditions of the 74 texts and the 42 activity
+   rules.
+6. **Housekeeping:** `data/veille/feed.json` is tracked by mistake (stale, unused):
+   `git rm --cached data/veille/feed.json` and add it to `.gitignore`. Delete `data/veille/probe/`
+   if no longer wanted (5.4 MB; the OCR text replaced the OCR plan). Then a pull request
+   `claude/veille` → `main` when the user asks.
+7. Test `scripts/veille-hebdo.ps1` on Windows (it calls `npm run veille`, which now reads the OCR
+   text first).
 8. Legal readings still to confirm (README "Not done yet"): Qx of the addition rule, rubrique 2724
    reading, dépollution route (circulaire 27 still in force?), annexe 2 units that regularise.
+9. Later: the Arabic edition (ocr.jort.tn has French only for now); `annonces-legales` collection
+   (2004-2026) is not read.
 
 ---
 
 ## 12. How things were verified
 
-* **Vitest** (82 tests): parsing of real JORT issues kept in `data/sources/` (2006 n° 83, 2010
-  n° 18) and of the probe's 2000 n° 40; rules on real titles; registers end to end.
-* **Local JORT mirror** for the scanner: a small Node HTTP server that serves PDFs under
-  `/journal-officiel/fr/<year>/<nnn>.pdf` **with Range support** (clamp the end of a range to the
-  file size, or small files break), plus `python3 -m http.server` for a server without Range; run
-  the scanner with `JORT_BASE=http://localhost:<port>` in a **copy of the project** so real data is
-  untouched. A fake scan: a blank page saved as PDF with Pillow.
-* **Playwright** (Chromium at `/opt/pw-browsers/chromium`, playwright from the global npm root):
-  scripted flows (validate → create register → add modifying text → change classification →
-  update register), page heights and horizontal overflow on desktop and phone, console errors.
-* The probe data was used offline: lines can be cut back into items and re-run through `toLines`
-  and `parseIssue`.
+* **Vitest** (90 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+  and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
+  joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
+  real titles (activity rules included); registers end to end (alerts after creation, history).
+* **OCR vs PDF benchmark**: all 566 issues of 2023-2026 downloaded from ocr.jort.tn, parsed, and
+  compared title by title (folded, apostrophes normalised, institution in the key) with the PDF
+  readings: 98% found, 99% same page.
+* **Samples across eras**: issues 1, 11, 30, 40, 55 of years 1957-1994 parsed and read by eye.
+* **Local JORT mirror** for the PDF path (Range support; `JORT_BASE`), and **Playwright** for UI
+  flows and page heights (Chromium at `/opt/pw-browsers/chromium`): see the README.
+* Register sizes measured with a scratch script: `catalogue(reassess(all sommaires).hits)` then
+  `proposals(texts, site)` for sample sites (§7 table).
 
 ---
 
@@ -384,14 +481,24 @@ Probe samples in `data/veille/probe/` (5.4 MB): JSON for every 5th year 1960–2
 * Commits end with the two trailer lines used in this repo (`Co-Authored-By: …` and
   `Claude-Session: …`); never put a model identifier in commits or files. Push only to
   `claude/veille` (`git push -u origin claude/veille`); no pull request unless the user asks.
+* **`\b` does not see a word end after an accented letter in JavaScript** ("Arrêté du", "Assemblée
+  des…" never matched `\b`): write `(?!\p{L})` with the `u` flag. Fixed in `jort.ts` and
+  `markdown.ts`; check any new regex.
+* **Kinds of text** (`kindOf`) are read without accents ("DECRET", "ARRETE"); a hit's kind is taken
+  from its title each time rules are applied, so stored kinds don't matter.
+* In a cloud session, **Node's fetch needs `NODE_USE_ENV_PROXY=1`** to go through the proxy.
+* The cloud session has a **stop hook** that asks to commit and push whenever the work tree is
+  dirty: during a long scan, commit the sommaires as checkpoints.
 * `.gitattributes` forces LF; Python scripts read/write UTF-8 explicitly (Windows cp1252 broke
   them once); `scripts/veille-hebdo.ps1` is saved with a UTF-8 BOM (Windows PowerShell 5.1).
 * pdf.js **takes over the buffer** passed to `getDocument`: measure `data.length` before.
-* Never update another component's state while rendering (registers are saved in an effect; doing
-  it inside a state updater broke React).
+* Never update another component's state while rendering (registers are saved in an effect).
 * In the cloud shell: `pkill -f <pattern>` / `pgrep` can match the shell's own command line and kill
-  it; split the pattern (`a="mirr"; b="or.mjs"; pgrep -f "node .*${a}${b}"`). `rm -rf` on a
-  relative path after `cd` is refused by a safety check: use absolute paths. Scripts outside the
-  project cannot resolve its packages: put scratch scripts under the project (and delete them).
-* The JORT numbering: an issue's own number in the PDF may differ from its address (`! the PDF says
-  n° …`): the address number is kept.
+  it; split the pattern. `rm -rf` on a relative path after `cd` is refused: use absolute paths.
+  Scripts outside the project cannot resolve its packages: put scratch scripts under the project
+  (`scripts/scratch/` is excluded in `.git/info/exclude` of the cloud copy only).
+* `tsx` loads a module once: **a scan running in the background keeps the parser it started with**;
+  stop and restart it after changing the parser (data read by the old one: delete that year's file
+  or re-read it).
+* The JORT numbering: an issue's own number may differ from its address: the address number is kept.
+* Editing `watch.json`: keep its layout (one rule per line); a JSON re-dump rewrites the whole file.
