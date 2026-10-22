@@ -198,6 +198,12 @@ describe("reading a sommaire from the OCR text of ocr.jort.tn", () => {
     expect(ocrUrl(1980, 1)).toBe("https://ocr.jort.tn/journal-officiel/fr/1980/001.md");
   });
 
+  it("knows the Arabic edition filed in the French collection, with nothing to read", () => {
+    const md = ["<!-- page:1 -->", "# الرائد الرسمي للجمهورية التونسية", ...Array(40).fill("أمر عدد 735 لسنة 2023 مؤرخ في 29 نوفمبر 2023 يتعلق بالمصادقة على اتفاق")].join("\n");
+    expect(parseMarkdown(md)).toMatchObject({ arabe: true, entries: [] });
+    expect(parseMarkdown(ocr("1980-001.md")).arabe).toBeUndefined();
+  });
+
   it("sees the end of a word after an accented letter", () => {
     expect(INSTITUTION.test("Assemblée des représentants du peuple")).toBe(true);
     expect(TEXT_START.test("Arrêté du ministre des finances")).toBe(true);

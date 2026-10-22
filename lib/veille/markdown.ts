@@ -127,7 +127,12 @@ function read(md: string): { issue: Issue; ended: boolean } {
     firstPage: firstPageOf(pages),
     entries: [],
   };
-  if (start < 0) return { issue, ended: false };
+  if (start < 0) {
+    // No "Sommaire": an Arabic edition filed as French (2019, 2023, 2026…) says so by its letters.
+    const arabic = (md.slice(0, 20_000).match(/[\u0600-\u06FF]/g) ?? []).length;
+    if (arabic > 300) return { issue: { ...issue, arabe: true }, ended: true };
+    return { issue, ended: false };
+  }
 
   let institution: string | null = null;
   let section: string | null = null;

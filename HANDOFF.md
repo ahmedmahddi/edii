@@ -208,7 +208,8 @@ n° 7: 77 titles instead of 10; 2024 n° 19: 42 instead of 0). On a sample of 11
 24 titles per issue, 91% with their institution, one empty (an Arabic file).
 
 **Not ours to fix:** some files of the French collection are the **Arabic** edition (2019: 30
-issues; 2023 n° 138, 142; 1959 n° 30): no French sommaire, stored with 0 texts. `api.jort.tn` is
+issues; 2023 n° 138, 142; 2026 n° 11, 13, 44, 62, 76; 1959 n° 30): no French sommaire; marked
+`arabe: true` (Arabic letters, no "Sommaire") and skipped by `--reread`. `api.jort.tn` is
 blocked by Cloudflare from the cloud.
 
 **PDF reading** (kept as fallback, `parseIssue`): sommaire pages = pages with ≥ 2 lines ending in
@@ -487,6 +488,9 @@ it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
 * **Kinds of text** (`kindOf`) are read without accents ("DECRET", "ARRETE"); a hit's kind is taken
   from its title each time rules are applied, so stored kinds don't matter.
 * In a cloud session, **Node's fetch needs `NODE_USE_ENV_PROXY=1`** to go through the proxy.
+* **Downloads go through `lib/veille/fetch.ts`** (`fetchRetry`, `fetchText`): 60 s timeout, retries
+  after 2, 5, 15, 30 s on a reset, a timeout, 408/429/5xx. Before it, one `ECONNRESET` on the
+  user's home connection ended the run, and a stalled download hung it.
 * The cloud session has a **stop hook** that asks to commit and push whenever the work tree is
   dirty: during a long scan, commit the sommaires as checkpoints.
 * `.gitattributes` forces LF; Python scripts read/write UTF-8 explicitly (Windows cp1252 broke

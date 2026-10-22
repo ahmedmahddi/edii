@@ -32,6 +32,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../lib/veille/jort";
+import { fetchRetry, fetchText } from "../lib/veille/fetch";
 import { ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
 import { amendments, catalogue } from "../lib/registre/referentiel";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
@@ -114,12 +115,11 @@ async function openMarkdown(year: number, number: number): Promise<Issue | null>
   if (process.env.JORT_OCR_BASE === "none") return null;
   const url = ocrFetchUrl(year, number);
   const get = async (range?: string) => {
-    const res = await fetch(url, { headers: { "User-Agent": UA, ...(range ? { Range: range } : {}) } });
-    if (res.status === 404) return null;
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text = await res.text();
-    downloaded += Buffer.byteLength(text);
-    return { text, whole: res.status === 200 };
+    const res = await fetchText(url, { headers: { "User-Agent": UA, ...(range ? { Range: range } : {}) } });
+    if (!res) return null;
+    if (res.status >= 400) throw new Error(`HTTP ${res.status}`);
+    downloaded += Buffer.byteLength(res.text);
+    return { text: res.text, whole: res.status === 200 };
   };
   try {
     // The beginning first: the whole text (up to a few megabytes) only when the sommaire runs on.
@@ -129,7 +129,7 @@ async function openMarkdown(year: number, number: number): Promise<Issue | null>
     const issue = (start.whole ? parseMarkdown(start.text) : parseMarkdownStart(start.text)) ?? parseMarkdown((await get())?.text ?? "");
     return { ...issue, source: "ocr" };
   } catch (error) {
-    const reason = error instanceof Error && error.cause instanceof Error ? error.cause.message : String(error);
+    const reason = error instanceof Error && error.cause instanceof Error ? error.cause.message : error instanceof Error ? error.message : String(error);
     throw new Error(`Impossible de lire le n° ${number}/${year} sur ocr.jort.tn (${reason}). Vérifiez la connexion Internet, puis relancez : ce qui a déjà été lu est gardé.`);
   }
 }
@@ -140,7 +140,7 @@ async function openMarkdown(year: number, number: number): Promise<Issue | null>
  */
 async function fetchIssue(year: number, number: number): Promise<Issue | null> {
   const ocr = await openMarkdown(year, number);
-  if (ocr?.entries.length) return ocr;
+  if (ocr?.entries.length || ocr?.arabe) return ocr; // the Arabic edition in the French collection: its PDF is too
   const pdf = await openIssue(year, number, SOMMAIRE_PAGES);
   if (!pdf) return ocr;
   const issue: Issue = { ...parseIssue(pdf.lines), source: "pdf" };
@@ -154,7 +154,7 @@ let catalog: Map<number, number[]> | null | undefined;
 async function catalogYears(): Promise<Map<number, number[]> | null> {
   if (catalog !== undefined) return catalog;
   try {
-    const res = await fetch(CATALOG, { headers: { "User-Agent": UA } });
+    const res = await fetchRetry(CATALOG, { headers: { "User-Agent": UA } });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = (await res.json()) as { collections: { id: string; years: Record<string, Record<string, { fr?: unknown }>> }[] };
     const years = data.collections.find((c) => c.id === "journal-officiel")?.years ?? {};
@@ -180,6 +180,7 @@ async function readIssue(feed: Feed, year: number, number: number, issue: Issue)
   }
   issue.number = number;
   if (issue.sansTexte) console.warn(`  ! n° ${number}: numéro scanné (images), pas encore de texte OCR sur ocr.jort.tn : à relire plus tard (--reread)`);
+  else if (issue.arabe) console.warn(`  ! n° ${number}: édition arabe à la place de la française (fichier de jort.tn) : rien à lire`);
   else if (!issue.entries.length) console.warn(`  ! n° ${number}: sommaire introuvable (mise en page inconnue) : à signaler`);
   saveSommaire(year, issue);
   const next = record(feed, year, issue);
@@ -269,7 +270,7 @@ async function probe(years: number[]): Promise<void> {
       const chars = pages.map((lines) => lines.reduce((n, l) => n + l.text.length, 0));
       if (chars.reduce((a, b) => a + b, 0) < MIN_TEXT) {
         // A scan: its first two pages as images, to work out how to read such issues (OCR).
-        const res = await fetch(fetchUrl(year, number), { headers: { "User-Agent": UA } });
+        const res = await fetchRetry(fetchUrl(year, number), { headers: { "User-Agent": UA } });
         const data = new Uint8Array(await res.arrayBuffer());
         downloaded += data.length;
         const images = await pdfPageImages(data, [1, 2], 150, "image/jpeg");
@@ -348,7 +349,7 @@ async function main(): Promise<void> {
     let done = 0;
     for (const y of stored().filter((y) => !only || only.has(y.year)).sort((a, b) => b.year - a.year)) {
       // Scans are read again too: their OCR text may have come out since.
-      const todo = Object.values(y.issues).filter((i) => i.number !== null && (!i.entries.length || glued(i)));
+      const todo = Object.values(y.issues).filter((i) => i.number !== null && !i.arabe && (!i.entries.length || glued(i)));
       if (!todo.length) continue;
       console.log(`JORT ${y.year} : ${todo.length} numéros à relire`);
       for (const issue of todo) {
