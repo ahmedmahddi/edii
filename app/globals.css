@@ -1877,6 +1877,7 @@ p {
 .registre-eval { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0 4px; }
 .registre-eval label, .registre-details > label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; min-width: 0; }
 .registre-details { margin-top: 8px; display: grid; gap: 10px; }
+.registre-history { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
 .registre-details[open] { padding-top: 4px; }
 .registre-details textarea { width: 100%; font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius); resize: vertical; }
 .registre-add { margin-bottom: 24px; }

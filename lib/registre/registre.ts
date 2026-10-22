@@ -184,13 +184,27 @@ export interface Alerte {
   amendment: Amendment;
 }
 
-/** JORT texts that modify a text kept in the register, not yet taken into account. */
+/**
+ * JORT texts that modify a text kept in the register, published since the register was created
+ * and not yet taken into account. Those published before are the text's history (modifiePar), not
+ * news: with decades of JORT read, every old text has some.
+ */
 export function alertes(reg: Registre, amendments: Amendment[]): Alerte[] {
+  const since = reg.cree.slice(0, 10);
   return reg.lignes.flatMap((l) => {
     if (!l.retenu) return [];
     const keys = new Set(keysOf(l.texte));
-    return amendments.filter((a) => !l.vus.includes(a.id) && a.cites.some((k) => keys.has(k))).map((amendment) => ({ ligne: l, amendment }));
+    return amendments
+      .filter((a) => !l.vus.includes(a.id) && (a.date ?? since) >= since && a.cites.some((k) => keys.has(k)))
+      .map((amendment) => ({ ligne: l, amendment }));
   });
+}
+
+/** The JORT texts that modified a text before the register was created, newest first. */
+export function modifiePar(reg: Registre, l: Ligne, amendments: Amendment[]): Amendment[] {
+  const since = reg.cree.slice(0, 10);
+  const keys = new Set(keysOf(l.texte));
+  return amendments.filter((a) => (a.date ?? since) < since && a.cites.some((k) => keys.has(k)));
 }
 
 const addMonths = (iso: string, months: number) => {

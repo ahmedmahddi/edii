@@ -6,6 +6,7 @@ import { proposals, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
   alertes,
+  modifiePar,
   backup,
   CONFORMITES,
   type Conformite,
@@ -584,7 +585,7 @@ function RegistreView({
             </summary>
             <ol className="registre-lignes">
               {lignes.map((l) => (
-                <LigneCard key={l.texte.id} l={l} set={(patch) => setLigne(l.texte.id, patch)} />
+                <LigneCard key={l.texte.id} l={l} history={modifiePar(reg, l, amendments)} set={(patch) => setLigne(l.texte.id, patch)} />
               ))}
             </ol>
           </details>
@@ -648,7 +649,7 @@ function ToDo({ className, title, note, action, children }: { className: string;
   );
 }
 
-function LigneCard({ l, set }: { l: Ligne; set: (patch: Partial<Ligne>) => void }) {
+function LigneCard({ l, history, set }: { l: Ligne; history: Amendment[]; set: (patch: Partial<Ligne>) => void }) {
   const next = prochaine(l);
   return (
     <li className={`card registre-ligne conf-${l.conformite || "none"} ${l.retenu ? "" : "is-left"}`}>
@@ -668,6 +669,26 @@ function LigneCard({ l, set }: { l: Ligne; set: (patch: Partial<Ligne>) => void 
         {l.origine === "ajoute" ? "Ajouté à la main" : `Pourquoi : ${l.raisons.join(", ")}`}
         {l.texte.publie ? ` · ${l.texte.publie}` : ""}
       </p>
+      {history.length ? (
+        // Modified before the register was made: the text as it stands now, not an alert.
+        <details className="registre-details">
+          <summary>
+            Modifié par {history.length} texte{history.length > 1 ? "s" : ""}
+          </summary>
+          <ul className="registre-history">
+            {history.map((a) => (
+              <li key={a.id}>
+                <a href={a.pdf} target="_blank" rel="noreferrer">
+                  {a.title}
+                </a>{" "}
+                <span className="muted small">
+                  JORT n° {a.issue}/{a.year}, p. {a.page}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </details>
+      ) : null}
       {l.retenu ? (
         <>
           <div className="registre-eval">

@@ -10,6 +10,7 @@ import {
   backup,
   createRegistre,
   dues,
+  modifiePar,
   nouveautes,
   plusApplicables,
   prochaine,
@@ -149,10 +150,15 @@ describe("an establishment's register", () => {
 
   it("alerts when the JORT modifies one of its texts, until it is taken into account", () => {
     const reg = createRegistre(report(), site(), texts, now);
-    const a = { id: "2025-115-2331-0", year: 2025, issue: 115, date: "2025-09-23", page: 2331, title: "Arrêté … modifiant l'arrêté du 10 janvier 1995", pdf: "x", cites: ["d:arrete:1995-01-10"] };
+    const a = { id: "2026-131-2931-0", year: 2026, issue: 131, date: "2026-11-03", page: 2931, title: "Arrêté … modifiant l'arrêté du 10 janvier 1995", pdf: "x", cites: ["d:arrete:1995-01-10"] };
     expect(alertes(reg, [a]).map((x) => x.ligne.texte.id)).toEqual(["arrete-1995-01-10"]);
     const seen = { ...reg, lignes: reg.lignes.map((l) => (l.texte.id === "arrete-1995-01-10" ? { ...l, vus: [a.id] } : l)) };
     expect(alertes(seen, [a])).toEqual([]);
+    // A modification published before the register was made is the text's history, not news.
+    const old = { ...a, id: "2025-115-2331-0", year: 2025, date: "2025-09-23" };
+    expect(alertes(reg, [old])).toEqual([]);
+    const ligne = reg.lignes.find((l) => l.texte.id === "arrete-1995-01-10")!;
+    expect(modifiePar(reg, ligne, [a, old]).map((x) => x.id)).toEqual([old.id]);
   });
 
   it("offers the new texts that apply, and takes a text added by hand", () => {

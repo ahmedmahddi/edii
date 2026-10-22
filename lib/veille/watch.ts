@@ -32,7 +32,7 @@ interface Rule {
 
 export const rules = watch as unknown as {
   domains: Record<string, string>;
-  registre: { systemes: Record<string, string>; frequence: string };
+  registre: { systemes: Record<string, string>; frequence: string; suggere?: string[] };
   ignore: string[];
   ignoreAnywhere: string[];
   demote: string[];
@@ -138,7 +138,7 @@ function apply(rule: Rule, text: string, institution: string): Match | null {
 
 /** Titles the veille never reports: nominations, concours, the State's budget… */
 export function ignored(title: string): boolean {
-  const full = fold(title);
+  const full = fold(title).replace(/^[-–—•*\s]+/, ""); // "- Nomination de…": a list mark of the OCR
   return rules.ignore.some((p) => full.startsWith(fold(p))) || rules.ignoreAnywhere.some((p) => contains(full, p));
 }
 

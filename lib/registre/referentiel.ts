@@ -9,7 +9,7 @@
  */
 import curated from "@/data/referentiel/textes.json";
 import { isoDate, pdfPage, pdfUrl } from "../veille/jort";
-import { type Amendment, fold, type Hit, ignored, rules, type Severity, type Sommaires } from "../veille/watch";
+import { type Amendment, fold, type Hit, ignored, rules, type Severity, type Sommaires, subject } from "../veille/watch";
 import { applies, type Site } from "./profil";
 
 export interface Texte {
@@ -28,6 +28,8 @@ export interface Texte {
   publie?: string; // "JORT n° 18/2010, p. 559"
   origine: "referentiel" | "jort";
   niveau?: Severity; // for a text found in the JORT
+  remplace?: boolean; // a JORT text of a series (the SMIG of each year…) replaced by a newer one: not proposed
+  coche?: string[]; // for a JORT text: the sites it is ticked for (the others with 'when': suggested)
 }
 
 export const REFERENTIEL: Texte[] = (curated as { textes: Omit<Texte, "origine">[] }).textes.map((t) => ({ ...t, origine: "referentiel" }));
@@ -105,6 +107,7 @@ export function citedKeys(title: string): string[] {
   return cited(title).map((n) => n.key);
 }
 
+const SUGGESTED = new Set(rules.registre.suggere ?? []);
 const ruleById = new Map([...rules.references, ...rules.rules].map((r) => [r.id, r]));
 
 /** A text the veille found in the JORT, as a text of the référentiel. */
@@ -112,6 +115,19 @@ export function fromHit(hit: Hit): Texte {
   const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(hit.title)?.[1].replace(/\s/g, "");
   const when = [...new Set(hit.matches.flatMap((m) => ruleById.get(m.rule)?.when ?? []))];
   const labels = hit.matches.filter((m) => !m.rule.startsWith("ref-")).map((m) => m.label);
+  // Ticked where an important rule outside the suggested domains (taxes, customs) places it; a
+  // text kept as information (sector news, an international agreement) is only suggested.
+  const coche =
+    hit.severity === "information"
+      ? []
+      : [
+          ...new Set(
+            hit.matches
+              .map((m) => ruleById.get(m.rule))
+              .filter((r) => r && r.level !== "information" && !SUGGESTED.has(r.domain ?? ""))
+              .flatMap((r) => r!.when ?? []),
+          ),
+        ];
   return {
     id: `jort-${hit.id}`,
     type: hit.kind === "Autre" ? "Texte" : hit.kind,
@@ -125,7 +141,24 @@ export function fromHit(hit: Hit): Texte {
     publie: `JORT n° ${hit.issue}/${hit.year}, p. ${hit.page}`,
     origine: "jort",
     niveau: hit.severity,
+    coche,
   };
+}
+
+/**
+ * What a series of texts has in common: the subject without numbers or dates ("fixant le salaire
+ * minimum interprofessionnel garanti…", "portant loi de finances pour l'année …"). Null for a text
+ * that modifies another (each modification counts) or a subject too short to tell.
+ */
+export function seriesKey(title: string): string | null {
+  const t = subject(title)
+    .replace(/^(?:loi|decret|arrete|decision|circulaire)s?\b[^,]*?\d{4}\s*,\s*/, "")
+    .replace(/n°\s*[\d-]+/g, "")
+    .replace(/\d+(?:er)?/g, "")
+    .replace(/[^a-z' ]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  return t.length >= 30 && !/modifi|complet|abrog|prorog|rectifi/.test(t) ? t : null;
 }
 
 /** The curated texts and the JORT's, a JORT text that is already curated adding its source only. */
@@ -143,6 +176,17 @@ export function catalogue(hits: Hit[]): Texte[] {
     texts.push(t);
     for (const k of keysOf(t)) byKey.set(k, t);
   }
+  // Of a series, the newest text stands; the older ones are kept, to be added by hand.
+  const newest = new Map<string, Texte>();
+  for (const t of texts) {
+    const key = t.origine === "jort" ? seriesKey(t.titre) : null;
+    if (!key) continue;
+    const other = newest.get(key);
+    if (!other || (t.date ?? "") > (other.date ?? "")) {
+      if (other) other.remplace = true;
+      newest.set(key, t);
+    } else t.remplace = true;
+  }
   return texts;
 }
 
@@ -152,11 +196,16 @@ export interface Proposal {
   proposed: boolean; // ticked when the register is created; otherwise a suggestion
 }
 
-/** The texts that apply to a site: curated and important JORT texts are proposed, sector news suggested. */
+/**
+ * The texts that apply to a site: curated texts and important JORT texts are proposed (ticked),
+ * among them every text on one of the site's activities; sector news and taxes are suggested.
+ */
 export function proposals(texts: Texte[], site: Site): Proposal[] {
   return texts.flatMap((texte) => {
+    if (texte.remplace) return [];
     const reasons = applies(texte.when, site);
-    return reasons ? [{ texte, reasons, proposed: texte.origine === "referentiel" || texte.niveau !== "information" }] : [];
+    const proposed = texte.origine === "referentiel" || applies(texte.coche, site) !== null;
+    return reasons ? [{ texte, reasons, proposed }] : [];
   });
 }
 

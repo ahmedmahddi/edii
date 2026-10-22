@@ -55,7 +55,10 @@ export const FLAGS: Flag[] = [
   { id: "import-export", label: "Importation ou exportation", group: "Site et activité" },
   { id: "forage", label: "Forage, prélèvement d’eau", group: "Site et activité" },
   { id: "energie", label: "Forte consommation d’énergie (audit énergétique)", group: "Site et activité" },
-  { id: "chantier", label: "Travaux de construction, chantiers", group: "Site et activité" },
+  { id: "chantier", label: "Bâtiment et travaux publics, chantiers", group: "Site et activité" },
+  { id: "hotellerie", label: "Hôtellerie, tourisme, restauration", group: "Site et activité" },
+  { id: "sante", label: "Établissement de santé, laboratoire d’analyses", group: "Site et activité" },
+  { id: "commerce", label: "Commerce, distribution", group: "Site et activité" },
 ];
 
 const FLAG = new Map(FLAGS.map((f) => [f.id, f]));

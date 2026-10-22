@@ -45,6 +45,7 @@ function plain(line: string): string {
     .replace(/^#{1,6}\s*/, "")
     .replace(/\*\*/g, "")
     .replace(/^["«»“”]\s*/, "")
+    .replace(/^[-–•*]\s+/, "") // a list mark
     .replace(/\\([*_#])/g, "$1")
     .trim();
 }
