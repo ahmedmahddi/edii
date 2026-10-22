@@ -416,7 +416,7 @@ function RegistreView({
             <li key={`${ligne.texte.id}-${amendment.id}`}>
               <p>
                 <strong>{refOf(ligne.texte)}</strong> est visé par :{" "}
-                <a href={amendment.pdf} target="_blank" rel="noreferrer">
+                <a href={amendment.pdf} target="_blank" rel="noreferrer" dir="auto">
                   {amendment.title}
                 </a>{" "}
                 <span className="muted small">
@@ -463,7 +463,7 @@ function RegistreView({
             <li key={texte.id}>
               <div>
                 {texte.source ? (
-                  <a href={texte.source} target="_blank" rel="noreferrer">
+                  <a href={texte.source} target="_blank" rel="noreferrer" dir="auto">
                     {texte.titre}
                   </a>
                 ) : (
@@ -495,7 +495,7 @@ function RegistreView({
           {gone.map((l) => (
             <li key={l.texte.id}>
               <div>
-                <span>{l.texte.titre}</span>
+                <span dir="auto">{l.texte.titre}</span>
                 <p className="muted small">
                   {l.texte.theme} · proposé pour : {l.raisons.join(", ")}
                 </p>
@@ -664,7 +664,8 @@ function LigneCard({ l, history, set }: { l: Ligne; history: Amendment[]; set: (
           {next.date ? ` · ${dateFr(next.date)}` : ""}
         </span>
       </div>
-      <h3>{l.texte.source ? <a href={l.texte.source} target="_blank" rel="noreferrer">{l.texte.titre}</a> : l.texte.titre}</h3>
+      {/* dir="auto": a few texts of the JORT are only in Arabic. */}
+      <h3 dir="auto">{l.texte.source ? <a href={l.texte.source} target="_blank" rel="noreferrer">{l.texte.titre}</a> : l.texte.titre}</h3>
       <p className="muted small">
         {l.origine === "ajoute" ? "Ajouté à la main" : `Pourquoi : ${l.raisons.join(", ")}`}
         {l.texte.publie ? ` · ${l.texte.publie}` : ""}
@@ -678,7 +679,7 @@ function LigneCard({ l, history, set }: { l: Ligne; history: Amendment[]; set: (
           <ul className="registre-history">
             {history.map((a) => (
               <li key={a.id}>
-                <a href={a.pdf} target="_blank" rel="noreferrer">
+                <a href={a.pdf} target="_blank" rel="noreferrer" dir="auto">
                   {a.title}
                 </a>{" "}
                 <span className="muted small">

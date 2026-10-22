@@ -3,6 +3,7 @@
  * runs on Windows as is). Node only: used by scripts/veille.ts and the tests, never by the page.
  */
 import { getDocument, PDFDataRangeTransport, type PDFDocumentProxy } from "pdfjs-dist/legacy/build/pdf.mjs";
+import { isArabic } from "./arabe";
 import { fetchRetry } from "./fetch";
 import { decodeGlyphs, isGlyphCoded } from "./glyphs";
 import type { Line } from "./jort";
@@ -166,15 +167,27 @@ export function toLines(raw: Item[]): Line[] {
     }
   }
   return rows.map((row) => {
-    row.items.sort((a, b) => a.x - b.x);
+    // An Arabic line is read right to left: its pieces from the rightmost one.
+    const rtl = isArabic(row.items.map((i) => i.str).join(""));
+    row.items.sort((a, b) => (rtl ? b.x - a.x : a.x - b.x));
+    // Numbers stay left to right, and they come digit by digit (splitNumbers): each run of digits
+    // is put back in order.
+    if (rtl)
+      for (let i = 0; i < row.items.length; i++) {
+        if (!/^\d$/.test(row.items[i].str)) continue;
+        let j = i;
+        while (j + 1 < row.items.length && /^\d$/.test(row.items[j + 1].str) && row.items[j].x - (row.items[j + 1].x + row.items[j + 1].width) <= 1) j++;
+        row.items.splice(i, j - i + 1, ...row.items.slice(i, j + 1).reverse());
+        i = j;
+      }
     let text = "";
-    let end = -Infinity;
+    let edge = rtl ? Infinity : -Infinity;
     for (const item of row.items) {
-      const gap = item.x - end;
+      const gap = rtl ? edge - (item.x + item.width) : item.x - edge;
       if (text && gap > 1 && !text.endsWith(" ") && !item.str.startsWith(" ")) text += " ";
       text += item.str;
-      end = item.x + item.width;
+      edge = rtl ? item.x : item.x + item.width;
     }
-    return { x: row.items[0].x, y: row.y, text };
+    return { x: Math.min(...row.items.map((i) => i.x)), y: row.y, text };
   });
 }

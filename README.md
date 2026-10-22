@@ -83,8 +83,20 @@ again by `--reread`.
 
 On the 566 issues of 2023 to 2026, the OCR reading finds 98% of the titles the PDF reading finds,
 and more in 133 issues (PDFs whose text is cut up, sommaire pages the PDF reading did not see).
-The PDF reading is kept where it found more. A few files of the French collection are in fact the
-Arabic edition (2023 n° 138 and 142, 1959 n° 30): no French sommaire to read there.
+The PDF reading is kept where it found more.
+
+**Arabic issues in the French collection.** Some files of the French collection are in fact the
+Arabic edition (30 issues of 2019, 2023 n° 138 and 142, 2026 n° 11, 13, 44, 62, 76, 96, 98…). They are
+read in Arabic rather than lost (`lib/veille/arabe.ts`, `readArabic` in `markdown.ts`): sections
+(القوانين, الأوامر والقرارات), institutions (وزارة …), titles starting with their kind (قانون, أمر,
+قرار, تسمية…), number and date ("عدد 25 لسنة 2019 مؤرخ في 26 فيفري 2019"), page numbers wherever the
+OCR set them. The texts an Arabic title names are rewritten as a French title would name them
+(`frenchCitations`: "تنقيح الأمر عدد 1991 لسنة 2005" → "décret n° 2005-1991"), so keys, amendments
+and alerts work the same. The rules have Arabic terms in `data/veille/watch-ar.json` (by rule id,
+plus Arabic ignore and demote lists), matched as substrings of the folded title (Arabic attaches
+prefixes to words). With no OCR text yet, an Arabic PDF is read too: its lines are put right to left
+(`toLines`), digits kept in order. Only Arabic files found in the French collection are read: the
+Arabic collection itself is not downloaded.
 
 PDF details, for the issues read from their PDF: issues of about 2000 to 2005 use fonts that write
 glyph numbers instead of letters ("6RPPDLUH" for "Sommaire"), decoded by `lib/veille/glyphs.ts`;

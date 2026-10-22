@@ -299,9 +299,15 @@ function Journal({ feed }: { feed: Feed }) {
                       </span>
                       {statusOf(h) !== "a-lire" ? <span className="badge veille-status">{STATUSES[statusOf(h)]}</span> : null}
                     </span>
-                    <span className="veille-hit-title">{h.title}</span>
+                    <span className="veille-hit-title" dir="auto">
+                      {h.title}
+                    </span>
                   </summary>
-                {h.institution ? <div className="veille-institution">{h.institution}</div> : null}
+                {h.institution ? (
+                  <div className="veille-institution" dir="auto">
+                    {h.institution}
+                  </div>
+                ) : null}
                 <dl className="veille-tags">
                   <div>
                     <dt>Domaine</dt>

@@ -12,6 +12,7 @@
  * wrapped lines are held until the line that ends with its page. The sommaire ends where the texts
  * themselves start ("Par décret…", "Nous, …", "Vu …").
  */
+import { arFold, isArabic, isoDateAr } from "./arabe";
 import { clean, INSTITUTION, type Issue, isoDate, kindOf, MONTHS, sommaireEntry, TEXT_START } from "./jort";
 
 // Section headings of the sommaire, as the OCR writes them over the years.
@@ -130,7 +131,7 @@ function read(md: string): { issue: Issue; ended: boolean } {
   if (start < 0) {
     // No "Sommaire": an Arabic edition filed as French (2019, 2023, 2026…) says so by its letters.
     const arabic = (md.slice(0, 20_000).match(/[\u0600-\u06FF]/g) ?? []).length;
-    if (arabic > 300) return { issue: { ...issue, arabe: true }, ended: true };
+    if (arabic > 300) return readArabic(pages);
     return { issue, ended: false };
   }
 
@@ -209,6 +210,155 @@ function read(md: string): { issue: Issue; ended: boolean } {
   }
   // Lines without a page after the last title are the start of the texts, not titles: dropped.
   return { issue, ended };
+}
+
+// The Arabic sommaire (read folded: one alef, hā for tā marbūṭa, ي for ى).
+const AR_START = /^(المحتوي|المحتويات|المحترم|الفهرس|فهرس)$/;
+const AR_SECTION =
+  /^(القوانين|القوانين الاساسيه|قوانين|المراسيم|مراسيم|الاوامر والقرارات|اوامر وقرارات|الاوامر|القرارات|الاراء والبلاغات|اراء وبلاغات|الاعلانات|البلاغات|المنشورات|المقررات)$/;
+const AR_INSTITUTION =
+  /^(وزاره|رئاسه|الهيئه|هيئه|البنك المركزي|مجلس|المجلس|محكمه|المحكمه|الكتابه العامه|كتابه الدوله|ديوان|الديوان|الوكاله|المعهد|الاداره العامه|دائره المحاسبات)/;
+const AR_TITLE =
+  /^(قانون|مرسوم|امر|قرار|مقرر|منشور|راي|بلاغ|اعلان|تسميه|انهاء|اسناد|ترقيه|تكليف|احاله|ابقاء|اعفاء|قائمه|جدول|محضر|تفويض|نتائج)(?![\u0600-\u06FF])/;
+// The texts start: "إن رئيس الجمهورية،", "بعد الاطلاع على…", "الفصل الأول", "بمقتضى أمر…".
+const AR_BODY = /^(ان رئيس|ان رئيسه|ان وزير|ان وزيره|بعد الاطلاع|وبعد الاطلاع|يصدر|يصدر الامر|الفصل الاول|الفصل 1|بمقتضي|باقتراح|اصدرنا|باسم الشعب)/;
+// A year closing a line ("لسنة 2022", "ديسمبر 2023") is not a page.
+const AR_YEAR = /(لسنه|سنه|بعنوان|جانفي|فيفري|مارس|افريل|ماي|جوان|جويليه|اوت|سبتمبر|اكتوبر|نوفمبر|ديسمبر) \d{4}\.?$/;
+
+/**
+ * The sommaire of the Arabic edition: sections, institutions, and titles that start with their
+ * kind (قانون، أمر، قرار، تسمية…) and run to the next one. The OCR sets page numbers on a line of
+ * their own before a title, or at either end of one of its lines; a title left without one takes
+ * the next title's page.
+ */
+function readArabic(pages: string[][]): { issue: Issue; ended: boolean } {
+  const all = pages.flatMap((lines, page) => lines.map((raw) => ({ raw, page, text: arFold(plain(raw)) })));
+  let start = all.findIndex((l) => AR_START.test(l.text));
+  if (start < 0) start = all.findIndex((l) => AR_SECTION.test(l.text)) - 1;
+  // No heading at all (a PDF whose headings are images): from the first title of the first page.
+  if (start < -1) start = all.findIndex((l) => l.page === 0 && AR_TITLE.test(l.text)) - 1;
+  const header = all.slice(0, start >= 0 ? start + 1 : 40).map((l) => l.text);
+  // "24 عدد" or "عدد 96", not the volume next to "السنة" ("السنة 169 عدد 96").
+  const number = header
+    .flatMap((l) => [...l.matchAll(/(?:^|\s)(\d{1,3}) عدد(?=\s|$)|(?:^|\s)عدد (\d{1,3})(?=\s|$)/g)])
+    .find((m) => !new RegExp(`السنه ${m[1] ?? m[2]}(?!\\d)|(?<!\\d)${m[1] ?? m[2]} السنه`).test(m.input!));
+  const dated = header.map((l) => isoDateAr(l)).find(Boolean);
+  // Page footers: "صفحة 160", "ص 882".
+  const votes = new Map<number, number>();
+  for (const l of all.slice(0, 400)) {
+    const m = /^(?:صفحه|ص) (\d{1,4})$/.exec(l.text);
+    if (m) votes.set(Number(m[1]) - l.page, (votes.get(Number(m[1]) - l.page) ?? 0) + 1);
+  }
+  const firstPage = [...votes].sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
+  const issue: Issue = {
+    number: number ? Number(number[1] ?? number[2]) : null,
+    date: dated ?? null,
+    firstPage: firstPage !== null && firstPage > 0 ? firstPage : null,
+    entries: [],
+    arabe: true,
+  };
+  if (start < -1) return { issue, ended: true };
+
+  let section: string | null = null;
+  let institution: string | null = null;
+  let current: { lines: string[]; page: number | null; institution: string | null; section: string | null } | null = null;
+  let pendingPage: number | null = null;
+  let lastPage: number | null = issue.firstPage;
+  const found: { institution: string | null; section: string | null; title: string; page: number | null }[] = [];
+  const sections = new Map<string, number>();
+  const page = (n: string, text: string) => {
+    const p = Number(n);
+    if (AR_YEAR.test(text) || p < 1) return null;
+    return lastPage === null ? (p < 10000 ? p : null) : p >= lastPage - 60 && p <= lastPage + 600 ? p : null;
+  };
+  const flush = () => {
+    if (current?.lines.length) {
+      found.push({ institution: current.institution, section: current.section, title: clean(current.lines.join(" ")).replace(/[.\s]+$/, ""), page: current.page });
+      if (current.page !== null) lastPage = current.page;
+    }
+    current = null;
+  };
+  let ended = false;
+  for (const { raw, page: at, text: folded } of all.slice(start + 1)) {
+    if (at >= 6) {
+      ended = true;
+      break;
+    }
+    let text = folded
+      .replace(/^[-–•*]\s+/, "")
+      .replace(/\s*(?:[.…·_]\s*){2,}/g, " ") // dot leaders
+      .trim();
+    if (!text || /^-{3,}$/.test(text) || /^!\[/.test(text) || /الرائد الرسمي/.test(text) || /^(صفحه|ص) \d+$/.test(text) || /^(\d{1,3} عدد|عدد \d{1,3})$/.test(text)) continue;
+    if (/^\d{1,4}$/.test(text)) {
+      // The page's own number (its footer) is not a title's.
+      if (issue.firstPage === null || Number(text) !== issue.firstPage + at) pendingPage = page(text, "") ?? pendingPage;
+      continue;
+    }
+    if (!isArabic(text)) continue; // the signature block, "II" and other OCR noise
+    if (AR_BODY.test(text)) {
+      if (found.length || current) {
+        ended = true;
+        break;
+      }
+      continue;
+    }
+    if (AR_SECTION.test(text)) {
+      flush();
+      if ((found.length || current) && (sections.get(text) ?? at) < at) {
+        ended = true;
+        break;
+      }
+      if (!sections.has(text)) sections.set(text, at);
+      section = raw.replace(/^#+\s*/, "").trim();
+      institution = null;
+      continue;
+    }
+    // A page number at the start of a line: the end of the title before, as the page is laid out
+    // right to left; at the end of a line: this title's.
+    const lead = /^(\d{1,4}) (.+)$/.exec(text);
+    // "… عدد 54 لسنة" / "2022 المؤرخ في…": a year wrapped to the next line is not a page.
+    const year = !!lead && !!current && /(لسنه|سنه|بعنوان|[\u0600-\u06FF]+ \d{1,2})$/.test(current.lines.at(-1) ?? "");
+    if (lead && year) {
+      current!.lines.push(lead[1]);
+      text = lead[2];
+    } else if (lead) {
+      const p = page(lead[1], "");
+      if (p !== null) {
+        if (current && current.page === null) current.page = p;
+        else if (!AR_TITLE.test(lead[2])) pendingPage = p;
+      }
+      // A misread number before a title still leaves the title to start its line.
+      if (p !== null || AR_TITLE.test(lead[2])) text = lead[2];
+    }
+    if (AR_TITLE.test(text)) {
+      flush();
+      current = { lines: [], page: pendingPage, institution, section };
+      pendingPage = null;
+    } else if (AR_INSTITUTION.test(text) || (/^#/.test(raw) && !current)) {
+      flush();
+      institution = raw.replace(/^#+\s*/, "").replace(/\*\*/g, "").trim();
+      continue;
+    } else if (!current) continue;
+    const trail = /^(.*\S) (\d{1,4})\.?$/.exec(text);
+    const p = trail ? page(trail[2], text) : null;
+    if (trail && p !== null) {
+      current!.lines.push(trail[1]);
+      if (current!.page === null) current!.page = p;
+    } else current!.lines.push(text);
+  }
+  flush();
+  // Titles left without a page take the next title's, or the one before.
+  for (let i = found.length - 1, next: number | null = null; i >= 0; i--) {
+    if (found[i].page === null) found[i].page = next;
+    else next = found[i].page;
+  }
+  let before = issue.firstPage ?? 0;
+  for (const f of found) {
+    if (f.page === null) f.page = before;
+    before = f.page;
+    if (f.title.length >= 8) issue.entries.push(sommaireEntry(f.institution, f.section, f.title, f.page));
+  }
+  return { issue, ended: ended || !!found.length };
 }
 
 /** A line that opens a title: "DECRET N°…", "NOMINATION de…", "Arrêté du…". */

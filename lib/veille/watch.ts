@@ -11,6 +11,8 @@
  * never a legal conclusion.
  */
 import watch from "@/data/veille/watch.json";
+import watchAr from "@/data/veille/watch-ar.json";
+import { arFold, isArabic } from "./arabe";
 import type { Issue, SommaireEntry } from "./jort";
 import { kindOf, pdfPage, pdfUrl } from "./jort";
 
@@ -129,23 +131,45 @@ export function subject(title: string): string {
   return m ? t.slice(m[0].length) : t;
 }
 
-function apply(rule: Rule, text: string, institution: string): Match | null {
+function apply(rule: Rule, text: string, institution: string, has = contains): Match | null {
   if (rule.institution) {
-    const terms = rule.institution.filter((t) => contains(institution, t));
+    const terms = rule.institution.filter((t) => has(institution, t));
     return terms.length ? { rule: rule.id, label: rule.label, terms } : null;
   }
-  const terms = (rule.any ?? []).filter((t) => contains(text, t));
+  const terms = (rule.any ?? []).filter((t) => has(text, t));
   if (!terms.length) return null;
   if (rule.with) {
-    const also = rule.with.filter((t) => contains(text, t));
+    const also = rule.with.filter((t) => has(text, t));
     if (!also.length) return null;
     terms.push(...also);
   }
   return { rule: rule.id, label: rule.label, terms };
 }
 
+type ArTerms = string[] | { any?: string[]; with?: string[]; institution?: string[] };
+const ar = watchAr as unknown as { ignore: string[]; ignoreAnywhere: string[]; demote: string[]; rules: Record<string, ArTerms> };
+const AR_IGNORE = ar.ignore.map(arFold);
+const AR_ANYWHERE = ar.ignoreAnywhere.map(arFold);
+const AR_DEMOTE = ar.demote.map(arFold);
+/** The same rules with their Arabic terms (data/veille/watch-ar.json), for Arabic titles. */
+const arRule = (rule: Rule): Rule => {
+  const t = ar.rules[rule.id];
+  const terms = Array.isArray(t) ? { any: t } : (t ?? {});
+  return { ...rule, any: terms.any?.map(arFold), with: terms.with?.map(arFold), institution: rule.institution ? (terms.institution ?? []).map(arFold) : undefined };
+};
+const AR_REFERENCES = rules.references.map(arRule);
+const AR_RULES = rules.rules.map(arRule);
+// Arabic attaches prefixes to words (ال, ب, و): a term is found as part of a word.
+const containsAr = (text: string, term: string) => text.includes(term);
+/** An Arabic title's subject: what comes from "يتعلق" ("relatif à"), else the whole title. */
+const subjectAr = (folded: string) => folded.slice(Math.max(folded.indexOf("يتعلق"), 0));
+
 /** Titles the veille never reports: nominations, concours, the State's budget… */
 export function ignored(title: string): boolean {
+  if (isArabic(title.slice(0, 30))) {
+    const t = arFold(title).replace(/^[\d\s-]+/, "");
+    return AR_IGNORE.some((p) => t.startsWith(p)) || AR_ANYWHERE.some((p) => t.includes(p));
+  }
   const full = fold(title).replace(/^[-–—•*\s]+/, ""); // "- Nomination de…": a list mark of the OCR
   return rules.ignore.some((p) => full.startsWith(fold(p))) || rules.ignoreAnywhere.some((p) => contains(full, p));
 }
@@ -154,20 +178,23 @@ export function ignored(title: string): boolean {
 export function assess(
   entry: Pick<SommaireEntry, "title"> & Partial<Pick<SommaireEntry, "institution">>,
 ): Pick<Hit, "severity" | "domains" | "sectors" | "impacts" | "matches"> | null {
-  const full = fold(entry.title);
   if (ignored(entry.title)) return null;
-  const text = subject(entry.title);
-  const institution = fold(entry.institution ?? "");
+  const arabic = isArabic(entry.title.slice(0, 30));
+  const full = arabic ? arFold(entry.title) : fold(entry.title);
+  const text = arabic ? subjectAr(full) : subject(entry.title);
+  const institution = arabic ? arFold(entry.institution ?? "") : fold(entry.institution ?? "");
+  const has = arabic ? containsAr : contains;
   // References are looked for in the whole title: "modifiant l'arrêté du 15 novembre 2005" is
   // after the issuer, but a reference may also sit in it.
-  const refs = rules.references.map((r) => [r, apply(r, full, institution)] as const).filter(([, m]) => m);
-  const others = rules.rules.map((r) => [r, apply(r, text, institution)] as const).filter(([, m]) => m);
+  const refs = (arabic ? AR_REFERENCES : rules.references).map((r) => [r, apply(r, full, institution, has)] as const).filter(([, m]) => m);
+  const others = (arabic ? AR_RULES : rules.rules).map((r) => [r, apply(r, text, institution, has)] as const).filter(([, m]) => m);
   if (!refs.length && !others.length) return null;
   // A text found only by its institution, with nothing in its title, is information at most; so is
   // an international agreement or a one-off act (rules.demote).
+  const demoted = arabic ? AR_DEMOTE.some((p) => full.includes(p)) : rules.demote.some((p) => contains(full, p));
   const severity: Severity = refs.length
     ? "critique"
-    : others.some(([r]) => r.level === "important" && !r.institution) && !rules.demote.some((p) => contains(full, p))
+    : others.some(([r]) => r.level === "important" && !r.institution) && !demoted
       ? "important"
       : "information";
   const all = [...refs, ...others];

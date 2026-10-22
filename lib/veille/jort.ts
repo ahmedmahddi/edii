@@ -10,6 +10,8 @@
  * turns a PDF into such lines.
  */
 
+import { frenchCitations, isArabic, isoDateAr, kindOfAr } from "./arabe";
+
 export interface Line {
   x: number; // left edge
   y: number; // baseline, from the bottom of the page
@@ -32,7 +34,7 @@ export interface Issue {
   entries: SommaireEntry[];
   sansTexte?: boolean; // a scanned issue: its pages are images, with no text to read
   source?: "ocr" | "pdf"; // read from the OCR text of ocr.jort.tn, or from the PDF's own text
-  arabe?: boolean; // the file is the Arabic edition, filed in the French collection: nothing to read
+  arabe?: boolean; // the file is the Arabic edition, filed in the French collection: its titles are in Arabic
 }
 
 export const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
@@ -50,7 +52,7 @@ export const TEXT_START = /^(lois?|loi organique|décrets?(?:-lois?)?|arrêtés?
 
 export function isoDate(text: string): string | null {
   const m = DATE.exec(text);
-  if (!m) return null;
+  if (!m) return isArabic(text) ? isoDateAr(text) : null;
   const month = MONTHS.indexOf(m[2].toLowerCase()) + 1;
   return `${m[3]}-${String(month).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
 }
@@ -73,13 +75,16 @@ const KINDS: [RegExp, string][] = [
 ];
 
 export function kindOf(title: string): string {
+  if (isArabic(title.slice(0, 20))) return kindOfAr(title);
   const t = title.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
   return KINDS.find(([re]) => re.test(t))?.[1] ?? "Autre";
 }
 
 /** A line of the sommaire, with what is read from its title. */
 export function sommaireEntry(institution: string | null, section: string | null, title: string, page: number): SommaireEntry {
-  return { institution, section, title, page, kind: kindOf(title), numbers: [...title.matchAll(/n°\s*(\d{2,4}-\d{1,5})/gi)].map((m) => m[1]) };
+  // An Arabic title's numbers are read once written as a French title would write them.
+  const named = isArabic(title) ? frenchCitations(title) : title;
+  return { institution, section, title, page, kind: kindOf(title), numbers: [...named.matchAll(/n°\s*(\d{2,4}-\d{1,5})/gi)].map((m) => m[1]) };
 }
 
 export const clean = (s: string) =>

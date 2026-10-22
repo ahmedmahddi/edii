@@ -33,6 +33,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import path from "node:path";
 import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../lib/veille/jort";
 import { fetchRetry, fetchText } from "../lib/veille/fetch";
+import { arabicPdfMarkdown, mostlyArabic } from "../lib/veille/arabe";
 import { ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
 import { amendments, catalogue } from "../lib/registre/referentiel";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
@@ -140,10 +141,12 @@ async function openMarkdown(year: number, number: number): Promise<Issue | null>
  */
 async function fetchIssue(year: number, number: number): Promise<Issue | null> {
   const ocr = await openMarkdown(year, number);
-  if (ocr?.entries.length || ocr?.arabe) return ocr; // the Arabic edition in the French collection: its PDF is too
+  if (ocr?.entries.length) return ocr;
   const pdf = await openIssue(year, number, SOMMAIRE_PAGES);
   if (!pdf) return ocr;
-  const issue: Issue = { ...parseIssue(pdf.lines), source: "pdf" };
+  // The Arabic edition filed as French, with no OCR text yet: its PDF read right to left.
+  const arabic = mostlyArabic(pdf.lines.slice(0, 2).flat().map((l) => l.text).join(" "));
+  const issue: Issue = { ...(arabic ? parseMarkdown(arabicPdfMarkdown(pdf.lines)) : parseIssue(pdf.lines)), source: "pdf" };
   // A scan without OCR text yet: its pages are images.
   issue.sansTexte = pdf.lines.slice(0, 3).reduce((n, lines) => n + lines.reduce((m, l) => m + l.text.length, 0), 0) < MIN_TEXT || undefined;
   return ocr && ocr.entries.length >= issue.entries.length && !issue.sansTexte ? ocr : issue;
@@ -180,7 +183,8 @@ async function readIssue(feed: Feed, year: number, number: number, issue: Issue)
   }
   issue.number = number;
   if (issue.sansTexte) console.warn(`  ! n° ${number}: numéro scanné (images), pas encore de texte OCR sur ocr.jort.tn : à relire plus tard (--reread)`);
-  else if (issue.arabe) console.warn(`  ! n° ${number}: édition arabe à la place de la française (fichier de jort.tn) : rien à lire`);
+  else if (issue.arabe && !issue.entries.length) console.warn(`  ! n° ${number}: édition arabe à la place de la française (fichier de jort.tn), sommaire introuvable`);
+  else if (issue.arabe) console.warn(`  ! n° ${number}: édition arabe à la place de la française (fichier de jort.tn) : lue en arabe`);
   else if (!issue.entries.length) console.warn(`  ! n° ${number}: sommaire introuvable (mise en page inconnue) : à signaler`);
   saveSommaire(year, issue);
   const next = record(feed, year, issue);
@@ -349,7 +353,7 @@ async function main(): Promise<void> {
     let done = 0;
     for (const y of stored().filter((y) => !only || only.has(y.year)).sort((a, b) => b.year - a.year)) {
       // Scans are read again too: their OCR text may have come out since.
-      const todo = Object.values(y.issues).filter((i) => i.number !== null && !i.arabe && (!i.entries.length || glued(i)));
+      const todo = Object.values(y.issues).filter((i) => i.number !== null && (!i.entries.length || glued(i)));
       if (!todo.length) continue;
       console.log(`JORT ${y.year} : ${todo.length} numéros à relire`);
       for (const issue of todo) {

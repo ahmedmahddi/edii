@@ -69,7 +69,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 90 tests
+npm test                                 # 92 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -83,7 +83,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 90 tests in 5 files
+npm test                 # vitest: 92 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -122,7 +122,9 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `app/components/download.ts` | Browser downloads; `downloadWorkbook` (exceljs on demand). |
 | `app/globals.css` | All styles (design tokens on `:root`; the user's redesign, see `DESIGN.md`, `design-tokens.json`, `design-preview.html`). One-line rules. |
 | `lib/classify.ts`, `lib/establishment.ts`, `lib/studies.ts`, `lib/report.ts`, `lib/sectors.ts` | Classification, establishment and addition rule, ANPE study, report model, sector names (see README). |
-| `lib/veille/markdown.ts` | **Sommaire from the OCR text** (ocr.jort.tn): `parseMarkdown`, `parseMarkdownStart` (partial download), `markdownPages`, `ocrUrl`. |
+| `lib/veille/markdown.ts` | **Sommaire from the OCR text** (ocr.jort.tn): `parseMarkdown`, `parseMarkdownStart` (partial download), `markdownPages`, `ocrUrl`; `readArabic` for Arabic files. |
+| `lib/veille/arabe.ts` | Arabic titles: `arFold`, `isArabic`, `mostlyArabic`, `isoDateAr`, `kindOfAr`, `numeroAr`, `frenchCitations`, `arabicPdfMarkdown`. |
+| `lib/veille/fetch.ts` | Downloads with timeout and retries (`fetchRetry`, `fetchText`). |
 | `lib/veille/jort.ts` | Shared types (`Issue`, `SommaireEntry`, `Line`), the **PDF** sommaire parser `parseIssue`, `isSommairePage`, `kindOf`, `isoDate`, `sommaireEntry`, `pdfUrl`, `pdfPage`, `INSTITUTION`, `TEXT_START`. |
 | `lib/veille/pdf.ts` | PDF → positioned lines: `pdfLines(data)`, `pdfLinesFromUrl(url)` (HTTP range requests), `pdfPageImages`, `toLines`. |
 | `lib/veille/glyphs.ts` | Decoder for 2000-2005 fonts that write glyph numbers instead of letters (PDF path only). |
@@ -137,6 +139,7 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `data/sources/`, `data/ocr/`, `data/pipeline/`, `data/nomenclature.json`, `data/eie*.json`, `data/corrections.json`, `data/review.md` | Classification and decree data (see README). |
 | `data/sources/ocr/` | First pages of 5 real OCR texts (1960 n° 1, 1965 n° 40, 1980 n° 1, 2023 n° 108, 2024 n° 2), for the tests. |
 | `data/veille/watch.json` | Veille rules (domains, levels, ignore lists, `when`, register mapping, `suggere`). |
+| `data/veille/watch-ar.json` | Arabic terms of the same rules (by rule id), Arabic ignore and demote lists. |
 | `data/veille/sommaires/<year>.json` | Every sommaire read (committed; the source of truth of the veille). Each issue says where it was read: `source: "ocr"` or `"pdf"`. |
 | `data/veille/probe/` | PDF probe samples (2 issues every 5 years, JPEG pages of the scans). Kept for reference; the OCR text made the OCR plan unnecessary. |
 | `data/referentiel/textes.json` | Curated référentiel (74 texts). |
@@ -207,9 +210,30 @@ reading found (same page 99%), and more in about 113 issues (PDFs whose text is 
 n° 7: 77 titles instead of 10; 2024 n° 19: 42 instead of 0). On a sample of 110 issues 1957-1994:
 24 titles per issue, 91% with their institution, one empty (an Arabic file).
 
-**Not ours to fix:** some files of the French collection are the **Arabic** edition (2019: 30
-issues; 2023 n° 138, 142; 2026 n° 11, 13, 44, 62, 76; 1959 n° 30): no French sommaire; marked
-`arabe: true` (Arabic letters, no "Sommaire") and skipped by `--reread`. `api.jort.tn` is
+**Arabic files in the French collection** (2019: 30 issues; 2023 n° 138, 142; 2026 n° 11, 13, 44,
+62, 76, 96, 98; 1959 n° 30 is the Constitution, no sommaire). **Decision of 22 October: read them
+in Arabic**, not the whole Arabic collection. `arabe: true` on the issue; titles stay in Arabic
+(shown `dir="auto"`). How (`lib/veille/arabe.ts`, `readArabic` in `markdown.ts`):
+
+* text folded with `arFold` (NFKC for the PDFs' presentation forms, no diacritics/tatweel, ا for
+  أإآٱ, ي for ى, ه for ة); sommaire from "المحتوى" (OCR variants المحترم, الفهرس), else the first
+  section, else the first title; sections القوانين / الأوامر والقرارات / المراسيم…; institutions
+  وزارة / رئاسة / الهيئة…; a title starts with its kind (قانون, مرسوم, أمر, قرار, منشور, تسمية,
+  إنهاء…) and runs to the next; page numbers on their own line (before the title), or at either
+  end of a line; the page's own footer number is skipped; a year wrapped after "لسنة" is not a page;
+  ends at "إن رئيس الجمهورية", "بعد الاطلاع", "الفصل الأول"…;
+* kind, number ("عدد 25 لسنة 2019" → 2019-25; before 2000 two digits: 68-88), date (Tunisian and
+  Mashriq months) → `kindOf`, `isoDate`, `sommaireEntry` handle Arabic;
+* `frenchCitations` rewrites the texts a title names as French ("الأمر عدد 1991 لسنة 2005" →
+  "decret n° 2005-1991"; "القرار المؤرخ في 28 نوفمبر 1995" → "arrete du 28 novembre 1995"): keys,
+  `citedKeys`, amendments, alerts and series work unchanged;
+* rules: Arabic terms per rule id in `data/veille/watch-ar.json` (+ Arabic ignore/demote), matched
+  as substrings of the folded subject (from "يتعلق"); avoid short terms hidden in other words
+  ("التن" in "التنمية", "المصب" in "المصبرات"; "الآجر" bricks = "الأجر" wages once folded);
+* no OCR text yet: the PDF is read when `mostlyArabic`; `toLines` puts Arabic lines right to left
+  and keeps digit runs left to right (2026 n° 96: 22 titles).
+
+2019 after `--reread`: 30 Arabic issues, 1,135 titles, no issue left empty. `api.jort.tn` is
 blocked by Cloudflare from the cloud.
 
 **PDF reading** (kept as fallback, `parseIssue`): sommaire pages = pages with ≥ 2 lines ending in
@@ -419,6 +443,8 @@ it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
   conditionnement)" were the user's examples) → the activity rules.
 * **22 October:** taxes, customs and loi de finances: **suggested, not ticked**.
 * **22 October:** the user reads 1957-1986 on the laptop (§2).
+* **22 October:** an Arabic file found in the French collection (OCR text or PDF) is **read in
+  Arabic and its texts added**; the Arabic collection as a whole is **not** downloaded.
 * Not answered yet: how to cut the number of ticked texts further (§11 step 3); should subsidies/
   aid to a sector (subventions, primes) appear as information? (Currently ignored.)
 
@@ -461,7 +487,7 @@ it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
 
 ## 12. How things were verified
 
-* **Vitest** (90 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (92 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).
@@ -488,6 +514,9 @@ it gave more titles. 1957-1985 and most of 1986: not read yet (§2).
 * **Kinds of text** (`kindOf`) are read without accents ("DECRET", "ARRETE"); a hit's kind is taken
   from its title each time rules are applied, so stored kinds don't matter.
 * In a cloud session, **Node's fetch needs `NODE_USE_ENV_PROXY=1`** to go through the proxy.
+* **The tool layer turns `\uXXXX` escapes into the characters themselves** when writing files from
+  a session: write Unicode ranges in code through a script (`chr(92) + "u0600"`) to keep them
+  readable as escapes.
 * **Downloads go through `lib/veille/fetch.ts`** (`fetchRetry`, `fetchText`): 60 s timeout, retries
   after 2, 5, 15, 30 s on a reset, a timeout, 408/429/5xx. Before it, one `ECONNRESET` on the
   user's home connection ended the run, and a stalled download hung it.

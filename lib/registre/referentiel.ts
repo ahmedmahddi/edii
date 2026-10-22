@@ -8,6 +8,7 @@
  * ("arrêté du 10 janvier 1995"); that is also how a new JORT title is seen to modify it.
  */
 import curated from "@/data/referentiel/textes.json";
+import { arFold, frenchCitations, isArabic } from "../veille/arabe";
 import { isoDate, pdfPage, pdfUrl } from "../veille/jort";
 import { type Amendment, fold, type Hit, ignored, rules, type Severity, type Sommaires, subject } from "../veille/watch";
 import { applies, type Site } from "./profil";
@@ -41,7 +42,8 @@ const DATE = `(\\d{1,2})(?:er)? (${MONTHS.join("|")}) (\\d{4})`;
 
 /** Folded, with "n° 2013- 5183" made "n° 2013-5183" and plurals of kinds made singular. */
 function prepare(title: string): string {
-  return fold(title)
+  // An Arabic title names texts as a French one once its citations are rewritten.
+  return fold(isArabic(title) ? frenchCitations(title) : title)
     .replace(/(\d)\s*-\s+(\d)/g, "$1-$2")
     .replace(/\b(lois|decrets|arretes|decisions|circulaires)\b/g, (k) => k.slice(0, -1))
     .replace(/\bdecret (?:gouvernemental|presidentiel)\b/g, "decret")
@@ -112,7 +114,7 @@ const ruleById = new Map([...rules.references, ...rules.rules].map((r) => [r.id,
 
 /** A text the veille found in the JORT, as a text of the référentiel. */
 export function fromHit(hit: Hit): Texte {
-  const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(hit.title)?.[1].replace(/\s/g, "");
+  const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(isArabic(hit.title) ? frenchCitations(hit.title) : hit.title)?.[1].replace(/\s/g, "");
   const when = [...new Set(hit.matches.flatMap((m) => ruleById.get(m.rule)?.when ?? []))];
   const labels = hit.matches.filter((m) => !m.rule.startsWith("ref-")).map((m) => m.label);
   // Ticked where an important rule outside the suggested domains (taxes, customs) places it; a
@@ -151,6 +153,12 @@ export function fromHit(hit: Hit): Texte {
  * that modifies another (each modification counts) or a subject too short to tell.
  */
 export function seriesKey(title: string): string | null {
+  if (isArabic(title)) {
+    // From "يتعلق", without numbers: "يتعلق بضبط الاجر الادني المضمون…".
+    const f = arFold(title);
+    const t = f.slice(Math.max(f.indexOf("يتعلق"), 0)).replace(/[\d.،,]+/g, " ").replace(/\s+/g, " ").trim();
+    return t.length >= 25 && !/تنقيح|اتمام|الغاء|التمديد/.test(t) ? t : null;
+  }
   const t = subject(title)
     .replace(/^(?:loi|decret|arrete|decision|circulaire)s?\b[^,]*?\d{4}\s*,\s*/, "")
     .replace(/n°\s*[\d-]+/g, "")
@@ -223,7 +231,8 @@ export function amendments(years: Sommaires[], texts: Texte[]): Amendment[] {
     for (const issue of Object.values(y.issues)) {
       if (issue.number === null) continue;
       issue.entries.forEach((e, index) => {
-        if (!/modifi|complet|abrog|remplac|prorog|application/.test(fold(e.title)) || ignored(e.title)) return;
+        // Modifying, completing, repealing… ("تنقيح", "إتمام", "إلغاء" in an Arabic title).
+        if (!/modifi|complet|abrog|remplac|prorog|application|تنقيح|اتمام|الغاء|تعويض|التمديد|تطبيق/.test(isArabic(e.title) ? arFold(e.title) : fold(e.title)) || ignored(e.title)) return;
         const cites = cited(e.title).filter(names).map((n) => n.key);
         if (!cites.length) return;
         out.push({

@@ -6,6 +6,7 @@ import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { INSTITUTION, type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl, TEXT_START } from "@/lib/veille/jort";
 import { ocrUrl, parseMarkdown, parseMarkdownStart } from "@/lib/veille/markdown";
+import { frenchCitations } from "@/lib/veille/arabe";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
@@ -198,10 +199,27 @@ describe("reading a sommaire from the OCR text of ocr.jort.tn", () => {
     expect(ocrUrl(1980, 1)).toBe("https://ocr.jort.tn/journal-officiel/fr/1980/001.md");
   });
 
-  it("knows the Arabic edition filed in the French collection, with nothing to read", () => {
-    const md = ["<!-- page:1 -->", "# الرائد الرسمي للجمهورية التونسية", ...Array(40).fill("أمر عدد 735 لسنة 2023 مؤرخ في 29 نوفمبر 2023 يتعلق بالمصادقة على اتفاق")].join("\n");
-    expect(parseMarkdown(md)).toMatchObject({ arabe: true, entries: [] });
+  it("reads the Arabic edition filed in the French collection (2019 n° 24)", () => {
+    const issue = parseMarkdown(ocr("2019-024-arabe.md"));
+    expect(issue).toMatchObject({ arabe: true, number: 24, date: "2019-03-22" });
+    expect(issue.entries.length).toBeGreaterThanOrEqual(15);
+    const law = issue.entries[0];
+    expect(law).toMatchObject({ kind: "Loi", numbers: ["2019-25"], page: 883, section: "القوانين" });
+    // The law on food safety: found by the Arabic terms of the rules, as its French title would be.
+    expect(assess(law)).toMatchObject({ severity: "important", domains: ["hygiene"] });
+    const molluscs = issue.entries.find((e) => /الرخويات/.test(e.title))!;
+    expect(molluscs).toMatchObject({ kind: "Arrêté", institution: "وزارة الفلاحة والموارد المائية والصيد البحري" });
     expect(parseMarkdown(ocr("1980-001.md")).arabe).toBeUndefined();
+  });
+
+  it("reads the texts an Arabic title names, as a French title would name them", () => {
+    const title = "أمر عدد 758 لسنة 2023 مؤرخ في 8 ديسمبر 2023 يتعلق بتنقيح الأمر عدد 1991 لسنة 2005 المؤرخ في 11 جويلية 2005";
+    expect(frenchCitations(title)).toMatch(/^decret n° 2023-758 يتعلق بتنقيح decret n° 2005-1991/);
+    expect(assess({ title })?.severity).toBe("critique"); // it modifies the décret on impact studies
+    expect(isoDate("قرار من وزير المالية مؤرخ في 15 مارس 2019")).toBe("2019-03-15");
+    expect(kindOf("قانون أساسي عدد 5 لسنة 2026")).toBe("Loi organique");
+    // Bricks and wages fold to the same letters: no "الآجر" among the terms.
+    expect(assess({ title: "أمر عدد 66 لسنة 2026 مؤرخ في 30 أفريل 2026 يتعلق بضبط الأجر الأدنى الفلاحي المضمون" })?.matches.map((m) => m.rule)).toEqual(["salaire-minimum"]);
   });
 
   it("sees the end of a word after an accented letter", () => {
