@@ -112,13 +112,22 @@ export function citedKeys(title: string): string[] {
 const SUGGESTED = new Set(rules.registre.suggere ?? []);
 const ruleById = new Map([...rules.references, ...rules.rules].map((r) => [r.id, r]));
 
+/** A title that modifies, completes, repeals or extends another text ("modifiant le décret…", "تنقيح"). */
+export function modifiesAnother(title: string): boolean {
+  if (isArabic(title)) return /تنقيح|اتمام|الغاء|التمديد/.test(arFold(title));
+  return /\b(modifiant|modifie|completant|portant modification|abrogeant|prorogeant|rectificatif)\b/.test(subject(title));
+}
+
 /** A text the veille found in the JORT, as a text of the référentiel. */
 export function fromHit(hit: Hit): Texte {
   const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(isArabic(hit.title) ? frenchCitations(hit.title) : hit.title)?.[1].replace(/\s/g, "");
   const when = [...new Set(hit.matches.flatMap((m) => ruleById.get(m.rule)?.when ?? []))];
   const labels = hit.matches.filter((m) => !m.rule.startsWith("ref-")).map((m) => m.label);
   // Ticked where an important rule outside the suggested domains (taxes, customs) places it; a
-  // text kept as information (sector news, an international agreement) is only suggested.
+  // text kept as information (sector news, an international agreement) is only suggested. A text
+  // that only modifies another is ticked on the site's activities, or when it modifies a text the
+  // app is built on; elsewhere it is suggested, and shows on its base text ("Modifié par").
+  const modifies = modifiesAnother(hit.title);
   const coche =
     hit.severity === "information"
       ? []
@@ -127,6 +136,7 @@ export function fromHit(hit: Hit): Texte {
             hit.matches
               .map((m) => ruleById.get(m.rule))
               .filter((r) => r && r.level !== "information" && !SUGGESTED.has(r.domain ?? ""))
+              .filter((r) => !modifies || r!.id.startsWith("act-") || r!.id.startsWith("ref-"))
               .flatMap((r) => r!.when ?? []),
           ),
         ];

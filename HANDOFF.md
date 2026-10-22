@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 92 tests
+npm test                                 # 93 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 92 tests in 5 files
+npm test                 # vitest: 93 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -311,13 +311,22 @@ chimiques, 1500 → déchets dangereux, 2400 → explosifs, 2600 → rayonnement
   matched rules that are important and not in a `suggere` domain (so a text matched by a tax rule
   and by `act-huileries` is ticked for huileries only, suggested elsewhere); a text demoted to
   information is never ticked;
+* **a text that only modifies another** (`modifiesAnother`: "modifiant", "complétant", "abrogeant",
+  "prorogeant", "rectificatif"; تنقيح، إتمام، إلغاء) is ticked only through an activity rule
+  (`act-*`) or a reference (`ref-*`); otherwise it is suggested, and shows as "Modifié par…" on its
+  base text when that text is in the register (decision of 22 October);
 * of a **series** (`seriesKey`: subject without numbers and dates, ≥ 30 characters, not a
   modification: the SMIG of each year, each loi de finances), only the newest is proposed; the older
   ones are marked `remplace` and can still be added by hand;
 * texts with no `when` (conventions collectives in general, marchés publics…) are added by hand
   only (a sectoral convention collective is caught by the activity rules).
 
-**Measured on 1986-2026 data (22 October), ticked / suggested:**
+**Measured on all 1957-2026 data (22 October, after the "base texts + activity" rule), ticked /
+suggested:** chemical plant 969 / 2,650; huilerie 1,054 / 2,137; BTP 811 / 1,734; workshop 636 /
+1,848 (before the rule: 1,230, 1,312, 1,008, 780). About 80% of the ticked JORT texts are older
+than 2006.
+
+**Earlier measure, 1986-2026 only, before that rule:**
 
 | Site | Ticked | of which curated | Suggested |
 |---|---|---|---|
@@ -412,6 +421,9 @@ To get the per-year table again: count `issues`, `entries` and flags in
   conditionnement)" were the user's examples) → the activity rules.
 * **22 October:** taxes, customs and loi de finances: **suggested, not ticked**.
 * **22 October:** the user reads 1957-1986 on the laptop (§2).
+* **22 October:** registers tick **base texts + every text on the site's activities**; a JORT text
+  that only modifies another is ticked only for the site's activities (or a reference text), else
+  suggested.
 * **22 October:** an Arabic file found in the French collection (OCR text or PDF) is **read in
   Arabic and its texts added**; the Arabic collection as a whole is **not** downloaded.
 * Not answered yet: how to cut the number of ticked texts further (§11 step 3); should subsidies/
@@ -428,16 +440,12 @@ To get the per-year table again: count `issues`, `entries` and flags in
    (Secrétariat d'État, DECRET N°…); look at hits per rule and at what is missed (`--list`).
    Watch for OCR typos ("ARRETTES", "DECLET"). One title gave a date in "1020": OCR misreads of
    years exist.
-3. **Decide with the user how many texts a register ticks** (§7 table: 430-775 with 1986-2026;
-   re-measure with 1957-2026, it will be more). Options measured or discussed:
-   * do not tick texts that only modify another (−30%): they show as "Modifié par" on their base
-     text when it is in the register;
-   * tick general (non-activity) JORT texts only from the last N years, or only base laws/decrees;
-   * a register shows ticked texts grouped by domain already; a "principaux textes" view could rank
-     curated + laws + decrees first.
-   The user's own words: sector laws ticked automatically; finance suggested. Ask before cutting.
+3. **Registers are still large** (636-1,054 ticked with 1957-2026). Decided so far: base texts +
+   activity. Further ideas, to put to the user with numbers: general texts older than N years as
+   suggestions; detect repealed texts ("abrogeant le décret n° X" → X no longer proposed); rank
+   curated + laws + decrees first in the register view.
 4. **Check the page with the large data**: open the Veille in the browser (`npm run dev`), create a
-   register for a big site, measure load time (feed.json 5 MB), the register's length and scroll,
+   register for a big site, measure load time (feed.json 8 MB with 1957-2026), the register's length and scroll,
    on desktop and phone. Consider paging register groups or loading the journal by year.
 5. **Grow the curated référentiel**: other client registers (an importer for ID-QSE-002 files would
    help), and have a QSE specialist review the `when` conditions of the 74 texts and the 42 activity
@@ -457,7 +465,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (92 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (93 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).

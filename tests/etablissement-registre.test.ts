@@ -172,6 +172,25 @@ describe("an establishment's register", () => {
     expect(proposals(texts, reg.site).length).toBeGreaterThan(40);
   });
 
+  it("ticks base texts and texts on the site's activities; other modifications are suggested", () => {
+    const huilerie = site({ rubriques: ["1213"], sections: ["1200"], flags: ["denrees", "vehicules"], effectif: 25 });
+    const texts = catalogue([
+      hit("Décret n° 2026-90 du 2 mai 2026, relatif aux règles de sécurité au travail sur les lieux de travail"),
+      hit("Décret n° 2026-91 du 2 mai 2026, modifiant le décret n° 2000-12 du 4 janvier 2000, relatif à la sécurité au travail"),
+      hit("Arrêté du 3 mai 2026, modifiant l'arrêté du 3 mars 2010, fixant les conditions de stockage des grignons et des margines dans les huileries"),
+      hit("Arrêté du 2 mai 2026, modifiant l'arrêté du 15 novembre 2005 fixant la nomenclature des établissements dangereux, insalubres ou incommodes"),
+    ]);
+    const ticked = proposals(texts, huilerie)
+      .filter((p) => p.texte.origine === "jort")
+      .map((p) => [p.texte.numero ?? p.texte.date, p.proposed]);
+    expect(ticked).toEqual([
+      ["2026-90", true], // a base text
+      ["2026-91", false], // modifies a general text: suggested
+      ["2026-05-03", true], // modifies a text on the site's activity (huileries)
+      ["2026-05-02", true], // modifies the nomenclature: critique
+    ]);
+  });
+
   it("is saved to and restored from a backup file", () => {
     const reg = createRegistre(report(), site(), texts, now);
     expect(restore([], backup([reg]))).toEqual([reg]);
