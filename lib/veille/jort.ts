@@ -31,9 +31,10 @@ export interface Issue {
   firstPage: number | null; // JORT page number of the PDF's first page
   entries: SommaireEntry[];
   sansTexte?: boolean; // a scanned issue: its pages are images, with no text to read
+  source?: "ocr" | "pdf"; // read from the OCR text of ocr.jort.tn, or from the PDF's own text
 }
 
-const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+export const MONTHS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
 const DATE = new RegExp(`(\\d{1,2})(?:er)?\\s+(${MONTHS.join("|")})\\s+(\\d{4})`, "i");
 // Dot leaders, then the page number at the end of the line.
 const LEADER_PAGE = /\s*(?:[.…·•_]\s*){2,}\s*(\d{1,5})\s*$/;
@@ -41,9 +42,10 @@ const SECTION = /^(lois?|décrets?(?:-lois?)?(?: et arrêtés)?|arrêtés|décis
 const SUPERSCRIPT = /^(ème|ère|er|e|bis)\s*$/i;
 // An institution heading is usually less indented than the titles, but not always (the Instance
 // supérieure indépendante pour les élections is centred): its first words tell it too.
-const INSTITUTION = /^(Présidence|Ministère|Instance|Haute Instance|Conseil|Cour|Banque Centrale|Assemblée)\b/;
+// (?!\p{L}) and not \b: in JavaScript \b does not see a word end after an accented letter ("Assemblée").
+export const INSTITUTION = /^(Présidence|Ministère|Instance|Haute Instance|Conseil|Cour|Banque Centrale|Assemblée)(?!\p{L})/u;
 // A law has no institution above it, and its first line is as far left as an institution heading.
-const TEXT_START = /^(lois?|loi organique|décrets?(?:-lois?)?|arrêtés?|décisions?|circulaires?|ordonnances?)\b/i;
+export const TEXT_START = /^(lois?|loi organique|décrets?(?:-lois?)?|arrêtés?|décisions?|circulaires?|ordonnances?)(?!\p{L})/iu;
 
 export function isoDate(text: string): string | null {
   const m = DATE.exec(text);
@@ -52,15 +54,34 @@ export function isoDate(text: string): string | null {
   return `${m[3]}-${String(month).padStart(2, "0")}-${m[1].padStart(2, "0")}`;
 }
 
+// Kinds of text, as titles start (without accents: the OCR of old issues writes "DECRET", "ARRETE").
+const KINDS: [RegExp, string][] = [
+  [/^loi organique/, "Loi organique"],
+  [/^decrets?-lois?/, "Décret-loi"],
+  [/^loi/, "Loi"],
+  [/^decret/, "Décret"],
+  [/^arrete/, "Arrêté"],
+  [/^decision/, "Décision"],
+  [/^avis/, "Avis"],
+  [/^circulaire/, "Circulaire"],
+  [/^ordonnance/, "Ordonnance"],
+  [/^convention/, "Convention"],
+  [/^accord/, "Accord"],
+  [/^nomination/, "Nomination"],
+  [/^delegation/, "Délégation"],
+];
+
 export function kindOf(title: string): string {
-  const m = /^(loi(?: organique)?|décret[s]?-loi|décret|arrêté|décision|avis|circulaire|ordonnance|convention|accord|nomination|délégation)/i.exec(title);
-  if (!m) return "Autre";
-  const k = m[1].toLowerCase();
-  if (k.startsWith("décret") && k.includes("loi")) return "Décret-loi";
-  return k[0].toUpperCase() + k.slice(1);
+  const t = title.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  return KINDS.find(([re]) => re.test(t))?.[1] ?? "Autre";
 }
 
-const clean = (s: string) =>
+/** A line of the sommaire, with what is read from its title. */
+export function sommaireEntry(institution: string | null, section: string | null, title: string, page: number): SommaireEntry {
+  return { institution, section, title, page, kind: kindOf(title), numbers: [...title.matchAll(/n°\s*(\d{2,4}-\d{1,5})/gi)].map((m) => m[1]) };
+}
+
+export const clean = (s: string) =>
   s
     .replace(/\s+/g, " ")
     .replace(/\s+([,.;:)])/g, "$1")
@@ -133,15 +154,7 @@ export function parseIssue(pages: Line[][]): Issue {
         const title = clean([...pending, text.slice(0, end.index)].join(" "));
         pending = [];
         lastWasInstitution = false;
-        if (title)
-          issue.entries.push({
-            institution,
-            section,
-            title,
-            page: Number(end[1]),
-            kind: kindOf(title),
-            numbers: [...title.matchAll(/n°\s*(\d{2,4}-\d{1,5})/gi)].map((m) => m[1]),
-          });
+        if (title) issue.entries.push(sommaireEntry(institution, section, title, Number(end[1])));
         continue;
       }
       if (!pending.length && SECTION.test(text)) {

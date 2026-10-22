@@ -50,44 +50,50 @@ Everything entered is kept in the page address, so a classification can be bookm
 ## Veille réglementaire
 
 The **Veille réglementaire** view lists the texts published in the Journal Officiel (JORT) that
-concern the establishments the app classifies. They're read from each issue's sommaire, in the French translation published at
-`https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf`.
+concern the establishments the app classifies. They're read from each issue's sommaire, in the
+French translation, from [jort.tn](https://jort.tn), a mirror of the JORT since 1957:
+
+* `https://index.jort.tn/catalog`: every issue published, year by year;
+* `https://ocr.jort.tn/journal-officiel/fr/<year>/<nnn>.md`: the OCR text of each French issue
+  (Markdown, pages separated by `<!-- page:N -->`), scanned issues included;
+* `https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf`: the PDF.
 
 ```bash
 npm run veille                                   # the issues of this year not read yet
 npm run veille -- --year 2025                    # the issues of 2025 not read yet
 npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 of 2026
-npm run veille -- --file jort.pdf --year 2010 --number 18   # a PDF already on disk
-npm run veille -- --years 1995-2023              # older years, most recent first
+npm run veille -- --years 1957-2022              # older years, most recent first
 npm run veille -- --reread                       # read again the issues that gave no text
-npm run veille -- --probe                        # sample old issues before reading whole years
+npm run veille -- --ocr --years 2023-2026        # issues read from the PDF: read their OCR text, keep the longer reading
+npm run veille -- --file jort.md --year 2010 --number 18    # an OCR text (or a PDF) already on disk
+npm run veille -- --probe                        # sample old PDFs (see data/veille/probe)
 ```
 
-**Older years.** Before reading decades of issues, `--probe` samples two issues every five years
-since 1960 (or the years given: `--probe 1995-2005`): whether the French edition exists, its size,
-whether the server sends part of a file, whether the PDF has a text layer, and how many texts its
-sommaire gives. It keeps the first pages of each in `data/veille/probe/`, to adapt the reading to
-old layouts. A past year ends after three missing numbers in a row ("fin de l'année", or "année
-absente en français" if none was found). An issue whose pages are images (a scan, with no text
-layer) is kept in its year's sommaires as `sansTexte`, not read: those will need OCR; the probe
-saves the first two pages of such issues as images (`<year>-<nnn>-p1.jpg`).
+**Where each issue is read.** From its OCR text first (`lib/veille/markdown.ts`): only its first
+64 KB are downloaded, the whole text only when the sommaire runs on. The OCR text gives the
+sommaire in the order printed: sections, institutions (headings, bold or capitals) and titles
+ending with their page number; a title wrapped over several lines (until about 1975) is held until
+its page; a title whose page number the OCR lost takes the next title's page; the sommaire ends where
+the texts start ("Par décret…", "Nous, …", "Vu …", or a section heading seen again on a later
+page). When an issue has no OCR text yet (the newest, for a few minutes or days), or no sommaire
+in it, its PDF is read (`lib/veille/pdf.ts`, `jort.ts`): only the parts of the file its sommaire
+pages need, so an issue of 100 MB costs a few hundred kilobytes. An issue keeps the source it was
+read from (`source: "ocr"` or `"pdf"`); a scan with no OCR text yet is kept as `sansTexte` and read
+again by `--reread`.
 
-Only the parts of a PDF that its sommaire pages need are downloaded (the server sends parts of
-files), and reading stops at the first page that is no longer the sommaire: an issue of 100 MB
-costs a few hundred kilobytes. What the probe found, in October 2026:
+On the 566 issues of 2023 to 2026, the OCR reading finds 98% of the titles the PDF reading finds,
+and more in 133 issues (PDFs whose text is cut up, sommaire pages the PDF reading did not see).
+The PDF reading is kept where it found more. A few files of the French collection are in fact the
+Arabic edition (2023 n° 138 and 142, 1959 n° 30): no French sommaire to read there.
 
-| Years | French edition | Text layer | Sommaire read |
-|---|---|---|---|
-| 1960–1990 | yes | no: scans (images) | needs OCR |
-| 1995–2025 | yes | yes | yes |
+PDF details, for the issues read from their PDF: issues of about 2000 to 2005 use fonts that write
+glyph numbers instead of letters ("6RPPDLUH" for "Sommaire"), decoded by `lib/veille/glyphs.ts`;
+some issues set their page numbers a few points lower than their titles' leader dots, put back on
+their line.
 
-Issues of about 2000 to 2005 use fonts that write glyph numbers instead of letters ("6RPPDLUH" for
-"Sommaire"): `lib/veille/glyphs.ts` decodes them. Some issues set their page numbers a few points
-lower than their titles' leader dots; they are put back on their line. Issues read before these
-fixes are read again with `--reread`.
-
-The command runs on any computer that reaches jort.tn. It needs Node.js only: PDFs are read with
-pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
+The command runs on any computer that reaches jort.tn (in a cloud session behind a proxy, run it
+with `NODE_USE_ENV_PROXY=1`, so that Node's `fetch` uses the proxy). It needs Node.js only: PDFs are
+read with pdf.js, with no Python or poppler. Each run starts where the last one stopped and keeps what it read
 if interrupted. Every sommaire read is kept in `data/veille/sommaires/<year>.json`: commit
 `data/veille` to share them. The texts found (`public/veille/feed.json`, fetched by the page when the veille opens) are derived from the sommaires
 and the rules, so that file is not kept in git: it is rebuilt by `npm run veille`, and before
@@ -201,7 +207,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `data/pipeline/` | `ocr.py` (scans → `data/ocr/`), `parse.py` (→ `data/nomenclature.json`, `data/review.md`), `eie.py` (decree → `data/eie.json`). |
 | `data/corrections.json` | OCR misreads fixed, and low-confidence digits confirmed, by hand. |
 | `data/eie-links.json` | For each rubrique, the entries of décret n° 2005-1991 it may fall under, and when (a reading; the user chooses). `data/eie-links.md` shows it as a table to review. |
-| `lib/veille/` | Veille réglementaire: reading a JORT PDF (`pdf.ts`), its sommaire (`jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
+| `lib/veille/` | Veille réglementaire: reading a JORT sommaire from its OCR text (`markdown.ts`) or its PDF (`pdf.ts`, `jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
 | `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `public/veille/feed.json`. |
 | `data/veille/` | `watch.json` (the rules), `sommaires/` (every sommaire read) and `feed.json` (the texts found; derived, not in git). |
 | `app/components/veille.tsx` | The Veille réglementaire view: registers and Journal officiel tabs. |

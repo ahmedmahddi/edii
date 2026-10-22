@@ -1,9 +1,11 @@
 // Veille réglementaire: reading JORT sommaires and picking the texts that concern the app.
-// The two issues are real ones, kept in data/sources: JORT n° 83 of 2006 and n° 18 of 2010.
+// The two issues are real ones, kept in data/sources: JORT n° 83 of 2006 and n° 18 of 2010; the
+// OCR texts are the first pages of real issues from ocr.jort.tn, kept in data/sources/ocr.
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
-import { type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl } from "@/lib/veille/jort";
+import { INSTITUTION, type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl, TEXT_START } from "@/lib/veille/jort";
+import { ocrUrl, parseMarkdown, parseMarkdownStart } from "@/lib/veille/markdown";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
@@ -126,6 +128,81 @@ describe("reading a JORT sommaire", () => {
     expect(pdfUrl(2025, 92)).toBe("https://lake.jort.tn/journal-officiel/fr/2025/092.pdf");
     expect(pdfPage({ firstPage: 553 }, 559)).toBe(7);
     expect(pdfPage({ firstPage: null }, 559)).toBeNull();
+  });
+});
+
+describe("reading a sommaire from the OCR text of ocr.jort.tn", () => {
+  const ocr = (f: string) => readFileSync(path.join(__dirname, "..", "data", "sources", "ocr", f), "utf8");
+
+  it("reads a scanned issue of 1960: titles over several lines, institutions in capitals", () => {
+    const issue = parseMarkdown(ocr("1960-001.md"));
+    expect([issue.number, issue.date]).toEqual([1, "1960-01-05"]);
+    expect(issue.entries).toHaveLength(16);
+    expect(issue.entries[0]).toMatchObject({
+      section: "DECRETS ET ARRETES",
+      institution: "SECRETARIAT D'ETAT AUX AFFAIRES ETRANGERES",
+      kind: "Décret",
+      numbers: ["59-387"],
+      page: 2,
+    });
+    expect(issue.entries[0].title).toMatch(/^DECRET N° 59-387 du 31 décembre 1959 .* en service à l'étranger$/);
+    expect(issue.entries.at(-1)).toMatchObject({ section: "AVIS ET COMMUNICATIONS", institution: "TRIBUNAL IMMOBILIER DE TUNISIE", title: "ANNONCES", page: 14 });
+  });
+
+  it("joins an institution set over two headings, and stops where the texts start (1965)", () => {
+    const issue = parseMarkdown(ocr("1965-040.md"));
+    expect(issue.entries).toHaveLength(17);
+    expect(issue.entries[2].institution).toBe("SECRETARIAT D'ETAT AU PLAN ET A L'ECONOMIE NATIONALE");
+    expect(issue.entries.at(-1)).toMatchObject({ title: "ANNONCES", page: 971 });
+  });
+
+  it("reads the sommaire of 1980, sections and institutions as headings", () => {
+    const issue = parseMarkdown(ocr("1980-001.md"));
+    expect(issue.entries).toHaveLength(24);
+    const edi = issue.entries.find((e) => /établissements dangereux/.test(e.title))!;
+    expect(edi).toMatchObject({ section: "Avis et Communications", institution: "Ministère de l'Industrie, des Mines et de l'Energie", page: 18 });
+    expect(assess(edi)?.severity).toBe("important");
+  });
+
+  it("reads a sommaire laid out as a table (2023 n° 108)", () => {
+    const issue = parseMarkdown(ocr("2023-108.md"));
+    expect(issue.entries.flatMap((e) => e.numbers)).toEqual(["2023-588", "2023-589", "2023-590", "2023-591", "2023-592", "2006-1245"]);
+    expect(issue.entries.map((e) => e.page)).toEqual([2397, 2397, 2398, 2399, 2402]);
+  });
+
+  it("keeps titles whose page number the OCR lost, with the next title's page (2024 n° 2)", () => {
+    const issue = parseMarkdown(ocr("2024-002.md"));
+    expect(issue.firstPage).toBe(25);
+    expect(issue.entries).toHaveLength(27);
+    expect(issue.entries.every((e) => e.page >= 25 && e.page <= 62)).toBe(true);
+    expect(issue.entries.at(-1)).toMatchObject({ title: "Nomination d'un ingénieur général", page: 62 });
+  });
+
+  it("does not take a year closing a title for a page number", () => {
+    const md = [
+      "# Sommaire",
+      "## Décrets et arrêtés",
+      "### Ministère des Finances",
+      "Arrêté de la ministre des finances du 2 janvier 2024, portant ouverture d'un concours au titre de l'année 2023",
+      "Nomination d'un directeur 12",
+    ].join("\n");
+    const issue = parseMarkdown(md);
+    expect(issue.entries.map((e) => e.page)).toEqual([12, 12]);
+    expect(issue.entries[0].title).toMatch(/au titre de l'année 2023$/);
+  });
+
+  it("asks for the whole text when its beginning does not hold the whole sommaire", () => {
+    const md = ocr("2024-002.md");
+    expect(parseMarkdownStart(md.slice(0, 3000))).toBeNull();
+    expect(parseMarkdownStart(md)?.entries).toHaveLength(27);
+    expect(ocrUrl(1980, 1)).toBe("https://ocr.jort.tn/journal-officiel/fr/1980/001.md");
+  });
+
+  it("sees the end of a word after an accented letter", () => {
+    expect(INSTITUTION.test("Assemblée des représentants du peuple")).toBe(true);
+    expect(TEXT_START.test("Arrêté du ministre des finances")).toBe(true);
+    expect(TEXT_START.test("Arrêtées")).toBe(false);
+    expect(["DECRET N° 59-387", "ARRETE du Secrétaire d'Etat", "Décrets-lois", "LOI N° 62-42"].map(kindOf)).toEqual(["Décret", "Arrêté", "Décret-loi", "Loi"]);
   });
 });
 

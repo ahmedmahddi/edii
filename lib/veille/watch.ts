@@ -12,7 +12,7 @@
  */
 import watch from "@/data/veille/watch.json";
 import type { Issue, SommaireEntry } from "./jort";
-import { pdfPage, pdfUrl } from "./jort";
+import { kindOf, pdfPage, pdfUrl } from "./jort";
 
 export type Severity = "critique" | "important" | "information";
 export type Impact = "nomenclature" | "addition" | "etude" | "procedures";
@@ -189,7 +189,7 @@ export function hitsOf(year: number, issue: Issue): Hit[] {
         pdf: page ? `${url}#page=${page}` : url,
         page: entry.page,
         institution: entry.institution,
-        kind: entry.kind,
+        kind: kindOf(entry.title), // from the title: kinds read before the reading improved are not kept
         title: entry.title,
         ...found,
       },

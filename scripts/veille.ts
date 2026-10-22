@@ -5,7 +5,7 @@
  *   npm run veille                         new issues of the current year (and of last year in January)
  *   npm run veille -- --year 2025          new issues of 2025
  *   npm run veille -- --year 2025 --from 1 --to 40     re-read issues 1 to 40 of 2025
- *   npm run veille -- --file jort.pdf --year 2010 --number 18   read a PDF already on disk
+ *   npm run veille -- --file jort.pdf --year 2010 --number 18   read a PDF (or .md OCR text) already on disk
  *   npm run veille -- --reassess           apply edited rules (data/veille/watch.json) to every
  *                                          sommaire already read, without downloading anything
  *                                          (run before dev and build: feed.json is
@@ -19,13 +19,20 @@
  *                                          read; the first pages are kept in data/veille/probe/ so
  *                                          that the reading can be adapted to old layouts
  *
- * Issues are numbered from 1 each year at https://lake.jort.tn/journal-officiel/fr/<year>/<nnn>.pdf;
- * the first number that is not there yet ends the run. Only the sommaire (first pages) is read; it
- * is kept in data/veille/sommaires/<year>.json, so the rules can be applied again later.
+ *   npm run veille -- --ocr --years 2023-2026   read again from the OCR text the issues first read
+ *                                          from the PDF, keeping the reading with more texts
+ *
+ * Issues are numbered from 1 each year. The list of issues comes from the catalog of jort.tn
+ * (https://index.jort.tn/catalog); without it, numbers are tried in order and the first missing
+ * ones end the year. Each issue is read from its OCR text (https://ocr.jort.tn/journal-officiel/fr/
+ * <year>/<nnn>.md, every French issue since 1957, scans included); when there is none yet, or no
+ * sommaire in it, from its PDF (https://lake.jort.tn/…/<nnn>.pdf). Only the sommaire is read; it is
+ * kept in data/veille/sommaires/<year>.json, so the rules can be applied again later.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../lib/veille/jort";
+import { ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
 import { amendments, catalogue } from "../lib/registre/referentiel";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
 import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
@@ -39,8 +46,13 @@ const UA = "ABClassement veille réglementaire";
 // Where the PDFs are fetched from: lake.jort.tn, or a copy of it (JORT_BASE, for tests or a mirror).
 const fetchUrl = (year: number, n: number) =>
   process.env.JORT_BASE ? pdfUrl(year, n).replace("https://lake.jort.tn", process.env.JORT_BASE) : pdfUrl(year, n);
+// The OCR text, from ocr.jort.tn or a copy of it (JORT_OCR_BASE; "none" to read the PDFs only).
+const ocrFetchUrl = (year: number, n: number) =>
+  process.env.JORT_OCR_BASE ? ocrUrl(year, n).replace("https://ocr.jort.tn", process.env.JORT_OCR_BASE) : ocrUrl(year, n);
+const CATALOG = process.env.JORT_CATALOG ?? "https://index.jort.tn/catalog";
 const SOMMAIRE_PAGES = 8;
-const PAUSE_MS = 400; // between downloads, to stay gentle with the server
+const OCR_START = 1 << 16; // first bytes of the OCR text: the sommaire, mostly
+const PAUSE_MS = 150; // between downloads, to stay gentle with the server
 const MISSES = 3; // a past year ends after this many missing numbers in a row (numbering may skip one)
 const MIN_TEXT = 200; // characters on the first pages below which an issue is a scan
 let downloaded = 0; // bytes, reported at the end
@@ -97,26 +109,108 @@ async function openIssue(year: number, number: number, pages: number): Promise<{
   }
 }
 
-async function readIssue(feed: Feed, year: number, number: number, pages: Line[][]): Promise<Feed> {
-  const issue = parseIssue(pages);
-  issue.sansTexte = pages.slice(0, 3).reduce((n, lines) => n + lines.reduce((m, l) => m + l.text.length, 0), 0) < MIN_TEXT || undefined;
+/** The sommaire read from an issue's OCR text, or null when there is no such text (yet). */
+async function openMarkdown(year: number, number: number): Promise<Issue | null> {
+  if (process.env.JORT_OCR_BASE === "none") return null;
+  const url = ocrFetchUrl(year, number);
+  const get = async (range?: string) => {
+    const res = await fetch(url, { headers: { "User-Agent": UA, ...(range ? { Range: range } : {}) } });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    downloaded += Buffer.byteLength(text);
+    return { text, whole: res.status === 200 };
+  };
+  try {
+    // The beginning first: the whole text (up to a few megabytes) only when the sommaire runs on.
+    const start = await get(`bytes=0-${OCR_START - 1}`);
+    if (!start) return null;
+    if (/^\s*</.test(start.text) && !/<!--\s*page/.test(start.text)) return null; // an HTML page, not the text
+    const issue = (start.whole ? parseMarkdown(start.text) : parseMarkdownStart(start.text)) ?? parseMarkdown((await get())?.text ?? "");
+    return { ...issue, source: "ocr" };
+  } catch (error) {
+    const reason = error instanceof Error && error.cause instanceof Error ? error.cause.message : String(error);
+    throw new Error(`Impossible de lire le n° ${number}/${year} sur ocr.jort.tn (${reason}). Vérifiez la connexion Internet, puis relancez : ce qui a déjà été lu est gardé.`);
+  }
+}
+
+/**
+ * An issue's sommaire: from its OCR text, or from its PDF when the OCR text is missing or gave no
+ * sommaire (then the reading with more texts is kept). Null when the issue is not published (yet).
+ */
+async function fetchIssue(year: number, number: number): Promise<Issue | null> {
+  const ocr = await openMarkdown(year, number);
+  if (ocr?.entries.length) return ocr;
+  const pdf = await openIssue(year, number, SOMMAIRE_PAGES);
+  if (!pdf) return ocr;
+  const issue: Issue = { ...parseIssue(pdf.lines), source: "pdf" };
+  // A scan without OCR text yet: its pages are images.
+  issue.sansTexte = pdf.lines.slice(0, 3).reduce((n, lines) => n + lines.reduce((m, l) => m + l.text.length, 0), 0) < MIN_TEXT || undefined;
+  return ocr && ocr.entries.length >= issue.entries.length && !issue.sansTexte ? ocr : issue;
+}
+
+let catalog: Map<number, number[]> | null | undefined;
+/** The French issues of each year, from the catalog of jort.tn; null when it cannot be read. */
+async function catalogYears(): Promise<Map<number, number[]> | null> {
+  if (catalog !== undefined) return catalog;
+  try {
+    const res = await fetch(CATALOG, { headers: { "User-Agent": UA } });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = (await res.json()) as { collections: { id: string; years: Record<string, Record<string, { fr?: unknown }>> }[] };
+    const years = data.collections.find((c) => c.id === "journal-officiel")?.years ?? {};
+    catalog = new Map(
+      Object.entries(years).map(([y, issues]) => [
+        Number(y),
+        Object.entries(issues)
+          .filter(([, langs]) => langs.fr)
+          .map(([n]) => Number(n))
+          .sort((a, b) => a - b),
+      ]),
+    );
+  } catch (error) {
+    console.warn(`  ! catalogue de jort.tn illisible (${error instanceof Error ? error.message : error}) : numéros essayés dans l'ordre`);
+    catalog = null;
+  }
+  return catalog;
+}
+
+async function readIssue(feed: Feed, year: number, number: number, issue: Issue): Promise<Feed> {
   if (issue.number !== null && issue.number !== number) {
     console.warn(`  ! n° ${number}: the PDF says n° ${issue.number}; recorded as n° ${number}`);
   }
   issue.number = number;
-  if (issue.sansTexte) console.warn(`  ! n° ${number}: numéro scanné (images, pas de texte) : gardé, à lire par OCR`);
+  if (issue.sansTexte) console.warn(`  ! n° ${number}: numéro scanné (images), pas encore de texte OCR sur ocr.jort.tn : à relire plus tard (--reread)`);
   else if (!issue.entries.length) console.warn(`  ! n° ${number}: sommaire introuvable (mise en page inconnue) : à signaler`);
   saveSommaire(year, issue);
   const next = record(feed, year, issue);
   const found = next.hits.filter((h) => h.year === year && h.issue === number);
   const flag = found.some((h) => h.severity === "critique") ? " ← CRITIQUE" : found.some((h) => h.severity === "important") ? " ← important" : "";
-  console.log(`  n° ${String(number).padStart(3, "0")} ${issue.date ?? ""}: ${issue.entries.length} textes, ${found.length} à lire${flag}`);
+  console.log(`  n° ${String(number).padStart(3, "0")} ${issue.date ?? ""}: ${issue.entries.length} textes (${issue.source ?? "pdf"}), ${found.length} à lire${flag}`);
   for (const h of found) console.log(`      [${h.severity}] p. ${h.page} ${h.title}`);
   return next;
 }
 
 async function scanYear(feed: Feed, year: number, from?: number, to?: number): Promise<Feed> {
   const read = new Set(feed.scanned[year] ?? []);
+  const listed = (await catalogYears())?.get(year);
+  if (listed && year < new Date().getFullYear()) {
+    // A past year: its issues are those of the catalog.
+    const todo = listed.filter((n) => (from === undefined ? !read.has(n) : n >= from) && (to === undefined || n <= to));
+    console.log(`JORT ${year} : ${todo.length} numéros à lire sur ${listed.length}`);
+    for (const [i, number] of todo.entries()) {
+      const issue = await fetchIssue(year, number);
+      if (!issue) {
+        console.log(`  n° ${String(number).padStart(3, "0")}: absent`);
+        continue;
+      }
+      feed = await readIssue(feed, year, number, issue);
+      if (i % 10 === 9) saveFeed(feed); // now and then: an interrupted run keeps what it read
+      await new Promise((r) => setTimeout(r, PAUSE_MS));
+    }
+    saveFeed(feed);
+    return feed;
+  }
+  // This year (the catalog may lag behind by a few minutes), or no catalog: numbers in order.
   let number = from ?? (read.size ? Math.max(...read) + 1 : 1);
   const past = year < new Date().getFullYear();
   let misses = 0;
@@ -124,8 +218,8 @@ async function scanYear(feed: Feed, year: number, from?: number, to?: number): P
   console.log(`JORT ${year}, à partir du n° ${number}`);
   for (; to === undefined || number <= to; number++) {
     if (from === undefined && read.has(number)) continue;
-    const got = await openIssue(year, number, SOMMAIRE_PAGES);
-    if (!got) {
+    const issue = await fetchIssue(year, number);
+    if (!issue) {
       // This year's next issue is not out yet; a past year may skip a number, and ends after a few.
       if (!past || ++misses >= MISSES) {
         console.log(`  n° ${String(number).padStart(3, "0")}: ${past ? (found ? "fin de l’année" : "année absente en français") : "pas encore publié"}, arrêt.`);
@@ -135,7 +229,7 @@ async function scanYear(feed: Feed, year: number, from?: number, to?: number): P
     }
     misses = 0;
     found++;
-    feed = await readIssue(feed, year, number, got.lines);
+    feed = await readIssue(feed, year, number, issue);
     saveFeed(feed); // after each issue: an interrupted run keeps what it read
     await new Promise((r) => setTimeout(r, PAUSE_MS));
   }
@@ -253,23 +347,46 @@ async function main(): Promise<void> {
     const glued = (i: Issue) => i.entries.some((e) => /\.{4,}\s*\d/.test(e.title));
     let done = 0;
     for (const y of stored().filter((y) => !only || only.has(y.year)).sort((a, b) => b.year - a.year)) {
-      const todo = Object.values(y.issues).filter((i) => i.number !== null && !i.sansTexte && (!i.entries.length || glued(i)));
+      // Scans are read again too: their OCR text may have come out since.
+      const todo = Object.values(y.issues).filter((i) => i.number !== null && (!i.entries.length || glued(i)));
       if (!todo.length) continue;
       console.log(`JORT ${y.year} : ${todo.length} numéros à relire`);
       for (const issue of todo) {
-        const got = await openIssue(y.year, issue.number!, SOMMAIRE_PAGES);
-        if (!got) continue;
-        feed = await readIssue(feed, y.year, issue.number!, got.lines);
+        const again = await fetchIssue(y.year, issue.number!);
+        if (!again) continue;
+        feed = await readIssue(feed, y.year, issue.number!, again);
         saveFeed(feed);
         done++;
         await new Promise((r) => setTimeout(r, PAUSE_MS));
       }
     }
     console.log(`${done} numéros relus.`);
+  } else if (process.argv.includes("--ocr")) {
+    // Issues read from their PDF: their OCR text often lists more (a PDF whose text is cut up).
+    const only = option("years") ? new Set(yearsOf(option("years")!)) : null;
+    let better = 0;
+    for (const y of stored().filter((y) => !only || only.has(y.year)).sort((a, b) => b.year - a.year)) {
+      const todo = Object.values(y.issues).filter((i) => i.number !== null && i.source !== "ocr");
+      console.log(`JORT ${y.year} : ${todo.length} numéros lus dans le PDF`);
+      for (const [i, issue] of todo.entries()) {
+        const ocr = await openMarkdown(y.year, issue.number!);
+        if (ocr && ocr.entries.length > issue.entries.length) {
+          console.log(`  n° ${pad(issue.number!)}: ${issue.entries.length} → ${ocr.entries.length} textes`);
+          feed = await readIssue(feed, y.year, issue.number!, ocr);
+          better++;
+        } else if (!issue.source) saveSommaire(y.year, { ...issue, source: "pdf" }); // checked: the PDF's reading stays
+        if (i % 10 === 9) saveFeed(feed);
+        await new Promise((r) => setTimeout(r, PAUSE_MS));
+      }
+    }
+    console.log(`${better} numéros mieux lus dans le texte OCR.`);
   } else if (file) {
     const number = Number(option("number"));
     if (!year || !number) throw new Error("--file needs --year and --number");
-    feed = await readIssue(feed, year, number, await pdfLines(new Uint8Array(readFileSync(file)), SOMMAIRE_PAGES));
+    const issue = file.endsWith(".md")
+      ? { ...parseMarkdown(readFileSync(file, "utf8")), source: "ocr" as const }
+      : { ...parseIssue(await pdfLines(new Uint8Array(readFileSync(file)), SOMMAIRE_PAGES)), source: "pdf" as const };
+    feed = await readIssue(feed, year, number, issue);
     saveFeed(feed);
   } else {
     const from = option("from") ? Number(option("from")) : undefined;
@@ -291,8 +408,8 @@ async function main(): Promise<void> {
     `\n${feed.hits.length} textes repérés : ${count("critique")} critiques, ${count("important")} importants, ${count("information")} pour information. Détail : vue Veille réglementaire.`,
   );
   const scans = stored().reduce((n, y) => n + Object.values(y.issues).filter((i) => i.sansTexte).length, 0);
-  if (scans) console.log(`${scans} numéros scannés (images) gardés sans lecture : il faudra les lire par OCR.`);
-  if (downloaded) console.log(`Téléchargé : ${(downloaded / 1e6).toFixed(0)} Mo.`);
+  if (scans) console.log(`${scans} numéros scannés sans texte OCR pour l’instant : --reread les relira quand ocr.jort.tn l’aura.`);
+  if (downloaded) console.log(`Téléchargé : ${(downloaded / 1e6).toFixed(1)} Mo.`);
 }
 
 main().catch((error) => {
