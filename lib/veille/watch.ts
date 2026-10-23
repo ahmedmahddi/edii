@@ -72,6 +72,7 @@ export interface Feed {
   scanned: Record<string, number[]>; // year → issue numbers read
   hits: Hit[];
   amendments?: Amendment[]; // JORT texts that modify a text of the référentiel
+  citations?: Record<string, number>; // text key → how many later JORT titles name it (its weight)
 }
 
 /** A JORT text that modifies or cites texts of the référentiel (keys of lib/registre/referentiel.ts). */

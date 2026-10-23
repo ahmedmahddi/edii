@@ -1878,6 +1878,12 @@ p {
 .registre-eval label, .registre-details > label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 600; min-width: 0; }
 .registre-details { margin-top: 8px; display: grid; gap: 10px; }
 .registre-history { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 13px; }
+.registre-raisons { display: block; margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+.registre-essentiels { display: grid; gap: 8px; }
+.registre-essentiels h2 { margin: 0; font-size: 18px; }
+.registre-essentiels-list { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.registre-essentiels-list summary { cursor: pointer; font-size: 14px; line-height: 1.4; }
+.registre-essentiels-list .registre-lignes { padding-left: 0; margin-top: 8px; }
 .registre-abroge { margin: 6px 0 0; padding: 6px 10px; border-left: 3px solid var(--bad); background: var(--bad-bg); }
 .registre-details[open] { padding-top: 4px; }
 .registre-details textarea { width: 100%; font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--border); border-radius: var(--radius); resize: vertical; }

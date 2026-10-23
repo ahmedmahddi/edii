@@ -32,6 +32,8 @@ export interface Texte {
   niveau?: Severity; // for a text found in the JORT
   remplace?: boolean; // a JORT text of a series (the SMIG of each year…) replaced by a newer one: not proposed
   abroge?: { titre: string; publie: string; source: string }; // repealed as a whole, by this text: not proposed
+  activites?: string[]; // for a JORT text: the sites whose activity it is about (conditions of the act-* rules)
+  cite?: number; // how many later JORT titles name it: the more, the more central the text
   coche?: string[]; // for a JORT text: the sites it is ticked for (the others with 'when': suggested)
 }
 
@@ -124,7 +126,11 @@ export function modifiesAnother(title: string): boolean {
 export function fromHit(hit: Hit): Texte {
   const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(isArabic(hit.title) ? frenchCitations(hit.title) : hit.title)?.[1].replace(/\s/g, "");
   const when = [...new Set(hit.matches.flatMap((m) => ruleById.get(m.rule)?.when ?? []))];
-  const labels = hit.matches.filter((m) => !m.rule.startsWith("ref-")).map((m) => m.label);
+  // The activity a text is about names it best ("Huileries…" rather than "Industries agroalimentaires").
+  const labels = hit.matches
+    .filter((m) => !m.rule.startsWith("ref-"))
+    .sort((a, b) => Number(b.rule.startsWith("act-")) - Number(a.rule.startsWith("act-")))
+    .map((m) => m.label);
   // Ticked where an important rule outside the suggested domains (taxes, customs) places it; a
   // text kept as information (sector news, an international agreement) is only suggested. A text
   // that only modifies another is ticked on the site's activities, or when it modifies a text the
@@ -159,6 +165,7 @@ export function fromHit(hit: Hit): Texte {
     origine: "jort",
     niveau: hit.severity,
     coche,
+    activites: [...new Set(hit.matches.filter((m) => m.rule.startsWith("act-")).flatMap((m) => ruleById.get(m.rule)?.when ?? []))],
   };
 }
 
@@ -193,7 +200,7 @@ function repealedBy(clauses: Repeal[], names: (n: Named) => boolean | undefined)
  * The curated texts and the JORT's, a JORT text that is already curated adding its source only. A
  * text repealed as a whole (amendments' abroge) is marked: it is no longer proposed.
  */
-export function catalogue(hits: Hit[], amendments: Amendment[] = []): Texte[] {
+export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: Record<string, number> = {}): Texte[] {
   const texts: Texte[] = REFERENTIEL.map((t) => ({ ...t }));
   const byKey = new Map(texts.flatMap((t) => keysOf(t).map((k) => [k, t] as const)));
   for (const hit of hits) {
@@ -206,6 +213,10 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = []): Texte[] {
     }
     texts.push(t);
     for (const k of keysOf(t)) byKey.set(k, t);
+  }
+  for (const t of texts) {
+    const n = Math.max(0, ...keysOf(t).map((k) => citations[k] ?? 0));
+    if (n) t.cite = n;
   }
   const repealed = new Map<string, Amendment>();
   for (const a of amendments) for (const k of a.abroge ?? []) if (!repealed.has(k) || (a.date ?? "") < (repealed.get(k)!.date ?? "")) repealed.set(k, a);
@@ -251,6 +262,29 @@ export function proposals(texts: Texte[], site: Site): Proposal[] {
  * The JORT texts that modify (or cite) a text of the référentiel, from every sommaire read: what
  * tells a register that one of its texts has changed.
  */
+/**
+ * How many JORT titles name each text of the référentiel, after it: a law that later texts keep
+ * applying, modifying or citing is central (loi 96-41 on waste, the code du travail). A date names
+ * a text only with a subject that matches (as for amendments).
+ */
+export function citations(years: Sommaires[], texts: Texte[]): Record<string, number> {
+  const byKey = new Map<string, Texte[]>();
+  for (const t of texts) for (const k of keysOf(t)) byKey.set(k, [...(byKey.get(k) ?? []), t]);
+  const counts: Record<string, number> = {};
+  for (const y of years)
+    for (const issue of Object.values(y.issues))
+      for (const e of issue.entries) {
+        // Most titles name no text: a cheap look first.
+        if (!/n°|\b(?:du|en date du) \d{1,2}|عدد|مؤرخ/.test(e.title)) continue;
+        for (const n of cited(e.title)) {
+          const known = byKey.get(n.key);
+          if (!known || !(n.key.startsWith("n:") || known.some((t) => sameSubject(n.subject, t)))) continue;
+          counts[n.key] = (counts[n.key] ?? 0) + 1;
+        }
+      }
+  return counts;
+}
+
 /** Repeals read in the bodies of the issues (scripts/veille.ts --abrogations): year → issue → clauses. */
 export type Repeals = Record<string, Record<string, Repeal[]>>;
 

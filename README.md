@@ -186,6 +186,14 @@ opens the establishment's register in the Veille réglementaire view:
    are unticked; texts that now apply come as new texts, and those that no longer apply are listed
    to remove or keep.
 
+**Most important first.** In a register, the texts are ranked for the site, whatever its sector:
+the texts the app is built on (nomenclature, procedures, impact study), then what the site does
+(texts on its activities, then on its facts: discharges, hydrocarbons, food…), the codes and laws
+before decrees and arrêtés, the texts later JORT texts cite most, and general rules before texts
+that only modify another or set up a body. The 30 first are shown above the domains as "Les 30
+textes essentiels pour ce site", each with why it ranks there; every domain, the new texts and the
+Excel export follow the same order (`lib/registre/importance.ts`).
+
 The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated law
 references (kind, number, date, title, and `when`, the conditions under which a text applies; the
 summary of requirements and the risk are written by the consultant in each register), and every

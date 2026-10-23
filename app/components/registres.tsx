@@ -2,6 +2,7 @@
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { download, downloadWorkbook, today } from "@/app/components/download";
 import { FLAG_GROUPS, FLAGS, type Site } from "@/lib/registre/profil";
+import { importance } from "@/lib/registre/importance";
 import { proposals, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
@@ -60,6 +61,9 @@ function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => 
   };
   return [list, update, saved, loaded];
 }
+
+// How many texts the register shows first, as the essential ones for the site.
+const ESSENTIELS = 30;
 
 export function Registres({
   seed,
@@ -340,7 +344,17 @@ function RegistreView({
   const retenus = reg.lignes.filter((l) => l.retenu);
   const alerts = alertes(reg, amendments);
   const gone = plusApplicables(reg);
-  const news = useMemo(() => nouveautes(reg, texts), [reg, texts]);
+  // Importance of each text for this site: the référentiel's current reading of the text (citations,
+  // activities) when it still has it, else the text as it was added.
+  const rank = useMemo(() => {
+    const byId = new Map(texts.map((t) => [t.id, t]));
+    return new Map(reg.lignes.map((l) => [l.texte.id, importance(byId.get(l.texte.id) ?? l.texte, reg.site)]));
+  }, [texts, reg.lignes, reg.site]);
+  const score = (l: Ligne) => rank.get(l.texte.id)?.score ?? 0;
+  const news = useMemo(
+    () => nouveautes(reg, texts).sort((a, b) => importance(b.texte, reg.site).score - importance(a.texte, reg.site).score),
+    [reg, texts],
+  );
   const due = dues(reg);
   const count = (c: Conformite) => retenus.filter((l) => l.conformite === c).length;
   const domains = Object.keys(rules.domains).filter((d) => reg.lignes.some((l) => l.texte.domaine === d));
@@ -357,10 +371,13 @@ function RegistreView({
   });
 
   const filtering = !!query || domaine !== "all" || filtre !== "tous";
+  const byScore = (a: Ligne, b: Ligne) => score(b) - score(a);
   const groups = Object.keys(rules.domains)
-    .map((d) => [d, shown.filter((l) => l.texte.domaine === d)] as const)
-    .concat([["autres", shown.filter((l) => !(l.texte.domaine in rules.domains))] as const])
+    .map((d) => [d, shown.filter((l) => l.texte.domaine === d).sort(byScore)] as const)
+    .concat([["autres", shown.filter((l) => !(l.texte.domaine in rules.domains)).sort(byScore)] as const])
     .filter(([, lignes]) => lignes.length);
+  // The texts that matter most for this site, whatever their domain: read first.
+  const essentiels = filtering ? [] : [...retenus].sort(byScore).slice(0, ESSENTIELS);
 
   const candidates = useMemo(() => {
     const q = fold(adding);
@@ -558,7 +575,7 @@ function RegistreView({
             setExporting(true);
             try {
               await downloadWorkbook(
-                (wb) => fillRegister(wb, retenus.map(ligneRow), new Date(), reg.nom),
+                (wb) => fillRegister(wb, [...retenus].sort(byScore).map(ligneRow), new Date(), reg.nom),
                 `ID-QSE-002_${reg.nom.replace(/[^\p{L}\p{N}]+/gu, "_")}_${today()}.xlsx`,
               );
             } finally {
@@ -569,6 +586,37 @@ function RegistreView({
           {exporting ? "Préparation du fichier…" : "Exporter le registre (Excel)"}
         </button>
       </div>
+
+      {essentiels.length ? (
+        <section className="card registre-essentiels" aria-labelledby="essentiels-title">
+          <h2 id="essentiels-title">Les {essentiels.length} textes essentiels pour ce site</h2>
+          <p className="muted small">
+            Classés selon ce que le texte est (loi, décret…), combien de textes du JORT s’y réfèrent, s’il porte sur l’activité ou les
+            caractéristiques de ce site, et s’il est récent. Tous les textes suivent, par domaine, dans le même ordre.
+          </p>
+          <ol className="registre-essentiels-list">
+            {essentiels.map((l) => (
+              <li key={l.texte.id}>
+                <details>
+                  <summary>
+                    <span dir="auto">{l.texte.titre}</span>
+                    <span className="registre-raisons">{rank.get(l.texte.id)?.raisons.slice(0, 3).join(" · ")}</span>
+                  </summary>
+                  <ol className="registre-lignes">
+                    <LigneCard
+                      l={l}
+                      raisons={rank.get(l.texte.id)?.raisons}
+                      history={modifiePar(reg, l, amendments)}
+                      repealed={abrogePar(l, amendments)}
+                      set={(patch) => setLigne(l.texte.id, patch)}
+                    />
+                  </ol>
+                </details>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
 
       {groups.map(([d, lignes]) => {
         const nc = lignes.filter((l) => l.conformite === "NC").length;
@@ -589,6 +637,7 @@ function RegistreView({
                 <LigneCard
                   key={l.texte.id}
                   l={l}
+                  raisons={rank.get(l.texte.id)?.raisons}
                   history={modifiePar(reg, l, amendments)}
                   repealed={abrogePar(l, amendments)}
                   set={(patch) => setLigne(l.texte.id, patch)}
@@ -656,7 +705,19 @@ function ToDo({ className, title, note, action, children }: { className: string;
   );
 }
 
-function LigneCard({ l, history, repealed, set }: { l: Ligne; history: Amendment[]; repealed?: Amendment; set: (patch: Partial<Ligne>) => void }) {
+function LigneCard({
+  l,
+  raisons,
+  history,
+  repealed,
+  set,
+}: {
+  l: Ligne;
+  raisons?: string[];
+  history: Amendment[];
+  repealed?: Amendment;
+  set: (patch: Partial<Ligne>) => void;
+}) {
   const next = prochaine(l);
   return (
     <li className={`card registre-ligne conf-${l.conformite || "none"} ${l.retenu ? "" : "is-left"}`}>
@@ -677,6 +738,7 @@ function LigneCard({ l, history, repealed, set }: { l: Ligne; history: Amendment
         {l.origine === "ajoute" ? "Ajouté à la main" : `Pourquoi : ${l.raisons.join(", ")}`}
         {l.texte.publie ? ` · ${l.texte.publie}` : ""}
       </p>
+      {raisons?.length ? <p className="registre-raisons">Importance : {raisons.slice(0, 4).join(" · ")}</p> : null}
       {repealed ? (
         // No longer in force: the consultant takes it out of the register, or keeps it for the record.
         <p className="registre-abroge small">

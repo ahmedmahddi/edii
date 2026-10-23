@@ -1,6 +1,7 @@
 // From a classification to the establishment's register: the texts that apply and why, the JORT
 // texts that modify them, and the evaluations due.
 import { describe, expect, it } from "vitest";
+import { importance } from "@/lib/registre/importance";
 import { applies, derivedFlags, type Site } from "@/lib/registre/profil";
 import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte } from "@/lib/registre/referentiel";
 import {
@@ -212,6 +213,35 @@ describe("an establishment's register", () => {
     const reg = createRegistre(report(), levage, texts, now);
     const ligne = reg.lignes.find((l) => l.texte.id === "decret-62-129")!;
     expect(abrogePar(ligne, [repeal])?.id).toBe(repeal.id);
+  });
+
+  it("ranks a site's texts: base texts, then its activities and risks, then general and one-off texts", () => {
+    const texts = catalogue(
+      [
+        hit("Décret n° 2026-50 du 2 mai 2026, fixant les règles de stockage des grignons et des margines dans les huileries"),
+        hit("Décret n° 2026-51 du 2 mai 2026, relatif à la prévention des risques professionnels sur les lieux de travail"),
+        hit("Décret n° 2026-52 du 2 mai 2026, modifiant le décret n° 2000-12 du 4 janvier 2000, relatif à la sécurité au travail"),
+        hit("Décret n° 2026-53 du 2 mai 2026, portant organisation de l'institut de l'olivier"),
+      ],
+      [],
+      { "n:decret:2026-51": 12 },
+    );
+    const huilerie = site({ rubriques: ["1213"], sections: ["1200"], flags: ["denrees"], effectif: 25 });
+    const ranked = proposals(texts, huilerie)
+      .map((p) => ({ id: p.texte.numero ?? p.texte.id, ...importance(p.texte, huilerie) }))
+      .sort((a, b) => b.score - a.score);
+    const order = ranked.map((r) => r.id);
+    expect(order.indexOf("decret-2006-2687")).toBeLessThan(order.indexOf("2026-50")); // a text the app is built on
+    expect(order.indexOf("2026-50")).toBeLessThan(order.indexOf("2026-51")); // its activity before a general text
+    expect(order.indexOf("2026-51")).toBeLessThan(order.indexOf("2026-52")); // a general text before a modification
+    expect(ranked.find((r) => r.id === "2026-50")?.raisons[0]).toMatch(/^votre activité/);
+    expect(ranked.find((r) => r.id === "2026-51")?.raisons).toContain("cité par 12 textes");
+    const institut = ranked.find((r) => r.id === "2026-53")!;
+    expect(institut.score).toBeLessThan(ranked.find((r) => r.id === "2026-50")!.score); // a body's organisation
+    // The same text weighs less for a site that does not carry on the activity.
+    const atelier = site({ rubriques: ["2310"], sections: ["2300"], flags: [], effectif: 25 });
+    const grignons = texts.find((t) => t.numero === "2026-50")!;
+    expect(importance(grignons, atelier).score).toBeLessThan(importance(grignons, huilerie).score);
   });
 
   it("is saved to and restored from a backup file", () => {

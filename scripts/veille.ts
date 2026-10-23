@@ -37,7 +37,7 @@ import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../li
 import { fetchRetry, fetchText } from "../lib/veille/fetch";
 import { arabicPdfMarkdown, mostlyArabic } from "../lib/veille/arabe";
 import { markdownPages, ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
-import { amendments, catalogue, type Repeals } from "../lib/registre/referentiel";
+import { amendments, catalogue, citations, type Repeals } from "../lib/registre/referentiel";
 import { type Repeal, repealClauses } from "../lib/veille/abrogation";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
 import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
@@ -383,6 +383,7 @@ async function main(): Promise<void> {
     const before = feed.hits.length;
     feed = reassess({ updated: null, scanned: {}, hits: [] }, years);
     feed.amendments = amendments(years, catalogue(feed.hits), loadRepeals());
+    feed.citations = citations(years, catalogue(feed.hits));
     const updated = years.map((y) => y.updated ?? "").sort().at(-1) || null;
     writeFeed({ ...feed, updated });
     const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
@@ -396,6 +397,7 @@ async function main(): Promise<void> {
     await readRepeals(stored().filter((y) => !only || only.has(y.year)));
     feed = reassess({ updated: null, scanned: {}, hits: [] }, stored());
     feed.amendments = amendments(stored(), catalogue(feed.hits), loadRepeals());
+    feed.citations = citations(stored(), catalogue(feed.hits));
     writeFeed({ ...feed, updated: new Date().toISOString() });
     const n = feed.amendments.filter((a) => a.abroge?.length).length;
     console.log(`\n${n} textes du référentiel abrogés par un texte publié au JORT. Téléchargé : ${(downloaded / 1e6).toFixed(0)} Mo.`);
@@ -470,6 +472,7 @@ async function main(): Promise<void> {
     for (const y of years) feed = await scanYear(feed, y, from, to);
   }
   feed.amendments = amendments(stored(), catalogue(feed.hits), loadRepeals());
+  feed.citations = citations(stored(), catalogue(feed.hits));
   saveFeed(feed);
   const count = (s: string) => feed.hits.filter((h) => h.severity === s).length;
   console.log(

@@ -81,7 +81,7 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
   const [tab, setTab] = useState<Tab>("registres");
   const feed = useFeed();
   // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
-  const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? []), [feed]);
+  const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? [], feed?.citations ?? {}), [feed]);
   useEffect(() => {
     if (seed) setTab("registres");
   }, [seed]);

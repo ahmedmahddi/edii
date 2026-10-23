@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 96 tests
+npm test                                 # 97 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 96 tests in 5 files
+npm test                 # vitest: 97 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -354,6 +354,37 @@ About 30% of the ticked JORT texts only modify another text; most of the rest ar
 CNSS, code de la route and environment texts across 40 years. **Too many** for a register a
 consultant can work through: the user has to choose how to cut (§11 step 3).
 
+**Ranking (23 October): most important first, for any site** (`lib/registre/importance.ts`,
+`importance(texte, site)` → `{score, raisons}`). The user asked that the veille put the most
+important texts first, for every sector and every kind of work, not for one or two example sites.
+Nothing in it is particular to a sector: the signals come from the text and from the site's own
+profile.
+
+| Signal | Points |
+|---|---|
+| Text the app is built on (nomenclature 2005 and its 2010 and 2012 amendments, décret 2006-2687, décret 2005-1991) | 40 |
+| Curated in `textes.json` | 20 (4 in a `suggere` domain: finance) |
+| On one of the site's activities (an `act-*` rule whose conditions hold) | 25 |
+| Through one of its facts, rubriques, category or study | 16; 5 for facts beside the process (`vehicules`, transport, `import-export`, `commerce`) |
+| Conditions every site or employer meets (`tous`, `classe`, `effectif`) | 0 |
+| Cited by later JORT titles (`feed.citations`, `texte.cite`) | 6 × log2(1 + n), at most 20 |
+| Kind | law promulgating a code 20, loi 14, décret-loi 12, décret 9, arrêté 5, circulaire/décision 3 |
+| Domain | établissements classés 12, environnement 10, SST 10, incendie 9, produits dangereux 9, hygiène 7, secteurs 6, travail 6, finance 0, route −4 |
+| Wording | general rules ("fixant les règles", "relatif à la prévention/réglementation"…) +5; only modifies another −8; composition, organisation, creation, ratification, temporary measure −6 |
+| Recent | +4 since 2015, +2 since 2000 |
+
+Citations: `citations(years, texts)` (referentiel.ts) counts, for each text, the later JORT titles
+whose citations name it (`n:`/`d:` keys); the scanner stores them in `feed.citations`
+(`--reassess` recomputes). The register view shows **"Les 30 textes essentiels pour ce site"**
+(`ESSENTIELS` in registres.tsx) above the domain groups, sorts each group, the "new texts" panel and
+the Excel export by the same score, and prints the reasons under each title ("votre activité :
+Huileries…", "votre site : rejets d'eaux usées industrielles", "cité par 7 textes", "code"…).
+Checked on rubriques of every section (1101, 1213, 1305, 1419, 1511, 1613, 1709, 2505, 2601…):
+the base texts, the site's codes (eaux, sécurité incendie, travail), the waste law and the activity's
+own texts come first. Known limits: a text matched by a broad rule still ranks with that rule's
+weight (e.g. seeds classification through `denrees`); the fix is in the rule's terms, not in the
+ranking. An AI pass to read whether a text still applies was discussed and left for later.
+
 **Register lifecycle** (`lib/registre/registre.ts`, UI in `registres.tsx`):
 
 1. Validated report → "Créer le registre de veille" → profile step (name required; classification
@@ -463,9 +494,9 @@ To get the per-year table again: count `issues`, `entries` and flags in
    still in force (AI pass discussed with the user, offline, with reasons shown), or general texts
    older than N years as suggestions.
    Before (636-1,054 ticked with 1957-2026). Decided so far: base texts +
-   activity. Further ideas, to put to the user with numbers: general texts older than N years as
-   suggestions; detect repealed texts ("abrogeant le décret n° X" → X no longer proposed); rank
-   curated + laws + decrees first in the register view.
+   activity; repealed texts dropped; importance ranking with an "essentiels" block (23 October,
+   §7). Further idea, to put to the user with numbers: general texts older than N years as
+   suggestions.
 4. **Check the page with the large data**: open the Veille in the browser (`npm run dev`), create a
    register for a big site, measure load time (feed.json 8 MB with 1957-2026), the register's length and scroll,
    on desktop and phone. Consider paging register groups or loading the journal by year.
@@ -487,7 +518,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (96 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (97 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).
