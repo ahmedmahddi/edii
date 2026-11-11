@@ -58,12 +58,13 @@ export function isoDate(text: string): string | null {
 }
 
 // Kinds of text, as titles start (without accents: the OCR of old issues writes "DECRET", "ARRETE").
+// With the OCR misreadings of old issues: "ABBETÉ", "ARBETE", "ABRETE", "ARRETTES", "LDI N°".
 const KINDS: [RegExp, string][] = [
   [/^loi organique/, "Loi organique"],
   [/^decrets?-lois?/, "Décret-loi"],
-  [/^loi/, "Loi"],
+  [/^(loi|ldi n|lioi)/, "Loi"],
   [/^decret/, "Décret"],
-  [/^arrete/, "Arrêté"],
+  [/^(arrete|arbete|abrete|abbete|arrettes)/, "Arrêté"],
   [/^decision/, "Décision"],
   [/^avis/, "Avis"],
   [/^circulaire/, "Circulaire"],
@@ -76,7 +77,8 @@ const KINDS: [RegExp, string][] = [
 
 export function kindOf(title: string): string {
   if (isArabic(title.slice(0, 20))) return kindOfAr(title);
-  const t = title.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
+  // "- Décret n° …": a list mark of the OCR text comes first.
+  const t = title.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase().replace(/^[-–—•*☑\s]+/, "");
   return KINDS.find(([re]) => re.test(t))?.[1] ?? "Autre";
 }
 

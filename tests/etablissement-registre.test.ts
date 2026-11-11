@@ -3,7 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { importance } from "@/lib/registre/importance";
 import { applies, derivedFlags, EMPTY_SITE, METIERS, type Site, toggleMetier } from "@/lib/registre/profil";
-import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte } from "@/lib/registre/referentiel";
+import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte, themeFor } from "@/lib/registre/referentiel";
 import {
   addTexte,
   abrogePar,
@@ -100,6 +100,24 @@ describe("a register without classification (trades)", () => {
     expect([reg.nom, reg.classe, reg.activites, reg.restauration]).toEqual(["Routes du Sud", null, [], null]);
     const enrobes = reg.lignes.find((l) => l.texte.numero === "2026-95")!;
     expect(importance(enrobes.texte, routes).raisons[0]).toBe("votre activité : Travaux routiers (terrassement, chaussées, enrobés)");
+  });
+
+  it("ticks legal acts only, shows the theme of the rule that applies, and only the latest yearly texts", () => {
+    const texts = catalogue([
+      hit("Décret n° 2026-97 du 2 mai 2026, relatif aux règles d'hygiène et de sécurité applicables au personnel des usines de conserves"),
+      hit("Code du Travail (suite et fin)"),
+      hit("Décret n° 2025-419 du 9 juillet 2025, fixant le salaire minimum interprofessionnel garanti"),
+      hit("Décret n° 2026-60 du 3 mai 2026, fixant le salaire minimum interprofessionnel garanti dans les secteurs non agricoles"),
+      hit("Décret n° 2019-50 du 3 mai 2019, portant majoration des salaires dans les secteurs non agricoles"),
+    ]);
+    const p = proposals(texts, routes).filter((x) => x.texte.origine === "jort");
+    const hygiene = p.find((x) => x.texte.numero === "2026-97")!;
+    expect(hygiene.texte.theme).not.toBe("Conserves, fruits et légumes, dattes"); // a canning rule does not apply to road works
+    expect(themeFor(texts.find((t) => t.numero === "2026-97")!, toggleMetier(EMPTY_SITE, "conserves"))).toBe("Conserves, fruits et légumes, dattes");
+    expect(p.find((x) => x.texte.titre.startsWith("Code du Travail"))?.proposed ?? false).toBe(false); // not an act
+    // The SMIG of the two latest years stand; the wage increase of 2019 is replaced.
+    expect(p.filter((x) => /^(2025-419|2026-60)$/.test(x.texte.numero ?? "")).map((x) => x.texte.numero).sort()).toEqual(["2025-419", "2026-60"]);
+    expect(texts.find((t) => t.numero === "2019-50")!.remplace).toBe(true);
   });
 
   it("keeps its trades when a classification is added later", () => {

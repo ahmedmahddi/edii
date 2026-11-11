@@ -128,6 +128,12 @@ describe("reading a JORT sommaire", () => {
     expect(kindOf("Arrêtés du ministre du tourisme")).toBe("Arrêté");
     expect(kindOf("Décret-loi n° 2011-115")).toBe("Décret-loi");
     expect(kindOf("Liste de promotion")).toBe("Autre");
+    // OCR misreadings of old issues, and the list marks of the OCR text.
+    expect(kindOf("ABBETÉ du Ministre de la Santé Publique du 12 mars 1970")).toBe("Arrêté");
+    expect(kindOf("ARBETE du Secrétaire d'Etat à l'Intérieur du 13 octobre 1965")).toBe("Arrêté");
+    expect(kindOf("LDI N° 76-15 du 21 janvier 1976")).toBe("Loi");
+    expect(kindOf("- Décret n° 2004-1876 du 11 août 2004")).toBe("Décret");
+    expect(kindOf("LICENCIEMENT d'un Cheikh")).toBe("Autre");
     expect(pdfUrl(2025, 92)).toBe("https://lake.jort.tn/journal-officiel/fr/2025/092.pdf");
     expect(pdfPage({ firstPage: 553 }, 559)).toBe(7);
     expect(pdfPage({ firstPage: null }, 559)).toBeNull();
@@ -298,7 +304,7 @@ describe("picking the texts that concern the app", () => {
     expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 12 janvier 2026, modifiant et complétant l’arrêté du ministre de l'agriculture du 19 septembre 1998, fixant les modalités de contrôle sanitaire et de surveillance des conditions de production des produits de la pêche et de leur mise sur le marché" })).toMatchObject({ severity: "important", domains: ["hygiene", "secteurs"], sectors: expect.arrayContaining(["1200"]) });
     expect(assess({ title: "Arrêté conjoint de la ministre de l’industrie, des mines et de l’énergie, du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime et du ministre de l’équipement et de l’habitat du 31 décembre 2025, modifiant l’arrêté conjoint […] du 3 mai 2023 fixant les conditions et les critères du changement de vocation des terres agricoles sur lesquelles sont implantés des projets industriels" })).toMatchObject({ severity: "information", domains: ["etablissements-classes"] });
     expect(assess({ title: "Arrêté du ministre de l'agriculture, des ressources hydrauliques et de la pêche maritime du 31 décembre 2025, modifiant l’arrêté du ministre de l'agriculture et des ressources hydrauliques du 9 juillet 2005, portant approbation du cahier des charges types de la production animale selon le mode biologique" })).toMatchObject({ severity: "information", sectors: ["1100"] });
-    expect(assess({ title: "Décret n° 2026-6 du 7 janvier 2026, relatif à l’approbation de la vente au dinar symbolique au profit de l’Agence foncière industrielle d’une parcelle de terre domaniale sise à la région de Bourbiaa dans la délégation de Mohammadia du gouvernorat de Ben Arous pour réaliser et aménager une zone industrielle" })?.severity).toBe("information");
+    expect(assess({ title: "Décret n° 2026-6 du 7 janvier 2026, relatif à l’approbation de la vente au dinar symbolique au profit de l’Agence foncière industrielle d’une parcelle de terre domaniale sise à la région de Bourbiaa dans la délégation de Mohammadia du gouvernorat de Ben Arous pour réaliser et aménager une zone industrielle" })).toBeNull(); // a sale of land in one place: one-off
     for (const title of [
       "Arrêté de la ministre des finances du 6 janvier 2026, complétant l’arrêté du 21 août 2023 relatif à la nomenclature des produits monopolisés et leurs prix",
       "Arrêté du ministre de l’agriculture, des ressources hydrauliques et de la pêche maritime du 9 janvier 2026, portant ouverture de la procédure de réaménagement foncier dans les périmètres publics irrigués situés au gouvernorat de Nabeul",

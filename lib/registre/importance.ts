@@ -22,7 +22,7 @@
  *   - recent: +4 since 2015, +2 since 2000.
  */
 import { applies, conditionLabel, type Site } from "./profil";
-import { keysOf, type Texte } from "./referentiel";
+import { keysOf, type Texte, themeFor } from "./referentiel";
 import { fold, rules } from "../veille/watch";
 
 export interface Importance {
@@ -79,7 +79,7 @@ export function importance(t: Texte, site: Site): Importance {
   // Named after the site's own trade when it is one: a text found by two activity rules carries the
   // theme of the first, maybe not the site's.
   const trade = t.activites?.find((c) => c.startsWith("metier:") && applies([c], site));
-  if (t.activites?.length && activity) add(25, `votre activité : ${trade ? conditionLabel(trade) : t.theme}`);
+  if (t.activites?.length && activity) add(25, `votre activité : ${trade ? conditionLabel(trade) : themeFor(t, site)}`);
   else {
     const specific = (t.when ?? []).filter((c) => !GENERIC(c) && applies([c], site));
     const core = specific.find((c) => !SIDE.has(c));

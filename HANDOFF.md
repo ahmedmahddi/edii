@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 100 tests
+npm test                                 # 101 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 100 tests in 5 files
+npm test                 # vitest: 101 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -375,6 +375,40 @@ première demande, ouverture de crédit, protocole financier, grand prix. Measur
 routes + VRD 676 ticked; electrical works 594; general industry 453; offices only 397 (all general
 labour, SST, fire, hygiene texts).
 
+**Cleaning after the user's BTP test register (11 November).** The user exported a construction
+company's register (645 texts) and shared it. Found and fixed:
+
+* **Junk ticked** (~45 rows: "LICENCIEMENT d'un Cheikh", "DESIGNATION des membres…", "CODE du Travail
+  (suite)", price lists, communiqués): domain rules ticked any title. Now only a legal act (loi,
+  décret, décret-loi, arrêté, décision, circulaire) is ticked (`LEGAL_ACTS` in referentiel.ts); the
+  rest is suggested at most, and titles starting "Licenciement" or "Désignation" are ignored.
+* **Real acts not recognised** (kind "Texte"): OCR misreadings ("ABBETÉ", "ARBETE", "ABRETE",
+  "ARRETTES", "LDI N°") and list marks ("- Décret n° …") are now read by `kindOf`.
+* **Wrong DOMAINE column** (~20 rows: "Conserves", "Huileries", "Aquaculture" in a construction
+  register): the theme was the first activity rule's label. Each JORT text now keeps the theme of each
+  rule that found it (`themes`); `proposals` gives the register the theme of the first rule that
+  applies to the site (`themeFor`), and the ranking uses it.
+* **Local one-off orders** (~100 hygiene rows of 1958-1973: fixed fines "pour contraventions aux
+  règlements sur l'hygiène" of one town, rules "rendant applicables dans la commune de …"; also
+  "dans la délégation / le gouvernorat / la ville de …"): ignored everywhere.
+* **Old yearly texts**: SMIG decrees, wage increases and lois de finances are published every year;
+  `registre.periodiques` (watch.json) lists those rules and wage titles are recognised, and only the
+  texts of the two latest years are proposed (the older are `remplace`).
+* **Other noise** ignored or demoted: individual decisions ("de ses fonctions"), staff statutes and
+  grades, manuals of procedures, internal rules, arbitration councils, the code du travail maritime,
+  bilateral social-security agreements, amnesties of late-payment penalties, social security of
+  students and seamen; "contrôle technique" in the vehicles rule narrowed to "contrôle technique des
+  véhicules" (it caught product import controls).
+
+Same company profile (Construction de bâtiments, 50 employees): 645 → 463 texts, none of them junk;
+the two construction themes are now the largest groups. Routes + VRD 495, electrical works 403,
+general industry 282, offices 226.
+
+**Still open from that test**, for the user: the résumé, risque and plan d'action columns are empty
+(the "fiche" project discussed on 11 November: an algorithm on the OCR text for all texts, written
+résumés for the ~400 essentials); about a third of the texts are from before 1980 and some are
+overtaken without a formal repeal.
+
 **Ranking (23 October): most important first, for any site** (`lib/registre/importance.ts`,
 `importance(texte, site)` → `{score, raisons}`). The user asked that the veille put the most
 important texts first, for every sector and every kind of work, not for one or two example sites.
@@ -539,7 +573,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (100 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (101 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).

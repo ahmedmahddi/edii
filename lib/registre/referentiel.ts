@@ -31,8 +31,10 @@ export interface Texte {
   origine: "referentiel" | "jort";
   niveau?: Severity; // for a text found in the JORT
   remplace?: boolean; // a JORT text of a series (the SMIG of each year…) replaced by a newer one: not proposed
+  periodique?: string; // a text published again every year (the SMIG, the loi de finances): its rule
   abroge?: { titre: string; publie: string; source: string }; // repealed as a whole, by this text: not proposed
   activites?: string[]; // for a JORT text: the sites whose activity it is about (conditions of the act-* rules)
+  themes?: { label: string; when: string[] }[]; // for a JORT text: the theme of each rule that found it
   cite?: number; // how many later JORT titles name it: the more, the more central the text
   coche?: string[]; // for a JORT text: the sites it is ticked for (the others with 'when': suggested)
 }
@@ -122,6 +124,20 @@ export function modifiesAnother(title: string): boolean {
   return /\b(modifiant|modifie|completant|portant modification|abrogeant|prorogeant|rectificatif)\b/.test(subject(title));
 }
 
+// Rules whose texts come again every year: the SMIG, wage increases, the loi de finances.
+const PERIODIC = new Set(rules.registre.periodiques ?? []);
+const WAGES = /\b(majoration des salaires|augmentation des salaires|salaire minimum)\b/;
+
+const LEGAL_ACTS = new Set(["Loi", "Loi organique", "Décret", "Décret-loi", "Arrêté", "Décision", "Circulaire"]);
+
+/**
+ * The theme a site's register shows: the first one whose rule applies to the site. A decree on the
+ * hygiene of canneries is "Hygiène" in a construction company's register, not "Conserves".
+ */
+export function themeFor(t: Texte, site: Site): string {
+  return t.themes?.find((x) => applies(x.when, site))?.label ?? t.theme;
+}
+
 /** A text the veille found in the JORT, as a text of the référentiel. */
 export function fromHit(hit: Hit): Texte {
   const numero = /n°\s*(\d{2,4}-\s?\d{1,5})/i.exec(isArabic(hit.title) ? frenchCitations(hit.title) : hit.title)?.[1].replace(/\s/g, "");
@@ -139,8 +155,11 @@ export function fromHit(hit: Hit): Texte {
   // A tax or customs text stays a suggestion even when it names the site's activity (an export tax
   // on olive oil, a customs duty on steel).
   const taxed = hit.matches.some((m) => SUGGESTED.has(ruleById.get(m.rule)?.domain ?? ""));
+  // Only a legal act is ticked: not a notice, a list, an appointment or a dismissal ("LICENCIEMENT
+  // d'un cheikh"), nor a title the OCR left without its kind; those are suggested at most.
+  const act = LEGAL_ACTS.has(hit.kind);
   const coche =
-    hit.severity === "information" || taxed
+    hit.severity === "information" || taxed || !act
       ? []
       : [
           ...new Set(
@@ -159,12 +178,17 @@ export function fromHit(hit: Hit): Texte {
     titre: hit.title,
     domaine: hit.domains[0] ?? "secteurs",
     theme: labels[0] ?? hit.matches[0]?.label ?? "",
+    themes: hit.matches
+      .filter((m) => !m.rule.startsWith("ref-"))
+      .map((m) => ({ label: m.label, when: ruleById.get(m.rule)?.when ?? [] }))
+      .sort((a, b) => labels.indexOf(a.label) - labels.indexOf(b.label)),
     when: when.length ? when : undefined,
     source: hit.pdf,
     publie: `JORT n° ${hit.issue}/${hit.year}, p. ${hit.page}`,
     origine: "jort",
     niveau: hit.severity,
     coche,
+    periodique: hit.matches.find((m) => PERIODIC.has(m.rule))?.rule ?? (WAGES.test(fold(hit.title)) ? "salaire-minimum" : undefined),
     activites: [...new Set(hit.matches.filter((m) => m.rule.startsWith("act-")).flatMap((m) => ruleById.get(m.rule)?.when ?? []))],
   };
 }
@@ -236,6 +260,11 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: 
       newest.set(key, t);
     } else t.remplace = true;
   }
+  // A text published again every year stands until the next ones: of the SMIG decrees, the wage
+  // increases or the lois de finances, those of the two latest years are proposed.
+  const latest = new Map<string, number>();
+  for (const t of texts) if (t.periodique && t.date) latest.set(t.periodique, Math.max(latest.get(t.periodique) ?? 0, Number(t.date.slice(0, 4))));
+  for (const t of texts) if (t.periodique && t.date && Number(t.date.slice(0, 4)) < latest.get(t.periodique)! - 1) t.remplace = true;
   return texts;
 }
 
@@ -253,8 +282,11 @@ export function proposals(texts: Texte[], site: Site): Proposal[] {
   return texts.flatMap((texte) => {
     if (texte.remplace || texte.abroge) return [];
     const reasons = applies(texte.when, site);
+    if (!reasons) return [];
     const proposed = texte.origine === "referentiel" || applies(texte.coche, site) !== null;
-    return reasons ? [{ texte, reasons, proposed }] : [];
+    // A register keeps its copy of the text with the theme for its site, without the others.
+    const { themes, ...rest } = texte;
+    return [{ texte: themes ? { ...rest, theme: themeFor(texte, site) } : texte, reasons, proposed }];
   });
 }
 
