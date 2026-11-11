@@ -36,7 +36,11 @@ const plain = (s: string) =>
 const bare = (s: string) => plain(s).replace(/[^a-z0-9]/g, "");
 
 // Lines that are not the text: running heads, page numbers, the signature block of the PDF.
-const NOISE = /^(page \d+|\d+\s*$|n° \d+|journal officiel|---|#|signature num|dn:|date:|cn=|2\.5\.4|de la repub|repub tunisien)/;
+const NOISE = /^(page \d+|\d+\s*$|n° \d+|journal officiel|---|signature num|dn:|date:|cn=|2\.5\.4|de la repub|repub tunisien)/;
+// A heading is a text's title in some issues ("## Décret n° 79-1001 …"); other headings (sections,
+// ministries, "# Sommaire") are not text.
+const TITLE_LINE = /^(d[ée]cret|a[rb][rb][êe]t[ée]|loi|ldi|circulaire|d[ée]cision)s?\b.{0,80}?\b(n°|du \d)/i;
+const ACT_HEADING = /^(d[ée]crets?|arr[êe]t[ée]s?|lois?|circulaires?|d[ée]cisions?)\b/i;
 
 interface Paragraph {
   text: string;
@@ -53,7 +57,15 @@ function paragraphs(md: string): Paragraph[] {
       current = [];
     };
     for (const raw of lines) {
-      const line = raw.replace(/\*\*/g, "").trim();
+      let line = raw.replace(/\*\*/g, "").trim();
+      if (line.startsWith("#")) {
+        line = line.replace(/^#+\s*/, "");
+        if (!ACT_HEADING.test(line)) {
+          flush();
+          continue;
+        }
+        flush();
+      }
       if (!line) {
         flush();
         continue;
@@ -62,6 +74,8 @@ function paragraphs(md: string): Paragraph[] {
         flush();
         continue;
       }
+      // A line that starts like a text's title starts a paragraph, glued to the line above or not.
+      if (TITLE_LINE.test(line)) flush();
       current.push(line);
     }
     flush();
@@ -74,32 +88,70 @@ function paragraphs(md: string): Paragraph[] {
  * at the head of the text on or after its page, to the next text's title. `pages` gives each
  * title's page index in the OCR text (its JORT page less the issue's first page), null when unknown.
  */
+// The kind a title starts with, OCR misreadings aside: "arr" for ARRETE, ARBETE, ABBETE…
+const kindOf = (k: string) => (/^(arr|arb|abb|abr)/.test(k) ? "arr" : /^(dec|dcr)/.test(k) ? "dec" : /^(loi|ldi|lio)/.test(k) ? "loi" : k.slice(0, 3));
+
+// A line of the sommaire: dot leaders, or a page number at its end.
+const SOMMAIRE_LINE = /(\.{4,}|…+)\s*\d+\s*$|\s\d{2,5}\s*$/;
+
 export function bodies(md: string, titles: { title: string; page: number | null }[]): (string[] | null)[] {
   const paras = paragraphs(md);
   const keys = paras.map((p) => bare(p.text).slice(0, 200));
   const starts: (number | null)[] = [];
+  const used = new Set<number>();
   let from = 0;
-  for (const { title, page } of titles) {
+  for (const { title, page: given } of titles) {
+    // A page before the issue's first: the issue's first page was misread; search without it.
+    const page = given !== null && given >= 0 ? given : null;
     const key = bare(title).slice(0, 45);
     let found: number | null = null;
     // From the title's page, then from the page before (a page number read one off), and never
     // before the text found last: the sommaire on the first pages lists the same titles.
     for (const first of page === null ? [null] : [page, page - 1]) {
       if (key.length < 20 || found !== null) break;
-      let i = from;
+      // On the title's pages, wherever the texts before it were found: old issues do not always
+      // print the texts in the sommaire's order.
+      let i = first === null ? from : 0;
       if (first !== null) while (i < paras.length && paras[i].page < first) i++;
       for (; i < paras.length && (first === null || paras[i].page <= first + 2); i++) {
         // A title the OCR broke in two paragraphs is read with the next one; a line of the sommaire
         // (dot leaders, a page number) is not the text.
-        if (/\.{4,}\s*\d+\s*$/.test(paras[i].text)) continue;
+        if (used.has(i) || SOMMAIRE_LINE.test(paras[i].text)) continue;
         if (keys[i].startsWith(key) || (keys[i] + (keys[i + 1] ?? "")).startsWith(key)) {
           found = i;
           break;
         }
       }
     }
+    // Old issues: the OCR misreads the head of the title ("ARBETE", "Pan" for "Plan"). The text is
+    // then found by its number ("69-426"), or else by its date, near the start of a paragraph that
+    // begins with a kind of text, on or just after its page.
+    const id = /n°\s*(\d{2,4}\s?-\s?\d{1,5})/i.exec(title)?.[1].replace(/\s/g, "") ?? /\bdu (\d{1,2}(?:er)? \S+ \d{4})/i.exec(title)?.[1];
+    if (found === null && id && page !== null) {
+      const needle = bare(id);
+      for (let i = 0; i < paras.length && paras[i].page <= page + 2; i++) {
+        if (used.has(i) || paras[i].page < page - 1 || SOMMAIRE_LINE.test(paras[i].text)) continue;
+        if (kindOf(keys[i]) === kindOf(key) && keys[i].slice(0, 90).includes(needle)) {
+          found = i;
+          break;
+        }
+      }
+    }
+    // Last, anywhere in the texts: the pages of some old issues do not match the sommaire's numbers.
+    if (found === null && key.length >= 20 && page !== null)
+      // After the sommaire: from the first text found.
+      for (let i = used.size ? Math.min(...used) : from; i < paras.length; i++) {
+        if (used.has(i) || SOMMAIRE_LINE.test(paras[i].text)) continue;
+        if (keys[i].startsWith(key)) {
+          found = i;
+          break;
+        }
+      }
     starts.push(found);
-    if (found !== null) from = found + 1;
+    if (found !== null) {
+      used.add(found);
+      from = Math.max(from, found + 1);
+    }
   }
   const sorted = starts.filter((s): s is number => s !== null).sort((a, b) => a - b);
   return starts.map((s) => {

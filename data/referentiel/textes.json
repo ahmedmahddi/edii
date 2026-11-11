@@ -525,10 +525,11 @@
    "type": "Décret",
    "numero": "62-129",
    "date": "1962-04-18",
-   "titre": "Décret n° 62-129 du 18 avril 1962, relatif au contrôle réglementaire des appareils de levage",
+   "titre": "Décret n° 62-129 du 18 avril 1962, relatif aux prescriptions de sécurité dans l'industrie du bâtiment",
    "domaine": "sst",
    "theme": "Prévention des risques professionnels",
    "when": [
+    "chantier",
     "levage"
    ]
   },
@@ -623,7 +624,7 @@
    "type": "Décret",
    "numero": "84-1556",
    "date": "1984-12-29",
-   "titre": "Décret n° 84-1556 du 29 décembre 1984, relatif au niveau de bruit de jour et de nuit",
+   "titre": "Décret n° 84-1556 du 29 décembre 1984, portant réglementation des lotissements industriels",
    "domaine": "environnement",
    "theme": "Bruit et nuisances sonores",
    "when": [

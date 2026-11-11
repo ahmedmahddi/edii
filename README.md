@@ -65,6 +65,7 @@ npm run veille -- --year 2026 --from 1 --to 30   # read (again) issues 1 to 30 o
 npm run veille -- --years 1957-2022              # older years, most recent first
 npm run veille -- --reread                       # read again the issues that gave no text
 npm run veille -- --abrogations                  # read every issue's whole text for the texts it repeals
+npm run veille -- --fiches                       # read the whole text of the issues with texts found: fiches
 npm run veille -- --ocr --years 2023-2026        # issues read from the PDF: read their OCR text, keep the longer reading
 npm run veille -- --file jort.md --year 2010 --number 18    # an OCR text (or a PDF) already on disk
 npm run veille -- --probe                        # sample old PDFs (see data/veille/probe)
@@ -206,6 +207,20 @@ before decrees and arrêtés, the texts later JORT texts cite most, and general 
 that only modify another or set up a body. The 30 first are shown above the domains as "Les 30
 textes essentiels pour ce site", each with why it ranks there; every domain, the new texts and the
 Excel export follow the same order (`lib/registre/importance.ts`).
+
+**Fiches: what each text requires, prefilled.** For every text the veille finds, `npm run veille --
+--fiches` reads its issue's whole OCR text once, cuts out the text's body (its title is printed again at
+its head), and keeps its **fiche** (`lib/veille/fiche.ts`, `data/veille/fiches/<year>.json`): the
+sentences of its articles that oblige or forbid ("doit", "sont tenus", "il est interdit"…), with their
+article, the sanctions, the periodicity ("une fois par an") and the kinds of obligation (register,
+display, authorisation, declaration, periodic check, analyses, training, medical surveillance,
+protective equipment, ban). In a register, until the consultant writes their own, the résumé shows a
+written résumé when there is one (`data/referentiel/resumes/*.json`, text key → résumé), else the
+quoted obligations (else the first article); the risk is written from the text's domain and its
+sanctions, the action plan from its kinds of obligation; the Excel export uses the same. All of it is
+a draft to check against the text, marked so on the page. The weekly run reads the fiches of new texts.
+Résumés are written in batches, the most useful texts first: `npx tsx scripts/resumes.ts --next 40`
+lists the next ones with their articles (kept out of git in `data/veille/corps/`).
 
 The **référentiel** is every text a register can hold: `data/referentiel/textes.json`, curated law
 references (kind, number, date, title, and `when`, the conditions under which a text applies; the

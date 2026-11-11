@@ -423,6 +423,31 @@ describe("the fiche of a text, read in its issue", () => {
     expect(arrete).toEqual(["Article premier - Est approuvé le plan d'aménagement de la zone X annexé au présent arrêté."]);
   });
 
+  it("finds the texts of old issues: titles as headings, glued to the line above, out of order, misread", () => {
+    const old = [
+      "<!-- page:1 -->",
+      "DECRET N° 79-1001 du 7 décembre 1979, portant publication de la Convention de 1972 sur l'immersion de déchets 3475",
+      "ARRETE du Ministre de la Justice du 7 décembre 1979, portant ouverture de concours 3476",
+      "<!-- page:2 -->",
+      "## Ministère de la Justice",
+      "Le Ministre de la Justice. Vu le statut général,",
+      "ARBETE du Ministre de la Justice du 7 décembre 1979, portant ouverture d'un concours externe",
+      "",
+      "Article premier. — Un concours est ouvert.",
+      "",
+      "## Décret n° 79-1001 du 7 décembre 1979, portant publication de la Convention de 1972, sur l'immersion de déchets.",
+      "",
+      "Article unique. — Est publiée la convention de 1972.",
+    ].join("\n");
+    const [decret, arrete] = bodies(old, [
+      { title: "DECRET N° 79-1001 du 7 décembre 1979, portant publication de la Convention de 1972 sur l'immersion de déchets", page: 1 },
+      { title: "ARRETE du Ministre de la Justice du 7 décembre 1979, portant ouverture de concours", page: 1 },
+    ]);
+    expect(decret).toEqual(["Article unique. — Est publiée la convention de 1972."]);
+    // Its head misread ("ARBETE") and its subject reworded: found by its date, as an arrêté, not the decree.
+    expect(arrete?.[0]).toBe("Article premier. — Un concours est ouvert.");
+  });
+
   it("keeps the obligations with their article, the sanctions, the periodicity and the kinds of obligation", () => {
     const [decret, arrete] = bodies(md, titles).map(readFiche);
     expect(decret.articles).toBe(4);

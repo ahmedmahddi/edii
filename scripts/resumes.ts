@@ -8,8 +8,8 @@
  * Priority: 1. the texts among the 30 essentials of at least one site (every trade, every rubrique of
  * the nomenclature in each category); 2. the texts ticked for at least one of those sites; 3. those
  * that apply to some site; 4. the rest. Résumés are written in data/referentiel/resumes/*.json, one
- * file per batch: { "<text key>": "<résumé>" }, the key being the text's first key (n:décret:2005-1991)
- * or its id. The articles come from data/veille/corps/ (npm run veille -- --fiches); a text whose
+ * file per batch: { "<text key>": "<résumé>" }, the key being resumeKey(): the text's number key
+ * (n:decret:2005-1991), or its kind and date with the first words of its subject. The articles come from data/veille/corps/ (npm run veille -- --fiches); a text whose
  * body was not found is summarised from its title, and says so.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -17,7 +17,7 @@ import path from "node:path";
 import nomenclature from "../data/nomenclature.json";
 import { importance } from "../lib/registre/importance";
 import { derivedFlags, EMPTY_SITE, FLAGS, METIERS, type Site, toggleMetier } from "../lib/registre/profil";
-import { catalogue, keysOf, proposals, type Texte } from "../lib/registre/referentiel";
+import { catalogue, proposals, resumeKey, type Texte } from "../lib/registre/referentiel";
 import { SIGNED } from "../lib/veille/fiche";
 
 const ROOT = process.cwd();
@@ -25,7 +25,7 @@ const RESUMES = path.join(ROOT, "data", "referentiel", "resumes");
 const CORPS = path.join(ROOT, "data", "veille", "corps");
 const ORDER = path.join(CORPS, "ordre.json"); // cached: computing it takes a minute
 
-export const keyOf = (t: Texte) => keysOf(t)[0] ?? t.id;
+const keyOf = resumeKey;
 
 function written(): Record<string, string> {
   const out: Record<string, string> = {};

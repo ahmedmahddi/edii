@@ -92,6 +92,19 @@ const COMMON = new Set(
 );
 const words = (s: string) => new Set(fold(s).split(/[^a-z]+/).filter((w) => w.length >= 5 && !COMMON.has(w)));
 
+/**
+ * The key of a text's written résumé (data/referentiel/resumes): its number key, or, for a text
+ * without a number, its kind and date followed by the first words of its subject, since two arrêtés
+ * of the same day are often two texts ("d:arrete:2016-11-14~batteries-accumulateurs-demarrage-plomb").
+ */
+export function resumeKey(t: Texte): string {
+  const key = keysOf(t)[0];
+  if (!key) return t.id;
+  if (key.startsWith("n:")) return key;
+  const first = [...words(subject(t.titre))].slice(0, 4).join("-");
+  return `${key}~${first || t.id}`;
+}
+
 /** Two texts of the same kind and date are told apart by their subject: some words in common. */
 function sameSubject(subject: string, texte: Texte): boolean {
   const mine = words(texte.titre);
@@ -230,7 +243,11 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: 
   const byKey = new Map(texts.flatMap((t) => keysOf(t).map((k) => [k, t] as const)));
   for (const hit of hits) {
     const t = fromHit(hit);
-    const known = keysOf(t).map((k) => byKey.get(k)).find(Boolean);
+    // Known by its number, or by its kind and date when the subjects agree: two arrêtés of the same
+    // day are often two different texts (the list of notifiable diseases and a finance arrêté).
+    const known = keysOf(t)
+      .map((k) => byKey.get(k))
+      .find((k) => k && (k.numero ? k.numero === t.numero : sameSubject(subject(t.titre), k)));
     if (known) {
       known.source ??= t.source;
       known.publie ??= t.publie;

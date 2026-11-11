@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 101 tests
+npm test                                 # 104 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 101 tests in 5 files
+npm test                 # vitest: 104 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -375,6 +375,42 @@ première demande, ouverture de crédit, protocole financier, grand prix. Measur
 routes + VRD 676 ticked; electrical works 594; general industry 453; offices only 397 (all general
 labour, SST, fire, hygiene texts).
 
+**Fiches and résumés (11 November).** The user wanted the résumé de l'exigence, the risque and the
+plan d'action prefilled for all sectors, with no AI model and nothing to run on their laptop (it cannot
+run a model). Two parts:
+
+* **Algorithm, all texts** (`lib/veille/fiche.ts`, `npm run veille -- --fiches`): each issue with
+  texts in the feed is read whole from ocr.jort.tn (about 620 MB for 1957-2026, ~35 min, resumable;
+  the weekly run reads new ones). `bodies()` cuts the issue into texts: the sommaire's title is found
+  again at the head of its body (letters and digits compared), on its page then the page before, never
+  on a sommaire line; for old issues, titles printed as headings ("## Décret n° …") are kept, a title
+  glued to the line above starts a paragraph, texts out of the sommaire's order are found, and a title
+  whose head the OCR misread ("ARBETE") is found by its number or date with the same kind; when the
+  issue's page numbers do not match, the whole text is searched. A body ends at the next text's title
+  and at the signature ("Pour contreseing", "Par décret n° … est nommé"). `readFiche()` keeps up to
+  six obligation sentences with their article, three sanctions, the periodicity and the kinds of
+  obligation (`TYPES`, each with its action plan); the risk comes from `RISKS` by domain plus the
+  first sanction. Stored compact per hit (`data/veille/fiches/<year>.json`, issue → entry index →
+  `{o, s, p, t, a, f}`); served as `public/veille/fiches.json` (derived, by text id, written by
+  `--reassess` and `--fiches`), fetched when a register opens. The register shows the defaults until
+  the consultant edits a field (nothing is copied into localStorage: lines stay small), with a note
+  "brouillon à vérifier"; the export uses the same (`ligneRow(l, defaults)`). Bodies found for legal
+  acts: about 85-90 % since 1990, lower before (OCR); the second run with the old-issue fixes is the
+  one in the repo.
+* **Written résumés** (`data/referentiel/resumes/lot-*.json`, text key → résumé, French, my own
+  wording, 1-3 sentences): written in this session from the articles, batch after batch, in priority
+  order (`scripts/resumes.ts`: 1. the 30 essentials of any of 716 site profiles, 2. ticked for one,
+  3. applicable, 4. the rest; `--next 40 --corps` lists the next ones with their articles from
+  `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; at
+  11 November evening about 180 are written. A résumé made from the title alone says so ("D'après
+  son titre").
+* **Found on the way:** the curated décret 84-1556 is the regulation of industrial subdivisions (it
+  sets the 50 dB(A) daytime limit), not a decree "on noise": title corrected; décret 62-129 is on
+  safety in the building industry (title corrected, `when` chantier + levage). Arrêtés of the same
+  date and kind were merged as one text: now merged only when their subjects agree (the référentiel
+  grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
+  write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
+
 **Cleaning after the user's BTP test register (11 November).** The user exported a construction
 company's register (645 texts) and shared it. Found and fixed:
 
@@ -573,7 +609,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (101 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (104 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).

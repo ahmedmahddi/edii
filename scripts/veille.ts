@@ -40,7 +40,7 @@ import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../li
 import { fetchRetry, fetchText } from "../lib/veille/fetch";
 import { arabicPdfMarkdown, mostlyArabic } from "../lib/veille/arabe";
 import { markdownPages, ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
-import { amendments, catalogue, citations, keysOf, type Repeals } from "../lib/registre/referentiel";
+import { amendments, catalogue, citations, type Repeals, resumeKey } from "../lib/registre/referentiel";
 import { type Repeal, repealClauses } from "../lib/veille/abrogation";
 import { articlesOf, bodies, compact, type FicheData, readFiche } from "../lib/veille/fiche";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
@@ -455,7 +455,7 @@ function writeFiches(hits: Hit[]): void {
   for (const t of catalogue(hits)) {
     const hitId = t.origine === "jort" ? t.id.slice(5) : t.jort?.slice(5);
     const f = hitId ? ficheOf(hitId) : undefined;
-    const r = keysOf(t).map((k) => resumes[k]).find(Boolean) ?? resumes[t.id];
+    const r = resumes[resumeKey(t)];
     if (r) written++;
     if ((f && (f.o || f.s || f.p || f.t || f.f)) || r) out[t.id] = { ...(f ?? {}), ...(r ? { r } : {}) };
   }
