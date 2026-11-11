@@ -94,14 +94,14 @@ const words = (s: string) => new Set(fold(s).split(/[^a-z]+/).filter((w) => w.le
 
 /**
  * The key of a text's written résumé (data/referentiel/resumes): its number key, or, for a text
- * without a number, its kind and date followed by the first words of its subject, since two arrêtés
+ * without a number, its kind and date followed by the first eight words of its subject, since two arrêtés
  * of the same day are often two texts ("d:arrete:2016-11-14~batteries-accumulateurs-demarrage-plomb").
  */
 export function resumeKey(t: Texte): string {
   const key = keysOf(t)[0];
   if (!key) return t.id;
   if (key.startsWith("n:")) return key;
-  const first = [...words(subject(t.titre))].slice(0, 4).join("-");
+  const first = [...words(subject(t.titre))].slice(0, 8).join("-");
   return `${key}~${first || t.id}`;
 }
 
@@ -138,9 +138,11 @@ export function modifiesAnother(title: string): boolean {
   return /\b(modifiant|modifie|completant|portant modification|abrogeant|prorogeant|rectificatif)\b/.test(subject(title));
 }
 
-// Rules whose texts come again every year: the SMIG, wage increases, the loi de finances.
+// Rules whose texts come again every year: the SMIG, wage increases, the loi de finances; and the
+// yearly stock of sterilised milk.
 const PERIODIC = new Set(rules.registre.periodiques ?? []);
 const WAGES = /\b(majoration des salaires|augmentation des salaires|salaire minimum)\b/;
+const MILK_STOCK = /\bstock de regulation (?:du|de) lait\b/;
 
 const LEGAL_ACTS = new Set(["Loi", "Loi organique", "Décret", "Décret-loi", "Arrêté", "Décision", "Circulaire"]);
 
@@ -202,7 +204,7 @@ export function fromHit(hit: Hit): Texte {
     origine: "jort",
     niveau: hit.severity,
     coche,
-    periodique: hit.matches.find((m) => PERIODIC.has(m.rule))?.rule ?? (WAGES.test(fold(hit.title)) ? "salaire-minimum" : undefined),
+    periodique: hit.matches.find((m) => PERIODIC.has(m.rule))?.rule ?? (WAGES.test(fold(hit.title)) ? "salaire-minimum" : MILK_STOCK.test(fold(hit.title)) ? "stock-lait" : undefined),
     activites: [...new Set(hit.matches.filter((m) => m.rule.startsWith("act-")).flatMap((m) => ruleById.get(m.rule)?.when ?? []))],
   };
 }
