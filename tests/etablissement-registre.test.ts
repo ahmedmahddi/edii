@@ -2,7 +2,7 @@
 // texts that modify them, and the evaluations due.
 import { describe, expect, it } from "vitest";
 import { importance } from "@/lib/registre/importance";
-import { applies, derivedFlags, type Site } from "@/lib/registre/profil";
+import { applies, derivedFlags, EMPTY_SITE, METIERS, type Site, toggleMetier } from "@/lib/registre/profil";
 import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
@@ -24,7 +24,7 @@ import {
 } from "@/lib/registre/registre";
 import { createClassificationReport } from "@/lib/report";
 import { ligneRow } from "@/lib/veille/registre";
-import { assess, type Hit, type Sommaires } from "@/lib/veille/watch";
+import { assess, type Hit, rules, type Sommaires } from "@/lib/veille/watch";
 
 const site = (patch: Partial<Site> = {}): Site => ({ classe: 2, sections: ["1200"], rubriques: ["1214"], etude: "eie_a", effectif: 40, flags: [], ...patch });
 
@@ -63,6 +63,48 @@ describe("the site profile", () => {
     expect(applies(["etude:eie"], site())).toEqual(["Étude d’impact"]);
     expect(applies(["classe"], site({ classe: "NC" }))).toBeNull();
     expect(applies(undefined, site())).toBeNull();
+  });
+});
+
+describe("a register without classification (trades)", () => {
+  // A road-works company: the nomenclature does not classify it, its trade says what it does.
+  const routes = toggleMetier({ ...EMPTY_SITE, effectif: 60 }, "routes");
+
+  it("ticks the facts a trade implies, and every trade turns on rules that exist", () => {
+    expect(routes.metiers).toEqual(["routes"]);
+    expect(routes.flags).toEqual(["chantier", "vehicules", "bruit"]);
+    expect(toggleMetier(routes, "routes").metiers).toEqual([]);
+    const ids = new Set(rules.rules.map((r) => r.id));
+    for (const m of METIERS) for (const r of m.regles) expect(ids.has(r), `${m.id} → ${r}`).toBe(true);
+    // Every activity rule can be reached by a trade, so any sector can be followed without a classification.
+    const reached = new Set(METIERS.flatMap((m) => m.regles));
+    expect(rules.rules.filter((r) => r.id.startsWith("act-") && !reached.has(r.id)).map((r) => r.id)).toEqual([]);
+  });
+
+  it("applies the texts of the trade's rules, of its group and sections, not those of classified sites", () => {
+    expect(applies(["metier:routes"], routes)).toEqual(["Travaux routiers (terrassement, chaussées, enrobés)"]);
+    expect(applies(["groupe:btp"], routes)).toEqual(["Bâtiment et travaux publics"]);
+    expect(applies(["classe"], routes)).toBeNull();
+    expect(applies(["secteur:1700"], toggleMetier(EMPTY_SITE, "materiaux"))).not.toBeNull();
+    const texts = catalogue([
+      hit("Décret n° 2026-95 du 2 mai 2026, fixant les spécifications des enrobés et des bitumes pour les chaussées"),
+      hit("Décret n° 2026-96 du 2 mai 2026, fixant les conditions de raccordement aux réseaux publics d'assainissement"),
+      hit("Arrêté du 3 mai 2026, fixant les conditions de stockage des grignons et des margines dans les huileries"),
+    ]);
+    const ticked = proposals(texts, routes)
+      .filter((p) => p.texte.origine === "jort" && p.proposed)
+      .map((p) => p.texte.numero ?? p.texte.date);
+    expect(ticked).toEqual(["2026-95"]); // its trade; not VRD's networks nor the huileries
+    expect(proposals(texts, toggleMetier(routes, "vrd")).filter((p) => p.texte.origine === "jort" && p.proposed)).toHaveLength(2);
+    const reg = createRegistre(null, routes, texts, new Date("2026-05-10T09:00:00Z"), "Routes du Sud");
+    expect([reg.nom, reg.classe, reg.activites, reg.restauration]).toEqual(["Routes du Sud", null, [], null]);
+    const enrobes = reg.lignes.find((l) => l.texte.numero === "2026-95")!;
+    expect(importance(enrobes.texte, routes).raisons[0]).toBe("votre activité : Travaux routiers (terrassement, chaussées, enrobés)");
+  });
+
+  it("keeps its trades when a classification is added later", () => {
+    const reg = createRegistre(null, routes, [], new Date("2026-05-10T09:00:00Z"), "Laiterie du Cap Bon");
+    expect(updateFromReport(reg, report()).site.metiers).toEqual(["routes"]);
   });
 });
 

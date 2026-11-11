@@ -70,7 +70,7 @@ git pull origin claude/veille
 npm install
 npm run veille -- --years 1957-1986      # what is left: ~2,000 issues, ~30 min; resumable
 npm run veille -- --reread               # issues that gave no text (scans whose OCR came out since…)
-npm test                                 # 97 tests
+npm test                                 # 100 tests
 git add data/veille/sommaires
 git commit -m "Veille: JORT 1957-1986"
 git push origin claude/veille
@@ -84,7 +84,7 @@ stopped (Ctrl+C) and run again: it goes on where it stopped. In a cloud session,
 
 ```bash
 npm run dev              # http://localhost:3000 (rebuilds public/veille/feed.json first, ~13 s)
-npm test                 # vitest: 97 tests in 5 files
+npm test                 # vitest: 100 tests in 5 files
 npm run typecheck
 npm run build            # static page (rebuilds feed.json first)
 
@@ -354,6 +354,27 @@ About 30% of the ticked JORT texts only modify another text; most of the rest ar
 CNSS, code de la route and environment texts across 40 years. **Too many** for a register a
 consultant can work through: the user has to choose how to cut (§11 step 3).
 
+**Registers without classification (11 November).** The user asked for the veille of companies the
+nomenclature does not cover (BTP: VRD, travaux routiers, construction immobilière, one or all of
+them; industry in general). `data/registre/metiers.json` is a catalogue of 48 **trades** in 4
+groups (btp, industrie, agro, services); each lists the `act-*` rules it turns on (`regles`), the
+facts it ticks (`flags`) and its nomenclature sections. At load, `lib/veille/watch.ts` adds
+`metier:<id>` to the `when` of those rules, so every activity rule can be reached without a
+rubrique (a test checks it). `Site.metiers` (optional: old registers have none); conditions
+`metier:<id>`, `groupe:<id>` (generic for the ranking), and `secteur:<s>` also holds through a
+trade's sections. `createRegistre(null, site, texts, now, nom)` makes a register with no
+classification ("Sans classement"); `updateFromReport` keeps the trades. UI: "Nouveau registre sans
+classement" on the register list, "Métiers de l'entreprise" in the profile (open when there is no
+rubrique). New rules: `act-batiment` (building-specific terms moved out of `act-btp`, so a road or VRD
+company no longer gets urbanism and property-development texts first), `act-vrd`, `act-electricite`,
+`act-ime`, `act-industrie`; `act-routes-bitume` widened ("goudron" dropped: cigarette packs). The
+waste and general environment rules, and the curated loi 96-41, also apply to `groupe:btp`,
+`groupe:industrie`, `groupe:agro`. One-off titles now ignored everywhere: déclaration d'utilité
+publique, déclassement, autorisation de construction (of a line…), emprunts, indemnités, garanties à
+première demande, ouverture de crédit, protocole financier, grand prix. Measured (effectif 60):
+routes + VRD 676 ticked; electrical works 594; general industry 453; offices only 397 (all general
+labour, SST, fire, hygiene texts).
+
 **Ranking (23 October): most important first, for any site** (`lib/registre/importance.ts`,
 `importance(texte, site)` → `{score, raisons}`). The user asked that the veille put the most
 important texts first, for every sector and every kind of work, not for one or two example sites.
@@ -518,7 +539,7 @@ To get the per-year table again: count `issues`, `entries` and flags in
 
 ## 12. How things were verified
 
-* **Vitest** (97 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
+* **Vitest** (100 tests): parsing of real JORT PDFs kept in `data/sources/` (2006 n° 83, 2010 n° 18)
   and of the probe's 2000 n° 40; parsing of 5 real OCR texts (`data/sources/ocr/`): wrapped titles,
   joined institutions, tables, lost page numbers, years at line end, partial downloads; rules on
   real titles (activity rules included); registers end to end (alerts after creation, history).

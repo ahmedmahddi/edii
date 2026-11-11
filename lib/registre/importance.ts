@@ -11,7 +11,7 @@
  *   - on one of the site's activities (an act-* rule whose conditions hold): 25;
  *     through one of its facts, rubriques, category or study (hydrocarbons, discharges, 1st
  *     category…): 16, 5 when it is only beside the process (vehicles, transport, trade);
- *     conditions every site or employer meets (all, classified, workforce): 0;
+ *     conditions every site or employer meets (all, classified, workforce, a group of trades): 0;
  *   - cited by later JORT titles: up to 20 (6 × log2(1 + n)), less than an activity: a law
  *     everyone cites does not come before the texts on what the site does;
  *   - kind: code 20, law 14, décret-loi 12, décret 9, arrêté 5, circulaire or décision 3;
@@ -62,7 +62,7 @@ const GENERAL = /\b(fixant les (?:regles|conditions|normes|valeurs limites|presc
 const ONE_OFF = /\b(composition|attributions|organisation administrative|portant (?:re)?organisation|reorganisation|portant creation|creation d'un|designation|delimitation|perimetre|campagne|approbation du plan|liste des (?:membres|agents)|exceptionnel(?:le)?|provisoire|autorisant l'etat|ratifiant|portant ratification|adhesion|adherer)\b/;
 const MODIFIES = /\b(modifiant|completant|portant modification|abrogeant|prorogeant|rectificatif)\b/;
 // Conditions every site, or every employer, meets: they say nothing of this site in particular.
-const GENERIC = (c: string) => c === "tous" || c === "classe" || c === "effectif" || c.startsWith("effectif:");
+const GENERIC = (c: string) => c === "tous" || c === "classe" || c === "effectif" || c.startsWith("effectif:") || c.startsWith("groupe:");
 // What the site has beside its process (vehicles, transport, trade): it counts, less than what it
 // makes, discharges or stores.
 const SIDE = new Set(["vehicules", "transport-marchandises", "transport-personnel", "import-export", "commerce"]);
@@ -76,7 +76,10 @@ export function importance(t: Texte, site: Site): Importance {
   else if (t.origine === "referentiel") add(SUGGESTED.has(t.domaine) ? 4 : 20, "texte du référentiel");
 
   const activity = applies(t.activites, site);
-  if (t.activites?.length && activity) add(25, `votre activité : ${t.theme}`);
+  // Named after the site's own trade when it is one: a text found by two activity rules carries the
+  // theme of the first, maybe not the site's.
+  const trade = t.activites?.find((c) => c.startsWith("metier:") && applies([c], site));
+  if (t.activites?.length && activity) add(25, `votre activité : ${trade ? conditionLabel(trade) : t.theme}`);
   else {
     const specific = (t.when ?? []).filter((c) => !GENERIC(c) && applies([c], site));
     const core = specific.find((c) => !SIDE.has(c));

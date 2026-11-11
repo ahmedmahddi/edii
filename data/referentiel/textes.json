@@ -417,7 +417,10 @@
    "theme": "Déchets",
    "when": [
     "classe",
-    "dechets-dangereux"
+    "dechets-dangereux",
+    "groupe:btp",
+    "groupe:industrie",
+    "groupe:agro"
    ]
   },
   {

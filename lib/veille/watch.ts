@@ -10,6 +10,7 @@
  * before matching, so a ministry's name does not count as a subject. A hit is something to read,
  * never a legal conclusion.
  */
+import metiers from "@/data/registre/metiers.json";
 import watch from "@/data/veille/watch.json";
 import watchAr from "@/data/veille/watch-ar.json";
 import { arFold, isArabic } from "./arabe";
@@ -41,6 +42,14 @@ export const rules = watch as unknown as {
   references: Rule[];
   rules: Rule[];
 };
+
+// The trades of data/registre/metiers.json turn on their activity rules: a text a rule finds applies
+// to a site with one of those trades (metier:<id>), classified or not.
+for (const m of metiers.metiers)
+  for (const id of m.regles) {
+    const rule = rules.rules.find((r) => r.id === id);
+    if (rule && !rule.when?.includes(`metier:${m.id}`)) rule.when = [...(rule.when ?? []), `metier:${m.id}`];
+  }
 
 export const SEVERITY_RANK: Record<Severity, number> = { critique: 0, important: 1, information: 2 };
 

@@ -88,18 +88,22 @@ function ligne(texte: Texte, raisons: string[], origine: Ligne["origine"], reten
   };
 }
 
-export function createRegistre(report: ClassificationReport, site: Site, texts: Texte[], now = new Date()): Registre {
+/**
+ * A new register, from a classification, or without one (report null: a site the nomenclature does
+ * not cover, such as a BTP company, described by its trades and facts).
+ */
+export function createRegistre(report: ClassificationReport | null, site: Site, texts: Texte[], now = new Date(), nom = report?.name ?? ""): Registre {
   const stamp = now.toISOString();
   return {
     id: `reg-${now.getTime().toString(36)}-${Math.random().toString(36).slice(2, 7)}`,
-    nom: report.name || "Établissement sans nom",
+    nom: nom || "Établissement sans nom",
     cree: stamp,
     maj: stamp,
-    classe: report.establishment.classe,
-    etude: report.environment.study?.kind ?? null,
-    situation: report.situation,
-    activites: report.activities.map((a) => ({ code: a.rubrique.code, categorie: a.category })),
-    restauration: report.restorationPath,
+    classe: report?.establishment.classe ?? null,
+    etude: report?.environment.study?.kind ?? null,
+    situation: report?.situation ?? "existant",
+    activites: report?.activities.map((a) => ({ code: a.rubrique.code, categorie: a.category })) ?? [],
+    restauration: report?.restorationPath ?? null,
     site,
     lignes: proposals(texts, site).map((p) => ligne(p.texte, p.reasons, p.proposed ? "propose" : "suggere", p.proposed)),
     ecartes: [],
@@ -134,7 +138,7 @@ export function updateFromReport(reg: Registre, report: ClassificationReport, no
     situation: report.situation,
     activites: report.activities.map((a) => ({ code: a.rubrique.code, categorie: a.category })),
     restauration: report.restorationPath,
-    site: { ...fresh, flags },
+    site: { ...fresh, flags, metiers: reg.site.metiers },
   };
 }
 

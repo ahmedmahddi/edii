@@ -186,6 +186,19 @@ opens the establishment's register in the Veille réglementaire view:
    are unticked; texts that now apply come as new texts, and those that no longer apply are listed
    to remove or keep.
 
+**Without a classification.** Many companies the veille is for are not établissements classés, or
+not yet: building and road contractors, VRD, electrical works, workshops, offices. "Nouveau registre
+sans classement" (Registres des établissements) builds a register from the company's **trades**
+(métiers), one or several: Bâtiment et travaux publics (construction de bâtiments, promotion
+immobilière, travaux routiers, VRD, génie civil, travaux électriques, carrières), Industrie
+(manufacturière en général, mécanique et électrique, métallurgie, matériaux, chimie, plastiques,
+textile…), Agriculture et agroalimentaire, Services, commerce et transport. Each trade adds the texts
+of its activity and ticks the facts it usually implies (chantier, véhicules, bruit…), which the
+consultant corrects. A classified establishment can also add trades the nomenclature does not cover.
+The catalogue is `data/registre/metiers.json`: each trade lists the activity rules of
+`data/veille/watch.json` it turns on, its facts and its nomenclature sections; conditions
+`metier:<id>` and `groupe:<id>` (`groupe:btp`, `groupe:industrie`…) can be used in `when`.
+
 **Most important first.** In a register, the texts are ranked for the site, whatever its sector:
 the texts the app is built on (nomenclature, procedures, impact study), then what the site does
 (texts on its activities, then on its facts: discharges, hydrocarbons, food…), the codes and laws
@@ -200,7 +213,7 @@ summary of requirements and the risk are written by the consultant in each regis
 text the veille finds in the JORT, whose conditions are those of the rule that
 found it (`when` in `data/veille/watch.json`). Conditions are listed in `lib/registre/profil.ts`:
 `tous`, `classe`, `categorie:1`, `secteur:1200`, `rubrique:2505`, `etude:eie`, `effectif`,
-`effectif:50`, or a fact of the profile (`vehicules`, `levage`…); `a+b` needs both. To widen the
+`effectif:50`, `metier:routes`, `groupe:btp`, or a fact of the profile (`vehicules`, `levage`…); `a+b` needs both. To widen the
 référentiel, add texts to `textes.json`, or read older JORT years with `npm run veille -- --year 2015`.
 
 Registers are kept in the browser that created them (no account, no server). "Sauvegarder les

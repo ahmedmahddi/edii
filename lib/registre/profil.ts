@@ -12,8 +12,12 @@
  *   rubrique:2505           that rubrique
  *   etude:eie_a, etude:eie  that ANPE study (eie: A or B), see lib/studies.ts
  *   effectif, effectif:50   at least one employee, at least 50
+ *   metier:routes           that trade (data/registre/metiers.json): BTP, industry, services…,
+ *                           for a site the nomenclature does not classify as well as one it does
+ *   groupe:btp              a trade of that group
  *   vehicules, …            a fact of the profile (FLAGS)
  */
+import catalogue from "@/data/registre/metiers.json";
 import type { Classe } from "../classify";
 import { SECTORS } from "../sectors";
 import type { StudyKind } from "../studies";
@@ -63,6 +67,19 @@ export const FLAGS: Flag[] = [
 
 const FLAG = new Map(FLAGS.map((f) => [f.id, f]));
 
+export interface Metier {
+  id: string;
+  label: string;
+  groupe: string;
+  regles: string[]; // the activity rules it turns on (data/veille/watch.json)
+  flags: string[]; // facts it usually implies, ticked when it is chosen
+  sections?: string[]; // nomenclature sections it belongs to, for the sector rules
+}
+
+export const METIER_GROUPS: Record<string, string> = catalogue.groupes;
+export const METIERS: Metier[] = catalogue.metiers;
+const METIER = new Map(METIERS.map((m) => [m.id, m]));
+
 export interface Site {
   classe: Classe | null;
   sections: string[]; // "1200"
@@ -70,7 +87,21 @@ export interface Site {
   etude: StudyKind | null;
   effectif: number | null;
   flags: string[];
+  metiers?: string[]; // trades (METIERS); absent in registers made before trades existed
 }
+
+/** A site with no classification yet: its trades and facts are chosen by hand. */
+export const EMPTY_SITE: Site = { classe: null, sections: [], rubriques: [], etude: null, effectif: null, flags: [], metiers: [] };
+
+/** The site with a trade added or removed; adding one ticks the facts it implies. */
+export function toggleMetier(site: Site, id: string): Site {
+  const metiers = site.metiers ?? [];
+  if (metiers.includes(id)) return { ...site, metiers: metiers.filter((m) => m !== id) };
+  return { ...site, metiers: [...metiers, id], flags: [...new Set([...site.flags, ...(METIER.get(id)?.flags ?? [])])] };
+}
+
+/** The trades of the site, in words. */
+export const metierLabels = (site: Site) => (site.metiers ?? []).map((id) => METIER.get(id)?.label ?? id);
 
 /** The flags the rubriques suggest, ticked when a register is created. */
 export function derivedFlags(sections: string[]): string[] {
@@ -104,6 +135,10 @@ export function conditionLabel(condition: string): string {
       return STUDIES[value] ?? value;
     case "effectif":
       return value ? `Effectif d’au moins ${value}` : "Personnel salarié";
+    case "metier":
+      return METIER.get(value)?.label ?? value;
+    case "groupe":
+      return METIER_GROUPS[value] ?? value;
     default:
       return FLAG.get(condition)?.label ?? condition;
   }
@@ -119,13 +154,17 @@ function holds(condition: string, site: Site): boolean {
     case "categorie":
       return String(site.classe) === value;
     case "secteur":
-      return site.sections.includes(value);
+      return site.sections.includes(value) || (site.metiers ?? []).some((m) => METIER.get(m)?.sections?.includes(value));
     case "rubrique":
       return site.rubriques.includes(value);
     case "etude":
       return value === "eie" ? site.etude === "eie_a" || site.etude === "eie_b" : site.etude === value;
     case "effectif":
       return (site.effectif ?? 0) >= (value ? Number(value) : 1);
+    case "metier":
+      return (site.metiers ?? []).includes(value);
+    case "groupe":
+      return (site.metiers ?? []).some((m) => METIER.get(m)?.groupe === value);
     default:
       return site.flags.includes(condition);
   }

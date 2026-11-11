@@ -1,7 +1,7 @@
 "use client";
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { download, downloadWorkbook, today } from "@/app/components/download";
-import { FLAG_GROUPS, FLAGS, type Site } from "@/lib/registre/profil";
+import { EMPTY_SITE, FLAG_GROUPS, FLAGS, METIER_GROUPS, METIERS, metierLabels, type Site, toggleMetier } from "@/lib/registre/profil";
 import { importance } from "@/lib/registre/importance";
 import { proposals, type Texte } from "@/lib/registre/referentiel";
 import {
@@ -36,6 +36,8 @@ import { fillRegister, ligneRow } from "@/lib/veille/registre";
 import { type Amendment, fold, rules } from "@/lib/veille/watch";
 
 const dateFr = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+// A register made without a classification has no rubrique: "À compléter" would mislead.
+const classLabel = (classe: Registre["classe"], rubriques: number) => (classe === null && !rubriques ? "Sans classement" : categoryLabel(classe));
 const refOf = (t: Texte) => [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dateFr(t.date)}` : ""].filter(Boolean).join(" ");
 
 /** Registers live in this browser: loaded once, saved on every change. */
@@ -78,7 +80,8 @@ export function Registres({
 }) {
   const [list, update, saved, loaded] = useRegistres();
   const [openId, setOpenId] = useState<string | null>(null);
-  const [draft, setDraft] = useState<{ report: ClassificationReport; site: Site; nom: string } | null>(null);
+  // report null: a register without classification (BTP, industry or services the nomenclature does not cover).
+  const [draft, setDraft] = useState<{ report: ClassificationReport | null; site: Site; nom: string } | null>(null);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
 
@@ -98,10 +101,10 @@ export function Registres({
 
   if (draft) {
     const nom = draft.nom.trim();
-    const report = { ...draft.report, name: nom };
+    const report = draft.report ? { ...draft.report, name: nom } : null;
     const existing = sameName(list, nom);
     const create = () => {
-      const reg = createRegistre(report, draft.site, texts);
+      const reg = createRegistre(report, draft.site, texts, undefined, nom);
       update((all) => [reg, ...all]);
       setDraft(null);
       setOpenId(reg.id);
@@ -113,23 +116,32 @@ export function Registres({
           <span id="registre-new-title">Nom de l’établissement</span>
           <input value={draft.nom} onChange={(e) => setDraft({ ...draft, nom: e.target.value })} placeholder="Nom de l’établissement" required />
         </label>
-        <p>
-          Le classement donne la catégorie, les rubriques et l’étude ANPE. Complétez le profil du site : chaque réponse ajoute les
-          textes qui s’y rapportent.
-        </p>
+        {report ? (
+          <p>
+            Le classement donne la catégorie, les rubriques et l’étude ANPE. Complétez le profil du site : chaque réponse ajoute les
+            textes qui s’y rapportent.
+          </p>
+        ) : (
+          <p>
+            Sans classement : choisissez les métiers de l’entreprise (un ou plusieurs), puis complétez le profil du site. Chaque
+            métier ajoute les textes de son activité, et coche ce qu’il implique d’ordinaire (chantier, véhicules…).
+          </p>
+        )}
         <Profil site={draft.site} onChange={(site) => setDraft({ ...draft, site })} />
         {existing ? (
           <div className="registre-existing" role="status">
             <p>
               Un registre « {existing.nom} » existe déjà (créé le {dateFr(existing.cree.slice(0, 10))},{" "}
               {existing.lignes.filter((l) => l.retenu).length} textes). Le mettre à jour garde ses évaluations : les textes que le
-              nouveau classement rend applicables vous sont proposés, ceux qui ne s’appliquent plus sont signalés.
+              nouveau profil rend applicables vous sont proposés, ceux qui ne s’appliquent plus sont signalés.
             </p>
             <div className="registre-actions">
               <button
                 type="button"
                 onClick={() => {
-                  update((all) => all.map((r) => (r.id === existing.id ? { ...updateFromReport(r, report), site: draft.site } : r)));
+                  update((all) =>
+                    all.map((r) => (r.id === existing.id ? { ...(report ? updateFromReport(r, report) : r), site: draft.site } : r)),
+                  );
                   setDraft(null);
                   setOpenId(existing.id);
                 }}
@@ -171,8 +183,21 @@ export function Registres({
       />
     );
 
+  const sansClassement = () => {
+    setDraft({ report: null, site: EMPTY_SITE, nom: "" });
+    setMessage("");
+  };
+
   return (
     <div className="registres">
+      <div className="registre-new-actions">
+        <button type="button" onClick={sansClassement}>
+          Nouveau registre sans classement
+        </button>
+        <span className="muted small">
+          BTP, travaux routiers, VRD, industrie, services : tout établissement que la nomenclature ne classe pas, ou pas encore.
+        </span>
+      </div>
       {!saved ? (
         <p className="registre-warning" role="alert">
           Ce navigateur n’enregistre pas les registres (navigation privée ou stockage bloqué) : sauvegardez-les dans un fichier.
@@ -190,7 +215,8 @@ export function Registres({
                 <div>
                   <h3>{r.nom}</h3>
                   <p className="muted small">
-                    {categoryLabel(r.classe)}
+                    {classLabel(r.classe, r.activites.length)}
+                    {metierLabels(r.site).length ? ` · ${metierLabels(r.site).join(", ")}` : ""}
                     {r.etude ? ` · ${study(r.etude, false).title}` : ""} · mis à jour le {dateFr(r.maj.slice(0, 10))}
                   </p>
                   <p className="registre-counts">
@@ -225,6 +251,10 @@ export function Registres({
           <p>
             Classez un établissement dans « Mon établissement », validez la synthèse, puis choisissez « Créer le registre de veille ».
             Les textes qui s’appliquent au site sont proposés d’office.
+          </p>
+          <p>
+            Pour une entreprise que la nomenclature ne classe pas (bâtiment, travaux routiers, VRD, industrie, services), choisissez
+            « Nouveau registre sans classement » et ses métiers.
           </p>
         </article>
       )}
@@ -277,7 +307,7 @@ function Profil({ site, onChange }: { site: Site; onChange: (site: Site) => void
       <dl className="registre-facts">
         <div>
           <dt>Catégorie</dt>
-          <dd>{categoryLabel(site.classe)}</dd>
+          <dd>{classLabel(site.classe, site.rubriques.length)}</dd>
         </div>
         <div>
           <dt>Étude ANPE</dt>
@@ -303,6 +333,27 @@ function Profil({ site, onChange }: { site: Site; onChange: (site: Site) => void
           placeholder="0 si aucun salarié"
         />
       </label>
+      <details className="registre-metiers" open={!site.rubriques.length}>
+        <summary>
+          Métiers de l’entreprise
+          {site.metiers?.length ? ` (${site.metiers.length} choisi${site.metiers.length > 1 ? "s" : ""})` : ""}
+        </summary>
+        <p className="muted small">
+          Un ou plusieurs : chaque métier ajoute les textes de son activité et coche ce qu’il implique d’ordinaire, à corriger
+          ci-dessous.
+        </p>
+        {Object.entries(METIER_GROUPS).map(([id, group]) => (
+          <fieldset key={id} className="registre-flags">
+            <legend>{group}</legend>
+            {METIERS.filter((m) => m.groupe === id).map((m) => (
+              <label key={m.id}>
+                <input type="checkbox" checked={site.metiers?.includes(m.id) ?? false} onChange={() => onChange(toggleMetier(site, m.id))} />
+                <span>{m.label}</span>
+              </label>
+            ))}
+          </fieldset>
+        ))}
+      </details>
       {FLAG_GROUPS.map((group) => (
         <fieldset key={group} className="registre-flags">
           <legend>{group}</legend>
@@ -397,8 +448,10 @@ function RegistreView({
           <input value={reg.nom} onChange={(e) => change((r) => ({ ...r, nom: e.target.value }))} />
         </label>
         <p className="muted small">
-          {categoryLabel(reg.classe)}
-          {reg.etude ? ` · ${study(reg.etude, false).title}` : ""} · rubriques {reg.activites.map((a) => a.code).join(", ")} · créé le{" "}
+          {classLabel(reg.classe, reg.activites.length)}
+          {reg.etude ? ` · ${study(reg.etude, false).title}` : ""}
+          {reg.activites.length ? ` · rubriques ${reg.activites.map((a) => a.code).join(", ")}` : ""}
+          {metierLabels(reg.site).length ? ` · ${metierLabels(reg.site).join(", ")}` : ""} · créé le{" "}
           {dateFr(reg.cree.slice(0, 10))}
           {reg.restauration ? (
             <>
