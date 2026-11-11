@@ -402,7 +402,10 @@ run a model). Two parts:
   order (`scripts/resumes.ts`: 1. the 30 essentials of any of 716 site profiles, 2. ticked for one,
   3. applicable, 4. the rest; `--next 40 --corps` lists the next ones with their articles from
   `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; at
-  11 November about 450 are written (the essentials first). A body the cutting got wrong is seen
+  11 November 1,546 are written: all essentials (378) and all ticked texts (1,112) are done;
+  next come the ~2,900 applicable and ~4,500 other texts. Each batch also adds ignore patterns for
+  the one-offs it meets (permits, ore sales, power lines, staff, committees, yearly campaigns);
+  `ignoreAnywhere` matches whole words, so plurals need their own entry. A body the cutting got wrong is seen
   when writing: the résumé then says "le texte lu dans le JORT ne correspond pas : à vérifier". A résumé made from the title alone says so ("D'après
   son titre").
 * **Found on the way:** the curated décret 84-1556 is the regulation of industrial subdivisions (it
