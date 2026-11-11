@@ -169,7 +169,9 @@ export const SIGNED = /\s(?:Pour contreseing|Par (?:décret|arrêté|décision)s
 
 const OBLIGES =
   /\b(doit|doivent|devra|devront|est tenue?s?|sont tenue?s?|il est interdit|est interdite?s?|sont interdite?s?|interdiction|obligatoires?|obligatoirement|est soumise?s?|sont soumise?s?|ne peut|ne peuvent|ne pourra|sont astreinte?s?|est astreinte?|veille(?:nt)? a|est subordonnee?|sont subordonnee?s|il est fait obligation|est oblige|sont obliges)\b/;
-const SANCTION = /\b(puni|punie|punis|amende|emprisonnement|fermeture|retrait de l'(?:autorisation|agrement)|suspension de l'activite|sanctions?|contravention|delit|penalite)/;
+// A penalty the text sets: a fine, prison, closure, withdrawal of an authorisation. The bare words
+// "sanction" or "contravention" are not enough ("la commission … propose les sanctions").
+const SANCTION = /\b(est puni|sont punis|est punie|sera puni|seront punis|puni d'une|punie d'une|passible d'une|amende (?:de|allant|variant|egale)|emprisonnement d|fermeture (?:provisoire|definitive|temporaire|de l'etablissement|du local)|retrait (?:definitif |provisoire )?de l'(?:autorisation|agrement)|suspension (?:de l'activite|de l'autorisation))/;
 
 const PERIODS: [RegExp, string][] = [
   [/\b(chaque mois|par mois|mensuel(?:le)?(?:ment)?)\b/, "Mensuelle"],
@@ -300,7 +302,8 @@ export function readFiche(body: string[] | null): Fiche {
 /** The risk of a text, from its domain and the sanctions it sets. */
 export function risqueOf(domaine: string, fiche: Fiche | undefined): string {
   const base = RISKS[domaine] ?? RISKS.secteurs;
-  const s = fiche?.sanctions[0];
+  // Fiches read before the stricter reading of sanctions may keep a looser one: checked again.
+  const s = fiche?.sanctions.find((x) => SANCTION.test(plain(x)));
   return s ? `${base} Sanction prévue (${cut(s, 200)})` : base;
 }
 

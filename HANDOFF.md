@@ -395,14 +395,15 @@ run a model). Two parts:
   `--reassess` and `--fiches`), fetched when a register opens. The register shows the defaults until
   the consultant edits a field (nothing is copied into localStorage: lines stay small), with a note
   "brouillon à vérifier"; the export uses the same (`ligneRow(l, defaults)`). Bodies found for legal
-  acts: about 85-90 % since 1990, lower before (OCR); the second run with the old-issue fixes is the
-  one in the repo.
+  acts (second run, with the old-issue fixes): 1950s 74 %, 1960s 82 %, 1970s 83 %, 1980s 91 %,
+  1990s 93 %, 2000s 95 %, 2010s 91 %, 2020s 92 %; 6,800 texts have obligations or a first article.
 * **Written résumés** (`data/referentiel/resumes/lot-*.json`, text key → résumé, French, my own
   wording, 1-3 sentences): written in this session from the articles, batch after batch, in priority
   order (`scripts/resumes.ts`: 1. the 30 essentials of any of 716 site profiles, 2. ticked for one,
   3. applicable, 4. the rest; `--next 40 --corps` lists the next ones with their articles from
   `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; at
-  11 November evening about 180 are written. A résumé made from the title alone says so ("D'après
+  11 November about 450 are written (the essentials first). A body the cutting got wrong is seen
+  when writing: the résumé then says "le texte lu dans le JORT ne correspond pas : à vérifier". A résumé made from the title alone says so ("D'après
   son titre").
 * **Found on the way:** the curated décret 84-1556 is the regulation of industrial subdivisions (it
   sets the 50 dB(A) daytime limit), not a decree "on noise": title corrected; décret 62-129 is on
