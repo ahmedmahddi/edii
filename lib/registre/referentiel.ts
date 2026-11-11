@@ -228,6 +228,13 @@ export function seriesKey(title: string): string | null {
     .replace(/[^a-z' ]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+  // The avenants of a sector's collective agreement follow one another (wages, bonuses): the
+  // newest stands, whatever the wording of the sector ("de l'industrie et de la chaussure").
+  const avenant = /\bavenants?\b.*?\bconvention (?:collective )?(?:sectorielle |nationale )?(?:de |des |du |d'|concernant )?(.+)$/.exec(t);
+  if (avenant) {
+    const sector = avenant[1].split(" ").filter((w) => w.length > 3 && !/^(industrie|industries|secteur|activites|produits|articles|similaires|conclue|entre)$/.test(w));
+    if (sector.length) return `avenant ${sector.slice(0, 3).join(" ")}`;
+  }
   return t.length >= 30 && !/modifi|complet|abrog|prorog|rectifi/.test(t) ? t : null;
 }
 
