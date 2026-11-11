@@ -402,9 +402,11 @@ run a model). Two parts:
   order (`scripts/resumes.ts`: 1. the 30 essentials of any of 716 site profiles, 2. ticked for one,
   3. applicable, 4. the rest; `--next 40 --corps` lists the next ones with their articles from
   `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; at
-  11 November 2,544 are written: all essentials and all ticked texts are done, and about 1,000
-  of the ~2,370 applicable ones (newest first); the ~4,400 others come last. Old yearly customs
-  and VAT suspensions share one standard wording. Each batch also adds ignore patterns for
+  11 November 3,835 are written: all essentials and all ticked texts are done, about 1,700
+  of the ~2,260 applicable ones (newest first) and ~600 of the ~4,300 others. Old yearly customs
+  and VAT suspensions share one standard wording. The notices of inquiries on dangerous
+  establishments ("Avis d'établissements dangereux…", ~650) stay in the feed as information (a test
+  holds this) and share one résumé; company balance sheets (titles starting "Bilan") are ignored. Each batch also adds ignore patterns for
   the one-offs it meets (permits, ore sales, power lines, staff, committees, yearly campaigns);
   `ignoreAnywhere` matches whole words, so plurals need their own entry. A body the cutting got wrong is seen
   when writing: the résumé then says "le texte lu dans le JORT ne correspond pas : à vérifier". A résumé made from the title alone says so ("D'après
