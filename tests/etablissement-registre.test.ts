@@ -281,7 +281,7 @@ describe("an establishment's register", () => {
         hit("Décret n° 2026-50 du 2 mai 2026, fixant les règles de stockage des grignons et des margines dans les huileries"),
         hit("Décret n° 2026-51 du 2 mai 2026, relatif à la prévention des risques professionnels sur les lieux de travail"),
         hit("Décret n° 2026-52 du 2 mai 2026, modifiant le décret n° 2000-12 du 4 janvier 2000, relatif à la sécurité au travail"),
-        hit("Décret n° 2026-53 du 2 mai 2026, portant organisation de l'institut de l'olivier"),
+        hit("Décret n° 2026-53 du 2 mai 2026, portant création d'un comité technique des huileries"),
       ],
       [],
       { "n:decret:2026-51": 12 },
