@@ -32,6 +32,7 @@ import {
 import { categoryLabel, type ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
 import { study } from "@/lib/studies";
+import { defaults, type FicheData, TYPES } from "@/lib/veille/fiche";
 import { fillRegister, ligneRow } from "@/lib/veille/registre";
 import { type Amendment, fold, rules } from "@/lib/veille/watch";
 
@@ -62,6 +63,26 @@ function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => 
     setList(fn);
   };
   return [list, update, saved, loaded];
+}
+
+/**
+ * The texts' fiches (public/veille/fiches.json, written by npm run veille): what each text requires,
+ * read from its articles, and the written résumés. Fetched once, when a register is opened.
+ */
+let fichesRequest: Promise<Record<string, FicheData>> | null = null;
+function useFiches(): Record<string, FicheData> {
+  const [fiches, setFiches] = useState<Record<string, FicheData>>({});
+  useEffect(() => {
+    let live = true;
+    fichesRequest ??= fetch("/veille/fiches.json")
+      .then((r) => (r.ok ? r.json() : {}))
+      .catch(() => ({}));
+    fichesRequest.then((f) => live && setFiches(f));
+    return () => {
+      live = false;
+    };
+  }, []);
+  return fiches;
 }
 
 // How many texts the register shows first, as the essential ones for the site.
@@ -386,6 +407,8 @@ function RegistreView({
   onBack: () => void;
   saved: boolean;
 }) {
+  const fiches = useFiches();
+  const ficheOf = (l: Ligne) => defaults(l.texte.domaine, fiches[l.texte.id]);
   const [filtre, setFiltre] = useState<Filtre>("tous");
   const [domaine, setDomaine] = useState("all");
   const [query, setQuery] = useState("");
@@ -628,7 +651,7 @@ function RegistreView({
             setExporting(true);
             try {
               await downloadWorkbook(
-                (wb) => fillRegister(wb, [...retenus].sort(byScore).map(ligneRow), new Date(), reg.nom),
+                (wb) => fillRegister(wb, [...retenus].sort(byScore).map((l) => ligneRow(l, ficheOf(l))), new Date(), reg.nom),
                 `ID-QSE-002_${reg.nom.replace(/[^\p{L}\p{N}]+/gu, "_")}_${today()}.xlsx`,
               );
             } finally {
@@ -661,6 +684,7 @@ function RegistreView({
                       raisons={rank.get(l.texte.id)?.raisons}
                       history={modifiePar(reg, l, amendments)}
                       repealed={abrogePar(l, amendments)}
+                      fiche={fiches[l.texte.id]}
                       set={(patch) => setLigne(l.texte.id, patch)}
                     />
                   </ol>
@@ -693,6 +717,7 @@ function RegistreView({
                   raisons={rank.get(l.texte.id)?.raisons}
                   history={modifiePar(reg, l, amendments)}
                   repealed={abrogePar(l, amendments)}
+                  fiche={fiches[l.texte.id]}
                   set={(patch) => setLigne(l.texte.id, patch)}
                 />
               ))}
@@ -763,15 +788,19 @@ function LigneCard({
   raisons,
   history,
   repealed,
+  fiche,
   set,
 }: {
   l: Ligne;
   raisons?: string[];
   history: Amendment[];
   repealed?: Amendment;
+  fiche?: FicheData;
   set: (patch: Partial<Ligne>) => void;
 }) {
   const next = prochaine(l);
+  // Until the consultant writes them, the résumé, risk and plan come from the text's fiche.
+  const proposed = defaults(l.texte.domaine, fiche);
   return (
     <li className={`card registre-ligne conf-${l.conformite || "none"} ${l.retenu ? "" : "is-left"}`}>
       <div className="registre-ligne-head">
@@ -852,17 +881,35 @@ function LigneCard({
           </div>
           <details className="registre-details" open={l.conformite === "NC" || undefined}>
             <summary>Exigences, risque et plan d’action</summary>
+            {!l.resume || !l.risque || !l.plan ? (
+              <p className="muted small registre-fiche-note">
+                {fiche?.r ? "Résumé rédigé" : fiche?.o?.length ? "Exigences relevées dans les articles du texte" : "Proposé d’après le domaine du texte"}
+                {" "}: brouillon à vérifier et à adapter au site.
+                {fiche?.p ? ` Périodicité relevée : ${fiche.p.toLowerCase()}.` : ""}
+                {fiche?.t?.length ? ` Obligations : ${fiche.t.map((t) => TYPES[t]?.label.toLowerCase() ?? t).join(", ")}.` : ""}
+              </p>
+            ) : null}
             <label>
               <span>Résumé des exigences</span>
-              <textarea rows={4} value={l.resume} onChange={(e) => set({ resume: e.target.value })} />
+              <textarea rows={4} value={l.resume || proposed.resume} onChange={(e) => set({ resume: e.target.value })} />
             </label>
+            {fiche?.r && fiche.o?.length ? (
+              <details className="registre-details">
+                <summary>Articles cités par le texte</summary>
+                <ul className="registre-history">
+                  {fiche.o.map((o) => (
+                    <li key={o}>{o}</li>
+                  ))}
+                </ul>
+              </details>
+            ) : null}
             <label>
               <span>Risque</span>
-              <textarea rows={2} value={l.risque} onChange={(e) => set({ risque: e.target.value })} />
+              <textarea rows={2} value={l.risque || proposed.risque} onChange={(e) => set({ risque: e.target.value })} />
             </label>
             <label>
               <span>Plan d’action en cas de non-conformité</span>
-              <textarea rows={2} value={l.plan} onChange={(e) => set({ plan: e.target.value })} />
+              <textarea rows={3} value={l.plan || proposed.plan} onChange={(e) => set({ plan: e.target.value })} />
             </label>
             <div className="registre-eval">
               <label>

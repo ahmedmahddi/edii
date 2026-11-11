@@ -79,8 +79,11 @@ export function registerRow(hit: Hit): RegisterRow {
 
 const CONFORMITE: Record<string, string> = { C: "C", NC: "NC", NA: "Non applicable" };
 
-/** A line of an establishment's register, with its evaluation. */
-export function ligneRow(l: Ligne): RegisterRow {
+/**
+ * A line of an establishment's register, with its evaluation. What the consultant has not written
+ * yet comes from the text's fiche (lib/veille/fiche.ts), when given.
+ */
+export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; plan: string }): RegisterRow {
   const t = l.texte;
   const ref = [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dmy(t.date)}` : ""].filter(Boolean).join(" ");
   const evaluated = l.evalue ? `Dernière évaluation : ${dmy(l.evalue)}.` : "";
@@ -90,11 +93,11 @@ export function ligneRow(l: Ligne): RegisterRow {
     type: t.type,
     ref,
     titre: t.titre,
-    resume: [l.resume, t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
+    resume: [l.resume || fiche?.resume, t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
     conformite: CONFORMITE[l.conformite] ?? "",
     frequence: [l.frequence, evaluated].filter(Boolean).join("\n"),
-    risque: l.risque,
-    plan: l.plan,
+    risque: l.risque || fiche?.risque || "",
+    plan: l.plan || fiche?.plan || "",
     responsable: [l.responsable, l.echeance ? dmy(l.echeance) : ""].filter(Boolean).join(" / "),
     url: t.source,
   };

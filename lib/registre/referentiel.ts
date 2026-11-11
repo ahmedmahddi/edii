@@ -32,6 +32,7 @@ export interface Texte {
   niveau?: Severity; // for a text found in the JORT
   remplace?: boolean; // a JORT text of a series (the SMIG of each year…) replaced by a newer one: not proposed
   periodique?: string; // a text published again every year (the SMIG, the loi de finances): its rule
+  jort?: string; // for a curated text: the id of the JORT text it was found as
   abroge?: { titre: string; publie: string; source: string }; // repealed as a whole, by this text: not proposed
   activites?: string[]; // for a JORT text: the sites whose activity it is about (conditions of the act-* rules)
   themes?: { label: string; when: string[] }[]; // for a JORT text: the theme of each rule that found it
@@ -233,6 +234,7 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: 
     if (known) {
       known.source ??= t.source;
       known.publie ??= t.publie;
+      known.jort ??= t.id; // where its fiche is read
       continue;
     }
     texts.push(t);

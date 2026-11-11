@@ -8,6 +8,7 @@ import { INSTITUTION, type Issue, isoDate, kindOf, parseIssue, pdfPage, pdfUrl, 
 import { ocrUrl, parseMarkdown, parseMarkdownStart } from "@/lib/veille/markdown";
 import { frenchCitations } from "@/lib/veille/arabe";
 import { repealClauses } from "@/lib/veille/abrogation";
+import { bodies, compact, defaults, readFiche } from "@/lib/veille/fiche";
 import { namedKeys } from "@/lib/registre/referentiel";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
@@ -374,5 +375,73 @@ describe("picking the texts that concern the app", () => {
       { year: 2010, issues: { "18": jort2010 } },
     ]);
     expect(again.hits.map((h) => h.id)).toEqual(feed.hits.map((h) => h.id));
+  });
+});
+
+describe("the fiche of a text, read in its issue", () => {
+  const md = [
+    "<!-- page:1 -->",
+    "# Sommaire",
+    "Décret n° 2026-90 du 2 mai 2026, relatif aux règles de sécurité sur les chantiers ............ 12",
+    "Arrêté du ministre de l'équipement du 3 mai 2026, portant approbation du plan d'aménagement de la zone X ..... 13",
+    "<!-- page:2 -->",
+    "Page 12",
+    "Journal Officiel de la République Tunisienne — 5 mai 2026",
+    "",
+    "Décret n° 2026-90 du 2 mai 2026, relatif aux règles de sécurité sur les",
+    "chantiers.",
+    "",
+    "Le Chef du Gouvernement,",
+    "",
+    "Vu le code du travail,",
+    "",
+    "Article premier - Le présent décret fixe les règles de sécurité sur les chantiers de bâtiment.",
+    "",
+    "Art. 2 - L'entrepreneur doit tenir un registre de sécurité du chantier. Les échafaudages sont vérifiés une fois par an par un organisme agréé.",
+    "",
+    "Art. 3 - Il est interdit d'employer sur un chantier un travailleur sans équipements de protection individuelle.",
+    "",
+    "Art. 4 - Toute infraction aux dispositions du présent décret est punie d'une amende de 500 à 2000 dinars.",
+    "",
+    "Tunis, le 2 mai 2026.",
+    "",
+    "<!-- page:3 -->",
+    "Arrêté du ministre de l'équipement du 3 mai 2026, portant approbation du plan d'aménagement de la zone X.",
+    "",
+    "Article premier - Est approuvé le plan d'aménagement de la zone X annexé au présent arrêté.",
+  ].join("\n");
+  const titles = [
+    { title: "Décret n° 2026-90 du 2 mai 2026, relatif aux règles de sécurité sur les chantiers", page: 1 },
+    { title: "Arrêté du ministre de l'équipement du 3 mai 2026, portant approbation du plan d'aménagement de la zone X", page: 2 },
+  ];
+
+  it("cuts the issue into its texts, after the sommaire, with titles broken over two lines", () => {
+    const [decret, arrete] = bodies(md, titles);
+    expect(decret?.[0]).toBe("Le Chef du Gouvernement,");
+    expect(decret?.some((p) => p.startsWith("Art. 4"))).toBe(true);
+    expect(decret?.some((p) => p.includes("plan d'aménagement"))).toBe(false);
+    expect(arrete).toEqual(["Article premier - Est approuvé le plan d'aménagement de la zone X annexé au présent arrêté."]);
+  });
+
+  it("keeps the obligations with their article, the sanctions, the periodicity and the kinds of obligation", () => {
+    const [decret, arrete] = bodies(md, titles).map(readFiche);
+    expect(decret.articles).toBe(4);
+    expect(decret.obligations).toEqual([
+      "Art. 2 : L'entrepreneur doit tenir un registre de sécurité du chantier.",
+      "Art. 3 : Il est interdit d'employer sur un chantier un travailleur sans équipements de protection individuelle.",
+    ]);
+    expect(decret.sanctions).toEqual(["Art. 4 : Toute infraction aux dispositions du présent décret est punie d'une amende de 500 à 2000 dinars."]);
+    expect(decret.types).toEqual(expect.arrayContaining(["registre", "interdiction", "protection"]));
+    // The first article only says what the text does: no obligation, it describes an approval.
+    expect(arrete.obligations).toEqual([]);
+    expect(defaults("secteurs", compact(arrete)).resume).toBe("Art. 1 : Est approuvé le plan d'aménagement de la zone X annexé au présent arrêté.");
+    const d = defaults("sst", compact(decret));
+    expect(d.resume).toContain("doit tenir un registre");
+    expect(d.risque).toContain("amende de 500 à 2000 dinars");
+    expect(d.plan).toContain("registre");
+    // A written résumé comes first.
+    expect(defaults("sst", { ...compact(decret), r: "Tenir un registre de sécurité ; protéger les travailleurs." }).resume).toBe(
+      "Tenir un registre de sécurité ; protéger les travailleurs.",
+    );
   });
 });

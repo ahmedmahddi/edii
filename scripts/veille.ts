@@ -21,6 +21,9 @@
  *
  *   npm run veille -- --abrogations        read the whole OCR text of every issue read, for the texts
  *                                          it repeals as a whole (data/veille/abrogations/), resumable
+ *   npm run veille -- --fiches             read the whole OCR text of the issues with texts found, for
+ *                                          each text's fiche (obligations, sanctions, periodicity):
+ *                                          data/veille/fiches/<year>.json; resumable, as --abrogations
  *   npm run veille -- --ocr --years 2023-2026   read again from the OCR text the issues first read
  *                                          from the PDF, keeping the reading with more texts
  *
@@ -37,10 +40,11 @@ import { type Issue, isSommairePage, type Line, parseIssue, pdfUrl } from "../li
 import { fetchRetry, fetchText } from "../lib/veille/fetch";
 import { arabicPdfMarkdown, mostlyArabic } from "../lib/veille/arabe";
 import { markdownPages, ocrUrl, parseMarkdown, parseMarkdownStart } from "../lib/veille/markdown";
-import { amendments, catalogue, citations, type Repeals } from "../lib/registre/referentiel";
+import { amendments, catalogue, citations, keysOf, type Repeals } from "../lib/registre/referentiel";
 import { type Repeal, repealClauses } from "../lib/veille/abrogation";
+import { articlesOf, bodies, compact, type FicheData, readFiche } from "../lib/veille/fiche";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
-import { assess, type Feed, reassess, record, type Sommaires } from "../lib/veille/watch";
+import { assess, type Feed, type Hit, reassess, record, type Sommaires } from "../lib/veille/watch";
 
 const DIR = path.join(process.cwd(), "data", "veille");
 // Served to the page, which fetches it when the veille is opened (not part of the page's code).
@@ -49,6 +53,14 @@ const SOMMAIRES = path.join(DIR, "sommaires");
 // Repeals read in the issues' full OCR text (--abrogations): data/veille/abrogations/<year>.json.
 const ABROGATIONS = path.join(DIR, "abrogations");
 const PROBE = path.join(DIR, "probe");
+// Fiches read in the bodies of the texts found (--fiches): data/veille/fiches/<year>.json, issue →
+// entry index → fiche. The bodies themselves (their articles) are kept out of git, in corps/, for
+// whoever writes résumés; written résumés are in data/referentiel/resumes/*.json (text key → résumé).
+const FICHES = path.join(DIR, "fiches");
+const CORPS = path.join(DIR, "corps");
+const RESUMES = path.join(process.cwd(), "data", "referentiel", "resumes");
+// Served to the page with the feed: text id → fiche and résumé (public/veille/fiches.json).
+const FICHES_OUT = path.join(process.cwd(), "public", "veille", "fiches.json");
 const UA = "ABClassement veille réglementaire";
 // Where the PDFs are fetched from: lake.jort.tn, or a copy of it (JORT_BASE, for tests or a mirror).
 const fetchUrl = (year: number, n: number) =>
@@ -356,6 +368,102 @@ async function readRepeals(years: Sommaires[]): Promise<void> {
   }
 }
 
+type FichesFile = { year: number; issues: Record<string, Record<string, FicheData>> };
+const loadFiches = (year: number): FichesFile => {
+  const file = path.join(FICHES, `${year}.json`);
+  return existsSync(file) ? (JSON.parse(readFileSync(file, "utf8")) as FichesFile) : { year, issues: {} };
+};
+// "2010-018-559-1" → issue 18, entry 1 of the sommaire.
+const entryOf = (hit: Hit) => hit.id.split("-").at(-1)!;
+
+/**
+ * Read the whole OCR text of each issue that has texts in the feed without a fiche yet, cut it into
+ * texts and read each found text's fiche (lib/veille/fiche.ts). Resumable: a text tried is kept,
+ * found or not (a: 0). Four issues at a time.
+ */
+async function readFiches(years: Sommaires[], hits: Hit[]): Promise<void> {
+  mkdirSync(FICHES, { recursive: true });
+  mkdirSync(CORPS, { recursive: true });
+  const byIssue = new Map<string, Hit[]>();
+  for (const h of hits) byIssue.set(`${h.year}-${h.issue}`, [...(byIssue.get(`${h.year}-${h.issue}`) ?? []), h]);
+  for (const y of years.sort((a, b) => b.year - a.year)) {
+    const data = loadFiches(y.year);
+    const corpsFile = path.join(CORPS, `${y.year}.json`);
+    const corps: Record<string, string> = existsSync(corpsFile) ? JSON.parse(readFileSync(corpsFile, "utf8")) : {};
+    const todo = Object.values(y.issues).filter(
+      (i) => i.number !== null && (byIssue.get(`${y.year}-${i.number}`) ?? []).some((h) => !(entryOf(h) in (data.issues[String(i.number)] ?? {}))),
+    );
+    if (!todo.length) continue;
+    console.log(`JORT ${y.year} : ${todo.length} numéros à lire en entier pour les fiches`);
+    const save = () => {
+      const issues = Object.fromEntries(Object.entries(data.issues).sort(([a], [b]) => Number(a) - Number(b)));
+      writeFileSync(path.join(FICHES, `${y.year}.json`), JSON.stringify({ year: y.year, issues }) + "\n");
+      writeFileSync(corpsFile, JSON.stringify(corps) + "\n");
+    };
+    let next = 0;
+    let found = 0;
+    let tried = 0;
+    const worker = async () => {
+      while (next < todo.length) {
+        const issue = todo[next++];
+        const res = await fetchText(ocrFetchUrl(y.year, issue.number!), { headers: { "User-Agent": UA } });
+        const text = res && res.status < 400 && /<!--\s*page/.test(res.text) ? res.text : null;
+        if (text) downloaded += Buffer.byteLength(text);
+        const cuts = text
+          ? bodies(
+              text,
+              issue.entries.map((e) => ({ title: e.title, page: issue.firstPage !== null && e.page ? e.page - issue.firstPage : null })),
+            )
+          : [];
+        const known = (data.issues[String(issue.number)] ??= {});
+        for (const h of byIssue.get(`${y.year}-${issue.number}`) ?? []) {
+          const body = cuts[Number(entryOf(h))] ?? null;
+          known[entryOf(h)] = compact(readFiche(body));
+          tried++;
+          if (body) {
+            found++;
+            const articles = articlesOf(body).map((a) => `${a.label} : ${a.text}`).join("\n");
+            if (articles) corps[h.id] = articles.slice(0, 6000);
+          }
+        }
+        if (next % 20 === 0) save();
+        await new Promise((r) => setTimeout(r, PAUSE_MS));
+      }
+    };
+    await Promise.all([worker(), worker(), worker(), worker()]);
+    save();
+    console.log(`  ${found} textes lus sur ${tried}`);
+  }
+}
+
+/**
+ * public/veille/fiches.json: for each text of the référentiel, its fiche and its written résumé,
+ * by text id. Derived from data/veille/fiches and data/referentiel/resumes.
+ */
+function writeFiches(hits: Hit[]): void {
+  const resumes: Record<string, string> = {};
+  if (existsSync(RESUMES))
+    for (const f of readdirSync(RESUMES).filter((f) => f.endsWith(".json"))) Object.assign(resumes, JSON.parse(readFileSync(path.join(RESUMES, f), "utf8")));
+  const files = new Map<number, FichesFile>();
+  const ficheOf = (hitId: string): FicheData | undefined => {
+    const [year, issue] = hitId.split("-").map(Number);
+    if (!files.has(year)) files.set(year, loadFiches(year));
+    return files.get(year)!.issues[String(issue)]?.[hitId.split("-").at(-1)!];
+  };
+  const out: Record<string, FicheData> = {};
+  let written = 0;
+  for (const t of catalogue(hits)) {
+    const hitId = t.origine === "jort" ? t.id.slice(5) : t.jort?.slice(5);
+    const f = hitId ? ficheOf(hitId) : undefined;
+    const r = keysOf(t).map((k) => resumes[k]).find(Boolean) ?? resumes[t.id];
+    if (r) written++;
+    if ((f && (f.o || f.s || f.p || f.t || f.f)) || r) out[t.id] = { ...(f ?? {}), ...(r ? { r } : {}) };
+  }
+  mkdirSync(path.dirname(FICHES_OUT), { recursive: true });
+  writeFileSync(FICHES_OUT, JSON.stringify(out) + "\n");
+  console.log(`Fiches : ${Object.keys(out).length} textes avec des exigences relevées ou un résumé écrit (${written} résumés écrits).`);
+}
+
 async function main(): Promise<void> {
   let feed = loadFeed();
   const stored = () =>
@@ -386,10 +494,18 @@ async function main(): Promise<void> {
     feed.citations = citations(years, catalogue(feed.hits));
     const updated = years.map((y) => y.updated ?? "").sort().at(-1) || null;
     writeFeed({ ...feed, updated });
+    writeFiches(feed.hits);
     const count = years.reduce((n, y) => n + Object.keys(y.issues).length, 0);
     console.log(
       `Règles appliquées à nouveau à ${count} numéros : ${before} → ${feed.hits.length} textes repérés, ${feed.amendments.length} modifiant un texte du référentiel.`,
     );
+    return;
+  }
+  if (process.argv.includes("--fiches")) {
+    const only = option("years") ? new Set(yearsOf(option("years")!)) : null;
+    await readFiches(stored().filter((y) => !only || only.has(y.year)), feed.hits);
+    writeFiches(feed.hits);
+    console.log(`Téléchargé : ${(downloaded / 1e6).toFixed(0)} Mo.`);
     return;
   }
   if (process.argv.includes("--abrogations")) {
@@ -474,6 +590,9 @@ async function main(): Promise<void> {
   feed.amendments = amendments(stored(), catalogue(feed.hits), loadRepeals());
   feed.citations = citations(stored(), catalogue(feed.hits));
   saveFeed(feed);
+  // The fiches of the texts just found: the whole text of their issues is read.
+  await readFiches(stored().filter((y) => feed.hits.some((h) => h.year === y.year)), feed.hits);
+  writeFiches(feed.hits);
   const count = (s: string) => feed.hits.filter((h) => h.severity === s).length;
   console.log(
     `\n${feed.hits.length} textes repérés : ${count("critique")} critiques, ${count("important")} importants, ${count("information")} pour information. Détail : vue Veille réglementaire.`,
