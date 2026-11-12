@@ -3,7 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { importance } from "@/lib/registre/importance";
 import { applies, derivedFlags, EMPTY_SITE, METIERS, type Site, toggleMetier } from "@/lib/registre/profil";
-import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, type Texte, themeFor } from "@/lib/registre/referentiel";
+import { amendments, catalogue, citedKeys, keysOf, namedKeys, proposals, REFERENTIEL, remplacePar, type Texte, themeFor } from "@/lib/registre/referentiel";
 import {
   addTexte,
   abrogePar,
@@ -12,6 +12,7 @@ import {
   backup,
   createRegistre,
   dues,
+  historique,
   modifiePar,
   nouveautes,
   plusApplicables,
@@ -197,6 +198,23 @@ describe("an establishment's register", () => {
     const row = ligneRow({ ...l, conformite: "NC", evalue: "2026-03-01", responsable: "R QSE", echeance: "2026-12-31", plan: "Mettre à jour l'étude de dangers" });
     expect(row).toMatchObject({ systeme: "HSST & Environnement", ref: "Décret n° 2006-2687 du 09-10-2006", conformite: "NC", responsable: "R QSE / 31-12-2026", plan: "Mettre à jour l'étude de dangers" });
     expect(row.frequence).toBe("Annuelle\nDernière évaluation : 01-03-2026.");
+  });
+
+  it("tells, in the export, a text repealed, overtaken or modified", () => {
+    const reg = createRegistre(report(), site(), texts, now);
+    const l = reg.lignes.find((x) => x.texte.id === "arrete-1995-01-10")!;
+    const a = { id: "2010-1-1-0", year: 2010, issue: 1, date: "2010-01-05", page: 1, title: "Arrêté du ministre des finances du 5 janvier 2010, modifiant l'arrêté du 10 janvier 1995", pdf: "x", cites: ["d:arrete:1995-01-10"] };
+    expect(historique(l, [a]).map((x) => x.id)).toEqual(["2010-1-1-0"]);
+    const row = ligneRow(l, undefined, { modifie: [a], remplacePar: "la loi 94-28" });
+    expect(row.resume).toContain("Remplacé par : la loi 94-28.");
+    expect(row.resume).toContain("Modifié par : Arrêté du 05-01-2010.");
+  });
+
+  it("no longer proposes a text overtaken without a repeal, and says by what", () => {
+    const old: Texte = { id: "jort-1957-1", type: "Loi", numero: "57-73", date: "1957-12-11", titre: "LOI N° 57-73 du 11 décembre 1957, relative au régime de réparation des accidents du travail", domaine: "sst", theme: "AT", when: ["effectif"], origine: "jort", coche: ["effectif"] };
+    expect(remplacePar(old)).toBe("la loi 94-28");
+    const [t] = catalogue([], [], {}).filter((x) => x.numero === "57-73");
+    expect(t).toBeUndefined(); // not curated: only the JORT brings it, and marks it
   });
 
   it("says when an evaluation is due", () => {

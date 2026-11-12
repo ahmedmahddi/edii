@@ -3,18 +3,18 @@ import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { download, downloadWorkbook, today } from "@/app/components/download";
 import { EMPTY_SITE, FLAG_GROUPS, FLAGS, METIER_GROUPS, METIERS, metierLabels, type Site, toggleMetier } from "@/lib/registre/profil";
 import { importance } from "@/lib/registre/importance";
-import { proposals, type Texte } from "@/lib/registre/referentiel";
+import { proposals, remplacePar, type Texte } from "@/lib/registre/referentiel";
 import {
   addTexte,
   abrogePar,
   alertes,
-  modifiePar,
   backup,
   CONFORMITES,
   type Conformite,
   createRegistre,
   dues,
   ETATS,
+  historique,
   FREQUENCES,
   type Ligne,
   loadRegistres,
@@ -417,6 +417,12 @@ function RegistreView({
 
   const retenus = reg.lignes.filter((l) => l.retenu);
   const alerts = alertes(reg, amendments);
+  const pending = new Set(alerts.map((a) => `${a.ligne.texte.id}|${a.amendment.id}`));
+  // A text's history, newest first: every text that modified it, but those still shown as alerts.
+  const historyOf = (l: Ligne) =>
+    historique(l, amendments)
+      .filter((a) => !pending.has(`${l.texte.id}|${a.id}`))
+      .reverse();
   const gone = plusApplicables(reg);
   // Importance of each text for this site: the référentiel's current reading of the text (citations,
   // activities) when it still has it, else the text as it was added.
@@ -651,7 +657,15 @@ function RegistreView({
             setExporting(true);
             try {
               await downloadWorkbook(
-                (wb) => fillRegister(wb, [...retenus].sort(byScore).map((l) => ligneRow(l, ficheOf(l))), new Date(), reg.nom),
+                (wb) =>
+                  fillRegister(
+                    wb,
+                    [...retenus]
+                      .sort(byScore)
+                      .map((l) => ligneRow(l, ficheOf(l), { abroge: abrogePar(l, amendments), remplacePar: remplacePar(l.texte), modifie: historique(l, amendments) })),
+                    new Date(),
+                    reg.nom,
+                  ),
                 `ID-QSE-002_${reg.nom.replace(/[^\p{L}\p{N}]+/gu, "_")}_${today()}.xlsx`,
               );
             } finally {
@@ -682,7 +696,7 @@ function RegistreView({
                     <LigneCard
                       l={l}
                       raisons={rank.get(l.texte.id)?.raisons}
-                      history={modifiePar(reg, l, amendments)}
+                      history={historyOf(l)}
                       repealed={abrogePar(l, amendments)}
                       fiche={fiches[l.texte.id]}
                       set={(patch) => setLigne(l.texte.id, patch)}
@@ -715,7 +729,7 @@ function RegistreView({
                   key={l.texte.id}
                   l={l}
                   raisons={rank.get(l.texte.id)?.raisons}
-                  history={modifiePar(reg, l, amendments)}
+                  history={historyOf(l)}
                   repealed={abrogePar(l, amendments)}
                   fiche={fiches[l.texte.id]}
                   set={(patch) => setLigne(l.texte.id, patch)}
@@ -832,9 +846,12 @@ function LigneCard({
             (JORT n° {repealed.issue}/{repealed.year}, p. {repealed.page})
           </span>
         </p>
+      ) : remplacePar(l.texte) ? (
+        // Overtaken by a newer text without a repeal the JORT titles show: same treatment.
+        <p className="registre-abroge small">Remplacé par {remplacePar(l.texte)}</p>
       ) : null}
       {history.length ? (
-        // Modified before the register was made: the text as it stands now, not an alert.
+        // Every text that modified it since it was published (those still waiting as alerts aside).
         <details className="registre-details">
           <summary>
             Modifié par {history.length} texte{history.length > 1 ? "s" : ""}

@@ -9,7 +9,7 @@
 import type ExcelJS from "exceljs";
 import type { Ligne } from "../registre/registre";
 import { isoDate } from "./jort";
-import { type Hit, rules } from "./watch";
+import { type Amendment, type Hit, rules } from "./watch";
 
 export const COLUMNS = [
   ["SYSTEME", 18],
@@ -79,11 +79,40 @@ export function registerRow(hit: Hit): RegisterRow {
 
 const CONFORMITE: Record<string, string> = { C: "C", NC: "NC", NA: "Non applicable" };
 
+/** Where a text stands: repealed, overtaken, or modified since it was published. */
+export interface Statut {
+  abroge?: Amendment;
+  remplacePar?: string;
+  modifie?: Amendment[]; // oldest first
+}
+
+/** "Décret n° 2008-2565 du 07-07-2008": a JORT text named shortly, by its kind, number and date. */
+export function shortRef(title: string): string {
+  const kind = /^[^\p{L}]*(d[ée]cret-loi|d[ée]cret|arr[êe]t[ée]|loi|d[ée]cision|circulaire)s?(?!\p{L})/iu.exec(title)?.[1];
+  const ref = reference({ kind: kind ? kind[0].toUpperCase() + kind.slice(1).toLowerCase() : "Autre", title });
+  return ref === title ? (title.length > 90 ? `${title.slice(0, 89)}…` : title) : ref;
+}
+
+/** The lines the résumé column adds for a text's state: « Abrogé par … », « Modifié par … ». */
+export function statutLines(s: Statut | undefined): string[] {
+  if (!s) return [];
+  const out: string[] = [];
+  if (s.abroge) out.push(`Abrogé par : ${shortRef(s.abroge.title)} (JORT n° ${s.abroge.issue}/${s.abroge.year}).`);
+  if (s.remplacePar) out.push(`Remplacé par : ${s.remplacePar}.`);
+  const m = s.modifie ?? [];
+  if (m.length) {
+    // The latest ones matter most: a register cell is not the place for a text's whole history.
+    const shown = m.slice(-6).map((a) => shortRef(a.title));
+    out.push(`Modifié par : ${m.length > 6 ? `${m.length - 6} textes antérieurs, puis ` : ""}${shown.join(" ; ")}.`);
+  }
+  return out;
+}
+
 /**
  * A line of an establishment's register, with its evaluation. What the consultant has not written
  * yet comes from the text's fiche (lib/veille/fiche.ts), when given.
  */
-export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; plan: string }): RegisterRow {
+export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; plan: string }, statut?: Statut): RegisterRow {
   const t = l.texte;
   const ref = [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dmy(t.date)}` : ""].filter(Boolean).join(" ");
   const evaluated = l.evalue ? `Dernière évaluation : ${dmy(l.evalue)}.` : "";
@@ -93,7 +122,7 @@ export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; pla
     type: t.type,
     ref,
     titre: t.titre,
-    resume: [l.resume || fiche?.resume, t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
+    resume: [l.resume || fiche?.resume, ...statutLines(statut), t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
     conformite: CONFORMITE[l.conformite] ?? "",
     frequence: [l.frequence, evaluated].filter(Boolean).join("\n"),
     risque: l.risque || fiche?.risque || "",

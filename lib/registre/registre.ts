@@ -210,6 +210,14 @@ export function abrogePar(l: Ligne, amendments: Amendment[]): Amendment | undefi
   return amendments.find((a) => a.abroge?.some((k) => keys.has(k)) && (!l.texte.date || (a.date ?? "") > l.texte.date));
 }
 
+/** Every JORT text that modified (or cited) a text after it was published, oldest first: its history. */
+export function historique(l: Ligne, amendments: Amendment[]): Amendment[] {
+  const keys = new Set(keysOf(l.texte));
+  return amendments
+    .filter((a) => a.cites.some((k) => keys.has(k)) && (!l.texte.date || (a.date ?? "") > l.texte.date))
+    .sort((a, b) => (a.date ?? "").localeCompare(b.date ?? ""));
+}
+
 /** The JORT texts that modified a text before the register was created, newest first. */
 export function modifiePar(reg: Registre, l: Ligne, amendments: Amendment[]): Amendment[] {
   const since = reg.cree.slice(0, 10);

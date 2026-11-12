@@ -427,6 +427,28 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Step 1 of "next level" (12 November): a register an auditor can trust.**
+
+* **Texts of general reach proposed where they apply.** Rules widened in watch.json: `dechets`
+  reads lubricating oils, oil filters and used packaging (décrets 2002-693, 97-1102 and their
+  amendments); `cahiers-des-charges` reads "procédures environnementales" (the 2006 cahiers des
+  charges of EIE annex II); a new `handicap` rule ticks décret 2005-3087 (employment quota) for
+  sites of 100 employees or more; the curated décret 2008-2745 (healthcare waste) applies to `sante`.
+  An audit of legal acts of the core domains that applied to no site found nothing else of weight.
+* **Superseded texts** (`data/referentiel/remplaces.json`, key = `resumeKey()`, value = what replaced
+  it): texts overtaken without a repeal the JORT titles show — the 1957 work-accident law by loi
+  94-28, the old production taxes by VAT, the 1970 distribution law, the 1964 and 1978 road codes,
+  the old investment laws and their nomenclatures, the 1983 used-oil collection order, older lists
+  and tariffs. 88 texts, taken from the résumés that say "remplacé" and from a reading of the
+  pre-1995 essentials. `catalogue()` marks them `remplace` (no longer proposed) with `remplacePar`;
+  a register that already holds one shows « Remplacé par … » like « Abrogé par … ». Ticked texts
+  over all site profiles went from 1,101 to 1,051. Add an entry when a résumé or a reading shows
+  another; anything uncertain stays out.
+* **History of each text:** a register line shows every JORT text that modified it since it was
+  published (`historique()`), newest first, those still waiting as alerts aside (before, an
+  amendment marked as seen vanished). The Excel export adds to the résumé column « Abrogé par … »,
+  « Remplacé par … » and « Modifié par … » (the six latest, short references).
+
 **Cleaning after the user's BTP test register (11 November).** The user exported a construction
 company's register (645 texts) and shared it. Found and fixed:
 

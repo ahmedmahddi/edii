@@ -7,6 +7,7 @@
  * A text is known by its number ("décret n° 2005-1991") or, without one, by its kind and date
  * ("arrêté du 10 janvier 1995"); that is also how a new JORT title is seen to modify it.
  */
+import remplaces from "@/data/referentiel/remplaces.json";
 import curated from "@/data/referentiel/textes.json";
 import { type Repeal, repealClauses } from "../veille/abrogation";
 import { arFold, frenchCitations, isArabic } from "../veille/arabe";
@@ -34,6 +35,7 @@ export interface Texte {
   periodique?: string; // a text published again every year (the SMIG, the loi de finances): its rule
   jort?: string; // for a curated text: the id of the JORT text it was found as
   abroge?: { titre: string; publie: string; source: string }; // repealed as a whole, by this text: not proposed
+  remplacePar?: string; // overtaken by a newer text without a repeal in the JORT titles (data/referentiel/remplaces.json): not proposed
   activites?: string[]; // for a JORT text: the sites whose activity it is about (conditions of the act-* rules)
   themes?: { label: string; when: string[] }[]; // for a JORT text: the theme of each rule that found it
   cite?: number; // how many later JORT titles name it: the more, the more central the text
@@ -293,7 +295,20 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: 
   const latest = new Map<string, number>();
   for (const t of texts) if (t.periodique && t.date) latest.set(t.periodique, Math.max(latest.get(t.periodique) ?? 0, Number(t.date.slice(0, 4))));
   for (const t of texts) if (t.periodique && t.date && Number(t.date.slice(0, 4)) < latest.get(t.periodique)! - 1) t.remplace = true;
+  // Overtaken without a repeal the titles show (the 1957 law on work accidents by the 1994 one):
+  // kept by hand.
+  for (const t of texts) {
+    const par = remplacePar(t);
+    if (par) Object.assign(t, { remplace: true, remplacePar: par });
+  }
   return texts;
+}
+
+const REMPLACES: Record<string, string> = remplaces.textes;
+
+/** What overtook a text without repealing it, when known (« la loi 94-28 »). */
+export function remplacePar(t: Texte): string | undefined {
+  return REMPLACES[resumeKey(t)];
 }
 
 export interface Proposal {
