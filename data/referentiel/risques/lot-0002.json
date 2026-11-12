@@ -1,0 +1,402 @@
+{
+ "n:loi:61-16": {
+  "risque": "Hôtel ou établissement de tourisme construit ou exploité hors normes : amende de 20 à 2 000 dinars, fermeture.",
+  "plan": "Faire approuver les plans de toute construction ou transformation et respecter les normes de son classement."
+ },
+ "n:loi:60-35": {
+  "risque": "Vente d'alcool à emporter sans autorisation : fermeture, amende.",
+  "plan": "Détenir l'autorisation de commerce de boissons à emporter et en respecter les conditions."
+ },
+ "n:decret:2000-148": {
+  "risque": "Véhicule en circulation sans visite technique à jour : amende, immobilisation, défaut d'assurance en cas d'accident.",
+  "plan": "Tenir un tableau de la flotte avec les dates de visite technique de chaque véhicule (premier contrôle, puis périodicité selon le type) et présenter chaque véhicule avant l'échéance."
+ },
+ "n:decret:2020-647": {
+  "risque": "Mesure temporaire de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; vérifier seulement que les situations de cette période sont soldées."
+ },
+ "n:decret:2018-171": {
+  "risque": "Bâtiment neuf ou étendu sans bâche de collecte des eaux pluviales exigée : refus du permis ou du certificat de conformité.",
+  "plan": "Prévoir dans les projets de construction concernés la bâche de collecte des eaux pluviales aux dimensions fixées, l'entretenir et en utiliser l'eau selon les règles."
+ },
+ "d:arrete:2017-01-19~verification-qualite-livraisons-emballage-marquage-ciment": {
+  "risque": "Ciment livré non conforme, mal emballé ou mal marqué : saisie, retrait du marché, amendes.",
+  "plan": "Pour un producteur ou importateur : contrôler chaque livraison (échantillons, essais), utiliser les emballages admis et marquer les sacs ; pour un acheteur : exiger les certificats de conformité."
+ },
+ "d:arrete:2008-05-21~peche-rouge": {
+  "risque": "Pêche du thon rouge hors période, sous la taille minimale ou sans déclaration : saisie, amende, retrait de licence.",
+  "plan": "Respecter les périodes d'interdiction par engin et la taille minimale, tenir le registre et faire les déclarations statistiques."
+ },
+ "n:decret:2002-1318": {
+  "risque": "Production d'électricité à partir du gaz sans concession : arrêt du projet.",
+  "plan": "Pour un porteur de projet : obtenir l'autorisation et la concession avant toute réalisation."
+ },
+ "d:arrete:1998-11-17~creation-marches-production-produits-agricoles-peche": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:94-1937": {
+  "risque": "Participation aux frais d'égout non réglée : recouvrement forcé par l'ONAS.",
+  "plan": "Régler la participation de riverain calculée par l'ONAS lors de la création du réseau."
+ },
+ "n:loi:87-49": {
+  "risque": "Commerce ou entretien d'ascenseurs sans agrément : amende, fermeture ; pour un site, ascenseur mal entretenu et accident.",
+  "plan": "Pour un ascensoriste : obtenir l'agrément ; pour un site équipé : faire entretenir les ascenseurs par un prestataire agréé sous contrat et faire vérifier l'installation."
+ },
+ "n:decret:84-1225": {
+  "risque": "Maladie contagieuse non déclarée : propagation, abattage d'office, sanctions.",
+  "plan": "Déclarer tout cas suspect aux services vétérinaires et appliquer les mesures prescrites (isolement, désinfection, restrictions)."
+ },
+ "n:decret:81-445": {
+  "risque": "Achat au marché de gros sans carte d'achat : refus d'accès, sanctions.",
+  "plan": "Détenir la carte d'achat et déclarer tout changement des informations qui ont servi à l'obtenir."
+ },
+ "n:loi:2025-9": {
+  "risque": "CDD hors cas permis ou sous-traitance de main-d'œuvre : requalification en CDI, amende de 10 000 dinars par infraction, doublée en récidive.",
+  "plan": "Revoir les contrats de travail : CDI par principe, période d'essai de six mois au plus, CDD seulement dans les cas prévus ; mettre fin à toute sous-traitance de main-d'œuvre et intégrer les salariés concernés."
+ },
+ "n:loi:2024-33": {
+  "risque": "Bâtiment menaçant ruine non signalé ou non traité : effondrement, responsabilité du propriétaire, évacuation ou démolition d'office, sanctions pénales.",
+  "plan": "Faire inspecter les bâtiments anciens ou dégradés, signaler tout danger à la commune et réaliser les travaux prescrits."
+ },
+ "n:decret:2022-448": {
+  "risque": "Exportation dans le quota de l'Union européenne sans autorisation préalable : refus du chargement, retrait de l'inscription sur la liste des exportateurs.",
+  "plan": "Demander l'autorisation au moins sept jours avant chaque chargement et respecter les quantités et conditions du quota de l'année."
+ },
+ "n:loi:2021-8": {
+  "risque": "Mesure temporaire de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; vérifier seulement que les situations de cette période sont soldées."
+ },
+ "n:loi:2021-10": {
+  "risque": "Mesure temporaire de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; vérifier seulement que les situations de cette période sont soldées."
+ },
+ "n:decret:2019-363": {
+  "risque": "Exportation dans le quota de l'Union européenne sans autorisation préalable : refus du chargement, retrait de l'inscription sur la liste des exportateurs.",
+  "plan": "Demander l'autorisation au moins sept jours avant chaque chargement et respecter les quantités et conditions du quota de l'année."
+ },
+ "d:arrete:2016-11-14~batteries-accumulateurs-demarrage-plomb": {
+  "risque": "Batteries non conformes mises sur le marché : retrait, saisie, amende.",
+  "plan": "Pour un fabricant ou importateur : vérifier la conformité aux normes, le marquage et les essais de chaque modèle avant la mise sur le marché."
+ },
+ "n:loi:2015-12": {
+  "risque": "Installation de production renouvelable sans autorisation ou approbation : retrait, démontage, sanctions.",
+  "plan": "Obtenir l'accord ou l'autorisation correspondant au régime du projet (autoconsommation, vente) et respecter les conditions de raccordement."
+ },
+ "d:arrete:2013-10-01~normes-minimales-classement-etablissements-touristiques-fournissant-prestations-hebergement": {
+  "risque": "Gîte rural sous les normes de son classement : déclassement, fermeture.",
+  "plan": "Comparer l'établissement aux normes minimales du groupe et corriger les écarts."
+ },
+ "d:arrete:2004-09-10~approbation-cahier-charges-exploitation-debits-boissons-premiere-categorie": {
+  "risque": "Café exploité hors cahier des charges : fermeture administrative.",
+  "plan": "Vérifier le respect du cahier des charges (hygiène, équipements, affichage) et garder la preuve de dépôt."
+ },
+ "d:arrete:2003-02-07~approbation-cahier-charges-commerce-distribution-engrais-chimiques-usage": {
+  "risque": "Engrais stockés ou vendus hors cahier des charges : fermeture, saisie, pollution.",
+  "plan": "Respecter les conditions de stockage, de vente et de traçabilité du cahier des charges et en garder la preuve de dépôt."
+ },
+ "d:arrete:2000-02-04~normes-minimales-classement-hotels-tourisme-octroi-label-qualite": {
+  "risque": "Hôtel sous les normes de sa catégorie : déclassement, retrait du label.",
+  "plan": "Faire l'auto-évaluation annuelle aux normes de sa catégorie et corriger les écarts avant les visites de contrôle."
+ },
+ "n:decret:94-1885": {
+  "risque": "Rejet d'eaux usées industrielles au réseau sans autorisation ou au-dessus des valeurs limites : suspension du déversement, frais de remise en état, sanctions de l'ONAS.",
+  "plan": "Obtenir l'autorisation ou signer le cahier des charges de déversement auprès de l'ONAS, installer le prétraitement nécessaire, faire analyser les rejets à la fréquence fixée et garder les résultats."
+ },
+ "n:decret:87-51": {
+  "risque": "Projet grand consommateur d'énergie lancé sans consultation de l'ANME : sanction, refus d'avantages.",
+  "plan": "Consulter l'ANME avant tout projet ou extension dépassant les seuils (10 000 thermies/h, 3 MW ou 2 000 tep/an) et garder son avis."
+ },
+ "n:decret:79-768": {
+  "risque": "Branchement ou déversement au réseau public hors autorisation : sanctions du code des eaux, travaux d'office.",
+  "plan": "Hors zones ONAS : obtenir l'autorisation de branchement, prétraiter les effluents et respecter les rejets interdits."
+ },
+ "n:decret-loi:73-4": {
+  "risque": "Construction ou aménagement d'établissement touristique sans plans approuvés : arrêt des travaux, sanctions.",
+  "plan": "Faire approuver les plans par le ministère du tourisme avant tous travaux et laisser le droit de visite s'exercer."
+ },
+ "n:decret-loi:64-12": {
+  "risque": "Estérification de corps gras alimentaires : saisie du matériel, sanctions.",
+  "plan": "Ne détenir ni utiliser aucun matériel d'estérification des corps gras alimentaires."
+ },
+ "n:loi:59-118": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2023-661": {
+  "risque": "Occupation du domaine public maritime sans renouvellement demandé : occupation sans titre, évacuation.",
+  "plan": "Demander à temps le renouvellement de l'autorisation d'occupation et respecter son objet et sa superficie."
+ },
+ "n:decret:2020-32": {
+  "risque": "Production, vente ou détention de sacs plastiques interdits : saisie, amende, fermeture.",
+  "plan": "Supprimer les sacs à usage unique interdits, utiliser des sacs conformes (épaisseur, réutilisables) et garder les justificatifs d'achat."
+ },
+ "n:decret:2015-785": {
+  "risque": "Importation ou utilisation de bromure de méthyle : saisie, poursuites.",
+  "plan": "Vérifier qu'aucun produit de traitement utilisé ne contient de bromure de méthyle et le remplacer par une alternative autorisée."
+ },
+ "n:decret:2009-2200": {
+  "risque": "Maladie animale réglementée non déclarée : propagation, abattage, sanctions.",
+  "plan": "Déclarer sans délai tout cas suspect aux services vétérinaires et appliquer les mesures de police sanitaire."
+ },
+ "d:arrete:2008-11-18~liste-centres-etablissements-sanitaires-lesquels-depistage-anonyme-infections": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2008-08-18~determinant-activites-specialites-categories-plafonds-correspondants-lesquels-entreprises": {
+  "risque": "Entreprise sans agrément de la catégorie et de la spécialité voulues : offre rejetée aux marchés publics, retrait de l'agrément.",
+  "plan": "Vérifier que l'agrément couvre les spécialités et la catégorie visées, tenir à jour les moyens humains, matériels et financiers exigés et renouveler l'agrément à temps."
+ },
+ "d:arrete:2008-07-23~specifications-techniques-minimales-visant-economie-consommation-energie-projets": {
+  "risque": "Bâtiment de bureaux de 500 m² ou plus non conforme : refus du permis ou du certificat de conformité, surconsommation d'énergie.",
+  "plan": "Pour un projet de bureaux concerné : faire vérifier par le bureau d'études la performance thermique de l'enveloppe et des équipements avant le dépôt du permis."
+ },
+ "n:decret:2007-1401": {
+  "risque": "Blé acheté ou vendu sans application du barème : litige sur le prix, sanctions.",
+  "plan": "Appliquer le barème d'agréage (analyses, bonifications, réfactions) à chaque lot de blé."
+ },
+ "d:arrete:2007-04-13~listes-specialites-actes-medicaux-paramedicaux-medicaments-appareillage-frais": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2007-457": {
+  "risque": "Établissement d'hébergement exploité hors de son groupe et de sa catégorie : déclassement, fermeture.",
+  "plan": "Vérifier que l'établissement relève du bon groupe et respecte les normes de sa catégorie."
+ },
+ "n:decret:2005-1408": {
+  "risque": "Exportation dans le quota de l'Union européenne sans autorisation préalable : refus du chargement, retrait de l'inscription sur la liste des exportateurs.",
+  "plan": "Demander l'autorisation au moins sept jours avant chaque chargement et respecter les quantités et conditions du quota de l'année."
+ },
+ "n:decret:2001-823": {
+  "risque": "Redevances portuaires non payées : pénalités de 0,1 % par jour de retard.",
+  "plan": "Payer les redevances de séjour, de débarquement et d'occupation dans les délais."
+ },
+ "n:decret:2000-1934": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1995-10-19~composition-fonctionnement-commissions-techniques-permis-batir": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1992-06-04~determinant-activites-specialites-categories-plafonds-correspondants-lesquels-entreprises": {
+  "risque": "Entreprise sans agrément de la catégorie et de la spécialité voulues : offre rejetée aux marchés publics, retrait de l'agrément.",
+  "plan": "Vérifier que l'agrément couvre les spécialités et la catégorie visées, tenir à jour les moyens humains, matériels et financiers exigés et renouveler l'agrément à temps."
+ },
+ "d:arrete:1987-02-17~interdiction-detention-unites-peche-utilisation-circuits-distribution-casiers": {
+  "risque": "Caisses en bois utilisées pour les produits de la pêche : saisie, amende, risque sanitaire.",
+  "plan": "N'utiliser que des caisses lavables en plastique ou autre matériau autorisé, à bord comme dans la distribution."
+ },
+ "n:loi:81-60": {
+  "risque": "Travaux près d'une canalisation d'hydrocarbures sans précaution : rupture, explosion, pollution, responsabilité de l'auteur.",
+  "plan": "Repérer les canalisations traversant ou longeant le site, respecter les servitudes et prévenir l'exploitant avant tous travaux."
+ },
+ "d:arrete:1976-03-27~reglementation-generale-presentation-etiquetage-recipients-destines-consommation-humaine": {
+  "risque": "Vins mal étiquetés : saisie, interdiction de mise en vente.",
+  "plan": "Vérifier les mentions obligatoires sur chaque étiquette de vin."
+ },
+ "n:loi:99-71": {
+  "risque": "Infractions au code de la route par les véhicules ou conducteurs de l'entreprise : amendes, retrait de permis, immobilisation, responsabilité de l'employeur en cas d'accident.",
+  "plan": "Vérifier les permis des conducteurs, l'immatriculation, l'assurance, la visite technique et les poids et dimensions des véhicules ; sensibiliser les conducteurs aux règles de circulation."
+ },
+ "n:decret-loi:2020-15": {
+  "risque": "Mesure temporaire de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; vérifier seulement que les situations de cette période sont soldées."
+ },
+ "d:arrete:2019-07-24~etiquetage-energetique-linge-automatiques": {
+  "risque": "Lave-linge vendus sans étiquette énergétique : retrait, amende.",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et fournir la fiche d'information de chaque modèle."
+ },
+ "n:loi:2017-20": {
+  "risque": "Infraction sur le domaine public routier : amende administrative selon barème, doublée en récidive.",
+  "plan": "Obtenir les autorisations avant tout accès, travaux ou occupation en bordure de route."
+ },
+ "n:decret:2014-4710": {
+  "risque": "Opération sur marchandises dangereuses au port hors règles : accident, pollution, arrêt de l'opération, sanctions.",
+  "plan": "Déclarer les marchandises dangereuses, respecter les zones et règles d'entreposage et de manutention et la surveillance exigée."
+ },
+ "d:arrete:2014-06-06~prescriptions-obligatoires-contenues-convention-conclue-entre-etablissement-sanitaire": {
+  "risque": "Déchets de soins remis sans convention conforme : responsabilité du producteur, sanctions.",
+  "plan": "Conclure avec une entreprise autorisée une convention comportant les prescriptions obligatoires et garder bordereaux et attestations d'élimination."
+ },
+ "n:decret:2013-4824": {
+  "risque": "Occupation du domaine portuaire sans autorisation ou hors conditions : retrait, perte du cautionnement.",
+  "plan": "Obtenir l'autorisation d'occupation, respecter son objet et payer redevances et cautionnement."
+ },
+ "n:decret:2013-1308": {
+  "risque": "Margines rejetées ou épandues hors des conditions : pollution des sols et des eaux, amende, fermeture de l'huilerie.",
+  "plan": "Gérer les margines selon les voies autorisées (épandage sur terres autorisées dans les limites, bassins, compostage) et tenir le suivi des quantités."
+ },
+ "n:decret:2011-1128": {
+  "risque": "Mesure temporaire de 2011 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2011-06-23~approbation-cahier-charges-creation-centres-collecte-transport-frais": {
+  "risque": "Centre de collecte de lait hors cahier des charges : fermeture, lait refusé.",
+  "plan": "Respecter les exigences de locaux, de réfrigération, d'hygiène et de contrôle du cahier des charges."
+ },
+ "d:arrete:2011-05-24~fabrication-charbon-domaine-forestier-terres-soumises-regime": {
+  "risque": "Fabrication de charbon en forêt sans déclaration ou hors des lieux fixés : incendie, procès-verbal forestier.",
+  "plan": "Prévenir l'arrondissement des forêts un mois avant et carboniser uniquement aux lieux désignés, avec les précautions contre l'incendie."
+ },
+ "n:decret:2009-3726": {
+  "risque": "Olives cueillies ou transportées hors règles : perte de qualité, sanctions.",
+  "plan": "Cueillir à la main ou avec des outils autorisés sur filets, transporter dans des contenants adaptés et livrer à l'huilerie dans les délais."
+ },
+ "n:decret:2009-3588": {
+  "risque": "Avances des acquéreurs non garanties : retrait de l'agrément du promoteur, litiges.",
+  "plan": "Fournir une caution bancaire ou d'assurance couvrant les avances reçues dans le délai fixé."
+ },
+ "n:decret:2009-2773": {
+  "risque": "Vente d'excédents d'électricité hors conditions : refus de la STEG, perte des recettes.",
+  "plan": "Respecter les conditions de transport et la limite de vente des excédents fixées dans le contrat avec la STEG."
+ },
+ "n:loi:2009-69": {
+  "risque": "Activité de distribution exercée sans l'autorisation requise ou hors obligations : procès-verbal, amende, fermeture.",
+  "plan": "Vérifier si l'activité exige une autorisation (grande surface, franchise…) et respecter les obligations des commerçants (affichage des prix, factures)."
+ },
+ "n:decret:2009-2100": {
+  "risque": "Pas d'obligation : risque de perdre la prime ou de devoir la rembourser si les conditions ne sont pas tenues.",
+  "plan": "Si l'entreprise en bénéficie, déposer les demandes dans les délais avec les justificatifs et respecter l'objet de l'aide."
+ },
+ "d:arrete:2008-12-10~novembre-prescriptions-salubrite-concernant-mollusques-bivalves-vivants": {
+  "risque": "Mollusques contaminés par des toxines mis sur le marché : intoxication, retrait, sanctions.",
+  "plan": "Faire analyser les toxines paralysantes selon la méthode fixée avant toute mise sur le marché."
+ },
+ "n:decret:2007-244": {
+  "risque": "Pas d'obligation : risque de perdre la prime ou de devoir la rembourser si les conditions ne sont pas tenues.",
+  "plan": "Si l'entreprise en bénéficie, déposer les demandes dans les délais avec les justificatifs et respecter l'objet de l'aide."
+ },
+ "d:arrete:2006-12-29~approbation-cahier-charges-fixation-utilisation-boues-provenant-ouvrages": {
+  "risque": "Épandage de boues hors cahier des charges : pollution, retrait de l'autorisation.",
+  "plan": "Appliquer les conditions d'épandage et de suivi du cahier des charges et tenir le registre."
+ },
+ "n:decret:2006-3165": {
+  "risque": "Centre de thalassothérapie hors normes : fermeture.",
+  "plan": "Respecter les normes de locaux, d'équipements, d'encadrement médical et de qualité de l'eau de mer."
+ },
+ "n:decret:2006-1467": {
+  "risque": "Bâtiment ouvert au public non accessible aux personnes handicapées : amende de 50 000 à 100 000 dinars, refus du permis ou de la conformité.",
+  "plan": "Faire un diagnostic d'accessibilité (cheminements, rampes, portes, sanitaires, stationnement) et programmer les travaux ; l'intégrer dès la conception des projets."
+ },
+ "n:decret:2005-2177": {
+  "risque": "Commercialisation d'huiles hors conditions : saisie, sanctions.",
+  "plan": "Respecter les conditions d'achat, d'exportation, d'importation et de vente des huiles et tenir les justificatifs."
+ },
+ "n:loi:2005-75": {
+  "risque": "Importation de vaccins ou sérums hors du circuit de la Pharmacie centrale : saisie, sanctions.",
+  "plan": "S'approvisionner en vaccins, sérums et allergènes auprès de la Pharmacie centrale uniquement."
+ },
+ "n:loi:2002-54": {
+  "risque": "Laboratoire d'analyses sans autorisation ou hors normes : fermeture, sanctions.",
+  "plan": "Maintenir l'autorisation, la direction par un biologiste et les normes de locaux, d'équipement et de personnel ; soumettre tout transfert ou fermeture au cahier des charges."
+ },
+ "n:decret:2002-693": {
+  "risque": "Huiles usagées ou filtres rejetés, brûlés ou remis à un opérateur non autorisé : pollution des sols et des eaux, procès-verbal, amende (loi 96-41).",
+  "plan": "Collecter les huiles et filtres usagés dans des fûts étanches sur rétention, les remettre à un collecteur ou régénérateur autorisé contre bordereau et tenir le registre des quantités."
+ },
+ "n:decret:2002-545": {
+  "risque": "Dépassement du plafond de prestations aux résidents : retrait des avantages, sanctions.",
+  "plan": "Suivre le chiffre d'affaires réalisé avec les résidents et le maintenir sous 20 % de celui des non-résidents de l'année précédente."
+ },
+ "n:decret:2002-105": {
+  "risque": "Laboratoire d'étalonnage non notifié : prestations métrologiques non reconnues.",
+  "plan": "Pour un laboratoire : obtenir l'accréditation ISO 17025 et la notification ; pour un site : choisir un laboratoire notifié."
+ },
+ "n:loi:2001-94": {
+  "risque": "Établissement de santé pour non-résidents hors conditions : remboursement des avantages avec pénalités.",
+  "plan": "Respecter la limite de prestations aux résidents et l'objet du projet ayant ouvert droit aux avantages."
+ },
+ "d:arrete:2001-02-28~approbation-cahier-charges-deversements-usees-autres-domestiques-reseau": {
+  "risque": "Rejet d'eaux usées industrielles au réseau sans autorisation ou au-dessus des valeurs limites : suspension du déversement, frais de remise en état, sanctions de l'ONAS.",
+  "plan": "Obtenir l'autorisation ou signer le cahier des charges de déversement auprès de l'ONAS, installer le prétraitement nécessaire, faire analyser les rejets à la fréquence fixée et garder les résultats."
+ },
+ "d:arrete:2000-10-16~chargement-transport-dechargement-matieres-explosives-utilisees-civiles-normes": {
+  "risque": "Transport d'explosifs hors règles : explosion, retrait de l'autorisation, poursuites.",
+  "plan": "Utiliser des véhicules équipés et contrôlés tous les six mois, couper le moteur au chargement et appliquer toutes les règles de sécurité du transport."
+ },
+ "d:arrete:1990-12-15~attribution-licence-exploitation-etablissement-fabrication-medicaments-usage-humain": {
+  "risque": "Fabrication de médicaments sans licence : fermeture, sanctions.",
+  "plan": "Maintenir la licence d'exploitation, les locaux et équipements autorisés et un pharmacien responsable."
+ },
+ "n:decret-loi:85-9": {
+  "risque": "Opérations pétrolières hors titre ou obligations : retrait du permis ou de la concession.",
+  "plan": "Pour un titulaire : respecter les obligations de son permis ou de sa concession (texte en grande partie repris par le code des hydrocarbures)."
+ },
+ "n:decret:80-876": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret-loi:70-13": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2007-1487": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2004-1876": {
+  "risque": "Local commercial ou artisanal exploité sans attestation de prévention : fermeture, amende.",
+  "plan": "Demander l'attestation de prévention à la protection civile, mettre le local en conformité avec le cahier des charges de sécurité et la renouveler à échéance."
+ },
+ "n:loi:66-27": {
+  "risque": "Manquements au code du travail (contrats, durée du travail, congés, salaires, hygiène et sécurité, représentation du personnel) : procès-verbal de l'inspection du travail, amendes doublées en récidive, litiges prud'homaux.",
+  "plan": "Faire un audit social annuel au regard du code : contrats et registres du personnel, horaires et repos, congés, salaires, comité ou délégués, hygiène et sécurité, médecine du travail ; corriger les écarts."
+ },
+ "n:decret:2017-433": {
+  "risque": "Dépôt de déchets sur la voie publique ou en contenants non conformes, autres manquements à l'hygiène : amendes fixées par le barème.",
+  "plan": "Faire enlever les déchets par les circuits prévus, dans des contenants conformes, et maintenir les abords du site propres."
+ },
+ "n:decret:2000-151": {
+  "risque": "Conduite ou chargement non conforme des véhicules de l'entreprise : accident, amende, responsabilité de l'employeur.",
+  "plan": "Former les conducteurs, contrôler l'arrimage et le chargement (pas de chute ni d'écoulement) et faire respecter les règles de circulation."
+ },
+ "d:arrete:2020-06-06~criteres-scientifiques-justifiant-dispense-etudes-biodisponibilite-cadre-bioequivalence": {
+  "risque": "Dispense de bioéquivalence non justifiée : retrait de l'AMM.",
+  "plan": "Justifier toute demande de dispense selon les critères scientifiques fixés."
+ },
+ "d:arrete:2018-01-22~sante-janvier-etablissements-sanitaires-specialites-prioritaires-recrutement-corps": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2016-11-14~piles-electriques-primaires-rechargeables": {
+  "risque": "Piles non conformes mises sur le marché : retrait, saisie, amende.",
+  "plan": "Vérifier marquage, performances et teneur en substances dangereuses de chaque modèle avant mise sur le marché."
+ },
+ "d:arrete:2015-01-13~modele-contrat-frais-montants-compensations-profit-volontaires-sains": {
+  "risque": "Volontaires sains engagés sans contrat conforme : arrêt de l'essai.",
+  "plan": "Utiliser le modèle de contrat fixé pour chaque volontaire sain."
+ },
+ "n:decret:2004-2179": {
+  "risque": "Semences produites ou commercialisées hors cahiers des charges : retrait de la carte, saisie.",
+  "plan": "Appliquer les cahiers des charges modifiés de production et de commercialisation."
+ },
+ "d:arrete:2002-10-15~composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation-marche": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:98-793": {
+  "risque": "Établissement de santé privé hors autorisation ou hors normes : retrait provisoire ou définitif de l'autorisation, fermeture.",
+  "plan": "Maintenir l'autorisation à jour, respecter les normes de locaux, d'équipements et de personnel de l'activité et informer l'administration de tout changement."
+ },
+ "n:decret:97-1102": {
+  "risque": "Emballages non repris ou abandonnés : pollution, procès-verbal et amende (loi 96-41) ; pour un producteur ou importateur d'emballages, défaut d'adhésion à un système de reprise.",
+  "plan": "Recenser les emballages produits, importés ou reçus ; adhérer au système Eco-Lef ou à un système agréé et remettre les emballages usagés à la filière contre justificatif."
+ },
+ "n:decret:95-2396": {
+  "risque": "Friperie importée ou vendue hors conditions : saisie, retrait de l'autorisation.",
+  "plan": "Respecter l'autorisation d'importation, les conditions de tri et de transformation et les quotas de vente."
+ },
+ "n:decret:95-1916": {
+  "risque": "Débit de tabac exploité sans autorisation : fermeture, saisie.",
+  "plan": "Détenir l'autorisation du gouverneur et en respecter les conditions."
+ },
+ "d:arrete:1993-09-15~liste-medicaments-usage-urgent-pouvant-detenus-etablissements-sanitaires": {
+  "risque": "Médicaments d'urgence absents ou non autorisés dans l'établissement : risque pour les patients, sanctions.",
+  "plan": "Tenir la trousse d'urgence conforme à la liste et vérifier les dates de péremption."
+ },
+ "n:decret:92-1208": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ }
+}
