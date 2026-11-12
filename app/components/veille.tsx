@@ -168,9 +168,10 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
 }
 
 const SAVE: Record<string, string> = {
-  lance: "Leur enregistrement est lancé : ils seront dans la veille de tous les postes après la prochaine mise à jour du site (quelques minutes).",
-  "non-configure": "Ils sont gardés dans ce navigateur ; la lecture hebdomadaire les enregistrera pour tous les postes.",
-  echec: "Ils sont gardés dans ce navigateur ; leur enregistrement n'a pas pu être lancé, la lecture hebdomadaire s'en chargera.",
+  enregistre: "Ils sont enregistrés : ils seront dans la veille de tous les postes après la mise à jour du site (quelques minutes).",
+  deja: "Ils viennent d'être enregistrés : ils seront dans la veille de tous les postes après la mise à jour du site (quelques minutes).",
+  "non-configure": "Ils sont gardés dans ce navigateur ; la lecture quotidienne les enregistrera pour tous les postes.",
+  echec: "Ils sont gardés dans ce navigateur ; ils n'ont pas pu être enregistrés, la lecture quotidienne s'en chargera.",
 };
 
 type Verification =
@@ -230,7 +231,7 @@ function Verifier({ feed }: { feed: Feed }) {
         ) : (
           "Aucun numéro du JORT lu pour l’instant"
         )}
-        {feed.updated ? <span className="muted"> · lecture hebdomadaire du {dateFr(feed.updated.slice(0, 10))}</span> : null}
+        {feed.updated ? <span className="muted"> · dernière lecture automatique le {dateFr(feed.updated.slice(0, 10))}</span> : null}
       </p>
       <button type="button" className="secondary-button" onClick={run} disabled={v.state === "running"}>
         {v.state === "running" ? "Lecture du JORT…" : "Vérifier maintenant"}

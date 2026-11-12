@@ -73,13 +73,14 @@ npm run veille -- --probe                        # sample old PDFs (see data/vei
 
 **Keeping it up to date, on its own and on demand.**
 
-* **Every week** (Monday 06:17, Tunis time), `.github/workflows/veille.yml` runs `npm run veille`
-  on GitHub and commits the sommaires and fiches it read (`data/veille/sommaires`,
-  `data/veille/fiches`). The push rebuilds the site (Vercel), whose feed is derived from the
-  sommaires at build: every user gets the new texts, and each register shows the new texts that
-  apply to it and the texts of its that a new one modifies. GitHub runs scheduled workflows from
-  the repository's default branch only: the workflow must be on it. It can also be started by hand
-  from the Actions tab (*Run workflow*).
+* **Every day** (about 06:17, Tunis time), a Vercel Cron Job (`vercel.json`) calls
+  `GET /api/veille/cron` (`lib/veille/store.ts`). It reads the issues published since those stored
+  in the repository, with the fiches of their texts, and commits them to it through GitHub's API
+  (`data/veille/sommaires`, `data/veille/fiches`: the same files as `npm run veille`). The commit
+  rebuilds the site, whose feed is derived from the sommaires at build: every user gets the new
+  texts, and each register shows the new texts that apply to it and the texts of its that a new one
+  modifies. No GitHub Actions: it is free on every Vercel plan (Hobby: once a day at most; the
+  call comes within the hour). A day with nothing new writes nothing.
 * **Vérifier maintenant**, at the top of the Veille view, reads at once the issues published since
   the feed (`POST /api/veille`, `lib/veille/live.ts`: the catalog of jort.tn, then the sommaire of
   each new issue from its OCR text; the server reads them, the OCR texts cannot be read from a
@@ -87,11 +88,16 @@ npm run veille -- --probe                        # sample old PDFs (see data/vei
   this browser, says how many concern the registers, and keeps them in this browser until a
   deployment carries them. An issue published but whose OCR text is not out yet is named, to check
   again later.
-* To have the button also store what it found for everyone (start the workflow at once), give the
-  deployment three environment variables: `VEILLE_GITHUB_TOKEN` (a fine-grained token on the
-  repository with *Actions: read and write*), `VEILLE_GITHUB_REPO` (`owner/name`) and
-  `VEILLE_GITHUB_REF` (the branch the workflow runs on, `main` by default). Without them, the
-  button still reads and shows the new texts; the weekly run stores them.
+* **Settings on Vercel** (*Settings → Environment Variables*, then redeploy):
+  `VEILLE_GITHUB_TOKEN` (a fine-grained GitHub token on this repository only, with
+  *Contents: read and write*), `VEILLE_GITHUB_REPO` (`owner/name`), `VEILLE_GITHUB_REF` (the branch
+  Vercel deploys, `main` by default) and `CRON_SECRET` (any long random string: Vercel sends it to
+  the cron route, which refuses calls without it). With them the button also stores what it found
+  for everyone, at once. Without them the button still reads and shows the new texts, kept in its
+  browser, and the daily run does nothing. The cron's runs and their messages are under
+  *Settings → Cron Jobs* and *Logs* on Vercel.
+* `npm run veille` still reads the JORT from a computer (then commit and push), for older years or
+  a large backlog: the daily run reads at most 6 issues per day.
 * Run locally behind a proxy, Node's fetch needs `NODE_USE_ENV_PROXY=1` (Node 22.21 or later).
 
 **Where each issue is read.** From its OCR text first (`lib/veille/markdown.ts`): only its first

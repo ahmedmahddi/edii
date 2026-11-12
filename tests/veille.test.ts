@@ -13,6 +13,7 @@ import { namedKeys } from "@/lib/registre/referentiel";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
 import { CATALOG_URL, checkJort, withLive } from "@/lib/veille/live";
+import { githubTarget, runVeille } from "@/lib/veille/store";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
 
 const source = (f: string) => new Uint8Array(readFileSync(path.join(__dirname, "..", "data", "sources", f)));
@@ -509,5 +510,78 @@ describe("checking the JORT at once (Vérifier maintenant)", () => {
       [2024, 1, "pas encore"],
       [2024, 2, "lu"],
     ]);
+  });
+});
+
+describe("the daily reading stored in the repository (Vercel Cron, no GitHub Actions)", () => {
+  // A fake GitHub repository (files at the head of main) and a fake jort.tn: n° 1 of 2024 is in the
+  // repository, n° 2 is published with its OCR text (a real issue, with texts that concern the app).
+  const md = readFileSync(path.join(process.cwd(), "data", "sources", "ocr", "1980-001.md"), "utf8");
+  const repo = () => {
+    const files: Record<string, string> = {
+      "data/veille/sommaires/2024.json": JSON.stringify({ year: 2024, issues: { "1": { number: 1, date: "2024-01-02", entries: [] } } }),
+    };
+    const commits: { message: string; files: string[] }[] = [];
+    let head = "c0";
+    const fetchImpl = (async (url: string | URL | Request, init?: RequestInit) => {
+      const u = String(url);
+      const method = init?.method ?? "GET";
+      const body = init?.body ? JSON.parse(String(init.body)) : null;
+      if (u === CATALOG_URL)
+        return Response.json({ collections: [{ id: "journal-officiel", years: { "2024": { "1": { fr: {} }, "2": { fr: {} } } } }] });
+      if (u.endsWith("/2024/002.md")) return new Response(md, { status: new Headers(init?.headers).get("Range") ? 206 : 200 });
+      if (!u.startsWith("https://api.github.com/repos/o/r/")) return new Response("not found", { status: 404 });
+      expect(new Headers(init?.headers).get("Authorization")).toBe("Bearer t");
+      const p = u.slice("https://api.github.com/repos/o/r".length);
+      if (p === "/git/ref/heads/main") return Response.json({ object: { sha: head } });
+      if (p.startsWith("/contents/")) {
+        const file = files[p.slice("/contents/".length).split("?")[0]];
+        return file === undefined ? new Response("", { status: 404 }) : new Response(file);
+      }
+      if (p.startsWith("/git/commits/") && method === "GET") return Response.json({ tree: { sha: "tree0" } });
+      if (p === "/git/trees") {
+        for (const e of body.tree) files[e.path] = e.content;
+        return Response.json({ sha: "tree1" });
+      }
+      if (p === "/git/commits") {
+        commits.push({ message: body.message, files: Object.keys(files) });
+        return Response.json({ sha: `c${commits.length}` });
+      }
+      if (p === "/git/refs/heads/main" && method === "PATCH") {
+        head = body.sha;
+        return new Response("{}");
+      }
+      return new Response("unexpected", { status: 500 });
+    }) as typeof fetch;
+    return { files, commits, fetchImpl };
+  };
+
+  it("needs a token and a repository", () => {
+    expect(githubTarget({})).toBeNull();
+    expect(githubTarget({ VEILLE_GITHUB_TOKEN: "t", VEILLE_GITHUB_REPO: "pas un dépôt" })).toBeNull();
+    expect(githubTarget({ VEILLE_GITHUB_TOKEN: "t", VEILLE_GITHUB_REPO: "o/r" })).toEqual({ token: "t", repo: "o/r", ref: "main" });
+  });
+
+  it("commits the new issues with their fiches, and nothing when there is nothing new", async () => {
+    const { files, commits, fetchImpl } = repo();
+    const target = { token: "t", repo: "o/r", ref: "main" };
+    const now = new Date("2024-03-01T10:00:00Z");
+    const run = await runVeille(target, { fetchImpl, now });
+    expect(run.stored).toEqual([{ year: 2024, number: 2 }]);
+    expect(run.commit).toBe("c1");
+    expect(commits[0].message).toContain("JORT n° 2/2024");
+    const sommaires = JSON.parse(files["data/veille/sommaires/2024.json"]);
+    expect(Object.keys(sommaires.issues)).toEqual(["1", "2"]);
+    expect(sommaires.issues["2"].entries.length).toBeGreaterThan(0);
+    expect(sommaires.updated).toBe(now.toISOString());
+    // The fiches of the texts that concern the app, as npm run veille writes them.
+    const hits = hitsOf(2024, sommaires.issues["2"]);
+    expect(hits.length).toBeGreaterThan(0);
+    expect(Object.keys(JSON.parse(files["data/veille/fiches/2024.json"]).issues["2"]).length).toBe(hits.length);
+    // The next day: nothing new, no commit.
+    const again = await runVeille(target, { fetchImpl, now });
+    expect(again.stored).toEqual([]);
+    expect(again.commit).toBeNull();
+    expect(commits.length).toBe(1);
   });
 });

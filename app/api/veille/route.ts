@@ -2,34 +2,17 @@
  * POST /api/veille { scanned: { "2026": [1, 2, …] } }: the JORT issues published since those read
  * (lib/veille/live.ts), sommaires only, for the "Vérifier maintenant" button.
  *
- * When the deployment holds a GitHub token (VEILLE_GITHUB_TOKEN, with the right to run the
- * repository's workflows) and new issues are found, the weekly workflow is started at once, so
- * that they are stored and the site rebuilt with them (VEILLE_GITHUB_REPO "owner/name",
- * VEILLE_GITHUB_REF the branch it runs on, "main" by default).
+ * When the deployment can write to the repository (VEILLE_GITHUB_TOKEN, VEILLE_GITHUB_REPO,
+ * VEILLE_GITHUB_REF: lib/veille/store.ts), the issues found are also committed to it at once, as the
+ * daily run does, so that the site is rebuilt with them for everyone.
  */
 import { checkJort } from "@/lib/veille/live";
+import { githubTarget, storeIssues } from "@/lib/veille/store";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60; // seconds: the catalog of jort.tn and a few OCR texts
 
-type Enregistrement = "lance" | "non-configure" | "echec" | "inutile";
-
-async function startWorkflow(): Promise<Enregistrement> {
-  const token = process.env.VEILLE_GITHUB_TOKEN;
-  const repo = process.env.VEILLE_GITHUB_REPO;
-  if (!token || !repo) return "non-configure";
-  try {
-    const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/veille.yml/dispatches`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", "User-Agent": "ABClassement veille" },
-      body: JSON.stringify({ ref: process.env.VEILLE_GITHUB_REF ?? "main" }),
-      signal: AbortSignal.timeout(10_000),
-    });
-    return res.status === 204 ? "lance" : "echec";
-  } catch {
-    return "echec";
-  }
-}
+type Enregistrement = "enregistre" | "deja" | "non-configure" | "echec" | "inutile";
 
 export async function POST(request: Request): Promise<Response> {
   let scanned: Record<string, number[]> = {};
@@ -42,11 +25,25 @@ export async function POST(request: Request): Promise<Response> {
   } catch {
     scanned = {};
   }
+  let check;
   try {
-    const check = await checkJort(scanned);
-    const enregistrement: Enregistrement = check.issues.some((i) => i.issue) ? await startWorkflow() : "inutile";
-    return Response.json({ ...check, enregistrement });
+    check = await checkJort(scanned);
   } catch (error) {
     return Response.json({ error: error instanceof Error ? error.message : String(error) }, { status: 502 });
   }
+  let enregistrement: Enregistrement = "inutile";
+  if (check.issues.some((i) => i.issue)) {
+    const target = githubTarget();
+    if (!target) enregistrement = "non-configure";
+    else {
+      try {
+        // Only the issues the repository does not have yet are written (another check may have).
+        enregistrement = (await storeIssues(target, check.issues)).stored.length ? "enregistre" : "deja";
+      } catch (error) {
+        console.error(`Veille : ${error instanceof Error ? error.message : String(error)}`);
+        enregistrement = "echec";
+      }
+    }
+  }
+  return Response.json({ ...check, enregistrement });
 }

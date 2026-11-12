@@ -429,19 +429,26 @@ run a model). Two parts:
 
 **Step 2 of "next level" (12 November): the veille runs on its own, and on demand.**
 
-* `.github/workflows/veille.yml`: weekly (Monday 05:17 UTC) and on demand (*Run workflow*):
-  `npm ci`, `npm run veille` (new issues of this year, then the whole text of the issues where
-  texts were found, for their fiches), commit of `data/veille/sommaires` and `data/veille/fiches`,
-  push; Vercel rebuilds (prebuild reassesses the sommaires into the feed). Scheduled workflows run
-  from the default branch only: it is not active until the workflow file is merged there.
+* The scheduled reading first ran on GitHub Actions; the user cannot use Actions (not free for
+  them), so it was replaced the same day by a **Vercel Cron Job**: `vercel.json` calls
+  `GET /api/veille/cron` daily at 05:17 UTC (Hobby: daily at most, within the hour), guarded by
+  `CRON_SECRET`. `lib/veille/store.ts`: `runVeille` reads the branch's sommaires through GitHub's
+  REST API (raw contents, any size), `checkJort` (at most 6 issues), then `storeIssues` reads the
+  fiches of the new texts in the issues' whole OCR text (`hitsOf`, `bodies`, `readFiche`, as
+  `readFiches` in the script) and commits `data/veille/sommaires/<year>.json` and
+  `data/veille/fiches/<year>.json` in one commit (git data API: tree, commit, ref fast-forward,
+  retried if the branch moved). Checked against jort.tn: n° 108–109/2026 gave the same files as
+  `npm run veille`, in 14 s. The commit makes Vercel rebuild. A library scheduler (node-cron…)
+  cannot work on Vercel: nothing runs between requests.
 * `lib/veille/live.ts` (`checkJort`, `readOcrSommaire`, `withLive`) and `app/api/veille/route.ts`:
   the "Vérifier maintenant" button (top of the Veille view, `Verifier` in veille.tsx). The server
   reads the catalog and the OCR sommaires of the issues the feed lacks (this year, and last year in
   January; at most 8 per check, the numbers past the catalog tried too); the page runs `record` and
   `amendments` on them, keeps them in localStorage (`abclassement-veille-direct`) until the feed has
   them, and reports texts found, those important, and for the registers of this browser the new
-  texts that apply and the texts modified. With `VEILLE_GITHUB_TOKEN` and `VEILLE_GITHUB_REPO` set on
-  the deployment, a check that finds issues also starts the workflow.
+  texts that apply and the texts modified. With `VEILLE_GITHUB_TOKEN` (Contents: read and write) and
+  `VEILLE_GITHUB_REPO` set on the deployment, a check that finds issues also commits them
+  (`storeIssues`; « enregistre », or « deja » when another check stored them first).
 * Register cards now show « N nouveaux textes à examiner » (`nouveautes`). An amendment read without
   a date counts from its year (`dated()` in registre.ts): two undated 2019 amendments used to show
   as « modifiés au JORT » on every new register.
