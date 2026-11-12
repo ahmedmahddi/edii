@@ -1,0 +1,442 @@
+{
+ "d:decret:1990-09-03~septembre-regles-bonne-pratique-fabrication-medicaments-destines-medecine": {
+  "risque": "Fabrication hors bonnes pratiques : lots non conformes, retrait du marché, suspension de la licence.",
+  "plan": "Appliquer les BPF (qualification, procédures, contrôle qualité, conditionnement, étiquetage et notice) et les faire auditer régulièrement."
+ },
+ "n:decret:81-1453": {
+  "risque": "Abattage sans inspection vétérinaire ou viandes non estampillées : saisie, amende, emprisonnement.",
+  "plan": "Faire inspecter chaque animal avant et après abattage par le service vétérinaire, estampiller les viandes et gérer les saisies."
+ },
+ "d:arrete:1977-07-27~affaires-sociales-juillet-agrement-convention-collective-nationale-colles": {
+  "risque": "Salaires, primes ou classifications sous les minima de la convention : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective des cafés, bars et restaurants (classification, grilles de salaires, primes, congés) et suivre ses avenants."
+ },
+ "n:decret:73-100": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:75-19": {
+  "risque": "Emploi de laminoirs en boulangerie : sanctions du code du travail, retrait de la carte professionnelle.",
+  "plan": "Ne pas utiliser de laminoirs ou cylindres interdits dans la boulangerie."
+ },
+ "n:decret:70-140": {
+  "risque": "Chaussures ou cuirs sans marque de fabrique agréée : saisie, amende.",
+  "plan": "Déposer la marque de fabrique et l'apposer sur chaque produit."
+ },
+ "d:arrete:1960-06-20~decembre-rabiu-construction-meubles-habitation": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:95-538": {
+  "risque": "Taux de cotisation accident du travail mal appliqué : redressement CNSS, pénalités.",
+  "plan": "Vérifier le taux appliqué à l'activité dans les déclarations CNSS et le corriger si l'activité a changé."
+ },
+ "d:arrete:2026-04-23~approbation-modification-complement-cahier-charges-experimentation-medicale-scientifique": {
+  "risque": "Essai clinique hors guides techniques du ministère : suspension de l'essai.",
+  "plan": "Aligner les protocoles d'essai sur la réglementation et les guides techniques des essais cliniques."
+ },
+ "d:arrete:2024-01-19~cahier-charges-activite-exploitation-unites-concassage-criblage-materiaux": {
+  "risque": "Unité de concassage exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (implantation, poussières, bruit, sécurité, remise en état) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2023-12-04~approbation-cahier-charges-organisant-exportation-huile-olive-tunisienne": {
+  "risque": "Exportation d'huile d'olive hors cahier des charges : retrait de l'inscription d'exportateur, blocage des lots.",
+  "plan": "Respecter le cahier des charges (inscription, conditionnement, traçabilité, qualité) pour chaque exportation."
+ },
+ "d:arrete:2022-09-20~approbation-cahier-charges-creation-etablissements-volailles": {
+  "risque": "Élevage de volailles exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (implantation, bâtiments, biosécurité, gestion des fientes) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2020-11-27~mesures-lutte-entreprendre-contre-maladie-taches-noires-agrumes": {
+  "risque": "Symptômes non signalés ou mesures non appliquées : propagation, sanctions de la loi 92-72.",
+  "plan": "Surveiller les vergers, signaler tout symptôme aux services de l'agriculture et appliquer les traitements et mesures prescrits."
+ },
+ "d:arrete:2020-08-21~protection-biens-culturels-meubles-propriete-revient": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2017-02-09~approbation-cahier-charges-exigences-techniques-raccordement-evacuation-energie": {
+  "risque": "Installation renouvelable non conforme aux exigences de raccordement BT : refus ou coupure du raccordement par la STEG.",
+  "plan": "Faire concevoir l'installation (onduleurs, protections, découplage) selon le cahier des charges et la faire réceptionner par la STEG."
+ },
+ "d:arrete:2009-04-21~etiquetage-appareils-climatisation-individuelle-puissance-frigorifique-inferieure": {
+  "risque": "Appareils vendus sans étiquette énergétique ou avec une classe erronée : retrait, amende.",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et fournir les informations exigées pour chaque modèle."
+ },
+ "d:arrete:2005-09-15~materiaux-objets-matiere-plastique-destines-entrer-contact-denrees": {
+  "risque": "Emballages ou objets plastiques non conformes au contact alimentaire : migration de substances, retrait, saisie.",
+  "plan": "Exiger des fournisseurs la déclaration de conformité alimentaire de chaque emballage ou objet plastique et faire vérifier les limites de migration."
+ },
+ "d:arrete:2004-09-10~etiquetage-refrigerateurs-congelateurs-appareils-combines": {
+  "risque": "Appareils vendus sans étiquette énergétique ou avec une classe erronée : retrait, amende.",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et fournir les informations exigées pour chaque modèle."
+ },
+ "n:loi:99-59": {
+  "risque": "Avantage ancien et temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:98-1630": {
+  "risque": "Activité sur un marché de gros exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (transit, facturation, horaires, hygiène) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:decret:96-1252": {
+  "risque": "Réseau de télédistribution exploité sans autorisation : sanctions du code des télécommunications.",
+  "plan": "Pour un opérateur : obtenir l'autorisation et respecter ses conditions techniques."
+ },
+ "n:decret:96-1125": {
+  "risque": "Production indépendante d'électricité sans concession : arrêt du projet.",
+  "plan": "Pour un producteur indépendant : obtenir la concession par appel d'offres et respecter la convention."
+ },
+ "d:arrete:1995-09-28~approuvant-cahier-charges-particulieres-utilisation-usees-traitees-agricoles": {
+  "risque": "Irrigation aux eaux usées traitées hors cahier des charges : risque sanitaire, retrait de l'autorisation.",
+  "plan": "Respecter les cultures autorisées, les modes d'irrigation et les analyses prévues ; tenir le suivi."
+ },
+ "n:loi:94-75": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:92-2246": {
+  "risque": "Pesticides fabriqués, importés ou vendus sans homologation ou autorisation : saisie, retrait de l'autorisation, sanctions de la loi 92-72.",
+  "plan": "Ne commercialiser ou utiliser que des pesticides homologués, maintenir l'autorisation et la qualification exigée du responsable, et déclarer toute modification du dossier."
+ },
+ "n:decret:92-1923": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:90-56": {
+  "risque": "Opérations pétrolières hors titre : retrait du permis.",
+  "plan": "Pour un titulaire : respecter son titre (texte largement repris par le code des hydrocarbures de 1999)."
+ },
+ "n:decret:89-1078": {
+  "risque": "Centre d'hémodialyse hors normes ou cédé sans information du ministère : fermeture.",
+  "plan": "Respecter les normes de locaux, d'équipements et d'encadrement et informer le ministère de toute cession ou fermeture."
+ },
+ "n:loi:88-77": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:87-228": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:85-48": {
+  "risque": "Pas d'obligation : texte d'encouragement, en grande partie remplacé.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:84-39": {
+  "risque": "Cotisations au groupement interprofessionnel non payées : recouvrement forcé.",
+  "plan": "Pour un aviculteur ou conditionneur : s'acquitter des cotisations et déclarations au groupement."
+ },
+ "n:loi:84-27": {
+  "risque": "Maladie contagieuse non déclarée ou mesures non appliquées : emprisonnement de 3 mois à 3 ans et amende.",
+  "plan": "Déclarer tout cas suspect au vétérinaire, appliquer la prophylaxie et les mesures de police sanitaire."
+ },
+ "n:loi:83-24": {
+  "risque": "Promotion ou étiquetage non conforme des substituts du lait maternel : saisie, amende.",
+  "plan": "Vérifier l'étiquetage des produits et ne faire aucune promotion auprès du public."
+ },
+ "n:decret:82-1479": {
+  "risque": "Messages de mise en garde sur les médicaments non affichés : amende.",
+  "plan": "Afficher de façon visible, en arabe et en français, les messages de mise en garde contre l'usage abusif des médicaments."
+ },
+ "n:decret:80-301": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:76-768": {
+  "risque": "Usage abusif de l'appellation « vin supérieur » : saisie, sanctions.",
+  "plan": "N'utiliser l'appellation que pour les vins classés et selon ses conditions."
+ },
+ "n:decret:75-594": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:70-39": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:70-33": {
+  "risque": "Caprins en parcours dans les zones forestières interdites : procès-verbal forestier, amende.",
+  "plan": "Ne pas faire pâturer les caprins dans les zones forestières protégées."
+ },
+ "n:decret:68-63": {
+  "risque": "Inventaire des stocks absent ou non conforme : redressement fiscal.",
+  "plan": "Établir l'inventaire annuel des stocks selon les modalités fixées et le conserver avec la comptabilité."
+ },
+ "n:loi:66-46": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:65-36": {
+  "risque": "Batteries reconditionnées vendues comme neuves : amende, saisie.",
+  "plan": "Marquer comme telles les batteries contenant des pièces de réemploi."
+ },
+ "n:decret:65-408": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:64-55": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:64-49": {
+  "risque": "Lait mouillé, écrémé ou mal conservé vendu comme « lait » : saisie, amende, emprisonnement.",
+  "plan": "Contrôler la composition et la température du lait à la réception, respecter les règles de traitement, de transport et de vente."
+ },
+ "n:decret:64-9": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:62-79": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:61-312": {
+  "risque": "Générateur d'acétylène non conforme ou non éprouvé : explosion, accident grave, procès-verbal.",
+  "plan": "Vérifier la conformité des générateurs (pression, construction, épreuves), leur installation et leur exploitation, et former les opérateurs."
+ },
+ "n:decret:61-250": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:loi:60-29": {
+  "risque": "Adhérent qui n'exécute pas les mesures du groupement : exécution d'office à ses frais.",
+  "plan": "Pour un producteur ou exportateur d'agrumes : appliquer les mesures prescrites par le groupement."
+ },
+ "n:decret:60-189": {
+  "risque": "Durée du travail dépassée dans le BTP : procès-verbal de l'inspection du travail, heures supplémentaires dues.",
+  "plan": "Organiser les horaires du chantier selon la durée légale du secteur, enregistrer et payer les heures supplémentaires."
+ },
+ "n:decret:58-223": {
+  "risque": "Usage abusif d'une appellation d'origine : saisie, sanctions.",
+  "plan": "N'utiliser une appellation d'origine que pour les vins qui y ont droit."
+ },
+ "n:loi:58-79": {
+  "risque": "Cotisation à la caisse du textile non payée : recouvrement comme en douane.",
+  "plan": "Pour une entreprise textile concernée : s'acquitter de la cotisation."
+ },
+ "d:loi:1908-06-09~jort-1958-046-821-0": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "jort-1958-021-323-2": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:68-328": {
+  "risque": "Locaux insalubres, absence d'eau potable, de sanitaires, de vestiaires ou de réfectoire conformes : procès-verbal de l'inspection du travail, risques pour la santé du personnel.",
+  "plan": "Vérifier eau potable, propreté, aération et éclairage des locaux, sanitaires et vestiaires en nombre suffisant, réfectoire si nécessaire et évacuation des déchets ; corriger les écarts."
+ },
+ "n:decret:75-503": {
+  "risque": "Contact électrique, électrocution, incendie d'origine électrique : accident du travail grave, procès-verbal.",
+  "plan": "Faire vérifier les installations électriques par un organisme agréé, corriger les non-conformités du rapport, assurer la protection contre les contacts et la mise à la terre, et habiliter le personnel qui intervient."
+ },
+ "n:loi:2018-35": {
+  "risque": "Pas de sanction directe ; risque d'image et de relation avec la région.",
+  "plan": "Formaliser les actions sociales et environnementales de l'entreprise et en rendre compte, notamment dans le rapport annuel."
+ },
+ "n:decret:2022-299": {
+  "risque": "Accord de principe d'un projet renouvelable expiré : projet à recommencer.",
+  "plan": "Suivre la date de validité prolongée de l'accord de principe et achever les démarches avant échéance."
+ },
+ "n:decret:2020-571": {
+  "risque": "Chaussures non conformes aux exigences de sécurité ou mal étiquetées : retrait, saisie, amende.",
+  "plan": "Pour un fabricant, importateur ou distributeur : vérifier les exigences de sécurité, l'étiquetage des matériaux et garder les preuves de conformité."
+ },
+ "n:decret:2019-482": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2019-381": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2018-963": {
+  "risque": "Carrière du domaine de l'État exploitée hors contrat : retrait, sanctions.",
+  "plan": "Exploiter dans les limites et conditions du contrat de location et de l'autorisation."
+ },
+ "d:arrete:2014-01-27~annulation-caractere-obligatoire-normes-tunisiennes-fruits-legumes-frais": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2011-01-06~montants-maximums-depenses-prises-consideration-titres-activites-realisees": {
+  "risque": "Pas d'obligation : plafonds des prêts aux petits agriculteurs et pêcheurs.",
+  "plan": "Garder pour information si l'entreprise y prétend."
+ },
+ "d:arrete:2010-09-20~registres-identification-animaux-procedure": {
+  "risque": "Animaux non identifiés ou mouvements non enregistrés : saisie, refus d'abattage ou de vente, amende.",
+  "plan": "Inscrire l'élevage au registre national, identifier chaque animal (boucles) et enregistrer naissances, achats, ventes et morts."
+ },
+ "d:arrete:2009-02-25~approbation-statut-centre-technique-dattes": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2004-07-28~criteres-pratiques-prelevement-organes-tissus-humains-conservation-transport": {
+  "risque": "Prélèvement ou greffe hors critères : sanctions pénales et disciplinaires.",
+  "plan": "Pour un établissement autorisé : appliquer les critères et le système d'assurance qualité fixés."
+ },
+ "d:arrete:2004-03-08~approbation-cahier-charges-generales-exploitation-production-secteur-conditionnees": {
+  "risque": "Production d'eaux conditionnées exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (captage, protection de la source, traitement, analyses, étiquetage) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2002-09-02~fixation-jours-repos-hebdomadaires-marches-production-produits-agricoles": {
+  "risque": "Marché ouvert le jour de repos : sanctions.",
+  "plan": "Respecter le jour de fermeture fixé pour le marché."
+ },
+ "n:decret:2001-576": {
+  "risque": "Contribution au contrôle vétérinaire non payée : blocage de l'importation ou de l'exportation.",
+  "plan": "Payer la contribution lors de chaque contrôle à l'importation ou à l'exportation d'animaux et produits animaux."
+ },
+ "n:decret:98-2532": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:96-63": {
+  "risque": "Explosifs fabriqués, stockés, transportés ou utilisés sans autorisation ou hors règles : explosion, saisie, sanctions pénales.",
+  "plan": "Détenir les autorisations par opération, respecter les règles de sécurité des dépôts et du transport, tenir les registres et informer l'unité de sécurité en cas d'arrêt."
+ },
+ "n:decret:96-859": {
+  "risque": "Pas d'obligation : liste d'avantages fiscaux.",
+  "plan": "Garder pour information si l'entreprise fabrique des équipements de maîtrise de l'énergie."
+ },
+ "n:loi:73-68": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:73-227": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:73-228": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:67-390": {
+  "risque": "Travailleurs de tannerie sans surveillance médicale : maladie professionnelle, procès-verbal.",
+  "plan": "Organiser la surveillance médicale des travailleurs exposés avec le médecin du travail."
+ },
+ "n:decret:2023-533": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2022-335": {
+  "risque": "Diagnostic de la consommation d'eau non réalisé alors que le seuil est dépassé : sanctions, surconsommation.",
+  "plan": "Vérifier la consommation annuelle d'eau du site par rapport au seuil et, s'il est dépassé, faire réaliser le diagnostic technique périodique par un expert et mettre en œuvre ses recommandations."
+ },
+ "n:decret:2000-155": {
+  "risque": "Infractions prouvées par radar, chronotachygraphe ou pesage : amendes, immobilisation.",
+  "plan": "Équiper les véhicules concernés d'un chronotachygraphe conforme, contrôler les temps de conduite et le chargement."
+ },
+ "d:arrete:2026-09-03~approbation-contrat-fourniture-clients-ordinaires-electrique-basse-tension": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2021-11": {
+  "risque": "Utilisation de HFC sans suivi de la réduction progressive : interdictions futures, coûts de remplacement.",
+  "plan": "Recenser les équipements de froid et de climatisation au HFC, prévoir leur remplacement par des fluides à faible impact et faire intervenir des techniciens qualifiés."
+ },
+ "d:arrete:2014-10-30~approbation-cahier-charges-obtention-label-qualite-tunisien-production": {
+  "risque": "Démarche volontaire : risque de refus ou de retrait du label si les conditions ne sont pas tenues ; la réglementation générale reste due.",
+  "plan": "Si l'entreprise vise le label, comparer sa production au cahier des charges et garder les preuves de conformité."
+ },
+ "d:arrete:2014-11-03~approbation-cahier-charges-obtention-label-qualite-tunisien-production": {
+  "risque": "Démarche volontaire : risque de refus ou de retrait du label si les conditions ne sont pas tenues ; la réglementation générale reste due.",
+  "plan": "Si l'entreprise vise le label, comparer sa production au cahier des charges et garder les preuves de conformité."
+ },
+ "d:arrete:2013-01-04~sanitaires-creation-etablissements-traitement-transformation-stockage-viandes-abats": {
+  "risque": "Établissement de viandes hors conditions sanitaires : retrait de l'agrément sanitaire vétérinaire, fermeture, saisie.",
+  "plan": "Comparer l'établissement aux conditions d'implantation, de locaux, de froid, d'eau et d'hygiène et maintenir l'agrément sanitaire."
+ },
+ "d:arrete:2011-05-12~regles-bonne-pratique-laboratoires-analyses-medicales": {
+  "risque": "Laboratoire hors bonnes pratiques : résultats erronés, sanctions, fermeture.",
+  "plan": "Appliquer les règles de bonne pratique (procédures, contrôle de qualité interne et externe, traçabilité) et les auditer."
+ },
+ "d:arrete:2011-05-12~approbation-cahier-charges-techniques-raccordement-evacuation-energie-electrique": {
+  "risque": "Installation de cogénération ou renouvelable non conforme : refus ou coupure du raccordement.",
+  "plan": "Concevoir et faire réceptionner l'installation selon les conditions techniques de raccordement de la STEG."
+ },
+ "d:arrete:2010-10-07~techniques-sanitaires-transport-volailles-petits-animaux-leurs-produits": {
+  "risque": "Transport de volailles ou produits hors conditions : sanctions de la loi 92-117, saisie.",
+  "plan": "Utiliser des véhicules et cages adaptés, respecter le bien-être animal et nettoyer et désinfecter après chaque transport."
+ },
+ "d:arrete:2010-07-17~approbation-modification-cahier-charges-cession-centre-hemodialyse-approuve": {
+  "risque": "Cession de centre d'hémodialyse hors cahier des charges : nullité, fermeture.",
+  "plan": "Respecter les conditions de cession du cahier des charges."
+ },
+ "d:arrete:2009-05-12~approbation-cahier-charges-activite-unites-production-conserves-produits": {
+  "risque": "Production de semi-conserves végétales exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (conditions techniques et d'hygiène) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2009-01-21~approbation-cahier-charges-exercice-commerce-distribution-aliments-betail": {
+  "risque": "Distribution d'aliments de bétail exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (stockage, traçabilité, local) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2008-11-29~approbation-cahier-charges-equipements-sanitaires-doivent-fournis-moyens": {
+  "risque": "Viandes transportées dans des véhicules non conformes : saisie, interdiction de transport.",
+  "plan": "Utiliser des véhicules isothermes ou frigorifiques conformes, nettoyés et désinfectés, et vérifier les températures."
+ },
+ "d:arrete:2009-01-05~approbation-cahier-charges-transport-frais": {
+  "risque": "Lait transporté hors conditions : lait refusé, sanctions.",
+  "plan": "Utiliser des citernes ou bidons conformes, maintenir la réfrigération et nettoyer les moyens de transport."
+ },
+ "d:arrete:2008-02-04~approbation-cahier-charges-activite-conditionnement-dattes-fruits-legumes": {
+  "risque": "Conditionnement de dattes, fruits et légumes exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (équipements, hygiène, sécurité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2007-12-12~approbation-cahier-charges-creation-laboratoires-specialises-analyse-aliments": {
+  "risque": "Laboratoire d'analyse des aliments de bétail exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (équipements, personnel, méthodes) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2007-10-01~approbation-cahier-charges-creation-centres-elevage-geniteurs-races": {
+  "risque": "Centre d'élevage de géniteurs exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (bâtiments, suivi sanitaire, registres) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2007-06-15~approbation-cahier-charges-creation-centres-elevage-geniteurs-races": {
+  "risque": "Centre d'élevage de géniteurs exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (bâtiments, suivi sanitaire, registres) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2007-06-11~approbation-cahier-charges-creation-laboratoires-specialises-analyse-frais": {
+  "risque": "Laboratoire d'analyse du lait exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (équipements, personnel, méthodes normalisées) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2006-10-31~techniques-sanitaires-minimales-exigibles-huileries": {
+  "risque": "Huilerie hors conditions sanitaires : fermeture, huile déclassée, sanctions.",
+  "plan": "Refuser les olives transportées en sacs plastiques, respecter les conditions de stockage des olives, d'extraction, de stockage de l'huile et d'hygiène."
+ },
+ "d:arrete:2005-12-09~approbation-cahier-charges-exercice-commerce-distribution-volailles-leurs": {
+  "risque": "Distribution de volailles exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (froid, hygiène, traçabilité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2005-02-11~approbation-cahier-charges-activite-conditionnement-huiles-alimentaires-creation": {
+  "risque": "Conditionnement d'huiles alimentaires exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (hygiène, sécurité, équipements) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2005-01-06~approbation-cahier-charges-rapportant-importation-bitume-creation-commission": {
+  "risque": "Importation de bitume exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (inscription, moyens, contrôle de conformité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2004-03-01~depot-demandes-titres-miniers": {
+  "risque": "Demande de titre minier non conforme aux modèles : nullité.",
+  "plan": "Utiliser les modèles annexés pour toute demande, renouvellement ou cession de titre minier."
+ },
+ "d:arrete:2001-11-03~approbation-cahier-charges-generales-construction-amenagement-exploitation-fonctionnement": {
+  "risque": "Exploitation d'un entrepôt sous douane exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (construction, aménagement, sécurité, tenue des stocks) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2001-03-28~approbation-cahier-charges-fabrication-charbon-dehors-domaine-forestier": {
+  "risque": "Fabrication de charbon hors cahier des charges : incendie, sanctions forestières.",
+  "plan": "Vérifier le texte publié et respecter les conditions de fabrication du charbon de bois."
+ },
+ "d:arrete:2001-03-12~approbation-cahier-charges-exercice-profession-collecte-peaux-brutes": {
+  "risque": "Collecte de peaux brutes exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (conservation, stockage, transport) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2001-02-20~approbation-cahier-charges-prelevement-echantillons-produits-carriere": {
+  "risque": "Échantillons de carrière prélevés hors cahier des charges : résultats contestables.",
+  "plan": "Appliquer les règles de prélèvement d'échantillons du cahier des charges."
+ },
+ "d:arrete:2001-02-12~approbation-cahier-charges-exercice-activite-insemination-artificielle-bovins": {
+  "risque": "Insémination artificielle exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (qualification, matériel, traçabilité) et garder la preuve de dépôt pour les contrôles."
+ }
+}
