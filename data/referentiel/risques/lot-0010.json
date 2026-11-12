@@ -1,0 +1,522 @@
+{
+ "d:arrete:1958-01-13~instituant-mesure-prohibition-exportation-dechets-poissons": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2013-05-13~liste-limites-maximales-contaminants-denrees-alimentaires-methodes-prelevement": {
+  "risque": "Denrées dépassant les teneurs maximales en contaminants : retrait, saisie, risque sanitaire.",
+  "plan": "Faire analyser les produits et matières premières (métaux lourds, mycotoxines, nitrates…) selon un plan d'échantillonnage et exiger les certificats des fournisseurs."
+ },
+ "n:decret:2009-3333": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2005-01-12~organisme-concerne-delivrance-attestation-sanitaire-utilisation-materiaux-objets": {
+  "risque": "Matériaux au contact des aliments sans attestation sanitaire : saisie, retrait.",
+  "plan": "Pour un fabricant ou importateur : obtenir l'attestation sanitaire ; pour un utilisateur : l'exiger du fournisseur."
+ },
+ "d:arrete:2002-01-15~liste-produits-soumis-activite-agence-nationale-controle-sanitaire": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1998-05-20~abrogation-avril-liste-specialites-medicales-titulaire-beneficier-autorisation": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1992-08-18~liste-laboratoires-reference-specialises-analyse-pesticides": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1991-10-02~liste-hydrocarbures-liquides-gazeux-importes-soumis-fluctuation-rapide": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1986-09-10~determinant-renseignements-precisions-devant-accompagner-demandes-autorisation-concernant": {
+  "risque": "Demande d'autorisation de source radioactive incomplète : autorisation refusée, détention illégale.",
+  "plan": "Joindre à chaque demande toutes les informations exigées sur la source ou l'appareil et son utilisation."
+ },
+ "d:arrete:1985-09-19~prime-stockage-produits-petroliers": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1984-03-30~zones-protection-madragues-campagne-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1982-04-23~caracteristiques-grands-produits-petroliers": {
+  "risque": "Produits pétroliers hors caractéristiques : saisie, sanctions (version remplacée depuis).",
+  "plan": "Pour un distributeur : vérifier la conformité des produits aux spécifications en vigueur."
+ },
+ "d:arrete:1981-12-09~fonctionnement-campagne-agrumes": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:1980-10-31~fonctionnement-campagne-dattes": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:1979-12-20~utilisation-substances-veneneuses-composition-teintures-lotions-cheveux-fards": {
+  "risque": "Cosmétiques contenant des substances limitées au-delà des seuils : retrait, saisie (texte ancien, à rapprocher de la réglementation cosmétique en vigueur).",
+  "plan": "Vérifier la composition des produits capillaires et des fards au regard des substances limitées."
+ },
+ "d:arrete:1979-12-27~produits-petroliers": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1979-03-27~zones-protection-madragues-campagne-peche": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1976-02-28~zones-protection-madragues-campagne-peche": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1975-04-17~zones-protection-madragues-campagne-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1974-11-16~fonctionnement-campagne-agrumes": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:1973-12-13~memeat-expot-olives-campagne": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1972-11-28~reglement-distribution-usage-irrigation-perimetre-irriguable-menrel-zeila": {
+  "risque": "Usage de l'eau d'irrigation hors règlement : coupure, pénalités.",
+  "plan": "Pour un exploitant du périmètre : respecter le règlement de distribution."
+ },
+ "d:arrete:1972-07-05~composition-commission-classement-appellations-origine-superieurs-tunisie": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1972-04-15~aines-protection-madragues-campagne-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1968-10-07~classification-production-campagne": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1962-06-26~zones-protection-madragues-campagne-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1958-09-05~prohibition-provisoire-exportations-bovins-ovins-porcins-vivants": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-05-09~fixation-contingent-minerai-plomb": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1957-12-18~tarifs-maxims-location-piles-huile-campagne-oleicole": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2008-12-10~seuil-poids-total-autorise-charge-vehicules-exploitation-transport": {
+  "risque": "Transport pour autrui avec des véhicules de plus de 12 t sans autorisation d'accès à la profession : immobilisation, amende.",
+  "plan": "Vérifier que les transporteurs employés pour des véhicules de plus de 12 t sont autorisés, et l'être soi-même si l'entreprise transporte pour autrui."
+ },
+ "n:decret:96-1050": {
+  "risque": "Pas d'obligation : financement CNSS des projets de santé et sécurité.",
+  "plan": "Pour un projet de prévention (protections, aménagements), étudier le prêt ou la prime de la CNSS."
+ },
+ "n:decret:86-383": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret-loi:2020-14": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "n:decret:2017-705": {
+  "risque": "Professionnel maritime sans la capacité professionnelle exigée : refus d'inscription au registre.",
+  "plan": "Pour un armateur ou transporteur maritime : justifier la capacité professionnelle exigée."
+ },
+ "n:loi:2002-104": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:97-1118": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1975-07-22~commercialisation-appellation-mornag-rectificatif": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-09-22~classification-rectificatif": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1963-01-29~tarifs-maxims-vente-energie-electrique-haute-basse-tension": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1959-03-19~regles-generales-securite-applicables-concerne-ascenseurs-monte-charge": {
+  "risque": "Ascenseur ou monte-charge non conforme ou mal entretenu : chute, coincement, accident grave.",
+  "plan": "Faire entretenir les ascenseurs et monte-charges sous contrat et vérifier périodiquement leurs dispositifs de sécurité."
+ },
+ "n:decret:2007-4101": {
+  "risque": "Conducteur de transport collectif ou touristique sans carte professionnelle : immobilisation, amende.",
+  "plan": "Vérifier la carte professionnelle, l'aptitude médicale et la formation de chaque conducteur concerné."
+ },
+ "n:decret:2003-1098": {
+  "risque": "Avantages exclus de l'assiette au-delà des limites : redressement CNSS.",
+  "plan": "Vérifier en paie que les avantages exonérés de cotisations restent dans les limites fixées."
+ },
+ "n:decret:2002-916": {
+  "risque": "Travailleurs de ces catégories non déclarés : cotisations et pénalités.",
+  "plan": "Déclarer les travailleurs concernés (employés de maison, travailleurs agricoles…) au régime applicable."
+ },
+ "n:decret:2000-2279": {
+  "risque": "Stagiaire d'un programme d'insertion non déclaré : accident non couvert à la charge de l'entreprise.",
+  "plan": "Vérifier la couverture sociale des stagiaires accueillis dans le cadre des programmes d'emploi."
+ },
+ "d:arrete:1959-01-20~reglementant-apprentissage-conduite-vehicules-automobiles-obligations-auxquelles-doivent": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1984-08-27~controle-point-niveau-sonore-vehicules-automobiles": {
+  "risque": "Véhicule trop bruyant : amende, refus à la visite technique.",
+  "plan": "Entretenir les silencieux et échappements des véhicules."
+ },
+ "n:decret:2020-152": {
+  "risque": "Cas de Covid-19 non déclarés : sanctions de la loi 92-71.",
+  "plan": "Pour le médecin du travail ou un établissement de santé : déclarer les cas."
+ },
+ "n:loi:2013-50": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2004-2323": {
+  "risque": "Personnel affecté à des travaux dangereux sans la qualification exigée : accident grave, procès-verbal, responsabilité de l'employeur.",
+  "plan": "Recenser les postes concernés (électricité, appareils à pression, levage…), vérifier les qualifications et habilitations des titulaires et organiser les formations manquantes."
+ },
+ "d:arrete:2004-08-17~interieur-developpement-local-determination-delivrance-attestation-prevention": {
+  "risque": "Local exploité sans attestation de prévention : fermeture, amende.",
+  "plan": "Demander la visite de conformité à la protection civile et obtenir l'attestation avant l'exploitation, puis la renouveler."
+ },
+ "n:loi:2002-58": {
+  "risque": "Mouvement d'OGM sans procédure : saisie (protocole de Cartagena).",
+  "plan": "Pour un importateur de semences ou de produits pouvant contenir des OGM : vérifier les autorisations requises."
+ },
+ "n:decret:2000-1439": {
+  "risque": "Cotisations calculées sur une assiette erronée : redressement CNSS.",
+  "plan": "Pour les catégories concernées : appliquer le salaire forfaitaire fixé comme assiette des cotisations."
+ },
+ "n:decret:93-2120": {
+  "risque": "Pas d'obligation : aides du FODEP aux investissements de dépollution.",
+  "plan": "Pour un projet de traitement ou de réduction de la pollution, étudier l'aide du FODEP avant d'engager l'investissement."
+ },
+ "d:arrete:1984-12-29~caracteristiques-installation-pneumatiques-vehicules-automobiles-leurs-remorques": {
+  "risque": "Pneumatiques usés ou mal montés : accident, amende, refus à la visite technique.",
+  "plan": "Contrôler régulièrement l'usure et l'homogénéité des pneumatiques des véhicules et remorques."
+ },
+ "n:loi:65-17": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:99-1544": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:96-1001": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1995-05-04~dispense-affiliation-caisse-nationale-securite-sociale-regime-reparation": {
+  "risque": "Dispense appliquée sans remplir les conditions : accidents non couverts, redressement.",
+  "plan": "Vérifier que l'entreprise remplit les conditions avant de se prévaloir de la dispense."
+ },
+ "n:decret:94-494": {
+  "risque": "Pas d'obligation : avantage de cotisation à demander.",
+  "plan": "Si l'entreprise y a droit, déclarer les salariés concernés selon les modalités fixées."
+ },
+ "n:decret:59-406": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:loi:2024-41": {
+  "risque": "Émission de chèques sans provision : sanctions, interdiction d'émettre des chèques.",
+  "plan": "Vérifier la provision avant toute émission de chèque et utiliser la plateforme de vérification pour les chèques reçus."
+ },
+ "d:arrete:2012-09-06~prescriptions-generales-amenagement-exploitation-etablissements-dangereux-insalubres-incommodes": {
+  "risque": "Établissement de 3e catégorie qui ne respecte pas les prescriptions générales : mise en demeure, suspension, fermeture.",
+  "plan": "Comparer le site aux prescriptions générales (implantation, prévention des pollutions, déchets, bruit, sécurité incendie), corriger les écarts et garder les justificatifs pour les contrôles."
+ },
+ "n:decret:2000-153": {
+  "risque": "Infraction au code de la route : amende, immobilisation.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées sur les véhicules de l'entreprise."
+ },
+ "n:loi:96-108": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1996-05-07~composition-commission-nationale-energie-atomique": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "n:loi:96-29": {
+  "risque": "Port, terminal ou installation en mer sans plan d'intervention contre la pollution marine : sanctions, pollution aggravée.",
+  "plan": "Si le site exploite une installation portuaire ou en mer, établir le plan d'intervention d'urgence, réunir les moyens et l'exercer."
+ },
+ "d:arrete:1970-10-25~composition-fonctionnement-commission-chargee-fixer-reprise-raffinerie-produits": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret-loi:64-13": {
+  "risque": "Infraction au code de la route : amende, immobilisation.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées sur les véhicules de l'entreprise."
+ },
+ "n:decret:2021-365": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2019-838": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:99-2428": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2015-12-01~liste-maladies-transmissibles-declaration-obligatoire": {
+  "risque": "Maladie à déclaration obligatoire non déclarée : sanctions.",
+  "plan": "Pour le médecin du travail ou un établissement de santé : déclarer les cas de la liste."
+ },
+ "d:arrete:2007-02-14~protection-travailleurs-charges-transport-manuel": {
+  "risque": "Port de charges au-delà des limites ou sans aides mécaniques : troubles musculo-squelettiques, accidents, procès-verbal.",
+  "plan": "Évaluer les postes de manutention, respecter les charges maximales selon l'âge et le sexe, fournir des aides mécaniques et former aux gestes et postures."
+ },
+ "n:decret:2005-3030": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2003-1543": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:2003-16": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:78-218": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1975-12-09~fonctionnement-campagne-agrumes-rectificatif": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "n:decret:67-391": {
+  "risque": "Manquements aux règles d'hygiène, de sécurité et d'emploi des femmes et des jeunes : procès-verbal (texte ancien, en partie repris par le code du travail).",
+  "plan": "Vérifier les règles d'emploi des femmes et des jeunes travailleurs (travaux interdits, horaires) et les conditions d'hygiène et de sécurité."
+ },
+ "d:arrete:1960-09-19~tarif-maximum-location-piles-huile-campagne-rectificatif": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2016-11-14~exercice-profession-formation-domaine-regles-circulation-securite-routiere": {
+  "risque": "Formation à la conduite hors conditions : retrait de l'agrément.",
+  "plan": "Pour une auto-école : respecter les conditions d'exercice ; pour un employeur : faire former les conducteurs professionnels par des organismes agréés."
+ },
+ "n:decret:2000-1986": {
+  "risque": "Pas d'obligation propre : statut des groupements de médecine du travail.",
+  "plan": "Vérifier que le groupement auquel l'entreprise adhère est constitué selon ce statut."
+ },
+ "n:decret:2000-1987": {
+  "risque": "Contribution au groupement de médecine du travail non payée : exclusion, absence de surveillance médicale.",
+  "plan": "Payer chaque année la contribution par salarié au groupement de médecine du travail."
+ },
+ "n:decret:2000-1989": {
+  "risque": "Pas de responsable de la santé et sécurité au travail désigné alors que l'entreprise y est tenue : procès-verbal de l'inspection du travail, sanctions.",
+  "plan": "Vérifier si l'entreprise y est tenue (établissement classé ou seuils dépassés) ; désigner un responsable SST qualifié, définir ses missions et l'en informer par écrit."
+ },
+ "n:loi:98-17": {
+  "risque": "Tabagisme dans les lieux de travail fermés : amende, plaintes ; vente de tabac aux mineurs : sanctions.",
+  "plan": "Afficher l'interdiction de fumer dans les locaux de travail fermés et faire respecter la consigne."
+ },
+ "n:decret:93-2451": {
+  "risque": "Pour le médecin du travail ou un établissement de santé : maladie transmissible non déclarée.",
+  "plan": "Déclarer les cas selon la forme et la procédure fixées."
+ },
+ "n:decret:90-2273": {
+  "risque": "Entrave au contrôle des experts de l'ANPE : sanctions pénales.",
+  "plan": "Donner accès aux experts contrôleurs de l'ANPE et leur fournir les documents demandés."
+ },
+ "n:decret:89-107": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:82-1359": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1980-04-21~reglementant-professions-moniteur-conduite-automobile-directeur-etablissement-enseignement": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2025-09-23~quater-travail": {
+  "risque": "Entreprise de prestation de services ou de travaux sans garantie financière couvrant les droits des salariés : sanctions, responsabilité du donneur d'ordre.",
+  "plan": "Souscrire la garantie financière exigée (article 30 quater) et l'exiger des prestataires de services ou de travaux auxquels l'entreprise fait appel."
+ },
+ "d:arrete:2010-01-22~maximum-automobiles-utilisees-transport-regulier-personnes-leurs-specifications": {
+  "risque": "Véhicule de transport public de personnes trop ancien ou non conforme : retrait de l'autorisation.",
+  "plan": "Pour un exploitant de taxi ou de louage : respecter l'âge maximal et les spécifications des véhicules."
+ },
+ "n:loi:97-58": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:97-61": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:96-2145": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:95-102": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:95-26": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:arrete:94-28": {
+  "risque": "Résumé de la loi sur les accidents du travail non affiché : amende.",
+  "plan": "Afficher dans les locaux le résumé officiel de la loi 94-28 et utiliser les formulaires de déclaration fixés."
+ },
+ "n:decret:90-548": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1989-08-10~tarifs-transport-reseau-urbain-suburbain-public-collectif-routier": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1988-07-28~prise-charge-fonds-accidents-travail-prestations-stagiaires-maladies": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:loi:88-6": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:86-86": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:82-1360": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:loi:63-55": {
+  "risque": "Jour férié chômé non payé ou travaillé sans majoration : rappels de salaires, procès-verbal.",
+  "plan": "Accorder les jours fériés chômés et payés et appliquer la majoration prévue lorsqu'ils sont travaillés."
+ },
+ "n:loi:63-33": {
+  "risque": "Congés payés non accordés ou mal calculés : rappels, procès-verbal (dispositions reprises par le code du travail).",
+  "plan": "Calculer et accorder les congés payés selon le code du travail et la convention collective."
+ },
+ "d:arrete:1958-09-02~fonctionnement-commission-arbitrage-frais-medicaux-matiere-accident-travail": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:2026-66": {
+  "risque": "Salaires agricoles sous le SMAG 2026 : rappels de salaires, procès-verbal.",
+  "plan": "Pour un employeur agricole : appliquer le SMAG 2026 dès sa date d'effet et régulariser."
+ },
+ "n:decret:2026-67": {
+  "risque": "Salaires sous le SMIG 2026 : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Mettre à jour la paie au SMIG 2026 (régime 48 h ou 40 h) dès sa date d'effet et régulariser les rappels."
+ },
+ "n:decret:2026-68": {
+  "risque": "Augmentation des salariés au SMIG ou de leurs primes non appliquée : rappels, procès-verbal.",
+  "plan": "Appliquer les nouvelles valeurs du salaire de base et des primes de transport et de présence des salariés payés au SMIG."
+ },
+ "n:decret:2026-69": {
+  "risque": "Augmentation non appliquée dans un secteur sans convention collective : rappels, procès-verbal.",
+  "plan": "Si l'entreprise ne relève d'aucune convention collective, appliquer l'augmentation fixée à la date d'effet."
+ },
+ "d:arrete:2025-12-11~tarifs-maxima-chargement-dechargement-manutention-gardiennage-marchandises-ports": {
+  "risque": "Facturation au-delà des tarifs maximaux : sanctions ; pour un chargeur, surcoût indu.",
+  "plan": "Vérifier les factures de manutention portuaire au regard des tarifs maximaux."
+ },
+ "n:decret:2020-724": {
+  "risque": "Travailleurs agricoles transportés dans des véhicules non autorisés : accident, sanctions.",
+  "plan": "Transporter les travailleurs agricoles uniquement dans des véhicules aménagés et autorisés."
+ },
+ "n:decret:2020-329": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "n:decret:2019-835": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:2017-02-01~moyens-materiels-minima-requis-exercice-profession-entrepreneur-manutention": {
+  "risque": "Entrepreneur de manutention sans les moyens minimaux : retrait de l'inscription.",
+  "plan": "Disposer des engins de levage et de manutention minimaux exigés et les maintenir en état."
+ },
+ "n:decret:97-2004": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1996-04-16~demande-interventions-operations-prestations-particulieres-payantes-office-national": {
+  "risque": "Pas d'obligation : procédure pour demander des prestations à la protection civile.",
+  "plan": "Suivre la procédure fixée pour toute demande de surveillance ou d'intervention de la protection civile."
+ },
+ "n:decret:68-83": {
+  "risque": "Travailleurs exposés sans surveillance médicale spéciale : maladie professionnelle, procès-verbal.",
+  "plan": "Recenser les travaux exigeant une surveillance médicale spéciale, organiser les examens avec le médecin du travail et respecter son temps de présence minimal."
+ },
+ "n:decret:66-325": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:65-218": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:64-73": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:63-218": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:62-158": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:61-59": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:59-132": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:decret:57-184": {
+  "risque": "Contribution annuelle ancienne au fonds des accidents du travail : pas d'obligation actuelle (régime remplacé par la loi 94-28).",
+  "plan": "Garder pour information."
+ },
+ "n:loi:2021-5": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:2020-08-14~redevances-interventions-operations-prestations-particulieres-payantes-office-national": {
+  "risque": "Prestations de la protection civile non réglées : recouvrement.",
+  "plan": "Régler les redevances des prestations demandées à la protection civile (surveillance de manifestations, interventions)."
+ },
+ "d:arrete:2016-04-05~contenu-plans-urgence-aeroports": {
+  "risque": "Pour un exploitant d'aéroport : plan d'urgence incomplet, sanctions.",
+  "plan": "Établir le plan d'urgence selon le contenu fixé et l'exercer."
+ }
+}
