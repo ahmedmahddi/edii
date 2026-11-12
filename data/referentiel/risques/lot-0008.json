@@ -1,0 +1,242 @@
+{
+ "d:arrete:1979-12-24~operations-verification-painconnage-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1979-08-21~extraction-farines-semoules": {
+  "risque": "Farines et semoules hors taux d'extraction fixés : saisie (texte ancien, remplacé par l'arrêté du 2 avril 2026).",
+  "plan": "Appliquer les taux d'extraction et types de produits en vigueur."
+ },
+ "d:arrete:1978-07-27~fixation-tarifs-consommations-servies-cafes-restaurants-night-clubs": {
+  "risque": "Tarifs maximaux anciens des consommations dans les hôtels, remplacés depuis.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1977-06-30~fixation-tarifs-consommations-venues-cafes-restaurants-integres-hotels": {
+  "risque": "Tarifs maximaux anciens des consommations dans les hôtels, remplacés depuis.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1977-03-03~operations-verification-pornooionage-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1975-06-05~classement-superieurs-tunisie-titre-annee": {
+  "risque": "Classement annuel ancien des vins.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1974-11-30~delivrance-vignettes-superieurs-tunisie": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1973-08-03~fixation-tarifs-maximaux-consommations-servies-cafes-restaurants-integres": {
+  "risque": "Tarifs maximaux anciens des consommations dans les hôtels, remplacés depuis.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1973-01-11~declaration-stocks-mouts-mures-soufre-liqueur-recoltes-anterieures": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1972-01-20~declaration-stocks-modes-mures-soufre-liqueur-recoltes-anterieures": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1972-01-03~operations-verification-polyconnage-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1969-12-19~operations-verification-poinconnage-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1969-03-31~standardisation-tomates-fraiches-exportation": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1968-12-17~operations-verification-poloconnage-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1967-10-19~declaration-stocks-monts-mutes-soufre-mistelles-liqueur-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1967-08-10~fixation-marque-applicables-boissons-alcoolisees": {
+  "risque": "Prix ou marges au-delà des maxima fixés : amende pour pratique de prix illicite (texte ancien, à vérifier contre le régime de liberté des prix en vigueur).",
+  "plan": "Vérifier si les prix ou marges de l'activité sont encore réglementés et les respecter."
+ },
+ "d:arrete:1967-04-25~delivrance-vignettes-superieurs-tunisie": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-02-28~fixation-limites-marges-beneficiaires-secteur-tissus-habillement-confection": {
+  "risque": "Prix ou marges au-delà des maxima fixés : amende pour pratique de prix illicite (texte ancien, à vérifier contre le régime de liberté des prix en vigueur).",
+  "plan": "Vérifier si les prix ou marges de l'activité sont encore réglementés et les respecter."
+ },
+ "d:arrete:1967-01-21~fixation-marque-applicables-secteur-papiers-cartons-leurs-ouvrages": {
+  "risque": "Prix ou marges au-delà des maxima fixés : amende pour pratique de prix illicite (texte ancien, à vérifier contre le régime de liberté des prix en vigueur).",
+  "plan": "Vérifier si les prix ou marges de l'activité sont encore réglementés et les respecter."
+ },
+ "d:arrete:1966-12-12~operations-verification-poinconnage-instruments-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1966-09-21~declaration-stocks-mouts-mutes-soufre-mintelles-liqueur-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1966-08-22~prohibition-importation-chlore-acide-chlorhydrique": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1965-11-11~declaration-stocks-mouts-mutes-soufre-mistelles-liqueur-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1964-12-07~arbete-secretaire-economie-nationale-decembre-chaubane-declaration-stocks": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1964-06-27~standardisation-fruits-legumes": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1964-06-10~fixation-limites-marges-beneficiaires-secteur-tissus-habillement-confection": {
+  "risque": "Prix ou marges au-delà des maxima fixés : amende pour pratique de prix illicite (texte ancien, à vérifier contre le régime de liberté des prix en vigueur).",
+  "plan": "Vérifier si les prix ou marges de l'activité sont encore réglementés et les respecter."
+ },
+ "d:arrete:1964-05-26~classement-superieures-tunisie-titre-annee": {
+  "risque": "Classement annuel ancien des vins.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1963-10-28~declaration-stols-mouts-mutes-soufre-mistriles-liqueurs-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1963-05-27~prohibition-importation-soufre-raffine": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1963-01-28~operations-verification-instruments-poids-mesures-titre-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1962-06-19~prohibition-importation-peintures-nitrocellulosiques": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1962-05-22~prohibant-importation-acides-industriels-huiles-raffinage-alcools": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1961-12-27~prohibant-importation-produits-leurs-conserves": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1961-11-18~prohibant-importation-disques-rondelles-aluminium-ainsi-menage": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1961-09-16~probant-importation-peintures-blanc-gelatineux": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1961-08-30~declaration-stocks-mouts-mutes-soufre-mistelles-liqueur-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1961-02-24~prohibant-importation-produits-patisserie-biscuiterie": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1960-11-23~prohibant-importation-chaussettes-jarrettes-socquettes-hommes-enfants-coton": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1960-11-24~prohibant-importation-fibre-textile-usage-technique": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1960-05-31~surtaxe-alcools-origine-etrangere": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1960-04-30~fabrication-standardisation-sucreries-confiseries-bonbonneries-destinees-exportation-consommation": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1960-01-16~extraction-farines-semoules": {
+  "risque": "Farines et semoules hors taux d'extraction fixés : saisie (texte ancien, remplacé par l'arrêté du 2 avril 2026).",
+  "plan": "Appliquer les taux d'extraction et types de produits en vigueur."
+ },
+ "d:arrete:1959-12-31~abrete-secretaires-finances-commerce-industrie-transports-decembre-redjeb": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1959-10-29~declaration-stocks-mutes-soufre-mistelles-liqueur-recoltes-anterieures": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1959-07-06~standardisation-conserves-tomates-mises-consommation-destinees-exportation": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1959-06-10~instituant-mesures-prohibition-importation-meubles-divers-autres": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1959-05-07~secretaires-finances-commerce-agriculture-chaoual-prohibant-importation-tomates": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1959-03-28~classement-muscats-tunisie-appellation-controlee-titre-annee": {
+  "risque": "Classement annuel ancien des vins.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1959-02-25~declaration-stocks-modes-mutes-soufre-mistelles-liqueur-recoltes": {
+  "risque": "Stocks de vins non déclarés : saisie, amende (texte annuel ancien).",
+  "plan": "Pour un détenteur de vins : faire la déclaration de stocks prévue par le texte en vigueur."
+ },
+ "d:arrete:1959-01-21~instituant-prohibitions-importation-medicaments": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1958-09-02~instituant-prohibitions-importation-tomates-purees": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1958-08-18~tituant-mesures-prohibition-importation-sucres-nouveaux": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1958-02-03~instituant-prohibitions-importation-olives-conservees": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1958-03-31~instituant-prohibitions-importation-chaussures": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1973-08-02~fixation-tarifs-maximaux-consommations-servies-cafes-restaurants-integres": {
+  "risque": "Tarifs maximaux anciens des consommations dans les hôtels, remplacés depuis.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1967-12-22~operations-verification-poinconnage-instruments-poids-mesures-cours-annee": {
+  "risque": "Instruments de pesage non vérifiés pour l'année : amende, transactions contestables (texte annuel ancien).",
+  "plan": "Faire vérifier chaque année les instruments de mesure et vérifier la marque de l'année en cours."
+ },
+ "d:arrete:1964-02-13~regles-standardisation-applicables-agrumes-tunisie-destines-exportation-rectificatif": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1959-08-18~instituant-prohibitions-importation-cuirs-rectificatif": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ },
+ "d:arrete:1957-12-12~regles-standardisation-applicables-agrumes-expedits-tunisie-rectificatif": {
+  "risque": "Produit exporté ou vendu hors normes de standardisation : interdiction de sortie, saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Contrôler la qualité, le calibrage, le conditionnement et le marquage des lots selon les normes en vigueur."
+ },
+ "d:arrete:1985-12-09~prohibant-importation-vehicules-automobiles-occasion": {
+  "risque": "Mesure ancienne de protection des importations (liste de 1956), levée depuis par la libéralisation du commerce extérieur ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation du produit avant toute opération."
+ }
+}
