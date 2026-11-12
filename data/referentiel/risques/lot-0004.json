@@ -1,0 +1,482 @@
+{
+ "d:arrete:2000-10-25~approbation-cahier-charges-exercice-commerce-distribution-dattes": {
+  "risque": "Distribution de dattes exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (stockage, hygiène, traçabilité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2000-02-04~interieur-defense-nationale-fevrier-regles-approvisionnement-matieres-explosives": {
+  "risque": "Approvisionnement ou stockage d'explosifs hors circuit fixé : saisie, sanctions.",
+  "plan": "S'approvisionner en explosifs uniquement selon la procédure fixée et respecter les règles de stockage et de contrôle."
+ },
+ "n:decret-loi:81-1": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret-loi:62-11": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret-loi:62-1": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2019-17": {
+  "risque": "Équipage de pêche sans brevets ou formation exigés : immobilisation du navire.",
+  "plan": "Pour un armateur : vérifier les brevets et certificats de formation de l'équipage."
+ },
+ "d:arrete:2015-12-01~decembre-liste-maladies-transmissibles-declaration-obligatoire": {
+  "risque": "Maladie à déclaration obligatoire non déclarée : propagation, sanctions.",
+  "plan": "Pour un établissement de santé ou le médecin du travail : déclarer les cas de la liste aux autorités sanitaires."
+ },
+ "n:decret-loi:2020-2": {
+  "risque": "Mesure temporaire de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:98-2248": {
+  "risque": "Tabagisme dans les lieux collectifs : amende, plaintes.",
+  "plan": "Afficher l'interdiction de fumer dans les locaux collectifs et aménager, le cas échéant, un espace fumeurs séparé."
+ },
+ "n:decret:2022-943": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2022-01-21~fevrier-inscription-mentions-doivent-portees-couverture-exterieure-paquets": {
+  "risque": "Paquets de tabac sans avertissements illustrés sur 70 % des faces : saisie, amende.",
+  "plan": "Vérifier sur chaque paquet les avertissements écrits et illustrés exigés."
+ },
+ "n:decret:2021-361": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2014-4064": {
+  "risque": "Utilisation ou importation de substances interdites par le protocole de Montréal : saisie, sanctions.",
+  "plan": "Recenser les fluides frigorigènes et produits utilisés, éliminer les substances interdites et confier les interventions à des techniciens qualifiés."
+ },
+ "n:decret:2013-1293": {
+  "risque": "Son de blé acquis ou distribué hors circuit : sanctions des lois sur le commerce et la concurrence.",
+  "plan": "Respecter les conditions et périodes de distribution du son de blé et garder les justificatifs."
+ },
+ "d:arrete:2011-10-10~liste-laboratoires-reference-accredites-effectuer-analyses-frais": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2011-1106": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2010-318": {
+  "risque": "Examens obligatoires non assurés aux patients dialysés : risque sanitaire, sanctions.",
+  "plan": "Assurer les examens complémentaires et la sécurité transfusionnelle de la liste."
+ },
+ "n:decret:2009-1733": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2009-1064": {
+  "risque": "Collecte, transport, stockage ou traitement de déchets dangereux sans autorisation : fermeture, amende, emprisonnement.",
+  "plan": "Pour un opérateur : obtenir l'autorisation de l'activité ; pour un producteur : vérifier que ses prestataires en sont titulaires et garder les copies."
+ },
+ "n:decret:2008-2035": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2005-3280": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2005-3079": {
+  "risque": "Transport de ces matières sans escorte des unités de sécurité : saisie, sanctions.",
+  "plan": "Pour tout transport d'explosifs, de matières radioactives ou d'autres matières listées : demander l'accompagnement des unités de sécurité."
+ },
+ "d:arrete:2004-06-16~liste-personnes-physiques-morales-autorisees-reprendre-produits-petroliers": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2004-944": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2002-1301": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2001-398": {
+  "risque": "Insémination artificielle par une personne non qualifiée : sanctions, retrait.",
+  "plan": "Confier l'insémination à un vétérinaire, un ingénieur spécialisé ou une structure autorisée."
+ },
+ "d:arrete:1986-12-04~exportation-agrumes": {
+  "risque": "Exportation d'agrumes sans carte professionnelle : blocage, sanctions.",
+  "plan": "Détenir la carte professionnelle d'exportateur et respecter les normes d'exportation."
+ },
+ "d:arrete:1977-09-07~affaires-sociales-septembre-agrement-convention-collective-nationale-industrie": {
+  "risque": "Conditions de travail sous les minima de la convention (bois, meuble et liège) : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1966-11-22~caracteristiques-obligatoires-semoule-extraite-couscous-farines-panifiables-extraites": {
+  "risque": "Semoules, farines ou pâtes hors caractéristiques : saisie, sanctions pour fraude.",
+  "plan": "Faire analyser les produits (humidité, acidité, cendres) et vérifier leur conformité aux caractéristiques fixées."
+ },
+ "d:arrete:1962-05-01~accordant-regime-admission-temporaire-sucres-conne-raffines-betterave": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1960-08-13~autorisant-entrepot-fictif-huiles-brutes-petrole-skhira": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2008-87": {
+  "risque": "Mesure temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2000-1985": {
+  "risque": "Absence de service de médecine du travail ou d'adhésion à un groupement : procès-verbal, sanctions du code du travail, maladies non dépistées.",
+  "plan": "Adhérer à un groupement de médecine du travail (ou créer un service propre à partir de 500 travailleurs), faire passer les visites d'embauche et périodiques et garder les fiches d'aptitude."
+ },
+ "n:decret-loi:2022-62": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2019-25": {
+  "risque": "Denrées dangereuses ou non conformes mises sur le marché, défaut d'autorisation ou de traçabilité : retrait, fermeture, amendes et poursuites.",
+  "plan": "Obtenir l'autorisation ou l'enregistrement sanitaire, appliquer un système d'hygiène (HACCP), assurer la traçabilité et organiser le retrait des produits en cas de risque."
+ },
+ "d:arrete:2011-03-25~controle-periodique-exploitation-fabrication-bouteilles-petrole-liquefies-acier": {
+  "risque": "Bouteilles de GPL non requalifiées ou défectueuses : explosion, retrait, sanctions.",
+  "plan": "Pour un distributeur propriétaire des bouteilles : faire requalifier périodiquement bouteilles et accessoires et retirer les bouteilles défectueuses ; pour un utilisateur : n'accepter que des bouteilles en cours de validité."
+ },
+ "n:loi:2010-2": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2006-64": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2006-05-26~controle-sanitaire-veterinaire-octroi-agrement-etablissements-production-transformation": {
+  "risque": "Établissement de denrées animales sans agrément sanitaire : fermeture, saisie, sanctions.",
+  "plan": "Obtenir et maintenir l'agrément sanitaire vétérinaire, respecter ses conditions et préparer les inspections."
+ },
+ "n:loi:2006-20": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2004-79": {
+  "risque": "Utilisation ou importation de substances interdites par le protocole de Montréal : saisie, sanctions.",
+  "plan": "Recenser les fluides frigorigènes et produits utilisés, éliminer les substances interdites et confier les interventions à des techniciens qualifiés."
+ },
+ "n:loi:2003-59": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2002-2015": {
+  "risque": "Véhicule de transport de matières dangereuses non équipé ou non aménagé selon les règles : immobilisation, amende, accident.",
+  "plan": "Faire vérifier l'équipement électrique, le freinage, la protection incendie et la signalisation de chaque véhicule concerné et garder le certificat d'agrément."
+ },
+ "d:arrete:1996-06-04~approbation-cahier-charges-location-locaux-meubles-immeubles-destines": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:95-56": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1986-03-14~mesures-sanitaires-specifiques-prendre-lutte-contre-charbon-symptomatique": {
+  "risque": "Charbon symptomatique non déclaré ou bovins non vaccinés : propagation, sanctions.",
+  "plan": "Vacciner le troupeau, garder les certificats de vaccination et déclarer tout cas."
+ },
+ "d:arrete:1985-04-27~requises-exercice-commerce-distribution-pneumatiques-derives": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1995-04-13~dispense-obligation-declaration": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2024-09-16~jort-2024-113-109-6": {
+  "risque": "Paquets de tabac non conformes après le délai prorogé : saisie, amende.",
+  "plan": "Suivre le nouveau délai de mise en conformité des avertissements sanitaires sur les paquets."
+ },
+ "d:arrete:2024-05-10~fixation-liste-patisseries-traditionnelles-populaires-exclues-redevance-compensation": {
+  "risque": "Redevance de compensation mal appliquée : redressement fiscal.",
+  "plan": "Pour un pâtissier : vérifier si ses produits figurent sur la liste des pâtisseries exclues de la redevance."
+ },
+ "d:arrete:2024-04-08~agrement-avenant-convention-collective-sectorielle-textile": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (textile) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2022-10-20~agrement-avenant-convention-collective-sectorielle-pates-alimentaires-couscous": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (pâtes alimentaires et couscous) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2020-11-13~production-exposition-vente": {
+  "risque": "Farine subventionnée détournée ou pain non conforme : retrait de l'agrément, amende, fermeture.",
+  "plan": "Respecter les règles de production et de vente du pain et tenir la comptabilité matière de la farine subventionnée."
+ },
+ "d:arrete:2019-04-22~agrement-avenant-convention-collective-sectorielle-boulangerie": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (boulangerie) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2018-11-30~agrement-avenant-convention-collective-sectorielle-fabrication-produits-toilette": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (produits de toilette et parfumerie) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2018-09-17~types-sucre": {
+  "risque": "Sucre non conforme aux spécifications : saisie, retrait, sanctions.",
+  "plan": "Vérifier les spécifications des sucres produits ou utilisés (analyses, étiquetage) et exiger les certificats des fournisseurs."
+ },
+ "d:arrete:2018-03-26~valeurs-limites-rejets-effluents-milieu-recepteur": {
+  "risque": "Rejets au-dessus des valeurs limites dans le milieu récepteur ou le réseau public : procès-verbal, amende, mise en demeure, fermeture ; pollution de l'eau.",
+  "plan": "Identifier le milieu récepteur de chaque rejet, faire analyser les effluents par un laboratoire agréé à la fréquence fixée, comparer aux valeurs limites, installer ou améliorer le traitement et tenir le registre d'autosurveillance."
+ },
+ "d:arrete:2017-12-05~agrement-avenant-convention-collective-sectorielle-fonderie-metallurgie-construction": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (fonderie, métallurgie et construction mécanique) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2017-08-11~agrement-avenant-convention-collective-sectorielle-construction-metallique": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (construction métallique) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2017-08-14~agrement-avenant-convention-collective-sectorielle-confection-bonneterie": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (confection et bonneterie) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2016-05-10~agrement-avenant-convention-collective-sectorielle-transformation-verre-miroiterie": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (verre et miroiterie) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:98-2133": {
+  "risque": "Redevances de propriété industrielle non payées : déchéance du brevet ou de la marque.",
+  "plan": "Suivre les échéances des redevances des brevets et marques de l'entreprise et les payer à temps."
+ },
+ "n:decret:93-2168": {
+  "risque": "Utilisation ou importation de substances interdites par le protocole de Montréal : saisie, sanctions.",
+  "plan": "Recenser les fluides frigorigènes et produits utilisés, éliminer les substances interdites et confier les interventions à des techniciens qualifiés."
+ },
+ "n:decret:81-436": {
+  "risque": "Entrepôt frigorifique hors conditions : denrées avariées, saisie, fermeture.",
+  "plan": "Vérifier les conditions d'exploitation de l'entrepôt (températures, hygiène, enregistrements)."
+ },
+ "n:decret:64-54": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:59-19": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2017-399": {
+  "risque": "Mesure temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2012-12-04~specifications-materiaux-objets-papier-carton-destines-entrer-contact": {
+  "risque": "Emballages papier-carton non conformes au contact alimentaire : migration de substances, retrait, saisie.",
+  "plan": "Exiger des fournisseurs la déclaration de conformité alimentaire des emballages en papier ou carton."
+ },
+ "n:loi:97-37": {
+  "risque": "Transport routier de matières dangereuses hors règles : amende de 60 à 300 dinars par infraction du conducteur, sanctions plus lourdes pour le transporteur, accident.",
+  "plan": "Pour les matières dangereuses expédiées ou transportées : autorisations, conducteurs formés, véhicules équipés et signalés, fiche de sécurité affichée, documents de bord ; vérifier aussi les transporteurs sous-traitants."
+ },
+ "n:decret:95-1166": {
+  "risque": "Non-salarié non affilié : absence de couverture, cotisations et pénalités réclamées.",
+  "plan": "Pour un exploitant individuel : s'affilier à la CNSS au régime des non-salariés et payer les cotisations."
+ },
+ "d:arrete:1970-01-23~autorisant-etablissement-entrepots-fictifs-produits-petroliers-destines-avitaillement": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:62-19": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2018-10-19~liste-laboratoires-habilites-effectuer-analyses-examens-cadre-controle": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2014-10-27~agrement-avenant-convention-collective-sectorielle-concernant-imprimerie-reliure": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant (imprimerie, reliure, carton et papier) : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2011-08-12~performances-energetiques-minimum-appareils-climatisation-individuelle-puissance-frigorifique": {
+  "risque": "Appareils vendus sans étiquette énergétique ou sous les performances minimales : retrait, amende (loi 2004-72).",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et ne mettre sur le marché que des appareils des classes autorisées."
+ },
+ "d:arrete:2009-03-02~octroi-regime-amenagements-exploitation-entrepot-prive": {
+  "risque": "Entrepôt privé exploité hors conditions : retrait du régime, droits et pénalités.",
+  "plan": "Respecter les conditions d'aménagement et d'exploitation de l'entrepôt sous douane et tenir la comptabilité matières."
+ },
+ "d:arrete:2004-01-26~actualisation-guide-investisseurs-promoteurs-prives-secteurs-industries-manufacturieres": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2003-05-05~approbation-cahier-charges-fabrication-pesticides-usage-agricole-importation": {
+  "risque": "Activité sur les pesticides exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (stockage, qualification, traçabilité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:loi:2002-32": {
+  "risque": "Travailleurs de ces catégories non déclarés : cotisations et pénalités, absence de couverture.",
+  "plan": "Déclarer et affilier les travailleurs concernés (employés de maison, pêcheurs, petits exploitants) et payer les cotisations."
+ },
+ "d:arrete:2000-11-14~forme-contenu-document-controle-technique-importation-cadre-liasse": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:92-71": {
+  "risque": "Maladie transmissible non déclarée ou mesures de prévention non appliquées : propagation, sanctions.",
+  "plan": "Appliquer les mesures de prévention et les vaccinations exigées, et déclarer les cas aux autorités sanitaires (médecin du travail)."
+ },
+ "n:loi:95-103": {
+  "risque": "Salarié non déclaré à la CNSS dans les 48 heures : amende, accident du travail non couvert à la charge de l'employeur.",
+  "plan": "Déclarer chaque recrutement à la CNSS dans les 48 heures ouvrables et vérifier l'affiliation au régime des accidents du travail."
+ },
+ "n:decret:2006-2745": {
+  "risque": "Transport de matières dangereuses hors règles (classement, emballage, véhicule, conducteur) : accident, pollution, amende, immobilisation.",
+  "plan": "Classer les matières transportées, utiliser des emballages et véhicules conformes, former les conducteurs, tenir les documents de bord et la signalisation."
+ },
+ "n:decret:2000-440": {
+  "risque": "Droits de contrôle et d'escorte non payés : blocage du transport.",
+  "plan": "Payer les droits de contrôle et d'accompagnement pour chaque transport soumis à escorte."
+ },
+ "n:decret:2000-147": {
+  "risque": "Véhicule non conforme aux règles d'équipement (freinage, éclairage, pneus, poids) : refus à la visite technique, immobilisation, accident.",
+  "plan": "Faire entretenir les véhicules et engins (freins, éclairage, pneumatiques, rétroviseurs) et respecter les poids et dimensions autorisés."
+ },
+ "d:arrete:1976-11-11~agrement-convention-collective-nationale-tentureries-blanchisseries": {
+  "risque": "Conditions de travail sous les minima de la convention (teintureries et blanchisseries) : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "n:decret:2019-1130": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1995-04-29~bareme-conversion-rentes-allouees-victimes-accidents-travail-maladies": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1995-02-23~formule-declaration-accidents-travail-maladies-professionnelles": {
+  "risque": "Accident du travail non déclaré ou déclaré hors délai : amende, frais à la charge de l'employeur.",
+  "plan": "Déclarer chaque accident du travail à la CNSS sur le formulaire officiel dans les délais, avec le certificat médical initial, et tenir le registre des accidents."
+ },
+ "n:loi:2007-19": {
+  "risque": "Facilités ou heures de délégation refusées aux représentants du personnel : entrave, procès-verbal.",
+  "plan": "Accorder aux délégués et membres de la commission consultative d'entreprise les heures de délégation et facilités prévues."
+ },
+ "n:loi:94-28": {
+  "risque": "Défaut d'affiliation, de cotisation ou de déclaration des accidents : amende de 100 à 500 dinars, remboursement des prestations par l'employeur, faute inexcusable en cas de manquement à la sécurité.",
+  "plan": "Vérifier l'affiliation et les cotisations accidents du travail, déclarer tout accident dans les délais, tenir le registre des accidents et analyser chaque accident pour éviter sa répétition."
+ },
+ "n:decret:2002-583": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2006-59": {
+  "risque": "Infraction aux règlements d'hygiène de la commune : amende.",
+  "plan": "Respecter les règlements d'hygiène communaux (déchets, salubrité des abords)."
+ },
+ "n:decret:95-2487": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2024-12-18~reglements-urbanisme-specifiques-applicables-lotissements-etablies-terrains-destines": {
+  "risque": "Construction dans un lotissement hors règlement d'urbanisme : refus du permis, démolition.",
+  "plan": "Vérifier le règlement d'urbanisme du lotissement (zonage, implantation, hauteurs) avant tout projet de construction ou d'extension."
+ },
+ "d:arrete:2024-07-24~reglements-urbanisme-specifiques-applicables-lotissements-etablies-terrains-destines": {
+  "risque": "Construction dans un lotissement hors règlement d'urbanisme : refus du permis, démolition.",
+  "plan": "Vérifier le règlement d'urbanisme du lotissement (zonage, implantation, hauteurs) avant tout projet de construction ou d'extension."
+ },
+ "d:arrete:2023-06-21~redevances-occupation-temporaire-domaine-public-hydraulique": {
+  "risque": "Redevance d'occupation du domaine public hydraulique non payée : retrait de l'autorisation, recouvrement.",
+  "plan": "Payer la redevance annuelle de chaque occupation du domaine public hydraulique."
+ },
+ "d:arrete:2018-09-21~approbation-reglement-securite-specifique-batiments-abritant-etablissements-dangereux": {
+  "risque": "Bâtiment d'établissement classé non conforme au règlement de sécurité incendie spécifique : refus de l'attestation de prévention, incendie, fermeture.",
+  "plan": "Comparer les bâtiments au règlement de sécurité spécifique (compartimentage, désenfumage, issues, détection, moyens d'extinction) avec un bureau de contrôle, programmer les travaux et faire valider par la protection civile."
+ },
+ "d:arrete:2015-01-28~promulgation-reglements-urbanisme-specifiques-applicables-lotissements-terrains-affectes": {
+  "risque": "Construction dans un lotissement hors règlement d'urbanisme : refus du permis, démolition.",
+  "plan": "Vérifier le règlement d'urbanisme du lotissement (zonage, implantation, hauteurs) avant tout projet de construction ou d'extension."
+ },
+ "n:decret:2008-2268": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2001-2001": {
+  "risque": "Redevances d'assainissement ou de pollution non payées : coupure, recouvrement.",
+  "plan": "Suivre les redevances facturées par l'ONAS, dont la redevance de pollution hydrique liée à la charge des rejets, et les réduire en améliorant le prétraitement."
+ },
+ "n:decret:95-2035": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2016-03-31~determinant-completer-financement-logements-lotissements-sociaux-attribues-cadre": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2020-02-12~cahier-charges-exercice-activite-promotion-immobiliere": {
+  "risque": "Promotion immobilière exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (moyens, obligations envers les acquéreurs) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:decret:83-507": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:68-354": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "jort-1958-021-324-3": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2023-01-30~modalite-calcul-revision-redevance-annuelle-occupation-temporaire-domaine": {
+  "risque": "Redevance d'occupation du domaine public maritime mal calculée ou impayée : retrait, recouvrement.",
+  "plan": "Vérifier le calcul de la redevance selon la surface ou le linéaire occupé et la payer chaque année."
+ },
+ "d:arrete:2014-05-08~promulgation-reglements-urbanisme-specifiques-applicables-lotissements-crees-execution": {
+  "risque": "Construction dans un lotissement hors règlement d'urbanisme : refus du permis, démolition.",
+  "plan": "Vérifier le règlement d'urbanisme du lotissement (zonage, implantation, hauteurs) avant tout projet de construction ou d'extension."
+ },
+ "d:arrete:2014-03-28~services-protection-civile-travaux-soumis-permis-batir": {
+  "risque": "Aménagement intérieur ou changement d'affectation sans avis de la protection civile : refus de l'attestation de prévention, fermeture.",
+  "plan": "Avant tout aménagement, changement d'affectation ou modification de locaux recevant du public, demander l'avis de la protection civile."
+ },
+ "n:decret:96-2371": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:81-1817": {
+  "risque": "Lotissement sans les pièces ou travaux de viabilité exigés : refus d'approbation.",
+  "plan": "Constituer le dossier complet et réaliser les travaux de viabilité et d'assainissement nécessaires."
+ },
+ "n:decret:75-273": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2021-4": {
+  "risque": "Mesure de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2009-06-10~normes-minimales-classement-etablissements-touristiques-animation-musicale": {
+  "risque": "Établissement d'animation musicale sous les normes de son classement : déclassement, fermeture.",
+  "plan": "Comparer l'établissement aux normes minimales et corriger les écarts."
+ },
+ "d:arrete:2009-01-07~approbation-cahier-charges-exercice-activite-commerce-distribution-produits": {
+  "risque": "Distribution de produits artisanaux exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (local, affichage, traçabilité) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2008-10-21~approbation-cahier-charges-exercice-commerce-distribution-electromenagers": {
+  "risque": "Distribution d'électroménager exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (local, service après-vente, garanties) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:loi:2007-35": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2005-12-01~normes-minimales-classement-hotels-tourisme": {
+  "risque": "Hôtel sous les normes de sa catégorie : déclassement.",
+  "plan": "Faire l'auto-évaluation aux normes minimales de sa catégorie et corriger les écarts avant les visites de l'ONTT."
+ },
+ "n:decret:2004-2145": {
+  "risque": "Appareils vendus sans étiquette énergétique ou sous les performances minimales : retrait, amende (loi 2004-72).",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et ne mettre sur le marché que des appareils des classes autorisées."
+ }
+}
