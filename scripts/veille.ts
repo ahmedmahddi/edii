@@ -59,6 +59,8 @@ const PROBE = path.join(DIR, "probe");
 const FICHES = path.join(DIR, "fiches");
 const CORPS = path.join(DIR, "corps");
 const RESUMES = path.join(process.cwd(), "data", "referentiel", "resumes");
+// Written risks and action plans: data/referentiel/risques/*.json (text key → { risque, plan }).
+const RISQUES = path.join(process.cwd(), "data", "referentiel", "risques");
 // Served to the page with the feed: text id → fiche and résumé (public/veille/fiches.json).
 const FICHES_OUT = path.join(process.cwd(), "public", "veille", "fiches.json");
 const UA = "ABClassement veille réglementaire";
@@ -437,13 +439,16 @@ async function readFiches(years: Sommaires[], hits: Hit[]): Promise<void> {
 }
 
 /**
- * public/veille/fiches.json: for each text of the référentiel, its fiche and its written résumé,
- * by text id. Derived from data/veille/fiches and data/referentiel/resumes.
+ * public/veille/fiches.json: for each text of the référentiel, its fiche, its written résumé, risk and
+ * action plan, by text id. Derived from data/veille/fiches and data/referentiel/resumes and risques.
  */
 function writeFiches(hits: Hit[]): void {
   const resumes: Record<string, string> = {};
   if (existsSync(RESUMES))
     for (const f of readdirSync(RESUMES).filter((f) => f.endsWith(".json"))) Object.assign(resumes, JSON.parse(readFileSync(path.join(RESUMES, f), "utf8")));
+  const risques: Record<string, { risque: string; plan: string }> = {};
+  if (existsSync(RISQUES))
+    for (const f of readdirSync(RISQUES).filter((f) => f.endsWith(".json"))) Object.assign(risques, JSON.parse(readFileSync(path.join(RISQUES, f), "utf8")));
   const files = new Map<number, FichesFile>();
   const ficheOf = (hitId: string): FicheData | undefined => {
     const [year, issue] = hitId.split("-").map(Number);
@@ -456,8 +461,9 @@ function writeFiches(hits: Hit[]): void {
     const hitId = t.origine === "jort" ? t.id.slice(5) : t.jort?.slice(5);
     const f = hitId ? ficheOf(hitId) : undefined;
     const r = resumes[resumeKey(t)];
+    const w = risques[resumeKey(t)];
     if (r) written++;
-    if ((f && (f.o || f.s || f.p || f.t || f.f)) || r) out[t.id] = { ...(f ?? {}), ...(r ? { r } : {}) };
+    if ((f && (f.o || f.s || f.p || f.t || f.f)) || r || w) out[t.id] = { ...(f ?? {}), ...(r ? { r } : {}), ...(w ? { k: w.risque, q: w.plan } : {}) };
   }
   mkdirSync(path.dirname(FICHES_OUT), { recursive: true });
   writeFileSync(FICHES_OUT, JSON.stringify(out) + "\n");

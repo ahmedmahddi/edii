@@ -13,7 +13,8 @@
  *      obligation (fiche()).
  *
  * A written résumé (data/referentiel/resumes/) takes the place of the quoted sentences when there is
- * one. All of it is a starting point for the consultant, never a legal reading.
+ * one, and a written risk and action plan (data/referentiel/risques/) the place of those made from
+ * the domain. All of it is a starting point for the consultant, never a legal reading.
  */
 import { markdownPages } from "./markdown";
 
@@ -321,6 +322,8 @@ export function resumeOf(fiche: Fiche | undefined): string {
 /** A fiche as stored and served (data/veille/fiches, public/veille/fiches.json): short keys, no empties. */
 export interface FicheData {
   r?: string; // a written résumé (data/referentiel/resumes), when there is one
+  k?: string; // a written risk (data/referentiel/risques)
+  q?: string; // a written action plan (data/referentiel/risques)
   o?: string[]; // obligations
   s?: string[]; // sanctions
   p?: string; // periodicity
@@ -346,5 +349,5 @@ export function expand(d: FicheData | undefined): Fiche | undefined {
 /** What a register line starts from: the written résumé or the quoted obligations, the risk, the plan. */
 export function defaults(domaine: string, d: FicheData | undefined): { resume: string; risque: string; plan: string } {
   const f = expand(d);
-  return { resume: d?.r ?? resumeOf(f), risque: risqueOf(domaine, f), plan: planOf(f) };
+  return { resume: d?.r ?? resumeOf(f), risque: d?.k ?? risqueOf(domaine, f), plan: d?.q ?? planOf(f) };
 }

@@ -11,6 +11,12 @@
  * file per batch: { "<text key>": "<résumé>" }, the key being resumeKey(): the text's number key
  * (n:decret:2005-1991), or its kind and date with the first words of its subject. The articles come from data/veille/corps/ (npm run veille -- --fiches); a text whose
  * body was not found is summarised from its title, and says so.
+ *
+ *   npx tsx scripts/resumes.ts --risques --stats     the same for the written risks and action plans
+ *   npx tsx scripts/resumes.ts --risques --next 60   the next texts without one, with their résumé
+ *
+ * Risks and action plans are written for the essentials and ticked texts (tiers 1 and 2), in
+ * data/referentiel/risques/*.json: { "<text key>": { "risque": "…", "plan": "…" } }.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -18,20 +24,48 @@ import nomenclature from "../data/nomenclature.json";
 import { importance } from "../lib/registre/importance";
 import { derivedFlags, EMPTY_SITE, FLAGS, METIERS, type Site, toggleMetier } from "../lib/registre/profil";
 import { catalogue, proposals, resumeKey, type Texte } from "../lib/registre/referentiel";
-import { SIGNED } from "../lib/veille/fiche";
+import { type FicheData, SIGNED } from "../lib/veille/fiche";
 
 const ROOT = process.cwd();
 const RESUMES = path.join(ROOT, "data", "referentiel", "resumes");
+const RISQUES = path.join(ROOT, "data", "referentiel", "risques");
 const CORPS = path.join(ROOT, "data", "veille", "corps");
 const ORDER = path.join(CORPS, "ordre.json"); // cached: computing it takes a minute
+const FICHES = path.join(ROOT, "public", "veille", "fiches.json");
 
 const keyOf = resumeKey;
 
-function written(): Record<string, string> {
-  const out: Record<string, string> = {};
-  if (existsSync(RESUMES))
-    for (const f of readdirSync(RESUMES).filter((f) => f.endsWith(".json"))) Object.assign(out, JSON.parse(readFileSync(path.join(RESUMES, f), "utf8")));
+function written<T = string>(dir = RESUMES): Record<string, T> {
+  const out: Record<string, T> = {};
+  if (existsSync(dir)) for (const f of readdirSync(dir).filter((f) => f.endsWith(".json"))) Object.assign(out, JSON.parse(readFileSync(path.join(dir, f), "utf8")));
   return out;
+}
+
+/** --risques: the written risks and action plans of the essentials and ticked texts. */
+function risques(texts: Texte[], ranked: { id: string; tier: number }[]): void {
+  const byId = new Map(texts.map((t) => [t.id, t]));
+  const done = written<{ risque: string; plan: string }>(RISQUES);
+  const resumes = written();
+  const todo = ranked.filter((x) => x.tier <= 2);
+  if (process.argv.includes("--stats")) {
+    const counts = [1, 2].map((tier) => {
+      const ids = todo.filter((x) => x.tier === tier);
+      return `${["", "essentiels", "cochés"][tier]} : ${ids.filter((x) => done[keyOf(byId.get(x.id)!)]).length} / ${ids.length}`;
+    });
+    console.log(`Risques et plans écrits : ${Object.keys(done).length}. ${counts.join(" · ")}`);
+    return;
+  }
+  const fiches: Record<string, FicheData> = existsSync(FICHES) ? JSON.parse(readFileSync(FICHES, "utf8")) : {};
+  const n = Number(process.argv[process.argv.indexOf("--next") + 1]) || 40;
+  for (const { id, tier } of todo.filter((x) => !done[keyOf(byId.get(x.id)!)]).slice(0, n)) {
+    const t = byId.get(id)!;
+    const f = fiches[id];
+    console.log(`\n### ${keyOf(t)} [${tier}] ${t.domaine}`);
+    console.log(t.titre.length > 220 ? `${t.titre.slice(0, 219)}…` : t.titre);
+    console.log(`R: ${resumes[keyOf(t)] ?? "(pas de résumé)"}`);
+    if (f?.s?.length) console.log(`S: ${f.s.join(" | ")}`);
+    if (f?.t?.length || f?.p) console.log(`T: ${(f.t ?? []).join(", ")}${f.p ? ` · ${f.p}` : ""}`);
+  }
 }
 
 function order(texts: Texte[]): { id: string; tier: number }[] {
@@ -75,6 +109,7 @@ function main(): void {
   const byId = new Map(texts.map((t) => [t.id, t]));
   const done = written();
   const ranked = order(texts).filter((x) => byId.has(x.id));
+  if (process.argv.includes("--risques")) return risques(texts, ranked);
   if (process.argv.includes("--stats")) {
     const counts = [1, 2, 3, 4].map((tier) => {
       const ids = ranked.filter((x) => x.tier === tier);
