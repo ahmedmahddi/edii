@@ -401,10 +401,19 @@ run a model). Two parts:
   wording, 1-3 sentences): written in this session from the articles, batch after batch, in priority
   order (`scripts/resumes.ts`: 1. the 30 essentials of any of 716 site profiles, 2. ticked for one,
   3. applicable, 4. the rest; `--next 40 --corps` lists the next ones with their articles from
-  `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; at
-  11 November 3,835 are written: all essentials and all ticked texts are done, about 1,700
-  of the ~2,260 applicable ones (newest first) and ~600 of the ~4,300 others. Old yearly customs
-  and VAT suspensions share one standard wording. The notices of inquiries on dangerous
+  `data/veille/corps/`, kept out of git). The user asked for all texts, not only the essentials; on
+  12 November every text of the feed has one: 6,379 résumés in 77 lots (376 essentials, 1,101
+  ticked, 2,209 applicable, 2,551 others; `--stats` shows the count). Recurring kinds share one
+  wording, applied by title rules (lots 66, 70 and 76): loi de finances, SMIG, wage increases,
+  homologation of training diplomas, collective agreements and their amendments (sector named),
+  yearly olive, milk, citrus, date and tuna-trap campaigns, measuring-instrument stamps, assainissement
+  fees, irrigated perimeters, old olive and wine taxes, State budget decrees. Old yearly customs
+  and VAT suspensions share one standard wording. A new text that enters the feed has no résumé
+  until a lot is added for it (`--next` lists it first in its tier). While writing the last tier,
+  some texts of general reach were seen in "autres" that a site may want ticked: décret 2002-693
+  (used oils), décret 97-1102 (packaging, Eco-Lef), the 2006 environmental cahiers des charges
+  (EIE annex II), décret 2005-3087 (quota for disabled workers), décret 2007-1866 (hygiene
+  offences), NT 106.02 (1989 effluent limits, superseded) and décret 81-1595 (compulsory insurance). The notices of inquiries on dangerous
   establishments ("Avis d'établissements dangereux…", ~650) stay in the feed as information (a test
   holds this) and share one résumé; company balance sheets (titles starting "Bilan") are ignored. Each batch also adds ignore patterns for
   the one-offs it meets (permits, ore sales, power lines, staff, committees, yearly campaigns);
