@@ -21,7 +21,7 @@ import {
   upsertRegistres,
   type Workspace,
 } from "@/lib/cloud/api";
-import { cloud, cloudEnabled } from "@/lib/cloud/client";
+import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
 import { type CloudBackend, cloudBackend, type SyncState } from "@/lib/cloud/sync";
 import { clearLocalRegistres, localRegistres, loadRegistres, type Registre, RELOADED, saveRegistres, setRegistreBackend } from "@/lib/registre/registre";
 
@@ -76,6 +76,18 @@ const byDate = (list: Registre[]) => [...list].sort((a, b) => (a.cree ?? "").loc
  * registers. In local mode, the app as it is.
  */
 export function CloudGate({ children }: { children: ReactNode }) {
+  if (cloudConfigError)
+    return (
+      <CenteredCard title="Configuration à corriger">
+        <p className="registre-warning" role="alert">
+          {cloudConfigError}
+        </p>
+        <p className="muted small">
+          Corrigez le fichier .env.local (en local) ou les variables d’environnement du site (Vercel), puis redémarrez l’application (npm run dev) ou
+          redéployez.
+        </p>
+      </CenteredCard>
+    );
   if (!cloudEnabled) return <CloudContext.Provider value={LOCAL}>{children}</CloudContext.Provider>;
   return <SignedIn>{children}</SignedIn>;
 }
