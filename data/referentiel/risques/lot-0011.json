@@ -1,0 +1,506 @@
+{
+ "n:decret:2010-262": {
+  "risque": "Infraction au code de la route : amende, immobilisation.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées sur les véhicules de l'entreprise."
+ },
+ "d:arrete:1991-07-02~tarifs-transport-reseau-urbain-suburbain-public-collectif-routier": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:loi:76-15": {
+  "risque": "Pour un armateur : rejet d'hydrocarbures ou de déchets en mer, sanctions (convention MARPOL).",
+  "plan": "Interdire tout rejet en mer et tenir les registres de bord exigés."
+ },
+ "n:decret:2018-933": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2015-2326": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2014-06-06~competence-territoriale-divisions-inspection-medicale-securite-travail-direction": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2011-4803": {
+  "risque": "Marchandises dangereuses expédiées par avion hors règles (classement, emballage, étiquetage, documents) : refus, sanctions, accident.",
+  "plan": "Pour tout envoi aérien de marchandises dangereuses : classer, emballer et étiqueter selon les règles, établir la déclaration de l'expéditeur et faire former le personnel qui les prépare."
+ },
+ "d:arrete:2009-07-21~fixation-modele-dossier-medicale-fiche-surveillance-speciale-aptitude": {
+  "risque": "Dossiers médicaux et fiches d'aptitude absents ou non conformes : procès-verbal, surveillance médicale non prouvée.",
+  "plan": "Vérifier que le médecin du travail tient pour chaque salarié le dossier médical et la fiche d'aptitude aux modèles fixés, et la fiche de surveillance spéciale pour les postes exposés."
+ },
+ "n:decret:2007-1366": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2004-956": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2003-10-27~fixation-requises-locaux-equipements-services-medecine-travail": {
+  "risque": "Service de médecine du travail aux locaux ou équipements insuffisants : procès-verbal.",
+  "plan": "Pour un service autonome : vérifier les locaux et équipements exigés ; pour une adhésion à un groupement : s'assurer qu'il les respecte."
+ },
+ "n:decret:2003-894": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2002-2016": {
+  "risque": "Véhicule non conforme (équipement GPL homologué et installé selon les règles) : amende, refus à la visite technique.",
+  "plan": "Vérifier sur chaque véhicule concerné : équipement GPL homologué et installé selon les règles."
+ },
+ "d:arrete:1996-01-04~affaires-sociales-janvier-fixation-delai-declaration-travailleurs-nouvellement": {
+  "risque": "Recrutement déclaré hors délai à la CNSS : pénalités, accident non couvert.",
+  "plan": "Déclarer chaque recrutement dans le délai fixé pour le secteur."
+ },
+ "d:arrete:1992-11-18~octroi-autorisations-transport-marchandises-compte-autrui-delivrance-cartes": {
+  "risque": "Transport pour autrui sans autorisation ou carte d'exploitation : immobilisation, amende (version ancienne).",
+  "plan": "Vérifier l'autorisation et les cartes d'exploitation des transporteurs employés."
+ },
+ "d:arrete:1968-10-31~reglementant-dimensions-eclairage-plaques-numeros-immatriculation-vehicules-automobiles": {
+  "risque": "Véhicule non conforme (plaques d'immatriculation conformes et éclairées) : amende, refus à la visite technique.",
+  "plan": "Vérifier sur chaque véhicule concerné : plaques d'immatriculation conformes et éclairées."
+ },
+ "d:arrete:2013-09-16~documents-constituant-dossier-obtention-attestation-prevention-renouvellement-ainsi": {
+  "risque": "Dossier d'attestation de prévention incomplet : attestation refusée ou non renouvelée, fermeture.",
+  "plan": "Constituer le dossier avec toutes les pièces exigées et demander le renouvellement avant l'échéance."
+ },
+ "d:arrete:2013-09-25~montant-redevance-exigible-delivrance-attestation-prevention": {
+  "risque": "Redevance non payée : attestation de prévention non délivrée.",
+  "plan": "Payer la redevance lors de la demande d'attestation de prévention."
+ },
+ "d:arrete:2006-07-24~modele-obtention-certificat-qualification-techniques-avancees-lutte-contre": {
+  "risque": "Pour un armateur : marins sans le certificat de lutte contre l'incendie.",
+  "plan": "Vérifier les certificats de qualification des marins concernés."
+ },
+ "d:arrete:2001-05-02~duree-formation-contenu-programmes-candidats-travail-volontaire-service": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:85-849": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1973-12-18~probeant-importation-vehicules-automobiles-occasion-israel": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "n:decret:69-453": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:69-208": {
+  "risque": "Absence de comité d'hygiène et de sécurité dans une entreprise qui y est tenue (40 salariés et plus dans l'industrie) : procès-verbal de l'inspection du travail, prévention non organisée (texte en grande partie repris par le code du travail).",
+  "plan": "Vérifier l'obligation au regard de l'effectif et du secteur ; constituer le comité ou la commission compétente en santé et sécurité, le réunir régulièrement et tenir les procès-verbaux."
+ },
+ "n:decret:67-343": {
+  "risque": "Salle de sport hors normes d'hygiène et de sécurité : fermeture.",
+  "plan": "Pour une salle privée d'éducation physique : respecter dimensions, annexes et conditions d'hygiène et de sécurité."
+ },
+ "d:arrete:1958-10-29~secretaire-sante-publique-affaires-sociales-octobre-rades-reglementant": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2020-05-12~revisant-modele-imprime-administratif-contrat-travail-travailleur-etranger": {
+  "risque": "Travailleur étranger embauché sans contrat visé : emploi illégal, amende, expulsion du salarié.",
+  "plan": "Utiliser le formulaire officiel du contrat de travail étranger et obtenir le visa du ministère de l'emploi avant toute embauche."
+ },
+ "d:arrete:2016-07-22~delivrance-cartes-exploitation-vehicules-utilises-activites-transport-public": {
+  "risque": "Véhicule de transport public ou pour autrui sans les documents ou marques exigés : amende, immobilisation.",
+  "plan": "Pour un transporteur : tenir à bord les documents d'exploitation et apposer les marques distinctives exigées."
+ },
+ "n:decret:2014-2611": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:98-2552": {
+  "risque": "Infraction à la loi 97-56 sur le transport de marchandises : amende selon barème.",
+  "plan": "Respecter les conditions du transport de marchandises (autorisations, documents) pour ne pas encourir les amendes."
+ },
+ "d:arrete:1998-03-18~approbation-guide-investisseurs-promoteurs-prives-domaine-protection-environnement": {
+  "risque": "Pas d'obligation : guide de procédures environnementales.",
+  "plan": "Garder pour information ; utile pour préparer un projet."
+ },
+ "n:decret:97-1645": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1996-02-26~formule-declarations-procedes-pouvant-provoquer-maladies-professionnelles-secteur": {
+  "risque": "Procédés à risque de maladie professionnelle non déclarés à la CNSS : amende, maladie professionnelle mal prise en charge.",
+  "plan": "Recenser les procédés pouvant provoquer des maladies professionnelles, les déclarer à la CNSS sur le formulaire et déclarer leur cessation."
+ },
+ "d:arrete:1995-01-13~tableau-reconversion-rentes-allouees-victimes-accidents-travail-maladies": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1994-12-30~modele-titre-reglement-droits-reparation-prejudices-accidents-travail": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:93-1917": {
+  "risque": "Travail de nuit des femmes hors dérogations : procès-verbal.",
+  "plan": "Si des femmes travaillent la nuit, vérifier que les dérogations prévues s'appliquent et sont respectées."
+ },
+ "n:decret:91-604": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:90-549": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:88-1437": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:88-273": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:88-132": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:81-1371": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:81-840": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:81-224": {
+  "risque": "Cotisations agricoles mal réparties ou versées : redressement.",
+  "plan": "Pour un employeur agricole : appliquer la répartition des cotisations et les échéances de versement."
+ },
+ "n:decret:76-800": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:decret:1974-01-11~janvier-minimum-inter-prefectueuse-moteur-agence-travail": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:68-158": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1959-03-18~determinant-forme-declarations-proces-verbaux-certificats-autres-documents": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-04-28~abbete-secretaire-affaires-sociales-avril-chaoual-procedure-intervention": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-04-17~valeur-rachat-rentes-allouees-victimes-accidents-travail-leurs": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:2021-510": {
+  "risque": "Conducteur sans permis de la bonne catégorie ou périmé : accident non couvert, amende, responsabilité de l'employeur.",
+  "plan": "Vérifier pour chaque conducteur la catégorie et la validité du permis, et suivre les visites médicales de renouvellement."
+ },
+ "d:arrete:1988-12-13~precautions-prendre-contre-incendies-forets": {
+  "risque": "Feu en forêt ou à proximité hors conditions : incendie, procès-verbal forestier, poursuites.",
+  "plan": "Interdire tout feu sur les terrains boisés ou à proximité du 1er mai au 31 octobre, sauf dans les conditions prévues."
+ },
+ "n:loi:64-14": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1963-08-19~derogation-ramadan-mesures-protection-contre-incendies-bordure-ferrees": {
+  "risque": "Dérogation ancienne et temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1961-07-17~derogation-ramadan-mesures-protection-contre-incendies-bordure-voies": {
+  "risque": "Dérogation ancienne et temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1959-06-03~derogation-rumadan-mesures-protection-contre-incendies-bordure-voies": {
+  "risque": "Dérogation ancienne et temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1958-07-07~derogation-ramadan-prescrivant-diverses-mesures-protection-contre-incendies": {
+  "risque": "Dérogation ancienne et temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2006-07-26~approbation-calendriers-delais-convention-documents-specifiques": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2004-01-02~equipement-materiel-ferroviaire-normes-securite-commodite-auxquelles-obeit": {
+  "risque": "Pour un exploitant ferroviaire : matériel non conforme, sanctions.",
+  "plan": "Vérifier les équipements et normes de sécurité du matériel ferroviaire."
+ },
+ "d:arrete:2002-08-02~modele-certificat-reconnaissance-caractere-economique-technique-cessation-travail": {
+  "risque": "Cessation d'activité sans certificat : droits des salariés non ouverts, litiges.",
+  "plan": "En cas de fermeture ou de cessation pour raisons économiques ou techniques, demander le certificat selon le modèle."
+ },
+ "n:arrete:2002-32": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2002-02-27~utilisation-transformation-permis-conduire-etrangers": {
+  "risque": "Salarié conduisant avec un permis étranger non valable : accident non couvert, amende.",
+  "plan": "Vérifier la validité en Tunisie des permis étrangers des conducteurs et faire échanger ceux qui doivent l'être."
+ },
+ "n:decret:2011-1143": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2004-2768": {
+  "risque": "Contrat de transport ou de location de véhicule sans les clauses du contrat-type : litiges, sanctions.",
+  "plan": "Utiliser les contrats-types pour le transport de marchandises pour autrui et la location de véhicules avec chauffeur."
+ },
+ "n:decret:2000-143": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2000-141": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2000-150": {
+  "risque": "Infraction au code de la route : amende, immobilisation.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées sur les véhicules de l'entreprise."
+ },
+ "n:decret:2000-154": {
+  "risque": "Infraction au code de la route : amende, immobilisation.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées sur les véhicules de l'entreprise."
+ },
+ "d:arrete:1998-12-22~modele-indication-signalant-endroits-lesquels-interdit-fumer": {
+  "risque": "Panneaux « interdit de fumer » absents ou non conformes : amende.",
+  "plan": "Afficher le panneau au modèle officiel dans les lieux où il est interdit de fumer."
+ },
+ "d:arrete:1996-08-06~normes-hygiene-inspection-sanitaire-veterinaire-etablissements-industriels-abaillage": {
+  "risque": "Abattoir de volailles hors normes d'hygiène ou sans inspection : retrait de l'agrément, saisie.",
+  "plan": "Respecter les normes d'hygiène et d'équipement et faire inspecter les abattages par le service vétérinaire."
+ },
+ "d:arrete:1971-01-29~paiement-amendes-forfaitaires-contraignances-reglements-hygiene-police-sanitaire": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1970-03-12~abbete-sante-publique-modele-carte-tettre-destinee-maladies": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1966-01-08~frisant-vitesses-maxima-vehicules-automobiles-poids-superieur-tonnes": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1966-01-08~dispositifs-sonores-pourvus-vehicules-automobiles": {
+  "risque": "Véhicule non conforme (avertisseur sonore de type agréé) : amende, refus à la visite technique.",
+  "plan": "Vérifier sur chaque véhicule concerné : avertisseur sonore de type agréé."
+ },
+ "d:arrete:1998-07-29~revalorisation-pensions-vieillesse-invalidite-survivants-accordees-cadre-regime": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1998-04-13~fixation-delai-declaration-travailleurs-nouvellement-recrutes-secteurs-professions": {
+  "risque": "Recrutement déclaré hors délai à la CNSS : pénalités, accident non couvert.",
+  "plan": "Déclarer chaque recrutement dans le délai fixé pour le secteur."
+ },
+ "d:arrete:1995-07-07~classement-travailleurs-salaries-secteurs-agricole": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1993-11-10~exercice-profession-moniteur-ainsi-exploitation-etablissement-enseignement-conduite": {
+  "risque": "Auto-école exploitée hors conditions : fermeture.",
+  "plan": "Pour une auto-école : respecter les conditions de locaux, de véhicules et de personnel."
+ },
+ "d:arrete:1993-05-06~acces-personnes-handicapees-moyens-transport-public-collectif-exploites": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1991-03-30~prise-charge-soins-thermaux-organismes-securite-sociale": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1987-01-06~contribution-caisse-nationale-retraite-prevoyance-sociale-securite-financement": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1984-09-17~admission-franchise-temporaire-effets-objets-mobiliers-vehicules-automobiles": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1980-07-12~prescriptions-auxquelles-conformer-toute-personne-autorisee-exploiter-service": {
+  "risque": "Exploitant d'un service de transport de personnes qui ne respecte pas ses obligations : retrait de l'autorisation.",
+  "plan": "Respecter horaires, véhicules, tarifs et règles de sécurité de l'autorisation."
+ },
+ "d:arrete:1960-03-09~fixation-duree-travail-ouvriers-salines": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1968-07-12~derogations-regles-generales-repos-hebdomadaire-concerne-specialistes-occupes": {
+  "risque": "Repos hebdomadaire non accordé par roulement dans une usine à feu continu : procès-verbal.",
+  "plan": "Si l'usine fonctionne en continu, organiser le repos hebdomadaire par roulement des ouvriers concernés."
+ },
+ "d:arrete:1963-05-15~liste-maladies-longue-duree-prevues-securite-sociale": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "n:arrete:60-30": {
+  "risque": "Adhésion tardive à la CNSS : taxation d'office.",
+  "plan": "Affilier l'entreprise et ses salariés à la CNSS dès le début de l'activité."
+ },
+ "d:arrete:1961-05-08~determinant-procedure-agrement-controleurs-caisse-nationale-securite-sociale": {
+  "risque": "Refus de contrôle par un contrôleur agréé de la CNSS : sanctions.",
+  "plan": "Accueillir les contrôleurs de la CNSS et tenir à disposition les documents de paie."
+ },
+ "d:arrete:1959-07-10~reglementant-dimensions-eclairage-plaques-numeros-immatriculation-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-03-19~regles-evaluation-puissance-administrative-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1957-12-02~reglementant-dimensions-eclairage-plaques-numeros-immatriculation-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2026-07-20~entree-vigueur-modele-definitif-carte-travailleur-agricole-destinee": {
+  "risque": "Ouvriers agricoles transportés sans carte de travailleur agricole : amende, immobilisation.",
+  "plan": "Faire établir la carte au modèle définitif pour chaque ouvrier agricole transporté."
+ },
+ "d:arrete:2025-05-19~transports-utilisation-vehicules-transport-propre-compte-categorie-effectuer": {
+  "risque": "Usage de véhicules pour propre compte hors cas autorisés : amende, immobilisation.",
+  "plan": "Vérifier que l'usage des véhicules pour propre compte reste dans les cas et conditions autorisés."
+ },
+ "d:arrete:2019-02-19~fixation-tarif-minima-maximal-services-transport-routier-marchandises": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:98-2327": {
+  "risque": "Location de véhicule de transport de marchandises sans contrat conforme : litiges, sanctions.",
+  "plan": "Utiliser le contrat-type de location."
+ },
+ "n:decret:98-2328": {
+  "risque": "Contrat de transport pour autrui sans les clauses obligatoires : litiges, sanctions.",
+  "plan": "Utiliser le contrat-type de transport de marchandises pour compte d'autrui."
+ },
+ "n:decret:98-573": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:57-04": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:74-784": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:65-507": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2020-07-10~attribution-prime-complementaire-exceptionnelle-temporaire-profit-personnes-montant": {
+  "risque": "Pas d'obligation nouvelle pour l'établissement : régime ou prestation de sécurité sociale propre à d'autres catégories.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:95-30": {
+  "risque": "Pas de commission consultative d'entreprise ou de délégués élus alors que l'effectif l'impose : délit d'entrave, procès-verbal de l'inspection du travail.",
+  "plan": "À partir de 40 salariés, organiser l'élection et constituer la commission consultative d'entreprise paritaire, la réunir et tenir ses procès-verbaux ; en dessous, faire élire les délégués du personnel si requis."
+ },
+ "d:arrete:2013-01-18~distinctives-vehicules-transport-public-regulier-personnes": {
+  "risque": "Véhicule de transport public ou pour autrui sans les documents ou marques exigés : amende, immobilisation.",
+  "plan": "Pour un transporteur : tenir à bord les documents d'exploitation et apposer les marques distinctives exigées."
+ },
+ "n:arrete:2004-33": {
+  "risque": "Personnel de bord sans respect de ses obligations : sanctions de l'exploitant.",
+  "plan": "Former et encadrer le personnel de bord des véhicules de transport public et touristique."
+ },
+ "n:decret:2008-2480": {
+  "risque": "Véhicule de transport public ou pour autrui sans les documents ou marques exigés : amende, immobilisation.",
+  "plan": "Pour un transporteur : tenir à bord les documents d'exploitation et apposer les marques distinctives exigées."
+ },
+ "d:arrete:1998-07-29~tarifs-abonnements-scolaires-reseaux-urbains-suburbains-transport-public": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1997-11-24~marques-distinctives-vehicules-affectes-transport-routier-marchandises-compte": {
+  "risque": "Véhicule de transport public ou pour autrui sans les documents ou marques exigés : amende, immobilisation.",
+  "plan": "Pour un transporteur : tenir à bord les documents d'exploitation et apposer les marques distinctives exigées."
+ },
+ "d:arrete:1996-01-11~droit-visite-technique-vehicules": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1991-12-16~caracteristiques-insigne-doivent-porter-vehicules-automobiles-utilisant-petrole": {
+  "risque": "Véhicule non conforme (insigne GPL apposé) : amende, refus à la visite technique.",
+  "plan": "Vérifier sur chaque véhicule concerné : insigne GPL apposé."
+ },
+ "d:arrete:1989-08-25~marques-distinctives-doivent-porter-vehicules-automobiles-routiers-personnes": {
+  "risque": "Véhicule de transport public ou pour autrui sans les documents ou marques exigés : amende, immobilisation.",
+  "plan": "Pour un transporteur : tenir à bord les documents d'exploitation et apposer les marques distinctives exigées."
+ },
+ "d:arrete:1957-12-20~composition-fonctionnement-attributions-commissions-consultatives-hopitaux-regionaux-auxiliaires": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1985-04-13~equipement-vehicules-automobiles-ceintures-securite-ancrages": {
+  "risque": "Véhicule non conforme (ceintures de sécurité et ancrages présents et en état) : amende, refus à la visite technique.",
+  "plan": "Vérifier sur chaque véhicule concerné : ceintures de sécurité et ancrages présents et en état."
+ },
+ "d:arrete:1982-07-08~approuvant-disposition-complementaire-procedure-applicable-conversion-monnaie-nationale": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1969-01-03~stage-probatoire-auquel-astreints-nouveaux-titulaires-permis-conduire": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1968-05-20~titre-monsieur-enseignement-conduite-vehicules-moteur": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-06-10~freinage-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-05-05~classification-infractions-route": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-04-18~amenagement-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1967-02-23~indication-vitesses-maximes-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1963-03-11~fixation-maximaux-marque-brute-applicables-revient-vehicules-automobiles": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1959-04-20~salar-renouvellement-permis-conduire-cartes-roses": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-08-23~renouvellement-permis-conduire-cartes-roses": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1995-06-08~delimitation-territoire-divisions-inspection-travail-direction-regionales-affaires": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1977-04-27~commissions-consultatives-aupres-bureaux-regionaux-caisse-nationale-securite": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2004-06-08~composition-fonctionnement-commission-regionale-chargee-executer-directives-propositions": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1984-12-29~composition-fonctionnement-commissions-techniques-speciales-retrait-permis-conduire": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ }
+}
