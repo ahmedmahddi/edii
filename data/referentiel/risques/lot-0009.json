@@ -1,0 +1,522 @@
+{
+ "d:arrete:1979-05-07~suspension-taxation-viande-ovine": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1977-10-22~forme-modele-ainsi-obtention-brevets-certificats-exiges-exercice": {
+  "risque": "Mécanicien de navire de pêche sans brevet : immobilisation du navire.",
+  "plan": "Pour un armateur : vérifier les brevets des mécaniciens embarqués."
+ },
+ "d:arrete:1975-09-12~liberant-importation-accumulateurs-electriques-montes-vehicules": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1971-07-25~communication-appellation-superieurs-tunisie": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1975-05-14~fonctionnement-agences-voyages": {
+  "risque": "Agence de voyages sans cautionnement suffisant : retrait de la licence.",
+  "plan": "Constituer et maintenir le cautionnement exigé (garantie bancaire ou assurance)."
+ },
+ "d:arrete:1975-04-08~accordant-matieres-premieres-exportation-utilisees-fabrication-appareils-sanitaires": {
+  "risque": "Pas d'obligation : régime douanier facultatif (admission temporaire, drawback).",
+  "plan": "Si l'entreprise y recourt, respecter les conditions de réexportation et tenir la comptabilité matières."
+ },
+ "d:arrete:1976-02-14~medicaments-presents-etranges-organismes-caractere-social": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1975-01-16~tarifs-hospitalisation-formations-hospitalieres-cliniques-intra": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1974-12-23~amenagement-tarifs-transport-phosphates-reseau": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1974-05-25~circuits-agences-voyages-licence": {
+  "risque": "Circuit vendu sans dépliant descriptif : sanction, litige avec les clients.",
+  "plan": "Publier pour chaque circuit un dépliant avec programme, prix et conditions."
+ },
+ "d:arrete:1974-02-16~exigees-approbation-plans-construction-etablissements-tourisme": {
+  "risque": "Établissement de tourisme construit sans plans approuvés : arrêt des travaux, refus d'ouverture.",
+  "plan": "Faire approuver les plans aux trois phases avec les pièces exigées."
+ },
+ "d:arrete:1972-09-04~emballages-matieres-plastiques": {
+  "risque": "Réutilisation d'emballages plastiques pour des aliments : contamination, saisie, sanctions.",
+  "plan": "Ne pas réutiliser d'emballages plastiques usagés pour les produits alimentaires."
+ },
+ "d:arrete:1971-03-18~commercialisation-interieure-fruits-legumes-frais": {
+  "risque": "Fruits et légumes vendus sans catégorie ou mal présentés : saisie, amende.",
+  "plan": "Classer et présenter les fruits et légumes par catégorie de qualité et de calibre."
+ },
+ "d:arrete:1970-09-19~fixation-capital-minimum-requis-exercice-commerce-distribution-societes": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1970-07-21~fixation-capital-minimum-requis-exercice-commerce-distribution": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1968-10-02~avances-remboursables-interet-consentir-exploitants-fonds-boulangerie-fabriques": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1968-05-14~regime-entrepot-industriel": {
+  "risque": "Pas d'obligation : régime douanier facultatif (admission temporaire, drawback).",
+  "plan": "Si l'entreprise y recourt, respecter les conditions de réexportation et tenir la comptabilité matières."
+ },
+ "d:arrete:1968-01-13~homologuant-propositions-commission-normalisation-materiaux-construction": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1967-09-22~classification": {
+  "risque": "Vin vendu sous une classe qu'il ne remplit pas : saisie (texte ancien).",
+  "plan": "Faire analyser les vins (degré, acidité, soufre) avant de les classer."
+ },
+ "d:arrete:1966-09-14~inscription-registre-varietes-cereales-production-commercialisation-circulation-semences": {
+  "risque": "Semences de céréales de variété non inscrite : saisie.",
+  "plan": "N'utiliser ou ne vendre que des variétés inscrites au registre."
+ },
+ "d:arrete:1965-06-21~admission-temporaire-tissus-destines-fabrication-confectionnes": {
+  "risque": "Pas d'obligation : régime douanier facultatif (admission temporaire, drawback).",
+  "plan": "Si l'entreprise y recourt, respecter les conditions de réexportation et tenir la comptabilité matières."
+ },
+ "d:arrete:1961-03-29~classement-muscats-tunisie-appellation-controlee-titre-annee": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:arrete:60-35": {
+  "risque": "Commerce de boissons à emporter sans autorisation : fermeture.",
+  "plan": "Déposer la demande d'autorisation selon la procédure fixée."
+ },
+ "d:arrete:1961-01-14~abbete-secretaire-industrie-transports-janvier-redjeb-tarifs-location": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1960-05-16~vente-quinine-debits-tabac": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1960-04-06~attribution-bonifications-interets-proprietaires-gerants-hotels-tourisme": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1959-08-18~inclutant-populations-exportation-cuirs": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1959-07-16~avril-djoumada-controle-colportage-vente-produits-forestiers": {
+  "risque": "Produits forestiers colportés sans permis : saisie, procès-verbal.",
+  "plan": "Obtenir le permis et la justification d'origine pour le colportage des produits forestiers."
+ },
+ "d:arrete:1959-02-26~interdisant-importation-tomates-purees": {
+  "risque": "Mesure ancienne de protection des importations, levée depuis ; risque limité.",
+  "plan": "Garder pour information ; vérifier le régime actuel d'importation."
+ },
+ "d:arrete:1959-02-05~associant-regions-drawback-autres-utilisations-fabrication-constructions-metalliques": {
+  "risque": "Pas d'obligation : régime douanier facultatif (admission temporaire, drawback).",
+  "plan": "Si l'entreprise y recourt, respecter les conditions de réexportation et tenir la comptabilité matières."
+ },
+ "d:arrete:1958-10-07~jort-1958-084-1269-3": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1958-08-04~jort-1958-063-22-0": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-05-09~tarifs-arbitrage-commissions-huiles-olive": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-04-22~nouveaux-droits-percevoir-traitement-coquillages-epuration-station-geanographique": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1958-03-27~caracteristiques-obligatoires-semoule-extraite-couscous-farines-panifishes-pates": {
+  "risque": "Semoules, farines ou pâtes hors caractéristiques : saisie (texte ancien, à rapprocher des normes en vigueur).",
+  "plan": "Faire analyser les produits par rapport aux caractéristiques en vigueur."
+ },
+ "d:arrete:1958-01-13~prohibant-malfacon-fabrication-chaussure": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1957-11-19~ventes-terme-livrer-huile-olive-huiles-grignons": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1957-11-08~colportage-vente-liege": {
+  "risque": "Liège colporté sans permis : saisie.",
+  "plan": "Obtenir le permis et la justification d'origine pour le transport et la vente du liège."
+ },
+ "d:arrete:1958-10-23~arbete-secretaire-finances-octobre-rabia-admission-temporaire-frais": {
+  "risque": "Pas d'obligation : régime douanier facultatif (admission temporaire, drawback).",
+  "plan": "Si l'entreprise y recourt, respecter les conditions de réexportation et tenir la comptabilité matières."
+ },
+ "d:arrete:1990-12-10~fixation-projets-batiments-civils-caractere-national-departemental-regional": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2023-05-22~admission-retraite-agents-travaillant-entreprises-affiliees-caisse-nationale": {
+  "risque": "Âge de retraite anticipée mal appliqué aux postes pénibles : litiges, droits perdus par les salariés.",
+  "plan": "Vérifier si des postes de l'entreprise relèvent du secteur visé et informer les salariés de leur âge de départ."
+ },
+ "d:arrete:2022-10-12~fixation-redevances-assainissement": {
+  "risque": "Redevances d'assainissement non payées : coupure, recouvrement.",
+  "plan": "Vérifier sur les factures les redevances d'assainissement appliquées à la catégorie du site et suivre la consommation d'eau qui les détermine."
+ },
+ "d:arrete:2020-08-07~etiquetage-composition-chaussures-similaires-leurs-exigences-securite": {
+  "risque": "Chaussures sans étiquetage de composition ou non sûres : retrait, saisie.",
+  "plan": "Étiqueter la composition (dessus, doublure, semelle) et vérifier les exigences de sécurité de chaque modèle."
+ },
+ "d:arrete:2018-05-18~nombre-habitants-requis-determiner-agglomerations-urbaines-necessitant-elaboration": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2015-05-06~liste-domaines-activites-polluantes-lesquels-exploitants-installations-operant": {
+  "risque": "Activité listée sans surveillance continue des émissions ou sans transmission des résultats : mise en demeure, sanctions de la loi 2007-34.",
+  "plan": "Vérifier si l'activité du site figure sur la liste ; si oui, installer un système de mesure en continu à la source, l'étalonner et transmettre les résultats à l'ANPE."
+ },
+ "d:arrete:2011-08-15~octroi-retrait-suspension-label-qualite-tunisien-denrees-alimentaires": {
+  "risque": "Démarche volontaire : risque de retrait ou de suspension du label.",
+  "plan": "Si l'entreprise détient le label, respecter son cahier des charges et les audits de l'organisme de gestion."
+ },
+ "n:decret:2007-1104": {
+  "risque": "Plants de pomme de terre non certifiés : saisie.",
+  "plan": "Pour un producteur de plants : appliquer les normes de production et de certification modifiées."
+ },
+ "d:arrete:2006-03-08~approbation-cahiers-charges-environnementales-maitre-ouvrage-petitionnaire-respecter": {
+  "risque": "Projet de l'annexe II réalisé sans cahier des charges environnemental signé et respecté : refus d'autorisation, mise en demeure, arrêt des travaux.",
+  "plan": "Identifier le cahier des charges qui correspond à l'activité, le signer et le déposer auprès de l'ANPE avant le démarrage, puis en appliquer et en documenter les mesures."
+ },
+ "d:arrete:2002-05-21~sanitaires-techniques-generales-traitement-rayonnements-ionisants-denrees-alimentaires": {
+  "risque": "Denrées ionisées hors installation agréée ou sans étiquetage : saisie, sanctions.",
+  "plan": "Ne faire ioniser que dans une installation agréée, aux doses autorisées, et étiqueter « traité par ionisation »."
+ },
+ "d:arrete:1997-10-08~chargement-transport-dechargement-matieres-explosives-utilisees-civiles-normes": {
+  "risque": "Transport d'explosifs hors règles : explosion, saisie, sanctions (version remplacée en 2000).",
+  "plan": "Appliquer les règles de transport des explosifs en vigueur (arrêté de 2000)."
+ },
+ "n:arrete:90-56": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1997-05-29~minimales-qualification-pharmacien-responsable-fabrication-etablissement-medicaments-usage": {
+  "risque": "Pharmacien responsable sans la qualification exigée : suspension de la licence.",
+  "plan": "Vérifier diplôme et expérience du pharmacien responsable de la fabrication."
+ },
+ "d:arrete:1980-03-25~designation-parties-chaussures-pouvant-fabriquees-matiere-synthese-pratiques": {
+  "risque": "Chaussures en matière synthétique non autorisée ou non marquées : saisie.",
+  "plan": "Vérifier les parties autorisées et le marquage de la composition."
+ },
+ "n:decret:65-380": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1961-04-08~protection-madrages-campagne-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:2026-01-26~attributions-composition-fonctionnement-cellules-gestion-urgences-sanitaires-structures": {
+  "risque": "Établissement de santé sans cellule de gestion des urgences sanitaires : désorganisation en crise, sanctions.",
+  "plan": "Pour un établissement de santé : créer la cellule, désigner ses membres et préparer ses plans de crise."
+ },
+ "d:arrete:2025-11-20~dates-ouverture-fermeture-campagne-cueillette-transformation-olives": {
+  "risque": "Huilerie en activité hors dates de la campagne : fermeture, amende.",
+  "plan": "Respecter les dates d'ouverture et de fermeture fixées pour la région."
+ },
+ "d:arrete:2025-09-30~montant-perception-contribution-operations-controle-phytosanitaire-analyse-homologation": {
+  "risque": "Contribution non payée : contrôle ou homologation refusés.",
+  "plan": "Payer les contributions dues pour chaque contrôle phytosanitaire ou homologation."
+ },
+ "d:arrete:2024-01-31~fixation-criteres-designation-concepteurs-realisation-projets-batiments-civils": {
+  "risque": "Pour un architecte ou bureau d'études : candidature écartée si les critères ne sont pas remplis.",
+  "plan": "Préparer les dossiers de candidature selon les critères de désignation."
+ },
+ "d:arrete:2023-11-23~methodes-specifiques-multiplication-production-semences-cereales-selectionnees-titre": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:2023-06-09~approbation-directeur-centres-collecte-transport-frais": {
+  "risque": "Centre de collecte de lait hors plan directeur : refus d'autorisation.",
+  "plan": "Vérifier l'inscription au plan directeur 2022-2026 avant tout nouveau centre."
+ },
+ "d:arrete:2016-02-19~exigences-phytosanitaires-ainsi-controle-vegetaux-produits-importes-tunisie": {
+  "risque": "Végétaux importés sans certificat phytosanitaire ou non conformes : refoulement, destruction.",
+  "plan": "Exiger le certificat phytosanitaire original pour chaque importation de végétaux et vérifier les exigences propres au produit."
+ },
+ "n:decret:2010-2525": {
+  "risque": "Démarche volontaire : label refusé si le cahier des charges n'est pas tenu.",
+  "plan": "Si l'entreprise vise le label, constituer le dossier et respecter le cahier des charges."
+ },
+ "n:decret:2003-1718": {
+  "risque": "Matériaux au contact des aliments non conformes : migration de substances, retrait, saisie.",
+  "plan": "Exiger des fournisseurs la déclaration de conformité « pour contact alimentaire » de chaque emballage ou équipement."
+ },
+ "n:decret:2002-820": {
+  "risque": "Denrées ionisées sans autorisation ou étiquetage : saisie.",
+  "plan": "Vérifier l'autorisation et l'étiquetage des denrées ionisées achetées ou vendues."
+ },
+ "n:decret:2002-668": {
+  "risque": "Refus d'accès ou de documents aux agents du contrôle vétérinaire : blocage des lots, sanctions.",
+  "plan": "Donner accès aux agents et tenir à disposition les documents exigibles lors des contrôles à l'import ou à l'export."
+ },
+ "n:decret:99-2363": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:99-894": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:98-1629": {
+  "risque": "Marché de gros créé hors plan directeur : refus d'autorisation.",
+  "plan": "Vérifier l'inscription au plan directeur avant tout projet de marché de gros."
+ },
+ "n:decret:95-1474": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:95-63": {
+  "risque": "Exportation ou importation de déchets dangereux sans notification et consentement préalables : saisie, sanctions, renvoi aux frais de l'auteur.",
+  "plan": "Avant tout transfert transfrontière de déchets dangereux, faire la notification et obtenir le consentement écrit des États concernés via l'ANPE."
+ },
+ "n:loi:95-51": {
+  "risque": "Pour une installation pétrolière ou portuaire : absence de plan d'urgence contre la pollution par les hydrocarbures.",
+  "plan": "Si le site manipule des hydrocarbures en zone portuaire ou côtière, disposer d'un plan d'urgence antipollution et l'exercer."
+ },
+ "n:decret:95-417": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:94-1938": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:94-816": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:93-1631": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:93-1146": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:90-2165": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:90-1809": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:90-1214": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:90-1083": {
+  "risque": "Collecte de céréales sans convention avec l'Office : sanctions.",
+  "plan": "Pour un collecteur mandataire : respecter la convention et le cahier des charges de l'Office des céréales."
+ },
+ "n:decret:89-1836": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:89-875": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:88-730": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:87-273": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:85-850": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:85-226": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:84-793": {
+  "risque": "Canalisation d'hydrocarbures posée ou exploitée sans autorisation ou servitudes : arrêt, sanctions.",
+  "plan": "Pour un exploitant de canalisation : obtenir l'autorisation et respecter les servitudes ; pour un riverain : respecter les servitudes."
+ },
+ "n:decret:84-219": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:circulaire:83-21": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:82-1546": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:82-1329": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:82-1314": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:circulaire:81-13": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:81-847": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1977-06-16~tarifs-ville-energie-electrique-rectificatif": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:loi:76-17": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:73-9": {
+  "risque": "Rejet d'hydrocarbures en mer depuis un navire : sanctions.",
+  "plan": "Pour un armateur : interdire tout rejet d'hydrocarbures en mer et tenir le registre des hydrocarbures."
+ },
+ "n:decret:70-542": {
+  "risque": "Dégrèvement des carburants agricoles sans déclarations : remboursement réclamé.",
+  "plan": "Si l'exploitant en bénéficie, souscrire les déclarations de matériel et de consommations."
+ },
+ "n:decret:69-205": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:69-21": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:69-22": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:arrete:2002-693": {
+  "risque": "Huiles lubrifiantes ou filtres importés sans organisation de leur reprise : sanctions du décret 2002-693.",
+  "plan": "Pour un importateur ou metteur sur le marché d'huiles ou de filtres de la liste : organiser ou financer leur reprise et justifier les quantités."
+ },
+ "n:loi:97-56": {
+  "risque": "Transport de marchandises pour autrui sans autorisation ou sans documents : immobilisation, amende ; pour le transport pour propre compte, véhicules ou documents non conformes.",
+  "plan": "Vérifier l'autorisation des transporteurs employés ; pour le transport pour propre compte, tenir les documents de bord et respecter les conditions des véhicules."
+ },
+ "n:loi:85-93": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1959-11-20~protection-denrees-alimentaires-mises-vente-exposees-transportees": {
+  "risque": "Denrées consommées crues exposées sans protection : contamination, amende.",
+  "plan": "Protéger les denrées exposées ou transportées (vitrines, couvercles, emballages)."
+ },
+ "d:arrete:1966-01-08~janvier-mesure-bruit-produit-vehicule-automobile": {
+  "risque": "Véhicule trop bruyant : amende, refus à la visite technique.",
+  "plan": "Entretenir les silencieux des véhicules."
+ },
+ "n:decret:2005-117": {
+  "risque": "Infraction au code de la route : amende.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées."
+ },
+ "n:decret:2001-2282": {
+  "risque": "Infraction au code de la route : amende.",
+  "plan": "Rappeler aux conducteurs les règles et suivre les infractions relevées."
+ },
+ "n:decret:2001-2281": {
+  "risque": "Conducteur téléphonant en main : amende, accident.",
+  "plan": "Interdire par consigne écrite l'usage du téléphone tenu en main pendant la conduite des véhicules de l'entreprise."
+ },
+ "n:decret:2000-152": {
+  "risque": "Véhicule circulant sans permis, carte grise, assurance, visite ou vignette à bord : amende, immobilisation.",
+  "plan": "Tenir dans chaque véhicule les pièces obligatoires à jour et en contrôler la validité."
+ },
+ "n:loi:2025-17": {
+  "risque": "Mesures fiscales 2026 mal appliquées : redressement, pénalités.",
+  "plan": "Faire analyser par le service comptable ou le conseiller fiscal les mesures 2026 qui touchent l'entreprise (taux, contributions, avantages) et mettre à jour les paramètres de paie et de facturation."
+ },
+ "d:arrete:2025-06-18~cahier-charges-exercice-activite-collecte-cereales": {
+  "risque": "Centre de collecte non conforme à l'échéance prolongée : arrêt de l'activité.",
+  "plan": "Planifier la mise en conformité au cahier des charges avant la nouvelle échéance."
+ },
+ "d:arrete:2025-03-11~contenu-forme-information-instance-nationale-securite-sanitaire-produits": {
+  "risque": "Entreprise alimentaire qui n'a pas informé l'INSSPA : sanctions de la loi 2019-25, activité non reconnue.",
+  "plan": "Déclarer l'activité à l'INSSPA sur le formulaire fixé et l'informer de tout changement."
+ },
+ "d:arrete:2023-09-18~prorogation-delai-premier-janvier-fevrier-inscription-mentions-doivent": {
+  "risque": "Mesure de l'année ou temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:2020-10-13~annulation-industrie-petites-moyennes-entreprises-commerce-janvier-verification": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2015-06-26~tarifs-analyses-produits-alimentaires-realises-institut-national-zouhair": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2012-05-12~designation-laboratoire-conservation-etalons-nationaux-mesure-domaine-metrologie": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2008-06-04~classification-pesticides-usage-agricole-liste-extremement-dangereux": {
+  "risque": "Utilisation ou vente de pesticides extrêmement dangereux hors restrictions : intoxication, saisie, sanctions.",
+  "plan": "Vérifier la classe de toxicité des pesticides utilisés ou vendus et appliquer les restrictions aux produits extrêmement dangereux (stockage, EPI, personnel formé)."
+ },
+ "d:arrete:2006-12-22~fixation-montant-reglement-prime-stockage-produits-petroliers": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:arrete:73-3": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2006-10-19~modele-obtention-certificat-formation-navires-citernes-produits-chimiques": {
+  "risque": "Officier sans certificat sur un navire-citerne chimique : immobilisation.",
+  "plan": "Pour un armateur : vérifier les certificats de formation des officiers."
+ },
+ "d:arrete:2006-05-03~stocks-securite-produits-petroliers": {
+  "risque": "Stocks de sécurité non constitués : sanctions, retrait de l'autorisation.",
+  "plan": "Pour un distributeur : constituer et déclarer les stocks de sécurité exigés."
+ },
+ "d:arrete:2005-05-09~fixation-perimetre-protection-marches-interet-national-produits-agricoles": {
+  "risque": "Commerce de gros dans le périmètre protégé : sanctions.",
+  "plan": "Vérifier que l'activité de gros n'est pas exercée dans le périmètre de protection d'un marché d'intérêt national."
+ },
+ "d:arrete:2000-07-14~documents-devant-tenus-exploitant-magasin-depot-approvisionnement-matieres": {
+  "risque": "Dépôt d'explosifs sans registre ou documents : retrait de l'autorisation, sanctions.",
+  "plan": "Tenir sur place l'autorisation, le registre des entrées et sorties, les plans et consignes, et les présenter aux contrôles."
+ },
+ "d:arrete:2000-03-18~classification-matieres-explosives": {
+  "risque": "Explosif stocké ou transporté selon une mauvaise classe : explosion, sanctions.",
+  "plan": "Identifier la classe de chaque explosif détenu et appliquer les règles de stockage et de transport correspondantes."
+ },
+ "d:arrete:1957-10-31~campagne-oleicole-annee-rectificatif": {
+  "risque": "Campagne oléicole ancienne : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:1994-12-21~modele-formules-declaration-travailleurs-nouvellement-recrutes-trimestrielle-salaires": {
+  "risque": "Recrutements ou salaires non déclarés à la CNSS : pénalités, absence de couverture.",
+  "plan": "Déclarer chaque recrutement et les salaires trimestriels à la CNSS (aujourd'hui par voie électronique)."
+ },
+ "n:decret:2002-335": {
+  "risque": "Diagnostic de la consommation d'eau non réalisé au-delà du seuil : sanctions, surconsommation.",
+  "plan": "Comparer la consommation annuelle d'eau du site au seuil de son secteur et, s'il est dépassé, faire réaliser le diagnostic périodique par un expert agréé."
+ },
+ "d:arrete:1998-07-29~redevances-assainissement": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ }
+}
