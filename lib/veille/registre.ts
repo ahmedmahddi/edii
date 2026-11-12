@@ -180,3 +180,43 @@ export function fillRegister(workbook: ExcelJS.Workbook, rows: RegisterRow[], to
   }
   ws.autoFilter = { from: "A3", to: `K${Math.max(3, ws.rowCount)}` };
 }
+
+/** One recorded evaluation, for the "Historique des évaluations" sheet. */
+export interface HistoriqueRow {
+  texte: string;
+  ref: string;
+  date: string; // ISO
+  conformite: string;
+  par: string;
+  commentaire: string;
+  preuves: string[];
+}
+
+export function historiqueRows(l: Ligne): HistoriqueRow[] {
+  const ref = [l.texte.type, l.texte.numero ? `n° ${l.texte.numero}` : ""].filter(Boolean).join(" ");
+  return (l.historique ?? []).map((e) => ({
+    texte: l.texte.titre,
+    ref,
+    date: e.date,
+    conformite: CONFORMITE[e.conformite] ?? "À évaluer",
+    par: e.par,
+    commentaire: e.commentaire,
+    preuves: e.preuves.map((p) => p.url ?? p.nom),
+  }));
+}
+
+/** A second sheet: every evaluation recorded, text by text, newest first: the audit trail. */
+export function fillHistorique(workbook: ExcelJS.Workbook, rows: HistoriqueRow[]): void {
+  const ws = workbook.addWorksheet("Historique des évaluations", { views: [{ state: "frozen", ySplit: 1 }] });
+  const font = { name: "Times New Roman", size: 10 };
+  const thin = { style: "thin" as const };
+  const border = { top: thin, left: thin, bottom: thin, right: thin };
+  ws.columns = [{ width: 14 }, { width: 60 }, { width: 24 }, { width: 16 }, { width: 24 }, { width: 50 }, { width: 50 }];
+  const header = ws.addRow(["Date", "Texte", "Référence", "Conformité", "Évalué par", "Commentaire", "Preuves"]);
+  header.eachCell((cell) => Object.assign(cell, { font: { ...font, bold: true }, border, fill: { type: "pattern", pattern: "solid", fgColor: { argb: "FFFCD5B4" } } }));
+  for (const r of [...rows].sort((a, b) => b.date.localeCompare(a.date))) {
+    const row = ws.addRow([dmy(r.date), r.texte, r.ref, r.conformite, r.par, r.commentaire, r.preuves.join("\n")]);
+    row.eachCell({ includeEmpty: true }, (cell) => Object.assign(cell, { font, border, alignment: { vertical: "top", wrapText: true } }));
+  }
+  ws.autoFilter = { from: "A1", to: `G${Math.max(1, ws.rowCount)}` };
+}

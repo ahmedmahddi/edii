@@ -427,6 +427,37 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Step 4 (12 November): the compliance workflow, in a register rebuilt as a checklist.**
+
+* Model (`lib/registre/registre.ts`): `Evaluation { id, date, enregistre, conformite, commentaire,
+  par, preuves }`, `Preuve { id, nom, url? | path?, type?, ajoute, par? }`; `Ligne.historique`,
+  `Ligne.preuves`, `Ligne.actionFaite`. `evaluer(l, {...})` sets conformite/evalue, appends to the
+  history, clears actionFaite on NC and sets it on a C that follows an NC or a started action plan.
+  `preuveLien`, `preuveFichier`, `preuvesDe`. Older registers lack the fields (all optional).
+* Excel (`lib/veille/registre.ts`): `historiqueRows`, `fillHistorique` add a second sheet
+  "Historique des évaluations" (date, texte, référence, conformité, par, commentaire, preuves).
+* Evidence files: `supabase/migrations/20261113000000_preuves.sql` (bucket `preuves`, private, 10 MB,
+  images + PDF; `preuve_org(name)` reads the workspace from the first folder; policies by
+  membership). `supabase/tests/auth-stub.sql` stubs `storage.buckets/objects`; `rls.sql` has 6
+  evidence checks. `lib/cloud/api.ts`: `uploadPreuve` (`<org>/<registre>/<ts>-<name>`),
+  `preuveUrl` (signed, 1 h), `deletePreuve`. Local mode: links only.
+* UI: `app/components/registre-view.tsx` replaces the old RegistreView/LigneCard (registres.tsx
+  keeps the list and creation; `registre-shared.tsx` has Profil, useFiches, dateFr, classLabel,
+  refOf). Head with progress bar and pills; the JORT/new/gone ToDo cards; chips (tous, à faire,
+  NC, conformes, essentiels = top 30 by importance, suggestions); search; "Plus" (domain, Excel,
+  profile, add a text); rows (`LigneRow`: title clamped, meta with state/next date or, for an NC,
+  the action's deadline, responsible initials, evidence count; status pill); `LigneSheet`: a bottom
+  sheet (a 560px right panel from 1000px, body gets `has-panel`), Escape closes: new evaluation
+  (segmented C/NC/NA, date, fréquence, constat, preuves: file upload when signed in, link always),
+  action plan (shown on NC or when started), exigences/risque, historique (newest first, signed
+  URLs fetched when the sheet opens), pourquoi + modifications + retenir/retirer. Readers see no
+  form. The stand-in for Supabase (scratchpad) gained the storage endpoints (insert into
+  storage.objects as the user, so the policies answered): upload, record, signed link, row in DB
+  checked on a phone viewport.
+* Not done: deleting evidence from the UI, evidence on the Excel ID-QSE-002 sheet itself (only in
+  the history sheet), a reminder of action deadlines on the home (the home counts late/soon
+  evaluations only).
+
 **Redesign (12 November): glass, mobile first, a home dashboard; the Mode d'emploi and Textes de
 référence screens removed.** The user asked for an Apple-like, glassmorphism look, easy to use,
 mobile first, with a premium dashboard, and the two documentation screens gone.

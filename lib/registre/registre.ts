@@ -23,6 +23,28 @@ export const CONFORMITES: Record<Conformite, string> = { "": "À évaluer", C: "
 /** Months between two evaluations. */
 export const FREQUENCES: Record<string, number> = { Mensuelle: 1, Trimestrielle: 3, Semestrielle: 6, Annuelle: 12, "Tous les deux ans": 24 };
 
+/** A piece of evidence: a link, or a file in the workspace's storage (cloud mode). */
+export interface Preuve {
+  id: string;
+  nom: string;
+  url?: string; // a link given by hand
+  path?: string; // a file uploaded to the workspace's bucket (lib/cloud/api.ts)
+  type?: string; // MIME type of an uploaded file
+  ajoute: string; // ISO date and time
+  par?: string; // who added it
+}
+
+/** One evaluation of a text, as it was recorded: the register's audit trail. */
+export interface Evaluation {
+  id: string;
+  date: string; // ISO date of the evaluation
+  enregistre: string; // ISO date and time it was recorded
+  conformite: Conformite;
+  commentaire: string;
+  par: string; // who evaluated (name or e-mail; "" in local mode)
+  preuves: Preuve[];
+}
+
 export interface Ligne {
   texte: Texte; // as it was when added: the register keeps its texts if the référentiel changes
   retenu: boolean; // in the register; otherwise a suggestion left aside
@@ -38,6 +60,9 @@ export interface Ligne {
   evalue: string; // ISO date of the last evaluation, "" if never
   vus: string[]; // JORT modifications already taken into account
   garde?: boolean; // kept although it no longer applies to the profile
+  historique?: Evaluation[]; // every evaluation recorded, oldest first
+  preuves?: Preuve[]; // evidence attached to the text (outside an evaluation)
+  actionFaite?: string; // ISO date the action plan was completed, "" or absent otherwise
 }
 
 export interface Registre {
@@ -108,6 +133,58 @@ export function createRegistre(report: ClassificationReport | null, site: Site, 
     lignes: proposals(texts, site).map((p) => ligne(p.texte, p.reasons, p.proposed ? "propose" : "suggere", p.proposed)),
     ecartes: [],
   };
+}
+
+const newId = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 7)}`;
+
+/**
+ * Record an evaluation: the line's conformity and date follow it, and it joins the history. A
+ * non-conformity keeps the action plan open (actionFaite cleared); conformity closes it.
+ */
+export function evaluer(
+  l: Ligne,
+  e: { conformite: Conformite; date: string; commentaire?: string; par?: string; preuves?: Preuve[] },
+  now = new Date(),
+): Ligne {
+  const entry: Evaluation = {
+    id: newId("ev"),
+    date: e.date,
+    enregistre: now.toISOString(),
+    conformite: e.conformite,
+    commentaire: e.commentaire?.trim() ?? "",
+    par: e.par ?? "",
+    preuves: e.preuves ?? [],
+  };
+  return {
+    ...l,
+    conformite: e.conformite,
+    evalue: e.date,
+    historique: [...(l.historique ?? []), entry],
+    // A conformity after a non-conformity (or with an action plan started) closes the action.
+    actionFaite:
+      e.conformite === "NC"
+        ? ""
+        : e.conformite === "C" && (l.conformite === "NC" || l.plan || l.responsable || l.echeance)
+          ? l.actionFaite || e.date
+          : l.actionFaite,
+  };
+}
+
+/** A link given by hand, as evidence. */
+export function preuveLien(nom: string, url: string, par = "", now = new Date()): Preuve {
+  return { id: newId("pr"), nom: nom.trim() || url, url: url.trim(), ajoute: now.toISOString(), par };
+}
+
+/** A file uploaded to the workspace's storage, as evidence. */
+export function preuveFichier(nom: string, path: string, type: string, par = "", now = new Date()): Preuve {
+  return { id: newId("pr"), nom, path, type, ajoute: now.toISOString(), par };
+}
+
+/** Every piece of evidence of a text: attached to it, or to one of its evaluations; newest first. */
+export function preuvesDe(l: Ligne): (Preuve & { evaluation?: Evaluation })[] {
+  return [...(l.preuves ?? []).map((p) => ({ ...p })), ...(l.historique ?? []).flatMap((e) => e.preuves.map((p) => ({ ...p, evaluation: e })))].sort((a, b) =>
+    b.ajoute.localeCompare(a.ajoute),
+  );
 }
 
 /** A register of the same establishment, by name (case and accents aside). */

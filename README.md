@@ -62,7 +62,9 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
 
 1. Create a project on [supabase.com](https://supabase.com) (region: Frankfurt, the closest to Tunis).
    The free plan pauses a project after a week without use: take the Pro plan for clients.
-2. *SQL Editor*: paste and run `supabase/migrations/20261112000000_workspaces.sql`.
+2. *SQL Editor*: paste and run `supabase/migrations/20261112000000_workspaces.sql`, then
+   `supabase/migrations/20261113000000_preuves.sql` (the private bucket for evidence files, 10 MB
+   per file, images and PDF; members read their workspace's files, editors add, admins remove).
 3. *Authentication → URL Configuration*: **Site URL** = the site's address (e.g.
    `https://abclassement.vercel.app`); **Redirect URLs**: add `https://<that address>/**` and
    `http://localhost:3000/**`. The links of the confirmation and password e-mails lead there.
@@ -246,9 +248,14 @@ opens the establishment's register in the Veille réglementaire view:
    with why ("Personnel salarié", "1ère catégorie", "Rubrique 2505", "Étude d'impact"…); sector news
    is listed as unticked suggestions. Any other text of the référentiel or of the JORT can be added by
    search.
-3. **Evaluation**, text by text, as in an ID-QSE-002 register: conformity (C / NC / non applicable),
-   date of the last evaluation and frequency, summary of the requirements, risk, action plan,
-   responsible and deadline. The register is exported to Excel in the ID-QSE-002 layout.
+3. **Evaluation**, text by text. The register is a checklist: chips narrow it (à faire, non
+   conformes, conformes, essentiels, suggestions), one row per text shows its status and next date,
+   and a sheet opens the text: a **new evaluation** (conforme / non conforme / non applicable, date,
+   constat, evidence: a link, or a photo or PDF uploaded to the workspace when signed in), the
+   **action plan** of a non-conformity (action, responsible, deadline; closed by the next conforming
+   evaluation), the requirements and risk (prefilled from the text's fiche), and the **history** of
+   every evaluation recorded, with its evidence. Excel: the ID-QSE-002 sheet plus a second sheet,
+   "Historique des évaluations", the audit trail.
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
    which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…": add that
    text to the register and re-evaluate, or re-evaluate only), and which new texts apply to the site
@@ -342,7 +349,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `app/components/veille.tsx` | The Registres and Veille réglementaire screens. |
 | `lib/registre/` | Registers of the establishments: the site profile and its conditions (`profil.ts`), the référentiel (`referentiel.ts`), a register, its alerts and due evaluations (`registre.ts`). |
 | `data/referentiel/textes.json` | The curated référentiel. |
-| `app/components/registres.tsx` | The registers: list, site profile, register and evaluation. |
+| `app/components/registres.tsx` | The registers: list and creation. `registre-view.tsx`: one register as a checklist, the text's sheet (evaluation, evidence, action plan, history). `registre-shared.tsx`: the site profile form and helpers. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
 ## Texts

@@ -87,3 +87,42 @@ describe("texts a QSE register commonly holds, as the JORT titled them", () => {
     for (const [title, domain] of expected) expect(assess({ title })?.domains, title).toContain(domain);
   });
 });
+
+describe("the compliance workflow: evaluations recorded, evidence, the audit sheet", async () => {
+  const { evaluer, preuveLien, preuvesDe, FREQUENCES } = await import("@/lib/registre/registre");
+  const { fillHistorique, historiqueRows } = await import("@/lib/veille/registre");
+  const ExcelJS = (await import("exceljs")).default;
+  const texte = { id: "t1", titre: "Loi n° 2009-11", type: "Loi", numero: "2009-11", theme: "Incendie", domaine: "securite", when: [] } as never;
+  const base = {
+    texte, retenu: true, origine: "propose", raisons: ["1ère catégorie"], conformite: "", resume: "", risque: "", plan: "Former le personnel",
+    responsable: "", echeance: "", frequence: "Annuelle", evalue: "", vus: [],
+  } as never as import("@/lib/registre/registre").Ligne;
+
+  it("keeps every evaluation, and closes the action plan on conformity", () => {
+    const now = new Date("2026-11-13T10:00:00Z");
+    const nc = evaluer(base, { conformite: "NC", date: "2026-11-13", commentaire: "Extincteurs périmés", par: "alice@client.tn", preuves: [preuveLien("Photo", "https://x/p.jpg", "alice@client.tn", now)] }, now);
+    expect(nc.conformite).toBe("NC");
+    expect(nc.evalue).toBe("2026-11-13");
+    expect(nc.actionFaite).toBe("");
+    expect(nc.historique).toHaveLength(1);
+    expect(nc.historique![0].preuves[0].url).toBe("https://x/p.jpg");
+    const c = evaluer(nc, { conformite: "C", date: "2026-12-01", par: "bob@abc.tn" }, now);
+    expect(c.historique).toHaveLength(2);
+    expect(c.actionFaite).toBe("2026-12-01");
+    expect(preuvesDe(c).map((p) => p.nom)).toEqual(["Photo"]);
+    expect(FREQUENCES[c.frequence]).toBe(12);
+  });
+
+  it("writes the audit sheet, newest first", async () => {
+    const now = new Date("2026-11-13T10:00:00Z");
+    const l = evaluer(evaluer(base, { conformite: "NC", date: "2026-01-10", par: "a" }, now), { conformite: "C", date: "2026-06-10", par: "b", commentaire: "ok" }, now);
+    const wb = new ExcelJS.Workbook();
+    fillHistorique(wb, historiqueRows(l));
+    const ws = wb.getWorksheet("Historique des évaluations")!;
+    expect(ws.getRow(1).getCell(1).value).toBe("Date");
+    expect(ws.getRow(2).getCell(1).value).toBe("10-06-2026");
+    expect(ws.getRow(2).getCell(4).value).toBe("C");
+    expect(ws.getRow(3).getCell(4).value).toBe("NC");
+    expect(ws.rowCount).toBe(3);
+  });
+});

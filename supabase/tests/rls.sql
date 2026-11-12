@@ -79,6 +79,20 @@ select pg_temp.fails($$insert into public.invitations (organization_id, email) s
 update public.organizations set name = 'Renommé';
 select pg_temp.check((select name from public.organizations) = 'Client SA', 'an editor cannot rename the workspace');
 
+-- Evidence files: Bob, editor, adds one to the workspace's folder; a stranger's folder is refused.
+insert into storage.objects (bucket_id, name) select 'preuves', org || '/r1/photo.jpg' from ids;
+select pg_temp.check((select count(*) from storage.objects) = 1, 'an editor adds evidence to the workspace');
+select pg_temp.fails($$insert into storage.objects (bucket_id, name) values ('preuves', '11111111-1111-1111-1111-111111111111/r1/x.jpg')$$, 'no evidence in another workspace');
+select pg_temp.fails($$insert into storage.objects (bucket_id, name) values ('preuves', 'loose.jpg')$$, 'no evidence outside a workspace folder');
+delete from storage.objects;
+select pg_temp.check((select count(*) from storage.objects) = 1, 'an editor cannot remove evidence');
+select pg_temp.act('carol');
+select pg_temp.check((select count(*) from storage.objects) = 0, 'a stranger sees no evidence');
+select pg_temp.act('alice');
+delete from storage.objects;
+select pg_temp.check((select count(*) from storage.objects) = 0, 'an owner removes evidence');
+select pg_temp.act('bob');
+
 -- Alice makes Bob a viewer: he reads but can no longer change.
 select pg_temp.act('alice');
 select public.set_member_role((select org from ids), '00000000-0000-0000-0000-00000000000b', 'viewer');

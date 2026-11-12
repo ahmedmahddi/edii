@@ -181,3 +181,30 @@ export async function deleteRegistres(workspace: string, ids: string[]): Promise
   const { error } = await db().from("registres").delete().eq("organization_id", workspace).in("id", ids);
   fail(error);
 }
+
+// Evidence files: the "preuves" bucket, one folder per workspace (supabase/migrations/…_preuves.sql).
+
+export const PREUVES_BUCKET = "preuves";
+export const PREUVE_MAX_BYTES = 10 * 1024 * 1024;
+
+/** Upload a file as evidence; returns its path in the bucket. */
+export async function uploadPreuve(workspace: string, registre: string, file: File): Promise<string> {
+  if (file.size > PREUVE_MAX_BYTES) throw new Error("Fichier trop lourd : 10 Mo au plus.");
+  const safe = file.name.replace(/[^\p{L}\p{N}._-]+/gu, "_").slice(-80);
+  const path = `${workspace}/${registre}/${Date.now().toString(36)}-${safe}`;
+  const { error } = await db().storage.from(PREUVES_BUCKET).upload(path, file, { contentType: file.type || undefined, upsert: false });
+  fail(error);
+  return path;
+}
+
+/** A link to an uploaded file, valid for an hour. */
+export async function preuveUrl(path: string): Promise<string> {
+  const { data, error } = await db().storage.from(PREUVES_BUCKET).createSignedUrl(path, 3600);
+  fail(error);
+  return data!.signedUrl;
+}
+
+export async function deletePreuve(path: string): Promise<void> {
+  const { error } = await db().storage.from(PREUVES_BUCKET).remove([path]);
+  fail(error);
+}
