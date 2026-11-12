@@ -322,7 +322,9 @@ The project path must have no spaces, and the laptop must be on and connected at
 
 | Path | What |
 |---|---|
-| `app/page.tsx` | The page: side menu (classement, conformité, ressources, espace de travail) and the screens. |
+| `app/page.tsx` | The page: the shell (tab bar and top bar on phones, side menu from 1000px) and the screens. |
+| `app/components/accueil.tsx` | The home: what waits in the registers, each establishment, the latest of the Journal, quick actions. |
+| `app/components/icons.tsx` | The line icons. |
 | `app/components/cloud.tsx` | Sign-in, workspace choice, register sync state, import of browser registers. |
 | `app/components/equipe.tsx` | Équipe et espace (members, invitations, roles) and Mon compte. |
 | `lib/cloud/` | Supabase: the client (`client.ts`), the calls (`api.ts`), the registers' sync (`sync.ts`). |

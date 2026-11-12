@@ -104,11 +104,16 @@ export function Registres({
   onSeedUsed,
   texts,
   amendments,
+  action = null,
+  onActionUsed = () => {},
 }: {
   seed: ClassificationReport | null;
   onSeedUsed: () => void;
   texts: Texte[];
   amendments: Amendment[];
+  /** From the home: open a register, or start one without classification. */
+  action?: { open?: string; create?: boolean } | null;
+  onActionUsed?: () => void;
 }) {
   const cloud = useCloud();
   const [list, update, saved, loaded] = useRegistres();
@@ -129,6 +134,17 @@ export function Registres({
     setMessage("");
     onSeedUsed();
   }, [seed, onSeedUsed, loaded, list]);
+
+  useEffect(() => {
+    if (!action || !loaded) return;
+    if (action.open) setOpenId(action.open);
+    if (action.create) {
+      setDraft({ report: null, site: EMPTY_SITE, nom: "" });
+      setOpenId(null);
+    }
+    setMessage("");
+    onActionUsed();
+  }, [action, onActionUsed, loaded]);
 
   const open = list.find((r) => r.id === openId);
   const change = (id: string) => (fn: (r: Registre) => Registre) =>

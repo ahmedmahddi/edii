@@ -31,6 +31,8 @@ import {
   type Situation,
   type StudyKind,
 } from "@/lib/studies";
+import { Icon } from "./components/icons";
+import { Accueil } from "./components/accueil";
 import { useVeilleCount, Veille } from "./components/veille";
 import { CloudGate, LocalImport, ReadOnlyNotice, useCloud, WorkspaceSwitcher } from "./components/cloud";
 import { Compte, Equipe } from "./components/equipe";
@@ -72,110 +74,30 @@ export default function EdiiPage() {
   );
 }
 
-type View = "search" | "establishment" | "guide" | "sources" | "registres" | "veille" | "report" | "equipe" | "compte";
+type View = "accueil" | "search" | "establishment" | "registres" | "veille" | "report" | "equipe" | "compte";
 
 /** Each screen's heading: eyebrow, title, one line on what it is for. */
 const HEADINGS: Record<View, [string, string, string]> = {
-  search: ["NOMENCLATURE TUNISIENNE", "Répertoire des activités", "Trouvez vos activités et leurs seuils de classement."],
-  establishment: ["CLASSEMENT", "Mon établissement", "Vos activités, leur catégorie et l’étude ANPE."],
-  report: ["CLASSEMENT", "Synthèse de classement", "La synthèse de votre classement, à imprimer ou à exporter."],
-  registres: ["CONFORMITÉ", "Registres réglementaires", "Les textes qui s’appliquent à chaque établissement, leur évaluation et leur suivi."],
-  veille: ["CONFORMITÉ", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
-  guide: ["RESSOURCES", "Comprendre votre classement", "Les informations utiles pour préparer votre dossier."],
-  sources: ["RESSOURCES", "Textes de référence", "Les textes et les sources du référentiel."],
-  equipe: ["ESPACE DE TRAVAIL", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
-  compte: ["ESPACE DE TRAVAIL", "Mon compte", "Votre nom, votre mot de passe et votre session."],
+  accueil: ["", "Accueil", ""],
+  search: ["Classement", "Nomenclature", "Trouvez vos activités et leurs seuils de classement."],
+  establishment: ["Classement", "Mon établissement", "Vos activités, leur catégorie et l’étude ANPE."],
+  report: ["Classement", "Synthèse de classement", "À imprimer, à exporter, ou à transformer en registre."],
+  registres: ["Conformité", "Registres", "Les textes qui s’appliquent à chaque établissement, leur évaluation et leur suivi."],
+  veille: ["Conformité", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
+  equipe: ["Espace de travail", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
+  compte: ["Espace de travail", "Mon compte", "Votre nom, votre mot de passe et votre session."],
 };
-
-function Icon({ name, size = 20 }: { name: string; size?: number }) {
-  const paths: Record<string, React.ReactNode> = {
-    search: (
-      <>
-        <circle cx="10.5" cy="10.5" r="6.5" />
-        <path d="m16 16 4.5 4.5" />
-      </>
-    ),
-    building: (
-      <>
-        <path d="M4 21V7l8-4v18M12 9h8v12M2 21h20M7 9h2M7 13h2M7 17h2M15 13h2M15 17h2" />
-      </>
-    ),
-    book: (
-      <>
-        <path d="M12 5C8 2 3 4 3 4v15s5-2 9 1c4-3 9-1 9-1V4s-5-2-9 1v15" />
-      </>
-    ),
-    file: (
-      <>
-        <path d="M14 3H5v18h14V8zM14 3v5h5M8 12h8M8 16h6" />
-      </>
-    ),
-    arrow: <path d="M5 12h14m-5-5 5 5-5 5" />,
-    leaf: (
-      <>
-        <path d="M20 3C10 2 3 6 5 14c3 8 15 4 15-11Z M4 21 15 10" />
-      </>
-    ),
-    check: <path d="m5 12 4 4L19 6" />,
-    plus: <path d="M12 5v14M5 12h14" />,
-    help: (
-      <>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M9.5 9a2.5 2.5 0 1 1 4 2c-1 .5-1.5 1-1.5 2M12 16v1" />
-      </>
-    ),
-    grid: (
-      <>
-        <rect x="3" y="3" width="6" height="6" rx="1" />
-        <rect x="15" y="3" width="6" height="6" rx="1" />
-        <rect x="3" y="15" width="6" height="6" rx="1" />
-        <rect x="15" y="15" width="6" height="6" rx="1" />
-      </>
-    ),
-    bell: (
-      <>
-        <path d="M6 16V11a6 6 0 1 1 12 0v5l2 2H4z" />
-        <path d="M10 20a2 2 0 0 0 4 0" />
-      </>
-    ),
-    shield: (
-      <>
-        <path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6z" />
-        <path d="m8 12 3 3 5-6" />
-      </>
-    ),
-    list: <path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" />,
-    users: (
-      <>
-        <circle cx="9" cy="8" r="3.5" />
-        <path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .6 3.3 2.4 3.5 5.2" />
-      </>
-    ),
-    user: (
-      <>
-        <circle cx="12" cy="8" r="4" />
-        <path d="M4 21c.6-4 3.8-6.5 8-6.5s7.4 2.5 8 6.5" />
-      </>
-    ),
-    menu: <path d="M4 7h16M4 12h16M4 17h16" />,
-    close: <path d="m6 6 12 12M18 6 6 18" />,
-  };
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.65"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {paths[name] ?? paths.building}
-    </svg>
-  );
-}
+/** The tab each screen belongs to (the bar below 1000px). */
+const TAB_OF: Record<View, View> = {
+  accueil: "accueil",
+  search: "search",
+  establishment: "establishment",
+  report: "establishment",
+  registres: "registres",
+  veille: "veille",
+  equipe: "accueil",
+  compte: "accueil",
+};
 
 function Edii() {
   const params = useSearchParams();
@@ -186,7 +108,10 @@ function Edii() {
   const [activities, setActivities] = useState<Activity[]>(() =>
     decodeActivities(params.get("e")),
   );
-  const [view, setView] = useState<View>("search");
+  const [view, setView] = useState<View>(() => (params.get("e") ? "establishment" : params.get("code") || params.get("q") ? "search" : "accueil"));
+  // What the home asks of the registers screen: open one, or start a new one.
+  const [registreAction, setRegistreAction] = useState<{ open?: string; create?: boolean } | null>(null);
+  const registreActionUsed = useCallback(() => setRegistreAction(null), []);
   const [notice, setNotice] = useState("");
   const [establishmentName, setEstablishmentName] = useState("");
   const [report, setReport] = useState<ClassificationReport | null>(null);
@@ -291,13 +216,29 @@ function Edii() {
     setActivities((list) => list.filter((_, j) => j !== i));
   const count = (c: string) => activities.filter((a) => a.code === c).length;
   const cloudState = useCloud();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const go = (v: View) => {
     setView(v);
-    setMenuOpen(false);
+    setSheetOpen(false);
     window.scrollTo({ top: 0 });
   };
+  const openRegistre = (id: string) => {
+    setRegistreAction({ open: id });
+    go("registres");
+  };
+  const newRegistre = () => {
+    setRegistreAction({ create: true });
+    go("registres");
+  };
+  const tabs: [View, string, string][] = [
+    ["accueil", "home", "Accueil"],
+    ["search", "search", "Nomenclature"],
+    ["establishment", "building", "Établissement"],
+    ["registres", "list", "Registres"],
+    ["veille", "bell", "Veille"],
+  ];
   const groups: { title: string; items: [View, string, string][] }[] = [
+    { title: "", items: [["accueil", "home", "Accueil"]] },
     {
       title: "Classement",
       items: [
@@ -312,13 +253,6 @@ function Edii() {
         ["veille", "bell", "Veille réglementaire"],
       ],
     },
-    {
-      title: "Ressources",
-      items: [
-        ["guide", "help", "Mode d’emploi"],
-        ["sources", "book", "Textes de référence"],
-      ],
-    },
     ...(cloudState.enabled
       ? [
           {
@@ -331,42 +265,39 @@ function Edii() {
         ]
       : []),
   ];
+  const badge = (id: View) =>
+    id === "establishment" && activities.length > 0 ? (
+      <span className="nav-count">{activities.length}</span>
+    ) : id === "registres" && veilleCount > 0 ? (
+      <span className="nav-count is-alert" title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours">
+        {veilleCount}
+      </span>
+    ) : null;
   const [eyebrow, title, lead] = HEADINGS[view];
 
   return (
-    <div className={`app-shell${menuOpen ? " menu-open" : ""}`}>
+    <div className="app-shell">
       <a className="skip-link" href="#workspace">
         Aller au contenu
       </a>
-      <aside className="sidebar" id="sidebar" aria-label="Menu">
-        <div className="sidebar-brand">
-          <a className="brand" href="/" aria-label="ABClassement — Accueil">
-            <span className="wordmark">
-              <span>ABC</span>lassement<span className="brand-period">.</span>
-            </span>
-            <span className="brand-caption">Classement, registres et veille</span>
-          </a>
-          <button type="button" className="sidebar-close" aria-label="Fermer le menu" onClick={() => setMenuOpen(false)}>
-            <Icon name="close" />
-          </button>
-        </div>
+      <aside className="sidebar" aria-label="Menu">
+        <a className="brand" href="/" aria-label="ABClassement — Accueil">
+          <span className="wordmark">
+            <span>ABC</span>lassement<span className="brand-period">.</span>
+          </span>
+        </a>
         {cloudState.enabled ? <WorkspaceSwitcher onManage={() => go("equipe")} /> : null}
         <nav className="side-nav" aria-label="Navigation principale">
-          {groups.map((g) => (
-            <div key={g.title} className="side-nav-group">
-              <span className="side-nav-title">{g.title}</span>
+          {groups.map((g, i) => (
+            <div key={i} className="side-nav-group">
+              {g.title ? <span className="side-nav-title">{g.title}</span> : null}
               {g.items.map(([id, icon, label]) => {
                 const active = view === id || (id === "establishment" && view === "report");
                 return (
                   <button key={id} type="button" className={active ? "active" : ""} aria-current={active ? "page" : undefined} onClick={() => go(id)}>
-                    <Icon name={icon} size={18} />
+                    <Icon name={icon} size={19} />
                     <span>{label}</span>
-                    {id === "establishment" && activities.length > 0 ? <span className="nav-count">{activities.length}</span> : null}
-                    {id === "registres" && veilleCount > 0 ? (
-                      <span className="nav-count is-alert" title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours">
-                        {veilleCount}
-                      </span>
-                    ) : null}
+                    {badge(id)}
                   </button>
                 );
               })}
@@ -376,7 +307,9 @@ function Edii() {
         <div className="sidebar-foot">
           {cloudState.user ? (
             <button type="button" className="sidebar-account" onClick={() => go("compte")}>
-              <Icon name="user" size={18} />
+              <span className="avatar" aria-hidden="true">
+                {(cloudState.name || cloudState.user.email || "?").slice(0, 1).toUpperCase()}
+              </span>
               <span>
                 <strong>{cloudState.name || cloudState.user.email}</strong>
                 {cloudState.name ? <small>{cloudState.user.email}</small> : null}
@@ -386,32 +319,55 @@ function Edii() {
             <p className="sidebar-local">Mode local : les registres restent dans ce navigateur.</p>
           )}
           <div className="sidebar-signature">
-            <span>Un outil</span>
             <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" />
           </div>
         </div>
       </aside>
-      <div className="sidebar-backdrop" aria-hidden="true" onClick={() => setMenuOpen(false)} />
       <div className="app-body">
         <header className="topbar">
-          <button
-            type="button"
-            className="topbar-menu"
-            aria-label="Ouvrir le menu"
-            aria-expanded={menuOpen}
-            aria-controls="sidebar"
-            onClick={() => setMenuOpen(true)}
-          >
-            <Icon name="menu" />
-          </button>
-          <a className="brand" href="/" aria-label="ABClassement — Accueil">
-            <span className="wordmark">
-              <span>ABC</span>lassement<span className="brand-period">.</span>
-            </span>
-          </a>
-          <span className="topbar-where">{cloudState.current?.name ?? HEADINGS[view][1]}</span>
+          {view !== TAB_OF[view] ? (
+            <button type="button" className="topbar-back" aria-label="Retour" onClick={() => go(view === "report" ? "establishment" : "accueil")}>
+              <Icon name="back" size={22} />
+            </button>
+          ) : null}
+          {view === "accueil" ? (
+            <a className="brand" href="/" aria-label="ABClassement — Accueil">
+              <span className="wordmark">
+                <span>ABC</span>lassement<span className="brand-period">.</span>
+              </span>
+            </a>
+          ) : (
+            <span className="topbar-title">{HEADINGS[view][1]}</span>
+          )}
+          {cloudState.user ? (
+            <button type="button" className="topbar-account" aria-label="Compte et espace de travail" aria-expanded={sheetOpen} onClick={() => setSheetOpen(true)}>
+              <span className="avatar" aria-hidden="true">
+                {(cloudState.name || cloudState.user.email || "?").slice(0, 1).toUpperCase()}
+              </span>
+            </button>
+          ) : null}
         </header>
+        {sheetOpen ? (
+          <div className="sheet-backdrop" onClick={() => setSheetOpen(false)}>
+            <div className="sheet" role="dialog" aria-label="Compte et espace de travail" onClick={(e) => e.stopPropagation()}>
+              <span className="sheet-handle" aria-hidden="true" />
+              <WorkspaceSwitcher onManage={() => go("equipe")} />
+              <div className="sheet-actions">
+                <button type="button" onClick={() => go("equipe")}>
+                  <Icon name="users" size={19} /> Équipe et espace
+                </button>
+                <button type="button" onClick={() => go("compte")}>
+                  <Icon name="user" size={19} /> Mon compte
+                </button>
+                <button type="button" onClick={() => void cloudState.signOut()}>
+                  <Icon name="logout" size={19} /> Se déconnecter
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
         <main id="workspace" className="workspace" tabIndex={-1}>
+          {view !== "accueil" ? (
           <div className="page-heading">
             <div>
               <div className="eyebrow">{eyebrow}</div>
@@ -429,10 +385,9 @@ function Edii() {
               </div>
             ) : null}
           </div>
-          {view === "guide" ? (
-            <Intro />
-          ) : view === "sources" ? (
-            <Sources />
+          ) : null}
+          {view === "accueil" ? (
+            <Accueil onClassify={() => go("search")} onNewRegistre={newRegistre} onOpenRegistre={openRegistre} onRegistres={() => go("registres")} onVeille={() => go("veille")} />
           ) : view === "registres" || view === "veille" ? (
             <>
               {view === "registres" ? (
@@ -441,7 +396,13 @@ function Edii() {
                   <LocalImport />
                 </>
               ) : null}
-              <Veille tab={view === "registres" ? "registres" : "journal"} seed={registreSeed} onSeedUsed={seedUsed} />
+              <Veille
+                tab={view === "registres" ? "registres" : "journal"}
+                seed={registreSeed}
+                onSeedUsed={seedUsed}
+                action={registreAction}
+                onActionUsed={registreActionUsed}
+              />
             </>
           ) : view === "equipe" ? (
             <Equipe />
@@ -665,15 +626,7 @@ function Edii() {
                   <Icon name="book" size={19} />
                   <p>
                     Nomenclature de 2005, consolidée avec les modifications de
-                    2010 et 2012.
-                    <br />
-                    <button
-                      className="edii-link"
-                      onClick={() => setView("sources")}
-                    >
-                      Consulter les textes de référence{" "}
-                      <span aria-hidden="true">→</span>
-                    </button>
+                    2010 et 2012. Un outil d’aide à la décision : le texte officiel fait foi.
                   </p>
                 </div>
               </section>
@@ -820,22 +773,6 @@ function Edii() {
                     </button>
                   </div>
                 )}
-                <div className="help-card">
-                  <span className="help-icon">
-                    <Icon name="help" size={22} />
-                  </span>
-                  <div>
-                    <h3>Aide au classement</h3>
-                    <p>Consultez les étapes et les règles de classement.</p>
-                    <button
-                      className="edii-link"
-                      onClick={() => setView("guide")}
-                    >
-                      Découvrir le mode d’emploi{" "}
-                      <span aria-hidden="true">→</span>
-                    </button>
-                  </div>
-                </div>
                 <div className="trust-note">
                   <Icon name="shield" size={18} />
                   <p>
@@ -892,12 +829,24 @@ function Edii() {
             <span>
               ABClassement <span>—</span> ABC Consulting
             </span>
-            <button onClick={() => setView("sources")}>
-              À propos du référentiel <span aria-hidden="true">→</span>
-            </button>
+            <span>Nomenclature 2005 · 2010 · 2012 — le texte officiel fait foi</span>
           </footer>
         </main>
       </div>
+      <nav className="tabbar" aria-label="Navigation">
+        {tabs.map(([id, icon, label]) => {
+          const active = TAB_OF[view] === id;
+          return (
+            <button key={id} type="button" className={active ? "active" : ""} aria-current={active ? "page" : undefined} onClick={() => go(id)}>
+              <span className="tab-icon">
+                <Icon name={icon} size={22} />
+                {badge(id)}
+              </span>
+              <span>{label}</span>
+            </button>
+          );
+        })}
+      </nav>
       <div className="toast-region" role="status" aria-live="polite">
         {notice && (
           <div className="toast">
@@ -922,98 +871,6 @@ function Edii() {
         )}
       </div>
     </div>
-  );
-}
-
-function Intro() {
-  return (
-    <article className="card guide-card">
-      <div className="eyebrow">MODE D’EMPLOI</div>
-      <h2>Utiliser ABClassement</h2>
-      <ol className="guide-steps">
-        <li>
-          <h3>Recherchez toutes vos activités</h3>
-          <p>
-            Entrez une activité, une substance ou un numéro de rubrique. Vous
-            pouvez aussi parcourir les secteurs. Ouvrez une rubrique pour
-            consulter ses cas et ses seuils.
-          </p>
-        </li>
-        <li>
-          <h3>Construisez votre établissement</h3>
-          <p>
-            Utilisez « Ajouter », puis ouvrez « Mon établissement ». Choisissez
-            le cas correspondant et saisissez la quantité avec son unité.
-            Ajoutez chaque activité présente sur votre site.
-          </p>
-        </li>
-        <li>
-          <h3>Consultez votre résultat</h3>
-          <p>
-            La catégorie la plus élevée détermine le classement de
-            l’établissement. La règle d’addition est appliquée aux substances
-            d’un même groupe. Pour l’étude environnementale, précisez votre
-            situation et choisissez une entrée du décret pour chaque activité.
-          </p>
-        </li>
-      </ol>
-      <div className="edii-note">
-        Vous pouvez conserver ou partager l’adresse de la page : elle contient
-        les activités et les paramètres de votre classement.
-      </div>
-      <p className="small muted">
-        Cet outil aide à lire la nomenclature. Les textes officiels font foi.
-      </p>
-    </article>
-  );
-}
-
-function Sources() {
-  return (
-    <article className="card sources-card">
-      <div className="eyebrow">LE RÉFÉRENTIEL</div>
-      <h2>Documents du référentiel</h2>
-      <p className="muted">
-        La nomenclature intègre le texte de base de 2005 et ses modifications de
-        2010 et 2012.
-      </p>
-      {nomenclature.sources.map((s) => (
-        <div className="source-item" key={s.id}>
-          <span className="source-year">{s.id}</span>
-          <div>
-            <h3>{s.title}</h3>
-            <p className="muted small">{s.jort}</p>
-            <span className="tag">
-              {s.role === "base" ? "Texte de base" : "Modification"}
-            </span>
-          </div>
-        </div>
-      ))}
-      <div className="source-item">
-        <span className="source-year">ANPE</span>
-        <div>
-          <h3>Décret n° 2005-1991 du 11 juillet 2005</h3>
-          <p className="muted">
-            Études d’impact sur l’environnement et cahiers des charges.
-          </p>
-        </div>
-      </div>
-      <div className="source-item">
-        <span className="source-year">EDII</span>
-        <div>
-          <h3>Décret n° 2006-2687 du 9 octobre 2006</h3>
-          <p className="muted">
-            Procédures d’ouverture et d’exploitation des établissements
-            dangereux, insalubres ou incommodes.
-          </p>
-        </div>
-      </div>
-      <p className="edii-note">
-        Les seuils ont été extraits des publications au JORT puis vérifiés. En
-        cas de doute, consultez le texte officiel et l’administration
-        compétente.
-      </p>
-    </article>
   );
 }
 

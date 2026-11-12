@@ -65,7 +65,7 @@ function merged(base: Feed, issues: LiveIssue[] = liveIssues()): Feed {
   return { ...feed, amendments: [...(base.amendments ?? []), ...added] };
 }
 
-function useFeed(): Feed | null {
+export function useFeed(): Feed | null {
   const [feed, setFeed] = useState<Feed | null>(null);
   useEffect(() => {
     let live = true;
@@ -124,7 +124,21 @@ export function useVeilleCount(): number {
  * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
  * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
  */
-export function Veille({ tab, seed, onSeedUsed }: { tab: Tab; seed: ClassificationReport | null; onSeedUsed: () => void }) {
+export type RegistreAction = { open?: string; create?: boolean } | null;
+
+export function Veille({
+  tab,
+  seed,
+  onSeedUsed,
+  action = null,
+  onActionUsed = () => {},
+}: {
+  tab: Tab;
+  seed: ClassificationReport | null;
+  onSeedUsed: () => void;
+  action?: RegistreAction;
+  onActionUsed?: () => void;
+}) {
   const feed = useFeed();
   // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
   const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? [], feed?.citations ?? {}), [feed]);
@@ -135,7 +149,7 @@ export function Veille({ tab, seed, onSeedUsed }: { tab: Tab; seed: Classificati
           Chargement de la veille…
         </p>
       ) : tab === "registres" ? (
-        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={texts} amendments={feed.amendments ?? []} />
+        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={texts} amendments={feed.amendments ?? []} action={action} onActionUsed={onActionUsed} />
       ) : (
         <>
           <Verifier feed={feed} />
@@ -326,11 +340,27 @@ function Journal({ feed }: { feed: Feed }) {
         <div className="veille-coverage">
           <span>Numéros du JORT lus</span>
           {years.length ? (
-            years.map(([year, numbers]) => (
-              <span key={year}>
-                {year} : {numbers.length} numéro{numbers.length > 1 ? "s" : ""} (jusqu’au n° {Math.max(...numbers)})
+            <>
+              <span>
+                {years
+                  .slice(0, 3)
+                  .map(([year, numbers]) => `${year} : ${numbers.length} (jusqu’au n° ${Math.max(...numbers)})`)
+                  .join(" · ")}
               </span>
-            ))
+              {years.length > 3 ? (
+                <details className="veille-years">
+                  <summary>
+                    et {years.length - 3} année{years.length - 3 > 1 ? "s" : ""} avant, depuis {years.at(-1)![0]}
+                  </summary>
+                  <span>
+                    {years
+                      .slice(3)
+                      .map(([year, numbers]) => `${year} : ${numbers.length}`)
+                      .join(" · ")}
+                  </span>
+                </details>
+              ) : null}
+            </>
           ) : (
             <span>aucun pour l’instant</span>
           )}

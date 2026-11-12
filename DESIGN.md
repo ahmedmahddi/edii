@@ -4,19 +4,19 @@ A working reference tool for establishment classification and environmental stud
 
 ## Identity
 
-ABClassement combines ABC and classement. The supplied ABC Consulting logo is displayed unchanged at public/brand/abc-consulting.jpg. The blue (#155a83), silver borders and navy utility strip follow the company identity. Avoid gradients, decorative pastel icons, large marketing headlines, floating tiles and repeated onboarding steps.
+ABClassement combines ABC and classement. The supplied ABC Consulting logo is displayed unchanged at public/brand/abc-consulting.jpg. The interface follows a light, glass language in the manner of Apple's platforms: the system font (San Francisco on Apple devices, Segoe UI on Windows), a brand blue (#0a6ed1) on a pale, softly tinted background, translucent surfaces with backdrop blur, 12 and 20px radii, hairline borders and soft shadows. Status colors always include labels. No gradients beyond the primary button and the soft background wash, no decorative illustration.
 
 ## Composition
 
-A navy side menu, 264px wide from 1000px, holds the product name, the client workspace (its name, the user's role, whether the registers are saved), the screens in four labeled groups (Classement, Conformité, Ressources, Espace de travail) and, at its foot, the account and the ABC Consulting logo on a white plate. The active screen has a light left rule and a lighter band. The work area to its right starts with a modest heading (eyebrow, title, one line). The catalogue and the establishment dossier are divided by a single vertical rule. Activities and substances appear in separate directory columns, using section codes and thin horizontal separators. The dossier uses a light grey document surface and a navy top rule.
+Mobile first. Below 1000px a frosted top bar carries the wordmark (or the screen's title and a back control) and the account avatar; a frosted tab bar at the bottom holds the five destinations: Accueil, Nomenclature, Établissement, Registres, Veille. The avatar opens a bottom sheet with the workspace switcher, Équipe et espace, Mon compte and sign-out. From 1000px a frosted side menu replaces both: the wordmark, the client workspace (name, role, save state), the destinations in groups (Accueil; Classement; Conformité; Espace de travail) and, at its foot, the account and the ABC Consulting logo.
 
-Below 1000px a slim white top bar carries a menu button, the wordmark and the workspace's name; the side menu slides in from the left over a dimmed page and closes on any choice. The catalogue stacks into one column below 560px. Long rubric tables and activity forms reflow into labeled vertical rows on phones. The remove control has a reserved 44px column with its padding accounted for; the table and tbody use block layout in compact dossier panels to avoid intrinsic table overflow. The full desktop establishment view restores normal table layout.
+Every screen starts with a large title. The home (Accueil) is a dashboard: a greeting with the workspace, four stat tiles (establishments, evaluations late, evaluations to do, JORT texts to examine) that open the registers, three quick actions (classify, new register, Journal officiel), the establishments with their evaluation progress and alert pills, and the latest important texts of the Journal. With no register it shows one card with the two ways in. The nomenclature keeps its directory of sections, search results as rows with an add control, and the establishment dossier beside it from 1000px. Registers and the Journal are lists of glass cards with a colored left rule for severity or conformity. Long rubric tables and activity forms reflow into labeled vertical rows on phones. The remove control has a reserved 44px column with its padding accounted for; the table and tbody use block layout in compact dossier panels to avoid intrinsic table overflow.
 
-The sign-in screen pairs a short statement of what the product does with the form, on the light grey surface; it stacks on phones.
+The sign-in screen pairs a short statement of what the product does with the form; it stacks on phones.
 
 ## Typography and interaction
 
-DM Sans is bundled locally for body text and Manrope for headings and the product wordmark. Font licenses are in public/fonts. Mobile input text is 16px to avoid automatic field zoom. Controls are at least 44px, with visible keyboard focus. Search has a persistent label. Result counts and activity additions announce their state. Rubric selection focuses and scrolls to its details. Status colors always include category labels.
+The system font stack renders the interface. Titles are 30px (34px on desktop) with tight letter-spacing; the eyebrow above a title is the section in brand blue. Mobile input text is 16px to avoid automatic field zoom. Controls are at least 44px, with a visible focus ring (a soft blue halo). Search has a persistent label. Result counts and activity additions announce their state. Rubric selection focuses and scrolls to its details, below the sticky top bar. Reduced motion disables the sheet's animation.
 
 ## Scope
 
@@ -28,7 +28,7 @@ The initial information architecture considered https://www.gov.uk/, https://ent
 
 ## Files
 
-app/globals.css is the visual source. design-tokens.json records the tokens. design-preview.html is a standalone preview of the identity and controls.
+app/globals.css is the visual source; the theme block at its end (tokens, shell, components) decides the look, the rules above it the layout. design-tokens.json and design-preview.html date from the first identity and are not updated.
 
 ## Validated reports
 

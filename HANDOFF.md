@@ -427,6 +427,35 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Redesign (12 November): glass, mobile first, a home dashboard; the Mode d'emploi and Textes de
+référence screens removed.** The user asked for an Apple-like, glassmorphism look, easy to use,
+mobile first, with a premium dashboard, and the two documentation screens gone.
+
+* `app/globals.css`: the old rules stay for layout; a theme block at the end sets tokens (system
+  font stack, brand blue #0a6ed1, glass surfaces with backdrop-filter, radii 12/20, soft shadows,
+  focus halo), restyles controls, cards, pills, segmented tab list, search field, result rows,
+  veille and register cards, then the shell: `.topbar` + `.tabbar` (5 tabs) + `.sheet` below 1000px,
+  a frosted `.sidebar` above. Dead CSS from the former headers (utility bar, masthead, primary-nav,
+  mobile-nav, navy sidebar) was removed or is unused.
+* `app/page.tsx`: views `accueil | search | establishment | registres | veille | report | equipe |
+  compte` (`guide` and `sources` deleted with `Intro`/`Sources`, the help card, the footer link; the
+  reference note is text only). Default view: the home, unless the URL carries a classification
+  (`e`, `code`, `q`). `TAB_OF` maps each view to its tab (the top bar shows a back control on
+  equipe/compte/report). `HEADINGS` per view; none on the home. Icons moved to
+  `app/components/icons.tsx` (+ home, chevron, back, more, logout).
+* `app/components/accueil.tsx`: greeting (name, workspace, read-only pill), stat tiles, quick actions,
+  establishments (evaluation progress bar, conformity rate, pills: retard / à évaluer / NC / JORT /
+  À jour), latest important hits; empty state with the two ways in. It reads the registers
+  (`loadRegistres`, on CHANGED/RELOADED) and the feed (`useFeed`, now exported from veille.tsx).
+  Opening a register or starting one from the home goes through `action` → `Veille` → `Registres`
+  (`{ open?: id, create?: true }`, consumed with `onActionUsed`).
+* veille.tsx: the Journal's "Numéros du JORT lus" shows the last three years and folds the rest.
+* Checked in a browser at 390 and 1440 (local mode, and cloud mode against the Supabase stand-in):
+  home empty/with data, new register, register, registers list, nomenclature, search, rubrique,
+  dossier, veille, sign-in, onboarding, account sheet, team. No overflow, no page errors.
+* Not done: dark mode (tokens would allow it, but many older rules hard-code white), the report's
+  own print styles untouched, design-tokens.json / design-preview.html not updated.
+
 **Step 3 of "next level" (12 November): accounts, client workspaces, and a side menu.**
 The user wants a product to sell to several clients (ABC Consulting is a consulting firm). Their
 choices: client workspaces with the firm's consultants invited in; Supabase; e-mail + password;
