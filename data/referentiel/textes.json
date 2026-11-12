@@ -392,7 +392,10 @@
    "date": "2008-07-28",
    "titre": "Décret n° 2008-2745 du 28 juillet 2008, fixant les conditions et modalités de gestion des déchets des activités sanitaires",
    "domaine": "environnement",
-   "theme": "Déchets"
+   "theme": "Déchets",
+   "when": [
+    "sante"
+   ]
   },
   {
    "id": "decret-2000-2339",
