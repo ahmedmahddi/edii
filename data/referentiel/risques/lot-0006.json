@@ -1,0 +1,482 @@
+{
+ "d:arrete:2000-02-12~approvisionnement-veterinaires-produits-pharmaceutiques-biologiques-destines-usage-veterinaire": {
+  "risque": "Approvisionnement hors circuit autorisé : saisie, sanctions.",
+  "plan": "Pour un vétérinaire : s'approvisionner auprès des fournisseurs autorisés selon la nomenclature fixée."
+ },
+ "n:decret-loi:78-6": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2022-716": {
+  "risque": "Mesure temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2020-374": {
+  "risque": "Mesure de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:2014-1847": {
+  "risque": "Occupation du domaine public maritime sans autorisation à jour : évacuation, pénalités de retard sur les redevances.",
+  "plan": "Demander à temps le renouvellement de l'autorisation, respecter son objet et sa surface et payer les redevances."
+ },
+ "d:arrete:2013-09-16~definition-pieces-constitutives-dossier-securite-accompagne-lotissement-terrains": {
+  "risque": "Lotissement sans dossier de sécurité approuvé : refus de l'approbation, permis bloqués.",
+  "plan": "Joindre au dossier de lotissement le dossier de sécurité exigé et obtenir l'approbation de la protection civile."
+ },
+ "n:decret:2010-1947": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2010-1501": {
+  "risque": "Contrat de franchise sans les clauses minimales ou sans document d'information : nullité, litiges, sanctions.",
+  "plan": "Pour un franchiseur ou franchisé : vérifier les clauses obligatoires du contrat et le document d'information précontractuel."
+ },
+ "n:decret:2009-1934": {
+  "risque": "Établissement d'animation musicale hors normes de classement : déclassement, retrait de l'agrément, fermeture.",
+  "plan": "Comparer l'établissement aux normes de son classement et corriger les écarts avant les contrôles."
+ },
+ "n:decret:2009-1852": {
+  "risque": "Quota d'exportation ancien (2009) : pas d'obligation actuelle.",
+  "plan": "Garder pour information ; appliquer le texte de l'année en cours."
+ },
+ "d:arrete:2009-06-01~specifications-techniques-minimales-visant-economie-consommation-energie-projets": {
+  "risque": "Bâtiment résidentiel neuf non conforme aux exigences thermiques : refus du permis ou de la conformité.",
+  "plan": "Pour un projet résidentiel : faire vérifier la performance thermique par le bureau d'études avant le permis."
+ },
+ "n:decret:2007-2631": {
+  "risque": "Navire de pêche sans titres de sécurité valides : interdiction d'appareiller, accident.",
+  "plan": "Faire visiter le navire et maintenir les titres de sécurité (stabilité, sauvetage, incendie) à jour."
+ },
+ "n:decret:2003-2416": {
+  "risque": "Dispositifs radiostérilisés hors exigences : lots non conformes, retrait.",
+  "plan": "Valider le procédé, contrôler la dosimétrie de chaque lot et assurer la traçabilité."
+ },
+ "n:decret:2002-1732": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2002-05-28~criteres-immeubles-proprietaires-beneficient-reduction-tarif-frais-raccordement": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2001-06-27~tarif-unique-frais-raccordement-zones-intervention-office-national": {
+  "risque": "Frais de raccordement non réglés : raccordement refusé.",
+  "plan": "Régler à l'ONAS les frais de raccordement au tarif fixé."
+ },
+ "n:decret:2001-789": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2001-589": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1995-12-27~generales-hygiene-applicables-produits-peche-bateaux": {
+  "risque": "Produits de la pêche mal conservés à bord : saisie au débarquement, risque sanitaire.",
+  "plan": "Appliquer à bord les règles d'hygiène, de froid et de nettoyage, renforcées pour les séjours de plus de 24 heures."
+ },
+ "d:arrete:1994-10-25~economie-nationale-sante-publique-octobre-determinant-produits-monopole": {
+  "risque": "Importation de produits réservés à la Pharmacie centrale : saisie, sanctions (liste remplacée en 2020).",
+  "plan": "Vérifier la liste en vigueur avant toute importation de produits pharmaceutiques."
+ },
+ "d:arrete:1994-04-12~vaccination-obligatoire-personnel-exercant-services-risque-etablissements-sanitaires": {
+  "risque": "Personnel des services à risque non vacciné : contamination, sanctions.",
+  "plan": "Organiser et tracer la vaccination obligatoire du personnel concerné avec le médecin du travail."
+ },
+ "d:arrete:1992-05-15~redevances-occupation-temporaire-domaine-public-maritime": {
+  "risque": "Barème ancien de redevances, révisé depuis.",
+  "plan": "Garder pour information ; appliquer le barème en vigueur."
+ },
+ "d:arrete:1988-02-13~abattage-animaux-especes-bovine-ovine": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié avant de l'évaluer."
+ },
+ "d:arrete:1987-02-17~sante-publique-fevrier-composition-fonctionnement-commission-agrement-octroi": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1981-06-24~prime-depouille-appropriees-travaux-conservation-classification-peaux-animaux": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1980-11-20~commercialisation-appellation-origine-controlee-coteaux-urque": {
+  "risque": "Usage abusif d'une appellation d'origine : saisie (texte à vérifier).",
+  "plan": "Vérifier le texte publié ; n'utiliser l'appellation que pour les vins qui y ont droit."
+ },
+ "d:arrete:1974-10-30~reglement-distribution-usage-irrigation-perimetres-irrigues-agrumicoles": {
+  "risque": "Usage de l'eau d'irrigation hors règlement : coupure, pénalités.",
+  "plan": "Pour un exploitant du périmètre : respecter les tours d'eau et le règlement de distribution."
+ },
+ "d:arrete:1958-02-27~classement-muscats-tunisie-appellation-controlee-gouvernement-tunisien-titre": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:loi:2010-22": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:2002-2017": {
+  "risque": "Véhicule au GNC installé hors règles : explosion, refus à la visite technique.",
+  "plan": "Faire installer et contrôler l'équipement GNC par un installateur agréé et garder le certificat."
+ },
+ "n:decret:2000-1443": {
+  "risque": "Opérations sur explosifs sans autorisation du ministère de l'intérieur : saisie, sanctions pénales.",
+  "plan": "Obtenir l'autorisation préalable pour chaque type d'opération sur les explosifs et la renouveler avant échéance."
+ },
+ "d:arrete:1998-06-04~octroi-renouvellement-retrait-autorisation-exercice-commerce-boissons-alcoolisees": {
+  "risque": "Autorisation retirée pour infraction (prix, fiscalité, consommateur) : fermeture.",
+  "plan": "Respecter les conditions du local et les règles commerciales, fiscales et de protection du consommateur ; renouveler l'autorisation à temps."
+ },
+ "d:arrete:1996-01-08~reglementant-operations-acquisition-huile-olive-office-national": {
+  "risque": "Pour une huilerie de collecte : non-respect des instructions de l'Office, refus de l'huile.",
+  "plan": "Suivre les instructions de l'Office national de l'huile pour la collecte et la cession de l'huile."
+ },
+ "d:arrete:1995-09-26~approvisionnement-etablissements-sanitaires-prives-medicaments-usage-urgent": {
+  "risque": "Texte non vérifié (le corps lu ne correspond pas).",
+  "plan": "Vérifier le texte publié ; s'approvisionner en médicaments d'urgence par les circuits autorisés."
+ },
+ "d:arrete:1994-11-01~techniques-sanitaires-centres-collecte-huile-olive-destinee-exportation": {
+  "risque": "Centre de collecte hors conditions : huile refusée à l'export, fermeture.",
+  "plan": "Stocker l'huile dans des cuves adaptées, dans des locaux réservés et propres, selon les conditions fixées."
+ },
+ "d:arrete:1993-01-25~versement-droit-autorisation-marche-medicaments-veterinaires": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1990-05-31~economie-finances-reglementant-exploitation-carrieres": {
+  "risque": "Carrière industrielle exploitée hors règles : accident, suspension, sanctions.",
+  "plan": "Vérifier si la carrière est industrielle (galeries ou consommation d'explosifs) et appliquer les règles qui s'y attachent."
+ },
+ "d:arrete:1990-05-04~designation-chaussures-parties-pouvant-fabriquees-materiaux-synthese-pratiques": {
+  "risque": "Chaussures en matériaux de synthèse hors cas autorisés ou sans marquage : saisie.",
+  "plan": "Vérifier les matériaux autorisés par partie de chaussure et marquer la composition."
+ },
+ "d:arrete:1989-03-31~normes-minimales-dimensionnelles-fonctionnelles-gestion-restaurants-classes-touristiques": {
+  "risque": "Restaurant touristique hors normes de classement : déclassement, retrait de l'agrément, fermeture.",
+  "plan": "Comparer l'établissement aux normes de son classement et corriger les écarts avant les contrôles."
+ },
+ "d:arrete:1989-01-31~protection-madragues-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie, amende (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1988-12-13~obtention-carte-professionnelle-exercice-commerce-ascenseurs-assimiles": {
+  "risque": "Commerce d'ascenseurs sans carte professionnelle : fermeture, amende.",
+  "plan": "Réunir le capital, les locaux, le personnel technique et l'outillage exigés et obtenir la carte professionnelle."
+ },
+ "d:arrete:1988-02-06~protection-madragues-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie, amende (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1986-03-14~protection-madragues-concernant-peche-annee": {
+  "risque": "Pêche aux abords des madragues pendant la période d'interdiction : saisie, amende (texte de campagne ancien).",
+  "plan": "Garder pour information ; appliquer l'arrêté de la campagne en cours."
+ },
+ "d:arrete:1984-11-21~mesures-sanitaires-prendre-contre-maladies-animales": {
+  "risque": "Maladie animale réglementée non déclarée ou mesures non appliquées : propagation, abattage, sanctions.",
+  "plan": "Vacciner selon le programme, garder les certificats, déclarer tout cas suspect et appliquer les mesures prescrites par les services vétérinaires."
+ },
+ "d:arrete:1983-03-16~exercice-regime-temps-partiel-biologistes-laboratoires-analyses-biologie": {
+  "risque": "Laboratoire de clinique dirigé par un biologiste sans les compétences exigées : sanctions.",
+  "plan": "Vérifier la qualification et les conditions d'exercice du biologiste à temps partiel."
+ },
+ "d:arrete:1981-05-19~requises-acces-commerce-distribution-stade-detail-secteurs-fruits": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:79-831": {
+  "risque": "Médicaments vétérinaires fabriqués hors bonnes pratiques : retrait, suspension.",
+  "plan": "Appliquer les bonnes pratiques de fabrication et de contrôle des médicaments vétérinaires."
+ },
+ "d:arrete:1979-07-23~mesures-sanitaires-prendre-contre-fievre-aphteuse": {
+  "risque": "Fièvre aphteuse non déclarée ou mesures non appliquées : propagation, abattage, sanctions.",
+  "plan": "Vacciner selon le programme, garder les certificats, déclarer tout cas suspect et appliquer les mesures prescrites par les services vétérinaires."
+ },
+ "d:arrete:1975-08-03~recettes-alcools-reserves": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1974-08-25~reglementant-peche-betail": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1974-08-17~regles-applicables-standardisation-conserves-piments-harissa-tunisie-destinees": {
+  "risque": "Exportation ou vente de harissa hors règles de standardisation : interdiction de sortie, saisie, sanctions.",
+  "plan": "Contrôler chaque lot de harissa (dénomination, qualité, calibrage, conditionnement, étiquetage) avant expédition."
+ },
+ "d:arrete:1974-02-16~normes-minimales-dimensionnelles-fonctionnelles-hotels-classes-tourisme": {
+  "risque": "Hôtel hors normes de classement : déclassement, retrait de l'agrément, fermeture.",
+  "plan": "Comparer l'établissement aux normes de son classement et corriger les écarts avant les contrôles."
+ },
+ "d:arrete:1973-09-04~regles-standardisation-applicables-agrumes-tunisie-destinees-exportation": {
+  "risque": "Exportation ou vente de agrumes hors règles de standardisation : interdiction de sortie, saisie, sanctions.",
+  "plan": "Contrôler chaque lot de agrumes (dénomination, qualité, calibrage, conditionnement, étiquetage) avant expédition."
+ },
+ "d:arrete:1969-02-14~regles-applicables-standardisation-conserves-fonds-coeurs-artichauts-destines": {
+  "risque": "Exportation ou vente de conserves d'artichauts hors règles de standardisation : interdiction de sortie, saisie, sanctions.",
+  "plan": "Contrôler chaque lot de conserves d'artichauts (dénomination, qualité, calibrage, conditionnement, étiquetage) avant expédition."
+ },
+ "n:decret:68-228": {
+  "risque": "Usine de conserves aux locaux ou matériels insalubres : fermeture, sanctions, risque sanitaire et accidents.",
+  "plan": "Vérifier sols et murs lavables, évacuation des eaux, propreté du matériel, hygiène et sécurité du personnel ; corriger les écarts."
+ },
+ "d:arrete:1963-10-24~execution-travaux-batiments-civils": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:1960-02-13~reglementation-javel": {
+  "risque": "Eau de Javel vendue sous la dénomination sans la concentration minimale : saisie, sanctions.",
+  "plan": "Vérifier la concentration et l'étiquetage de l'eau de Javel produite ou vendue."
+ },
+ "d:arrete:1959-08-18~regles-appliquees-standardisation-conserves-priorats-haricots-destinees-exportation": {
+  "risque": "Exportation ou vente de conserves de haricots hors règles de standardisation : interdiction de sortie, saisie, sanctions.",
+  "plan": "Contrôler chaque lot de conserves de haricots (dénomination, qualité, calibrage, conditionnement, étiquetage) avant expédition."
+ },
+ "d:arrete:1959-03-19~regles-generales-securite-concerne-ascenseurs-monte-charge": {
+  "risque": "Ascenseur ou monte-charge mal entretenu ou sans dispositifs de sécurité : chute, coincement, accident grave.",
+  "plan": "Faire entretenir les ascenseurs et monte-charges sous contrat, vérifier périodiquement portes, parachutes et dispositifs de sécurité et garder les rapports."
+ },
+ "d:arrete:1958-01-08~particulieres-reglement-cotisation-professionnelle-chaussures": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "d:arrete:2026-09-22~stock-regulation-frais-sterilise-periode-haute-lactation-annee": {
+  "risque": "Stock de régulation non constitué : perte de la prime de stockage, sanctions.",
+  "plan": "Pour une centrale laitière : constituer sa quote-part du stock en haute lactation et déposer les justificatifs pour la prime."
+ },
+ "d:arrete:2026-05-14~liste-substituts-maternel": {
+  "risque": "Substitut du lait maternel absent de la liste ou mal étiqueté : retrait, sanctions.",
+  "plan": "Vérifier que les produits commercialisés figurent sur la liste en vigueur."
+ },
+ "d:arrete:2026-04-07~peche-engraissement-rouge": {
+  "risque": "Pêche ou engraissement du thon rouge hors quota ou sans déclaration : saisie, retrait de l'autorisation.",
+  "plan": "Respecter quotas, périodes et engins autorisés, et faire les déclarations et contrôles des fermes d'engraissement."
+ },
+ "d:arrete:2026-04-02~extraction-farines-semoule": {
+  "risque": "Farines et semoules hors taux d'extraction ou types fixés : saisie, sanctions.",
+  "plan": "Pour une minoterie : respecter les taux d'extraction et les types de produits fixés et contrôler chaque lot."
+ },
+ "d:arrete:2026-01-12~subventions-exceptionnelles-destinees-soutenir-petits-eleveurs-bovins-delais": {
+  "risque": "Pas d'obligation : risque de perdre la subvention faute de dossier dans les délais.",
+  "plan": "Si l'éleveur y a droit, déposer la demande avec les justificatifs dans les délais."
+ },
+ "n:arrete:2021-436": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2025-03-13~aciers-armatures-passives": {
+  "risque": "Aciers pour armatures non conformes mis sur le marché ou mis en œuvre : retrait, risque structurel.",
+  "plan": "Pour un fabricant ou importateur : prouver la conformité aux normes ; pour une entreprise de construction : exiger les certificats de conformité des aciers livrés."
+ },
+ "d:arrete:2024-11-20~liste-detaillee-produits-relevant-domaine-competence-agence-nationale": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2024-10-09~approbation-contrat-vente-electricite-produite-partir-energies-renouvelables": {
+  "risque": "Projet d'électricité renouvelable hors conditions du régime : refus de l'accord ou du contrat, vente des excédents impossible.",
+  "plan": "Vérifier le régime applicable au projet (puissance, raccordement) et signer le contrat type avec la STEG selon ses conditions."
+ },
+ "d:arrete:2024-05-29~specifications-techniques-minimales-visant-economie-consommation-energie-projets": {
+  "risque": "Bâtiment résidentiel neuf non conforme aux exigences thermiques : refus du permis ou de la conformité.",
+  "plan": "Pour un projet résidentiel : faire vérifier isolation et équipements par le bureau d'études avant le permis."
+ },
+ "d:arrete:2023-12-08~approbation-contrat-transport-electricite-produite-societes-autoproduction-partir": {
+  "risque": "Projet d'électricité renouvelable hors conditions du régime : refus de l'accord ou du contrat, vente des excédents impossible.",
+  "plan": "Vérifier le régime applicable au projet (puissance, raccordement) et signer le contrat type avec la STEG selon ses conditions."
+ },
+ "d:arrete:2022-12-26~execution-projet-pilote-national-equipement-logements-menages-faibles": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2022-11-17~fixation-puissance-minimale-projets-autoproduction-electricite-partir-energies": {
+  "risque": "Projet d'autoproduction de 1 MW ou plus raccordé en HT/MT sans accord du ministre : refus du raccordement.",
+  "plan": "Pour un projet d'autoproduction de 1 MW ou plus : obtenir l'accord du ministre de l'énergie avant la réalisation."
+ },
+ "d:arrete:2022-03-03~commerce-distribution-petrole-liquefie-lampant": {
+  "risque": "Usage professionnel de GPL domestique subventionné : saisie, amende.",
+  "plan": "N'utiliser pour l'activité que du GPL professionnel (vrac ou bouteilles professionnelles) et garder les factures."
+ },
+ "d:arrete:2021-12-21~execution-projet-pilote-equipement-menages-connectees-reseau-basse": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2021-12-13~approbation-liste-equipements-produits-medicaments-dispositifs-medicaux-prestations": {
+  "risque": "Mesure de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2020-12-11~approbation-liste-equipements-produits-medicaments-dispositifs-medicaux-prestations": {
+  "risque": "Mesure de la période Covid-19 : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "d:arrete:2020-11-25~determinant-produits-monopole-importation-reserve-pharmacie-centrale-tunisie": {
+  "risque": "Importation de produits réservés à la Pharmacie centrale : saisie, sanctions.",
+  "plan": "Vérifier la liste avant toute importation de produits pharmaceutiques et passer par la Pharmacie centrale pour ceux qui y sont réservés."
+ },
+ "d:arrete:2020-10-20~marges-brutes-detail-applicables-vente-fruits-legumes": {
+  "risque": "Marges de détail dépassées : procès-verbal, amende pour pratique de prix illicite.",
+  "plan": "Calculer les prix de vente des fruits et légumes dans la limite des marges fixées et garder les factures d'achat."
+ },
+ "d:arrete:2020-05-28~niveau-minimal-puissance-souscrite-individuelle-autoconsommateur-autoconsommateurs-ouvrant": {
+  "risque": "Vente d'excédents sans la puissance minimale requise : refus de la STEG.",
+  "plan": "Vérifier la puissance souscrite avant de prévoir la vente des excédents."
+ },
+ "n:arrete:2015-36": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2019-03-15~jort-2019-024-905-14": {
+  "risque": "Zone de production de mollusques non conforme : fermeture de la zone, saisie.",
+  "plan": "Pour un conchyliculteur : appliquer les conditions modifiées des zones de production et les analyses exigées."
+ },
+ "d:arrete:2018-08-30~approbation-revision-contrat-vente-societe-tunisienne-electricite-energie": {
+  "risque": "Projet d'électricité renouvelable hors conditions du régime : refus de l'accord ou du contrat, vente des excédents impossible.",
+  "plan": "Vérifier le régime applicable au projet (puissance, raccordement) et signer le contrat type avec la STEG selon ses conditions."
+ },
+ "d:arrete:2018-03-27~approbation-statut-groupement-interprofessionnel-dattes": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2018-02-19~conserves-bonite": {
+  "risque": "Conserves de thon ou bonite non conformes : retrait, saisie, sanctions.",
+  "plan": "Contrôler dénomination, critères physiques et microbiologiques, étiquetage et conditions d'entreposage de chaque lot."
+ },
+ "d:arrete:2017-06-02~approbation-reglement-securite-specifique-batiments-usage-habitation": {
+  "risque": "Pour un promoteur ou un logement de fonction : bâtiment d'habitation non conforme au règlement incendie, refus de la conformité.",
+  "plan": "Appliquer le règlement de sécurité incendie des bâtiments d'habitation dès la conception."
+ },
+ "d:arrete:2017-04-04~etablissements-sanitaires-specialites-prioritaires-recrutement-corps-medical-hospitalo": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2016-12-23~postes-haute-tension-basse-distribution-energie-electrique-alimentes": {
+  "risque": "Poste de transformation non conforme : électrocution, incendie, refus de mise en service par la STEG.",
+  "plan": "Faire vérifier le poste HT/BT (équipements, protections, mise à la terre, accès) par un organisme agréé et corriger les écarts."
+ },
+ "d:arrete:2016-12-23~regles-installation-eclairage-public": {
+  "risque": "Installation d'éclairage extérieur non conforme : électrocution, refus de réception.",
+  "plan": "Pour un installateur ou un site avec éclairage extérieur : respecter les règles de protection et de sécurité et faire réceptionner l'installation."
+ },
+ "d:arrete:2016-05-02~conserves-piments-harissa-tunisie": {
+  "risque": "Harissa non conforme aux conditions de production ou d'étiquetage : retrait, saisie.",
+  "plan": "Appliquer les conditions techniques, de conditionnement et de contrôle de la production d'harissa."
+ },
+ "d:arrete:2016-04-18~fixation-perimetres-pastoraux-sauvegarde-cheptel-ouverture-pacage": {
+  "risque": "Mesure temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:98-1870": {
+  "risque": "Mesure temporaire : pas d'obligation actuelle.",
+  "plan": "Garder pour information."
+ },
+ "n:decret:98-1646": {
+  "risque": "Pour un immeuble en copropriété : charges et usages des parties communes contestés.",
+  "plan": "Si l'établissement est en copropriété, vérifier le règlement de copropriété et sa participation aux charges."
+ },
+ "n:decret:97-434": {
+  "risque": "Droit de licence non payé : sanctions, fermeture.",
+  "plan": "Payer chaque année le droit de licence du débit de boissons."
+ },
+ "n:decret:95-31": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1994-06-21~liste-cultures-peuvent-irriguees-usees-traitees": {
+  "risque": "Irrigation aux eaux usées traitées de cultures non autorisées : risque sanitaire, destruction des récoltes.",
+  "plan": "N'irriguer avec des eaux usées traitées que les cultures de la liste."
+ },
+ "n:decret:93-2175": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:93-1886": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:89-432": {
+  "risque": "Restaurant touristique hors normes de classement : déclassement, retrait de l'agrément, fermeture.",
+  "plan": "Comparer l'établissement aux normes de son classement et corriger les écarts avant les contrôles."
+ },
+ "n:decret:87-654": {
+  "risque": "Ouvrage sur ou sous la route sans concession : démolition, sanctions.",
+  "plan": "Obtenir la concession d'occupation avant tout ouvrage sur le domaine public routier et payer la redevance."
+ },
+ "n:decret:85-985": {
+  "risque": "Cotisation professionnelle sur les conserves non payée : recouvrement.",
+  "plan": "Pour un fabricant de conserves : déclarer et payer la cotisation professionnelle."
+ },
+ "n:decret:85-56": {
+  "risque": "Rejet interdit ou non autorisé dans le milieu récepteur : procès-verbal, amende, fermeture (texte complété depuis par les valeurs limites de 2018).",
+  "plan": "Recenser les rejets du site, obtenir les autorisations requises, prétraiter et respecter les valeurs limites en vigueur."
+ },
+ "d:arrete:1983-12-21~autorisation-irrigation-usees": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:81-649": {
+  "risque": "Achat au marché de gros sans carte : refus d'accès.",
+  "plan": "Détenir la carte d'achat pour les produits concernés."
+ },
+ "n:decret:79-763": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:76-767": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:74-591": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:74-581": {
+  "risque": "Agence de voyages sans licence : fermeture.",
+  "plan": "Obtenir la licence auprès de l'Office national du tourisme et la maintenir."
+ },
+ "n:decret:73-509": {
+  "risque": "Directeur d'établissement d'hébergement non agréé : sanctions.",
+  "plan": "Faire agréer le directeur par l'Office national du tourisme."
+ },
+ "n:decret:73-511": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:73-287": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:71-394": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:71-140": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:68-91": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:68-19": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:68-5": {
+  "risque": "Ouverture hors horaires fixés : fermeture administrative, amende.",
+  "plan": "Respecter les horaires d'ouverture fixés pour l'établissement selon la saison."
+ },
+ "n:decret:63-314": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret:62-200": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:62-201": {
+  "risque": "Texte ancien, sans obligation actuelle identifiée ; risque limité.",
+  "plan": "Garder pour information ; vérifier seulement qu'aucune disposition n'est reprise dans un texte en vigueur pour l'activité."
+ },
+ "n:decret:61-240": {
+  "risque": "Droits de visite des navires non payés : immobilisation.",
+  "plan": "Payer les droits de visite des navires et des experts."
+ }
+}
