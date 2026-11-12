@@ -1,0 +1,322 @@
+{
+ "n:decret:2005-1991": {
+  "risque": "Projet réalisé ou étendu sans étude d'impact ou cahier des charges approuvé par l'ANPE : refus ou retrait de l'autorisation, arrêt des travaux, mise en demeure et poursuites au titre du code de l'environnement.",
+  "plan": "Vérifier la catégorie EIE du site (annexe 1 A ou B, annexe 2) pour chaque projet ou extension ; faire approuver l'étude d'impact ou signer le cahier des charges avant tout démarrage ; garder l'avis de l'ANPE et suivre ses prescriptions."
+ },
+ "d:arrete:2005-11-15~nomenclature-etablissements-dangereux-insalubres-incommodes": {
+  "risque": "Exploiter sous une catégorie inexacte : autorisation ou déclaration invalide, mise en demeure, suspension ou fermeture de l'établissement par l'administration.",
+  "plan": "Vérifier la ou les rubriques et la catégorie du site au regard de la nomenclature en vigueur (règle d'addition comprise) et, si elles ont changé, régulariser l'autorisation ou la déclaration."
+ },
+ "n:decret:2010-2519": {
+  "risque": "Dépassement des valeurs limites d'émission : procès-verbal, amende de 1 000 à 50 000 dinars (loi 2007-34), mise en demeure, suspension de l'installation.",
+  "plan": "Recenser les sources fixes (chaudières, fours, cheminées) et les polluants concernés ; faire mesurer les émissions par un laboratoire agréé à la fréquence prévue, comparer aux valeurs limites, tenir les résultats et corriger (traitement, réglage) en cas de dépassement."
+ },
+ "n:loi:96-41": {
+  "risque": "Déchets abandonnés, brûlés ou remis à un opérateur non autorisé : responsabilité du producteur, amendes et emprisonnement, frais de dépollution à sa charge.",
+  "plan": "Tenir l'inventaire des déchets par nature (dangereux ou non), les trier et les stocker sur aire adaptée, les remettre à des collecteurs et éliminateurs autorisés avec bordereaux, et réduire leur production à la source."
+ },
+ "n:decret:2018-447": {
+  "risque": "Contribution à un dépassement des valeurs de qualité de l'air autour du site : mesures de restriction imposées par l'administration en épisode de pollution, plaintes du voisinage.",
+  "plan": "Connaître les valeurs de qualité de l'air de la zone ; maîtriser les émissions du site pour ne pas y contribuer et appliquer les consignes des autorités en cas d'alerte."
+ },
+ "n:decret:2006-2687": {
+  "risque": "Exploitation sans autorisation ou déclaration à jour, ou non-respect des prescriptions : mise en demeure, suspension provisoire ou fermeture de l'établissement.",
+  "plan": "Vérifier que l'autorisation (1re et 2e catégories) ou la déclaration (3e catégorie) couvre l'activité, les capacités et l'emplacement actuels ; déposer un nouveau dossier avant toute extension ou modification ; conserver l'arrêté et en respecter les prescriptions."
+ },
+ "n:decret:2005-3395": {
+  "risque": "Piles et accumulateurs jetés avec les déchets ordinaires ou remis à un circuit non agréé : pollution par les métaux lourds, procès-verbal et amende (loi 96-41).",
+  "plan": "Collecter séparément les piles et batteries usagées dans des contenants dédiés, les remettre à un collecteur agréé contre justificatif et tenir le registre des quantités remises."
+ },
+ "n:decret:2008-2745": {
+  "risque": "Déchets de soins mal triés ou remis à un opérateur non autorisé : risque infectieux pour le personnel et le public, poursuites au titre de la loi 96-41.",
+  "plan": "Trier les déchets d'activités sanitaires à la source dans les emballages et couleurs prévus, les stocker dans un local dédié, les faire enlever et traiter par une entreprise autorisée, tenir le registre et former le personnel."
+ },
+ "n:loi:2007-34": {
+  "risque": "Non-respect des valeurs limites ou défaut de surveillance des émissions : amende de 1 000 à 50 000 dinars, mise en demeure et arrêt de l'installation.",
+  "plan": "Identifier les installations émettrices, en faire mesurer les rejets, tenir les résultats à disposition, déclarer tout incident de pollution de l'air et mettre en place les traitements nécessaires."
+ },
+ "n:loi:59-147": {
+  "risque": "Débit de boissons exploité sans autorisation ou hors des conditions fixées : fermeture, amende et emprisonnement.",
+  "plan": "Vérifier que l'autorisation d'ouverture correspond à la catégorie de l'établissement ; respecter les horaires, les interdictions de vente et l'affichage exigés."
+ },
+ "n:decret:62-129": {
+  "risque": "Chute de hauteur, effondrement ou accident d'engin sur chantier : accident du travail grave, procès-verbal de l'inspection du travail, responsabilité pénale de l'entrepreneur.",
+  "plan": "Évaluer les risques de chaque chantier ; installer et vérifier échafaudages, garde-corps et protections contre les chutes ; faire vérifier les appareils de levage ; fournir et faire porter les EPI ; former et encadrer le personnel."
+ },
+ "n:loi:94-122": {
+  "risque": "Construction ou extension sans permis de bâtir ou non conforme : procès-verbal, amende de 500 à 20 000 dinars, emprisonnement, ordre de démolition.",
+  "plan": "Obtenir le permis de bâtir avant tous travaux de construction ou d'extension, respecter le plan d'aménagement et les règles de construction, afficher le permis sur le chantier et demander le certificat de conformité à l'achèvement."
+ },
+ "n:loi:93-41": {
+  "risque": "Rejet non autorisé ou non conforme dans le réseau de l'ONAS : travaux exécutés d'office aux frais de l'établissement, sanctions et dommages et intérêts.",
+  "plan": "S'assurer que les rejets au réseau public sont autorisés par l'ONAS et conformes aux conditions de déversement ; laisser l'accès aux agents de contrôle et payer les redevances."
+ },
+ "n:decret:84-1556": {
+  "risque": "Non-respect des prescriptions du lotissement industriel (fumées, résidus, bruit, assainissement) : mise en demeure, sanctions, retrait d'avantages, conflit avec les voisins.",
+  "plan": "Vérifier le respect du cahier des charges du lotissement : traitement des fumées et odeurs, stockage et élimination des résidus, bruit de jour sous 50 dB(A) chez les voisins, réseau séparatif et rétention des liquides dangereux."
+ },
+ "n:decret:2000-101": {
+  "risque": "Production ou vente de semences et plants sans carte professionnelle ou non conformes : saisie des lots, retrait de la carte, amendes.",
+  "plan": "Détenir la carte professionnelle, respecter le cahier des charges de production, d'emballage et d'étiquetage, et faire contrôler chaque lot avant sa commercialisation."
+ },
+ "d:arrete:1998-09-19~controle-sanitaire-surveillance-production-produits-peche-marche": {
+  "risque": "Produits de la pêche non conformes ou établissement non agréé : saisie, retrait de l'agrément sanitaire, risque d'intoxication des consommateurs.",
+  "plan": "Maintenir l'agrément sanitaire de l'établissement, appliquer les règles d'hygiène et de chaîne du froid, réaliser les analyses prévues et tenir les documents de traçabilité pour les contrôles."
+ },
+ "n:loi:89-20": {
+  "risque": "Exploitation de carrière sans autorisation ou hors cahier des charges : suspension ou retrait de l'autorisation, amendes, obligation de remise en état des lieux.",
+  "plan": "Vérifier l'autorisation et ses limites (périmètre, profondeur, durée), appliquer les règles techniques et de sécurité, tenir le registre d'exploitation et provisionner la remise en état du site."
+ },
+ "n:loi:66-64": {
+  "risque": "Abattage hors abattoir agréé ou vente de viandes non inspectées : saisie, amende, emprisonnement jusqu'à cinq ans en récidive.",
+  "plan": "N'abattre que dans un abattoir ou lieu autorisé, n'acheter et ne vendre que des viandes estampillées par l'inspection vétérinaire et garder les justificatifs d'origine."
+ },
+ "n:loi:90-17": {
+  "risque": "Promoteur qui ne respecte pas la réglementation ou ses engagements envers les acquéreurs : retrait de l'agrément et des avantages, litiges et pénalités.",
+  "plan": "Maintenir l'agrément de promoteur, respecter le cahier des charges et le code de l'urbanisme, rédiger promesses et contrats de vente avec les mentions obligatoires et tenir les délais de livraison."
+ },
+ "d:arrete:2007-04-17~definition-pieces-constitutives-dossier-permis-batir-delais-validite": {
+  "risque": "Dossier de permis incomplet ou permis périmé : refus ou retard du permis, travaux réalisés sans titre valable.",
+  "plan": "Constituer le dossier de permis de bâtir avec toutes les pièces exigées, suivre sa date de validité et en demander la prorogation avant expiration si les travaux ne sont pas achevés."
+ },
+ "n:decret:2000-2339": {
+  "risque": "Déchet dangereux traité comme ordinaire : élimination illégale, pollution, poursuites au titre de la loi 96-41.",
+  "plan": "Classer chaque déchet du site au regard de la liste des déchets dangereux, les identifier comme tels, les stocker séparément et les confier à des opérateurs autorisés."
+ },
+ "n:decret-loi:2020-23": {
+  "risque": "Mesure temporaire de 2020 : pas d'obligation actuelle, sinon litiges avec des clients sur les voyages annulés de cette période.",
+  "plan": "Garder pour information ; vérifier seulement que les avoirs émis en 2020 ont été soldés."
+ },
+ "n:decret:2012-793": {
+  "risque": "Pas d'obligation : risque de perdre la prime faute de dossier conforme.",
+  "plan": "Si l'unité y a droit, déposer les demandes de prime avec les justificatifs de séchage en sous-traitance."
+ },
+ "d:arrete:2008-04-23~montant-consigne-obligatoire-reprise-accumulateurs-usages-utilises-moyens": {
+  "risque": "Batteries vendues sans consigne ou usagées non reprises : infraction au régime de reprise, amende.",
+  "plan": "Pour un vendeur : percevoir la consigne et reprendre les batteries usagées ; pour un utilisateur : rapporter les batteries usagées au circuit de reprise et garder les justificatifs."
+ },
+ "n:decret:2006-2095": {
+  "risque": "Pas d'obligation : risque de devoir rembourser les primes si les actions financées ne sont pas exécutées.",
+  "plan": "Si l'entreprise en bénéficie, exécuter les actions du contrat-programme et en garder les justificatifs."
+ },
+ "d:arrete:2002-10-15~approbation-cahier-charges-commerce-distribution-materiel-roulant-occasion": {
+  "risque": "Commerce de véhicules d'occasion hors cahier des charges : fermeture, amende.",
+  "plan": "Vérifier le respect du cahier des charges (déclaration, local, registre des véhicules) et en garder la preuve de dépôt."
+ },
+ "n:loi:99-40": {
+  "risque": "Instruments de mesure non approuvés ou non vérifiés : amende de 100 à 1 000 dinars, emprisonnement, mesures et transactions contestables.",
+  "plan": "Inventorier les instruments de mesure utilisés pour les transactions ou les contrôles réglementaires, vérifier leur approbation de modèle et les faire vérifier périodiquement (marque de l'année)."
+ },
+ "n:loi:85-91": {
+  "risque": "Fabrication sans licence ou médicament sans AMM : fermeture, retrait du marché, sanctions pénales.",
+  "plan": "Maintenir la licence d'exploitation et les AMM à jour, appliquer les bonnes pratiques de fabrication et organiser le retrait immédiat des lots en cas de retrait d'AMM."
+ },
+ "n:loi:75-16": {
+  "risque": "Prélèvement, forage ou rejet sans autorisation : amende égale au dixième des travaux, fermeture du forage, poursuites pour pollution.",
+  "plan": "Vérifier l'autorisation ou la concession de chaque forage et prélèvement d'eau, relever les volumes, ne rejeter aucun effluent dans le domaine public hydraulique sans autorisation."
+ },
+ "n:decret:2021-436": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:2010-02-20~termes-reference-etude-dangers-operation-interne-etablissements-dangereux": {
+  "risque": "Étude de dangers ou POI absents ou non à jour : refus d'autorisation, aggravation d'un accident majeur, mise en demeure.",
+  "plan": "Faire réaliser ou mettre à jour l'étude de dangers et le plan d'opération interne selon les termes de référence, former le personnel au POI et l'exercer au moins une fois par an."
+ },
+ "n:decret:2017-967": {
+  "risque": "Pour un intervenant de bâtiments civils : réception refusée, pénalités ou exclusion des marchés publics.",
+  "plan": "Pour une entreprise ou un bureau d'études intervenant sur des bâtiments publics : respecter les étapes et missions fixées et documenter le contrôle de l'exécution."
+ },
+ "n:decret:2016-1123": {
+  "risque": "Installation renouvelable réalisée ou exploitée hors autorisation : retrait sans dédommagement, démontage aux frais du porteur.",
+  "plan": "Pour un projet d'autoproduction ou de vente : obtenir l'accord ou l'autorisation prévus, respecter le cahier des charges de raccordement et les conditions du contrat avec la STEG."
+ },
+ "n:loi:2015-11": {
+  "risque": "Bâtiment non conforme au permis non régularisé : démolition possible, amende, difficultés de vente ou d'assurance.",
+  "plan": "Vérifier la conformité des bâtiments au permis ; pour un écart ancien éligible, déposer la demande de régularisation et payer l'amende fixée."
+ },
+ "d:arrete:2013-01-09~annulation-caractere-obligatoire-normes-tunisiennes-verrerie-laboratoire": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "d:arrete:1999-02-24~inscription-mentions-doivent-portees-couverture-exterieure-paquets-emballages": {
+  "risque": "Paquets de tabac sans les mentions obligatoires : saisie, amende.",
+  "plan": "Vérifier sur chaque produit les mentions sanitaires exigées (teneurs, avertissement en arabe, caractères indélébiles)."
+ },
+ "n:decret:98-795": {
+  "risque": "Centre d'hémodialyse hors normes de personnel, de locaux ou d'équipement : risque pour les patients, fermeture.",
+  "plan": "Vérifier le respect des normes annexées, la qualification du personnel et notifier toute fermeture trois mois à l'avance."
+ },
+ "n:decret:94-2050": {
+  "risque": "Établissement non raccordé ou installations intérieures défectueuses : rejets illicites, travaux d'office, sanctions de l'ONAS.",
+  "plan": "Raccorder le site au réseau public d'assainissement s'il passe devant, entretenir les installations intérieures et laisser l'ONAS les contrôler."
+ },
+ "n:loi:92-117": {
+  "risque": "Produit dangereux, mal étiqueté ou trompeur mis sur le marché : retrait, saisie, amendes et poursuites pour fraude.",
+  "plan": "S'assurer de la sécurité des produits vendus, de leur étiquetage en arabe et de l'affichage des prix ; organiser le rappel ou le retrait en cas de produit dangereux."
+ },
+ "n:decret:90-1401": {
+  "risque": "Essai clinique sans autorisation ou sans consentement : arrêt de l'essai, sanctions pénales et disciplinaires.",
+  "plan": "Faire autoriser chaque essai, obtenir l'avis du comité d'éthique et le consentement écrit des participants, et assurer la responsabilité civile du promoteur."
+ },
+ "n:decret:89-1047": {
+  "risque": "Usage agricole d'eaux usées sans autorisation ou sur cultures interdites : risque sanitaire, retrait de l'autorisation, destruction des récoltes.",
+  "plan": "N'utiliser que des eaux traitées autorisées, sur les cultures permises, et faire réaliser les contrôles sanitaires prévus."
+ },
+ "n:loi:86-17": {
+  "risque": "Travaux, accès ou occupation sur le domaine public routier sans autorisation : contravention, remise en état aux frais de l'auteur.",
+  "plan": "Obtenir l'autorisation avant tout accès, raccordement, dépôt ou travaux en bordure de route et respecter l'alignement."
+ },
+ "n:decret:78-71": {
+  "risque": "Pour un prestataire d'études : litiges sur la mission, la rémunération ou les délais.",
+  "plan": "Pour un bureau d'études ou un architecte : vérifier que les contrats publics suivent le CCAG applicable."
+ },
+ "d:arrete:2010-01-22~approbation-criteres-techniques-ecologiques-attribution-ecolabel-tunisien-categorie": {
+  "risque": "Démarche volontaire : risque de refus ou de retrait de l'écolabel si les critères ne sont pas tenus.",
+  "plan": "Si l'entreprise vise l'écolabel pour ses textiles : comparer ses produits aux critères, constituer le dossier et maintenir les preuves de conformité."
+ },
+ "n:decret:94-1744": {
+  "risque": "Produit importé ou exporté sans contrôle technique requis : blocage en douane, refoulement, destruction.",
+  "plan": "Vérifier si les produits importés ou exportés figurent sur les listes du contrôle technique et faire réaliser le contrôle avant le dédouanement."
+ },
+ "n:loi:76-18": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:decret-loi:73-13": {
+  "risque": "Agence de voyages exploitée sans licence ou sans garantie : fermeture immédiate, amende jusqu'à 4 000 dinars en récidive.",
+  "plan": "Maintenir la licence et la garantie financière à jour et respecter les obligations envers les clients."
+ },
+ "n:decret:2015-786": {
+  "risque": "Pneus usagés brûlés, abandonnés ou remis à un opérateur non autorisé : pollution, procès-verbal et amende.",
+  "plan": "Stocker les pneus usagés à l'abri et séparément, les remettre à un collecteur autorisé contre justificatif et ne jamais les brûler."
+ },
+ "n:decret:2013-664": {
+  "risque": "Grande surface ouverte ou étendue sans autorisation d'implantation : fermeture, sanctions.",
+  "plan": "Obtenir l'autorisation d'implantation avant toute ouverture ou extension et respecter les engagements du dossier."
+ },
+ "n:loi:2009-12": {
+  "risque": "Publicité installée sans autorisation : amende, enlèvement d'office aux frais de l'annonceur.",
+  "plan": "Obtenir l'autorisation avant toute enseigne ou panneau visible de la route et respecter les règles de sécurité et d'implantation."
+ },
+ "n:decret:2008-2704": {
+  "risque": "Collecte ou distribution de médicaments sans autorisation ou hors conditions : retrait de l'autorisation, risque sanitaire.",
+  "plan": "Pour une association : maintenir l'autorisation, un pharmacien responsable, les conditions de stockage et la traçabilité des dons."
+ },
+ "n:loi:2003-30": {
+  "risque": "Travaux miniers sans titre ou hors obligations : retrait du titre, amendes, remise en état.",
+  "plan": "Vérifier le titre minier et ses obligations (sécurité, environnement, redevances, déclarations) et les respecter."
+ },
+ "d:arrete:2001-07-26~approbation-cahier-charges-exercice-activite-commerce-ascenseurs-assimiles": {
+  "risque": "Installation ou maintenance d'ascenseurs hors cahier des charges : accident, fermeture de l'activité.",
+  "plan": "Pour un ascensoriste : respecter le cahier des charges (compétences, maintenance, responsabilités) ; pour un site équipé : exiger un prestataire conforme et un contrat d'entretien."
+ },
+ "d:arrete:1995-10-19~pieces-constitutives-dossier-lotissement-compris-cahier-charges-ainsi": {
+  "risque": "Lotissement réalisé sans approbation : nullité des ventes, sanctions d'urbanisme.",
+  "plan": "Constituer le dossier de lotissement complet et ne commencer ni travaux ni ventes avant son approbation."
+ },
+ "d:arrete:1984-08-23~superficie-couverte-reservee-construction-batiments-usage-habitation-exploitations": {
+  "risque": "Habitation agricole dépassant la superficie admise : refus du permis, démolition.",
+  "plan": "Vérifier la superficie couverte des habitations prévues avant le dépôt du permis."
+ },
+ "n:decret-loi:73-3": {
+  "risque": "Établissement touristique ouvert ou exploité hors normes : fermeture, sanctions, déclassement.",
+  "plan": "Respecter les normes de son classement, obtenir l'accord avant toute ouverture ou installation nouvelle et aviser un mois avant toute fermeture."
+ },
+ "d:arrete:1995-01-10~liste-maladies-professionnelles": {
+  "risque": "Maladie professionnelle non prévenue ou non déclarée : réparation à la charge de la CNSS avec recours possible contre l'employeur, procès-verbal.",
+  "plan": "Repérer les postes exposés aux agents des tableaux, organiser la surveillance médicale renforcée et déclarer toute maladie professionnelle dans les délais."
+ },
+ "n:decret:2010-261": {
+  "risque": "Panneau publicitaire non autorisé ou confondable avec la signalisation : enlèvement d'office, amende.",
+  "plan": "Constituer le dossier d'autorisation de chaque support et respecter dimensions, distances et règles d'implantation."
+ },
+ "n:decret:93-1915": {
+  "risque": "Établissement sanitaire privé hors normes : fermeture, retrait de l'autorisation.",
+  "plan": "Comparer locaux, équipements et effectifs aux normes de la spécialité, tenir les contrats du personnel et communiquer ce qui est exigé."
+ },
+ "n:decret:71-48": {
+  "risque": "Pas d'obligation directe pour l'établissement ; risque limité à une information manquée.",
+  "plan": "Garder le texte pour information ; aucune action de conformité à prévoir."
+ },
+ "n:loi:2009-11": {
+  "risque": "Bâtiment non conforme aux règles de sécurité incendie : incendie ou panique, amende de 100 à 10 000 dinars, refus de l'attestation de prévention, fermeture.",
+  "plan": "Obtenir et renouveler l'attestation de prévention de la protection civile ; maintenir dégagements, issues de secours, éclairage de sécurité, détection et extincteurs ; vérifier les installations et former le personnel."
+ },
+ "n:decret:2018-928": {
+  "risque": "Dépassement des nouvelles valeurs limites ou absence de points de mesure : procès-verbal, amende, mise en demeure.",
+  "plan": "Vérifier les valeurs applicables à ses installations (cimenteries comprises) et équiper chaque source d'émission d'un point de prélèvement accessible."
+ },
+ "d:arrete:2010-02-23~novembre-nomenclature-etablissements-dangereux-insalubres-incommodes-regle-addition": {
+  "risque": "Exploiter sous une catégorie inexacte : autorisation ou déclaration invalide, mise en demeure, suspension ou fermeture de l'établissement par l'administration.",
+  "plan": "Vérifier la ou les rubriques et la catégorie du site au regard de la nomenclature en vigueur (règle d'addition comprise) et, si elles ont changé, régulariser l'autorisation ou la déclaration."
+ },
+ "d:arrete:2012-10-24~novembre-nomenclature-etablissements-dangereux-insalubres-incommodes": {
+  "risque": "Exploiter sous une catégorie inexacte : autorisation ou déclaration invalide, mise en demeure, suspension ou fermeture de l'établissement par l'administration.",
+  "plan": "Vérifier la ou les rubriques et la catégorie du site au regard de la nomenclature en vigueur (règle d'addition comprise) et, si elles ont changé, régulariser l'autorisation ou la déclaration."
+ },
+ "d:arrete:2023-06-21~cahier-charges-exercice-activite-collecte-cereales": {
+  "risque": "Centre de collecte non conforme après deux ans : arrêt de l'activité par le ministre de l'agriculture.",
+  "plan": "Comparer le centre au cahier des charges (stockage, hygiène, équipements) et réaliser les mises à niveau avant l'échéance."
+ },
+ "d:arrete:2016-07-13~approbation-cahier-charges-exercice-activite-micro-entreprises-creees": {
+  "risque": "Pour une micro-entreprise concernée : exclusion du programme ou des marchés.",
+  "plan": "Respecter le cahier des charges de l'activité et tenir les justificatifs."
+ },
+ "d:arrete:2012-01-25~industrie-energie-petites-moyennes-entreprises-novembre-nomenclature-etablissements": {
+  "risque": "Exploiter sous une catégorie inexacte : autorisation ou déclaration invalide, mise en demeure, suspension ou fermeture de l'établissement par l'administration.",
+  "plan": "Vérifier la ou les rubriques et la catégorie du site au regard de la nomenclature en vigueur (règle d'addition comprise) et, si elles ont changé, régulariser l'autorisation ou la déclaration."
+ },
+ "n:decret:2011-1058": {
+  "risque": "Producteur de semences hors cahier des charges : retrait de la carte, saisie des lots.",
+  "plan": "Appliquer le cahier des charges de production et de multiplication et faire contrôler qualité et état sanitaire."
+ },
+ "n:decret-loi:2011-53": {
+  "risque": "Mesure temporaire de 2011 : risque de remboursement des aides si les conditions n'étaient pas remplies.",
+  "plan": "Garder pour information et conserver les justificatifs des aides perçues."
+ },
+ "n:decret:2007-13": {
+  "risque": "Épandage de boues non conformes : pollution des sols, risque sanitaire, retrait de l'autorisation.",
+  "plan": "Pour une station d'épuration ou un agriculteur : analyser les boues, ne les épandre que sur terres et cultures permises aux doses fixées, tenir le suivi."
+ },
+ "n:decret:2003-1984": {
+  "risque": "Occupation du domaine portuaire sans autorisation : expulsion, redevances et pénalités.",
+  "plan": "Obtenir et renouveler l'autorisation d'occupation et respecter ses conditions."
+ },
+ "n:loi:98-14": {
+  "risque": "Vente d'alcool à emporter sans autorisation : emprisonnement de 3 mois à 1 an et amende, fermeture.",
+  "plan": "Détenir l'autorisation personnelle à jour et la renouveler tous les deux ans."
+ },
+ "d:arrete:1996-11-12~paiement-frais-raccordement-reseaux-publics-assainissement-zones-intervention": {
+  "risque": "Frais de raccordement non réglés : raccordement refusé ou retardé.",
+  "plan": "Régler les frais de raccordement à l'ONAS selon les modalités fixées et garder les justificatifs."
+ },
+ "d:arrete:1996-09-10~octroi-autorisation-marche-medicaments-usage-humain-renouvellement-cession": {
+  "risque": "Médicament commercialisé sans AMM valide : retrait du marché, sanctions.",
+  "plan": "Suivre l'échéance de chaque AMM et déposer à temps les dossiers de renouvellement ou de cession."
+ },
+ "n:decret:94-1935": {
+  "risque": "Occupant d'une zone industrielle qui ne respecte pas le cahier des charges : sanctions, charges de remise en état.",
+  "plan": "Respecter les obligations du cahier des charges de la zone (voirie, réseaux, entretien) et participer au groupement de maintenance."
+ },
+ "n:decret:92-1297": {
+  "risque": "Centre de thalassothérapie hors normes : avertissement, fermeture provisoire ou définitive.",
+  "plan": "Respecter les normes de locaux, d'équipements, de personnel et de qualité de l'eau de mer, avec le suivi médical prévu."
+ },
+ "n:decret:91-1330": {
+  "risque": "Promoteur qui ne respecte pas le cahier des charges : retrait de l'agrément, pénalités de retard dues aux acquéreurs.",
+  "plan": "Appliquer le cahier des charges générales : mentions obligatoires des promesses de vente, garanties, délais de livraison et qualité de la construction."
+ },
+ "n:decret:86-319": {
+  "risque": "Collecte de peaux brutes sans carte professionnelle : saisie, amende.",
+  "plan": "Détenir la carte professionnelle de collecteur et respecter les conditions de conservation et de transport."
+ },
+ "d:arrete:1980-10-21~normes-controle-production-commercialisation-semences-cereales": {
+  "risque": "Semences de céréales non contrôlées : saisie des lots, sanctions.",
+  "plan": "Faire contrôler la production et respecter les normes de commercialisation des semences de céréales."
+ },
+ "n:decret:80-117": {
+  "risque": "Chaussures fabriquées avec des matériaux interdits : saisie, amende.",
+  "plan": "Vérifier les matériaux utilisés et le marquage de la composition sur chaque modèle."
+ }
+}
