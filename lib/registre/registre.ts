@@ -183,6 +183,9 @@ export function nouveautes(reg: Registre, texts: Texte[]): ReturnType<typeof pro
   return proposals(texts, reg.site).filter((p) => !known.has(p.texte.id) && !keysOf(p.texte).some((k) => keys.has(k)));
 }
 
+/** An amendment's date; one read without a date counts from its year (not as news for ever). */
+const dated = (a: Amendment) => a.date ?? `${a.year}-01-01`;
+
 export interface Alerte {
   ligne: Ligne;
   amendment: Amendment;
@@ -199,7 +202,7 @@ export function alertes(reg: Registre, amendments: Amendment[]): Alerte[] {
     if (!l.retenu) return [];
     const keys = new Set(keysOf(l.texte));
     return amendments
-      .filter((a) => !l.vus.includes(a.id) && (a.date ?? since) >= since && a.cites.some((k) => keys.has(k)))
+      .filter((a) => !l.vus.includes(a.id) && dated(a) >= since && a.cites.some((k) => keys.has(k)))
       .map((amendment) => ({ ligne: l, amendment }));
   });
 }
@@ -222,7 +225,7 @@ export function historique(l: Ligne, amendments: Amendment[]): Amendment[] {
 export function modifiePar(reg: Registre, l: Ligne, amendments: Amendment[]): Amendment[] {
   const since = reg.cree.slice(0, 10);
   const keys = new Set(keysOf(l.texte));
-  return amendments.filter((a) => (a.date ?? since) < since && a.cites.some((k) => keys.has(k)));
+  return amendments.filter((a) => dated(a) < since && a.cites.some((k) => keys.has(k)));
 }
 
 const addMonths = (iso: string, months: number) => {

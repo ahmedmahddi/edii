@@ -427,6 +427,29 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Step 2 of "next level" (12 November): the veille runs on its own, and on demand.**
+
+* `.github/workflows/veille.yml`: weekly (Monday 05:17 UTC) and on demand (*Run workflow*):
+  `npm ci`, `npm run veille` (new issues of this year, then the whole text of the issues where
+  texts were found, for their fiches), commit of `data/veille/sommaires` and `data/veille/fiches`,
+  push; Vercel rebuilds (prebuild reassesses the sommaires into the feed). Scheduled workflows run
+  from the default branch only: it is not active until the workflow file is merged there.
+* `lib/veille/live.ts` (`checkJort`, `readOcrSommaire`, `withLive`) and `app/api/veille/route.ts`:
+  the "Vérifier maintenant" button (top of the Veille view, `Verifier` in veille.tsx). The server
+  reads the catalog and the OCR sommaires of the issues the feed lacks (this year, and last year in
+  January; at most 8 per check, the numbers past the catalog tried too); the page runs `record` and
+  `amendments` on them, keeps them in localStorage (`abclassement-veille-direct`) until the feed has
+  them, and reports texts found, those important, and for the registers of this browser the new
+  texts that apply and the texts modified. With `VEILLE_GITHUB_TOKEN` and `VEILLE_GITHUB_REPO` set on
+  the deployment, a check that finds issues also starts the workflow.
+* Register cards now show « N nouveaux textes à examiner » (`nouveautes`). An amendment read without
+  a date counts from its year (`dated()` in registre.ts): two undated 2019 amendments used to show
+  as « modifiés au JORT » on every new register.
+* The register line's note says whether the résumé is written or read automatically from the
+  articles, and whether the risk and plan are written: the fiches of new texts are drafts.
+* Run on 12 November: n° 103 to 109 of 2026 read (2 texts found, both on veterinary medicines);
+  the button found the same in 7 s.
+
 **Step 1 of "next level" (12 November): a register an auditor can trust.**
 
 * **Texts of general reach proposed where they apply.** Rules widened in watch.json: `dechets`

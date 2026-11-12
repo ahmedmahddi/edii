@@ -2,12 +2,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Registres } from "@/app/components/registres";
-import { catalogue } from "@/lib/registre/referentiel";
-import { aTraiter, CHANGED, loadRegistres } from "@/lib/registre/registre";
+import { amendments, catalogue } from "@/lib/registre/referentiel";
+import { alertes, aTraiter, CHANGED, loadRegistres, nouveautes } from "@/lib/registre/registre";
 import type { ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
+import { type LiveCheck, type LiveIssue, withLive } from "@/lib/veille/live";
 import { fillRegister, registerRow } from "@/lib/veille/registre";
-import { type Feed, fold, type Hit, type Impact, rules, type Severity } from "@/lib/veille/watch";
+import { type Feed, fold, type Hit, type Impact, rules, type Severity, type Sommaires } from "@/lib/veille/watch";
 
 const EMPTY: Feed = { updated: null, scanned: {}, hits: [] };
 let feedRequest: Promise<Feed> | null = null;
@@ -23,13 +24,57 @@ function fetchFeed(): Promise<Feed> {
   return feedRequest;
 }
 
+/**
+ * Issues read with "Vérifier maintenant", kept in this browser until a deployment carries them
+ * (the weekly run stores them in the repository). Per browser: another computer checks again.
+ */
+const LIVE = "abclassement-veille-direct";
+const LIVE_CHANGED = "abclassement-veille-direct";
+
+function liveIssues(): LiveIssue[] {
+  try {
+    return (JSON.parse(localStorage.getItem(LIVE) ?? "null") as LiveCheck | null)?.issues ?? [];
+  } catch {
+    return [];
+  }
+}
+
+function saveLive(check: LiveCheck): void {
+  // Added to what an earlier check found, by year and number.
+  const byKey = new Map(liveIssues().map((i) => [`${i.year}-${i.number}`, i]));
+  for (const i of check.issues) if (i.issue || !byKey.get(`${i.year}-${i.number}`)?.issue) byKey.set(`${i.year}-${i.number}`, i);
+  try {
+    localStorage.setItem(LIVE, JSON.stringify({ ...check, issues: [...byKey.values()] }));
+  } catch {
+    // private window: the texts found show for this visit only
+  }
+  window.dispatchEvent(new Event(LIVE_CHANGED));
+}
+
+/** The feed with the issues of the checks made in this browser: their texts and the amendments they bring. */
+function merged(base: Feed, issues: LiveIssue[] = liveIssues()): Feed {
+  const fresh = issues.filter((i) => i.issue && !(base.scanned[String(i.year)] ?? []).includes(i.number));
+  if (!fresh.length) return base;
+  const feed = withLive(base, fresh);
+  const years: Sommaires[] = [...new Set(fresh.map((i) => i.year))].map((year) => ({
+    year,
+    issues: Object.fromEntries(fresh.filter((i) => i.year === year).map((i) => [String(i.number), i.issue!])),
+  }));
+  const known = new Set((base.amendments ?? []).map((a) => a.id));
+  const added = amendments(years, catalogue(feed.hits)).filter((a) => !known.has(a.id));
+  return { ...feed, amendments: [...(base.amendments ?? []), ...added] };
+}
+
 function useFeed(): Feed | null {
   const [feed, setFeed] = useState<Feed | null>(null);
   useEffect(() => {
     let live = true;
-    fetchFeed().then((f) => live && setFeed(f));
+    const load = () => fetchFeed().then((f) => live && setFeed(merged(f)));
+    load();
+    window.addEventListener(LIVE_CHANGED, load);
     return () => {
       live = false;
+      window.removeEventListener(LIVE_CHANGED, load);
     };
   }, []);
   return feed;
@@ -61,12 +106,14 @@ const PAGE = 20; // texts shown at once in the Journal officiel
 export function useVeilleCount(): number {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    const recount = () => fetchFeed().then((feed) => setCount(aTraiter(loadRegistres(), feed.amendments ?? [])));
+    const recount = () => fetchFeed().then((feed) => setCount(aTraiter(loadRegistres(), merged(feed).amendments ?? [])));
     recount();
     window.addEventListener(CHANGED, recount);
+    window.addEventListener(LIVE_CHANGED, recount);
     window.addEventListener("storage", recount); // another tab
     return () => {
       window.removeEventListener(CHANGED, recount);
+      window.removeEventListener(LIVE_CHANGED, recount);
       window.removeEventListener("storage", recount);
     };
   }, []);
@@ -106,6 +153,7 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
           </button>
         ))}
       </div>
+      {feed ? <Verifier feed={feed} /> : null}
       {!feed ? (
         <p className="muted" role="status">
           Chargement de la veille…
@@ -116,6 +164,113 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
         <Journal feed={feed} />
       )}
     </div>
+  );
+}
+
+const SAVE: Record<string, string> = {
+  lance: "Leur enregistrement est lancé : ils seront dans la veille de tous les postes après la prochaine mise à jour du site (quelques minutes).",
+  "non-configure": "Ils sont gardés dans ce navigateur ; la lecture hebdomadaire les enregistrera pour tous les postes.",
+  echec: "Ils sont gardés dans ce navigateur ; leur enregistrement n'a pas pu être lancé, la lecture hebdomadaire s'en chargera.",
+};
+
+type Verification =
+  | { state: "idle" }
+  | { state: "running" }
+  | { state: "done"; check: LiveCheck & { enregistrement?: string }; hits: number; important: number; news: number; alerts: number }
+  | { state: "error"; message: string };
+
+/**
+ * The JORT checked at once: the issues published since the last reading are read by the server
+ * (app/api/veille), their texts added to the veille and to the registers of this browser.
+ */
+function Verifier({ feed }: { feed: Feed }) {
+  const [v, setV] = useState<Verification>({ state: "idle" });
+  const recent = Object.entries(feed.scanned)
+    .map(([y, numbers]) => [Number(y), Math.max(...numbers)] as const)
+    .sort((a, b) => b[0] - a[0])[0];
+  const lastIssue = recent ? feed.hits.find((h) => h.year === recent[0] && h.issue === recent[1])?.date : null;
+
+  const run = async () => {
+    setV({ state: "running" });
+    try {
+      const year = new Date().getFullYear();
+      const scanned = Object.fromEntries(Object.entries(feed.scanned).filter(([y]) => Number(y) >= year - 1));
+      const res = await fetch("/api/veille", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ scanned }) });
+      const body = (await res.json()) as (LiveCheck & { enregistrement?: string }) | { error: string };
+      if (!res.ok || "error" in body) throw new Error("error" in body ? body.error : `HTTP ${res.status}`);
+      // What the new issues bring: texts found, and for the registers of this browser, new texts
+      // that apply and texts of theirs that are modified.
+      const next = merged(feed, body.issues);
+      const fresh = new Set(next.hits.filter((h) => !feed.scanned[String(h.year)]?.includes(h.issue)).map((h) => `jort-${h.id}`));
+      const known = new Set((feed.amendments ?? []).map((a) => a.id));
+      const added = (next.amendments ?? []).filter((a) => !known.has(a.id));
+      const texts = fresh.size ? catalogue(next.hits, next.amendments ?? [], next.citations ?? {}) : [];
+      const regs = loadRegistres();
+      const news = fresh.size ? regs.reduce((n, r) => n + nouveautes(r, texts).filter((p) => fresh.has(p.texte.id)).length, 0) : 0;
+      const alerts = added.length ? regs.reduce((n, r) => n + alertes(r, added).length, 0) : 0;
+      const hits = fresh.size;
+      const important = next.hits.filter((h) => fresh.has(`jort-${h.id}`) && h.severity !== "information").length;
+      if (body.issues.length) saveLive(body);
+      setV({ state: "done", check: body, hits, important, news, alerts });
+    } catch (error) {
+      setV({ state: "error", message: error instanceof Error ? error.message : String(error) });
+    }
+  };
+
+  const read = v.state === "done" ? v.check.issues.filter((i) => i.issue) : [];
+  const waiting = v.state === "done" ? v.check.issues.filter((i) => !i.issue) : [];
+  return (
+    <section className="veille-verifier" aria-label="Vérifier le Journal officiel">
+      <p className="small">
+        {recent ? (
+          <>
+            JORT lu jusqu’au n° {recent[1]}/{recent[0]}
+            {lastIssue ? ` (${dateFr(lastIssue)})` : ""}
+          </>
+        ) : (
+          "Aucun numéro du JORT lu pour l’instant"
+        )}
+        {feed.updated ? <span className="muted"> · lecture hebdomadaire du {dateFr(feed.updated.slice(0, 10))}</span> : null}
+      </p>
+      <button type="button" className="secondary-button" onClick={run} disabled={v.state === "running"}>
+        {v.state === "running" ? "Lecture du JORT…" : "Vérifier maintenant"}
+      </button>
+      <div aria-live="polite" className="veille-verifier-result small">
+        {v.state === "running" ? <p className="muted">Lecture des numéros parus depuis, sur jort.tn (jusqu’à une minute)…</p> : null}
+        {v.state === "error" ? <p className="registre-warning">Le JORT n’a pas pu être lu : {v.message}. Réessayez plus tard.</p> : null}
+        {v.state === "done" ? (
+          read.length || waiting.length ? (
+            <>
+              <p>
+                {read.length
+                  ? `${read.length} nouveau${read.length > 1 ? "x" : ""} numéro${read.length > 1 ? "s" : ""} lu${read.length > 1 ? "s" : ""} (n° ${read.map((i) => i.number).join(", ")}) : `
+                  : ""}
+                {read.length ? (
+                  <strong>
+                    {v.hits} texte{v.hits > 1 ? "s" : ""} repéré{v.hits > 1 ? "s" : ""}
+                    {v.hits ? `, dont ${v.important} important${v.important > 1 ? "s" : ""}` : ""}
+                  </strong>
+                ) : null}
+                {read.length && (v.news || v.alerts)
+                  ? ` · pour vos registres : ${[v.news ? `${v.news} nouveau${v.news > 1 ? "x" : ""} texte${v.news > 1 ? "s" : ""}` : "", v.alerts ? `${v.alerts} texte${v.alerts > 1 ? "s" : ""} modifié${v.alerts > 1 ? "s" : ""}` : ""].filter(Boolean).join(", ")}.`
+                  : read.length
+                    ? " · rien de nouveau pour vos registres."
+                    : ""}
+              </p>
+              {waiting.length ? (
+                <p className="muted">
+                  Publié{waiting.length > 1 ? "s" : ""} mais pas encore lisible{waiting.length > 1 ? "s" : ""} (texte en préparation sur ocr.jort.tn) : n° {waiting.map((i) => `${i.number}/${i.year}`).join(", ")}.
+                </p>
+              ) : null}
+              {v.check.remaining ? <p className="muted">{v.check.remaining} autre(s) numéro(s) à lire : vérifiez à nouveau.</p> : null}
+              {read.length && v.check.enregistrement && SAVE[v.check.enregistrement] ? <p className="muted">{SAVE[v.check.enregistrement]}</p> : null}
+            </>
+          ) : (
+            <p>Aucun nouveau numéro : la veille est à jour.</p>
+          )
+        ) : null}
+      </div>
+    </section>
   );
 }
 

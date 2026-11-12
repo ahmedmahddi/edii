@@ -12,6 +12,7 @@ import { bodies, compact, defaults, readFiche } from "@/lib/veille/fiche";
 import { namedKeys } from "@/lib/registre/referentiel";
 import { decodeGlyphs, isGlyphCoded } from "@/lib/veille/glyphs";
 import { pdfLines, toLines } from "@/lib/veille/pdf";
+import { CATALOG_URL, checkJort, withLive } from "@/lib/veille/live";
 import { assess, type Feed, hitsOf, reassess, record, subject } from "@/lib/veille/watch";
 
 const source = (f: string) => new Uint8Array(readFileSync(path.join(__dirname, "..", "data", "sources", f)));
@@ -471,5 +472,42 @@ describe("the fiche of a text, read in its issue", () => {
     // So do a written risk and action plan, in place of those made from the domain.
     const written = defaults("sst", { ...compact(decret), k: "Chute de hauteur sur chantier.", q: "Installer les garde-corps." });
     expect([written.risque, written.plan]).toEqual(["Chute de hauteur sur chantier.", "Installer les garde-corps."]);
+  });
+});
+
+describe("checking the JORT at once (Vérifier maintenant)", () => {
+  // A fake jort.tn: the catalog lists n° 1 and 2 of 2024; n° 2 has its OCR text (a real one), n° 1
+  // is already read, n° 3 is out of the catalog and not published yet.
+  const md = readFileSync(path.join(process.cwd(), "data", "sources", "ocr", "2024-002.md"), "utf8");
+  const fakeFetch = (async (url: string | URL | Request, init?: RequestInit) => {
+    const u = String(url);
+    if (u === CATALOG_URL)
+      return Response.json({ collections: [{ id: "journal-officiel", years: { "2024": { "1": { fr: {} }, "2": { fr: {} } } } }] });
+    if (u.endsWith("/2024/002.md")) {
+      const range = new Headers(init?.headers).get("Range");
+      return new Response(md, { status: range ? 206 : 200 });
+    }
+    return new Response("not found", { status: 404 });
+  }) as typeof fetch;
+
+  it("reads the issues published since those read, and adds their texts to the feed", async () => {
+    const check = await checkJort({ "2024": [1] }, { now: new Date("2024-03-01T10:00:00Z"), fetchImpl: fakeFetch });
+    expect(check.issues.map((i) => [i.year, i.number, i.issue?.entries.length ? "lu" : "vide"])).toEqual([[2024, 2, "lu"]]);
+    expect(check.remaining).toBe(0);
+    const before: Feed = { updated: null, scanned: { "2024": [1] }, hits: [] };
+    const after = withLive(before, check.issues);
+    expect(after.scanned["2024"]).toEqual([1, 2]);
+    expect(after.hits.every((h) => h.year === 2024 && h.issue === 2)).toBe(true);
+    // An issue the feed already has is left as it is.
+    expect(withLive(after, check.issues)).toBe(after);
+  });
+
+  it("says when a listed issue has no text yet, and reads last year's in January", async () => {
+    const check = await checkJort({ "2025": [1] }, { now: new Date("2025-01-10T10:00:00Z"), fetchImpl: fakeFetch });
+    // 2024 n° 1 is listed but its text is not out; n° 2 is read.
+    expect(check.issues.map((i) => [i.year, i.number, i.issue ? "lu" : "pas encore"])).toEqual([
+      [2024, 1, "pas encore"],
+      [2024, 2, "lu"],
+    ]);
   });
 });

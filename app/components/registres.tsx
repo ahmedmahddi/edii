@@ -105,6 +105,8 @@ export function Registres({
   const [draft, setDraft] = useState<{ report: ClassificationReport | null; site: Site; nom: string } | null>(null);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  // New texts that apply to each register (a JORT issue read since, a changed profile): shown on its card.
+  const news = useMemo(() => new Map(list.map((r) => [r.id, nouveautes(r, texts).length])), [list, texts]);
 
   useEffect(() => {
     if (!seed || !loaded) return;
@@ -245,6 +247,11 @@ export function Registres({
                     {nc ? <span className="is-nc">{nc} non conformes</span> : null}
                     {d ? <span className="is-due">{d} évaluations à faire</span> : null}
                     {a ? <span className="is-alert">{a} modifiés au JORT</span> : null}
+                    {news.get(r.id) ? (
+                      <span className="is-alert">
+                        {news.get(r.id) === 1 ? "1 nouveau texte à examiner" : `${news.get(r.id)} nouveaux textes à examiner`}
+                      </span>
+                    ) : null}
                   </p>
                 </div>
                 <div className="registre-card-actions">
@@ -900,7 +907,8 @@ function LigneCard({
             <summary>Exigences, risque et plan d’action</summary>
             {!l.resume || !l.risque || !l.plan ? (
               <p className="muted small registre-fiche-note">
-                {fiche?.r ? "Résumé rédigé" : fiche?.o?.length ? "Exigences relevées dans les articles du texte" : "Proposé d’après le domaine du texte"}
+                {fiche?.r ? "Résumé rédigé" : fiche?.o?.length ? "Exigences relevées automatiquement dans les articles du texte" : "Proposé d’après le domaine du texte"}
+                {fiche?.k ? ", risque et plan d’action rédigés" : ", risque et plan d’action proposés d’après le domaine"}
                 {" "}: brouillon à vérifier et à adapter au site.
                 {fiche?.p ? ` Périodicité relevée : ${fiche.p.toLowerCase()}.` : ""}
                 {fiche?.t?.length ? ` Obligations : ${fiche.t.map((t) => TYPES[t]?.label.toLowerCase() ?? t).join(", ")}.` : ""}

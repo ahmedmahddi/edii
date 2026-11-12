@@ -362,9 +362,11 @@ describe("an establishment's register", () => {
 
   it("counts, for the menu, the modified texts and the late evaluations, not the texts never evaluated", () => {
     const reg = createRegistre(report(), site(), texts, now);
-    const a = { id: "x", year: 2025, issue: 1, date: null, page: 1, title: "", pdf: "", cites: ["d:arrete:1995-01-10"] };
+    const a = { id: "x", year: 2026, issue: 120, date: "2026-11-02", page: 1, title: "", pdf: "", cites: ["d:arrete:1995-01-10"] };
     expect(aTraiter([reg], [], now)).toBe(0);
     expect(aTraiter([reg], [a], now)).toBe(1);
+    // Read without a date, an amendment counts from its year: an old one is history, not news.
+    expect(aTraiter([reg], [{ ...a, year: 2019, date: null }], now)).toBe(0);
     const late = { ...reg, lignes: reg.lignes.map((l, i) => (i < 3 ? { ...l, evalue: "2024-01-01" } : l)) };
     expect(aTraiter([late], [], now)).toBe(3);
   });

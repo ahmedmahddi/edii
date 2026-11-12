@@ -71,6 +71,29 @@ npm run veille -- --file jort.md --year 2010 --number 18    # an OCR text (or a 
 npm run veille -- --probe                        # sample old PDFs (see data/veille/probe)
 ```
 
+**Keeping it up to date, on its own and on demand.**
+
+* **Every week** (Monday 06:17, Tunis time), `.github/workflows/veille.yml` runs `npm run veille`
+  on GitHub and commits the sommaires and fiches it read (`data/veille/sommaires`,
+  `data/veille/fiches`). The push rebuilds the site (Vercel), whose feed is derived from the
+  sommaires at build: every user gets the new texts, and each register shows the new texts that
+  apply to it and the texts of its that a new one modifies. GitHub runs scheduled workflows from
+  the repository's default branch only: the workflow must be on it. It can also be started by hand
+  from the Actions tab (*Run workflow*).
+* **Vérifier maintenant**, at the top of the Veille view, reads at once the issues published since
+  the feed (`POST /api/veille`, `lib/veille/live.ts`: the catalog of jort.tn, then the sommaire of
+  each new issue from its OCR text; the server reads them, the OCR texts cannot be read from a
+  browser). The page applies the rules to them, adds their texts to the veille and the registers of
+  this browser, says how many concern the registers, and keeps them in this browser until a
+  deployment carries them. An issue published but whose OCR text is not out yet is named, to check
+  again later.
+* To have the button also store what it found for everyone (start the workflow at once), give the
+  deployment three environment variables: `VEILLE_GITHUB_TOKEN` (a fine-grained token on the
+  repository with *Actions: read and write*), `VEILLE_GITHUB_REPO` (`owner/name`) and
+  `VEILLE_GITHUB_REF` (the branch the workflow runs on, `main` by default). Without them, the
+  button still reads and shows the new texts; the weekly run stores them.
+* Run locally behind a proxy, Node's fetch needs `NODE_USE_ENV_PROXY=1` (Node 22.21 or later).
+
 **Where each issue is read.** From its OCR text first (`lib/veille/markdown.ts`): only its first
 64 KB are downloaded, the whole text only when the sommaire runs on. The OCR text gives the
 sommaire in the order printed: sections, institutions (headings, bold or capitals) and titles
