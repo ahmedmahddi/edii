@@ -32,6 +32,8 @@ import {
   type StudyKind,
 } from "@/lib/studies";
 import { useVeilleCount, Veille } from "./components/veille";
+import { CloudGate, LocalImport, ReadOnlyNotice, useCloud, WorkspaceSwitcher } from "./components/cloud";
+import { Compte, Equipe } from "./components/equipe";
 import { SECTORS } from "@/lib/sectors";
 
 import {
@@ -63,12 +65,27 @@ function ClasseBadge({ classe, big }: { classe: Classe; big?: boolean }) {
 export default function EdiiPage() {
   return (
     <Suspense fallback={<div className="center muted">Chargement…</div>}>
-      <Edii />
+      <CloudGate>
+        <Edii />
+      </CloudGate>
     </Suspense>
   );
 }
 
-type View = "search" | "establishment" | "guide" | "sources" | "veille" | "report";
+type View = "search" | "establishment" | "guide" | "sources" | "registres" | "veille" | "report" | "equipe" | "compte";
+
+/** Each screen's heading: eyebrow, title, one line on what it is for. */
+const HEADINGS: Record<View, [string, string, string]> = {
+  search: ["NOMENCLATURE TUNISIENNE", "Répertoire des activités", "Trouvez vos activités et leurs seuils de classement."],
+  establishment: ["CLASSEMENT", "Mon établissement", "Vos activités, leur catégorie et l’étude ANPE."],
+  report: ["CLASSEMENT", "Synthèse de classement", "La synthèse de votre classement, à imprimer ou à exporter."],
+  registres: ["CONFORMITÉ", "Registres réglementaires", "Les textes qui s’appliquent à chaque établissement, leur évaluation et leur suivi."],
+  veille: ["CONFORMITÉ", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
+  guide: ["RESSOURCES", "Comprendre votre classement", "Les informations utiles pour préparer votre dossier."],
+  sources: ["RESSOURCES", "Textes de référence", "Les textes et les sources du référentiel."],
+  equipe: ["ESPACE DE TRAVAIL", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
+  compte: ["ESPACE DE TRAVAIL", "Mon compte", "Votre nom, votre mot de passe et votre session."],
+};
 
 function Icon({ name, size = 20 }: { name: string; size?: number }) {
   const paths: Record<string, React.ReactNode> = {
@@ -127,6 +144,21 @@ function Icon({ name, size = 20 }: { name: string; size?: number }) {
         <path d="m8 12 3 3 5-6" />
       </>
     ),
+    list: <path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" />,
+    users: (
+      <>
+        <circle cx="9" cy="8" r="3.5" />
+        <path d="M2.5 20c.5-3.5 3.2-5.5 6.5-5.5s6 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18 14.8c2 .6 3.3 2.4 3.5 5.2" />
+      </>
+    ),
+    user: (
+      <>
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 21c.6-4 3.8-6.5 8-6.5s7.4 2.5 8 6.5" />
+      </>
+    ),
+    menu: <path d="M4 7h16M4 12h16M4 17h16" />,
+    close: <path d="m6 6 12 12M18 6 6 18" />,
   };
   return (
     <svg
@@ -206,7 +238,7 @@ function Edii() {
   const startRegister = () => {
     if (!report) return;
     setRegistreSeed(report);
-    setView("veille");
+    setView("registres");
     window.scrollTo({ top: 0 });
   };
   const selected = rubrique(code ?? "");
@@ -258,130 +290,163 @@ function Edii() {
   const remove = (i: number) =>
     setActivities((list) => list.filter((_, j) => j !== i));
   const count = (c: string) => activities.filter((a) => a.code === c).length;
-  const nav: [View, string, string][] = [
-    ["search", "search", "Rechercher une activité"],
-    ["establishment", "building", "Mon établissement"],
-    ["guide", "help", "Mode d’emploi"],
-    ["sources", "book", "Textes de référence"],
-    ["veille", "bell", "Veille réglementaire"],
+  const cloudState = useCloud();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const go = (v: View) => {
+    setView(v);
+    setMenuOpen(false);
+    window.scrollTo({ top: 0 });
+  };
+  const groups: { title: string; items: [View, string, string][] }[] = [
+    {
+      title: "Classement",
+      items: [
+        ["search", "search", "Nomenclature"],
+        ["establishment", "building", "Mon établissement"],
+      ],
+    },
+    {
+      title: "Conformité",
+      items: [
+        ["registres", "list", "Registres"],
+        ["veille", "bell", "Veille réglementaire"],
+      ],
+    },
+    {
+      title: "Ressources",
+      items: [
+        ["guide", "help", "Mode d’emploi"],
+        ["sources", "book", "Textes de référence"],
+      ],
+    },
+    ...(cloudState.enabled
+      ? [
+          {
+            title: "Espace de travail",
+            items: [
+              ["equipe", "users", "Équipe et espace"],
+              ["compte", "user", "Mon compte"],
+            ] as [View, string, string][],
+          },
+        ]
+      : []),
   ];
+  const [eyebrow, title, lead] = HEADINGS[view];
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell${menuOpen ? " menu-open" : ""}`}>
       <a className="skip-link" href="#workspace">
         Aller au contenu
       </a>
-      <div className="app-body">
-        <div className="utility-bar">
-          <span>
-            ABC CONSULTING <span className="utility-separator">/</span> OUTILS
-            MÉTIERS
-          </span>
-          <span>Tunisie · Classement des établissements</span>
-        </div>
-        <header className="site-header">
-          <div className="masthead">
-            <a className="brand" href="/" aria-label="ABClassement — Accueil">
-              <span className="wordmark">
-                <span>ABC</span>lassement<span className="brand-period">.</span>
-              </span>
-              <span className="brand-caption">Classement & environnement</span>
-            </a>
-            <div className="company-signature">
-              <span>Un outil développé par</span>
-              <img
-                src="/brand/abc-consulting.jpg"
-                alt="ABC Consulting"
-                width="763"
-                height="366"
-              />
-            </div>
-          </div>
-          <nav className="primary-nav" aria-label="Navigation principale">
-            {nav.map(([id, icon, label]) => (
-              <button
-                key={id}
-                className={view === id || (id === "establishment" && view === "report") ? "active" : ""}
-                aria-current={view === id ? "page" : undefined}
-                onClick={() => setView(id)}
-              >
-                <Icon name={icon} size={18} />
-                <span>{id === "search" ? "Nomenclature" : label}</span>
-                {id === "establishment" && (
-                  <span className="nav-count">{activities.length}</span>
-                )}
-                {id === "veille" && veilleCount > 0 && (
-                  <span
-                    className="nav-count is-alert"
-                    title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours"
-                  >
-                    {veilleCount}
-                  </span>
-                )}
-              </button>
-            ))}
-            <span className="nav-reference">
-              Référentiel 2005 · 2010 · 2012
+      <aside className="sidebar" id="sidebar" aria-label="Menu">
+        <div className="sidebar-brand">
+          <a className="brand" href="/" aria-label="ABClassement — Accueil">
+            <span className="wordmark">
+              <span>ABC</span>lassement<span className="brand-period">.</span>
             </span>
-          </nav>
+            <span className="brand-caption">Classement, registres et veille</span>
+          </a>
+          <button type="button" className="sidebar-close" aria-label="Fermer le menu" onClick={() => setMenuOpen(false)}>
+            <Icon name="close" />
+          </button>
+        </div>
+        {cloudState.enabled ? <WorkspaceSwitcher onManage={() => go("equipe")} /> : null}
+        <nav className="side-nav" aria-label="Navigation principale">
+          {groups.map((g) => (
+            <div key={g.title} className="side-nav-group">
+              <span className="side-nav-title">{g.title}</span>
+              {g.items.map(([id, icon, label]) => {
+                const active = view === id || (id === "establishment" && view === "report");
+                return (
+                  <button key={id} type="button" className={active ? "active" : ""} aria-current={active ? "page" : undefined} onClick={() => go(id)}>
+                    <Icon name={icon} size={18} />
+                    <span>{label}</span>
+                    {id === "establishment" && activities.length > 0 ? <span className="nav-count">{activities.length}</span> : null}
+                    {id === "registres" && veilleCount > 0 ? (
+                      <span className="nav-count is-alert" title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours">
+                        {veilleCount}
+                      </span>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+        </nav>
+        <div className="sidebar-foot">
+          {cloudState.user ? (
+            <button type="button" className="sidebar-account" onClick={() => go("compte")}>
+              <Icon name="user" size={18} />
+              <span>
+                <strong>{cloudState.name || cloudState.user.email}</strong>
+                {cloudState.name ? <small>{cloudState.user.email}</small> : null}
+              </span>
+            </button>
+          ) : (
+            <p className="sidebar-local">Mode local : les registres restent dans ce navigateur.</p>
+          )}
+          <div className="sidebar-signature">
+            <span>Un outil</span>
+            <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" />
+          </div>
+        </div>
+      </aside>
+      <div className="sidebar-backdrop" aria-hidden="true" onClick={() => setMenuOpen(false)} />
+      <div className="app-body">
+        <header className="topbar">
+          <button
+            type="button"
+            className="topbar-menu"
+            aria-label="Ouvrir le menu"
+            aria-expanded={menuOpen}
+            aria-controls="sidebar"
+            onClick={() => setMenuOpen(true)}
+          >
+            <Icon name="menu" />
+          </button>
+          <a className="brand" href="/" aria-label="ABClassement — Accueil">
+            <span className="wordmark">
+              <span>ABC</span>lassement<span className="brand-period">.</span>
+            </span>
+          </a>
+          <span className="topbar-where">{cloudState.current?.name ?? HEADINGS[view][1]}</span>
         </header>
         <main id="workspace" className="workspace" tabIndex={-1}>
           <div className="page-heading">
             <div>
-              <div className="eyebrow">
-                {view === "search"
-                  ? "NOMENCLATURE TUNISIENNE"
-                  : "ABCLASSEMENT / " +
-                    (view === "establishment"
-                      ? "VOTRE DOSSIER"
-                      : view === "report"
-                        ? "SYNTHÈSE"
-                      : view === "guide"
-                        ? "MODE D’EMPLOI"
-                        : view === "veille"
-                          ? "VEILLE RÉGLEMENTAIRE"
-                          : "DOCUMENTATION")}
+              <div className="eyebrow">{eyebrow}</div>
+              <h1>{title}</h1>
+              <p>{lead}</p>
+            </div>
+            {view === "search" || view === "establishment" ? (
+              <div className="reference-total">
+                <strong>{nomenclature.rubriques.length}</strong>
+                <span>
+                  rubriques
+                  <br />
+                  de référence
+                </span>
               </div>
-              <h1>
-                {view === "search"
-                  ? "Répertoire des activités"
-                  : view === "establishment"
-                    ? "Mon établissement"
-                    : view === "report"
-                      ? "Synthèse de classement"
-                      : view === "guide"
-                      ? "Comprendre votre classement"
-                      : view === "veille"
-                        ? "Veille réglementaire"
-                        : "Textes de référence"}
-              </h1>
-              <p>
-                {view === "search"
-                  ? "Trouvez vos activités et leurs seuils de classement."
-                  : view === "establishment"
-                    ? "Vos activités, leur catégorie et l’étude ANPE."
-                    : view === "report"
-                      ? "La synthèse de votre classement, à imprimer ou à exporter."
-                      : view === "veille"
-                        ? "Les registres de vos établissements et les textes du Journal officiel qui les concernent."
-                        : "Les informations utiles pour préparer votre dossier."}
-              </p>
-            </div>
-            <div className="reference-total">
-              <strong>{nomenclature.rubriques.length}</strong>
-              <span>
-                rubriques
-                <br />
-                de référence
-              </span>
-            </div>
+            ) : null}
           </div>
           {view === "guide" ? (
             <Intro />
           ) : view === "sources" ? (
             <Sources />
-          ) : view === "veille" ? (
-            <Veille seed={registreSeed} onSeedUsed={seedUsed} />
+          ) : view === "registres" || view === "veille" ? (
+            <>
+              {view === "registres" ? (
+                <>
+                  <ReadOnlyNotice />
+                  <LocalImport />
+                </>
+              ) : null}
+              <Veille tab={view === "registres" ? "registres" : "journal"} seed={registreSeed} onSeedUsed={seedUsed} />
+            </>
+          ) : view === "equipe" ? (
+            <Equipe />
+          ) : view === "compte" ? (
+            <Compte />
           ) : view === "report" ? null : (
             <div className={`edii-layout view-${view}`}>
               <section
@@ -833,34 +898,6 @@ function Edii() {
           </footer>
         </main>
       </div>
-      <nav className="mobile-nav" aria-label="Navigation mobile">
-        {nav.map(([id, icon]) => (
-          <button
-            key={id}
-            onClick={() => {
-              setView(id);
-              window.scrollTo({ top: 0 });
-            }}
-            aria-current={view === id ? "page" : undefined}
-            className={view === id || (id === "establishment" && view === "report") ? "active" : ""}
-          >
-            <Icon name={icon} />
-            <span>
-              {id === "search"
-                ? "Recherche"
-                : id === "establishment"
-                  ? `Établissement (${activities.length})`
-                  : id === "guide"
-                    ? "Guide"
-                    : id === "veille"
-                      ? veilleCount
-                        ? `Veille (${veilleCount})`
-                        : "Veille"
-                      : "Textes"}
-            </span>
-          </button>
-        ))}
-      </nav>
       <div className="toast-region" role="status" aria-live="polite">
         {notice && (
           <div className="toast">

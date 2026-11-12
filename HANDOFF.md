@@ -427,6 +427,54 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Step 3 of "next level" (12 November): accounts, client workspaces, and a side menu.**
+The user wants a product to sell to several clients (ABC Consulting is a consulting firm). Their
+choices: client workspaces with the firm's consultants invited in; Supabase; e-mail + password;
+free for now (no billing; Stripe does not take Tunisian companies; Konnect/Flouci later if needed).
+They do not want the scheduled JORT reading set up for now (the Vercel cron route stays, inactive
+without `CRON_SECRET`: it answers 401).
+
+* `supabase/migrations/20261112000000_workspaces.sql`: profiles (trigger on auth.users), organizations,
+  memberships (role enum owner/admin/editor/viewer), invitations (by e-mail; no e-mail sent by the
+  database: the app shows a message to send), registres (one JSON document per register, stamped
+  updated_at/updated_by by trigger). RLS on all; helpers `my_role`, `is_member`, `shares_workspace`
+  (security definer); memberships change only through `create_workspace`, `accept_invitation`,
+  `set_member_role`, `remove_member` (a workspace keeps an owner; admins cannot touch owners);
+  `my_invitations` gives the invitee the workspace's name. Idempotent.
+* `npm run test:db` (`scripts/test-db.sh`): a throwaway PostgreSQL (initdb; as the postgres account
+  when run as root), a stub of Supabase's auth schema (`supabase/tests/auth-stub.sql`: roles anon and
+  authenticated, auth.users, auth.uid() and auth.jwt() from `request.jwt.claims`), the migration
+  twice, then `supabase/tests/rls.sql`: 29 checks (stranger, editor, viewer, invitations, last owner,
+  anonymous). A deliberately broken check fails the run.
+* `lib/registre/registre.ts`: `RegistreBackend`; `loadRegistres`/`saveRegistres` use it when set
+  (cloud), localStorage otherwise; `RELOADED` event (registres.tsx reloads its list on it);
+  `localRegistres`/`clearLocalRegistres` for the import.
+* `lib/cloud/`: `client.ts` (`cloudEnabled` from NEXT_PUBLIC_SUPABASE_URL/ANON_KEY), `api.ts` (all
+  queries and RPCs; roles and labels), `sync.ts` (`diff`, `cloudBackend`: per-register upserts and
+  deletes, debounced (1.5 s in the app), retried after 5 s on failure keeping newer versions, read-only
+  for viewers; unit-tested in tests/cloud.test.ts).
+* `app/components/cloud.tsx`: `CloudGate` (local mode = the app as before), sign-in / sign-up /
+  password reset (French messages), `NewPassword` after a recovery link, onboarding (invitations +
+  create), `WorkspaceSwitcher` (name, role, sync state), `LocalImport`, `ReadOnlyNotice`; re-reads
+  the registers on focus/visibility when nothing is pending; warns before leaving with changes unsent.
+  `app/components/equipe.tsx`: members, roles, invite (message to copy or mailto), pending
+  invitations, rename, other workspaces, delete (type the name); Mon compte (name, password, sign out).
+* Layout: `app/page.tsx` has a navy side menu (groups Classement, Conformité, Ressources, Espace de
+  travail; Registres is now its own screen, with the alert count; Veille réglementaire = the Journal
+  with « Vérifier maintenant »); below 1000px a top bar and a drawer. The utility bar, masthead,
+  horizontal nav and phone bottom bar are gone (their CSS stays, unused). `HEADINGS` per view.
+  `Veille` takes `tab` from the page (no inner tab bar). DESIGN.md updated.
+* Checked end to end in a browser against a stand-in for Supabase (auth in memory, the app's REST
+  calls run as SQL on the local PostgreSQL as role authenticated with the user's claims, so the RLS
+  answered): sign-up → workspace → register created and saved (988 lines, 830 KB JSON) → invite →
+  second account joins, sees and edits → demoted to reader (read-only notice, nothing saved) → a third
+  account sees nothing → a browser register imported. Desktop 1440 and phone 390, no overflow.
+* Known limits: a register is one JSON document (~0.8 MB), re-sent whole on each change (debounced);
+  per-line storage would be the next step if it is slow on site connections. No real-time push (focus
+  re-read). Two people editing the same register at once: the last save wins. The JORT reading notes
+  (Journal statuses) stay per browser. No platform admin page or plans/limits yet (billing "free for
+  now"). Supabase's default mailer only writes to the project team: SMTP needed for clients.
+
 **Step 2 of "next level" (12 November): the veille runs on its own, and on demand.**
 
 * The scheduled reading first ran on GitHub Actions; the user cannot use Actions (not free for

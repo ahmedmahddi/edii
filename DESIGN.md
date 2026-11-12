@@ -8,9 +8,11 @@ ABClassement combines ABC and classement. The supplied ABC Consulting logo is di
 
 ## Composition
 
-A compact masthead contains the product name and company logo. Desktop navigation runs horizontally below it. The main area divides the numbered catalogue from the establishment dossier with a single vertical rule. Activities and substances appear in separate directory columns, using section codes and thin horizontal separators. A modest heading explains the current screen. The dossier uses a light grey document surface and a navy top rule.
+A navy side menu, 264px wide from 1000px, holds the product name, the client workspace (its name, the user's role, whether the registers are saved), the screens in four labeled groups (Classement, Conformité, Ressources, Espace de travail) and, at its foot, the account and the ABC Consulting logo on a white plate. The active screen has a light left rule and a lighter band. The work area to its right starts with a modest heading (eyebrow, title, one line). The catalogue and the establishment dossier are divided by a single vertical rule. Activities and substances appear in separate directory columns, using section codes and thin horizontal separators. The dossier uses a light grey document surface and a navy top rule.
 
-Phones show one work surface at a time with four labeled bottom navigation controls. The catalogue stacks into one column below 560px. A tablet keeps two catalogue columns and mobile navigation. Desktop begins at 1000px. Long rubric tables and activity forms reflow into labeled vertical rows on phones. The remove control has a reserved 44px column with its padding accounted for; the table and tbody use block layout in compact dossier panels to avoid intrinsic table overflow. The full desktop establishment view restores normal table layout.
+Below 1000px a slim white top bar carries a menu button, the wordmark and the workspace's name; the side menu slides in from the left over a dimmed page and closes on any choice. The catalogue stacks into one column below 560px. Long rubric tables and activity forms reflow into labeled vertical rows on phones. The remove control has a reserved 44px column with its padding accounted for; the table and tbody use block layout in compact dossier panels to avoid intrinsic table overflow. The full desktop establishment view restores normal table layout.
+
+The sign-in screen pairs a short statement of what the product does with the form, on the light grey surface; it stacks on phones.
 
 ## Typography and interaction
 
@@ -18,7 +20,7 @@ DM Sans is bundled locally for body text and Manrope for headings and the produc
 
 ## Scope
 
-The classification engine and legal data remain in lib/ and data/. The URL preserves the selected activities, quantities and environmental-study options. The interface does not imply server-side dossier storage or replace the official texts.
+The classification engine and legal data remain in lib/ and data/. The URL preserves the selected activities, quantities and environmental-study options. Registers are stored in the client workspace when accounts are configured (Supabase), in the browser otherwise; classification dossiers stay in the URL. The interface does not replace the official texts.
 
 ## Design references
 

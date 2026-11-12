@@ -1,4 +1,5 @@
 "use client";
+import { useCloud } from "@/app/components/cloud";
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { download, downloadWorkbook, today } from "@/app/components/download";
 import { EMPTY_SITE, FLAG_GROUPS, FLAGS, METIER_GROUPS, METIERS, metierLabels, type Site, toggleMetier } from "@/lib/registre/profil";
@@ -18,6 +19,7 @@ import {
   FREQUENCES,
   type Ligne,
   loadRegistres,
+  RELOADED,
   nouveautes,
   plusApplicables,
   prochaine,
@@ -41,15 +43,24 @@ const dateFr = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString("
 const classLabel = (classe: Registre["classe"], rubriques: number) => (classe === null && !rubriques ? "Sans classement" : categoryLabel(classe));
 const refOf = (t: Texte) => [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dateFr(t.date)}` : ""].filter(Boolean).join(" ");
 
-/** Registers live in this browser: loaded once, saved on every change. */
+/**
+ * Registers live in this browser, or in the client workspace when signed in: loaded once (and
+ * again when another workspace is opened or a colleague's changes arrive), saved on every change.
+ */
 function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => void, boolean, boolean] {
   const [list, setList] = useState<Registre[]>([]);
   const [saved, setSaved] = useState(true);
   const [loaded, setLoaded] = useState(false);
   const changed = useRef(false);
   useEffect(() => {
-    setList(loadRegistres());
+    const reload = () => {
+      changed.current = false;
+      setList(loadRegistres());
+    };
+    reload();
     setLoaded(true);
+    window.addEventListener(RELOADED, reload);
+    return () => window.removeEventListener(RELOADED, reload);
   }, []);
   // Saved after rendering: saving tells the rest of the page (the menu's badge), which must not
   // change while this renders.
@@ -99,6 +110,7 @@ export function Registres({
   texts: Texte[];
   amendments: Amendment[];
 }) {
+  const cloud = useCloud();
   const [list, update, saved, loaded] = useRegistres();
   const [openId, setOpenId] = useState<string | null>(null);
   // report null: a register without classification (BTP, industry or services the nomenclature does not cover).
@@ -317,7 +329,10 @@ export function Registres({
           }}
         />
         <span className="muted small" aria-live="polite">
-          {message || "Les registres sont gardés dans ce navigateur : sauvegardez-les régulièrement."}
+          {message ||
+            (cloud.current
+              ? `Les registres sont enregistrés dans l’espace « ${cloud.current.name} », pour tous ses membres. Le fichier de sauvegarde en garde une copie.`
+              : "Les registres sont gardés dans ce navigateur : sauvegardez-les régulièrement.")}
         </span>
       </div>
     </div>

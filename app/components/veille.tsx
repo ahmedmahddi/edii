@@ -99,7 +99,7 @@ const dateFr = (iso: string | null) =>
 const exportRegister = (hits: Hit[]) =>
   downloadWorkbook((wb) => fillRegister(wb, hits.map(registerRow), new Date()), `ID-QSE-002_veille_${today()}.xlsx`);
 
-type Tab = "registres" | "journal";
+export type Tab = "registres" | "journal";
 const PAGE = 20; // texts shown at once in the Journal officiel
 
 /** What waits in the registers of this browser (evaluations due, texts modified at the JORT), kept up to date. */
@@ -124,36 +124,12 @@ export function useVeilleCount(): number {
  * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
  * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
  */
-export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null; onSeedUsed: () => void }) {
-  const [tab, setTab] = useState<Tab>("registres");
+export function Veille({ tab, seed, onSeedUsed }: { tab: Tab; seed: ClassificationReport | null; onSeedUsed: () => void }) {
   const feed = useFeed();
   // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
   const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? [], feed?.citations ?? {}), [feed]);
-  useEffect(() => {
-    if (seed) setTab("registres");
-  }, [seed]);
   return (
     <div className="veille-tabs">
-      <div className="registre-tablist" role="tablist" aria-label="Veille réglementaire">
-        {(
-          [
-            ["registres", "Registres des établissements"],
-            ["journal", "Journal officiel"],
-          ] as const
-        ).map(([id, label]) => (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            aria-selected={tab === id}
-            className={tab === id ? "active" : ""}
-            onClick={() => setTab(id)}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-      {feed ? <Verifier feed={feed} /> : null}
       {!feed ? (
         <p className="muted" role="status">
           Chargement de la veille…
@@ -161,7 +137,10 @@ export function Veille({ seed, onSeedUsed }: { seed: ClassificationReport | null
       ) : tab === "registres" ? (
         <Registres seed={seed} onSeedUsed={onSeedUsed} texts={texts} amendments={feed.amendments ?? []} />
       ) : (
-        <Journal feed={feed} />
+        <>
+          <Verifier feed={feed} />
+          <Journal feed={feed} />
+        </>
       )}
     </div>
   );

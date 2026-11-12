@@ -266,7 +266,29 @@ export function aTraiter(list: Registre[], amendments: Amendment[], today = new 
   return list.reduce((n, r) => n + late(r) + alertes(r, amendments).length, 0);
 }
 
-export function loadRegistres(): Registre[] {
+/**
+ * Where the registers are kept: this browser (localStorage) by default, or a client workspace in
+ * Supabase once signed in (lib/cloud/sync.ts sets a backend). The pages call loadRegistres and
+ * saveRegistres either way.
+ */
+export interface RegistreBackend {
+  list: Registre[];
+  save(next: Registre[], prev: Registre[]): void;
+}
+let backend: RegistreBackend | null = null;
+/** The registers were replaced from elsewhere (another workspace, a colleague's changes). */
+export const RELOADED = "abclassement-registres-recharges";
+
+export function setRegistreBackend(b: RegistreBackend | null): void {
+  backend = b;
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event(RELOADED));
+    window.dispatchEvent(new Event(CHANGED));
+  }
+}
+
+/** The registers kept in this browser, whatever the backend (to import them into a workspace). */
+export function localRegistres(): Registre[] {
   try {
     const list = JSON.parse(localStorage.getItem(STORAGE) ?? "[]");
     return Array.isArray(list) ? list : [];
@@ -275,7 +297,26 @@ export function loadRegistres(): Registre[] {
   }
 }
 
+export function clearLocalRegistres(): void {
+  try {
+    localStorage.removeItem(STORAGE);
+  } catch {
+    // nothing kept, nothing to clear
+  }
+}
+
+export function loadRegistres(): Registre[] {
+  return backend ? backend.list : localRegistres();
+}
+
 export function saveRegistres(list: Registre[]): boolean {
+  if (backend) {
+    const prev = backend.list;
+    backend.list = list;
+    backend.save(list, prev);
+    window.dispatchEvent(new Event(CHANGED));
+    return true;
+  }
   try {
     localStorage.setItem(STORAGE, JSON.stringify(list));
     window.dispatchEvent(new Event(CHANGED));

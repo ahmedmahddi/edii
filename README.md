@@ -11,7 +11,9 @@ comes from.
 
 ## Run it
 
-Needs Node.js 22. No database, no account.
+Needs Node.js 22. Without Supabase configured it runs in **local mode**: no account, the registers
+stay in the browser. With Supabase (below) it is the multi-client product: sign-in, one private
+workspace per client company, registers kept in the database.
 
 ```bash
 npm install
@@ -21,6 +23,7 @@ npm run dev        # http://localhost:3000
 ```bash
 npm run typecheck
 npm test           # classification, addition rule, ANPE study, and data in sync with the texts
+npm run test:db    # the database's access rules (supabase/), on a throwaway local PostgreSQL
 npm run build && npm start
 ```
 
@@ -30,6 +33,47 @@ fine on a laptop; CI installs both. The `npm run data:*` scripts find Python on 
 (`python3`, `python` or `py` on Windows).
 
 It deploys as is on Vercel (import the repository, keep the defaults): the page is static.
+
+## Accounts and client workspaces (Supabase)
+
+The product side: each **client company has a private workspace** (its establishments, their
+registers); its members are the client's own people and the consultants it invites. Roles:
+**Propriétaire** (everything, deleting the workspace), **Administrateur** (members and invitations),
+**Éditeur** (the registers), **Lecteur** (read and export). The database enforces it
+(row-level security, `supabase/migrations/20261112000000_workspaces.sql`): a user only ever reads the
+workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a reader, the last owner…).
+
+* **Sign-in**: e-mail and password, with e-mail confirmation and "mot de passe oublié"
+  (`app/components/cloud.tsx`).
+* **First sign-in**: create the company's workspace, or accept an invitation waiting for that e-mail.
+* **Équipe et espace** (`app/components/equipe.tsx`): members and roles, invite by e-mail (the app
+  shows a message to send; the invitation waits until that address signs in), rename, leave, delete.
+  One account can belong to several workspaces (a consultant with many clients): the switcher at the
+  top of the side menu changes workspace.
+* **Registers** are saved to the workspace as they change (`lib/cloud/sync.ts`: only the registers
+  changed, 1.5 s after the last change, retried when the network fails; the side menu says
+  "Enregistré"). A colleague's changes arrive when the page comes back to the front. Registers made
+  in a browser before accounts are offered for import into the workspace.
+* **How a consulting firm uses it**: for each client, a consultant creates the workspace (as owner),
+  invites the client's contact as administrator (then owner, if the client is to control it) and
+  colleagues as editors. No billing yet: every workspace is free.
+
+**Setting it up (once):**
+
+1. Create a project on [supabase.com](https://supabase.com) (region: Frankfurt, the closest to Tunis).
+   The free plan pauses a project after a week without use: take the Pro plan for clients.
+2. *SQL Editor*: paste and run `supabase/migrations/20261112000000_workspaces.sql`.
+3. *Authentication → URL Configuration*: **Site URL** = the site's address (e.g.
+   `https://abclassement.vercel.app`); **Redirect URLs**: add `https://<that address>/**` and
+   `http://localhost:3000/**`. The links of the confirmation and password e-mails lead there.
+4. *Authentication → Emails → SMTP Settings*: Supabase's own mail service only writes to the
+   project's team and a few times an hour. For clients, set a real sender (e.g. Brevo or Resend, both
+   with a free tier, from `noreply@` your domain). Until then, confirmation can be switched off in
+   *Authentication → Providers → Email → Confirm email*.
+5. *Project Settings → API*: copy the **Project URL** and the **anon public** key into the site's
+   environment (Vercel: *Settings → Environment Variables*, then redeploy; locally `.env.local`):
+   `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY` (see `.env.example`). The anon key is
+   public by design: what it can read is decided by the database's rules.
 
 ## How to use it
 
@@ -208,7 +252,7 @@ opens the establishment's register in the Veille réglementaire view:
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
    which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…": add that
    text to the register and re-evaluate, or re-evaluate only), and which new texts apply to the site
-   (to add, all at once or one by one, or set aside). The **Veille** menu shows how many modified texts
+   (to add, all at once or one by one, or set aside). The **Registres** menu shows how many modified texts
    and late or soon-due evaluations wait in all registers.
 5. **When the classification changes**, validate it again and choose "Créer le registre de veille":
    the app finds the register of the same name and offers to update it. Its evaluations are kept;
@@ -278,7 +322,11 @@ The project path must have no spaces, and the laptop must be on and connected at
 
 | Path | What |
 |---|---|
-| `app/page.tsx` | The page. |
+| `app/page.tsx` | The page: side menu (classement, conformité, ressources, espace de travail) and the screens. |
+| `app/components/cloud.tsx` | Sign-in, workspace choice, register sync state, import of browser registers. |
+| `app/components/equipe.tsx` | Équipe et espace (members, invitations, roles) and Mon compte. |
+| `lib/cloud/` | Supabase: the client (`client.ts`), the calls (`api.ts`), the registers' sync (`sync.ts`). |
+| `supabase/` | The database (`migrations/`) and its access-rule tests (`tests/`, `npm run test:db`). |
 | `lib/classify.ts` | One rubrique: search, thresholds, units, outcome. |
 | `lib/establishment.ts` | Several activities, the addition rule, and the URL form. |
 | `lib/studies.ts` | The ANPE study, from décret n° 2005-1991. |
@@ -289,7 +337,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `lib/veille/` | Veille réglementaire: reading a JORT sommaire from its OCR text (`markdown.ts`) or its PDF (`pdf.ts`, `jort.ts`), the watch rules (`watch.ts`), and the export to the QSE register (`registre.ts`). |
 | `scripts/veille.ts` | `npm run veille`: reads new JORT issues into `data/veille/sommaires/`, and the texts found into `public/veille/feed.json`. |
 | `data/veille/` | `watch.json` (the rules), `sommaires/` (every sommaire read) and `feed.json` (the texts found; derived, not in git). |
-| `app/components/veille.tsx` | The Veille réglementaire view: registers and Journal officiel tabs. |
+| `app/components/veille.tsx` | The Registres and Veille réglementaire screens. |
 | `lib/registre/` | Registers of the establishments: the site profile and its conditions (`profil.ts`), the référentiel (`referentiel.ts`), a register, its alerts and due evaluations (`registre.ts`). |
 | `data/referentiel/textes.json` | The curated référentiel. |
 | `app/components/registres.tsx` | The registers: list, site profile, register and evaluation. |
