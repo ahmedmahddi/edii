@@ -1,0 +1,1306 @@
+{
+ "n:loi:2004-70": {
+  "risque": "Appliquer la loi n° 41-93 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 41-93 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2004-05-06~approbation-cahier-charges-commerce-distribution-librairie-bureautique": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2001-05-28~approbation-cahier-charges-experimentation-medicale-scientifique-medicaments-destines": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:1975-07-17~agrement-convention-collective-nationale-industrie-chaussure-chaussants": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "n:decret:2002-621": {
+  "risque": "Appliquer le décret n° 2000-101 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-101 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2025-01-21~agrement-avenant-convention-collective-sectorielle-agences-voyages": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2024-09-16~agrement-avenant-convention-collective-sectorielle-hotels-classes-touristiques": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2023-03-03~agrement-avenant-convention-collective-sectorielle-commerce-detail": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2022-11-25~agrement-avenant-convention-collective-sectorielle-batiment-travaux-publics": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2022-06-23~agrement-avenant-convention-collective-sectorielle-industrie-chaussure-chaussants": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2020-01-23~approbation-avenant-convention-cliniques-dialyse-conclue-entre-caisse": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2019-04-17~agrement-avenant-convention-collective-sectorielle-cliniques-prives": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2018-02-02~agrement-avenant-convention-collective-sectorielle-cuirs-peaux": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2017-07-26~agrement-avenant-convention-collective-sectorielle-industries-conserves-alimentaires": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2017-01-06~agrement-avenant-convention-collective-sectorielle-cliniques-privees": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2016-05-10~agrement-avenant-convention-collective-sectorielle-industries-materiaux-construction": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2015-02-03~agrement-avenant-convention-collective-sectorielle-minoteries": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2009-09-04~sante-publique-septembre-novembre-liste-centres-etablissements-sanitaires": {
+  "risque": "Appliquer l'arrêté du 18 novembre 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 18 novembre 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1523": {
+  "risque": "Appliquer le décret n° 94-1166 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 94-1166 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2000-11-28~modification-modifie-complete-determination-activites-specialites-categories-plafonds": {
+  "risque": "Appliquer l'arrêté du 4 juin 1992 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 4 juin 1992 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:95-50": {
+  "risque": "Appliquer la loi n° 82-60 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 82-60 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2009-62": {
+  "risque": "Appliquer la loi n° 90-17 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 90-17 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2009-29": {
+  "risque": "Appliquer le code de l'aménagement du territoire et de l'urbanisme sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de l'aménagement du territoire et de l'urbanisme : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2009-9": {
+  "risque": "Appliquer le code de l'aménagement du territoire et de l'urbanisme sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de l'aménagement du territoire et de l'urbanisme : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2008-12": {
+  "risque": "Appliquer la loi n° 99-40 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 99-40 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2005-71": {
+  "risque": "Appliquer le code de l'aménagement du territoire et de l'urbanisme sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de l'aménagement du territoire et de l'urbanisme : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2004-76": {
+  "risque": "Appliquer la loi n° 98-14 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 98-14 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2003-78": {
+  "risque": "Appliquer le code de l'aménagement du territoire et de l'urbanisme sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de l'aménagement du territoire et de l'urbanisme : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2001-27": {
+  "risque": "Appliquer la loi n° 59-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 59-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2000-97": {
+  "risque": "Appliquer la loi n° 89-20 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 89-20 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2000-94": {
+  "risque": "Appliquer la loi n° 90-17 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 90-17 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1987-12-14~homologation-normes-tunisiennes-batteries-accumulateurs-demarrage-plomb": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "d:arrete:1984-11-28~homologation-norme-tunisienne-tuyaux-joints-amiante-ciment-pression": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "d:arrete:2025-11-18~equipement-habitat-amenagement-territoire-avril-definition-pieces-constitutives": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2023-01-16~prorogation-delai-janvier-fevrier-inscription-mentions-doivent-portees": {
+  "risque": "Appliquer l'arrêté du 24 février 1999 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 24 février 1999 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2020-08-05~industrie-commerce-janvier-verification-qualite-livraisons-emballage-marquage": {
+  "risque": "Appliquer l'arrêté du 19 janvier 2017 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 janvier 2017 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2019-12-19~avril-definition-pieces-constitutives-dossier-permis-batir-delais": {
+  "risque": "Appliquer l'arrêté du 17 avril 2007 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 17 avril 2007 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2016-11-14~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2015-12-01~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-12-31~agrement-avenant-convention-collective-sectorielle-concessionnaires-materiel-agricole": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2014-11-17~agrement-avenant-convention-collective-sectorielle-fabricants-produits-toilette": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2014-11-04~agrement-avenant-convention-collective-sectorielle-industrie-transformation-plastique": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2009-11-09~approbation-avenant-convention-collective-sectorielle-cafes-restaurants-etablissements": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:2009-2269": {
+  "risque": "Appliquer le décret n° 2004-2144 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2004-2144 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2007-08-21~annulation-normes-tunisiennes-methodes-essais-ciments": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "d:arrete:2006-05-03~approbation-avenants-conventions-collectives-sectorielles-distributeurs-medicaments-cliniques": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:2004-1198": {
+  "risque": "Appliquer le décret n° 84-1225 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 84-1225 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2002-524": {
+  "risque": "Appliquer le décret n° 75-492 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 75-492 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1534": {
+  "risque": "Appliquer le décret n° 94-2050 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 94-2050 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1979-05-11~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1977-04-28~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2020-12-01~approbation-cahier-charges-exercice-commerce-produits-subventionnes-grossistes": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:decret:2017-991": {
+  "risque": "Appliquer le décret n° 2000-101 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-101 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret-loi:2011-84": {
+  "risque": "Appliquer la loi n° 2009-12 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 2009-12 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-11-02~agriculture-septembre-controle-sanitaire-surveillance-production-produits-peche": {
+  "risque": "Appliquer l'arrêté du 19 septembre 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 septembre 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-09-30~approbation-cahier-charges-operations-importation-clinker-ciment-chaux": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2006-10-30~approbation-cahier-charges-importation-carreaux-ceramiques-creation-commission": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2006-10-06~approbation-cahier-charges-importation-sieges-meubles-leurs-parties": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2001-07-10~approbation-cahier-charges-creation-atelier-plastiques-prive": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:loi:99-73": {
+  "risque": "Appliquer la loi n° 85-91 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 85-91 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:98-95": {
+  "risque": "Appliquer la loi n° 89-20 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 89-20 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:93-18": {
+  "risque": "Appliquer la loi n° 59-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 59-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:91-76": {
+  "risque": "Appliquer la loi n° 90-17 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 90-17 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-08-30~homologation-normes-tunisiennes-minerales-naturelles-table-conditionnees": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "n:loi:87-75": {
+  "risque": "Appliquer la loi n° 66-64 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 66-64 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:83-105": {
+  "risque": "Appliquer la loi N° 81-56 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi N° 81-56 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:81-54": {
+  "risque": "Appliquer le décret du 31 mai 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret du 31 mai 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:71-18": {
+  "risque": "Appliquer la loi n° 66-64 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 66-64 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:62-12": {
+  "risque": "Appliquer la loi N° 61-16 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi N° 61-16 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:61-55": {
+  "risque": "Appliquer la loi N° 50-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi N° 50-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:59-62": {
+  "risque": "Appliquer la loi n° 57-23 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 57-23 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:58-36": {
+  "risque": "Appliquer le décret du 13 décembre 1948 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret du 13 décembre 1948 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:59-113": {
+  "risque": "Appliquer le décret du 20 novembre 1927 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret du 20 novembre 1927 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2025-459": {
+  "risque": "Appliquer le décret gouvernemental n° 2021-436 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret gouvernemental n° 2021-436 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2024-71": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1023-04-11~agrement-avenant-convention-collective-sectorielle-savonneries-raffineries-usines": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:2021-475": {
+  "risque": "Appliquer le décret gouvernemental n° 2017-967 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret gouvernemental n° 2017-967 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2021-204": {
+  "risque": "Appliquer le décret n° 95-1916 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 95-1916 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2020-105": {
+  "risque": "Appliquer le décret gouvernemental n° 2016-1123 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret gouvernemental n° 2016-1123 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2019-1194": {
+  "risque": "Appliquer le décret gouvernemental n° 2018-171 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret gouvernemental n° 2018-171 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2019-949": {
+  "risque": "Appliquer le décret n° 94-1744 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 94-1744 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2018-59": {
+  "risque": "Appliquer la loi n° 86-17 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 86-17 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2017-1403": {
+  "risque": "Appliquer le décret n° 2012-793 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2012-793 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2017-1253": {
+  "risque": "Appliquer le décret n° 2013-664 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2013-664 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2017-1069": {
+  "risque": "Appliquer le cahier des charges relatif à l'aménagement et à la maintenance des zones et des bâtiment sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du cahier des charges relatif à l'aménagement et à la maintenance des zones et des bâtiment : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2016-335": {
+  "risque": "Appliquer le décret n° 2007-457 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2007-457 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-10-17~sante-octobre-liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-11-02~agriculture-novembre-prescriptions-salubrites-mollusques-bivalves-vivants": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2005-09-15~modification-economie-nationale-listes-produits-soumis-controle-technique": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1997-05-15~agrement-convention-collective-nationale-agences-voyages": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1997-02-04~agrement-convention-collective-nationale-cliniques-privees": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1995-09-04~annulation-norme-tunisienne-chaux-hydraulique-naturelle": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "n:decret:93-2447": {
+  "risque": "Appliquer le décret n° 89-1047 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 89-1047 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1993-08-02~agrement-avenant-convention-collective-nationale-confiserie-biscuiterie-chocolaterie": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:1987-08-28~homologation-normes-tunisiennes-conserves-alimentaires": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "d:arrete:1985-09-07~agrement-convention-collective-nationale-branche-transformation-verre-miroiterie": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1985-03-18~agrement-avenant-convention-collective-hotels-classes-touristique-etablissements": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:1985-02-05~agrement-convention-collective-nationale-repartiteurs-medicaments": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1983-04-28~agrement-avenant-convention-collective-nationale-industries-commerce-boissons": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:1977-06-15~agrement-convention-collective-nationale-fabricants-produits-toilette-parfumerie": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1977-06-06~agrement-convention-collective-nationale-fabricants-produits-entretien-insecticides": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1976-07-23~agrement-convention-collective-nationale-commerce-detail": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1976-07-12~agrement-convention-collective-nationale-boulangerie": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1976-05-05~extension-champ-professionnel-convention-collective-nationale-textile": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1975-12-11~agrement-convention-collective-nationale-fonderie-metallurgie-construction-mecanique": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1975-11-20~agrement-convention-collective-nationale-fabrication-peinture": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1975-08-04~agrement-convention-collective-nationale-savonneries-raffineries-usines-extraction": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1975-03-12~agrement-convention-collective-nationale-pates-alimentaires-couscous": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:1969-07-02~agrement-convention-collective-nationale-hotels-restaurants-cafes-debits": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:2023-03-21~agrement-avenant-convention-collective-sectorielle-gestion-dechets-solides": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:2008-3378": {
+  "risque": "Appliquer le décret n° 2000-101 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-101 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret-loi:74-23": {
+  "risque": "Appliquer la loi N° 59-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi N° 59-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret-loi:60-5": {
+  "risque": "Appliquer le décret du 20 novembre 1927 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret du 20 novembre 1927 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2025-03-14~agrement-avenant-convention-collective-sectorielle-concernant-secteur-explosifs": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2015-12-31~annulation-caractere-obligatoire-normes-tunisiennes-analyse-naturel": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "n:decret:2014-3657": {
+  "risque": "Appliquer le décret n° 90-1401 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 90-1401 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2014-1324": {
+  "risque": "Appliquer le décret n° 2012-793 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2012-793 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2012-621": {
+  "risque": "Appliquer le décret n° 2007-1401 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2007-1401 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2012-408": {
+  "risque": "Appliquer le décret n° 2010-261 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2010-261 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2011-09-17~janvier-montants-maximums-depenses-prises-consideration-titre-activites": {
+  "risque": "Appliquer l'arrêté du 6 janvier 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 6 janvier 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2010-12-17~modification-juillet-specifications-techniques-minimales-visant-economie-consommation": {
+  "risque": "Appliquer l'arrêté du 23 juillet 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 juillet 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2010-2641": {
+  "risque": "Appliquer le décret n° 2008-2704 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2008-2704 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2010-2200": {
+  "risque": "Appliquer le décret n° 93-1915 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 93-1915 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2010-1684": {
+  "risque": "Appliquer le décret n° 94-1744 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 94-1744 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2010-1207": {
+  "risque": "Appliquer le décret n° 2009-2200 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2009-2200 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2010-772": {
+  "risque": "Appliquer le décret n° 2010-261 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2010-261 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2009-2293": {
+  "risque": "Appliquer le décret n° 91-1391 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 91-1391 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2009-1926": {
+  "risque": "Appliquer le décret n° 98-793 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 98-793 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2009-1927": {
+  "risque": "Appliquer le décret n° 98-795 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 98-795 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2009-1933": {
+  "risque": "Appliquer le décret n° 2006-2095 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2006-2095 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2008-2398": {
+  "risque": "Appliquer le décret n° 2000-1934 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-1934 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2006-404": {
+  "risque": "Appliquer le décret n° 98-795 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 98-795 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2005-2038": {
+  "risque": "Appliquer le décret n° 95-2396 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 95-2396 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2004-03-08~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2002-2205": {
+  "risque": "Appliquer le décret n° 95-2035 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 95-2035 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1706": {
+  "risque": "Appliquer le décret n° 2001-823 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2001-823 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1076": {
+  "risque": "Appliquer le décret n° 90-1401 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 90-1401 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1081": {
+  "risque": "Appliquer le décret n° 92-1297 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 92-1297 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1082": {
+  "risque": "Appliquer le décret n° 93-1915 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 93-1915 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-487": {
+  "risque": "Appliquer le décret n° 86-319 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 86-319 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-299": {
+  "risque": "Appliquer le décret n° 81-1453 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 81-1453 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-263": {
+  "risque": "Appliquer le décret n° 89-1979 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 89-1979 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1959-03-24~fevrier-redjeb-huiles-alimentaires-grignons-olive-octobre-moharem": {
+  "risque": "Appliquer l'arrêté du 11 février 1957 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 11 février 1957 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret-loi:2025-2": {
+  "risque": "Appliquer le décret-loi n° 62-10 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret-loi n° 62-10 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2023-04-24~modification-industrie-petites-moyennes-entreprises-commerce-juillet-etiquetage": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2023-03-23~etiquetage-energetique-fours-electriques-usage-domestique-industrie-mines": {
+  "risque": "Appareils vendus sans étiquette énergétique ou sous les performances minimales : retrait, amende (loi 2004-72).",
+  "plan": "Pour un fabricant, importateur ou vendeur : apposer l'étiquette énergétique et ne mettre sur le marché que des appareils des classes autorisées."
+ },
+ "d:arrete:2022-06-23~agriculture-novembre-generales-amenagement-locaux-equipement-materiel-hygiene": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-12-25~novembre-prescriptions-salubrite-concernant-mollusques-bivalves": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-08-16~agriculture-septembre-controle-sanitaire-surveillance-production-produits-peche": {
+  "risque": "Appliquer l'arrêté du 19 septembre 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 septembre 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-04-02~agriculture-septembre-controle-sanitaire-surveillance-production-produits-peche": {
+  "risque": "Appliquer l'arrêté du 19 septembre 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 septembre 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-11-21~agrement-convention-collective-sectorielle-gestion-dechets-solides-liquides": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "n:loi:96-62": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:91-15": {
+  "risque": "Appliquer le code du travail sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code du travail : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:70-20": {
+  "risque": "Appliquer le code du travail sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code du travail : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2023-10-16~agriculture-septembre-controles-sanitaire-surveillance-production-produits-peche": {
+  "risque": "Appliquer l'arrêté du 19 septembre 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 septembre 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2022-04-29~annexe-equipement-habitat-amenagement-territoire-determinant-activites-specialites": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2022-04-01~modification-agriculture-novembre-regles-sanitaires-regissant-production-marche": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2021-03-12~agriculture-ressources-hydrauliques-fevrier-approbation-statut-centre-technique": {
+  "risque": "Appliquer l'arrêté du 25 février 2009 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 février 2009 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2020-10-12~criteres-scientifiques-justifiant-dispense-etudes-biodisponibilite-cadre-bioequivalence": {
+  "risque": "Appliquer l'arrêté du 6 juin 2020 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 6 juin 2020 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2020-08-25~modification-interieur-commerce-agriculture-novembre-creation-marches-production": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2020-03-27~modification-produits-pharmaceutiques": {
+  "risque": "Appliquer l'arrêté du 21 mai 1982 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 mai 1982 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2019-05-28~peche-rouge": {
+  "risque": "Appliquer l'arrêté du 21 mai 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 mai 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-09-26~equipement-habitat-amenagement-territoire-juillet-approbation-cahier-charges": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-05-16~janvier-modele-formulaire-consentement-eclaire-cadre-experimentation-medicale": {
+  "risque": "Appliquer l'arrêté du 13 janvier 2015 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 13 janvier 2015 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-04-17~avril-composition-fonctionnement-commissions-techniques-permis-batir": {
+  "risque": "Appliquer l'arrêté du 17 avril 2007 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 17 avril 2007 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-02-19~octobre-pieces-constitutives-dossier-lotissement-compris-cahier-charges": {
+  "risque": "Appliquer l'arrêté du 19 octobre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 octobre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-02-05~novembre-exigences-auxquelles-doivent-satisfaire-zones-production-mollusques": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2017-08-24~septembre-octroi-autorisation-marche-medicaments-usage-humain-renouvellement": {
+  "risque": "Appliquer l'arrêté du 10 septembre 1996 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 10 septembre 1996 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2017-02-01~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2016-05-25~culture-tabacs-tunisie": {
+  "risque": "Appliquer l'arrêté du 2 juin 2012 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 2 juin 2012 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2016-04-18~sante-publique-septembre-liste-medicaments-usage-urgent-pouvant": {
+  "risque": "Appliquer l'arrêté du 15 septembre 1993 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 septembre 1993 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2016-04-05~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2015-12-31~septembre-registres-identification-animaux-procedure": {
+  "risque": "Appliquer l'arrêté du 20 septembre 2010 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 20 septembre 2010 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2015-12-14~industrie-janvier-annulation-caractere-obligatoire-normes-tunisiennes-fruits": {
+  "risque": "Appliquer l'arrêté du 27 janvier 2014 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 janvier 2014 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2015-09-15~modification-cahier-charges-exercice-activite-commerce-distribution-produits": {
+  "risque": "Appliquer le cahier des charges relatif à l'organisation de l'exercice de l'activité du commerce de d sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du cahier des charges relatif à l'organisation de l'exercice de l'activité du commerce de d : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2015-07-29~directeur-centres-collecte-transport-frais-approuve": {
+  "risque": "Appliquer le plan directeur des centres de collecte et de transport du lait frais sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du plan directeur des centres de collecte et de transport du lait frais : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2000-05-19~matieres-dangereuses-transport-soumis-obtention-feuille-route-modele": {
+  "risque": "Transport de matières dangereuses hors règles (classement, emballage, véhicule, conducteur) : accident, pollution, amende, immobilisation.",
+  "plan": "Classer les matières transportées, utiliser des emballages et véhicules conformes, former les conducteurs, tenir les documents de bord et la signalisation."
+ },
+ "d:arrete:2000-01-19~etiquettes-danger-marques-distinctives-transport-matieres-dangereuses-route": {
+  "risque": "Transport de matières dangereuses hors règles (classement, emballage, véhicule, conducteur) : accident, pollution, amende, immobilisation.",
+  "plan": "Classer les matières transportées, utiliser des emballages et véhicules conformes, former les conducteurs, tenir les documents de bord et la signalisation."
+ },
+ "n:decret:99-2833": {
+  "risque": "Appliquer le décret n° 93-1915 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 93-1915 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:99-1233": {
+  "risque": "Appliquer le décret n° 94-1744 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 94-1744 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:98-2362": {
+  "risque": "Appliquer le décret n° 84-1225 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 84-1225 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:96-874": {
+  "risque": "Appliquer le décret n° 89-1979 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 89-1979 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:92-684": {
+  "risque": "Appliquer le décret n° 73-510 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 73-510 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:91-511": {
+  "risque": "Appliquer le décret n° 89-1979 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 89-1979 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:89-1921": {
+  "risque": "Appliquer le décret n° 80-117 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 80-117 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:85-1512": {
+  "risque": "Appliquer le décret n° 81-860 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 81-860 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:85-741": {
+  "risque": "Appliquer le décret n° 61-259 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 61-259 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:85-722": {
+  "risque": "Appliquer le décret n° 75-19 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 75-19 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:85-666": {
+  "risque": "Appliquer le décret N° 81-860 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 81-860 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:81-1816": {
+  "risque": "Appliquer le décret N° 70-140 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 70-140 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:80-409": {
+  "risque": "Appliquer le décret N° 71-337 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 71-337 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:79-119": {
+  "risque": "Appliquer le décret N° 71-48 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 71-48 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:78-1516": {
+  "risque": "Appliquer le décret N° 78-70 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 78-70 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:78-478": {
+  "risque": "Appliquer le décret N° 71-48 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 71-48 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:73-84": {
+  "risque": "Appliquer le décret N° 71-337 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 71-337 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:71-17": {
+  "risque": "Appliquer le décret n° 70-143 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 70-143 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:64-122": {
+  "risque": "Appliquer le décret N° 62-129 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 62-129 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:61-284": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-03-29~liste-maladies-professionnelles": {
+  "risque": "Appliquer l'arrêté du 10 janvier 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 10 janvier 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-11-17~agriculture-novembre-prescriptions-salubrite-concernant-mollusques-bivalves-vivants": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2012-09-11~commerce-artisanat-agriculture-ressources-hydrauliques-sante-publique-industrie": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2009-01-21~septembre-controle-sanitaire-surveillance-production-produits-peche-marche": {
+  "risque": "Appliquer l'arrêté du 19 septembre 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 septembre 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2004-08-17~approbation-cahier-charges-determination-generales-conformite-locaux": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2002-05-28~novembre-prescriptions-salubrite-concernant-mollusques-bivalves-vivants": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:94-37": {
+  "risque": "Appliquer le décret-loi n°70-13 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret-loi n°70-13 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:94-38": {
+  "risque": "Appliquer la loi n°91-44 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n°91-44 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:85-94": {
+  "risque": "Appliquer la loi n° 81-56 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la loi n° 81-56 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:61-19": {
+  "risque": "Appliquer le décret-loi N° 66-16 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret-loi N° 66-16 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2021-501": {
+  "risque": "Appliquer le décret n° 92-1208 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 92-1208 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-05-20~fevrier-inscription-mentions-doivent-portees-couverture-exterieure-paquets": {
+  "risque": "Appliquer l'arrêté du 24 février 1999 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 24 février 1999 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2014-01-17~sante-publique-liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2013-11-25~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2013-10-29~modification-culture-tabacs-tunisie": {
+  "risque": "Appliquer l'arrêté du 2 juin 2012 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 2 juin 2012 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2013-06-10~modification-peche-rouge": {
+  "risque": "Appliquer l'arrêté du 21 mai 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 mai 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2013-02-22~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2012-06-13~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2012-03-03~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 27 août 2011 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 août 2011 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2011-03-25~novembre-liste-centres-etablissements-sanitaires-lesquels-depistage-anonyme": {
+  "risque": "Appliquer l'arrêté du 18 novembre 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 18 novembre 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2010-06-24~liste-substituts-maternel": {
+  "risque": "Appliquer l'arrêté du 30 mars 2010 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 mars 2010 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2010-04-13~modification-peche-rouge": {
+  "risque": "Appliquer l'arrêté du 21 mai 2008 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 mai 2008 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2008-07-24~novembre-manipulation-produits-peche-pendant-apres-debarquement": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2008-07-24~novembre-recolte-transport-mollusques-bivalves-vivants-centres-expedition": {
+  "risque": "Appliquer l'arrêté du 28 novembre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 novembre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2008-02-22~modification-cahier-charges-commerce-distribution-engrais-chimiques-usage": {
+  "risque": "Appliquer le cahier des charges relatif à l'organisation du commerce de distribution des engrais chim sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du cahier des charges relatif à l'organisation du commerce de distribution des engrais chim : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2007-08-10~determinant-activites-specialites-categories-plafonds-correspondants-lesquels-entreprises": {
+  "risque": "Appliquer l'arrêté du 4 juin 1992 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 4 juin 1992 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2007-02-28~modification-avril-liste-documents-exiges-constitution-dossier-preliminaire": {
+  "risque": "Appliquer l'arrêté du 27 avril 1998 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 avril 1998 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-10-19~economie-nationale-listes-produits-soumis-controle-technique-importation": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-06-17~economie-nationale-listes-produits-soumis-controle-technique-importation": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-04-04~interieur-commerce-agriculture-novembre-creation-marches-production-produits": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2006-02-14~economie-nationale-listes-produits-soumis-controle-technique-importation": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2004-11-23~modification-cahier-charges-commerce-distribution-engrais-chimiques-usage": {
+  "risque": "Appliquer le cahier des charges relatif à l'organisation du commerce de distribution des engrais chim sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du cahier des charges relatif à l'organisation du commerce de distribution des engrais chim : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2004-03-08~octobre-composition-fonctionnement-commissions-techniques-lotissements": {
+  "risque": "Appliquer l'arrêté du 19 octobre 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 octobre 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2003-10-31~interieur-commerce-agriculture-novembre-creation-marches-production-produits": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2003-09-26~modification-interieur-commerce-septembre-fixation-jours-repos-hebdomadaires": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:arrete:92-117": {
+  "risque": "Appliquer l'arrêté du 18 septembre 1993 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 18 septembre 1993 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1999-03-18~modele-fiche-securite-transport-matieres-dangereuses-route-consignes": {
+  "risque": "Transport de matières dangereuses hors règles (classement, emballage, véhicule, conducteur) : accident, pollution, amende, immobilisation.",
+  "plan": "Classer les matières transportées, utiliser des emballages et véhicules conformes, former les conducteurs, tenir les documents de bord et la signalisation."
+ },
+ "d:arrete:1992-07-10~homologation-norme-tunisienne-specifications-super-carburant-plomb": {
+  "risque": "Produit ou installation non conforme à la norme rendue obligatoire : refus à l'importation, retrait du marché, amende.",
+  "plan": "Vérifier si la norme est d'application obligatoire pour les produits ou installations du site et en exiger la conformité (certificats, essais, marquage)."
+ },
+ "d:arrete:1961-09-02~transport-matieres-dangereuses": {
+  "risque": "Transport de matières dangereuses hors règles (classement, emballage, véhicule, conducteur) : accident, pollution, amende, immobilisation.",
+  "plan": "Classer les matières transportées, utiliser des emballages et véhicules conformes, former les conducteurs, tenir les documents de bord et la signalisation."
+ },
+ "d:arrete:2007-08-15~janvier-liste-maladies-professionnelles": {
+  "risque": "Appliquer l'arrêté du 10 janvier 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 10 janvier 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2003-06-05~janvier-liste-maladies-professionnelles": {
+  "risque": "Appliquer l'arrêté du 10 janvier 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 10 janvier 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2006-54": {
+  "risque": "Appliquer le code de la route sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de la route : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2004-74": {
+  "risque": "Appliquer le code de la route sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de la route : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:loi:2001-101": {
+  "risque": "Appliquer le code de la route sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du code de la route : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1982-08-20~reglementation-generale-presentation-etiquetage-recipients-destines-consommation-humaine": {
+  "risque": "Appliquer l'arrêté du 27 mars 1976 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 mars 1976 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2004-1108": {
+  "risque": "Appliquer le décret n° 93-1886 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 93-1886 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2001-1080": {
+  "risque": "Appliquer le décret n° 92-1208 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 92-1208 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1999-05-18~octobre-normes-controle-production-commercialisation-semences-cereales": {
+  "risque": "Appliquer l'arrêté du 21 octobre 1980 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 octobre 1980 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1999-02-05~modification-liste-produits-importes-soumis-controle-technique-systematique": {
+  "risque": "Appliquer la liste A relative aux produits importés soumis au contrôle technique systéma sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de la liste A relative aux produits importés soumis au contrôle technique systéma : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1996-03-28~economie-nationale-listes-produits-sousmis-controle-technique-importation": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1995-12-07~modification-listes-produits-soumis-controle-technique-importation-exportation": {
+  "risque": "Appliquer l'arrêté du 30 août 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 août 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1995-09-04~octobre-determinant-produits-monopole-importation-reserve-pharmacie-centrale": {
+  "risque": "Appliquer l'arrêté du 25 octobre 1994 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 octobre 1994 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1993-10-06~redevances-occupation-temporaire-domaine-public-maritime": {
+  "risque": "Appliquer l'arrêté du 15 mai 1992 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 mai 1992 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1991-03-08~modification-recettes-alcools-reserves": {
+  "risque": "Appliquer l'arrêté du 2 août 1975 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 2 août 1975 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-12-23~homologation-norme-tunisienne-specifications-vinaigre": {
+  "risque": "Appliquer l'arrêté du 17 mai 1989 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 17 mai 1989 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-09-07~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-06-27~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-02-15~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1988-02-16~modification-accordant-regime-admission-temporaire-cartons-destines-fabrication": {
+  "risque": "Appliquer l'arrêté du 22 mai 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 22 mai 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1988-02-25~fevrier-interdiction-detention-unites-peche-utilisation-circuits-distribution": {
+  "risque": "Appliquer l'arrêté du 17 février 1987 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 17 février 1987 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1988-01-28~modification-decembre-exportation-agrumes": {
+  "risque": "Appliquer l'arrêté du 4 décembre 1986 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 4 décembre 1986 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1986-03-14~reglementant-abattage-animaux-especes-bovines-ovines": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1985-05-08~modification-prime-depouille-appropriees-travaux-conservation-classification-peaux": {
+  "risque": "Appliquer l'arrêté du 24 juin 1981 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 24 juin 1981 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1985-03-14~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 23 août 1984 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 23 août 1984 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1984-10-09~modification-ciment": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1984-09-10~novembre-repression-matiere": {
+  "risque": "Appliquer l'arrêté du 19 novembre 1974 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 19 novembre 1974 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1984-03-26~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1983-03-05~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1982-04-08~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1982-02-26~octobre-normes-controle-production-commercialisation-semences-cereales": {
+  "risque": "Appliquer l'arrêté du 21 octobre 1980 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 octobre 1980 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1981-03-10~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 11 mai 1979 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 11 mai 1979 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1980-11-29~modification-decembre-regles-fonctionnement-entrepots": {
+  "risque": "Appliquer l'arrêté du 29 décembre 1955 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 29 décembre 1955 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1980-03-19~reglementant-abattage-animaux-especes-bovine-ovine": {
+  "risque": "Appliquer l'arrêté du 11 mai 1979 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 11 mai 1979 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1979-05-30~modification-septembre-janvier-reglementant-concerne-boissons-liquides-confiserie": {
+  "risque": "Appliquer l'arrêté du 30 septembre 1977 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 septembre 1977 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1978-02-27~tarifs-ville-energie-electrique-haute-moyenne-basse-tension": {
+  "risque": "Appliquer l'arrêté du 16 juin 1977 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 16 juin 1977 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1977-05-11~juillet-tarifs-journees-hospitalisation-formations-hospitalieres-cliniques-intra": {
+  "risque": "Appliquer l'arrêté du 28 juillet 1975 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 28 juillet 1975 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1976-08-20~octobre-avances-remboursables-interet-consentir-exploitants-fonds-commerce": {
+  "risque": "Appliquer l'arrêté du 2 octobre 1908 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 2 octobre 1908 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1975-05-20~octobre-reglement-distribution-usage-irrigation-perimetres-irrigues-agrumicoides": {
+  "risque": "Appliquer l'arrêté du 30 octobre 1974 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 30 octobre 1974 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1974-06-20~fixation-tarifs-maxima-consommations-servies-cafes-restaurants-integres": {
+  "risque": "Appliquer l'arrêté du 2 août 1974 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 2 août 1974 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1972-01-25~reglementant-abattage-animaux-especes-bovines-ovines": {
+  "risque": "Appliquer l'arrêté du 25 mai 1971 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1971 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1968-02-12~novembre-caracteristiques-obligatoires-seconde-extraite-couscous-farines-panifiables": {
+  "risque": "Appliquer l'arrêté du 22 novembre 1966 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 22 novembre 1966 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1966-09-14~janvier-reglementant-commerce-boulangerie": {
+  "risque": "Appliquer l'arrêté du 20 janvier 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 20 janvier 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1965-12-25~octobre-execution-travaux-batiments-civils": {
+  "risque": "Appliquer l'arrêté du 21 octobre 1965 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 21 octobre 1965 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1965-09-02~fevrier-repression-fraudes-matieres-huiles-alimentaires": {
+  "risque": "Appliquer l'arrêté du 11 février 1957 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 11 février 1957 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1965-08-21~arbete-secretaire-economie-nationale-reglementant-admission-temporaire-toles": {
+  "risque": "Appliquer l'arrêté du 22 mai 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 22 mai 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1962-10-18~kauda-accordant-regime-admission-temporaire-sucres-canne-raffines": {
+  "risque": "Appliquer l'arrêté du 1 mai 1962 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 1 mai 1962 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1962-02-09~decembre-journada-regles-fonctionnement-entrepots": {
+  "risque": "Appliquer l'arrêté du 29 décembre 1955 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 29 décembre 1955 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1962-01-30~chaoual-accordant-regime-admission-temporaire-cartons-destines-fabrication": {
+  "risque": "Appliquer l'arrêté du 22 mai 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 22 mai 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1961-07-06~chsouai-livraison-circulation-cereales-tunisie": {
+  "risque": "Appliquer l'arrêté du 25 mai 1955 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1955 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1959-06-18~septembre-safar-avances-remboursables-interets-consentir-exploitants-fonds": {
+  "risque": "Appliquer l'arrêté du 14 septembre 1957 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 14 septembre 1957 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1959-08-12~chaoud-livraison-circulation-cereales-tunisie": {
+  "risque": "Appliquer l'arrêté du 25 mai 1955 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 25 mai 1955 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1959-04-11~decembre-livraisons-cereales-recolte": {
+  "risque": "Appliquer l'arrêté du 20 décembre 1958 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 20 décembre 1958 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1958-09-29~chaoual-reglementant-admission-temporaire-toles-larges-plats-bondes": {
+  "risque": "Appliquer l'arrêté du 22 mai 1956 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 22 mai 1956 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1958-06-25~fevrier-chaubane-classement-superieurs-tunisie-titre-annee": {
+  "risque": "Appliquer l'arrêté du 27 février 1958 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 27 février 1958 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1958-05-16~abrogeant-avril-chaoual-octobre-rahia-campagne-oleicole": {
+  "risque": "Appliquer le texte modifié sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du texte modifié : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1999-04-15~janvier-liste-maladies-professionnelles": {
+  "risque": "Appliquer l'arrêté du 10 janvier 1995 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 10 janvier 1995 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2017-811": {
+  "risque": "Appliquer le décret n° 2010-262 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2010-262 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2017-132": {
+  "risque": "Appliquer le décret n° 2000-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2019-10-10~octobre-composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation": {
+  "risque": "Appliquer l'arrêté du 15 octobre 2002 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 octobre 2002 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:98-740": {
+  "risque": "Appliquer le décret n° 92-1208 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 92-1208 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:93-25": {
+  "risque": "Appliquer le décret n° 92-1723 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 92-1723 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:90-2009": {
+  "risque": "Appliquer le décret n° 89-1616 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 89-1616 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:84-859": {
+  "risque": "Appliquer le décret N° 70-291 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret N° 70-291 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:65-206": {
+  "risque": "Appliquer le décret n° 64-349 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 64-349 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "n:decret:2012-2759": {
+  "risque": "Appliquer le décret n° 2000-147 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation du décret n° 2000-147 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2010-11-24~octobre-composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation": {
+  "risque": "Appliquer l'arrêté du 15 octobre 2002 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 octobre 2002 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2009-11-11~modification-fevrier-composition-fonctionnement-commission-agrement-octroi-licence": {
+  "risque": "Appliquer l'arrêté du 17 février 1987 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 17 février 1987 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2009-04-28~modification-decembre-composition-attributions-regles-fonctionnement-commission-controle": {
+  "risque": "Appliquer l'arrêté du 15 décembre 1990 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 décembre 1990 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2005-03-07~octobre-composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation": {
+  "risque": "Appliquer l'arrêté du 15 octobre 2002 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 15 octobre 2002 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1997-01-07~economie-finances-designation-chaussures-parties-pouvant-fabriquees-materiaux": {
+  "risque": "Appliquer l'arrêté du 04 mai 1990 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 04 mai 1990 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1990-06-06~composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation-marche": {
+  "risque": "Appliquer l'arrêté du 9 juin 1987 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 9 juin 1987 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1989-07-28~composition-fonctionnement-comite-technique-specialites-pharmaceutiques-autorisation-marche": {
+  "risque": "Appliquer l'arrêté du 9 juin 1987 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 9 juin 1987 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1981-04-25~modification-novembre-fonctionnement-campagne-agrumes": {
+  "risque": "Appliquer l'arrêté du 20 novembre 1980 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 20 novembre 1980 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:1958-04-21~octobre-rabia-campagne-oleicole": {
+  "risque": "Appliquer l'arrêté du 31 octobre 1957 sans tenir compte de cette modification : écart au texte tel qu'il s'applique aujourd'hui, avec les sanctions prévues par le texte de base.",
+  "plan": "Relire les dispositions changées et mettre à jour l'évaluation de l'arrêté du 31 octobre 1957 : pratiques, procédures, documents ou équipements concernés."
+ },
+ "d:arrete:2018-08-16~approbation-modification-cahier-charges-exercer-activite-etablissement-hygiene": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:1995-08-10~approbation-cahier-charges-commercialisation-materiels-transport-routier-fabriques": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2018-03-26~agrement-avenant-convention-collective-sectorielle-location-voitures": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2016-04-08~agrement-avenant-convention-collective-sectorielle-constructeurs-concessionnaires-vehicules": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "n:decret:2019-40": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2013-11-28~approbation-modification-cahier-charges-exercer-activite-etablissement-hygiene": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2000-08-07~agrement-avenant-convention-collective-nationale-secteur-transport-routier": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:1997-10-25~approbation-cahier-charges-exercer-activite-etablissement-hygiene": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:1983-12-21~agrement-convention-collective-nationale-constructeurs-concessionnaires-vehicules-automobiles": {
+  "risque": "Conditions de travail sous les minima de la convention collective du secteur : rappels de salaires, procès-verbal de l'inspection du travail.",
+  "plan": "Appliquer la convention collective du secteur (classification, salaires, primes, congés, droits des délégués) et suivre ses avenants."
+ },
+ "d:arrete:2025-09-30~approbation-modification-cahier-charges-exercice-personnes-morales-activite": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2020-01-16~approbation-cahier-charges-exercice-activite-location-voitures-particulieres": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "d:arrete:2016-08-12~approbation-cahier-charges-exploitation-etablissements-formation-domaine-conduite": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ },
+ "n:decret:81-169": {
+  "risque": "Salaires, primes ou avantages sous les minima de l'avenant : rappels de salaires, procès-verbal de l'inspection du travail, conflit social.",
+  "plan": "Mettre à jour la grille des salaires et les primes selon l'avenant, à compter de sa date d'effet, et régulariser les rappels éventuels."
+ },
+ "d:arrete:2001-01-02~approbation-cahier-charges-creation-atelier-prive-production-circulation": {
+  "risque": "Activité exercée hors cahier des charges : mise en demeure, suspension ou fermeture de l'activité, saisie des produits le cas échéant.",
+  "plan": "Signer et déposer le cahier des charges avant de commencer, respecter ses conditions (locaux, équipements, hygiène, personnel) et garder la preuve de dépôt pour les contrôles."
+ }
+}
