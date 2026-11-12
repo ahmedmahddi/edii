@@ -468,5 +468,8 @@ describe("the fiche of a text, read in its issue", () => {
     expect(defaults("sst", { ...compact(decret), r: "Tenir un registre de sécurité ; protéger les travailleurs." }).resume).toBe(
       "Tenir un registre de sécurité ; protéger les travailleurs.",
     );
+    // So do a written risk and action plan, in place of those made from the domain.
+    const written = defaults("sst", { ...compact(decret), k: "Chute de hauteur sur chantier.", q: "Installer les garde-corps." });
+    expect([written.risque, written.plan]).toEqual(["Chute de hauteur sur chantier.", "Installer les garde-corps."]);
   });
 });

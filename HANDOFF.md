@@ -444,6 +444,23 @@ run a model). Two parts:
   a register that already holds one shows « Remplacé par … » like « Abrogé par … ». Ticked texts
   over all site profiles went from 1,101 to 1,051. Add an entry when a résumé or a reading shows
   another; anything uncertain stays out.
+* **Written risk and action plan** (`data/referentiel/risques/lot-*.json`, key = `resumeKey()`,
+  value = `{ risque, plan }`): written for every essential and ticked text (384 + 1,051, over all
+  site profiles), in place of the generic wording made from the domain and the kinds of
+  obligation (`FicheData.k` and `.q`, read by `defaults()` in lib/veille/fiche.ts; served through
+  public/veille/fiches.json by `writeFiches`). The risk names the concrete consequence and the
+  sanction when the text sets one; the plan says what to check or do on the site. Recurring kinds
+  share one wording (amendments name the text they change, collective-agreement amendments, cahiers
+  des charges, standards, old campaign and price texts); a text with nothing to apply says so
+  (« Garder pour information »). `npx tsx scripts/resumes.ts --risques --stats` counts them,
+  `--risques --next 60` lists the next ones with their résumé. A text that becomes ticked later
+  has none until a lot is added for it.
+* **Seen while writing them:** several texts of everyday weight sit in tier 2 (ticked) rather
+  than among the 30 essentials of a profile: décret 2000-1989 (SST officer), décret 95-30
+  (consultative committee from 40 employees), décret 69-208 (health and safety committees), the
+  arrêté of 14 February 2007 (manual handling), the arrêté of 6 September 2012 (general rules for
+  3rd-category classified sites) and the arrêté of 6 May 2015 (continuous emission monitoring).
+  The ranking could weigh them more.
 * **History of each text:** a register line shows every JORT text that modified it since it was
   published (`historique()`), newest first, those still waiting as alerts aside (before, an
   amendment marked as seen vanished). The Excel export adds to the résumé column « Abrogé par … »,
