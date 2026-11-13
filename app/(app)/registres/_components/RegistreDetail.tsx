@@ -8,10 +8,11 @@ import { ChevronLeft, ChevronRight, Download, FileText, MoreHorizontal, Papercli
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { REMOTE_EVENT, type RemoteDetail, useCloud } from "@/app/components/cloud";
+import { useCloud } from "@/app/components/cloud";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { RapportConformite } from "@/app/components/rapport-conformite";
-import { useFiches } from "../../_data/fiches";
+import { useRemoteNotice } from "../../_data/registres";
+import { fetchFiches, useFiche } from "../../_data/veille";
 import { Badge, Button, Kbd, Menu, MenuItem, Notice, PageHeader, SearchInput, Select, Sheet, SheetSection, Stats, table, Tabs, TextField } from "@/app/ui";
 import { canWrite, uploadPreuve } from "@/lib/cloud/api";
 import { etatRegistre } from "@/lib/registre/etat";
@@ -30,6 +31,8 @@ import {
   preuvesDe,
   prochaine,
   type Registre,
+  setLigne as withLigne,
+  suggestions,
   texteFromAmendment,
 } from "@/lib/registre/registre";
 import { study } from "@/lib/studies";
@@ -61,10 +64,6 @@ const VIDE: Record<Filtre, string> = {
   suggestions: "Aucune suggestion : tous les textes proposés sont retenus.",
 };
 
-const setOn = (r: Registre, id: string, patch: Partial<Ligne>): Registre => ({
-  ...r,
-  lignes: r.lignes.map((l) => (l.texte.id === id ? { ...l, ...patch } : l)),
-});
 
 /** Where a text's follow-up stands, in a few words: the action of a non-conformity, or the next evaluation. */
 function Suivi({ l }: { l: Ligne }) {
@@ -102,8 +101,6 @@ export function RegistreDetail({
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
-  const fiches = useFiches();
-  const ficheOf = (l: Ligne) => defaults(l.texte.domaine, fiches[l.texte.id]);
   const [filtre, setFiltre] = useState<Filtre>("tous");
   const [domaine, setDomaine] = useState("all");
   const [query, setQuery] = useState("");
@@ -120,31 +117,20 @@ export function RegistreDetail({
 
   // The text open in the sheet is in the address (?texte=…): a link leads to it.
   const openId = params.get("texte");
+  const fiche = useFiche(openId);
   const openText = useCallback(
     (id: string | null) => router.replace(id ? `${pathname}?texte=${encodeURIComponent(id)}` : pathname, { scroll: false }),
     [router, pathname],
   );
 
   // A colleague's changes reached this register, or ours were merged with theirs: said briefly.
-  const [remote, setRemote] = useState("");
-  useEffect(() => {
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    const on = (e: Event) => {
-      const d = (e as CustomEvent<RemoteDetail>).detail;
-      if (!d.ids.includes(reg.id)) return;
-      setRemote(d.kind === "merged" ? "Vos modifications ont été fusionnées avec celles d’un collègue." : "Registre mis à jour par un collègue.");
-      clearTimeout(timer);
-      timer = setTimeout(() => setRemote(""), 6000);
-    };
-    window.addEventListener(REMOTE_EVENT, on);
-    return () => {
-      window.removeEventListener(REMOTE_EVENT, on);
-      clearTimeout(timer);
-    };
-  }, [reg.id]);
+  const remote = useRemoteNotice(reg.id);
 
   const etat = useMemo(() => etatRegistre(reg, amendments, texts), [reg, amendments, texts]);
   const retenus = reg.lignes.filter((l) => l.retenu);
+  // Suggestions are not kept in the register until acted on (lib/registre/registre.ts suggestions()).
+  const suggested = useMemo(() => suggestions(reg, texts), [reg, texts]);
+  const lignes = useMemo(() => [...reg.lignes, ...suggested], [reg.lignes, suggested]);
   const alerts = alertes(reg, amendments);
   const pending = new Set(alerts.map((a) => `${a.ligne.texte.id}|${a.amendment.id}`));
   const historyOf = (l: Ligne) =>
@@ -154,28 +140,28 @@ export function RegistreDetail({
   const gone = plusApplicables(reg);
   const rank = useMemo(() => {
     const byId = new Map(texts.map((t) => [t.id, t]));
-    return new Map(reg.lignes.map((l) => [l.texte.id, importance(byId.get(l.texte.id) ?? l.texte, reg.site)]));
-  }, [texts, reg.lignes, reg.site]);
+    return new Map(lignes.map((l) => [l.texte.id, importance(byId.get(l.texte.id) ?? l.texte, reg.site)]));
+  }, [texts, lignes, reg.site]);
   const score = (l: Ligne) => rank.get(l.texte.id)?.score ?? 0;
   const byScore = (a: Ligne, b: Ligne) => score(b) - score(a);
   const news = useMemo(() => nouveautes(reg, texts).sort((a, b) => importance(b.texte, reg.site).score - importance(a.texte, reg.site).score), [reg, texts]);
-  const domains = Object.keys(rules.domains).filter((d) => reg.lignes.some((l) => l.texte.domaine === d));
+  const domains = Object.keys(rules.domains).filter((d) => lignes.some((l) => l.texte.domaine === d));
   const essentielIds = useMemo(
     () => new Set([...retenus].sort(byScore).slice(0, ESSENTIELS).map((l) => l.texte.id)),
     [reg.lignes, rank], // eslint-disable-line react-hooks/exhaustive-deps
   );
-  const setLigne = (id: string, patch: Partial<Ligne>) => change((r) => setOn(r, id, patch));
+  const setLigne = (l: Ligne, patch: Partial<Ligne>) => change((r) => withLigne(r, l, (x) => ({ ...x, ...patch })));
   const counts: Record<Filtre, number> = {
     tous: retenus.length,
     afaire: etat.retard + etat.aFaire,
     nc: etat.nonConformes,
     conformes: etat.conformes,
     essentiels: Math.min(ESSENTIELS, retenus.length),
-    suggestions: reg.lignes.length - retenus.length,
+    suggestions: lignes.length - retenus.length,
   };
 
   const q = fold(query);
-  const shown = reg.lignes.filter((l) => {
+  const shown = lignes.filter((l) => {
     if (filtre === "suggestions" ? l.retenu : !l.retenu) return false;
     if (filtre === "nc" && l.conformite !== "NC") return false;
     if (filtre === "conformes" && l.conformite !== "C") return false;
@@ -225,6 +211,9 @@ export function RegistreDetail({
   const exportAll = async () => {
     setExporting(true);
     try {
+      // The texts' requirements, written résumés and plans, from the server.
+      const fiches = await fetchFiches(retenus.map((l) => l.texte.id));
+      const ficheOf = (l: Ligne) => defaults(l.texte.domaine, fiches[l.texte.id]);
       await downloadWorkbook(
         (wb) => {
           fillRegister(
@@ -285,7 +274,7 @@ export function RegistreDetail({
   };
 
   const metiers = metierLabels(reg.site);
-  const open = openId ? reg.lignes.find((l) => l.texte.id === openId) : undefined;
+  const open = openId ? lignes.find((l) => l.texte.id === openId) : undefined;
 
   return (
     <div className={s.screen}>
@@ -360,14 +349,14 @@ export function RegistreDetail({
                       variant="primary"
                       onClick={() =>
                         change((r) => {
-                          const seen = setOn(r, ligne.texte.id, { vus: [...ligne.vus, amendment.id], evalue: "", conformite: "" });
+                          const seen = withLigne(r, ligne, (x) => ({ ...x, vus: [...x.vus, amendment.id], evalue: "", conformite: "" }));
                           return addTexte(seen, texteFromAmendment(amendment, ligne.texte, texts));
                         })
                       }
                     >
                       Ajouter ce texte et réévaluer
                     </Button>
-                    <Button size="sm" onClick={() => setLigne(ligne.texte.id, { vus: [...ligne.vus, amendment.id], evalue: "", conformite: "" })}>
+                    <Button size="sm" onClick={() => setLigne(ligne, { vus: [...ligne.vus, amendment.id], evalue: "", conformite: "" })}>
                       Réévaluer seulement
                     </Button>
                   </>
@@ -436,10 +425,10 @@ export function RegistreDetail({
               actions={
                 editable ? (
                   <>
-                    <Button size="sm" onClick={() => setLigne(l.texte.id, { retenu: false })}>
+                    <Button size="sm" onClick={() => setLigne(l, { retenu: false })}>
                       Retirer
                     </Button>
-                    <Button size="sm" onClick={() => setLigne(l.texte.id, { garde: true })}>
+                    <Button size="sm" onClick={() => setLigne(l, { garde: true })}>
                       Garder
                     </Button>
                   </>
@@ -481,7 +470,13 @@ export function RegistreDetail({
         <Notice title={VIDE[filtre]} />
       ) : (
         <div className={table.wrap}>
-          <table ref={tableRef} className={`${table.table} ${table.stack}`}>
+          <table ref={tableRef} className={`${table.table} ${table.stack} ${s.fixed}`}>
+            <colgroup>
+              <col />
+              <col className={s.colConf} />
+              <col className={s.colSuivi} />
+              <col className={s.colWho} />
+            </colgroup>
             <thead>
               <tr>
                 <th>Texte</th>
@@ -544,12 +539,12 @@ export function RegistreDetail({
         <LigneSheet
           key={open.texte.id}
           l={open}
-          fiche={fiches[open.texte.id]}
+          fiche={fiche ?? undefined}
           raisons={rank.get(open.texte.id)?.raisons}
           history={historyOf(open)}
           repealed={abrogePar(open, amendments)}
-          set={(patch) => setLigne(open.texte.id, patch)}
-          replace={(fn) => change((r) => ({ ...r, lignes: r.lignes.map((x) => (x.texte.id === open.texte.id ? fn(x) : x)) }))}
+          set={(patch) => setLigne(open, patch)}
+          replace={(fn) => change((r) => withLigne(r, open, fn))}
           onClose={() => openText(null)}
           who={who}
           editable={editable}

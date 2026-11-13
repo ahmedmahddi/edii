@@ -183,3 +183,19 @@
   font-size: var(--ui-text-xs);
   color: var(--ui-text-muted);
 }
+
+/* Columns that keep their width whether the groups are open or not. */
+@media (min-width: 720px) {
+  .fixed {
+    table-layout: fixed;
+  }
+  .colConf {
+    width: 150px;
+  }
+  .colSuivi {
+    width: 190px;
+  }
+  .colWho {
+    width: 48px;
+  }
+}

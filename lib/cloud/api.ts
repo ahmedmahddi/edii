@@ -2,7 +2,7 @@
  * What the app reads and changes in Supabase. Every call goes through row-level security: a user
  * only reaches the workspaces they belong to (supabase/migrations/20261112000000_workspaces.sql).
  */
-import type { Registre } from "@/lib/registre/registre";
+import { compacter, type Registre } from "@/lib/registre/registre";
 import { cloud } from "./client";
 import { etatOffre, type Offre, type Plan } from "./plans";
 
@@ -197,14 +197,14 @@ export async function fetchRegistres(workspace: string): Promise<{ registre: Reg
     res = await db().from("registres").select("data").eq("organization_id", workspace);
   }
   fail(res.error);
-  return ((res.data ?? []) as { data: Registre; version?: number }[]).map((r) => ({ registre: r.data, version: r.version ?? 0 }));
+  return ((res.data ?? []) as { data: Registre; version?: number }[]).map((r) => ({ registre: compacter(r.data), version: r.version ?? 0 }));
 }
 
 /** One register as stored now (null when it no longer exists). */
 export async function fetchRegistre(workspace: string, id: string): Promise<{ registre: Registre; version: number } | null> {
   const { data, error } = await db().from("registres").select("data, version").eq("organization_id", workspace).eq("id", id).maybeSingle();
   fail(error);
-  return data ? { registre: data.data as Registre, version: (data.version as number) ?? 0 } : null;
+  return data ? { registre: compacter(data.data as Registre), version: (data.version as number) ?? 0 } : null;
 }
 
 /**

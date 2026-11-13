@@ -3,7 +3,11 @@ import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Signaler } from "@/app/components/signaler";
 import { amendments, catalogue } from "@/lib/registre/referentiel";
-import { alertes, aTraiter, CHANGED, loadRegistres, nouveautes } from "@/lib/registre/registre";
+import { useAmendements } from "@/app/(app)/_data/veille";
+import { useRegistreList } from "@/app/(app)/_data/registres";
+import { alertes, aTraiter, nouveautes } from "@/lib/registre/registre";
+import { registres } from "@/lib/registre/store";
+import { LIVE_CHANGED, liveIssues, saveLive } from "@/lib/veille/live-store";
 import { SECTORS } from "@/lib/sectors";
 import { type LiveCheck, type LiveIssue, withLive } from "@/lib/veille/live";
 import { fillRegister, registerRow } from "@/lib/veille/registre";
@@ -13,41 +17,14 @@ const EMPTY: Feed = { updated: null, scanned: {}, hits: [] };
 let feedRequest: Promise<Feed> | null = null;
 
 /**
- * The texts the veille found (public/veille/feed.json, written by npm run veille). Fetched once,
- * when first needed, rather than carried by the page: forty years of the JORT weigh a megabyte.
+ * Everything the veille found (public/veille/feed.json, written by npm run veille): the Journal
+ * officiel screen only. The other screens read the smaller files of lib/veille/served.ts.
  */
 function fetchFeed(): Promise<Feed> {
   feedRequest ??= fetch("/veille/feed.json")
     .then((r) => (r.ok ? (r.json() as Promise<Feed>) : EMPTY))
     .catch(() => EMPTY);
   return feedRequest;
-}
-
-/**
- * Issues read with "Vérifier maintenant", kept in this browser until a deployment carries them
- * (the weekly run stores them in the repository). Per browser: another computer checks again.
- */
-const LIVE = "abclassement-veille-direct";
-const LIVE_CHANGED = "abclassement-veille-direct";
-
-function liveIssues(): LiveIssue[] {
-  try {
-    return (JSON.parse(localStorage.getItem(LIVE) ?? "null") as LiveCheck | null)?.issues ?? [];
-  } catch {
-    return [];
-  }
-}
-
-function saveLive(check: LiveCheck): void {
-  // Added to what an earlier check found, by year and number.
-  const byKey = new Map(liveIssues().map((i) => [`${i.year}-${i.number}`, i]));
-  for (const i of check.issues) if (i.issue || !byKey.get(`${i.year}-${i.number}`)?.issue) byKey.set(`${i.year}-${i.number}`, i);
-  try {
-    localStorage.setItem(LIVE, JSON.stringify({ ...check, issues: [...byKey.values()] }));
-  } catch {
-    // private window: the texts found show for this visit only
-  }
-  window.dispatchEvent(new Event(LIVE_CHANGED));
 }
 
 /** The feed with the issues of the checks made in this browser: their texts and the amendments they bring. */
@@ -100,28 +77,13 @@ const exportRegister = (hits: Hit[]) =>
 
 const PAGE = 20; // texts shown at once in the Journal officiel
 
-/** What waits in the registers of this browser (evaluations due, texts modified at the JORT), kept up to date. */
+/** What waits in the registers (evaluations late, texts modified at the JORT), kept up to date: the menu's count. */
 export function useVeilleCount(): number {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    const recount = () => fetchFeed().then((feed) => setCount(aTraiter(loadRegistres(), merged(feed).amendments ?? [])));
-    recount();
-    window.addEventListener(CHANGED, recount);
-    window.addEventListener(LIVE_CHANGED, recount);
-    window.addEventListener("storage", recount); // another tab
-    return () => {
-      window.removeEventListener(CHANGED, recount);
-      window.removeEventListener(LIVE_CHANGED, recount);
-      window.removeEventListener("storage", recount);
-    };
-  }, []);
-  return count;
+  const amendements = useAmendements();
+  const list = useRegistreList();
+  return useMemo(() => (amendements && list ? aTraiter(list, amendements) : 0), [amendements, list]);
 }
 
-/**
- * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
- * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
- */
 /** The Journal officiel read issue by issue, and the check of the issues published since. */
 export function Veille() {
   const feed = useFeed();
@@ -180,7 +142,7 @@ function Verifier({ feed }: { feed: Feed }) {
       const known = new Set((feed.amendments ?? []).map((a) => a.id));
       const added = (next.amendments ?? []).filter((a) => !known.has(a.id));
       const texts = fresh.size ? catalogue(next.hits, next.amendments ?? [], next.citations ?? {}) : [];
-      const regs = loadRegistres();
+      const regs = registres.get();
       const news = fresh.size ? regs.reduce((n, r) => n + nouveautes(r, texts).filter((p) => fresh.has(p.texte.id)).length, 0) : 0;
       const alerts = added.length ? regs.reduce((n, r) => n + alertes(r, added).length, 0) : 0;
       const hits = fresh.size;

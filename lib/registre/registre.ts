@@ -131,7 +131,10 @@ export function createRegistre(report: ClassificationReport | null, site: Site, 
     activites: report?.activities.map((a) => ({ code: a.rubrique.code, categorie: a.category })) ?? [],
     restauration: report?.restorationPath ?? null,
     site,
-    lignes: proposals(texts, site).map((p) => ligne(p.texte, p.reasons, p.proposed ? "propose" : "suggere", p.proposed)),
+    // The texts proposed; the others that may apply are suggestions, computed when shown (suggestions()).
+    lignes: proposals(texts, site)
+      .filter((p) => p.proposed)
+      .map((p) => ligne(p.texte, p.reasons, "propose", true)),
     ecartes: [],
   };
 }
@@ -269,11 +272,54 @@ export function addTexte(reg: Registre, texte: Texte): Registre {
   return { ...reg, lignes, ecartes: reg.ecartes.filter((id) => id !== texte.id) };
 }
 
-/** Texts that apply to the site and the register does not have yet (new JORT texts, a changed profile). */
+/** Texts proposed for the site that the register does not have yet (new JORT texts, a changed profile). */
 export function nouveautes(reg: Registre, texts: Texte[]): ReturnType<typeof proposals> {
   const known = new Set([...reg.lignes.map((l) => l.texte.id), ...reg.ecartes]);
   const keys = new Set(reg.lignes.flatMap((l) => keysOf(l.texte)));
-  return proposals(texts, reg.site).filter((p) => !known.has(p.texte.id) && !keysOf(p.texte).some((k) => keys.has(k)));
+  return proposals(texts, reg.site).filter((p) => p.proposed && !known.has(p.texte.id) && !keysOf(p.texte).some((k) => keys.has(k)));
+}
+
+/**
+ * The texts that may also apply to the site, not proposed: the register's suggestions. Not kept in
+ * the register (there are hundreds): computed when shown. One the consultant acts on (retains,
+ * annotates) becomes a line of the register.
+ */
+export function suggestions(reg: Registre, texts: Texte[]): Ligne[] {
+  const known = new Set([...reg.lignes.map((l) => l.texte.id), ...reg.ecartes]);
+  return proposals(texts, reg.site)
+    .filter((p) => !p.proposed && !known.has(p.texte.id))
+    .map((p) => ligne(p.texte, p.reasons, "suggere", false));
+}
+
+/** A suggestion nobody acted on: as suggestions() would make it again. */
+export function intacte(l: Ligne): boolean {
+  return (
+    l.origine === "suggere" &&
+    !l.retenu &&
+    !l.conformite &&
+    !l.evalue &&
+    !l.garde &&
+    !l.vus.length &&
+    !l.historique?.length &&
+    !l.preuves?.length &&
+    !l.responsable &&
+    !l.echeance &&
+    !l.plan &&
+    l.resume === (l.texte.resume ?? "") &&
+    l.risque === (l.texte.risque ?? "") &&
+    l.frequence === (l.texte.frequence ?? DEFAULT_FREQUENCE)
+  );
+}
+
+/** The register without the suggestions nobody acted on (registers made before they were computed kept them all). */
+export function compacter(reg: Registre): Registre {
+  return reg.lignes.some(intacte) ? { ...reg, lignes: reg.lignes.filter((l) => !intacte(l)) } : reg;
+}
+
+/** A line changed, added to the register if it was a suggestion not kept yet. */
+export function setLigne(reg: Registre, l: Ligne, fn: (l: Ligne) => Ligne): Registre {
+  const known = reg.lignes.some((x) => x.texte.id === l.texte.id);
+  return { ...reg, lignes: known ? reg.lignes.map((x) => (x.texte.id === l.texte.id ? fn(x) : x)) : [...reg.lignes, fn(l)] };
 }
 
 /** An amendment's date; one read without a date counts from its year (not as news for ever). */
@@ -344,11 +390,6 @@ export function dues(reg: Registre, today = new Date()): Ligne[] {
   return reg.lignes.filter((l) => l.retenu && prochaine(l, today).etat !== "a-jour");
 }
 
-// Kept in this browser. Reading may fail (private window, blocked storage): then nothing is kept.
-const STORAGE = "abclassement-registres";
-/** Sent on window when the registers are saved: what counts them (the menu's badge) counts again. */
-export const CHANGED = "abclassement-registres";
-
 /**
  * What calls for attention in every register: texts modified at the JORT, and evaluations late or
  * due within 30 days. Texts never evaluated are the register's first work, not a reminder: they
@@ -357,66 +398,6 @@ export const CHANGED = "abclassement-registres";
 export function aTraiter(list: Registre[], amendments: Amendment[], today = new Date()): number {
   const late = (r: Registre) => dues(r, today).filter((l) => prochaine(l, today).etat !== "a-evaluer").length;
   return list.reduce((n, r) => n + late(r) + alertes(r, amendments).length, 0);
-}
-
-/**
- * Where the registers are kept: this browser (localStorage) by default, or a client workspace in
- * Supabase once signed in (lib/cloud/sync.ts sets a backend). The pages call loadRegistres and
- * saveRegistres either way.
- */
-export interface RegistreBackend {
-  list: Registre[];
-  save(next: Registre[], prev: Registre[]): void;
-}
-let backend: RegistreBackend | null = null;
-/** The registers were replaced from elsewhere (another workspace, a colleague's changes). */
-export const RELOADED = "abclassement-registres-recharges";
-
-export function setRegistreBackend(b: RegistreBackend | null): void {
-  backend = b;
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new Event(RELOADED));
-    window.dispatchEvent(new Event(CHANGED));
-  }
-}
-
-/** The registers kept in this browser, whatever the backend (to import them into a workspace). */
-export function localRegistres(): Registre[] {
-  try {
-    const list = JSON.parse(localStorage.getItem(STORAGE) ?? "[]");
-    return Array.isArray(list) ? list : [];
-  } catch {
-    return [];
-  }
-}
-
-export function clearLocalRegistres(): void {
-  try {
-    localStorage.removeItem(STORAGE);
-  } catch {
-    // nothing kept, nothing to clear
-  }
-}
-
-export function loadRegistres(): Registre[] {
-  return backend ? backend.list : localRegistres();
-}
-
-export function saveRegistres(list: Registre[]): boolean {
-  if (backend) {
-    const prev = backend.list;
-    backend.list = list;
-    backend.save(list, prev);
-    window.dispatchEvent(new Event(CHANGED));
-    return true;
-  }
-  try {
-    localStorage.setItem(STORAGE, JSON.stringify(list));
-    window.dispatchEvent(new Event(CHANGED));
-    return true;
-  } catch {
-    return false;
-  }
 }
 
 /** A backup file holds every register; restoring it adds or replaces registers by id. */
@@ -428,6 +409,6 @@ export function restore(current: Registre[], file: string): Registre[] {
   const data = JSON.parse(file);
   if (data?.type !== "registres" || !Array.isArray(data.registres)) throw new Error("Ce fichier n’est pas une sauvegarde des registres.");
   const byId = new Map(current.map((r) => [r.id, r]));
-  for (const r of data.registres as Registre[]) byId.set(r.id, r);
+  for (const r of data.registres as Registre[]) byId.set(r.id, compacter(r));
   return [...byId.values()];
 }

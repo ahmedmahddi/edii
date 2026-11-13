@@ -13,7 +13,9 @@ import { canWrite } from "@/lib/cloud/api";
 import { aJour, etatRegistre } from "@/lib/registre/etat";
 import { classLabel, dateCourte } from "@/lib/registre/labels";
 import { metierLabels } from "@/lib/registre/profil";
-import { useCatalogue, useRegistreList } from "./_data/registres";
+import { lastIssue } from "@/lib/veille/served";
+import { useRegistreList } from "./_data/registres";
+import { useCatalogue } from "./_data/veille";
 import s from "./home.module.css";
 
 /** Links sent before the screens had their own address (e-mails: ?vue=registres, ?e=… for a classification). */
@@ -40,25 +42,14 @@ export function Home() {
 
   const cloud = useCloud();
   const registres = useRegistreList();
-  const { feed, texts, amendments } = useCatalogue();
+  const { ready, meta, texts, amendments } = useCatalogue();
   const etats = useMemo(() => (registres ?? []).map((reg) => ({ reg, ...etatRegistre(reg, amendments, texts) })), [registres, amendments, texts]);
   const total = (k: "retard" | "aFaire" | "nonConformes" | "jort" | "nouveaux") => etats.reduce((n, e) => n + e[k], 0);
   const writable = !cloud.current || canWrite(cloud.current);
 
-  const last = feed
-    ? Object.entries(feed.scanned)
-        .map(([y, numbers]) => [Number(y), Math.max(...numbers)] as const)
-        .sort((a, b) => b[0] - a[0])[0]
-    : null;
-  const lastDate = last ? feed?.hits.find((h) => h.year === last[0] && h.issue === last[1])?.date : null;
-  const latest = useMemo(
-    () =>
-      (feed?.hits ?? [])
-        .filter((h) => h.severity !== "information")
-        .sort((a, b) => b.year - a.year || b.issue - a.issue || a.page - b.page)
-        .slice(0, 5),
-    [feed],
-  );
+  const last = lastIssue(meta.scanned);
+  const lastDate = last ? meta.recent.find((h) => h.year === last.year && h.issue === last.number)?.date : null;
+  const latest = useMemo(() => meta.recent.filter((h) => h.severity !== "information").slice(0, 5), [meta]);
 
   const today = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
   const actions = (
@@ -166,7 +157,7 @@ export function Home() {
       ) : null}
 
       <Panel title="Journal officiel" actions={<Link href="/veille">Toute la veille</Link>} padded={false}>
-        {!feed ? (
+        {!ready ? (
           <p className={s.muted}>Chargement de la veille…</p>
         ) : latest.length ? (
           <ul className={s.hits}>
@@ -188,7 +179,7 @@ export function Home() {
         )}
         {last ? (
           <p className={s.foot}>
-            Lu jusqu’au n° {last[1]}/{last[0]}
+            Lu jusqu’au n° {last.number}/{last.year}
             {lastDate ? `, paru le ${dateCourte(lastDate)}` : ""}.
           </p>
         ) : null}

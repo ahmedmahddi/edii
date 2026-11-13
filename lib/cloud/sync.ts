@@ -1,13 +1,14 @@
 /**
  * The registers of a client workspace, kept in Supabase. The pages change the list as before
- * (saveRegistres); the changes are sent shortly after, register by register (only those changed),
+ * (lib/registre/store.ts); the changes are sent shortly after, register by register (only those changed),
  * each from the version it was read at. When a colleague saved the same register meanwhile, the
  * save is refused with their copy: both are merged (lib/registre/merge.ts) and saved again, and the
  * page shows the merged register. A colleague's save heard live (or on coming back to the page)
  * replaces a register that has no change waiting here.
  */
 import { mergeRegistre } from "@/lib/registre/merge";
-import type { Registre, RegistreBackend } from "@/lib/registre/registre";
+import type { Registre } from "@/lib/registre/registre";
+import type { RegistreBackend } from "@/lib/registre/store";
 
 export type SyncState = { state: "saved" | "saving" | "error" | "readonly"; message?: string };
 export const SYNC_EVENT = "abclassement-sync";

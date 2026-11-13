@@ -15,9 +15,10 @@ import { digestRegistre, jortRecent, quiet, type WorkspaceDigest } from "@/lib/n
 import { renderDigest } from "@/lib/notify/email";
 import { sendMail } from "@/lib/notify/send";
 import { unsubscribeToken } from "@/lib/notify/token";
-import { catalogue } from "@/lib/registre/referentiel";
+import type { Texte } from "@/lib/registre/referentiel";
 import type { Registre } from "@/lib/registre/registre";
-import type { Feed } from "@/lib/veille/watch";
+import type { VeilleMeta } from "@/lib/veille/served";
+import type { Amendment } from "@/lib/veille/watch";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -43,12 +44,17 @@ export async function GET(request: Request): Promise<Response> {
       all<{ user_id: string; organization_id: string }>((a, b) => db.from("memberships").select("user_id, organization_id").range(a, b)),
       all<{ id: string; name: string }>((a, b) => db.from("organizations").select("id, name").range(a, b)),
     ]);
-    // The feed of the JORT, as the site serves it (derived at build from the sommaires).
-    const feedRes = await fetch(`${url.origin}/veille/feed.json`, { signal: AbortSignal.timeout(20_000) });
-    const feed: Feed = feedRes.ok ? await feedRes.json() : { updated: null, scanned: {}, hits: [] };
-    const amendments = feed.amendments ?? [];
-    const texts = catalogue(feed.hits, amendments, feed.citations ?? {});
-    const jort = jortRecent(feed.hits, now);
+    // What the site serves of the veille (lib/veille/served.ts, built with the site).
+    const served = async <T,>(file: string, empty: T): Promise<T> => {
+      const res = await fetch(`${url.origin}/veille/${file}`, { signal: AbortSignal.timeout(20_000) });
+      return res.ok ? ((await res.json()) as T) : empty;
+    };
+    const [meta, texts, amendments] = await Promise.all([
+      served<VeilleMeta>("meta.json", { updated: null, scanned: {}, recent: [] }),
+      served<Texte[]>("catalogue.json", []),
+      served<Amendment[]>("amendements.json", []),
+    ]);
+    const jort = jortRecent(meta.recent, now);
 
     // One workspace at a time (a register weighs up to a megabyte), only those someone will read.
     const wanted = new Set(profiles.map((p) => p.id));

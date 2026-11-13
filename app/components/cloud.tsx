@@ -30,15 +30,8 @@ import ui from "./cloud.module.css";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
 import { etatOffre, PLANS } from "@/lib/cloud/plans";
 import { type CloudBackend, cloudBackend, type SyncState } from "@/lib/cloud/sync";
-import {
-  clearLocalRegistres,
-  localRegistres,
-  loadRegistres,
-  type Registre,
-  RELOADED,
-  saveRegistres,
-  setRegistreBackend,
-} from "@/lib/registre/registre";
+import type { Registre } from "@/lib/registre/registre";
+import { clearLocalRegistres, localRegistres, registres } from "@/lib/registre/store";
 
 const CURRENT = "abclassement-espace"; // the workspace last opened in this browser
 
@@ -74,10 +67,7 @@ const CloudContext = createContext<Cloud>(LOCAL);
 export const useCloud = () => useContext(CloudContext);
 
 /** A colleague's save reached registers shown here ("remote"), or ours was merged with one ("merged"). */
-export const REMOTE_EVENT = "abclassement-registres-distants";
-export type RemoteDetail = { ids: string[]; kind: "remote" | "merged" };
-const announce = (ids: string[], kind: RemoteDetail["kind"]) =>
-  window.dispatchEvent(new CustomEvent<RemoteDetail>(REMOTE_EVENT, { detail: { ids, kind } }));
+const announce = (ids: string[], kind: "remote" | "merged") => registres.announce({ ids, kind });
 
 /**
  * The app behind its sign-in: the account, then a workspace, then the app with that workspace's
@@ -139,7 +129,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     setReady(false);
     setCurrent(w);
     if (!w) {
-      setRegistreBackend(null);
+      registres.setBackend(null);
       return;
     }
     try {
@@ -162,14 +152,14 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
         delay: 1500,
         // Merged with a colleague's changes: the page shows the merged registers.
         onMerged: (ids) => {
-          setRegistreBackend(b);
+          registres.setBackend(b);
           announce(ids, "merged");
         },
       },
     );
     backend.current = b;
     setSync({ state: canWrite(w) ? "saved" : "readonly" });
-    setRegistreBackend(b);
+    registres.setBackend(b);
     setReady(true);
   }, []);
 
@@ -202,7 +192,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     void refresh();
     return () => {
       backend.current?.dispose();
-      setRegistreBackend(null);
+      registres.setBackend(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -221,7 +211,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
         const ids = new Set(fresh.map((s) => s.registre.id));
         const gone = b.list.filter((r) => !ids.has(r.id) && b.applyRemoval(r.id)).map((r) => r.id);
         if (changed.length || gone.length) {
-          setRegistreBackend(b);
+          registres.setBackend(b);
           announce([...changed, ...gone], "remote");
         }
       } catch {
@@ -259,7 +249,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
         const b = backend.current;
         const id = (p.old as { id?: string }).id;
         if (b && id && b.applyRemoval(id)) {
-          setRegistreBackend(b);
+          registres.setBackend(b);
           announce([id], "remote");
         }
       })
@@ -271,7 +261,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
       try {
         const s = await fetchRegistre(current!.id, id);
         if (s && b === backend.current && b.applyRemote(s)) {
-          setRegistreBackend(b);
+          registres.setBackend(b);
           announce([id], "remote");
         }
       } catch {
@@ -301,7 +291,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     await backend.current?.flush();
     backend.current?.dispose();
     backend.current = null;
-    setRegistreBackend(null);
+    registres.setBackend(null);
     await cloud()!.auth.signOut();
   }, []);
 
@@ -536,11 +526,10 @@ export function LocalImport() {
   if (done) return <Notice title={done} />;
   if (!canWrite(current)) return null;
   const importAll = () => {
-    const here = loadRegistres();
+    const here = registres.get();
     const ids = new Set(here.map((r) => r.id));
     const added = local.filter((r) => !ids.has(r.id));
-    saveRegistres([...here, ...added]);
-    window.dispatchEvent(new Event(RELOADED));
+    registres.set([...here, ...added]);
     clearLocalRegistres();
     setLocal([]);
     setDone(`${added.length} registre${added.length > 1 ? "s" : ""} importé${added.length > 1 ? "s" : ""} dans « ${current.name} ».`);

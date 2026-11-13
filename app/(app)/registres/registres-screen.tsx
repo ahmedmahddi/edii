@@ -7,7 +7,8 @@ import { Button, EmptyState, Panel } from "@/app/ui";
 import { canWrite } from "@/lib/cloud/api";
 import { limiteAtteinte } from "@/lib/cloud/plans";
 import type { Registre } from "@/lib/registre/registre";
-import { useCatalogue, useRegistres } from "../_data/registres";
+import { useRegistres } from "../_data/registres";
+import { useCatalogue } from "../_data/veille";
 import { NouveauRegistre } from "./_components/NouveauRegistre";
 import { RegistreDetail } from "./_components/RegistreDetail";
 import { RegistreList } from "./_components/RegistreList";
@@ -27,7 +28,7 @@ function Screen({ route }: { route: RegistreRoute }) {
   const router = useRouter();
   const cloud = useCloud();
   const { list, update, saved, loaded } = useRegistres();
-  const { feed, texts, amendments } = useCatalogue();
+  const { ready, texts, amendments } = useCatalogue();
 
   // The offer: an ended one makes the workspace read only; its limit caps the establishments.
   const writable = !cloud.current || canWrite(cloud.current);
@@ -37,7 +38,7 @@ function Screen({ route }: { route: RegistreRoute }) {
       ? `Limite de l’offre atteinte : ${max} établissement${(max ?? 0) > 1 ? "s" : ""} au plus dans cet espace. Contactez ABC Consulting pour l’étendre.`
       : null;
 
-  if (!loaded || (route.kind !== "list" && !feed)) return <p className="visually-hidden" role="status">Chargement…</p>;
+  if (!loaded || (route.kind !== "list" && !ready)) return <p className="visually-hidden" role="status">Chargement…</p>;
 
   if (route.kind === "new")
     return (

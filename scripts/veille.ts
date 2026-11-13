@@ -44,6 +44,7 @@ import { amendments, catalogue, citations, type Repeals, resumeKey } from "../li
 import { type Repeal, repealClauses } from "../lib/veille/abrogation";
 import { articlesOf, bodies, compact, type FicheData, readFiche } from "../lib/veille/fiche";
 import { pdfLines, pdfLinesFromUrl, pdfPageImages } from "../lib/veille/pdf";
+import { served } from "../lib/veille/served";
 import { assess, type Feed, type Hit, reassess, record, type Sommaires } from "../lib/veille/watch";
 
 const DIR = path.join(process.cwd(), "data", "veille");
@@ -61,8 +62,9 @@ const CORPS = path.join(DIR, "corps");
 const RESUMES = path.join(process.cwd(), "data", "referentiel", "resumes");
 // Written risks and action plans: data/referentiel/risques/*.json (text key → { risque, plan }).
 const RISQUES = path.join(process.cwd(), "data", "referentiel", "risques");
-// Served to the page with the feed: text id → fiche and résumé (public/veille/fiches.json).
-const FICHES_OUT = path.join(process.cwd(), "public", "veille", "fiches.json");
+// Text id → fiche, résumé, risk and plan: read by the server, given one text at a time (app/api/fiches).
+// Not a public file: the written résumés are ABC Consulting's work.
+const FICHES_OUT = path.join(process.cwd(), "data", "build", "fiches.json");
 const UA = "ABClassement veille réglementaire";
 // Where the PDFs are fetched from: lake.jort.tn, or a copy of it (JORT_BASE, for tests or a mirror).
 const fetchUrl = (year: number, n: number) =>
@@ -91,6 +93,11 @@ function loadFeed(): Feed {
 function writeFeed(feed: Feed): void {
   mkdirSync(path.dirname(FEED), { recursive: true });
   writeFileSync(FEED, JSON.stringify(feed) + "\n");
+  // And what each screen needs of it (lib/veille/served.ts).
+  const out = served(feed);
+  writeFileSync(path.join(path.dirname(FEED), "meta.json"), JSON.stringify(out.meta) + "\n");
+  writeFileSync(path.join(path.dirname(FEED), "catalogue.json"), JSON.stringify(out.catalogue) + "\n");
+  writeFileSync(path.join(path.dirname(FEED), "amendements.json"), JSON.stringify(out.amendements) + "\n");
 }
 
 function saveFeed(feed: Feed): void {
@@ -439,7 +446,7 @@ async function readFiches(years: Sommaires[], hits: Hit[]): Promise<void> {
 }
 
 /**
- * public/veille/fiches.json: for each text of the référentiel, its fiche, its written résumé, risk and
+ * data/build/fiches.json: for each text of the référentiel, its fiche, its written résumé, risk and
  * action plan, by text id. Derived from data/veille/fiches and data/referentiel/resumes and risques.
  */
 function writeFiches(hits: Hit[]): void {

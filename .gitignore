@@ -13,6 +13,10 @@ public/veille/feed.json
 data/veille/veille-hebdo.log
 # Bodies of the texts found (their articles), read by --fiches: for writing résumés, not served
 data/veille/corps/
-public/veille/fiches.json
+# Built by npm run veille --reassess (before dev and build): what the site serves of the veille
+public/veille/meta.json
+public/veille/catalogue.json
+public/veille/amendements.json
+data/build/
 test-results/
 playwright-report/

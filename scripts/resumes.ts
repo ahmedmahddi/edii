@@ -31,7 +31,7 @@ const RESUMES = path.join(ROOT, "data", "referentiel", "resumes");
 const RISQUES = path.join(ROOT, "data", "referentiel", "risques");
 const CORPS = path.join(ROOT, "data", "veille", "corps");
 const ORDER = path.join(CORPS, "ordre.json"); // cached: computing it takes a minute
-const FICHES = path.join(ROOT, "public", "veille", "fiches.json");
+const FICHES = path.join(ROOT, "data", "build", "fiches.json");
 
 const keyOf = resumeKey;
 

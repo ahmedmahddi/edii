@@ -83,6 +83,17 @@ export function LigneSheet({
   const [error, setError] = useState("");
   const [saved, setSaved] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
+  // The fiche comes from the server a moment after the sheet opens: its risk and plan replace the
+  // ones proposed from the domain, unless already edited.
+  const firstProposed = useRef(proposed);
+  useEffect(() => {
+    const before = firstProposed.current;
+    if (before === proposed || !fiche) return;
+    setRisque((r) => (r === before.risque ? l.risque || proposed.risque : r));
+    setPlan((p) => (p === before.plan ? l.plan || proposed.plan : p));
+    firstProposed.current = proposed;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fiche]);
   const evidence = preuvesDe(l);
   // The uploaded files are read through links that last an hour, fetched when the sheet opens.
   const [urls, setUrls] = useState<Record<string, string>>({});

@@ -64,3 +64,21 @@ test("a register from the keyboard, and a text open from its address", async ({ 
   await fitsTheScreen(page);
   expect(errors).toEqual([]);
 });
+
+test("a suggestion retained joins the register", async ({ page }) => {
+  const errors = watchErrors(page);
+  await newRegister(page, "Dépôt de Bizerte");
+  const tous = page.getByRole("tab", { name: /^Tous/ });
+  const before = Number((await tous.textContent())!.replace(/\D/g, ""));
+  await page.getByRole("tab", { name: /^Suggestions/ }).click();
+  await page.locator("tr[data-ligne]").first().click();
+  await page.getByText("Pourquoi ce texte, et ses modifications").click();
+  await page.getByRole("button", { name: "Retenir dans le registre" }).click();
+  await expect(page.getByRole("button", { name: "Retirer du registre" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(tous).toContainText(String(before + 1));
+  // Kept after a reload: it is a line of the register now.
+  await page.reload();
+  await expect(page.getByRole("tab", { name: /^Tous/ })).toContainText(String(before + 1));
+  expect(errors).toEqual([]);
+});

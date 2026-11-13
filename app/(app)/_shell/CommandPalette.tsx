@@ -6,7 +6,8 @@ import { Bell, Building2, FileText, Home, LayoutList, Moon, Plus, Search, Shield
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCloud } from "@/app/components/cloud";
-import { loadRegistres, type Registre } from "@/lib/registre/registre";
+import type { Registre } from "@/lib/registre/registre";
+import { registres as store } from "@/lib/registre/store";
 import s from "./CommandPalette.module.css";
 import type { Theme } from "@/app/ui";
 
@@ -15,7 +16,7 @@ export function CommandPalette({ open, onOpenChange, theme }: { open: boolean; o
   const cloud = useCloud();
   const [registres, setRegistres] = useState<Registre[]>([]);
   useEffect(() => {
-    if (open) setRegistres(loadRegistres());
+    if (open) setRegistres(store.get());
   }, [open]);
   const run = (fn: () => void) => () => {
     onOpenChange(false);
