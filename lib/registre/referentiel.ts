@@ -252,8 +252,28 @@ function repealedBy(clauses: Repeal[], names: (n: Named) => boolean | undefined)
 export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: Record<string, number> = {}): Texte[] {
   const texts: Texte[] = REFERENTIEL.map((t) => ({ ...t }));
   const byKey = new Map(texts.flatMap((t) => keysOf(t).map((k) => [k, t] as const)));
+  const byTitle = new Map(texts.map((t) => [fold(t.titre), t] as const));
+  // A combined issue ("N° 77 - 78") is one file listed under both numbers: its texts are read twice,
+  // on the same page with the same title. The lower number stands.
+  const twice = new Map<string, Hit>();
   for (const hit of hits) {
+    const k = `${hit.year}|${hit.page}|${fold(hit.title)}`;
+    const other = twice.get(k);
+    if (!other || hit.issue < other.issue) twice.set(k, hit);
+  }
+  for (const hit of hits) {
+    // A page header read as a title ("N° 70 - 71"), or the second reading of a combined issue.
+    if (/^\s*(n°\s*\d+(\s*[-–]\s*\d+)?\s*)+$/i.test(hit.title)) continue;
+    if (twice.get(`${hit.year}|${hit.page}|${fold(hit.title)}`) !== hit) continue;
     const t = fromHit(hit);
+    // The very title of a text of the référentiel: that text, whatever its number reads.
+    const same = byTitle.get(fold(t.titre));
+    if (same && same.origine !== "jort") {
+      same.source ??= t.source;
+      same.publie ??= t.publie;
+      same.jort ??= t.id;
+      continue;
+    }
     // Known by its number, or by its kind and date when the subjects agree: two arrêtés of the same
     // day are often two different texts (the list of notifiable diseases and a finance arrêté).
     const known = keysOf(t)
@@ -267,6 +287,7 @@ export function catalogue(hits: Hit[], amendments: Amendment[] = [], citations: 
     }
     texts.push(t);
     for (const k of keysOf(t)) byKey.set(k, t);
+    if (!byTitle.has(fold(t.titre))) byTitle.set(fold(t.titre), t);
   }
   for (const t of texts) {
     const n = Math.max(0, ...keysOf(t).map((k) => citations[k] ?? 0));

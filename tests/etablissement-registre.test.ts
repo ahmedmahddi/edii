@@ -371,3 +371,17 @@ describe("an establishment's register", () => {
     expect(aTraiter([late], [], now)).toBe(3);
   });
 });
+
+describe("the same text read twice", async () => {
+  const { catalogue } = await import("@/lib/registre/referentiel");
+  const hit = (id: string, issue: number, page: number, title: string) =>
+    ({ id, year: 2019, issue, date: "2019-01-04", pdf: "x", page, institution: null, kind: "Arrêté", title, severity: "important", domains: ["sante"], sectors: [], impacts: [], matches: [] }) as never;
+  const titre = "Arrêté du ministre de l'agriculture du 25 décembre 2018, modifiant l'arrêté du 28 novembre 1995, fixant les prescriptions de salubrité concernant les mollusques bivalves";
+
+  it("keeps one text from a combined issue, and drops a page header read as a title", () => {
+    const t = catalogue([hit("2019-002-16-16", 2, 16, titre), hit("2019-001-16-16", 1, 16, titre), hit("2019-070-5-1", 70, 5, "N° 70 - 71 N° 70 - 71")]);
+    const jort = t.filter((x) => x.origine === "jort");
+    expect(jort.map((x) => x.id)).toEqual(["jort-2019-001-16-16"]);
+  });
+
+});

@@ -8,6 +8,7 @@ import type { Texte } from "./referentiel";
 import { alertes, CONFORMITES, type Ligne, nouveautes, preuvesDe, prochaine, type Registre } from "./registre";
 
 export interface RapportLigne {
+  id: string; // the text's id: unique in a register (two texts may share a reference and a title)
   ref: string;
   titre: string;
   theme: string;
@@ -46,14 +47,14 @@ export interface RapportConformite {
   actionsRealisees: (RapportLigne & { date: string })[];
   evaluationsPeriode: number;
   aVenir: (RapportLigne & { date: string | null; etat: "en-retard" | "bientot" })[];
-  jort: { modifies: (RapportLigne & { par: string; jort: string })[]; nouveaux: number };
+  jort: { modifies: (RapportLigne & { amendment: string; par: string; jort: string })[]; nouveaux: number };
   textes: RapportTexte[];
 }
 
 const iso = (d: Date) => d.toISOString().slice(0, 10);
 const pct = (a: number, b: number) => (b ? Math.round((a / b) * 100) : null);
 export const refTexte = (l: Ligne) => [l.texte.type, l.texte.numero ? `n° ${l.texte.numero}` : "", l.texte.date ? `du ${l.texte.date.split("-").reverse().join("/")}` : ""].filter(Boolean).join(" ");
-const base = (l: Ligne): RapportLigne => ({ ref: refTexte(l), titre: l.texte.titre, theme: l.texte.theme });
+const base = (l: Ligne): RapportLigne => ({ id: l.texte.id, ref: refTexte(l), titre: l.texte.titre, theme: l.texte.theme });
 
 export function rapportConformite(reg: Registre, amendments: Amendment[], texts: Texte[], today = new Date(), depuis?: string): RapportConformite {
   const date = iso(today);
@@ -104,7 +105,7 @@ export function rapportConformite(reg: Registre, amendments: Amendment[], texts:
     .map(({ l, p }) => ({ ...base(l), date: p.date, etat: p.etat as "en-retard" | "bientot" }))
     .sort((a, b) => (a.date ?? "").localeCompare(b.date ?? ""));
 
-  const modifies = alertes(reg, amendments).map(({ ligne, amendment }) => ({ ...base(ligne), par: amendment.title, jort: `JORT n° ${amendment.issue}/${amendment.year}` }));
+  const modifies = alertes(reg, amendments).map(({ ligne, amendment }) => ({ ...base(ligne), amendment: amendment.id, par: amendment.title, jort: `JORT n° ${amendment.issue}/${amendment.year}` }));
 
   const textes: RapportTexte[] = lignes.map((l) => {
     const p = etats.get(l.texte.id)!;

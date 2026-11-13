@@ -200,7 +200,7 @@ export function RapportConformite({
               </thead>
               <tbody>
                 {r.nonConformites.map((n) => (
-                  <tr key={n.ref + n.titre}>
+                  <tr key={n.id}>
                     <td>
                       <strong>{n.ref}</strong>
                       <small>{n.titre}</small>
@@ -227,7 +227,7 @@ export function RapportConformite({
           {r.actionsRealisees.length ? (
             <ul className="rapport-list">
               {r.actionsRealisees.map((a) => (
-                <li key={a.ref + a.titre}>
+                <li key={a.id}>
                   <strong>{dateCourt(a.date)}</strong> · {a.ref} — {a.titre}
                 </li>
               ))}
@@ -251,7 +251,7 @@ export function RapportConformite({
               </thead>
               <tbody>
                 {r.aVenir.map((a) => (
-                  <tr key={a.ref + a.titre}>
+                  <tr key={a.id}>
                     <td>
                       <strong>{a.ref}</strong>
                       <small>{a.titre}</small>
@@ -279,7 +279,7 @@ export function RapportConformite({
           {r.jort.modifies.length ? (
             <ul className="rapport-list">
               {r.jort.modifies.map((m) => (
-                <li key={m.ref + m.par}>
+                <li key={`${m.id}-${m.amendment}`}>
                   <strong>{m.ref}</strong> est modifié par : {m.par} ({m.jort}) — à réévaluer.
                 </li>
               ))}
@@ -311,7 +311,7 @@ export function RapportConformite({
               </thead>
               <tbody>
                 {[...r.textes].sort((a, b) => ORDRE.indexOf(a.conformite) - ORDRE.indexOf(b.conformite)).map((x) => (
-                  <tr key={x.ref + x.titre}>
+                  <tr key={x.id}>
                     <td>
                       <strong>{x.ref}</strong>
                       <small>{x.titre}</small>

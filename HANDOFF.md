@@ -432,6 +432,16 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Fix (13 November): duplicate keys in the report, and texts read twice.** The report keyed its rows
+by reference + title, which two texts can share: rows now carry the text's id (`RapportLigne.id`).
+The catalogue (`catalogue()` in referentiel.ts) had 37 titles shared by two texts or more: 27 are
+distinct texts with generic titles (the 1957–1984 "AVIS relatifs aux établissements dangereux…"),
+kept; 7 were combined issues ("N° 77 - 78", one file listed under both numbers, read twice: same
+year, page and title) → the lower number stands; 1 was a curated text matched by title only → the
+JORT copy now links to it (`jort`, `source`, `publie`); 1 was a page header read as a title ("N° 70 -
+71") → dropped. 6,239 → 6,229 texts. Test in etablissement-registre.test.ts. Registers that already
+hold both copies keep them (their lines are theirs); new proposals no longer offer the second.
+
 **Launch 4: the compliance report (PDF).** `lib/registre/rapport.ts` (`rapportConformite(reg,
 amendments, texts, today, depuis)`: totals with taux = C/(C+NC) and progression = evaluated/applicable,
 domains, open NCs with the constat of their last NC evaluation and an état en-retard / à venir / à
