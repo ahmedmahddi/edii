@@ -1,5 +1,7 @@
 "use client";
-import { useCloud } from "@/app/components/cloud";
+import { OffreBanner, useCloud } from "@/app/components/cloud";
+import { canWrite } from "@/lib/cloud/api";
+import { limiteAtteinte } from "@/lib/cloud/plans";
 import { classLabel, dateFr, Profil } from "@/app/components/registre-shared";
 import { RegistreView } from "@/app/components/registre-view";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -109,6 +111,12 @@ export function Registres({
   const change = (id: string) => (fn: (r: Registre) => Registre) =>
     update((all) => all.map((r) => (r.id === id ? { ...fn(r), maj: new Date().toISOString() } : r)));
 
+  // The offer: an ended one makes the workspace read only; its limit caps the establishments.
+  const writable = !cloud.current || canWrite(cloud.current);
+  const maxRegistres = cloud.current?.offre?.maxRegistres ?? null;
+  const atLimit = !!cloud.current && limiteAtteinte(maxRegistres, list.length);
+  const limitNote = `Limite de l’offre atteinte : ${maxRegistres} établissement${(maxRegistres ?? 0) > 1 ? "s" : ""} au plus dans cet espace. Contactez ABC Consulting pour l’étendre.`;
+
   if (draft) {
     const nom = draft.nom.trim();
     const report = draft.report ? { ...draft.report, name: nom } : null;
@@ -168,7 +176,10 @@ export function Registres({
           </div>
         ) : (
           <div className="registre-actions">
-            <button type="button" disabled={!nom} onClick={create}>
+            {atLimit || !writable ? (
+              <p className="registre-warning">{!writable ? "Cet espace est en lecture seule." : limitNote}</p>
+            ) : null}
+            <button type="button" disabled={!nom || atLimit || !writable} onClick={create}>
               Créer le registre ({texts.length ? `${countProposed(texts, draft.site)} textes proposés` : "référentiel vide"})
             </button>
             <button type="button" className="secondary-button" onClick={() => setDraft(null)}>
@@ -200,14 +211,19 @@ export function Registres({
 
   return (
     <div className="registres">
-      <div className="registre-new-actions">
-        <button type="button" onClick={sansClassement}>
-          Nouveau registre sans classement
-        </button>
-        <span className="muted small">
-          BTP, travaux routiers, VRD, industrie, services : tout établissement que la nomenclature ne classe pas, ou pas encore.
-        </span>
-      </div>
+      <OffreBanner />
+      {writable ? (
+        <div className="registre-new-actions">
+          <button type="button" onClick={sansClassement} disabled={atLimit}>
+            Nouveau registre sans classement
+          </button>
+          <span className="muted small">
+            {atLimit
+              ? limitNote
+              : `BTP, travaux routiers, VRD, industrie, services : tout établissement que la nomenclature ne classe pas, ou pas encore.${maxRegistres != null ? ` (${list.length} / ${maxRegistres} établissements)` : ""}`}
+          </span>
+        </div>
+      ) : null}
       {!saved ? (
         <p className="registre-warning" role="alert">
           Ce navigateur n’enregistre pas les registres (navigation privée ou stockage bloqué) : sauvegardez-les dans un fichier.
@@ -248,8 +264,9 @@ export function Registres({
                   <button
                     type="button"
                     className="secondary-button"
+                    hidden={!writable}
                     onClick={() => {
-                      if (confirm(`Supprimer le registre « ${r.nom} » de ce navigateur ? Cette action est définitive.`))
+                      if (confirm(`Supprimer le registre « ${r.nom} »${cloud.current ? ` de l’espace « ${cloud.current.name} »` : " de ce navigateur"} ? Cette action est définitive.`))
                         update((all) => all.filter((x) => x.id !== r.id));
                     }}
                   >
@@ -282,7 +299,7 @@ export function Registres({
         >
           Sauvegarder les registres (fichier)
         </button>
-        <button type="button" className="secondary-button" onClick={() => fileRef.current?.click()}>
+        <button type="button" className="secondary-button" hidden={!writable} onClick={() => fileRef.current?.click()}>
           Restaurer une sauvegarde
         </button>
         <input

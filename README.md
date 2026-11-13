@@ -58,6 +58,19 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
   invites the client's contact as administrator (then owner, if the client is to control it) and
   colleagues as editors. No billing yet: every workspace is free.
 
+**Offers and administration.** Each workspace has an offer (Essai, Standard, Pro, Interne), an end
+date and limits: establishments and people (members plus pending invitations). A new workspace
+starts on a 30-day trial with 2 establishments and 3 people. After its end date it is read only:
+everything stays readable and exportable, nothing can be added or changed. The database enforces it
+all (`supabase/migrations/20261115000000_plans.sql`); members cannot change their own offer. The
+app shows the trial's days left, an end that comes, or the end passed, and says when a limit is
+reached. **Administration → Clients** (platform administrators only, `public.platform_admins`):
+every workspace with its offer, owners, establishments, people and last activity, filters (en essai,
+abonnés, à renouveler, terminés), and a sheet to change the offer (presets, +30 days, +1 year, no
+end, limits) and see the members. Administrators do not read a client's registers unless invited.
+The first administrator is named once in the SQL Editor:
+`insert into public.platform_admins (user_id) select id from public.profiles where email = 'you@…';`
+
 **Weekly digest e-mail.** Every Monday (about 06:23 Tunis time; Vercel Cron, `vercel.json`)
 `GET /api/notifications/cron` sends each account one e-mail for all its workspaces: evaluations late
 or due within 30 days, actions of non-conformities overdue, due within 14 days or not planned, texts

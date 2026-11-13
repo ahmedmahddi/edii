@@ -4,6 +4,7 @@
  */
 import type { Registre } from "@/lib/registre/registre";
 import { cloud } from "./client";
+import { etatOffre, type Offre, type Plan } from "./plans";
 
 export type Role = "owner" | "admin" | "editor" | "viewer";
 export const ROLE_LABEL: Record<Role, string> = {
@@ -25,7 +26,12 @@ export interface Workspace {
   id: string;
   name: string;
   role: Role;
+  offre?: Offre; // absent until the plans migration runs
 }
+
+/** Whether this account can change the workspace's registers: its role, and an offer not ended. */
+export const canWrite = (w: Workspace | null | undefined) => !!w && canEdit(w.role) && etatOffre(w.offre).actif;
+export const canInvite = (w: Workspace | null | undefined) => !!w && canManage(w.role) && etatOffre(w.offre).actif;
 export interface Member {
   userId: string;
   email: string;
@@ -58,15 +64,22 @@ function fail(error: { message: string } | null): void {
   if (error) throw new Error(error.message);
 }
 
+type OrgRow = { id: string; name: string; plan?: Plan; ends_at?: string | null; max_registres?: number | null; max_membres?: number | null };
+
 export async function myWorkspaces(userId: string): Promise<Workspace[]> {
-  const { data, error } = await db()
-    .from("memberships")
-    .select("role, organizations(id, name)")
-    .eq("user_id", userId);
+  const read = (cols: string) => db().from("memberships").select(`role, organizations(${cols})`).eq("user_id", userId);
+  let { data, error } = await read("id, name, plan, ends_at, max_registres, max_membres");
+  // Before the plans migration, the offer's columns do not exist: the workspaces without them.
+  if (error && /plan|ends_at|max_|column/i.test(error.message)) ({ data, error } = await read("id, name"));
   fail(error);
-  return ((data ?? []) as unknown as { role: Role; organizations: { id: string; name: string } | null }[])
+  return ((data ?? []) as unknown as { role: Role; organizations: OrgRow | null }[])
     .filter((m) => m.organizations)
-    .map((m) => ({ id: m.organizations!.id, name: m.organizations!.name, role: m.role }))
+    .map(({ role, organizations: o }) => ({
+      id: o!.id,
+      name: o!.name,
+      role,
+      offre: o!.plan ? { plan: o!.plan, endsAt: o!.ends_at ?? null, maxRegistres: o!.max_registres ?? null, maxMembres: o!.max_membres ?? null } : undefined,
+    }))
     .sort((a, b) => a.name.localeCompare(b.name, "fr"));
 }
 
@@ -218,5 +231,72 @@ export async function preuveUrl(path: string): Promise<string> {
 
 export async function deletePreuve(path: string): Promise<void> {
   const { error } = await db().storage.from(PREUVES_BUCKET).remove([path]);
+  fail(error);
+}
+
+// The platform's administration (supabase/migrations/20261115000000_plans.sql): administrators only.
+
+export async function isPlatformAdmin(): Promise<boolean> {
+  const { data, error } = await db().rpc("is_platform_admin");
+  return !error && data === true;
+}
+
+export interface AdminWorkspace {
+  id: string;
+  name: string;
+  offre: Offre;
+  created: string;
+  proprietaires: string;
+  membres: number;
+  invitations: number;
+  registres: number;
+  activite: string | null;
+}
+
+export async function adminWorkspaces(): Promise<AdminWorkspace[]> {
+  const { data, error } = await db().rpc("admin_workspaces");
+  fail(error);
+  return (
+    (data ?? []) as {
+      id: string;
+      name: string;
+      plan: Plan;
+      ends_at: string | null;
+      max_registres: number | null;
+      max_membres: number | null;
+      created_at: string;
+      proprietaires: string | null;
+      membres: number;
+      invitations: number;
+      registres: number;
+      derniere_activite: string | null;
+    }[]
+  ).map((w) => ({
+    id: w.id,
+    name: w.name,
+    offre: { plan: w.plan, endsAt: w.ends_at, maxRegistres: w.max_registres, maxMembres: w.max_membres },
+    created: w.created_at,
+    proprietaires: w.proprietaires ?? "",
+    membres: w.membres,
+    invitations: w.invitations,
+    registres: w.registres,
+    activite: w.derniere_activite,
+  }));
+}
+
+export async function adminWorkspaceMembers(workspace: string): Promise<{ email: string; name: string | null; role: Role; since: string }[]> {
+  const { data, error } = await db().rpc("admin_workspace_members", { org: workspace });
+  fail(error);
+  return ((data ?? []) as { email: string; full_name: string | null; role: Role; since: string }[]).map((m) => ({ email: m.email, name: m.full_name, role: m.role, since: m.since }));
+}
+
+export async function adminSetPlan(workspace: string, o: Offre): Promise<void> {
+  const { error } = await db().rpc("admin_set_plan", {
+    org: workspace,
+    new_plan: o.plan,
+    new_ends_at: o.endsAt,
+    new_max_registres: o.maxRegistres,
+    new_max_membres: o.maxMembres,
+  });
   fail(error);
 }

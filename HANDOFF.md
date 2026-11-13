@@ -432,6 +432,23 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Launch 2: offers and administration.** Migration `20261115000000_plans.sql`: `platform_admins`
+(+ `is_platform_admin()`); organizations.plan (essai/standard/pro/interne), ends_at (default now+30
+days, also for existing rows), max_registres (2), max_membres (3); column grants: members update
+organizations.name only, profiles.full_name/notifications only; `workspace_active(org)`; write
+policies on registres, invitations and storage `preuves` require it; triggers `registres_limit`
+and `invitations_limit` (members + invitations); admin RPCs `admin_workspaces()` (counts, owners,
+last activity), `admin_workspace_members(org)`, `admin_set_plan(...)`. rls.sql: 19 new checks (54).
+App: `lib/cloud/plans.ts` (PLANS presets, `etatOffre`, `limiteAtteinte`); `Workspace.offre`
+(myWorkspaces falls back to id/name before the migration); `canWrite`/`canInvite` (role and offer)
+replace canEdit in the UI and the sync backend; `OffreBanner` (home, registers); limits on register
+creation and invitations; Cloud.isAdmin; `app/components/admin.tsx` (tiles, filter chips, search,
+rows, sheet with presets/+30 j/+1 an/sans fin/limits and members). Nav: "Administration → Clients"
+in the side menu and the account sheet; `?vue=admin`. `[hidden]` now wins over display rules.
+Checked against the stand-in (it gained the offer select and multi-row RPCs): trial banner, 3rd
+register refused, admin list and sheet, Standard preset saved, end set to yesterday → read-only
+(banner, no new/delete/restore, no evaluation form), phone and desktop, no errors.
+
 **Evaluation form adapts to the answer (13 November, asked by the user).** Conforme: a comment
 (optional) and evidence only. Non applicable: a justification. Non conforme: constat, evidence,
 then risk and the action plan (action, responsable, échéance) in the same form, saved on the text by

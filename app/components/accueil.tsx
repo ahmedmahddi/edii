@@ -4,7 +4,8 @@
  * Journal officiel, and the way in for a new client (classify a site, or start a register).
  */
 import { useEffect, useMemo, useState } from "react";
-import { useCloud } from "@/app/components/cloud";
+import { OffreBanner, useCloud } from "@/app/components/cloud";
+import { canWrite } from "@/lib/cloud/api";
 import { Icon } from "@/app/components/icons";
 import { useFeed } from "@/app/components/veille";
 import { metierLabels } from "@/lib/registre/profil";
@@ -84,7 +85,7 @@ export function Accueil({
   const hello = hour < 18 ? "Bonjour" : "Bonsoir";
   const first = cloud.name?.split(/\s+/)[0];
   const today = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-  const readOnly = cloud.current ? !["owner", "admin", "editor"].includes(cloud.current.role) : false;
+  const readOnly = cloud.current ? !canWrite(cloud.current) : false;
 
   // The Journal officiel: the last issue read, and the latest texts that matter.
   const last = feed
@@ -121,6 +122,8 @@ export function Accueil({
           )}
         </p>
       </header>
+
+      <OffreBanner />
 
       {!registres.length ? (
         <section className="card home-hero" aria-labelledby="home-hero-title">

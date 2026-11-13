@@ -110,10 +110,53 @@ select pg_temp.act('bob');
 select public.remove_member((select org from ids), auth.uid());
 select pg_temp.check((select count(*) from public.registres) = 0, 'after leaving, nothing is visible');
 
+-- Offers: the workspace's own members cannot change theirs; limits and the end date hold.
+select pg_temp.act('alice');
+select pg_temp.fails($$update public.organizations set plan = 'pro', ends_at = null, max_registres = null$$, 'a member cannot change the offer');
+update public.organizations set name = 'Client SA (Sfax)';
+select pg_temp.check((select name from public.organizations) = 'Client SA (Sfax)', 'an owner still renames the workspace');
+select pg_temp.check((select plan from public.organizations) = 'essai' and (select max_registres from public.organizations) = 2, 'a new workspace starts on the trial offer');
+select pg_temp.fails($$update public.profiles set email = 'other@x.tn' where id = auth.uid()$$, 'an account cannot change its e-mail in its profile');
+insert into public.registres (organization_id, id, nom, data) select org, 'r2', 'Dépôt', '{"id":"r2"}' from ids;
+select pg_temp.fails($$insert into public.registres (organization_id, id, nom, data) select org, 'r3', 'Trop', '{}' from ids$$, 'no more establishments than the offer allows');
+insert into public.invitations (organization_id, email, role) select org, 'x1@y.tn', 'editor' from ids;
+insert into public.invitations (organization_id, email, role) select org, 'x2@y.tn', 'editor' from ids;
+select pg_temp.fails($$insert into public.invitations (organization_id, email, role) select org, 'x3@y.tn', 'editor' from ids$$, 'no more people than the offer allows (invitations count)');
+select pg_temp.fails($$select * from public.admin_workspaces()$$, 'only platform administrators list the workspaces');
+select pg_temp.fails($$select public.admin_set_plan((select org from ids), 'pro', null, null, null)$$, 'only platform administrators change an offer');
+
+-- The offer ends: the workspace is read only.
+reset role;
+update public.organizations set ends_at = now() - interval '1 day';
+set role authenticated;
+select pg_temp.act('alice');
+update public.registres set nom = 'Après la fin' where id = 'r1';
+select pg_temp.check((select nom from public.registres where id = 'r1') = 'Usine Sfax (révisé)', 'after the end date, registers cannot change');
+select pg_temp.check((select count(*) from public.registres) = 2, 'after the end date, registers are still readable');
+delete from public.invitations;
+select pg_temp.fails($$insert into public.invitations (organization_id, email, role) select org, 'x4@y.tn', 'editor' from ids$$, 'after the end date, no invitation');
+
+-- Carol becomes a platform administrator: she sees every workspace, not its registers, and extends the offer.
+reset role;
+insert into public.platform_admins (user_id) values ('00000000-0000-0000-0000-00000000000c');
+set role authenticated;
+select pg_temp.act('carol');
+select pg_temp.check(public.is_platform_admin(), 'the administrator is known as such');
+select pg_temp.check((select registres from public.admin_workspaces() where id = (select org from ids)) = 2, 'the administrator sees each workspace''s counts');
+select pg_temp.check((select proprietaires from public.admin_workspaces() where id = (select org from ids)) = 'alice@client.tn', 'and its owners');
+select pg_temp.check((select count(*) from public.admin_workspace_members((select org from ids))) = 1, 'and its members');
+select pg_temp.check((select count(*) from public.registres) = 0, 'the administrator does not read the clients'' registers');
+select public.admin_set_plan((select org from ids), 'standard', now() + interval '1 year', 5, 10);
+select pg_temp.act('alice');
+select pg_temp.check(not public.is_platform_admin(), 'a client is not an administrator');
+update public.registres set nom = 'Usine Sfax (2027)' where id = 'r1';
+select pg_temp.check((select nom from public.registres where id = 'r1') = 'Usine Sfax (2027)', 'once extended, the workspace can be changed again');
+
 -- Anonymous visitors see nothing.
 reset role;
 set role anon;
 select pg_temp.check((select count(*) from public.registres) = 0, 'anonymous: no register');
 select pg_temp.fails($$select public.create_workspace('x')$$, 'anonymous: cannot create a workspace');
+select pg_temp.fails($$select * from public.admin_workspaces()$$, 'anonymous: no administration');
 reset role;
 \echo tous les contrôles sont passés

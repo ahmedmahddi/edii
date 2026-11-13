@@ -36,6 +36,7 @@ import { Accueil } from "./components/accueil";
 import { useVeilleCount, Veille } from "./components/veille";
 import { CloudGate, LocalImport, ReadOnlyNotice, useCloud, WorkspaceSwitcher } from "./components/cloud";
 import { Compte, Equipe } from "./components/equipe";
+import { Admin } from "./components/admin";
 import { SECTORS } from "@/lib/sectors";
 
 import {
@@ -74,7 +75,7 @@ export default function EdiiPage() {
   );
 }
 
-type View = "accueil" | "search" | "establishment" | "registres" | "veille" | "report" | "equipe" | "compte";
+type View = "accueil" | "search" | "establishment" | "registres" | "veille" | "report" | "equipe" | "compte" | "admin";
 
 /** Each screen's heading: eyebrow, title, one line on what it is for. */
 const HEADINGS: Record<View, [string, string, string]> = {
@@ -86,6 +87,7 @@ const HEADINGS: Record<View, [string, string, string]> = {
   veille: ["Conformité", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
   equipe: ["Espace de travail", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
   compte: ["Espace de travail", "Mon compte", "Votre nom, votre mot de passe et votre session."],
+  admin: ["Administration", "Clients", "Les espaces de vos clients, leur offre et leur activité."],
 };
 /** The tab each screen belongs to (the bar below 1000px). */
 const TAB_OF: Record<View, View> = {
@@ -97,6 +99,7 @@ const TAB_OF: Record<View, View> = {
   veille: "veille",
   equipe: "accueil",
   compte: "accueil",
+  admin: "accueil",
 };
 
 function Edii() {
@@ -268,6 +271,7 @@ function Edii() {
           },
         ]
       : []),
+    ...(cloudState.isAdmin ? [{ title: "Administration", items: [["admin", "shield", "Clients"]] as [View, string, string][] }] : []),
   ];
   const badge = (id: View) =>
     id === "establishment" && activities.length > 0 ? (
@@ -363,6 +367,11 @@ function Edii() {
                 <button type="button" onClick={() => go("compte")}>
                   <Icon name="user" size={19} /> Mon compte
                 </button>
+                {cloudState.isAdmin ? (
+                  <button type="button" onClick={() => go("admin")}>
+                    <Icon name="shield" size={19} /> Administration · Clients
+                  </button>
+                ) : null}
                 <button type="button" onClick={() => void cloudState.signOut()}>
                   <Icon name="logout" size={19} /> Se déconnecter
                 </button>
@@ -412,6 +421,8 @@ function Edii() {
             <Equipe />
           ) : view === "compte" ? (
             <Compte />
+          ) : view === "admin" ? (
+            <Admin />
           ) : view === "report" ? null : (
             <div className={`edii-layout view-${view}`}>
               <section

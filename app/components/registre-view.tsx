@@ -9,7 +9,7 @@ import { useCloud } from "@/app/components/cloud";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Icon } from "@/app/components/icons";
 import { classLabel, dateFr, Profil, refOf, useFiches } from "@/app/components/registre-shared";
-import { canEdit, preuveUrl, uploadPreuve } from "@/lib/cloud/api";
+import { canWrite, preuveUrl, uploadPreuve } from "@/lib/cloud/api";
 import { importance } from "@/lib/registre/importance";
 import { metierLabels } from "@/lib/registre/profil";
 import { remplacePar, type Texte } from "@/lib/registre/referentiel";
@@ -90,7 +90,7 @@ export function RegistreView({
   const [openId, setOpenId] = useState<string | null>(null);
   const [adding, setAdding] = useState("");
   const [exporting, setExporting] = useState(false);
-  const editable = !cloud.current || canEdit(cloud.current.role);
+  const editable = !cloud.current || canWrite(cloud.current);
   const who = cloud.name || cloud.user?.email || "";
 
   const retenus = reg.lignes.filter((l) => l.retenu);

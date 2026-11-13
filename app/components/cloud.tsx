@@ -8,7 +8,8 @@ import type { User } from "@supabase/supabase-js";
 import { createContext, type FormEvent, type ReactNode, useCallback, useContext, useEffect, useRef, useState } from "react";
 import {
   acceptInvitation,
-  canEdit,
+  canWrite,
+  isPlatformAdmin,
   cancelInvitation,
   createWorkspace,
   deleteRegistres,
@@ -22,6 +23,7 @@ import {
   type Workspace,
 } from "@/lib/cloud/api";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
+import { etatOffre, PLANS } from "@/lib/cloud/plans";
 import { type CloudBackend, cloudBackend, type SyncState } from "@/lib/cloud/sync";
 import { clearLocalRegistres, localRegistres, loadRegistres, type Registre, RELOADED, saveRegistres, setRegistreBackend } from "@/lib/registre/registre";
 
@@ -34,6 +36,7 @@ export interface Cloud {
   workspaces: Workspace[];
   current: Workspace | null;
   sync: SyncState;
+  isAdmin: boolean; // a platform administrator (ABC Consulting)
   switchTo(id: string): Promise<void>;
   /** Read the workspaces again (after creating, renaming, leaving one). */
   refresh(open?: string): Promise<void>;
@@ -48,6 +51,7 @@ const LOCAL: Cloud = {
   workspaces: [],
   current: null,
   sync: { state: "saved" },
+  isAdmin: false,
   switchTo: async () => {},
   refresh: async () => {},
   setName: () => {},
@@ -122,6 +126,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
   const [ready, setReady] = useState(false); // the current workspace's registers are loaded
   const [error, setError] = useState("");
   const [sync, setSync] = useState<SyncState>({ state: "saved" });
+  const [isAdmin, setIsAdmin] = useState(false);
   const backend = useRef<CloudBackend | null>(null);
 
   const open = useCallback(async (w: Workspace | null) => {
@@ -145,10 +150,10 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     const b = cloudBackend(
       registres,
       { upsert: (l) => upsertRegistres(w.id, l), remove: (ids) => deleteRegistres(w.id, ids) },
-      { readOnly: !canEdit(w.role), onState: setSync, delay: 1500 },
+      { readOnly: !canWrite(w), onState: setSync, delay: 1500 },
     );
     backend.current = b;
-    setSync({ state: canEdit(w.role) ? "saved" : "readonly" });
+    setSync({ state: canWrite(w) ? "saved" : "readonly" });
     setRegistreBackend(b);
     setReady(true);
   }, []);
@@ -157,9 +162,10 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     async (want?: string) => {
       setError("");
       try {
-        const [ws, n] = await Promise.all([myWorkspaces(user.id), myName(user.id)]);
+        const [ws, n, admin] = await Promise.all([myWorkspaces(user.id), myName(user.id), isPlatformAdmin()]);
         setList(ws);
         setName(n);
+        setIsAdmin(admin);
         let remembered: string | null = null;
         try {
           remembered = localStorage.getItem(CURRENT);
@@ -234,6 +240,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
   const value: Cloud = {
     enabled: true,
     user,
+    isAdmin,
     name,
     workspaces: list ?? [],
     current,
@@ -623,13 +630,55 @@ export function WorkspaceSwitcher({ onManage }: { onManage: () => void }) {
 /** A reader opens the registers: what they change on screen is not saved. */
 export function ReadOnlyNotice() {
   const { current } = useCloud();
-  if (!current || canEdit(current.role)) return null;
+  if (!current || canWrite(current) || !etatOffre(current.offre).actif) return null; // an ended offer: OffreBanner says it
   return (
     <p className="registre-warning" role="note">
       Vous êtes lecteur de « {current.name} » : vous pouvez consulter et exporter les registres, mais vos modifications ne sont pas enregistrées. Un
       administrateur de l’espace peut vous donner le rôle d’éditeur.
     </p>
   );
+}
+
+const dateLong = (iso: string) => new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+
+/** Where the workspace's offer stands: a trial's days left, an end that comes, an end passed (read only). */
+export function OffreBanner() {
+  const { current } = useCloud();
+  const o = current?.offre;
+  if (!current || !o) return null;
+  const { actif, jours } = etatOffre(o);
+  const limits = [o.maxRegistres != null ? `${o.maxRegistres} établissement${o.maxRegistres > 1 ? "s" : ""}` : "", o.maxMembres != null ? `${o.maxMembres} personne${o.maxMembres > 1 ? "s" : ""}` : ""]
+    .filter(Boolean)
+    .join(", ");
+  if (!actif)
+    return (
+      <div className="offre-banner is-ended" role="status">
+        <strong>L’offre de « {current.name} » a pris fin le {dateLong(o.endsAt!)}.</strong>
+        <span>L’espace est en lecture seule : vos registres restent consultables et exportables. Contactez ABC Consulting pour le prolonger.</span>
+      </div>
+    );
+  if (o.plan === "essai" && jours !== null)
+    return (
+      <div className="offre-banner is-trial" role="status">
+        <strong>
+          Essai gratuit : {jours} jour{jours > 1 ? "s" : ""} restant{jours > 1 ? "s" : ""}
+        </strong>
+        <span>
+          Jusqu’au {dateLong(o.endsAt!)}
+          {limits ? ` · ${limits}` : ""}. Contactez ABC Consulting pour passer à une offre.
+        </span>
+      </div>
+    );
+  if (jours !== null && jours <= 15)
+    return (
+      <div className="offre-banner is-soon" role="status">
+        <strong>
+          L’offre {PLANS[o.plan].label} prend fin dans {jours} jour{jours > 1 ? "s" : ""}
+        </strong>
+        <span>Le {dateLong(o.endsAt!)}. Contactez ABC Consulting pour la renouveler.</span>
+      </div>
+    );
+  return null;
 }
 
 /** Registers made in this browser before accounts: brought into the workspace on request. */
@@ -642,7 +691,7 @@ export function LocalImport() {
   }, [enabled, current?.id]);
   if (!enabled || !current || (!local.length && !done)) return null;
   if (done) return <p className="auth-done">{done}</p>;
-  if (!canEdit(current.role)) return null;
+  if (!canWrite(current)) return null;
   const importAll = () => {
     const here = loadRegistres();
     const ids = new Set(here.map((r) => r.id));

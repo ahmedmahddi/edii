@@ -6,6 +6,7 @@
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { NewWorkspace, PendingInvitations, useCloud } from "@/app/components/cloud";
 import {
+  canInvite,
   canManage,
   cancelInvitation,
   deleteWorkspace,
@@ -25,6 +26,7 @@ import {
   updateMyName,
 } from "@/lib/cloud/api";
 import { cloud } from "@/lib/cloud/client";
+import { limiteAtteinte } from "@/lib/cloud/plans";
 
 const dateFr = (iso: string) => new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 const message = (e: unknown) => (e instanceof Error ? e.message : String(e));
@@ -49,6 +51,9 @@ export function Equipe() {
   const [name, setName] = useState(current?.name ?? "");
   const [confirm, setConfirm] = useState("");
   const manage = canManage(current?.role);
+  const inviting = canInvite(current); // and the offer has not ended
+  const seats = current?.offre?.maxMembres ?? null;
+  const full = limiteAtteinte(seats, list.length + pending.length);
   const owner = current?.role === "owner";
 
   const load = useCallback(async () => {
@@ -81,6 +86,7 @@ export function Equipe() {
     if (!address) return;
     void act(async () => {
       if (list.some((m) => m.email === address)) throw new Error("Cette personne est déjà membre de l’espace.");
+      if (full) throw new Error(`Limite de l’offre atteinte : ${seats} personne${seats! > 1 ? "s" : ""} au plus dans cet espace (membres et invitations). Contactez ABC Consulting pour l’étendre.`);
       await invite(current.id, address, role, user.id);
       setSent({ email: address, role });
       setEmail("");
@@ -184,9 +190,18 @@ export function Equipe() {
         <section className="card equipe-section" aria-labelledby="equipe-inviter">
           <div className="section-heading">
             <h2 id="equipe-inviter">Inviter</h2>
-            <span className="quiet-label">Collaborateurs de l’entreprise ou consultants</span>
+            <span className="quiet-label">
+              {seats != null ? `${list.length + pending.length} / ${seats} personnes (membres et invitations)` : "Collaborateurs de l’entreprise ou consultants"}
+            </span>
           </div>
-          <form className="equipe-invite" onSubmit={sendInvite}>
+          {!inviting ? (
+            <p className="registre-warning">L’offre de cet espace a pris fin : il est en lecture seule, les invitations sont suspendues.</p>
+          ) : full ? (
+            <p className="registre-warning">
+              Limite de l’offre atteinte ({seats} personne{seats! > 1 ? "s" : ""}). Retirez un membre ou une invitation, ou contactez ABC Consulting pour l’étendre.
+            </p>
+          ) : null}
+          <form className="equipe-invite" onSubmit={sendInvite} hidden={!inviting || full}>
             <label>
               <span>Adresse e-mail</span>
               <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
