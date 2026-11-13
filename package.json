@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:db": "bash scripts/test-db.sh",
+    "db:types": "bash scripts/db-types.sh",
     "test:e2e": "playwright test",
     "data:ocr": "node scripts/python.mjs data/pipeline/ocr.py",
     "data:parse": "node scripts/python.mjs data/pipeline/parse.py",

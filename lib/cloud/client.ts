@@ -5,6 +5,10 @@
  * Without them the app runs as before, everything kept in the browser ("mode local").
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "./database.types";
+
+/** The client, typed by the database (lib/cloud/database.types.ts, npm run db:types). */
+export type Db = SupabaseClient<Database>;
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/^["']|["']$/g, "").replace(/\/+$/, "");
 const KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim().replace(/^["']|["']$/g, "");
@@ -36,10 +40,10 @@ function safeJwtPayload(key: string): string {
 
 export const cloudEnabled = !!(URL && KEY) && !cloudConfigError;
 
-let client: SupabaseClient | null = null;
+let client: Db | null = null;
 /** The client, in the browser only; null in local mode. */
-export function cloud(): SupabaseClient | null {
+export function cloud(): Db | null {
   if (!cloudEnabled || typeof window === "undefined") return null;
-  client ??= createClient(URL!, KEY!, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
+  client ??= createClient<Database>(URL!, KEY!, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
   return client;
 }

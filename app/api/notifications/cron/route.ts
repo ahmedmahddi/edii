@@ -16,7 +16,7 @@ import { renderDigest } from "@/lib/notify/email";
 import { sendMail } from "@/lib/notify/send";
 import { unsubscribeToken } from "@/lib/notify/token";
 import type { Texte } from "@/lib/registre/referentiel";
-import type { Registre } from "@/lib/registre/registre";
+import type { Ligne, Registre } from "@/lib/registre/registre";
 import type { VeilleMeta } from "@/lib/veille/served";
 import type { Amendment } from "@/lib/veille/watch";
 
@@ -56,13 +56,21 @@ export async function GET(request: Request): Promise<Response> {
     ]);
     const jort = jortRecent(meta.recent, now);
 
-    // One workspace at a time (a register weighs up to a megabyte), only those someone will read.
+    // One workspace at a time, only those someone will read.
     const wanted = new Set(profiles.map((p) => p.id));
     const digests = new Map<string, WorkspaceDigest>();
     for (const o of organizations) {
       if (!memberships.some((m) => m.organization_id === o.id && wanted.has(m.user_id))) continue;
-      const registres = await all<{ data: Registre }>((a, b) => db.from("registres").select("data").eq("organization_id", o.id).range(a, b));
-      digests.set(o.id, { id: o.id, nom: o.name, registres: registres.map((r) => digestRegistre(r.data, amendments, texts, now)) });
+      // The registers and their lines (lines in their own rows: supabase/migrations/…_lignes.sql).
+      const [metas, lignes] = await Promise.all([
+        all((a, b) => db.from("registres").select("id, data").eq("organization_id", o.id).range(a, b)),
+        all((a, b) => db.from("registre_lignes").select("registre_id, data").eq("organization_id", o.id).range(a, b)),
+      ]);
+      const registres = metas.map((m) => ({
+        ...(m.data as unknown as Registre),
+        lignes: lignes.filter((l) => l.registre_id === m.id).map((l) => l.data as unknown as Ligne),
+      }));
+      digests.set(o.id, { id: o.id, nom: o.name, registres: registres.map((r) => digestRegistre(r, amendments, texts, now)) });
     }
 
     const report = { comptes: profiles.length, envoyes: 0, rien: 0, recents: 0, erreurs: [] as string[], apercu: [] as unknown[] };

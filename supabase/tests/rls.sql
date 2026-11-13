@@ -165,6 +165,26 @@ delete from public.registres where id = 'r9';
 select pg_temp.act('carol');
 select pg_temp.fails($$select * from public.save_registre((select org from ids), 'r2', 'x', '{}', 2)$$, 'a stranger cannot save through it');
 
+-- A register's lines are rows: each saved from the version it was read at, with the register's rights.
+select pg_temp.act('alice');
+create temp table l1 as select * from public.save_lignes((select org from ids), 'r2', '[{"id":"t1","data":{"v":"a"},"expected":null},{"id":"t2","data":{"v":"a"},"expected":null}]');
+select pg_temp.check((select count(*) = 2 and bool_and(ok) and bool_and(v = 1) from l1), 'new lines are saved, at version 1');
+select pg_temp.check((select ok and v = 2 from public.save_lignes((select org from ids), 'r2', '[{"id":"t1","data":{"v":"b"},"expected":1}]')), 'a line saved from its version goes up one');
+create temp table l2 as select * from public.save_lignes((select org from ids), 'r2', '[{"id":"t1","data":{"v":"late"},"expected":1},{"id":"t2","data":{"v":"c"},"expected":1}]');
+select pg_temp.check((select not ok and v = 2 and courant->>'v' = 'b' from l2 where texte_id = 't1'), 'a line saved from an older version is refused, with the current copy');
+select pg_temp.check((select ok from l2 where texte_id = 't2'), 'and the other lines of the same save go through');
+select pg_temp.check((select data->>'v' from public.registre_lignes where texte_id = 't1') = 'b', 'nothing is overwritten');
+select pg_temp.check((select updated_by from public.registre_lignes where texte_id = 't1') = auth.uid(), 'the database stamps who saved a line');
+select pg_temp.fails($$select * from public.save_lignes((select org from ids), 'r404', '[{"id":"t1","data":{},"expected":null}]')$$, 'no line without its register');
+select pg_temp.act('carol');
+select pg_temp.check((select count(*) from public.registre_lignes) = 0, 'a stranger reads no line');
+select pg_temp.fails($$select * from public.save_lignes((select org from ids), 'r2', '[{"id":"t9","data":{},"expected":null}]')$$, 'a stranger cannot add a line');
+update public.registre_lignes set data = '{"v":"piraté"}';
+select pg_temp.act('alice');
+select pg_temp.check((select data->>'v' from public.registre_lignes where texte_id = 't1') = 'b', 'nor change one');
+delete from public.registres where id = 'r2';
+select pg_temp.check((select count(*) from public.registre_lignes where registre_id = 'r2') = 0, 'a register removed takes its lines');
+
 -- Reports on texts: a member reports from a workspace; only administrators see them all and settle them.
 select pg_temp.act('alice');
 insert into public.signalements (organization_id, texte_id, texte_titre, motif, commentaire) select org, 'jort-1', 'Arrêté X', 'hors-sujet', 'Rien à voir avec notre site' from ids;

@@ -12,15 +12,15 @@ import {
   isPlatformAdmin,
   cancelInvitation,
   createWorkspace,
-  deleteRegistres,
+  fetchLigne,
   fetchRegistre,
   fetchRegistres,
   type MyInvitation,
   myInvitations,
   myName,
   myWorkspaces,
+  registresIO,
   ROLE_LABEL,
-  saveRegistre,
   type Workspace,
 } from "@/lib/cloud/api";
 import { AuthFrame, AuthScreen, AuthSection, NewPassword, Splash } from "@/app/components/auth";
@@ -142,10 +142,7 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     );
     const b: CloudBackend = cloudBackend(
       stored,
-      {
-        save: (r, expected) => saveRegistre(w.id, r, expected),
-        remove: (ids) => deleteRegistres(w.id, ids),
-      },
+      registresIO(w.id),
       {
         readOnly: !canWrite(w),
         onState: setSync,
@@ -253,7 +250,32 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
           announce([id], "remote");
         }
       })
+      // A line: read back alone (the others of its register are not touched).
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "registre_lignes", filter: `organization_id=eq.${current.id}` }, (p) => void heardLigne(p.new))
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "registre_lignes", filter: `organization_id=eq.${current.id}` }, (p) => void heardLigne(p.new))
+      .on("postgres_changes", { event: "DELETE", schema: "public", table: "registre_lignes" }, (p) => {
+        const b = backend.current;
+        const { organization_id, registre_id, texte_id } = p.old as { organization_id?: string; registre_id?: string; texte_id?: string };
+        if (b && organization_id === current.id && registre_id && texte_id && b.applyLigneRemoval(registre_id, texte_id)) {
+          registres.setBackend(b);
+          announce([registre_id], "remote");
+        }
+      })
       .subscribe();
+    async function heardLigne(row: unknown) {
+      const b = backend.current;
+      const { registre_id: rid, texte_id: tid, version } = (row ?? {}) as { registre_id?: string; texte_id?: string; version?: number };
+      if (!b || !rid || !tid || (version ?? 0) <= b.ligneVersionOf(rid, tid)) return; // our own save, or already known
+      try {
+        const l = await fetchLigne(current!.id, rid, tid);
+        if (l && b === backend.current && b.applyLigne(rid, l.ligne, l.version)) {
+          registres.setBackend(b);
+          announce([rid], "remote");
+        }
+      } catch {
+        // the next focus reads it
+      }
+    }
     async function heard(row: unknown) {
       const b = backend.current;
       const { id, version } = (row ?? {}) as { id?: string; version?: number };

@@ -36,11 +36,11 @@
   }
   /* A domain's header: a full-width bar, not a stacked card. */
   table tr.group {
-    display: block;
+    grid-template-columns: minmax(0, 1fr);
     padding: 0;
   }
   table tr.group th {
-    display: block;
+    min-width: 0;
   }
 }
 .count {

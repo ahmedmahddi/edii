@@ -24,6 +24,7 @@ npm run dev        # http://localhost:3000
 npm run typecheck
 npm test           # classification, addition rule, ANPE study, and data in sync with the texts
 npm run test:db    # the database's access rules (supabase/), on a throwaway local PostgreSQL
+npm run db:types   # lib/cloud/database.types.ts from the migrations (after changing one)
 npm run test:e2e   # the interface in a real browser, phone and desktop (local mode)
                    # once before: npx playwright install chromium
 npm run build && npm start
@@ -52,9 +53,10 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
   shows a message to send; the invitation waits until that address signs in), rename, leave, delete.
   One account can belong to several workspaces (a consultant with many clients): the switcher at the
   top of the side menu changes workspace.
-* **Registers** are saved to the workspace as they change (`lib/cloud/sync.ts`: only the registers
-  changed, 1.5 s after the last change, retried when the network fails; the side menu says
-  "Enregistré"). A colleague's changes arrive when the page comes back to the front. Registers made
+* **Registers** are saved to the workspace as they change (`lib/cloud/sync.ts`): each text of a
+  register is a row of its own (`registre_lignes`, migration `20261118000000_lignes.sql`), so a change
+  sends only the lines changed, 1.5 s after the last change, retried when the network fails; the
+  side menu says "Enregistré". A colleague's changes arrive when the page comes back to the front. Registers made
   in a browser before accounts are offered for import into the workspace.
 * **Two people on the same register**: every save says which version it started from
   (`save_registre`, migration `20261116000000_versions.sql`). A save from an older version is refused
@@ -391,7 +393,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `app/components/icons.tsx` | The line icons. |
 | `app/components/cloud.tsx` | Sign-in, workspace choice, register sync state, import of browser registers. |
 | `app/components/equipe.tsx` | Équipe et espace (members, invitations, roles) and Mon compte. |
-| `lib/cloud/` | Supabase: the client (`client.ts`), the calls (`api.ts`), the registers' sync (`sync.ts`). |
+| `lib/cloud/` | Supabase: the typed client (`client.ts`, types generated in `database.types.ts`), the calls (`api.ts`), the registers' sync line by line (`sync.ts`). |
 | `supabase/` | The database (`migrations/`) and its access-rule tests (`tests/`, `npm run test:db`). |
 | `lib/classify.ts` | One rubrique: search, thresholds, units, outcome. |
 | `lib/establishment.ts` | Several activities, the addition rule, and the URL form. |

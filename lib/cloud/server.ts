@@ -4,12 +4,13 @@
  * caller themselves (the cron's CRON_SECRET, the unsubscribe link's signature). Never sent to a browser.
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "./database.types";
 
-export function serviceClient(env: Record<string, string | undefined> = process.env): SupabaseClient | null {
+export function serviceClient(env: Record<string, string | undefined> = process.env): SupabaseClient<Database> | null {
   const url = env.NEXT_PUBLIC_SUPABASE_URL?.trim().replace(/\/+$/, "");
   const key = env.SUPABASE_SERVICE_ROLE_KEY?.trim();
   if (!url || !key) return null;
-  return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+  return createClient<Database>(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 }
 
 /** Every row of a query, 1000 at a time (PostgREST's page). */

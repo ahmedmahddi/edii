@@ -20,7 +20,7 @@ function unionBy<T>(a: T[] = [], b: T[] = [], key: (x: T) => string): T[] {
 
 const latest = (l: Ligne) => (l.historique ?? []).reduce((m, e) => (e.enregistre > m ? e.enregistre : m), "");
 
-function mergeLigne(base: Ligne | undefined, mine: Ligne, theirs: Ligne): Ligne {
+export function mergeLigne(base: Ligne | undefined, mine: Ligne, theirs: Ligne): Ligne {
   if (same(mine, theirs)) return mine;
   if (base && same(mine, base)) return theirs;
   if (base && same(theirs, base)) return mine;

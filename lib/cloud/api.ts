@@ -2,7 +2,9 @@
  * What the app reads and changes in Supabase. Every call goes through row-level security: a user
  * only reaches the workspaces they belong to (supabase/migrations/20261112000000_workspaces.sql).
  */
-import { compacter, type Registre } from "@/lib/registre/registre";
+import { compacter, type Ligne, type Registre } from "@/lib/registre/registre";
+import type { Json } from "./database.types";
+import { metaOf, type Saved, type Stored, type SyncIO } from "./sync";
 import { cloud } from "./client";
 import { etatOffre, type Offre, type Plan } from "./plans";
 
@@ -185,58 +187,108 @@ export async function myName(userId: string): Promise<string | null> {
   return (data?.full_name as string | null) ?? null;
 }
 
-// Registers: one row per register, the register itself as JSON.
+// Registers: the register itself (name, classification, site profile) in `registres`, each of its
+// lines in `registre_lignes` (supabase/migrations/20261118000000_lignes.sql), each with its version.
 
-/** Before the versions migration (20261116000000_versions.sql): saved whole, last save wins. */
-let versioned = true;
+const json = (x: unknown) => x as Json;
 
-export async function fetchRegistres(workspace: string): Promise<{ registre: Registre; version: number }[]> {
-  let res: { data: unknown[] | null; error: { message: string } | null } = await db().from("registres").select("data, version").eq("organization_id", workspace);
-  if (res.error && /version/i.test(res.error.message)) {
-    versioned = false;
-    res = await db().from("registres").select("data").eq("organization_id", workspace);
+/** Every row of a query, 1000 at a time (PostgREST's page). */
+async function pages<T>(page: (from: number, to: number) => PromiseLike<{ data: T[] | null; error: { message: string } | null }>): Promise<T[]> {
+  const out: T[] = [];
+  for (let from = 0; ; from += 1000) {
+    const { data, error } = await page(from, from + 999);
+    fail(error);
+    out.push(...(data ?? []));
+    if (!data || data.length < 1000) return out;
   }
-  fail(res.error);
-  return ((res.data ?? []) as { data: Registre; version?: number }[]).map((r) => ({ registre: compacter(r.data), version: r.version ?? 0 }));
+}
+
+type LigneRow = { registre_id: string; texte_id: string; data: Json; version: number; updated_at: string };
+
+/** Registers and lines read, put together; the last change of a line counts as the register's. */
+function assemble(metas: { id: string; data: Json; version: number }[], rows: LigneRow[]): Stored[] {
+  const byRegistre = new Map<string, LigneRow[]>();
+  for (const l of rows) byRegistre.set(l.registre_id, [...(byRegistre.get(l.registre_id) ?? []), l]);
+  return metas.map((m) => {
+    const own = byRegistre.get(m.id) ?? [];
+    const meta = m.data as unknown as Registre;
+    const last = own.reduce((x, l) => (l.updated_at > x ? l.updated_at : x), meta.maj ?? "");
+    return {
+      registre: compacter({ ...meta, maj: last, lignes: own.map((l) => l.data as unknown as Ligne) }),
+      version: m.version,
+      lignes: Object.fromEntries(own.map((l) => [l.texte_id, l.version])),
+    };
+  });
+}
+
+export async function fetchRegistres(workspace: string): Promise<Stored[]> {
+  const [metas, rows] = await Promise.all([
+    pages((a, b) => db().from("registres").select("id, data, version").eq("organization_id", workspace).order("id").range(a, b)),
+    pages((a, b) =>
+      db().from("registre_lignes").select("registre_id, texte_id, data, version, updated_at").eq("organization_id", workspace).order("registre_id").order("texte_id").range(a, b),
+    ),
+  ]);
+  return assemble(metas, rows);
 }
 
 /** One register as stored now (null when it no longer exists). */
-export async function fetchRegistre(workspace: string, id: string): Promise<{ registre: Registre; version: number } | null> {
-  const { data, error } = await db().from("registres").select("data, version").eq("organization_id", workspace).eq("id", id).maybeSingle();
+export async function fetchRegistre(workspace: string, id: string): Promise<Stored | null> {
+  const [{ data, error }, rows] = await Promise.all([
+    db().from("registres").select("id, data, version").eq("organization_id", workspace).eq("id", id).maybeSingle(),
+    pages((a, b) =>
+      db().from("registre_lignes").select("registre_id, texte_id, data, version, updated_at").eq("organization_id", workspace).eq("registre_id", id).order("texte_id").range(a, b),
+    ),
+  ]);
   fail(error);
-  return data ? { registre: compacter(data.data as Registre), version: (data.version as number) ?? 0 } : null;
+  return data ? assemble([data], rows)[0]! : null;
 }
 
-/**
- * Save a register from the version it was read at; refused (with the current copy) when a
- * colleague saved it meanwhile.
- */
-export async function saveRegistre(
-  workspace: string,
-  r: Registre,
-  expected: number | null,
-): Promise<{ ok: true; version: number } | { ok: false; version: number; current: Registre }> {
-  if (!versioned) {
-    await upsertRegistres(workspace, [r]);
-    return { ok: true, version: 0 };
-  }
-  const { data, error } = await db().rpc("save_registre", { org: workspace, rid: r.id, rnom: r.nom, rdata: r, expected: expected || null });
-  if (error && /save_registre|function/i.test(error.message) && /not find|does not exist|schema cache/i.test(error.message)) {
-    versioned = false;
-    await upsertRegistres(workspace, [r]);
-    return { ok: true, version: 0 };
-  }
+/** One line as stored now (null when it no longer exists). */
+export async function fetchLigne(workspace: string, rid: string, tid: string): Promise<{ ligne: Ligne; version: number } | null> {
+  const { data, error } = await db()
+    .from("registre_lignes")
+    .select("data, version")
+    .eq("organization_id", workspace)
+    .eq("registre_id", rid)
+    .eq("texte_id", tid)
+    .maybeSingle();
   fail(error);
-  const row = (Array.isArray(data) ? data[0] : data) as { ok: boolean; v: number; courant: Registre | null };
-  return row.ok ? { ok: true, version: row.v } : { ok: false, version: row.v, current: row.courant! };
+  return data ? { ligne: data.data as unknown as Ligne, version: data.version } : null;
 }
 
-export async function upsertRegistres(workspace: string, list: Registre[]): Promise<void> {
-  if (!list.length) return;
-  const { error } = await db()
-    .from("registres")
-    .upsert(list.map((r) => ({ organization_id: workspace, id: r.id, nom: r.nom, data: r })), { onConflict: "organization_id,id" });
-  fail(error);
+/** What the sync engine (lib/cloud/sync.ts) needs to keep a workspace's registers. */
+export function registresIO(workspace: string): SyncIO {
+  return {
+    async saveMeta(r, expected) {
+      const { data, error } = await db().rpc("save_registre", { org: workspace, rid: r.id, rnom: r.nom, rdata: json(metaOf(r)), expected });
+      fail(error);
+      const row = data?.[0];
+      if (!row) throw new Error("Réponse vide du serveur");
+      return row.ok ? { ok: true, version: row.v ?? 0 } : { ok: false, version: row.v ?? 0, current: { ...(row.courant as unknown as Registre), lignes: [] } };
+    },
+    async saveLignes(rid, items) {
+      const out: (Saved<Ligne> & { id: string })[] = [];
+      // A few hundred lines at most per call (a new register sends all of its own).
+      for (let i = 0; i < items.length; i += 200) {
+        const part = items.slice(i, i + 200).map((x) => ({ id: x.ligne.texte.id, data: x.ligne, expected: x.expected }));
+        const { data, error } = await db().rpc("save_lignes", { org: workspace, rid, lignes: json(part) });
+        fail(error);
+        for (const row of data ?? [])
+          out.push(
+            row.ok
+              ? { id: row.texte_id!, ok: true, version: row.v ?? 0 }
+              : { id: row.texte_id!, ok: false, version: row.v ?? 0, current: row.courant as unknown as Ligne },
+          );
+      }
+      return out;
+    },
+    async removeLignes(rid, ids) {
+      if (!ids.length) return;
+      const { error } = await db().from("registre_lignes").delete().eq("organization_id", workspace).eq("registre_id", rid).in("texte_id", ids);
+      fail(error);
+    },
+    remove: (ids) => deleteRegistres(workspace, ids),
+  };
 }
 
 export async function deleteRegistres(workspace: string, ids: string[]): Promise<void> {
