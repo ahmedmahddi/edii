@@ -1,0 +1,95 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--ui-overlay);
+  animation: fade 0.15s ease;
+}
+.content {
+  position: fixed;
+  z-index: 51;
+  display: flex;
+  flex-direction: column;
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  outline: none;
+  /* Phone: a sheet from the bottom. */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 92dvh;
+  border-radius: 12px 12px 0 0;
+  border-top: 1px solid var(--ui-border);
+  animation: up 0.2s ease;
+}
+.head {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: var(--ui-space-4) 52px var(--ui-space-4) var(--ui-space-5);
+  border-bottom: 1px solid var(--ui-border);
+}
+.title {
+  font-size: var(--ui-text-lg);
+  font-weight: var(--ui-weight-semibold);
+  line-height: 1.35;
+}
+.description {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--ui-space-5);
+  display: grid;
+  gap: var(--ui-space-6);
+  align-content: start;
+}
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--ui-space-2);
+  padding: var(--ui-space-3) var(--ui-space-5) calc(var(--ui-space-3) + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--ui-border);
+  background: var(--ui-panel);
+}
+@media (min-width: 900px) {
+  .content {
+    left: auto;
+    top: 0;
+    bottom: 0;
+    width: min(560px, 100vw);
+    max-height: none;
+    border-radius: 0;
+    border-top: 0;
+    border-left: 1px solid var(--ui-border);
+    box-shadow: var(--ui-shadow-sheet);
+    animation: left 0.18s ease;
+  }
+  .wide {
+    width: min(760px, 100vw);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes up {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+}
+@keyframes left {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}

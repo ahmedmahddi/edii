@@ -6,17 +6,38 @@ test("the home shows the way in, and every screen fits the screen", async ({ pag
   await page.goto("/");
   await expect(page.getByRole("heading", { name: "Commencez par un établissement" })).toBeVisible();
   await fitsTheScreen(page);
-  for (const [tab, heading] of [
-    [/^Nomenclature/, "Nomenclature"],
-    [/tablissement/, "Mon établissement"],
-    [/^Registres/, "Registres"],
-    [/^Veille/, "Veille réglementaire"],
+  for (const [link, url, heading] of [
+    [/^Registres/, "/registres", "Registres"],
+    [/^Veille/, "/veille", "Veille réglementaire"],
+    [/^Classement/, "/classement", "Classement"],
+    [/^Accueil/, "/", "Accueil"],
   ] as const) {
-    await go(page, tab);
+    await go(page, link);
+    await expect(page).toHaveURL(url);
     await expect(page.getByRole("heading", { level: 1, name: heading })).toBeVisible();
     await fitsTheScreen(page);
   }
   expect(errors).toEqual([]);
+});
+
+test("the command palette opens a screen from the keyboard", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1, name: "Accueil" })).toBeVisible();
+  await page.keyboard.press("Control+k");
+  await expect(page.getByRole("dialog", { name: "Rechercher" })).toBeVisible();
+  await page.keyboard.type("veille");
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL("/veille");
+  await expect(page.getByRole("dialog")).toHaveCount(0);
+});
+
+test("each screen has its address, and links of before still lead to it", async ({ page }) => {
+  await page.goto("/registres");
+  await expect(page.getByRole("heading", { level: 1, name: "Registres" })).toBeVisible();
+  await page.goto("/registres/inconnu");
+  await expect(page.getByRole("heading", { name: "Registre introuvable" })).toBeVisible();
+  await page.goto("/?vue=veille");
+  await expect(page).toHaveURL("/veille");
 });
 
 test("the legal pages are reachable", async ({ page }) => {
@@ -39,5 +60,5 @@ test("dark mode follows the choice made", async ({ page }) => {
   await page.reload();
   expect(await page.evaluate(() => document.documentElement.dataset.theme)).toBe("dark");
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(bg).toBe("rgb(11, 18, 32)");
+  expect(bg).toBe("rgb(13, 15, 18)");
 });

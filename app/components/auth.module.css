@@ -1,0 +1,164 @@
+.page {
+  min-height: 100dvh;
+  display: grid;
+  background: var(--ui-bg);
+}
+@media (min-width: 960px) {
+  .page {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.formSide {
+  display: flex;
+  flex-direction: column;
+  padding: var(--ui-space-6) var(--ui-space-4);
+}
+.column {
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+  display: grid;
+  gap: var(--ui-space-6);
+  padding: var(--ui-space-8) 0;
+}
+.wide {
+  max-width: 480px;
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  font-size: var(--ui-text-md);
+  font-weight: var(--ui-weight-semibold);
+  color: var(--ui-text);
+}
+.mark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 5px;
+  background: var(--ui-accent);
+  color: #fff;
+  font-size: 12px;
+}
+.heading {
+  display: grid;
+  gap: var(--ui-space-1);
+}
+.title {
+  font-size: var(--ui-text-xl);
+  font-weight: var(--ui-weight-semibold);
+  letter-spacing: -0.01em;
+}
+.lead {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.form {
+  display: grid;
+  gap: var(--ui-space-4);
+}
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--ui-space-2) var(--ui-space-4);
+  font-size: var(--ui-text-sm);
+}
+.link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ui-accent-fg);
+  font: inherit;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ui-space-4);
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-subtle);
+}
+.foot a {
+  color: inherit;
+}
+
+/* What the product does: beside the form on a large screen, under it on a phone. */
+.pitch {
+  display: grid;
+  align-content: center;
+  gap: var(--ui-space-6);
+  padding: var(--ui-space-8) var(--ui-space-4);
+  border-top: 1px solid var(--ui-border);
+  background: var(--ui-panel);
+}
+@media (min-width: 960px) {
+  .pitch {
+    order: -1;
+    padding: var(--ui-space-10) clamp(32px, 6vw, 96px);
+    border-top: 0;
+    border-right: 1px solid var(--ui-border);
+  }
+}
+.pitchTitle {
+  max-width: 30ch;
+  font-size: var(--ui-text-xl);
+  font-weight: var(--ui-weight-semibold);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+.features {
+  display: grid;
+  gap: var(--ui-space-4);
+  max-width: 440px;
+  padding: 0;
+  list-style: none;
+}
+.feature {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--ui-space-3);
+  align-items: start;
+}
+.featureIcon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  color: var(--ui-accent-fg);
+}
+.featureTitle {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+}
+.featureText {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.logo {
+  width: 152px;
+  height: auto;
+  border-radius: var(--ui-radius);
+}
+.splash {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  color: var(--ui-text-muted);
+  font-size: var(--ui-text-sm);
+}
+.section {
+  display: grid;
+  gap: var(--ui-space-3);
+}
+.sectionTitle {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-semibold);
+}

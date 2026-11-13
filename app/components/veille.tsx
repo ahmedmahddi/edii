@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
-import { Registres } from "@/app/components/registres";
+import { type RegistreRoute, Registres } from "@/app/components/registres";
 import { Signaler } from "@/app/components/signaler";
 import { amendments, catalogue } from "@/lib/registre/referentiel";
 import { alertes, aTraiter, CHANGED, loadRegistres, nouveautes } from "@/lib/registre/registre";
-import type { ClassificationReport } from "@/lib/report";
 import { SECTORS } from "@/lib/sectors";
 import { type LiveCheck, type LiveIssue, withLive } from "@/lib/veille/live";
 import { fillRegister, registerRow } from "@/lib/veille/registre";
@@ -125,21 +124,7 @@ export function useVeilleCount(): number {
  * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
  * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
  */
-export type RegistreAction = { open?: string; create?: boolean } | null;
-
-export function Veille({
-  tab,
-  seed,
-  onSeedUsed,
-  action = null,
-  onActionUsed = () => {},
-}: {
-  tab: Tab;
-  seed: ClassificationReport | null;
-  onSeedUsed: () => void;
-  action?: RegistreAction;
-  onActionUsed?: () => void;
-}) {
+export function Veille({ tab, route = { kind: "list" } }: { tab: Tab; route?: RegistreRoute }) {
   const feed = useFeed();
   // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
   const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? [], feed?.citations ?? {}), [feed]);
@@ -150,7 +135,7 @@ export function Veille({
           Chargement de la veille…
         </p>
       ) : tab === "registres" ? (
-        <Registres seed={seed} onSeedUsed={onSeedUsed} texts={texts} amendments={feed.amendments ?? []} action={action} onActionUsed={onActionUsed} />
+        <Registres route={route} texts={texts} amendments={feed.amendments ?? []} />
       ) : (
         <>
           <Verifier feed={feed} />

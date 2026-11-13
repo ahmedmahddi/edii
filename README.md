@@ -384,7 +384,9 @@ The project path must have no spaces, and the laptop must be on and connected at
 
 | Path | What |
 |---|---|
-| `app/page.tsx` | The page: the shell (tab bar and top bar on phones, side menu from 1000px) and the screens. |
+| `app/(app)/` | The screens, one address each (`/`, `/registres`, `/registres/[id]`, `/registres/nouveau`, `/veille`, `/classement`, `/equipe`, `/compte`, `/admin`); `_shell/` holds the frame (side menu, phone bars, Ctrl+K command palette) and the providers. |
+| `app/ui/` | The component library (buttons, fields, tabs, sheets, menus, tables…), on the tokens of `app/styles/tokens.css`. See DESIGN.md. |
+| `app/components/auth.tsx` | Sign-in, account creation, new password. |
 | `app/components/accueil.tsx` | The home: what waits in the registers, each establishment, the latest of the Journal, quick actions. |
 | `app/components/icons.tsx` | The line icons. |
 | `app/components/cloud.tsx` | Sign-in, workspace choice, register sync state, import of browser registers. |

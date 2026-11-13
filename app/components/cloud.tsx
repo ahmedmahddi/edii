@@ -23,11 +23,22 @@ import {
   saveRegistre,
   type Workspace,
 } from "@/lib/cloud/api";
-import { LEGAL_VERSION } from "@/app/components/legal";
+import { AuthFrame, AuthScreen, AuthSection, NewPassword, Splash } from "@/app/components/auth";
+import { Button, Notice, TextField } from "@/app/ui";
+import { frenchError } from "@/lib/cloud/errors";
+import ui from "./cloud.module.css";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
 import { etatOffre, PLANS } from "@/lib/cloud/plans";
 import { type CloudBackend, cloudBackend, type SyncState } from "@/lib/cloud/sync";
-import { clearLocalRegistres, localRegistres, loadRegistres, type Registre, RELOADED, saveRegistres, setRegistreBackend } from "@/lib/registre/registre";
+import {
+  clearLocalRegistres,
+  localRegistres,
+  loadRegistres,
+  type Registre,
+  RELOADED,
+  saveRegistres,
+  setRegistreBackend,
+} from "@/lib/registre/registre";
 
 const CURRENT = "abclassement-espace"; // the workspace last opened in this browser
 
@@ -62,23 +73,11 @@ const LOCAL: Cloud = {
 const CloudContext = createContext<Cloud>(LOCAL);
 export const useCloud = () => useContext(CloudContext);
 
-/** Supabase's messages, in French. */
-function frenchError(error: unknown): string {
-  const m = error instanceof Error ? error.message : String(error);
-  if (/invalid login credentials/i.test(m)) return "Adresse e-mail ou mot de passe incorrect.";
-  if (/email not confirmed/i.test(m)) return "Adresse pas encore confirmée : ouvrez le lien reçu par e-mail.";
-  if (/already registered|already been registered/i.test(m)) return "Un compte existe déjà avec cette adresse : connectez-vous.";
-  if (/password should be at least|weak password/i.test(m)) return "Mot de passe trop court ou trop simple : 8 caractères au moins, avec des lettres et des chiffres.";
-  if (/rate limit|too many/i.test(m)) return "Trop de tentatives : réessayez dans quelques minutes.";
-  if (/same password|different from the old/i.test(m)) return "Choisissez un mot de passe différent de l’ancien.";
-  if (/failed to fetch|network/i.test(m)) return "Le serveur ne répond pas : vérifiez la connexion Internet.";
-  return m;
-}
-
 /** A colleague's save reached registers shown here ("remote"), or ours was merged with one ("merged"). */
 export const REMOTE_EVENT = "abclassement-registres-distants";
 export type RemoteDetail = { ids: string[]; kind: "remote" | "merged" };
-const announce = (ids: string[], kind: RemoteDetail["kind"]) => window.dispatchEvent(new CustomEvent<RemoteDetail>(REMOTE_EVENT, { detail: { ids, kind } }));
+const announce = (ids: string[], kind: RemoteDetail["kind"]) =>
+  window.dispatchEvent(new CustomEvent<RemoteDetail>(REMOTE_EVENT, { detail: { ids, kind } }));
 
 /**
  * The app behind its sign-in: the account, then a workspace, then the app with that workspace's
@@ -87,15 +86,12 @@ const announce = (ids: string[], kind: RemoteDetail["kind"]) => window.dispatchE
 export function CloudGate({ children }: { children: ReactNode }) {
   if (cloudConfigError)
     return (
-      <CenteredCard title="Configuration à corriger">
-        <p className="registre-warning" role="alert">
-          {cloudConfigError}
-        </p>
-        <p className="muted small">
+      <AuthFrame title="Configuration à corriger">
+        <Notice tone="danger" title={cloudConfigError}>
           Corrigez le fichier .env.local (en local) ou les variables d’environnement du site (Vercel), puis redémarrez l’application (npm run dev) ou
           redéployez.
-        </p>
-      </CenteredCard>
+        </Notice>
+      </AuthFrame>
     );
   if (!cloudEnabled) return <CloudContext.Provider value={LOCAL}>{children}</CloudContext.Provider>;
   return <SignedIn>{children}</SignedIn>;
@@ -156,7 +152,10 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     );
     const b: CloudBackend = cloudBackend(
       stored,
-      { save: (r, expected) => saveRegistre(w.id, r, expected), remove: (ids) => deleteRegistres(w.id, ids) },
+      {
+        save: (r, expected) => saveRegistre(w.id, r, expected),
+        remove: (ids) => deleteRegistres(w.id, ids),
+      },
       {
         readOnly: !canWrite(w),
         onState: setSync,
@@ -235,8 +234,26 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     const c = cloud()!;
     const live = c
       .channel(`registres-${current.id}`)
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "registres", filter: `organization_id=eq.${current.id}` }, (p) => void heard(p.new))
-      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "registres", filter: `organization_id=eq.${current.id}` }, (p) => void heard(p.new))
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "registres",
+          filter: `organization_id=eq.${current.id}`,
+        },
+        (p) => void heard(p.new),
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "registres",
+          filter: `organization_id=eq.${current.id}`,
+        },
+        (p) => void heard(p.new),
+      )
       // Removals cannot be filtered by workspace: an unknown id is ignored.
       .on("postgres_changes", { event: "DELETE", schema: "public", table: "registres" }, (p) => {
         const b = backend.current;
@@ -313,17 +330,17 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
 
   if (error && !list)
     return (
-      <CenteredCard title="Connexion au serveur impossible">
-        <p className="registre-warning">{error}</p>
-        <div className="registre-actions">
-          <button type="button" className="primary-button" onClick={() => void refresh()}>
+      <AuthFrame title="Connexion au serveur impossible">
+        <Notice tone="danger" title={error} />
+        <div style={{ display: "flex", gap: 8 }}>
+          <Button variant="primary" onClick={() => void refresh()}>
             Réessayer
-          </button>
-          <button type="button" className="secondary-button" onClick={() => void signOut()}>
+          </Button>
+          <Button variant="secondary" onClick={() => void signOut()}>
             Se déconnecter
-          </button>
+          </Button>
         </div>
-      </CenteredCard>
+      </AuthFrame>
     );
   if (!list) return <Splash />;
   if (!list.length)
@@ -334,216 +351,6 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     );
   if (!ready) return <Splash label={current ? `Ouverture de « ${current.name} »…` : undefined} />;
   return <CloudContext.Provider value={value}>{children}</CloudContext.Provider>;
-}
-
-function Splash({ label = "Chargement…" }: { label?: string }) {
-  return (
-    <div className="auth-page">
-      <p className="muted" role="status">
-        {label}
-      </p>
-    </div>
-  );
-}
-
-function Wordmark() {
-  return (
-    <span className="wordmark">
-      <span>ABC</span>lassement<span className="brand-period">.</span>
-    </span>
-  );
-}
-
-function CenteredCard({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <div className="auth-page">
-      <div className="auth-card card">
-        <Wordmark />
-        <h1>{title}</h1>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/** Sign in, create an account, or ask for a new password. */
-function AuthScreen() {
-  const [mode, setMode] = useState<"connexion" | "inscription" | "oubli">("connexion");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  const [done, setDone] = useState("");
-
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setError("");
-    setDone("");
-    const auth = cloud()!.auth;
-    try {
-      if (mode === "connexion") {
-        const { error } = await auth.signInWithPassword({ email: email.trim(), password });
-        if (error) throw error;
-      } else if (mode === "inscription") {
-        if (password.length < 8) throw new Error("Le mot de passe doit faire au moins 8 caractères.");
-        if (!consent) throw new Error("Acceptez les conditions générales et la politique de confidentialité pour créer un compte.");
-        const { data, error } = await auth.signUp({
-          email: email.trim(),
-          password,
-          // The consent is recorded with the account: the version accepted and when.
-          options: { data: { full_name: fullName.trim(), cgu: LEGAL_VERSION, cgu_acceptees: new Date().toISOString() }, emailRedirectTo: window.location.origin },
-        });
-        if (error) throw error;
-        if (!data.session)
-          setDone(`Un e-mail de confirmation a été envoyé à ${email.trim()}. Ouvrez le lien qu’il contient pour activer votre compte, puis connectez-vous.`);
-      } else {
-        const { error } = await auth.resetPasswordForEmail(email.trim(), { redirectTo: window.location.origin });
-        if (error) throw error;
-        setDone(`Si un compte existe pour ${email.trim()}, un e-mail avec un lien pour choisir un nouveau mot de passe vient d’être envoyé.`);
-      }
-    } catch (err) {
-      setError(frenchError(err));
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const title = mode === "connexion" ? "Connexion" : mode === "inscription" ? "Créer un compte" : "Mot de passe oublié";
-  return (
-    <div className="auth-page">
-      <section className="auth-pitch" aria-label="ABClassement">
-        <Wordmark />
-        <p className="auth-lead">Classement des établissements, registres réglementaires et veille du Journal officiel, pour vos sites en Tunisie.</p>
-        <ul>
-          <li>Classement EDII et étude environnementale ANPE de chaque site</li>
-          <li>Registre des exigences réglementaires par établissement, prêt pour l’audit</li>
-          <li>Veille du JORT : les nouveaux textes qui concernent vos sites</li>
-          <li>Un espace privé par entreprise, partagé avec votre équipe et vos consultants</li>
-        </ul>
-        <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" className="auth-logo" />
-      </section>
-      <div className="auth-card card">
-        <h1>{title}</h1>
-        {done ? (
-          <p className="auth-done" role="status">
-            {done}
-          </p>
-        ) : null}
-        <form onSubmit={submit} className="auth-form">
-          {mode === "inscription" ? (
-            <label>
-              <span>Nom et prénom</span>
-              <input value={fullName} onChange={(e) => setFullName(e.target.value)} autoComplete="name" required />
-            </label>
-          ) : null}
-          <label>
-            <span>Adresse e-mail</span>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required />
-          </label>
-          {mode !== "oubli" ? (
-            <label>
-              <span>Mot de passe</span>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                autoComplete={mode === "connexion" ? "current-password" : "new-password"}
-                minLength={mode === "inscription" ? 8 : undefined}
-                required
-              />
-            </label>
-          ) : null}
-          {mode === "inscription" ? (
-            <label className="consent">
-              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
-              <span>
-                J’accepte les{" "}
-                <a href="/cgu" target="_blank" rel="noreferrer">
-                  conditions générales d’utilisation
-                </a>{" "}
-                et la{" "}
-                <a href="/confidentialite" target="_blank" rel="noreferrer">
-                  politique de confidentialité
-                </a>
-                .
-              </span>
-            </label>
-          ) : null}
-          {error ? (
-            <p className="registre-warning" role="alert">
-              {error}
-            </p>
-          ) : null}
-          <button type="submit" className="primary-button" disabled={busy}>
-            {busy ? "Un instant…" : mode === "connexion" ? "Se connecter" : mode === "inscription" ? "Créer mon compte" : "Recevoir un lien"}
-          </button>
-        </form>
-        <div className="auth-switch">
-          {mode !== "connexion" ? (
-            <button type="button" className="edii-link" onClick={() => setMode("connexion")}>
-              J’ai déjà un compte : me connecter
-            </button>
-          ) : (
-            <>
-              <button type="button" className="edii-link" onClick={() => setMode("inscription")}>
-                Créer un compte
-              </button>
-              <button type="button" className="edii-link" onClick={() => setMode("oubli")}>
-                Mot de passe oublié ?
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-      <nav className="legal-links auth-legal" aria-label="Informations légales">
-        <a href="/cgu">Conditions générales</a>
-        <a href="/confidentialite">Confidentialité</a>
-      </nav>
-    </div>
-  );
-}
-
-/** After the link of a "mot de passe oublié" e-mail. */
-function NewPassword({ onDone }: { onDone: () => void }) {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    setBusy(true);
-    setError("");
-    try {
-      if (password.length < 8) throw new Error("Le mot de passe doit faire au moins 8 caractères.");
-      const { error } = await cloud()!.auth.updateUser({ password });
-      if (error) throw error;
-      onDone();
-    } catch (err) {
-      setError(frenchError(err));
-    } finally {
-      setBusy(false);
-    }
-  };
-  return (
-    <CenteredCard title="Nouveau mot de passe">
-      <form onSubmit={submit} className="auth-form">
-        <label>
-          <span>Nouveau mot de passe (8 caractères au moins)</span>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" minLength={8} required />
-        </label>
-        {error ? (
-          <p className="registre-warning" role="alert">
-            {error}
-          </p>
-        ) : null}
-        <button type="submit" className="primary-button" disabled={busy}>
-          Enregistrer
-        </button>
-      </form>
-    </CenteredCard>
-  );
 }
 
 /** Invitations waiting for this account, to accept or decline. */
@@ -558,43 +365,43 @@ export function PendingInvitations({ onJoined }: { onJoined: (workspace: string)
   useEffect(load, [load]);
   if (!list.length && !error) return null;
   return (
-    <div className="invitations-pending">
-      <h2>Invitations reçues</h2>
-      {error ? <p className="registre-warning">{error}</p> : null}
-      <ul>
-        {list.map((i) => (
-          <li key={i.id}>
-            <span>
-              <strong>{i.workspaceName}</strong> · {ROLE_LABEL[i.role]}
-              {i.invitedBy ? <span className="muted"> · invité par {i.invitedBy}</span> : null}
+    <div data-ui="" className={ui.list}>
+      {error ? <Notice tone="danger" title={error} /> : null}
+      {list.map((i) => (
+        <div key={i.id} className={ui.row}>
+          <div className={ui.rowText}>
+            <span className={ui.rowTitle}>{i.workspaceName}</span>
+            <span className={ui.rowMeta}>
+              {ROLE_LABEL[i.role]}
+              {i.invitedBy ? ` · invité par ${i.invitedBy}` : ""}
             </span>
-            <span className="registre-actions">
-              <button
-                type="button"
-                className="primary-button"
-                onClick={() =>
-                  acceptInvitation(i.id)
-                    .then(onJoined)
-                    .catch((e) => setError(frenchError(e)))
-                }
-              >
-                Rejoindre
-              </button>
-              <button
-                type="button"
-                className="secondary-button"
-                onClick={() =>
-                  cancelInvitation(i.id)
-                    .then(load)
-                    .catch((e) => setError(frenchError(e)))
-                }
-              >
-                Refuser
-              </button>
-            </span>
-          </li>
-        ))}
-      </ul>
+          </div>
+          <div className={ui.rowActions}>
+            <Button
+              size="sm"
+              variant="primary"
+              onClick={() =>
+                acceptInvitation(i.id)
+                  .then(onJoined)
+                  .catch((e) => setError(frenchError(e)))
+              }
+            >
+              Rejoindre
+            </Button>
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() =>
+                cancelInvitation(i.id)
+                  .then(load)
+                  .catch((e) => setError(frenchError(e)))
+              }
+            >
+              Refuser
+            </Button>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -619,19 +426,19 @@ export function NewWorkspace({ onCreated, compact }: { onCreated: (id: string) =
     }
   };
   return (
-    <form onSubmit={submit} className={compact ? "workspace-new is-compact" : "workspace-new auth-form"}>
-      <label>
-        <span>Nom de l’entreprise</span>
-        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex. : Société industrielle de Sfax" maxLength={120} required />
-      </label>
-      {error ? (
-        <p className="registre-warning" role="alert">
-          {error}
-        </p>
-      ) : null}
-      <button type="submit" className="primary-button" disabled={busy || !name.trim()}>
+    <form data-ui="" id="nouvel-espace" onSubmit={submit} className={compact ? ui.inline : ui.form}>
+      <TextField
+        label="Nom de l’entreprise"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Ex. : Société industrielle de Sfax"
+        maxLength={120}
+        required
+        error={error || undefined}
+      />
+      <Button type="submit" variant="primary" disabled={busy || !name.trim()} block={!compact}>
         Créer l’espace de travail
-      </button>
+      </Button>
     </form>
   );
 }
@@ -640,64 +447,27 @@ export function NewWorkspace({ onCreated, compact }: { onCreated: (id: string) =
 function Onboarding() {
   const { user, refresh, signOut } = useCloud();
   return (
-    <div className="auth-page">
-      <div className="auth-card card is-wide">
-        <Wordmark />
-        <h1>Bienvenue{user?.email ? `, ${user.email}` : ""}</h1>
-        <p className="muted">
-          Chaque entreprise a son espace de travail privé : ses établissements, leurs registres et leur veille. Créez celui de votre entreprise, ou rejoignez
-          celui auquel vous avez été invité.
-        </p>
-        <PendingInvitations onJoined={(id) => void refresh(id)} />
-        <h2>Créer un espace de travail</h2>
+    <AuthFrame
+      wide
+      title="Bienvenue"
+      lead={
+        <>
+          Chaque entreprise a son espace de travail privé : ses établissements, leurs registres et leur veille. Créez celui de votre entreprise, ou
+          rejoignez celui auquel vous avez été invité
+          {user?.email ? ` (${user.email})` : ""}.
+        </>
+      }
+    >
+      <PendingInvitations onJoined={(id) => void refresh(id)} />
+      <AuthSection title="Créer un espace de travail">
         <NewWorkspace onCreated={(id) => void refresh(id)} />
-        <div className="auth-switch">
-          <button type="button" className="edii-link" onClick={() => void signOut()}>
-            Se déconnecter
-          </button>
-        </div>
+      </AuthSection>
+      <div>
+        <Button variant="ghost" onClick={() => void signOut()}>
+          Se déconnecter
+        </Button>
       </div>
-    </div>
-  );
-}
-
-const SYNC_LABEL: Record<SyncState["state"], string> = {
-  saved: "Enregistré",
-  saving: "Enregistrement…",
-  error: "Non enregistré : nouvel essai…",
-  readonly: "Lecture seule",
-};
-
-/** The workspace open, to switch to another, and whether its registers are saved. */
-export function WorkspaceSwitcher({ onManage }: { onManage: () => void }) {
-  const { workspaces, current, switchTo, sync } = useCloud();
-  if (!current) return null;
-  return (
-    <div className="workspace-switcher">
-      <label>
-        <span className="eyebrow">Espace de travail</span>
-        {workspaces.length > 1 ? (
-          <select value={current.id} onChange={(e) => void switchTo(e.target.value)}>
-            {workspaces.map((w) => (
-              <option key={w.id} value={w.id}>
-                {w.name}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <strong className="workspace-name">{current.name}</strong>
-        )}
-      </label>
-      <div className="workspace-meta">
-        <span>{ROLE_LABEL[current.role]}</span>
-        <span className={`sync-state is-${sync.state}`} title={sync.message} role="status">
-          {SYNC_LABEL[sync.state]}
-        </span>
-      </div>
-      <button type="button" className="edii-link" onClick={onManage}>
-        Gérer l’espace et l’équipe
-      </button>
-    </div>
+    </AuthFrame>
   );
 }
 
@@ -706,14 +476,19 @@ export function ReadOnlyNotice() {
   const { current } = useCloud();
   if (!current || canWrite(current) || !etatOffre(current.offre).actif) return null; // an ended offer: OffreBanner says it
   return (
-    <p className="registre-warning" role="note">
-      Vous êtes lecteur de « {current.name} » : vous pouvez consulter et exporter les registres, mais vos modifications ne sont pas enregistrées. Un
-      administrateur de l’espace peut vous donner le rôle d’éditeur.
-    </p>
+    <Notice tone="warning" title={`Vous êtes lecteur de « ${current.name} »`}>
+      Vous pouvez consulter et exporter les registres, mais vos modifications ne sont pas enregistrées. Un administrateur de l’espace peut vous donner
+      le rôle d’éditeur.
+    </Notice>
   );
 }
 
-const dateLong = (iso: string) => new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
+const dateLong = (iso: string) =>
+  new Date(iso).toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
 /** Where the workspace's offer stands: a trial's days left, an end that comes, an end passed (read only). */
 export function OffreBanner() {
@@ -721,36 +496,30 @@ export function OffreBanner() {
   const o = current?.offre;
   if (!current || !o) return null;
   const { actif, jours } = etatOffre(o);
-  const limits = [o.maxRegistres != null ? `${o.maxRegistres} établissement${o.maxRegistres > 1 ? "s" : ""}` : "", o.maxMembres != null ? `${o.maxMembres} personne${o.maxMembres > 1 ? "s" : ""}` : ""]
+  const limits = [
+    o.maxRegistres != null ? `${o.maxRegistres} établissement${o.maxRegistres > 1 ? "s" : ""}` : "",
+    o.maxMembres != null ? `${o.maxMembres} personne${o.maxMembres > 1 ? "s" : ""}` : "",
+  ]
     .filter(Boolean)
     .join(", ");
   if (!actif)
     return (
-      <div className="offre-banner is-ended" role="status">
-        <strong>L’offre de « {current.name} » a pris fin le {dateLong(o.endsAt!)}.</strong>
-        <span>L’espace est en lecture seule : vos registres restent consultables et exportables. Contactez ABC Consulting pour le prolonger.</span>
-      </div>
+      <Notice tone="danger" title={`L’offre de « ${current.name} » a pris fin le ${dateLong(o.endsAt!)}.`}>
+        L’espace est en lecture seule : vos registres restent consultables et exportables. Contactez ABC Consulting pour le prolonger.
+      </Notice>
     );
   if (o.plan === "essai" && jours !== null)
     return (
-      <div className="offre-banner is-trial" role="status">
-        <strong>
-          Essai gratuit : {jours} jour{jours > 1 ? "s" : ""} restant{jours > 1 ? "s" : ""}
-        </strong>
-        <span>
-          Jusqu’au {dateLong(o.endsAt!)}
-          {limits ? ` · ${limits}` : ""}. Contactez ABC Consulting pour passer à une offre.
-        </span>
-      </div>
+      <Notice title={`Essai gratuit : ${jours} jour${jours > 1 ? "s" : ""} restant${jours > 1 ? "s" : ""}`}>
+        Jusqu’au {dateLong(o.endsAt!)}
+        {limits ? ` · ${limits}` : ""}. Contactez ABC Consulting pour passer à une offre.
+      </Notice>
     );
   if (jours !== null && jours <= 15)
     return (
-      <div className="offre-banner is-soon" role="status">
-        <strong>
-          L’offre {PLANS[o.plan].label} prend fin dans {jours} jour{jours > 1 ? "s" : ""}
-        </strong>
-        <span>Le {dateLong(o.endsAt!)}. Contactez ABC Consulting pour la renouveler.</span>
-      </div>
+      <Notice tone="warning" title={`L’offre ${PLANS[o.plan].label} prend fin dans ${jours} jour${jours > 1 ? "s" : ""}`}>
+        Le {dateLong(o.endsAt!)}. Contactez ABC Consulting pour la renouveler.
+      </Notice>
     );
   return null;
 }
@@ -764,7 +533,7 @@ export function LocalImport() {
     if (enabled) setLocal(localRegistres());
   }, [enabled, current?.id]);
   if (!enabled || !current || (!local.length && !done)) return null;
-  if (done) return <p className="auth-done">{done}</p>;
+  if (done) return <Notice title={done} />;
   if (!canWrite(current)) return null;
   const importAll = () => {
     const here = loadRegistres();
@@ -777,21 +546,20 @@ export function LocalImport() {
     setDone(`${added.length} registre${added.length > 1 ? "s" : ""} importé${added.length > 1 ? "s" : ""} dans « ${current.name} ».`);
   };
   return (
-    <div className="registre-existing local-import">
-      <p>
-        <strong>
-          {local.length} registre{local.length > 1 ? "s" : ""} enregistré{local.length > 1 ? "s" : ""} dans ce navigateur
-        </strong>{" "}
-        avant la création des comptes : {local.map((r) => r.nom || "sans nom").join(", ")}.
-      </p>
-      <div className="registre-actions">
-        <button type="button" className="primary-button" onClick={importAll}>
-          Importer dans « {current.name} »
-        </button>
-        <button type="button" className="secondary-button" onClick={() => setLocal([])}>
-          Plus tard
-        </button>
-      </div>
-    </div>
+    <Notice
+      title={`${local.length} registre${local.length > 1 ? "s" : ""} enregistré${local.length > 1 ? "s" : ""} dans ce navigateur avant la création des comptes`}
+      actions={
+        <div className={ui.rowActions}>
+          <Button size="sm" variant="primary" onClick={importAll}>
+            Importer dans « {current.name} »
+          </Button>
+          <Button size="sm" variant="secondary" onClick={() => setLocal([])}>
+            Plus tard
+          </Button>
+        </div>
+      }
+    >
+      {local.map((r) => r.nom || "sans nom").join(", ")}
+    </Notice>
   );
 }

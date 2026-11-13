@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "@fontsource-variable/inter";
+import "./styles/tokens.css";
+import "./styles/base.css";
+import "./styles/legacy.css";
 
 export const metadata: Metadata = {
   title: "ABClassement | ABC Consulting",
@@ -9,8 +12,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eef1f6" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
+    { media: "(prefers-color-scheme: light)", color: "#f7f8f9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0f12" },
   ],
 };
 

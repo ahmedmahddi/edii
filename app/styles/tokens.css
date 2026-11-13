@@ -1,0 +1,130 @@
+/*
+ * ABClassement design tokens. Every colour, size and radius of the interface comes from here;
+ * components (app/ui) and screens use the tokens, never raw values. Light by default; dark when
+ * the device asks for it, or when chosen in the app (html[data-theme]).
+ *
+ * Palette: neutral greys, one brand colour (ABC Consulting's blue), four status colours. Each
+ * colour has a strong value (text, icons, borders) and a subtle one (backgrounds).
+ */
+:root {
+  /* Type: Inter, tabular figures in data. Sizes from a 1.125 scale around 14px. */
+  --ui-font: "Inter Variable", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ui-font-mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  --ui-text-xs: 12px;
+  --ui-text-sm: 13px;
+  --ui-text-md: 14px;
+  --ui-text-lg: 16px;
+  --ui-text-xl: 20px;
+  --ui-text-2xl: 24px;
+  --ui-leading: 1.5;
+  --ui-weight-medium: 500;
+  --ui-weight-semibold: 600;
+
+  /* Space: a 4px grid. */
+  --ui-space-1: 4px;
+  --ui-space-2: 8px;
+  --ui-space-3: 12px;
+  --ui-space-4: 16px;
+  --ui-space-5: 20px;
+  --ui-space-6: 24px;
+  --ui-space-8: 32px;
+  --ui-space-10: 40px;
+
+  --ui-radius-sm: 4px;
+  --ui-radius: 6px;
+  --ui-radius-lg: 8px;
+  --ui-control: 32px; /* height of a control on desktop */
+  --ui-control-touch: 40px; /* on touch screens */
+  --ui-sidebar: 240px;
+
+  /* Neutral: the page, its panels, lines and text. */
+  --ui-bg: #f7f8f9;
+  --ui-panel: #ffffff;
+  --ui-subtle: #f1f3f5;
+  --ui-hover: #eceff2;
+  --ui-border: #e2e5e9;
+  --ui-border-strong: #c9ced4;
+  --ui-text: #12161c;
+  --ui-text-muted: #5f6872;
+  --ui-text-subtle: #8a929b;
+
+  /* Brand: ABC Consulting's blue. */
+  --ui-accent: #155a83;
+  --ui-accent-hover: #104a6d;
+  --ui-accent-text: #ffffff;
+  --ui-accent-fg: #155a83; /* links, active items */
+  --ui-accent-subtle: #eaf2f8;
+
+  /* Status. */
+  --ui-success: #1a7f45;
+  --ui-success-subtle: #eaf6ef;
+  --ui-warning: #a05a00;
+  --ui-warning-subtle: #fdf3e2;
+  --ui-danger: #c0322b;
+  --ui-danger-subtle: #fcecea;
+  --ui-info: #155a83;
+  --ui-info-subtle: #eaf2f8;
+
+  --ui-ring: 0 0 0 2px var(--ui-panel), 0 0 0 4px color-mix(in srgb, var(--ui-accent) 55%, transparent);
+  --ui-shadow-popover: 0 8px 24px rgba(16, 24, 32, 0.12), 0 1px 3px rgba(16, 24, 32, 0.08);
+  --ui-shadow-sheet: -8px 0 32px rgba(16, 24, 32, 0.12);
+  --ui-overlay: rgba(16, 24, 32, 0.32);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ui-bg: #0d0f12;
+    --ui-panel: #14171b;
+    --ui-subtle: #1a1e23;
+    --ui-hover: #20252b;
+    --ui-border: #262b32;
+    --ui-border-strong: #353c45;
+    --ui-text: #e8ebee;
+    --ui-text-muted: #9aa3ad;
+    --ui-text-subtle: #6b747e;
+    --ui-accent: #2a76a8;
+    --ui-accent-hover: #3384b8;
+    --ui-accent-fg: #6cb2e0;
+    --ui-accent-subtle: #13293a;
+    --ui-success: #4cbf7c;
+    --ui-success-subtle: #12291c;
+    --ui-warning: #e6a645;
+    --ui-warning-subtle: #2e2414;
+    --ui-danger: #f0736b;
+    --ui-danger-subtle: #321816;
+    --ui-info: #6cb2e0;
+    --ui-info-subtle: #13293a;
+    --ui-shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+    --ui-shadow-sheet: -8px 0 32px rgba(0, 0, 0, 0.5);
+    --ui-overlay: rgba(0, 0, 0, 0.55);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ui-bg: #0d0f12;
+  --ui-panel: #14171b;
+  --ui-subtle: #1a1e23;
+  --ui-hover: #20252b;
+  --ui-border: #262b32;
+  --ui-border-strong: #353c45;
+  --ui-text: #e8ebee;
+  --ui-text-muted: #9aa3ad;
+  --ui-text-subtle: #6b747e;
+  --ui-accent: #2a76a8;
+  --ui-accent-hover: #3384b8;
+  --ui-accent-fg: #6cb2e0;
+  --ui-accent-subtle: #13293a;
+  --ui-success: #4cbf7c;
+  --ui-success-subtle: #12291c;
+  --ui-warning: #e6a645;
+  --ui-warning-subtle: #2e2414;
+  --ui-danger: #f0736b;
+  --ui-danger-subtle: #321816;
+  --ui-info: #6cb2e0;
+  --ui-info-subtle: #13293a;
+  --ui-shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --ui-shadow-sheet: -8px 0 32px rgba(0, 0, 0, 0.5);
+  --ui-overlay: rgba(0, 0, 0, 0.55);
+  color-scheme: dark;
+}

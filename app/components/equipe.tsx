@@ -5,7 +5,7 @@
  */
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { NewWorkspace, PendingInvitations, useCloud } from "@/app/components/cloud";
-import { ThemeChoice } from "@/app/components/theme";
+import { Segmented, type Theme, useTheme } from "@/app/ui";
 import {
   canInvite,
   canManage,
@@ -467,5 +467,21 @@ export function Compte() {
         </button>
       </section>
     </div>
+  );
+}
+
+function ThemeChoice() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <Segmented<Theme>
+      label="Apparence"
+      value={theme}
+      onChange={setTheme}
+      options={[
+        { value: "auto", label: "Automatique" },
+        { value: "light", label: "Clair" },
+        { value: "dark", label: "Sombre" },
+      ]}
+    />
   );
 }

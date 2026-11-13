@@ -1,6 +1,12 @@
 "use client";
+/**
+ * Classement: the nomenclature (search, rubriques, thresholds), the establishment's dossier
+ * (activities, quantities, addition rule, ANPE study) and its validated synthesis, which starts
+ * the establishment's register. The screens' inner parts still use the former styles (.legacy)
+ * until they are rebuilt on the design system.
+ */
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   additionGroup,
   type Classe,
@@ -31,13 +37,9 @@ import {
   type Situation,
   type StudyKind,
 } from "@/lib/studies";
-import { Icon } from "./components/icons";
-import { Accueil } from "./components/accueil";
-import { useVeilleCount, Veille } from "./components/veille";
-import { CloudGate, LocalImport, ReadOnlyNotice, useCloud, WorkspaceSwitcher } from "./components/cloud";
-import { Compte, Equipe } from "./components/equipe";
-import { Admin } from "./components/admin";
-import { ThemeChoice } from "./components/theme";
+import { Icon } from "@/app/components/icons";
+import { setPendingSeed } from "@/lib/registre/seed";
+import { PageHeader, Tabs } from "@/app/ui";
 import { SECTORS } from "@/lib/sectors";
 
 import {
@@ -46,7 +48,9 @@ import {
   reportFingerprint,
   type ClassificationReport,
 } from "@/lib/report";
-import { ClassificationReportView } from "./components/classification-report";
+import { ClassificationReportView } from "@/app/components/classification-report";
+
+type ClassView = "search" | "establishment" | "report";
 
 const LABEL: Record<string, string> = {
   "1": "1ère catégorie",
@@ -66,44 +70,7 @@ function ClasseBadge({ classe, big }: { classe: Classe; big?: boolean }) {
   );
 }
 
-export default function EdiiPage() {
-  return (
-    <Suspense fallback={<div className="center muted">Chargement…</div>}>
-      <CloudGate>
-        <Edii />
-      </CloudGate>
-    </Suspense>
-  );
-}
-
-type View = "accueil" | "search" | "establishment" | "registres" | "veille" | "report" | "equipe" | "compte" | "admin";
-
-/** Each screen's heading: eyebrow, title, one line on what it is for. */
-const HEADINGS: Record<View, [string, string, string]> = {
-  accueil: ["", "Accueil", ""],
-  search: ["Classement", "Nomenclature", "Trouvez vos activités et leurs seuils de classement."],
-  establishment: ["Classement", "Mon établissement", "Vos activités, leur catégorie et l’étude ANPE."],
-  report: ["Classement", "Synthèse de classement", "À imprimer, à exporter, ou à transformer en registre."],
-  registres: ["Conformité", "Registres", "Les textes qui s’appliquent à chaque établissement, leur évaluation et leur suivi."],
-  veille: ["Conformité", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
-  equipe: ["Espace de travail", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
-  compte: ["Espace de travail", "Mon compte", "Votre nom, votre mot de passe et votre session."],
-  admin: ["ABC Consulting", "Administration", "Les espaces de vos clients, leur offre, et les signalements sur les textes."],
-};
-/** The tab each screen belongs to (the bar below 1000px). */
-const TAB_OF: Record<View, View> = {
-  accueil: "accueil",
-  search: "search",
-  establishment: "establishment",
-  report: "establishment",
-  registres: "registres",
-  veille: "veille",
-  equipe: "accueil",
-  compte: "accueil",
-  admin: "accueil",
-};
-
-function Edii() {
+export function Classement() {
   const params = useSearchParams();
   const router = useRouter();
   const [query, setQuery] = useState(params.get("q") ?? "");
@@ -112,21 +79,10 @@ function Edii() {
   const [activities, setActivities] = useState<Activity[]>(() =>
     decodeActivities(params.get("e")),
   );
-  const [view, setView] = useState<View>(() => {
-    const vue = params.get("vue");
-    if (vue && vue in HEADINGS && vue !== "report") return vue as View; // a link to a screen (e-mails)
-    return params.get("e") ? "establishment" : params.get("code") || params.get("q") ? "search" : "accueil";
-  });
-  // What the home asks of the registers screen: open one, or start a new one.
-  const [registreAction, setRegistreAction] = useState<{ open?: string; create?: boolean } | null>(null);
-  const registreActionUsed = useCallback(() => setRegistreAction(null), []);
+  const [view, setView] = useState<ClassView>(() => (params.get("vue") === "etablissement" || (params.get("e") && !params.get("code") && !params.get("q")) ? "establishment" : "search"));
   const [notice, setNotice] = useState("");
   const [establishmentName, setEstablishmentName] = useState("");
   const [report, setReport] = useState<ClassificationReport | null>(null);
-  // A validated classification on its way to the veille, to start the establishment's register.
-  const [registreSeed, setRegistreSeed] = useState<ClassificationReport | null>(null);
-  const seedUsed = useCallback(() => setRegistreSeed(null), []);
-  const veilleCount = useVeilleCount();
   const [validationErrors, setValidationErrors] = useState<string[]>([]);
   const reportRef = useRef<HTMLDivElement>(null);
   const validationRef = useRef<HTMLDivElement>(null);
@@ -168,11 +124,11 @@ function Edii() {
     setView("report");
     window.scrollTo({ top: 0 });
   };
+  // The validated classification starts the establishment's register (/registres/nouveau).
   const startRegister = () => {
     if (!report) return;
-    setRegistreSeed(report);
-    setView("registres");
-    window.scrollTo({ top: 0 });
+    setPendingSeed(report);
+    router.push("/registres/nouveau");
   };
   const selected = rubrique(code ?? "");
   const est = useMemo(() => classifyEstablishment(activities), [activities]);
@@ -183,8 +139,9 @@ function Edii() {
     if (activities.length && situation !== "projet") p.set("s", situation);
     if (activities.length && sensitive) p.set("z", "1");
     if (query.trim()) p.set("q", query.trim());
-    router.replace(p.size ? `/?${p}` : "/", { scroll: false });
-  }, [code, activities, situation, sensitive, query, router]);
+    if (view === "establishment") p.set("vue", "etablissement");
+    router.replace(p.size ? `/classement?${p}` : "/classement", { scroll: false });
+  }, [code, activities, situation, sensitive, query, router, view]);
   useEffect(
     () => () => {
       if (noticeTimer.current) clearTimeout(noticeTimer.current);
@@ -223,209 +180,25 @@ function Edii() {
   const remove = (i: number) =>
     setActivities((list) => list.filter((_, j) => j !== i));
   const count = (c: string) => activities.filter((a) => a.code === c).length;
-  const cloudState = useCloud();
-  const [sheetOpen, setSheetOpen] = useState(false);
-  const go = (v: View) => {
-    setView(v);
-    setSheetOpen(false);
-    window.scrollTo({ top: 0 });
-  };
-  const openRegistre = (id: string) => {
-    setRegistreAction({ open: id });
-    go("registres");
-  };
-  const newRegistre = () => {
-    setRegistreAction({ create: true });
-    go("registres");
-  };
-  const tabs: [View, string, string][] = [
-    ["accueil", "home", "Accueil"],
-    ["search", "search", "Nomenclature"],
-    ["establishment", "building", "Établissement"],
-    ["registres", "list", "Registres"],
-    ["veille", "bell", "Veille"],
-  ];
-  const groups: { title: string; items: [View, string, string][] }[] = [
-    { title: "", items: [["accueil", "home", "Accueil"]] },
-    {
-      title: "Classement",
-      items: [
-        ["search", "search", "Nomenclature"],
-        ["establishment", "building", "Mon établissement"],
-      ],
-    },
-    {
-      title: "Conformité",
-      items: [
-        ["registres", "list", "Registres"],
-        ["veille", "bell", "Veille réglementaire"],
-      ],
-    },
-    ...(cloudState.enabled
-      ? [
-          {
-            title: "Espace de travail",
-            items: [
-              ["equipe", "users", "Équipe et espace"],
-              ["compte", "user", "Mon compte"],
-            ] as [View, string, string][],
-          },
-        ]
-      : []),
-    ...(cloudState.isAdmin ? [{ title: "Administration", items: [["admin", "shield", "Clients et signalements"]] as [View, string, string][] }] : []),
-  ];
-  const badge = (id: View) =>
-    id === "establishment" && activities.length > 0 ? (
-      <span className="nav-count">{activities.length}</span>
-    ) : id === "registres" && veilleCount > 0 ? (
-      <span className="nav-count is-alert" title="Dans vos registres : textes modifiés au JORT, évaluations en retard ou à faire sous 30 jours">
-        {veilleCount}
-      </span>
-    ) : null;
-  const [eyebrow, title, lead] = HEADINGS[view];
 
   return (
-    <div className="app-shell">
-      <a className="skip-link" href="#workspace">
-        Aller au contenu
-      </a>
-      <aside className="sidebar" aria-label="Menu">
-        <a className="brand" href="/" aria-label="ABClassement — Accueil">
-          <span className="wordmark">
-            <span>ABC</span>lassement<span className="brand-period">.</span>
-          </span>
-        </a>
-        {cloudState.enabled ? <WorkspaceSwitcher onManage={() => go("equipe")} /> : null}
-        <nav className="side-nav" aria-label="Navigation principale">
-          {groups.map((g, i) => (
-            <div key={i} className="side-nav-group">
-              {g.title ? <span className="side-nav-title">{g.title}</span> : null}
-              {g.items.map(([id, icon, label]) => {
-                const active = view === id || (id === "establishment" && view === "report");
-                return (
-                  <button key={id} type="button" className={active ? "active" : ""} aria-current={active ? "page" : undefined} onClick={() => go(id)}>
-                    <Icon name={icon} size={19} />
-                    <span>{label}</span>
-                    {badge(id)}
-                  </button>
-                );
-              })}
-            </div>
-          ))}
-        </nav>
-        <div className="sidebar-foot">
-          {cloudState.user ? (
-            <button type="button" className="sidebar-account" onClick={() => go("compte")}>
-              <span className="avatar" aria-hidden="true">
-                {(cloudState.name || cloudState.user.email || "?").slice(0, 1).toUpperCase()}
-              </span>
-              <span>
-                <strong>{cloudState.name || cloudState.user.email}</strong>
-                {cloudState.name ? <small>{cloudState.user.email}</small> : null}
-              </span>
-            </button>
-          ) : (
-            <p className="sidebar-local">Mode local : les registres restent dans ce navigateur.</p>
-          )}
-          <ThemeChoice compact />
-          <div className="sidebar-signature">
-            <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" />
-          </div>
-        </div>
-      </aside>
-      <div className="app-body">
-        <header className="topbar">
-          {view !== TAB_OF[view] ? (
-            <button type="button" className="topbar-back" aria-label="Retour" onClick={() => go(view === "report" ? "establishment" : "accueil")}>
-              <Icon name="back" size={22} />
-            </button>
-          ) : null}
-          {view === "accueil" ? (
-            <a className="brand" href="/" aria-label="ABClassement — Accueil">
-              <span className="wordmark">
-                <span>ABC</span>lassement<span className="brand-period">.</span>
-              </span>
-            </a>
-          ) : (
-            <span className="topbar-title">{HEADINGS[view][1]}</span>
-          )}
-          {cloudState.user ? (
-            <button type="button" className="topbar-account" aria-label="Compte et espace de travail" aria-expanded={sheetOpen} onClick={() => setSheetOpen(true)}>
-              <span className="avatar" aria-hidden="true">
-                {(cloudState.name || cloudState.user.email || "?").slice(0, 1).toUpperCase()}
-              </span>
-            </button>
-          ) : null}
-        </header>
-        {sheetOpen ? (
-          <div className="sheet-backdrop" onClick={() => setSheetOpen(false)}>
-            <div className="sheet" role="dialog" aria-label="Compte et espace de travail" onClick={(e) => e.stopPropagation()}>
-              <span className="sheet-handle" aria-hidden="true" />
-              <WorkspaceSwitcher onManage={() => go("equipe")} />
-              <div className="sheet-actions">
-                <button type="button" onClick={() => go("equipe")}>
-                  <Icon name="users" size={19} /> Équipe et espace
-                </button>
-                <button type="button" onClick={() => go("compte")}>
-                  <Icon name="user" size={19} /> Mon compte
-                </button>
-                {cloudState.isAdmin ? (
-                  <button type="button" onClick={() => go("admin")}>
-                    <Icon name="shield" size={19} /> Administration
-                  </button>
-                ) : null}
-                <button type="button" onClick={() => void cloudState.signOut()}>
-                  <Icon name="logout" size={19} /> Se déconnecter
-                </button>
-              </div>
-            </div>
-          </div>
-        ) : null}
-        <main id="workspace" className="workspace" tabIndex={-1}>
-          {view !== "accueil" ? (
-          <div className="page-heading">
-            <div>
-              <div className="eyebrow">{eyebrow}</div>
-              <h1>{title}</h1>
-              <p>{lead}</p>
-            </div>
-            {view === "search" || view === "establishment" ? (
-              <div className="reference-total">
-                <strong>{nomenclature.rubriques.length}</strong>
-                <span>
-                  rubriques
-                  <br />
-                  de référence
-                </span>
-              </div>
-            ) : null}
-          </div>
-          ) : null}
-          {view === "accueil" ? (
-            <Accueil onClassify={() => go("search")} onNewRegistre={newRegistre} onOpenRegistre={openRegistre} onRegistres={() => go("registres")} onVeille={() => go("veille")} />
-          ) : view === "registres" || view === "veille" ? (
-            <>
-              {view === "registres" ? (
-                <>
-                  <ReadOnlyNotice />
-                  <LocalImport />
-                </>
-              ) : null}
-              <Veille
-                tab={view === "registres" ? "registres" : "journal"}
-                seed={registreSeed}
-                onSeedUsed={seedUsed}
-                action={registreAction}
-                onActionUsed={registreActionUsed}
-              />
-            </>
-          ) : view === "equipe" ? (
-            <Equipe />
-          ) : view === "compte" ? (
-            <Compte />
-          ) : view === "admin" ? (
-            <Admin />
-          ) : view === "report" ? null : (
+    <div style={{ display: "grid", gap: "var(--ui-space-5)" }}>
+      <PageHeader title="Classement" description="Nomenclature des établissements dangereux, insalubres ou incommodes, classement de l’établissement et étude ANPE." />
+      <Tabs<ClassView>
+        label="Classement"
+        value={view}
+        onChange={(v) => {
+          setView(v);
+          window.scrollTo({ top: 0 });
+        }}
+        tabs={[
+          { value: "search", label: "Nomenclature" },
+          { value: "establishment", label: "Mon établissement", count: activities.length },
+          ...(report ? [{ value: "report" as const, label: "Synthèse" }] : []),
+        ]}
+      />
+      <div className="legacy">
+          {view === "report" ? null : (
             <div className={`edii-layout view-${view}`}>
               <section
                 className="search-workspace"
@@ -842,32 +615,6 @@ function Edii() {
               />
             </div>
           )}
-          <footer className="workspace-footer">
-            <span>
-              ABClassement <span>—</span> ABC Consulting
-            </span>
-            <nav className="legal-links" aria-label="Informations légales">
-              <a href="/cgu">Conditions générales</a>
-              <a href="/confidentialite">Confidentialité</a>
-              <span>Le texte officiel fait foi</span>
-            </nav>
-          </footer>
-        </main>
-      </div>
-      <nav className="tabbar" aria-label="Navigation">
-        {tabs.map(([id, icon, label]) => {
-          const active = TAB_OF[view] === id;
-          return (
-            <button key={id} type="button" className={active ? "active" : ""} aria-current={active ? "page" : undefined} onClick={() => go(id)}>
-              <span className="tab-icon">
-                <Icon name={icon} size={22} />
-                {badge(id)}
-              </span>
-              <span>{label}</span>
-            </button>
-          );
-        })}
-      </nav>
       <div className="toast-region" role="status" aria-live="polite">
         {notice && (
           <div className="toast">
@@ -890,6 +637,7 @@ function Edii() {
             </button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );

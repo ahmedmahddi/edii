@@ -111,18 +111,21 @@ the README). The project path must have no spaces.
 
 ## 3. Stack and layout
 
-Next.js 15 (App Router, one static page), React 19, TypeScript, Vitest. `exceljs` (loaded only when
+Next.js 15 (App Router, one address per screen under `app/(app)/`), React 19, TypeScript, Vitest,
+Playwright (`npm run test:e2e`). Interface: `app/styles/tokens.css` + `app/ui/` (CSS Modules, Radix
+Dialog/DropdownMenu/Tooltip, cmdk, lucide-react, Inter); see DESIGN.md. `exceljs` (loaded only when
 exporting). `pdfjs-dist` 4.10 (legacy build, Node) with its bundled `@napi-rs/canvas` for page
 rendering, `tsx` for the scanner. Python only for the nomenclature/decree data pipeline.
 
 | Path | Role |
 |---|---|
-| `app/page.tsx` | The whole page: views `search` (Nomenclature), `establishment`, `report` (synthèse on its own page), `guide`, `sources`, `veille`. State lives in React and the dossier is mirrored in the URL (`?e=…&s=…&z=1&code=…&q=…`). Menu badge for the veille. |
+| `app/(app)/` | The screens: `page.tsx` (home; redirects links of before, `?vue=…`, `?e=…`), `registres/` (list, `[id]`, `nouveau`), `veille/`, `classement/` (nomenclature, establishment, synthèse; the dossier mirrored in the URL `?e=…&s=…&z=1&code=…&q=…`), `equipe/`, `compte/`, `admin/`. `_shell/`: providers (TanStack Query, tooltips, CloudGate), the side menu and phone bars, the Ctrl+K palette, `Legacy` (screens not rebuilt yet). |
+| `app/ui/` | Component library (Button, Badge, fields, Tabs, Segmented, Sheet, Menu, Tooltip, PageHeader, Panel, Stats, Notice, table classes); `useTheme`. |
 | `app/components/classification-report.tsx` | The detailed report (contents bar, exports). |
 | `app/components/veille.tsx` | Veille view: tabs **Registres des établissements** / **Journal officiel**; fetches `public/veille/feed.json` once; `useVeilleCount()` for the menu badge. |
 | `app/components/registres.tsx` | Registers: list, new-register step (name, site profile, duplicate detection), register view (to-do panels, groups by domain, evaluation cards with "Modifié par…" history, add a text, Excel export), backup/restore. |
 | `app/components/download.ts` | Browser downloads; `downloadWorkbook` (exceljs on demand). |
-| `app/globals.css` | All styles (design tokens on `:root`; the user's redesign, see `DESIGN.md`, `design-tokens.json`, `design-preview.html`). One-line rules. |
+| `app/styles/` | `tokens.css` (every colour and size, light and dark), `base.css` (reset), `legacy.css` (former rules of screens not rebuilt, scoped under `:where(.legacy)`, skipping `[data-ui]`; generated once, shrinks, never added to). |
 | `lib/classify.ts`, `lib/establishment.ts`, `lib/studies.ts`, `lib/report.ts`, `lib/sectors.ts` | Classification, establishment and addition rule, ANPE study, report model, sector names (see README). |
 | `lib/veille/markdown.ts` | **Sommaire from the OCR text** (ocr.jort.tn): `parseMarkdown`, `parseMarkdownStart` (partial download), `markdownPages`, `ocrUrl`; `readArabic` for Arabic files. |
 | `lib/veille/arabe.ts` | Arabic titles: `arFold`, `isArabic`, `mostlyArabic`, `isoDateAr`, `kindOfAr`, `numeroAr`, `frenchCitations`, `arabicPdfMarkdown`. |
@@ -882,6 +885,22 @@ To get the per-year table again: count `issues`, `entries` and flags in
 ---
 
 ## 11. Next steps (in order)
+
+**The rebuild (November 2026), decided with the user:** a product sold to clients by ABC
+Consulting (never called a SaaS), state of the art, scalable and maintainable; design direction
+"precision instrument" (Linear/Stripe/Vercel: neutral greys, one blue, 1px borders, no blur nor
+gradients, dense tables, Inter, keyboard shortcuts, Ctrl+K). Clients stay off `main` until it is done.
+
+* Step 1 (foundation): ~~tokens, components~~, ~~shell with real addresses, providers, command
+  palette, sign-in screens, legal pages~~; then home, registers list, register (table) and the
+  text sheet on `app/ui`, and the report styles as a module.
+* Step 2 (data): registers as rows (one per line, evaluations, evidence) with per-line saves; a
+  typed Supabase client; the text catalogue and fiches served from the database or the server
+  (the browser downloads 9 MB of JSON today); TanStack Query instead of window events.
+* Step 3: classification, veille, équipe, compte, admin on `app/ui`, then delete `legacy.css`;
+  error monitoring, CI, end-to-end tests against a real Supabase.
+
+Earlier items:
 
 1. ~~Finish reading 1957-1986~~ (done 22 October). Next: run `npm run veille -- --reread` now and
    then (scans whose OCR text comes out, Arabic files), and look at the few issues of §9 whose

@@ -1,0 +1,92 @@
+.field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.label {
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+  color: var(--ui-text);
+}
+.hint {
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+}
+.error {
+  font-size: var(--ui-text-xs);
+  color: var(--ui-danger);
+}
+.control {
+  width: 100%;
+  min-width: 0;
+  height: var(--ui-control);
+  padding: 0 10px;
+  border: 1px solid var(--ui-border-strong);
+  border-radius: var(--ui-radius);
+  background: var(--ui-panel);
+  color: var(--ui-text);
+  font-size: var(--ui-text-md);
+  transition: border-color 0.12s ease;
+}
+.control:hover {
+  border-color: var(--ui-text-subtle);
+}
+.control:focus-visible {
+  border-color: var(--ui-accent);
+}
+.control::placeholder {
+  color: var(--ui-text-subtle);
+}
+.control:disabled {
+  background: var(--ui-subtle);
+  color: var(--ui-text-muted);
+}
+textarea.control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  line-height: var(--ui-leading);
+  resize: vertical;
+}
+select.control {
+  appearance: none;
+  padding-right: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%238a929b' stroke-width='1.5'%3E%3Cpath d='m3 4.5 3 3 3-3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search svg {
+  position: absolute;
+  left: 10px;
+  color: var(--ui-text-subtle);
+  pointer-events: none;
+}
+.search .control {
+  padding-left: 32px;
+}
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--ui-text-sm);
+  line-height: 1.45;
+  cursor: pointer;
+}
+.checkbox input {
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: var(--ui-accent);
+  flex: none;
+}
+@media (pointer: coarse) {
+  .control {
+    height: var(--ui-control-touch);
+    font-size: 16px; /* no zoom on focus */
+  }
+}

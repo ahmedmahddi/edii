@@ -6,15 +6,14 @@ export async function fitsTheScreen(page: Page) {
   expect(extra, "horizontal overflow").toBeLessThanOrEqual(0);
 }
 
-/** A tab of the bar (phone) or the side menu (desktop). */
+/** A link of the tab bar (phone) or the side menu (desktop): the one on screen. */
 export async function go(page: Page, name: RegExp) {
-  await page.getByRole("button", { name }).first().click();
+  await page.getByRole("link", { name }).filter({ visible: true }).first().click();
 }
 
 /** A register without classification, opened. */
 export async function newRegister(page: Page, nom = "Usine de Sfax") {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Nouveau registre" }).first().click();
+  await page.goto("/registres/nouveau");
   await page.getByPlaceholder("Nom de l’établissement").fill(nom);
   await page.getByRole("button", { name: /Créer le registre/ }).click();
   await expect(page.locator(".registre-head")).toBeVisible();

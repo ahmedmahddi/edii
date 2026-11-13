@@ -4,6 +4,7 @@ import { canWrite } from "@/lib/cloud/api";
 import { limiteAtteinte } from "@/lib/cloud/plans";
 import { classLabel, dateFr, Profil } from "@/app/components/registre-shared";
 import { RegistreView } from "@/app/components/registre-view";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { download, today } from "@/app/components/download";
 import { EMPTY_SITE, metierLabels, type Site } from "@/lib/registre/profil";
@@ -24,6 +25,7 @@ import {
   updateFromReport,
 } from "@/lib/registre/registre";
 import type { ClassificationReport } from "@/lib/report";
+import { takePendingSeed } from "@/lib/registre/seed";
 import { study } from "@/lib/studies";
 import type { Amendment } from "@/lib/veille/watch";
 
@@ -60,52 +62,49 @@ function useRegistres(): [Registre[], (fn: (list: Registre[]) => Registre[]) => 
   return [list, update, saved, loaded];
 }
 
+/** Where the registers screen is: the list (/registres), one register, or a new one. */
+export type RegistreRoute = { kind: "list" } | { kind: "open"; id: string } | { kind: "new" };
+
+const hrefOf = (id: string | null) => (id ? `/registres/${encodeURIComponent(id)}` : "/registres");
+
 export function Registres({
-  seed,
-  onSeedUsed,
+  route,
   texts,
   amendments,
-  action = null,
-  onActionUsed = () => {},
 }: {
-  seed: ClassificationReport | null;
-  onSeedUsed: () => void;
+  route: RegistreRoute;
   texts: Texte[];
   amendments: Amendment[];
-  /** From the home: open a register, or start one without classification. */
-  action?: { open?: string; create?: boolean } | null;
-  onActionUsed?: () => void;
 }) {
   const cloud = useCloud();
+  const router = useRouter();
   const [list, update, saved, loaded] = useRegistres();
-  const [openId, setOpenId] = useState<string | null>(null);
+  const openId = route.kind === "open" ? route.id : null;
+  const setOpenId = (id: string | null) => router.push(hrefOf(id));
   // report null: a register without classification (BTP, industry or services the nomenclature does not cover).
-  const [draft, setDraft] = useState<{ report: ClassificationReport | null; site: Site; nom: string } | null>(null);
+  const [draft, setDraftState] = useState<{ report: ClassificationReport | null; site: Site; nom: string } | null>(null);
   const [message, setMessage] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
   // New texts that apply to each register (a JORT issue read since, a changed profile): shown on its card.
   const news = useMemo(() => new Map(list.map((r) => [r.id, nouveautes(r, texts).length])), [list, texts]);
 
+  // /registres/nouveau: from a validated classification (left by the classification screen), or without one.
+  const started = useRef(false);
   useEffect(() => {
-    if (!seed || !loaded) return;
-    // The same establishment already has a register: start from its profile, to update it.
-    const existing = sameName(list, seed.name);
-    setDraft({ report: seed, site: existing ? updateFromReport(existing, seed).site : siteFromReport(seed), nom: seed.name });
-    setOpenId(null);
-    setMessage("");
-    onSeedUsed();
-  }, [seed, onSeedUsed, loaded, list]);
-
-  useEffect(() => {
-    if (!action || !loaded) return;
-    if (action.open) setOpenId(action.open);
-    if (action.create) {
-      setDraft({ report: null, site: EMPTY_SITE, nom: "" });
-      setOpenId(null);
-    }
-    setMessage("");
-    onActionUsed();
-  }, [action, onActionUsed, loaded]);
+    if (route.kind !== "new" || !loaded || started.current) return;
+    started.current = true;
+    const seed = takePendingSeed();
+    if (seed) {
+      // The same establishment already has a register: start from its profile, to update it.
+      const existing = sameName(list, seed.name);
+      setDraftState({ report: seed, site: existing ? updateFromReport(existing, seed).site : siteFromReport(seed), nom: seed.name });
+    } else setDraftState({ report: null, site: EMPTY_SITE, nom: "" });
+  }, [route.kind, loaded, list]);
+  // Leaving the draft (created, updated, cancelled) leaves /registres/nouveau.
+  const setDraft = (d: typeof draft, then: string | null = null) => {
+    setDraftState(d);
+    if (!d) router.replace(hrefOf(then));
+  };
 
   const open = list.find((r) => r.id === openId);
   const change = (id: string) => (fn: (r: Registre) => Registre) =>
@@ -124,8 +123,7 @@ export function Registres({
     const create = () => {
       const reg = createRegistre(report, draft.site, texts, undefined, nom);
       update((all) => [reg, ...all]);
-      setDraft(null);
-      setOpenId(reg.id);
+      setDraft(null, reg.id);
     };
     return (
       <section className="card registre-new" aria-labelledby="registre-new-title">
@@ -160,8 +158,7 @@ export function Registres({
                   update((all) =>
                     all.map((r) => (r.id === existing.id ? { ...(report ? updateFromReport(r, report) : r), site: draft.site } : r)),
                   );
-                  setDraft(null);
-                  setOpenId(existing.id);
+                  setDraft(null, existing.id);
                 }}
               >
                 Mettre à jour ce registre
@@ -204,10 +201,19 @@ export function Registres({
       />
     );
 
-  const sansClassement = () => {
-    setDraft({ report: null, site: EMPTY_SITE, nom: "" });
-    setMessage("");
-  };
+  if (route.kind === "new" || (openId && !loaded)) return <p className="muted">Chargement…</p>;
+  if (openId)
+    return (
+      <article className="card veille-empty">
+        <h2>Registre introuvable</h2>
+        <p>Ce registre n’existe pas dans {cloud.current ? `l’espace « ${cloud.current.name} »` : "ce navigateur"}, ou il a été supprimé.</p>
+        <button type="button" className="secondary-button" onClick={() => setOpenId(null)}>
+          Tous les registres
+        </button>
+      </article>
+    );
+
+  const sansClassement = () => router.push("/registres/nouveau");
 
   return (
     <div className="registres">

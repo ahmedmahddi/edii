@@ -4,21 +4,35 @@ A working reference tool for establishment classification and environmental stud
 
 ## Identity
 
-ABClassement combines ABC and classement. The supplied ABC Consulting logo is displayed unchanged at public/brand/abc-consulting.jpg. The interface follows a light, glass language in the manner of Apple's platforms: the system font (San Francisco on Apple devices, Segoe UI on Windows), a brand blue (#0a6ed1) on a pale, softly tinted background, translucent surfaces with backdrop blur, 12 and 20px radii, hairline borders and soft shadows. Status colors always include labels. No gradients beyond the primary button and the soft background wash, no decorative illustration.
+ABClassement combines ABC and classement. The supplied ABC Consulting logo is displayed unchanged at public/brand/abc-consulting.jpg (sign-in screen).
 
-Dark mode follows the device (prefers-color-scheme) unless a choice is made (Auto, Clair, Sombre in Mon compte and at the foot of the side menu): a deep navy background (#0b1220) with a soft blue wash, translucent dark surfaces, a lighter brand blue (#4aa3ff), and status colors brightened for contrast. Printed documents (the compliance report) stay on white.
+The interface is a precision instrument for people who keep compliance registers all day: neutral greys, one brand blue (#155a83, #2a76a8 in dark mode), crisp 1px borders, no blur, no gradients, no decorative shadows (only menus, the command palette and sheets float). Dense, legible tables; status always carries a word, never a colour alone. Inter (variable, self-hosted) for the interface, tabular figures for numbers.
+
+Dark mode follows the device unless a choice is made (Automatique, Clair, Sombre: account menu, command palette, Mon compte). Printed documents (the compliance report, the classification report) stay on white.
+
+## Tokens and components
+
+app/styles/tokens.css holds every decision: type scale (12, 13, 14, 16, 20, 24px), spacing (4px steps), radii (4, 6, 8px), control heights (32px, 40px on touch screens), colours for light and dark (bg, panel, subtle, border, text, muted, accent, success, warning, danger and their subtle tints). Nothing else defines a colour or a size.
+
+app/ui/ is the component library every screen is built from: Button and ButtonLink (primary, secondary, ghost, danger; one primary action per view), Badge, Field/TextField/SelectField/TextArea/SearchInput/Checkbox, Segmented, Tabs, Sheet (right side on desktop, bottom on phones; Radix Dialog), Menu (Radix DropdownMenu), Tooltip, Page/PageHeader/Panel/Stats/EmptyState/Progress/Notice/Kbd, and table classes. Styles are CSS Modules next to each component; the root of each carries data-ui.
 
 ## Composition
 
-Mobile first. Below 1000px a frosted top bar carries the wordmark (or the screen's title and a back control) and the account avatar; a frosted tab bar at the bottom holds the five destinations: Accueil, Nomenclature, Établissement, Registres, Veille. The avatar opens a bottom sheet with the workspace switcher, Équipe et espace, Mon compte and sign-out. From 1000px a frosted side menu replaces both: the wordmark, the client workspace (name, role, save state), the destinations in groups (Accueil; Classement; Conformité; Espace de travail) and, at its foot, the account and the ABC Consulting logo.
+Mobile first. Below 900px: a top bar (workspace menu, search, account menu) and a tab bar with Accueil, Registres, Veille, Classement. From 900px a 240px side menu replaces both: the workspace menu (switch, Équipe, create a workspace), a search field that opens the command palette, the destinations (with the count of what waits in the registers), Équipe, Administration for ABC Consulting, and the account menu at its foot (Mon compte, appearance, conditions, sign-out).
 
-Every screen starts with a large title. The home (Accueil) is a dashboard: a greeting with the workspace, four stat tiles (establishments, evaluations late, evaluations to do, JORT texts to examine) that open the registers, three quick actions (classify, new register, Journal officiel), the establishments with their evaluation progress and alert pills, and the latest important texts of the Journal. With no register it shows one card with the two ways in. The nomenclature keeps its directory of sections, search results as rows with an add control, and the establishment dossier beside it from 1000px. Registers and the Journal are lists of glass cards with a colored left rule for severity or conformity. Long rubric tables and activity forms reflow into labeled vertical rows on phones. The remove control has a reserved 44px column with its padding accounted for; the table and tbody use block layout in compact dossier panels to avoid intrinsic table overflow.
+Every screen has its own address: /, /registres, /registres/[id], /registres/nouveau, /veille, /classement, /equipe, /compte, /admin, /cgu, /confidentialite. Links of before (?vue=…, ?e=…) are redirected. Each screen starts with a PageHeader: title, one line on what it is for, its actions.
 
-The sign-in screen pairs a short statement of what the product does with the form; it stacks on phones.
+Ctrl+K (Cmd+K) opens the command palette: every register by name, the actions (new register, classify, check the JORT), every screen, the appearance.
+
+The sign-in screen pairs what the product does with the form; it stacks on phones.
+
+## Screens not rebuilt yet
+
+Screens not yet rebuilt on the components render inside <div class="legacy">: app/styles/legacy.css holds their former rules, generated once from the former stylesheet and scoped so they cannot reach anything else (every rule is under :where(.legacy) and skips [data-ui] elements, so a component placed in an old screen keeps its own look). It shrinks as screens are rebuilt and goes with the last one; nothing is added to it.
 
 ## Typography and interaction
 
-The system font stack renders the interface. Titles are 30px (34px on desktop) with tight letter-spacing; the eyebrow above a title is the section in brand blue. Mobile input text is 16px to avoid automatic field zoom. Controls are at least 44px, with a visible focus ring (a soft blue halo). Search has a persistent label. Result counts and activity additions announce their state. Rubric selection focuses and scrolls to its details, below the sticky top bar. Reduced motion disables the sheet's animation.
+Titles 20px (24px for the screen title), body 14px, secondary text 13px, labels 12px. Inputs are 16px on phones to avoid automatic zoom. A visible focus ring on every control; menus, sheets and the palette keep focus inside and return it (Radix). Reduced motion disables transitions.
 
 ## Scope
 
@@ -30,7 +44,7 @@ The initial information architecture considered https://www.gov.uk/, https://ent
 
 ## Files
 
-app/globals.css is the visual source; the theme block at its end (tokens, shell, components) decides the look, the rules above it the layout. design-tokens.json and design-preview.html date from the first identity and are not updated.
+app/styles/tokens.css (decisions), app/styles/base.css (reset, body), app/ui/ (components), app/(app)/_shell/ (side menu, bars, command palette), app/styles/legacy.css (screens not rebuilt yet).
 
 ## Validated reports
 
