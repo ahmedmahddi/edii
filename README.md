@@ -24,6 +24,8 @@ npm run dev        # http://localhost:3000
 npm run typecheck
 npm test           # classification, addition rule, ANPE study, and data in sync with the texts
 npm run test:db    # the database's access rules (supabase/), on a throwaway local PostgreSQL
+npm run test:e2e   # the interface in a real browser, phone and desktop (local mode)
+                   # once before: npx playwright install chromium
 npm run build && npm start
 ```
 
@@ -78,6 +80,14 @@ abonnés, à renouveler, terminés), and a sheet to change the offer (presets, +
 end, limits) and see the members. Administrators do not read a client's registers unless invited.
 The first administrator is named once in the SQL Editor:
 `insert into public.platform_admins (user_id) select id from public.profiles where email = 'you@…';`
+
+**Legal, security, appearance.** `/cgu` and `/confidentialite` (models to complete, the passages in
+[brackets], and to have validated by a lawyer; loi organique n° 2004-63); creating an account requires
+accepting them, and the version accepted is recorded with the account. Every response carries a
+content security policy (the page reaches only the site and the Supabase project), no framing,
+HSTS, nosniff, a strict referrer policy (`next.config.ts`). The public API routes are rate-limited
+per address (`lib/ratelimit.ts`: 5 JORT checks a minute, 20 unsubscribe calls). Dark mode follows the
+device, or the choice made in *Mon compte* or at the foot of the side menu (Auto, Clair, Sombre).
 
 **Reports on texts.** "Signaler un problème" on a text (in the register's sheet and in the Journal):
 hors sujet, abrogé ou remplacé, erreur dans la fiche, autre, with a comment. Reports reach

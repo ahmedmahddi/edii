@@ -6,6 +6,7 @@
  * VEILLE_GITHUB_REF: lib/veille/store.ts), the issues found are also committed to it at once, as the
  * daily run does, so that the site is rebuilt with them for everyone.
  */
+import { clientAddress, rateLimit, tooMany } from "@/lib/ratelimit";
 import { checkJort } from "@/lib/veille/live";
 import { githubTarget, storeIssues } from "@/lib/veille/store";
 
@@ -15,6 +16,9 @@ export const maxDuration = 60; // seconds: the catalog of jort.tn and a few OCR 
 type Enregistrement = "enregistre" | "deja" | "non-configure" | "echec" | "inutile";
 
 export async function POST(request: Request): Promise<Response> {
+  // Each check reads jort.tn: a few per minute and per address are plenty.
+  const limited = rateLimit(`veille:${clientAddress(request)}`, 5, 60_000);
+  if (!limited.ok) return tooMany(limited.retryAfter);
   let scanned: Record<string, number[]> = {};
   try {
     const body = (await request.json()) as { scanned?: unknown };

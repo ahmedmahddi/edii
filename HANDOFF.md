@@ -432,6 +432,22 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Launch 6: hardening.** Legal: `app/cgu`, `app/confidentialite` (`app/components/legal.tsx`,
+`LEGAL_VERSION`), placeholders in [brackets] for ABC Consulting to fill, to be validated by a lawyer;
+sign-up needs the consent box (stored in user_metadata `cgu`, `cgu_acceptees`); links on the sign-in
+page and in the footer. Headers (`next.config.ts`): CSP (script/style 'unsafe-inline' for Next's
+inline bootstrap, 'unsafe-eval' in development only; connect-src self + the Supabase URL + *.supabase.co
+with wss), X-Frame-Options DENY, frame-ancestors 'none', nosniff, Referrer-Policy, Permissions-Policy,
+HSTS, COOP; poweredByHeader off. Rate limit (`lib/ratelimit.ts`, in memory per instance, so approximate
+on Vercel): POST /api/veille 5/min/address, unsubscribe 20/min. Dark mode: tokens redefined under
+prefers-color-scheme (unless data-theme="light") and data-theme="dark"; the rules naming light colors
+overridden under both (generated block at the end of globals.css); an inline script in layout.tsx sets
+data-theme before paint from localStorage `abclassement-theme`; `ThemeChoice` (Auto/Clair/Sombre) in
+Mon compte and the side menu; the compliance report stays white. E2E: `@playwright/test` 1.56.1,
+`playwright.config.ts` (local mode forced, phone and desktop projects, `PW_CHROMIUM_PATH` optional),
+tests/e2e (navigation and overflow, legal pages, headers, dark mode, classification, a register's
+workflow and report); vitest excludes tests/e2e. 12 pass in dev and against `next start` (strict CSP).
+
 **Launch 5: reports on texts.** Migration `20261117000000_signalements.sql`: table signalements
 (motif hors-sujet/abroge/erreur/autre, commentaire, statut nouveau/traite/rejete, reponse,
 traite_at), RLS: insert own as nouveau from a workspace one belongs to (or none), select own or as

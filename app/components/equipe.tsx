@@ -5,6 +5,7 @@
  */
 import { type FormEvent, useCallback, useEffect, useState } from "react";
 import { NewWorkspace, PendingInvitations, useCloud } from "@/app/components/cloud";
+import { ThemeChoice } from "@/app/components/theme";
 import {
   canInvite,
   canManage,
@@ -412,6 +413,10 @@ export function Compte() {
             }}
           />
         </label>
+      </section>
+      <section className="card equipe-section">
+        <h2>Apparence</h2>
+        <ThemeChoice />
       </section>
       <section className="card equipe-section">
         <h2>Mot de passe</h2>

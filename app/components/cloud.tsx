@@ -23,6 +23,7 @@ import {
   saveRegistre,
   type Workspace,
 } from "@/lib/cloud/api";
+import { LEGAL_VERSION } from "@/app/components/legal";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
 import { etatOffre, PLANS } from "@/lib/cloud/plans";
 import { type CloudBackend, cloudBackend, type SyncState } from "@/lib/cloud/sync";
@@ -371,6 +372,7 @@ function AuthScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [done, setDone] = useState("");
@@ -387,10 +389,12 @@ function AuthScreen() {
         if (error) throw error;
       } else if (mode === "inscription") {
         if (password.length < 8) throw new Error("Le mot de passe doit faire au moins 8 caractères.");
+        if (!consent) throw new Error("Acceptez les conditions générales et la politique de confidentialité pour créer un compte.");
         const { data, error } = await auth.signUp({
           email: email.trim(),
           password,
-          options: { data: { full_name: fullName.trim() }, emailRedirectTo: window.location.origin },
+          // The consent is recorded with the account: the version accepted and when.
+          options: { data: { full_name: fullName.trim(), cgu: LEGAL_VERSION, cgu_acceptees: new Date().toISOString() }, emailRedirectTo: window.location.origin },
         });
         if (error) throw error;
         if (!data.session)
@@ -452,6 +456,22 @@ function AuthScreen() {
               />
             </label>
           ) : null}
+          {mode === "inscription" ? (
+            <label className="consent">
+              <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} required />
+              <span>
+                J’accepte les{" "}
+                <a href="/cgu" target="_blank" rel="noreferrer">
+                  conditions générales d’utilisation
+                </a>{" "}
+                et la{" "}
+                <a href="/confidentialite" target="_blank" rel="noreferrer">
+                  politique de confidentialité
+                </a>
+                .
+              </span>
+            </label>
+          ) : null}
           {error ? (
             <p className="registre-warning" role="alert">
               {error}
@@ -478,6 +498,10 @@ function AuthScreen() {
           )}
         </div>
       </div>
+      <nav className="legal-links auth-legal" aria-label="Informations légales">
+        <a href="/cgu">Conditions générales</a>
+        <a href="/confidentialite">Confidentialité</a>
+      </nav>
     </div>
   );
 }

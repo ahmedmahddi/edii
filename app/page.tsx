@@ -37,6 +37,7 @@ import { useVeilleCount, Veille } from "./components/veille";
 import { CloudGate, LocalImport, ReadOnlyNotice, useCloud, WorkspaceSwitcher } from "./components/cloud";
 import { Compte, Equipe } from "./components/equipe";
 import { Admin } from "./components/admin";
+import { ThemeChoice } from "./components/theme";
 import { SECTORS } from "@/lib/sectors";
 
 import {
@@ -326,6 +327,7 @@ function Edii() {
           ) : (
             <p className="sidebar-local">Mode local : les registres restent dans ce navigateur.</p>
           )}
+          <ThemeChoice compact />
           <div className="sidebar-signature">
             <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" />
           </div>
@@ -844,7 +846,11 @@ function Edii() {
             <span>
               ABClassement <span>—</span> ABC Consulting
             </span>
-            <span>Nomenclature 2005 · 2010 · 2012 — le texte officiel fait foi</span>
+            <nav className="legal-links" aria-label="Informations légales">
+              <a href="/cgu">Conditions générales</a>
+              <a href="/confidentialite">Confidentialité</a>
+              <span>Le texte officiel fait foi</span>
+            </nav>
           </footer>
         </main>
       </div>

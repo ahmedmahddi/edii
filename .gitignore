@@ -14,3 +14,5 @@ data/veille/veille-hebdo.log
 # Bodies of the texts found (their articles), read by --fiches: for writing résumés, not served
 data/veille/corps/
 public/veille/fiches.json
+test-results/
+playwright-report/

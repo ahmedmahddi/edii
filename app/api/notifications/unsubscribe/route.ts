@@ -3,6 +3,7 @@
  * GET (a click) and POST (mail clients' one-click unsubscribe, RFC 8058) both turn it off.
  */
 import { serviceClient } from "@/lib/cloud/server";
+import { clientAddress, rateLimit, tooMany } from "@/lib/ratelimit";
 import { checkUnsubscribe } from "@/lib/notify/token";
 
 export const dynamic = "force-dynamic";
@@ -19,6 +20,8 @@ function page(title: string, body: string, status = 200): Response {
 }
 
 async function unsubscribe(request: Request): Promise<Response> {
+  const limited = rateLimit(`unsubscribe:${clientAddress(request)}`, 20, 60_000);
+  if (!limited.ok) return tooMany(limited.retryAfter);
   const url = new URL(request.url);
   const u = url.searchParams.get("u") ?? "";
   const t = url.searchParams.get("t") ?? "";

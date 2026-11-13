@@ -6,6 +6,8 @@ A working reference tool for establishment classification and environmental stud
 
 ABClassement combines ABC and classement. The supplied ABC Consulting logo is displayed unchanged at public/brand/abc-consulting.jpg. The interface follows a light, glass language in the manner of Apple's platforms: the system font (San Francisco on Apple devices, Segoe UI on Windows), a brand blue (#0a6ed1) on a pale, softly tinted background, translucent surfaces with backdrop blur, 12 and 20px radii, hairline borders and soft shadows. Status colors always include labels. No gradients beyond the primary button and the soft background wash, no decorative illustration.
 
+Dark mode follows the device (prefers-color-scheme) unless a choice is made (Auto, Clair, Sombre in Mon compte and at the foot of the side menu): a deep navy background (#0b1220) with a soft blue wash, translucent dark surfaces, a lighter brand blue (#4aa3ff), and status colors brightened for contrast. Printed documents (the compliance report) stay on white.
+
 ## Composition
 
 Mobile first. Below 1000px a frosted top bar carries the wordmark (or the screen's title and a back control) and the account avatar; a frosted tab bar at the bottom holds the five destinations: Accueil, Nomenclature, Établissement, Registres, Veille. The avatar opens a bottom sheet with the workspace switcher, Équipe et espace, Mon compte and sign-out. From 1000px a frosted side menu replaces both: the wordmark, the client workspace (name, role, save state), the destinations in groups (Accueil; Classement; Conformité; Espace de travail) and, at its foot, the account and the ABC Consulting logo.
