@@ -201,3 +201,41 @@ button.stat:hover {
     border-right: 0;
   }
 }
+/* A part of a settings page: its title and what it is for on the left (desktop), the controls on the right. */
+.section {
+  display: grid;
+  gap: var(--ui-space-3) var(--ui-space-8);
+  padding: var(--ui-space-6) 0;
+  border-top: 1px solid var(--ui-border);
+}
+.section:first-of-type {
+  border-top: 0;
+  padding-top: 0;
+}
+@media (min-width: 900px) {
+  .section {
+    grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  }
+}
+.sectionHead {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+.sectionTitle {
+  font-size: var(--ui-text-md);
+  font-weight: var(--ui-weight-semibold);
+}
+.sectionDanger .sectionTitle {
+  color: var(--ui-danger);
+}
+.sectionText {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.sectionBody {
+  display: grid;
+  gap: var(--ui-space-4);
+  align-content: start;
+  min-width: 0;
+}

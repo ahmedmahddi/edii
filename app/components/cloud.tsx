@@ -438,7 +438,7 @@ export function NewWorkspace({ onCreated, compact }: { onCreated: (id: string) =
     }
   };
   return (
-    <form data-ui="" id="nouvel-espace" onSubmit={submit} className={compact ? ui.inline : ui.form}>
+    <form data-ui="" onSubmit={submit} className={compact ? ui.inline : ui.form}>
       <TextField
         label="Nom de l’entreprise"
         value={name}

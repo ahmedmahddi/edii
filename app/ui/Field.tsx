@@ -77,3 +77,16 @@ export function Checkbox({ children, ...rest }: ComponentProps<"input"> & { chil
     </label>
   );
 }
+
+/** An on/off setting, said in words beside it. */
+export function Switch({ label, description, ...rest }: Omit<ComponentProps<"input">, "type"> & { label: ReactNode; description?: ReactNode }) {
+  return (
+    <label data-ui="" className={s.switchRow}>
+      <span className={s.switchText}>
+        <span>{label}</span>
+        {description ? <small>{description}</small> : null}
+      </span>
+      <input type="checkbox" role="switch" className={s.switch} {...rest} />
+    </label>
+  );
+}

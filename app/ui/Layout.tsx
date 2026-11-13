@@ -87,3 +87,18 @@ export function Notice({ tone = "info", icon, title, children, actions }: { tone
 }
 
 export const Kbd = ({ children }: { children: ReactNode }) => <kbd data-ui="" className={s.kbd}>{children}</kbd>;
+
+/** A part of a settings page (Équipe, Mon compte, Administration). */
+export function Section({ title, description, children, danger, id }: { title: ReactNode; description?: ReactNode; children: ReactNode; danger?: boolean; id?: string }) {
+  return (
+    <section data-ui="" id={id} className={[s.section, danger ? s.sectionDanger : ""].join(" ")} aria-labelledby={id ? `${id}-titre` : undefined}>
+      <div className={s.sectionHead}>
+        <h2 className={s.sectionTitle} id={id ? `${id}-titre` : undefined}>
+          {title}
+        </h2>
+        {description ? <p className={s.sectionText}>{description}</p> : null}
+      </div>
+      <div className={s.sectionBody}>{children}</div>
+    </section>
+  );
+}

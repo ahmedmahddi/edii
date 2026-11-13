@@ -90,3 +90,53 @@ select.control {
     font-size: 16px; /* no zoom on focus */
   }
 }
+/* An on/off setting: a label and its description, the switch at the end. */
+.switchRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-4);
+  cursor: pointer;
+}
+.switchText {
+  display: grid;
+  gap: 2px;
+  font-size: var(--ui-text-sm);
+}
+.switchText small {
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+}
+.switch {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 18px;
+  margin: 0;
+  border-radius: 9px;
+  background: var(--ui-border-strong);
+  appearance: none;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+.switch::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: transform 0.12s ease;
+}
+.switch:checked {
+  background: var(--ui-accent);
+}
+.switch:checked::after {
+  transform: translateX(14px);
+}
+.switch:disabled {
+  opacity: 0.5;
+}
