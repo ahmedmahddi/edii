@@ -8,6 +8,7 @@ import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { REMOTE_EVENT, type RemoteDetail, useCloud } from "@/app/components/cloud";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Icon } from "@/app/components/icons";
+import { RapportConformite } from "@/app/components/rapport-conformite";
 import { classLabel, dateFr, Profil, refOf, useFiches } from "@/app/components/registre-shared";
 import { canWrite, preuveUrl, uploadPreuve } from "@/lib/cloud/api";
 import { importance } from "@/lib/registre/importance";
@@ -90,6 +91,7 @@ export function RegistreView({
   const [openId, setOpenId] = useState<string | null>(null);
   const [adding, setAdding] = useState("");
   const [exporting, setExporting] = useState(false);
+  const [rapport, setRapport] = useState(false);
   const editable = !cloud.current || canWrite(cloud.current);
   // A colleague's changes reached this register, or ours were merged with theirs: said briefly.
   const [remote, setRemote] = useState("");
@@ -227,6 +229,9 @@ export function RegistreView({
             <strong>{progress} %</strong> évalué · {retenus.length} textes
           </span>
         </div>
+        <button type="button" className="secondary-button registre-rapport-button" onClick={() => setRapport(true)}>
+          <Icon name="file" size={18} /> Rapport de conformité (PDF)
+        </button>
         <div className="registre-kpis">
           <span className="pill pill-ok">{count("C")} conformes</span>
           <span className={`pill ${count("NC") ? "pill-bad" : "pill-muted"}`}>{count("NC")} non conformes</span>
@@ -442,6 +447,16 @@ export function RegistreView({
         })
       )}
 
+      {rapport ? (
+        <RapportConformite
+          reg={reg}
+          amendments={amendments}
+          texts={texts}
+          espace={cloud.current?.name ?? null}
+          auteur={cloud.name || cloud.user?.email || null}
+          onClose={() => setRapport(false)}
+        />
+      ) : null}
       {open ? (
         <LigneSheet
           key={open.texte.id}

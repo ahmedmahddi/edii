@@ -2689,3 +2689,84 @@ body.has-panel { overflow: hidden; }
 .remote-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--tabbar) + 20px + env(safe-area-inset-bottom)); z-index: 90; display: flex; align-items: center; gap: 10px; max-width: min(520px, calc(100vw - 32px)); padding: 10px 16px; border-radius: 999px; background: rgba(15, 42, 68, 0.92); color: #fff; font-size: 14px; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); animation: sheet-in 0.2s ease; }
 @media (min-width: 1000px) { .remote-toast { bottom: 24px; left: calc(50% + 136px); } }
 .remote-toast { width: max-content; max-width: calc(100vw - 32px); border-radius: 16px; }
+
+/* The compliance report: an A4 document over the app, printed alone */
+.rapport-root { position: fixed; inset: 0; z-index: 100; overflow-y: auto; background: #e5e9f0; -webkit-overflow-scrolling: touch; }
+.rapport-toolbar { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px 14px; padding: 10px 16px; background: rgba(255, 255, 255, 0.85); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); border-bottom: 1px solid var(--hairline); }
+.rapport-toolbar label { display: grid; gap: 4px; font-size: 12px; font-weight: 600; color: var(--muted); }
+.rapport-toolbar input[type="date"] { min-height: 40px; padding: 6px 10px; font-size: 14px; }
+.rapport-toolbar .rapport-check { display: flex; align-items: center; gap: 8px; min-height: 40px; font-size: 13px; color: var(--text); }
+.rapport-toolbar > button { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; }
+.rapport-toolbar > button:last-child { margin-left: auto; }
+.rapport { width: min(210mm, 100% - 24px); margin: 16px auto 40px; background: #fff; color: #111827; padding: 14mm 12mm; box-shadow: 0 10px 40px rgba(15, 23, 42, 0.18); border-radius: 6px; font-size: 13px; line-height: 1.5; }
+.rapport h1 { font-size: 26px; margin: 2px 0 4px; letter-spacing: -0.02em; }
+.rapport h2 { font-size: 16px; margin: 0 0 10px; color: #0f2a44; border-bottom: 2px solid #0f2a44; padding-bottom: 6px; }
+.rapport-masthead { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #d5dbe3; margin-bottom: 18px; }
+.rapport-masthead img { width: 120px; height: auto; flex: none; }
+.rapport-kicker { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0a6ed1; }
+.rapport-meta { margin: 0; color: #4b5563; font-size: 12px; }
+.rapport-section { margin-bottom: 20px; }
+.rapport-kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+.rapport-kpi { border: 1px solid #d5dbe3; border-radius: 8px; padding: 8px 10px; display: grid; gap: 0; }
+.rapport-kpi strong { font-size: 22px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.rapport-kpi span { font-size: 12px; color: #374151; }
+.rapport-kpi small { font-size: 10px; color: #6b7280; }
+.rapport-kpi.is-main { background: #eef5fd; border-color: #b9d6f5; }
+.rapport-kpi.is-main strong { color: #0a6ed1; font-size: 28px; }
+.rapport-kpi.is-bad strong, .rapport .is-bad { color: #b42318; }
+.rapport-facts { display: grid; gap: 4px; margin: 0; font-size: 12px; }
+.rapport-facts div { display: grid; grid-template-columns: 120px 1fr; gap: 8px; }
+.rapport-facts dt { color: #6b7280; }
+.rapport-facts dd { margin: 0; }
+.rapport-table { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.rapport-table th, .rapport-table td { border: 1px solid #d5dbe3; padding: 5px 6px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.rapport-table th { background: #f1f4f8; font-weight: 700; color: #0f2a44; }
+.rapport-table td small { display: block; color: #4b5563; font-size: 10.5px; }
+.rapport-table td strong { display: block; font-weight: 600; }
+.rapport-table .num { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rapport-table.is-dense { font-size: 10.5px; }
+.rapport-bar { display: inline-block; width: 40px; height: 6px; margin-right: 6px; border-radius: 3px; background: #e5e7eb; overflow: hidden; vertical-align: middle; }
+.rapport-bar > span { display: block; height: 100%; background: #1f7a4d; }
+.rapport-tag { display: inline-block; padding: 1px 6px; border-radius: 4px; font-size: 10.5px; font-weight: 600; white-space: nowrap; background: #f1f4f8; }
+.rapport-tag.tag-en-retard { background: #fde8e7; color: #b42318; }
+.rapport-tag.tag-a-venir, .rapport-tag.tag-bientot { background: #fdf3e1; color: #8a5a00; }
+.rapport-tag.tag-a-planifier { background: #eef5fd; color: #0a6ed1; }
+.rapport-list { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+.rapport-empty { margin: 0; color: #1f7a4d; font-weight: 600; }
+.rapport-note { margin: 8px 0 0; color: #4b5563; font-size: 12px; }
+.rapport-signatures { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; break-inside: avoid; }
+.rapport-signatures div { border: 1px solid #d5dbe3; border-radius: 8px; padding: 10px 12px; min-height: 90px; display: grid; align-content: start; gap: 4px; }
+.rapport-signatures span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7280; }
+.rapport-signatures em { margin-top: auto; font-size: 10.5px; color: #9ca3af; font-style: normal; }
+.rapport-foot { margin: 16px 0 0; font-size: 10.5px; color: #6b7280; }
+body.has-rapport { overflow: hidden; }
+@media (max-width: 640px) {
+  .rapport { width: calc(100% - 16px); padding: 16px 12px; margin-top: 8px; font-size: 12px; }
+  .rapport-masthead img { width: 80px; }
+  .rapport h1 { font-size: 20px; }
+  .rapport-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rapport-table { font-size: 10.5px; }
+  .rapport-table th, .rapport-table td { padding: 4px; }
+  .rapport-toolbar > button:last-child { margin-left: 0; }
+  .rapport-facts div { grid-template-columns: 1fr; gap: 0; }
+}
+@media print {
+  @page { size: A4; margin: 12mm 10mm; }
+  body.has-rapport { overflow: visible; background: #fff !important; }
+  body.has-rapport > *:not(.rapport-root) { display: none !important; }
+  body.has-rapport .rapport-root { position: static; overflow: visible; background: #fff; }
+  .rapport-toolbar { display: none !important; }
+  .rapport { width: auto; margin: 0; padding: 0; box-shadow: none; border-radius: 0; font-size: 10pt; }
+  .rapport-table { font-size: 8.5pt; }
+  .rapport-table.is-dense { font-size: 8pt; }
+  .rapport-table thead { display: table-header-group; }
+  .rapport-table tr, .rapport-kpi, .rapport-facts { break-inside: avoid; }
+  .rapport h2 { break-after: avoid; }
+  .rapport-annexe { break-before: page; }
+  .rapport-kpi.is-main, .rapport-table th, .rapport-tag, .rapport-bar > span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+.registre-rapport-button { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; min-height: 40px; }
+.rapport-table.is-fixed { table-layout: fixed; }
+.rapport-table td.date { white-space: nowrap; }
+.rapport-table th { overflow-wrap: normal; word-break: normal; hyphens: auto; }
+@media (max-width: 640px) { .rapport-table td.date { white-space: normal; } .rapport-tag { white-space: normal; } }

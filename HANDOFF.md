@@ -432,6 +432,17 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Launch 4: the compliance report (PDF).** `lib/registre/rapport.ts` (`rapportConformite(reg,
+amendments, texts, today, depuis)`: totals with taux = C/(C+NC) and progression = evaluated/applicable,
+domains, open NCs with the constat of their last NC evaluation and an état en-retard / à venir / à
+planifier, actions closed in the period (actionFaite), evaluations in the period, late or within 30
+days, JORT alerts and new texts, the texts for the appendix; tests/rapport.test.ts).
+`app/components/rapport-conformite.tsx`: portal into body (class `has-rapport`), toolbar (Fermer,
+période depuis, annexe on/off, Imprimer / PDF = window.print), A4 sheet; print CSS hides everything
+else, A4 12/10 mm margins, header rows repeat, the appendix starts a page; fixed column widths.
+Button "Rapport de conformité (PDF)" in the register's head. Checked: Chromium's print to PDF (A4,
+7 pages with the appendix of 50 texts), screen at 390 and 1440 without overflow.
+
 **Launch 3: two people on one register.** Migration `20261116000000_versions.sql`: registres.version
 (the stamp trigger sets 1 on insert, +1 on update); `save_registre(org, rid, rnom, rdata, expected)`
 (security invoker, so RLS applies): inserts when absent (a register removed meanwhile is re-created

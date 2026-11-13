@@ -287,7 +287,13 @@ opens the establishment's register in the Veille réglementaire view:
    a comment, a constat or a justification, evidence: a written note, a link, or a photo or PDF
    uploaded to the workspace when signed in; a non-conformity also takes its risk and **action
    plan**: action, responsible, deadline, closed by the next conforming evaluation), the requirements and risk (prefilled from the text's fiche), and the **history** of
-   every evaluation recorded, with its evidence. Excel: the ID-QSE-002 sheet (risk and action plan for
+   every evaluation recorded, with its evidence. **Rapport de conformité (PDF)**, from the register's head: an A4 "état de conformité" for a period
+   (from a date chosen, a year back by default): synthesis (conformity rate = C / (C + NC), share of
+   texts evaluated, counts), conformity by domain, open non-conformities with their constat, action,
+   responsible, deadline and state, corrective actions closed in the period, evaluations late or due
+   within 30 days, JORT texts to take into account, an appendix of every text with its evidence
+   (optional), and signature boxes. The browser prints it or saves it as PDF
+   (`lib/registre/rapport.ts`, `app/components/rapport-conformite.tsx`). Excel: the ID-QSE-002 sheet (risk and action plan for
    non-conformities only, and a last column "Constat et preuves") plus a second sheet,
    "Historique des évaluations", the audit trail.
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
