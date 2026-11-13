@@ -432,6 +432,25 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Launch 3: two people on one register.** Migration `20261116000000_versions.sql`: registres.version
+(the stamp trigger sets 1 on insert, +1 on update); `save_registre(org, rid, rnom, rdata, expected)`
+(security invoker, so RLS applies): inserts when absent (a register removed meanwhile is re-created
+with the work in hand), refuses with `(false, version, current data)` when `expected` differs,
+raises when RLS blocks the update; the table joins `supabase_realtime` with a column list (id,
+version…), when the publication exists. rls.sql: 7 checks (61). `lib/registre/merge.ts`
+(`mergeRegistre(base, mine, theirs)`, tests/merge.test.ts). `lib/cloud/sync.ts` rewritten: initial
+`{registre, version}[]`, `io.save(r, expected) → Saved`, conflict → merge with the last copy read
+(`bases`) and retry up to 3 times, a newer local change rebased on the merge, `onMerged(ids)`;
+`applyRemote`, `applyRemoval`, `versionOf`. api.ts: `fetchRegistres` returns versions (falls back
+before the migration, then saves by upsert), `fetchRegistre`, `saveRegistre`. cloud.tsx: the
+workspace's backend uses them; focus/visibility re-read applies remote copies; Realtime channel per
+workspace (INSERT/UPDATE filtered on the workspace, DELETE unfiltered: unknown ids ignored; an event
+whose version is not newer is our own save); `REMOTE_EVENT` → a notice on the open register
+(`remote-toast`). Checked: unit tests; against the stand-in, Alice and Bob on the same register,
+Bob saving from the old version: both evaluations stored (versions 1 → 2 → 3), Bob told of the
+merge, Alice sees Bob's evaluation on focus. Realtime itself is not exercised here (no Realtime
+server in the stand-in): to check on the real project with two browsers.
+
 **Launch 2: offers and administration.** Migration `20261115000000_plans.sql`: `platform_admins`
 (+ `is_platform_admin()`); organizations.plan (essai/standard/pro/interne), ends_at (default now+30
 days, also for existing rows), max_registres (2), max_membres (3); column grants: members update

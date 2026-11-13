@@ -152,6 +152,19 @@ select pg_temp.check(not public.is_platform_admin(), 'a client is not an adminis
 update public.registres set nom = 'Usine Sfax (2027)' where id = 'r1';
 select pg_temp.check((select nom from public.registres where id = 'r1') = 'Usine Sfax (2027)', 'once extended, the workspace can be changed again');
 
+-- Two people on one register: a save from an older version is refused, with the current copy.
+select pg_temp.act('alice');
+select pg_temp.check((select version from public.registres where id = 'r2') = 1, 'a new register is at version 1');
+select pg_temp.check((select ok from public.save_registre((select org from ids), 'r2', 'Dépôt', '{"id":"r2","v":"alice"}', 1)), 'a save from the current version goes through');
+select pg_temp.check((select version from public.registres where id = 'r2') = 2, 'and the version goes up');
+create temp table stale as select * from public.save_registre((select org from ids), 'r2', 'Dépôt', '{"id":"r2","v":"late"}', 1);
+select pg_temp.check((select not ok and v = 2 and courant->>'v' = 'alice' from stale), 'a save from an older version is refused, with the current copy');
+select pg_temp.check((select data->>'v' from public.registres where id = 'r2') = 'alice', 'and nothing is overwritten');
+select pg_temp.check((select ok and v = 1 from public.save_registre((select org from ids), 'r9', 'Nouveau', '{"id":"r9"}', null)), 'a new register is created through the same save');
+delete from public.registres where id = 'r9';
+select pg_temp.act('carol');
+select pg_temp.fails($$select * from public.save_registre((select org from ids), 'r2', 'x', '{}', 2)$$, 'a stranger cannot save through it');
+
 -- Anonymous visitors see nothing.
 reset role;
 set role anon;

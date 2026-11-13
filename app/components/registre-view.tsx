@@ -5,7 +5,7 @@
  * text: its requirements, a new evaluation with evidence, the action plan, the history.
  */
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { useCloud } from "@/app/components/cloud";
+import { REMOTE_EVENT, type RemoteDetail, useCloud } from "@/app/components/cloud";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Icon } from "@/app/components/icons";
 import { classLabel, dateFr, Profil, refOf, useFiches } from "@/app/components/registre-shared";
@@ -91,6 +91,23 @@ export function RegistreView({
   const [adding, setAdding] = useState("");
   const [exporting, setExporting] = useState(false);
   const editable = !cloud.current || canWrite(cloud.current);
+  // A colleague's changes reached this register, or ours were merged with theirs: said briefly.
+  const [remote, setRemote] = useState("");
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const on = (e: Event) => {
+      const d = (e as CustomEvent<RemoteDetail>).detail;
+      if (!d.ids.includes(reg.id)) return;
+      setRemote(d.kind === "merged" ? "Vos modifications ont été fusionnées avec celles d’un collègue." : "Registre mis à jour par un collègue.");
+      clearTimeout(timer);
+      timer = setTimeout(() => setRemote(""), 6000);
+    };
+    window.addEventListener(REMOTE_EVENT, on);
+    return () => {
+      window.removeEventListener(REMOTE_EVENT, on);
+      clearTimeout(timer);
+    };
+  }, [reg.id]);
   const who = cloud.name || cloud.user?.email || "";
 
   const retenus = reg.lignes.filter((l) => l.retenu);
@@ -175,6 +192,12 @@ export function RegistreView({
 
   return (
     <div className="registre">
+      {remote ? (
+        <div className="remote-toast" role="status">
+          <Icon name="users" size={18} />
+          <span>{remote}</span>
+        </div>
+      ) : null}
       <button type="button" className="edii-link registre-back" onClick={onBack}>
         <Icon name="back" size={16} /> Tous les registres
       </button>

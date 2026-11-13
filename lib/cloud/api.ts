@@ -187,10 +187,48 @@ export async function myName(userId: string): Promise<string | null> {
 
 // Registers: one row per register, the register itself as JSON.
 
-export async function fetchRegistres(workspace: string): Promise<Registre[]> {
-  const { data, error } = await db().from("registres").select("data").eq("organization_id", workspace);
+/** Before the versions migration (20261116000000_versions.sql): saved whole, last save wins. */
+let versioned = true;
+
+export async function fetchRegistres(workspace: string): Promise<{ registre: Registre; version: number }[]> {
+  let res: { data: unknown[] | null; error: { message: string } | null } = await db().from("registres").select("data, version").eq("organization_id", workspace);
+  if (res.error && /version/i.test(res.error.message)) {
+    versioned = false;
+    res = await db().from("registres").select("data").eq("organization_id", workspace);
+  }
+  fail(res.error);
+  return ((res.data ?? []) as { data: Registre; version?: number }[]).map((r) => ({ registre: r.data, version: r.version ?? 0 }));
+}
+
+/** One register as stored now (null when it no longer exists). */
+export async function fetchRegistre(workspace: string, id: string): Promise<{ registre: Registre; version: number } | null> {
+  const { data, error } = await db().from("registres").select("data, version").eq("organization_id", workspace).eq("id", id).maybeSingle();
   fail(error);
-  return (data ?? []).map((r) => r.data as Registre);
+  return data ? { registre: data.data as Registre, version: (data.version as number) ?? 0 } : null;
+}
+
+/**
+ * Save a register from the version it was read at; refused (with the current copy) when a
+ * colleague saved it meanwhile.
+ */
+export async function saveRegistre(
+  workspace: string,
+  r: Registre,
+  expected: number | null,
+): Promise<{ ok: true; version: number } | { ok: false; version: number; current: Registre }> {
+  if (!versioned) {
+    await upsertRegistres(workspace, [r]);
+    return { ok: true, version: 0 };
+  }
+  const { data, error } = await db().rpc("save_registre", { org: workspace, rid: r.id, rnom: r.nom, rdata: r, expected: expected || null });
+  if (error && /save_registre|function/i.test(error.message) && /not find|does not exist|schema cache/i.test(error.message)) {
+    versioned = false;
+    await upsertRegistres(workspace, [r]);
+    return { ok: true, version: 0 };
+  }
+  fail(error);
+  const row = (Array.isArray(data) ? data[0] : data) as { ok: boolean; v: number; courant: Registre | null };
+  return row.ok ? { ok: true, version: row.v } : { ok: false, version: row.v, current: row.courant! };
 }
 
 export async function upsertRegistres(workspace: string, list: Registre[]): Promise<void> {

@@ -2684,3 +2684,8 @@ body.has-panel { overflow: hidden; }
 .segmented-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .equipe-list a.edii-link { font-size: 13px; text-decoration: none; }
 [hidden] { display: none !important; }
+
+/* A colleague's changes arrived (or ours were merged) */
+.remote-toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--tabbar) + 20px + env(safe-area-inset-bottom)); z-index: 90; display: flex; align-items: center; gap: 10px; max-width: min(520px, calc(100vw - 32px)); padding: 10px 16px; border-radius: 999px; background: rgba(15, 42, 68, 0.92); color: #fff; font-size: 14px; box-shadow: var(--shadow); -webkit-backdrop-filter: var(--blur); backdrop-filter: var(--blur); animation: sheet-in 0.2s ease; }
+@media (min-width: 1000px) { .remote-toast { bottom: 24px; left: calc(50% + 136px); } }
+.remote-toast { width: max-content; max-width: calc(100vw - 32px); border-radius: 16px; }

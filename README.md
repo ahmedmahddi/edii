@@ -54,6 +54,14 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
   changed, 1.5 s after the last change, retried when the network fails; the side menu says
   "Enregistré"). A colleague's changes arrive when the page comes back to the front. Registers made
   in a browser before accounts are offered for import into the workspace.
+* **Two people on the same register**: every save says which version it started from
+  (`save_registre`, migration `20261116000000_versions.sql`). A save from an older version is refused
+  with the current copy; the app merges both people's changes (`lib/registre/merge.ts`: per text,
+  per field; evaluations, evidence and JORT modifications kept from both sides; the latest
+  evaluation decides the conformity) and saves again, and says so. A colleague's save is heard live
+  (Supabase Realtime: the migration adds the table to the publication, its id and version only) and
+  on coming back to the page; it replaces a register shown here unless a change of ours waits, which
+  then merges.
 * **How a consulting firm uses it**: for each client, a consultant creates the workspace (as owner),
   invites the client's contact as administrator (then owner, if the client is to control it) and
   colleagues as editors. No billing yet: every workspace is free.

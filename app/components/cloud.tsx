@@ -13,13 +13,14 @@ import {
   cancelInvitation,
   createWorkspace,
   deleteRegistres,
+  fetchRegistre,
   fetchRegistres,
   type MyInvitation,
   myInvitations,
   myName,
   myWorkspaces,
   ROLE_LABEL,
-  upsertRegistres,
+  saveRegistre,
   type Workspace,
 } from "@/lib/cloud/api";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
@@ -73,7 +74,10 @@ function frenchError(error: unknown): string {
   return m;
 }
 
-const byDate = (list: Registre[]) => [...list].sort((a, b) => (a.cree ?? "").localeCompare(b.cree ?? "") || a.id.localeCompare(b.id));
+/** A colleague's save reached registers shown here ("remote"), or ours was merged with one ("merged"). */
+export const REMOTE_EVENT = "abclassement-registres-distants";
+export type RemoteDetail = { ids: string[]; kind: "remote" | "merged" };
+const announce = (ids: string[], kind: RemoteDetail["kind"]) => window.dispatchEvent(new CustomEvent<RemoteDetail>(REMOTE_EVENT, { detail: { ids, kind } }));
 
 /**
  * The app behind its sign-in: the account, then a workspace, then the app with that workspace's
@@ -146,11 +150,22 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     } catch {
       // remembered next time only
     }
-    const registres = byDate(await fetchRegistres(w.id));
-    const b = cloudBackend(
-      registres,
-      { upsert: (l) => upsertRegistres(w.id, l), remove: (ids) => deleteRegistres(w.id, ids) },
-      { readOnly: !canWrite(w), onState: setSync, delay: 1500 },
+    const stored = (await fetchRegistres(w.id)).sort(
+      (a, b) => (a.registre.cree ?? "").localeCompare(b.registre.cree ?? "") || a.registre.id.localeCompare(b.registre.id),
+    );
+    const b: CloudBackend = cloudBackend(
+      stored,
+      { save: (r, expected) => saveRegistre(w.id, r, expected), remove: (ids) => deleteRegistres(w.id, ids) },
+      {
+        readOnly: !canWrite(w),
+        onState: setSync,
+        delay: 1500,
+        // Merged with a colleague's changes: the page shows the merged registers.
+        onMerged: (ids) => {
+          setRegistreBackend(b);
+          announce(ids, "merged");
+        },
+      },
     );
     backend.current = b;
     setSync({ state: canWrite(w) ? "saved" : "readonly" });
@@ -192,18 +207,22 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // A colleague's changes: read again when the page comes back to the front, unless ours wait.
+  // A colleague's changes: heard live (Supabase Realtime), and read again when the page comes back
+  // to the front. A register with a change of ours waiting is left alone: its save merges.
   useEffect(() => {
     if (!current || !ready) return;
     const reread = async () => {
       const b = backend.current;
-      if (!b || b.pending() || document.visibilityState !== "visible") return;
+      if (!b || document.visibilityState !== "visible") return;
       try {
-        const fresh = byDate(await fetchRegistres(current.id));
-        if (b !== backend.current || b.pending()) return;
-        if (JSON.stringify(fresh) !== JSON.stringify(byDate(b.list))) {
-          b.list = fresh;
+        const fresh = await fetchRegistres(current.id);
+        if (b !== backend.current) return;
+        const changed = fresh.filter((s) => b.applyRemote(s)).map((s) => s.registre.id);
+        const ids = new Set(fresh.map((s) => s.registre.id));
+        const gone = b.list.filter((r) => !ids.has(r.id) && b.applyRemoval(r.id)).map((r) => r.id);
+        if (changed.length || gone.length) {
           setRegistreBackend(b);
+          announce([...changed, ...gone], "remote");
         }
       } catch {
         // offline: the next return will try again
@@ -211,9 +230,40 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     };
     document.addEventListener("visibilitychange", reread);
     window.addEventListener("focus", reread);
+
+    const c = cloud()!;
+    const live = c
+      .channel(`registres-${current.id}`)
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "registres", filter: `organization_id=eq.${current.id}` }, (p) => void heard(p.new))
+      .on("postgres_changes", { event: "UPDATE", schema: "public", table: "registres", filter: `organization_id=eq.${current.id}` }, (p) => void heard(p.new))
+      // Removals cannot be filtered by workspace: an unknown id is ignored.
+      .on("postgres_changes", { event: "DELETE", schema: "public", table: "registres" }, (p) => {
+        const b = backend.current;
+        const id = (p.old as { id?: string }).id;
+        if (b && id && b.applyRemoval(id)) {
+          setRegistreBackend(b);
+          announce([id], "remote");
+        }
+      })
+      .subscribe();
+    async function heard(row: unknown) {
+      const b = backend.current;
+      const { id, version } = (row ?? {}) as { id?: string; version?: number };
+      if (!b || !id || (version ?? 0) <= b.versionOf(id)) return; // our own save, or already known
+      try {
+        const s = await fetchRegistre(current!.id, id);
+        if (s && b === backend.current && b.applyRemote(s)) {
+          setRegistreBackend(b);
+          announce([id], "remote");
+        }
+      } catch {
+        // the next focus reads it
+      }
+    }
     return () => {
       document.removeEventListener("visibilitychange", reread);
       window.removeEventListener("focus", reread);
+      void c.removeChannel(live);
     };
   }, [current, ready]);
 
