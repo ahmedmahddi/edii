@@ -338,3 +338,71 @@ export async function adminSetPlan(workspace: string, o: Offre): Promise<void> {
   });
   fail(error);
 }
+
+// Reports on texts (supabase/migrations/20261117000000_signalements.sql).
+
+export type Motif = "hors-sujet" | "abroge" | "erreur" | "autre";
+export const MOTIFS: Record<Motif, string> = {
+  "hors-sujet": "Hors sujet pour ce site",
+  abroge: "Abrogé ou remplacé",
+  erreur: "Erreur dans la fiche",
+  autre: "Autre",
+};
+export type StatutSignalement = "nouveau" | "traite" | "rejete";
+export const STATUTS_SIGNALEMENT: Record<StatutSignalement, string> = { nouveau: "En attente", traite: "Traité", rejete: "Rejeté" };
+
+export interface Signalement {
+  id: string;
+  created: string;
+  texteId: string;
+  titre: string;
+  motif: Motif;
+  commentaire: string;
+  statut: StatutSignalement;
+  reponse: string;
+  traite: string | null;
+  email?: string;
+  nom?: string | null;
+  espace?: string | null;
+}
+
+export async function signaler(s: { workspace: string | null; texteId: string; titre: string; motif: Motif; commentaire: string }): Promise<void> {
+  const { error } = await db()
+    .from("signalements")
+    .insert({ organization_id: s.workspace, texte_id: s.texteId, texte_titre: s.titre.slice(0, 2000), motif: s.motif, commentaire: s.commentaire.trim().slice(0, 2000) });
+  fail(error);
+}
+
+type SignalementRow = { id: string; created_at: string; texte_id: string; texte_titre: string; motif: Motif; commentaire: string; statut: StatutSignalement; reponse: string; traite_at: string | null; email?: string; full_name?: string | null; espace?: string | null };
+const toSignalement = (r: SignalementRow): Signalement => ({
+  id: r.id,
+  created: r.created_at,
+  texteId: r.texte_id,
+  titre: r.texte_titre,
+  motif: r.motif,
+  commentaire: r.commentaire,
+  statut: r.statut,
+  reponse: r.reponse,
+  traite: r.traite_at,
+  email: r.email,
+  nom: r.full_name,
+  espace: r.espace,
+});
+
+/** The account's own reports, with ABC Consulting's answers. */
+export async function mesSignalements(userId: string): Promise<Signalement[]> {
+  const { data, error } = await db().from("signalements").select("*").eq("user_id", userId).order("created_at", { ascending: false });
+  if (error) return []; // before the migration
+  return ((data ?? []) as SignalementRow[]).map(toSignalement);
+}
+
+export async function adminSignalements(): Promise<Signalement[]> {
+  const { data, error } = await db().rpc("admin_signalements");
+  fail(error);
+  return ((data ?? []) as SignalementRow[]).map(toSignalement);
+}
+
+export async function adminTraiterSignalement(id: string, statut: StatutSignalement, reponse: string): Promise<void> {
+  const { error } = await db().rpc("admin_traiter_signalement", { sid: id, nouveau_statut: statut, texte_reponse: reponse });
+  fail(error);
+}

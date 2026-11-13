@@ -7,7 +7,20 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useCloud } from "@/app/components/cloud";
 import { Icon } from "@/app/components/icons";
-import { type AdminWorkspace, adminSetPlan, adminWorkspaceMembers, adminWorkspaces, ROLE_LABEL, type Role } from "@/lib/cloud/api";
+import {
+  adminSetPlan,
+  adminSignalements,
+  adminTraiterSignalement,
+  type AdminWorkspace,
+  adminWorkspaceMembers,
+  adminWorkspaces,
+  MOTIFS,
+  ROLE_LABEL,
+  type Role,
+  type Signalement,
+  type StatutSignalement,
+  STATUTS_SIGNALEMENT,
+} from "@/lib/cloud/api";
 import { etatOffre, type Offre, type Plan, PLANS } from "@/lib/cloud/plans";
 import { fold } from "@/lib/veille/watch";
 
@@ -44,7 +57,123 @@ const matches = (w: AdminWorkspace, f: Filtre) => {
   return true;
 };
 
+/** Administration: the clients' workspaces, and the reports on texts. */
 export function Admin() {
+  const { isAdmin } = useCloud();
+  const [tab, setTab] = useState<"clients" | "signalements">("clients");
+  const [nouveaux, setNouveaux] = useState(0);
+  useEffect(() => {
+    if (isAdmin)
+      adminSignalements()
+        .then((l) => setNouveaux(l.filter((x) => x.statut === "nouveau").length))
+        .catch(() => setNouveaux(0));
+  }, [isAdmin, tab]);
+  if (!isAdmin) return <p className="card registre-empty">Cet écran est réservé aux administrateurs de la plateforme.</p>;
+  return (
+    <div className="admin">
+      <div className="registre-tablist admin-tabs" role="tablist" aria-label="Administration">
+        <button type="button" role="tab" aria-selected={tab === "clients"} className={tab === "clients" ? "active" : ""} onClick={() => setTab("clients")}>
+          Clients
+        </button>
+        <button type="button" role="tab" aria-selected={tab === "signalements"} className={tab === "signalements" ? "active" : ""} onClick={() => setTab("signalements")}>
+          Signalements{nouveaux ? <span className="nav-count is-alert">{nouveaux}</span> : null}
+        </button>
+      </div>
+      {tab === "clients" ? <AdminClients /> : <AdminSignalements onChange={setNouveaux} />}
+    </div>
+  );
+}
+
+const dateHeure = (iso: string) => new Date(iso).toLocaleString("fr-FR", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
+
+/** The reports on texts, the new ones first: settled with a reply the author reads in Mon compte. */
+function AdminSignalements({ onChange }: { onChange: (nouveaux: number) => void }) {
+  const [list, setList] = useState<Signalement[] | null>(null);
+  const [error, setError] = useState("");
+  const [filtre, setFiltre] = useState<StatutSignalement | "tous">("nouveau");
+  const [replies, setReplies] = useState<Record<string, string>>({});
+  const load = useCallback(() => {
+    adminSignalements()
+      .then((l) => {
+        setList(l);
+        onChange(l.filter((x) => x.statut === "nouveau").length);
+      })
+      .catch((e) => setError(e instanceof Error ? e.message : String(e)));
+  }, [onChange]);
+  useEffect(load, [load]);
+  if (error)
+    return (
+      <p className="registre-warning" role="alert">
+        {error}
+      </p>
+    );
+  if (!list)
+    return (
+      <p className="muted" role="status">
+        Chargement des signalements…
+      </p>
+    );
+  const shown = list.filter((x) => filtre === "tous" || x.statut === filtre);
+  const settle = async (x: Signalement, statut: StatutSignalement) => {
+    try {
+      await adminTraiterSignalement(x.id, statut, replies[x.id] ?? x.reponse);
+      load();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    }
+  };
+  return (
+    <>
+      <div className="chips" role="tablist" aria-label="Filtrer les signalements">
+        {(["nouveau", "traite", "rejete", "tous"] as const).map((f) => (
+          <button key={f} type="button" role="tab" aria-selected={filtre === f} className={filtre === f ? "chip active" : "chip"} onClick={() => setFiltre(f)}>
+            {f === "tous" ? "Tous" : STATUTS_SIGNALEMENT[f]}
+            <span className="chip-count">{f === "tous" ? list.length : list.filter((x) => x.statut === f).length}</span>
+          </button>
+        ))}
+      </div>
+      <ul className="admin-list">
+        {shown.map((x) => (
+          <li key={x.id} className="card signalement">
+            <div className="signalement-head">
+              <span className={`pill ${x.statut === "nouveau" ? "pill-warn" : x.statut === "traite" ? "pill-ok" : "pill-muted"}`}>{STATUTS_SIGNALEMENT[x.statut]}</span>
+              <span className="pill pill-accent">{MOTIFS[x.motif]}</span>
+              <span className="muted small">{dateHeure(x.created)}</span>
+            </div>
+            <strong dir="auto">{x.titre}</strong>
+            <span className="muted small">
+              {x.nom || x.email}
+              {x.nom ? ` · ${x.email}` : ""}
+              {x.espace ? ` · ${x.espace}` : ""} · {x.texteId}
+            </span>
+            {x.commentaire ? <p className="signalement-text">« {x.commentaire} »</p> : null}
+            <label>
+              <span>Réponse (visible par l’auteur)</span>
+              <textarea rows={2} value={replies[x.id] ?? x.reponse} onChange={(e) => setReplies((r) => ({ ...r, [x.id]: e.target.value }))} placeholder="Ex. : retiré des règles de veille, merci." />
+            </label>
+            <div className="evidence-actions">
+              <button type="button" onClick={() => void settle(x, "traite")}>
+                Traité
+              </button>
+              <button type="button" className="secondary-button" onClick={() => void settle(x, "rejete")}>
+                Rejeté
+              </button>
+              {x.statut !== "nouveau" ? (
+                <button type="button" className="edii-link" onClick={() => void settle(x, "nouveau")}>
+                  Rouvrir
+                </button>
+              ) : null}
+              {x.traite ? <span className="muted small">le {dateHeure(x.traite)}</span> : null}
+            </div>
+          </li>
+        ))}
+        {!shown.length ? <li className="card registre-empty">Aucun signalement ici.</li> : null}
+      </ul>
+    </>
+  );
+}
+
+function AdminClients() {
   const { isAdmin } = useCloud();
   const [list, setList] = useState<AdminWorkspace[] | null>(null);
   const [error, setError] = useState("");
@@ -66,7 +195,6 @@ export function Admin() {
     return (list ?? []).filter((w) => matches(w, filtre) && (!q || fold(`${w.name} ${w.proprietaires}`).includes(q)));
   }, [list, filtre, query]);
 
-  if (!isAdmin) return <p className="card registre-empty">Cet écran est réservé aux administrateurs de la plateforme.</p>;
   if (error)
     return (
       <p className="registre-warning" role="alert">
@@ -83,7 +211,7 @@ export function Admin() {
   const count = (f: Filtre) => list.filter((w) => matches(w, f)).length;
   const open = list.find((w) => w.id === openId);
   return (
-    <div className="admin">
+    <>
       <section className="home-stats" aria-label="Vue d’ensemble">
         <button type="button" className="stat" onClick={() => setFiltre("tous")}>
           <strong>{list.length}</strong>
@@ -155,7 +283,7 @@ export function Admin() {
           }}
         />
       ) : null}
-    </div>
+    </>
   );
 }
 

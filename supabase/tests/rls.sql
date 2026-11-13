@@ -165,6 +165,23 @@ delete from public.registres where id = 'r9';
 select pg_temp.act('carol');
 select pg_temp.fails($$select * from public.save_registre((select org from ids), 'r2', 'x', '{}', 2)$$, 'a stranger cannot save through it');
 
+-- Reports on texts: a member reports from a workspace; only administrators see them all and settle them.
+select pg_temp.act('alice');
+insert into public.signalements (organization_id, texte_id, texte_titre, motif, commentaire) select org, 'jort-1', 'Arrêté X', 'hors-sujet', 'Rien à voir avec notre site' from ids;
+select pg_temp.fails($$insert into public.signalements (organization_id, texte_id, texte_titre, motif, statut) select org, 'jort-1', 'X', 'autre', 'traite' from ids$$, 'a report cannot be filed as settled');
+select pg_temp.fails($$insert into public.signalements (organization_id, texte_id, texte_titre, motif) values ('11111111-1111-1111-1111-111111111111', 'j', 'X', 'autre')$$, 'no report from another workspace');
+select pg_temp.check((select count(*) from public.signalements) = 1, 'the author sees the report');
+update public.signalements set statut = 'traite';
+select pg_temp.check((select statut from public.signalements) = 'nouveau', 'the author cannot settle it');
+select pg_temp.fails($$select * from public.admin_signalements()$$, 'only administrators list every report');
+select pg_temp.act('bob');
+select pg_temp.check((select count(*) from public.signalements) = 0, 'another account does not see it');
+select pg_temp.act('carol');
+select pg_temp.check((select espace from public.admin_signalements()) = 'Client SA (Sfax)', 'the administrator sees it, with its workspace');
+select public.admin_traiter_signalement((select id from public.signalements limit 1), 'traite', 'Retiré des règles');
+select pg_temp.act('alice');
+select pg_temp.check((select statut || ' / ' || reponse from public.signalements) = 'traite / Retiré des règles', 'the author sees the answer');
+
 -- Anonymous visitors see nothing.
 reset role;
 set role anon;

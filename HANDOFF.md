@@ -432,6 +432,17 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Launch 5: reports on texts.** Migration `20261117000000_signalements.sql`: table signalements
+(motif hors-sujet/abroge/erreur/autre, commentaire, statut nouveau/traite/rejete, reponse,
+traite_at), RLS: insert own as nouveau from a workspace one belongs to (or none), select own or as
+platform admin; `admin_signalements()` (with e-mail, name, workspace), `admin_traiter_signalement`.
+rls.sql: 8 checks. api.ts: MOTIFS, `signaler`, `mesSignalements`, `adminSignalements`,
+`adminTraiterSignalement`. `app/components/signaler.tsx` (form; cloud mode only) in the register
+sheet ("Pourquoi ce texte…") and on each Journal hit. Admin screen: tabs Clients | Signalements
+(badge of new ones; filter chips; reply; Traité / Rejeté / Rouvrir). Mon compte: "Vos signalements"
+with status and reply. Checked against the stand-in, phone: report → admin badge → reply → seen
+in Mon compte.
+
 **Fix (13 November): duplicate keys in the report, and texts read twice.** The report keyed its rows
 by reference + title, which two texts can share: rows now carry the text's id (`RapportLigne.id`).
 The catalogue (`catalogue()` in referentiel.ts) had 37 titles shared by two texts or more: 27 are

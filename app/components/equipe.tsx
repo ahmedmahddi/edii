@@ -20,9 +20,13 @@ import {
   ROLE_HELP,
   ROLE_LABEL,
   type Role,
+  mesSignalements,
+  MOTIFS,
   myNotifications,
   setMemberRole,
   setMyNotifications,
+  type Signalement,
+  STATUTS_SIGNALEMENT,
   updateMyName,
 } from "@/lib/cloud/api";
 import { cloud } from "@/lib/cloud/client";
@@ -333,6 +337,10 @@ export function Compte() {
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [notify, setNotify] = useState<boolean | null>(null);
+  const [reports, setReports] = useState<Signalement[]>([]);
+  useEffect(() => {
+    if (user) void mesSignalements(user.id).then(setReports);
+  }, [user]);
   useEffect(() => setFullName(name ?? ""), [name]);
   useEffect(() => {
     if (user) void myNotifications(user.id).then(setNotify);
@@ -428,6 +436,25 @@ export function Compte() {
           </button>
         </form>
       </section>
+      {reports.length ? (
+        <section className="card equipe-section">
+          <h2>Vos signalements</h2>
+          <ul className="equipe-list">
+            {reports.map((r) => (
+              <li key={r.id} className="signalement-mine">
+                <span className="equipe-who">
+                  <strong dir="auto">{r.titre}</strong>
+                  <span className="muted small">
+                    {MOTIFS[r.motif]} · {new Date(r.created).toLocaleDateString("fr-FR")}
+                  </span>
+                  {r.reponse ? <span className="small">Réponse d’ABC Consulting : {r.reponse}</span> : null}
+                </span>
+                <span className={`pill ${r.statut === "nouveau" ? "pill-warn" : r.statut === "traite" ? "pill-ok" : "pill-muted"}`}>{STATUTS_SIGNALEMENT[r.statut]}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       <section className="card equipe-section">
         <h2>Session</h2>
         <button type="button" className="secondary-button" onClick={() => void signOut()}>

@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Registres } from "@/app/components/registres";
+import { Signaler } from "@/app/components/signaler";
 import { amendments, catalogue } from "@/lib/registre/referentiel";
 import { alertes, aTraiter, CHANGED, loadRegistres, nouveautes } from "@/lib/registre/registre";
 import type { ClassificationReport } from "@/lib/report";
@@ -530,6 +531,7 @@ function Journal({ feed }: { feed: Feed }) {
                       ))}
                     </select>
                   </label>
+                  <Signaler texteId={`jort-${h.id}`} titre={h.title} compact />
                 </div>
                 </details>
               </li>

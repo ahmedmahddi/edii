@@ -9,6 +9,7 @@ import { REMOTE_EVENT, type RemoteDetail, useCloud } from "@/app/components/clou
 import { downloadWorkbook, today } from "@/app/components/download";
 import { Icon } from "@/app/components/icons";
 import { RapportConformite } from "@/app/components/rapport-conformite";
+import { Signaler } from "@/app/components/signaler";
 import { classLabel, dateFr, Profil, refOf, useFiches } from "@/app/components/registre-shared";
 import { canWrite, preuveUrl, uploadPreuve } from "@/lib/cloud/api";
 import { importance } from "@/lib/registre/importance";
@@ -954,6 +955,7 @@ function LigneSheet({
                 {l.retenu ? "Retirer du registre" : "Retenir dans le registre"}
               </button>
             ) : null}
+            <Signaler texteId={l.texte.id} titre={l.texte.titre} />
           </details>
         </div>
       </div>

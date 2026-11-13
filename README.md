@@ -79,6 +79,11 @@ end, limits) and see the members. Administrators do not read a client's register
 The first administrator is named once in the SQL Editor:
 `insert into public.platform_admins (user_id) select id from public.profiles where email = 'you@…';`
 
+**Reports on texts.** "Signaler un problème" on a text (in the register's sheet and in the Journal):
+hors sujet, abrogé ou remplacé, erreur dans la fiche, autre, with a comment. Reports reach
+**Administration → Signalements** (new first; treated or dismissed, with a reply the author reads in
+*Mon compte*). Signed-in accounts only (`supabase/migrations/20261117000000_signalements.sql`).
+
 **Weekly digest e-mail.** Every Monday (about 06:23 Tunis time; Vercel Cron, `vercel.json`)
 `GET /api/notifications/cron` sends each account one e-mail for all its workspaces: evaluations late
 or due within 30 days, actions of non-conformities overdue, due within 14 days or not planned, texts

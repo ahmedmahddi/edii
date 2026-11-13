@@ -87,7 +87,7 @@ const HEADINGS: Record<View, [string, string, string]> = {
   veille: ["Conformité", "Veille réglementaire", "Les textes du Journal officiel qui concernent vos établissements."],
   equipe: ["Espace de travail", "Équipe et espace", "Les membres de l’espace, leurs droits et les invitations."],
   compte: ["Espace de travail", "Mon compte", "Votre nom, votre mot de passe et votre session."],
-  admin: ["Administration", "Clients", "Les espaces de vos clients, leur offre et leur activité."],
+  admin: ["ABC Consulting", "Administration", "Les espaces de vos clients, leur offre, et les signalements sur les textes."],
 };
 /** The tab each screen belongs to (the bar below 1000px). */
 const TAB_OF: Record<View, View> = {
@@ -271,7 +271,7 @@ function Edii() {
           },
         ]
       : []),
-    ...(cloudState.isAdmin ? [{ title: "Administration", items: [["admin", "shield", "Clients"]] as [View, string, string][] }] : []),
+    ...(cloudState.isAdmin ? [{ title: "Administration", items: [["admin", "shield", "Clients et signalements"]] as [View, string, string][] }] : []),
   ];
   const badge = (id: View) =>
     id === "establishment" && activities.length > 0 ? (
@@ -369,7 +369,7 @@ function Edii() {
                 </button>
                 {cloudState.isAdmin ? (
                   <button type="button" onClick={() => go("admin")}>
-                    <Icon name="shield" size={19} /> Administration · Clients
+                    <Icon name="shield" size={19} /> Administration
                   </button>
                 ) : null}
                 <button type="button" onClick={() => void cloudState.signOut()}>
