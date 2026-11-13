@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { downloadWorkbook, today } from "@/app/components/download";
-import { type RegistreRoute, Registres } from "@/app/components/registres";
 import { Signaler } from "@/app/components/signaler";
 import { amendments, catalogue } from "@/lib/registre/referentiel";
 import { alertes, aTraiter, CHANGED, loadRegistres, nouveautes } from "@/lib/registre/registre";
@@ -99,7 +98,6 @@ const dateFr = (iso: string | null) =>
 const exportRegister = (hits: Hit[]) =>
   downloadWorkbook((wb) => fillRegister(wb, hits.map(registerRow), new Date()), `ID-QSE-002_veille_${today()}.xlsx`);
 
-export type Tab = "registres" | "journal";
 const PAGE = 20; // texts shown at once in the Journal officiel
 
 /** What waits in the registers of this browser (evaluations due, texts modified at the JORT), kept up to date. */
@@ -124,18 +122,15 @@ export function useVeilleCount(): number {
  * The veille: the registers of the establishments (texts that apply to each, their evaluation) and
  * the JORT read issue by issue. A validated classification arrives as `seed` to start a register.
  */
-export function Veille({ tab, route = { kind: "list" } }: { tab: Tab; route?: RegistreRoute }) {
+/** The Journal officiel read issue by issue, and the check of the issues published since. */
+export function Veille() {
   const feed = useFeed();
-  // Every text a register can hold: the curated référentiel and what the veille found in the JORT.
-  const texts = useMemo(() => catalogue(feed?.hits ?? [], feed?.amendments ?? [], feed?.citations ?? {}), [feed]);
   return (
     <div className="veille-tabs">
       {!feed ? (
         <p className="muted" role="status">
           Chargement de la veille…
         </p>
-      ) : tab === "registres" ? (
-        <Registres route={route} texts={texts} amendments={feed.amendments ?? []} />
       ) : (
         <>
           <Verifier feed={feed} />

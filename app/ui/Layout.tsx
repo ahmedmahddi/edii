@@ -58,7 +58,7 @@ export function EmptyState({ icon, title, children, actions }: { icon?: ReactNod
   return (
     <div data-ui="" className={s.empty}>
       {icon ? <div className={s.emptyIcon}>{icon}</div> : null}
-      <p className={s.emptyTitle}>{title}</p>
+      <h2 className={s.emptyTitle}>{title}</h2>
       {children ? <p className={s.emptyText}>{children}</p> : null}
       {actions ? <div className={s.emptyActions}>{actions}</div> : null}
     </div>

@@ -82,3 +82,18 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* A document over the app (the compliance report): the page under it does not scroll, and only the
+   document prints. */
+body.has-rapport {
+  overflow: hidden;
+}
+@media print {
+  body.has-rapport {
+    overflow: visible;
+    background: #fff !important;
+  }
+  body.has-rapport > *:not([data-rapport]) {
+    display: none !important;
+  }
+}

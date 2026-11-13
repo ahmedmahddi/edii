@@ -122,8 +122,8 @@ rendering, `tsx` for the scanner. Python only for the nomenclature/decree data p
 | `app/(app)/` | The screens: `page.tsx` (home; redirects links of before, `?vue=…`, `?e=…`), `registres/` (list, `[id]`, `nouveau`), `veille/`, `classement/` (nomenclature, establishment, synthèse; the dossier mirrored in the URL `?e=…&s=…&z=1&code=…&q=…`), `equipe/`, `compte/`, `admin/`. `_shell/`: providers (TanStack Query, tooltips, CloudGate), the side menu and phone bars, the Ctrl+K palette, `Legacy` (screens not rebuilt yet). |
 | `app/ui/` | Component library (Button, Badge, fields, Tabs, Segmented, Sheet, Menu, Tooltip, PageHeader, Panel, Stats, Notice, table classes); `useTheme`. |
 | `app/components/classification-report.tsx` | The detailed report (contents bar, exports). |
-| `app/components/veille.tsx` | Veille view: tabs **Registres des établissements** / **Journal officiel**; fetches `public/veille/feed.json` once; `useVeilleCount()` for the menu badge. |
-| `app/components/registres.tsx` | Registers: list, new-register step (name, site profile, duplicate detection), register view (to-do panels, groups by domain, evaluation cards with "Modifié par…" history, add a text, Excel export), backup/restore. |
+| `app/components/veille.tsx` | The Journal officiel (/veille) and "Vérifier maintenant"; fetches `public/veille/feed.json` once (`useFeed`); `useVeilleCount()` for the menu's count. |
+| `app/(app)/registres/_components/` | Registers: `RegistreList` (table, backup/restore), `NouveauRegistre` (name, site profile, duplicate detection), `RegistreDetail` (figures, texts modified at the JORT / new / no longer applicable, filters, table by domain, Excel export, add a text, name and profile), `LigneSheet` (evaluate, evidence, action plan, history), `ProfilForm`. |
 | `app/components/download.ts` | Browser downloads; `downloadWorkbook` (exceljs on demand). |
 | `app/styles/` | `tokens.css` (every colour and size, light and dark), `base.css` (reset), `legacy.css` (former rules of screens not rebuilt, scoped under `:where(.legacy)`, skipping `[data-ui]`; generated once, shrinks, never added to). |
 | `lib/classify.ts`, `lib/establishment.ts`, `lib/studies.ts`, `lib/report.ts`, `lib/sectors.ts` | Classification, establishment and addition rule, ANPE study, report model, sector names (see README). |
@@ -891,9 +891,11 @@ Consulting (never called a SaaS), state of the art, scalable and maintainable; d
 "precision instrument" (Linear/Stripe/Vercel: neutral greys, one blue, 1px borders, no blur nor
 gradients, dense tables, Inter, keyboard shortcuts, Ctrl+K). Clients stay off `main` until it is done.
 
-* Step 1 (foundation): ~~tokens, components~~, ~~shell with real addresses, providers, command
-  palette, sign-in screens, legal pages~~; then home, registers list, register (table) and the
-  text sheet on `app/ui`, and the report styles as a module.
+* ~~Step 1 (foundation)~~ done: tokens, components, shell with real addresses, providers, command
+  palette, sign-in, legal pages; home, registers list, new register, register (a table grouped by
+  domain, filters, j/k and / on the keyboard, the open text in the address `?texte=…`), the text
+  sheet, the site profile form, the compliance report's styles as a module. Shared figures in
+  `lib/registre/etat.ts`; hooks in `app/(app)/_data/`.
 * Step 2 (data): registers as rows (one per line, evaluations, evidence) with per-line saves; a
   typed Supabase client; the text catalogue and fiches served from the database or the server
   (the browser downloads 9 MB of JSON today); TanStack Query instead of window events.

@@ -387,7 +387,7 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `app/(app)/` | The screens, one address each (`/`, `/registres`, `/registres/[id]`, `/registres/nouveau`, `/veille`, `/classement`, `/equipe`, `/compte`, `/admin`); `_shell/` holds the frame (side menu, phone bars, Ctrl+K command palette) and the providers. |
 | `app/ui/` | The component library (buttons, fields, tabs, sheets, menus, tables…), on the tokens of `app/styles/tokens.css`. See DESIGN.md. |
 | `app/components/auth.tsx` | Sign-in, account creation, new password. |
-| `app/components/accueil.tsx` | The home: what waits in the registers, each establishment, the latest of the Journal, quick actions. |
+| `app/(app)/registres/_components/` | The registers: list, new register, the register as a table, the text sheet, the site profile form. |
 | `app/components/icons.tsx` | The line icons. |
 | `app/components/cloud.tsx` | Sign-in, workspace choice, register sync state, import of browser registers. |
 | `app/components/equipe.tsx` | Équipe et espace (members, invitations, roles) and Mon compte. |
@@ -406,7 +406,6 @@ The project path must have no spaces, and the laptop must be on and connected at
 | `app/components/veille.tsx` | The Registres and Veille réglementaire screens. |
 | `lib/registre/` | Registers of the establishments: the site profile and its conditions (`profil.ts`), the référentiel (`referentiel.ts`), a register, its alerts and due evaluations (`registre.ts`). |
 | `data/referentiel/textes.json` | The curated référentiel. |
-| `app/components/registres.tsx` | The registers: list and creation. `registre-view.tsx`: one register as a checklist, the text's sheet (evaluation, evidence, action plan, history). `registre-shared.tsx`: the site profile form and helpers. |
 | `tests/` | Vitest suite. Expected categories were read off the scans. |
 
 ## Texts

@@ -1,0 +1,84 @@
+.form {
+  display: grid;
+  gap: var(--ui-space-5);
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--ui-space-3) var(--ui-space-4);
+  margin: 0;
+  padding: var(--ui-space-3) var(--ui-space-4);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-subtle);
+}
+.facts dt {
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+}
+.facts dd {
+  margin: 0;
+  font-size: var(--ui-text-sm);
+}
+.effectif {
+  max-width: 16rem;
+}
+.group {
+  display: grid;
+  gap: var(--ui-space-2);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.group legend {
+  margin-bottom: var(--ui-space-2);
+  padding: 0;
+  font-size: var(--ui-text-xs);
+  font-weight: var(--ui-weight-semibold);
+  color: var(--ui-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--ui-space-2) var(--ui-space-4);
+}
+.metiers {
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+}
+.metiers > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ui-space-2);
+  padding: var(--ui-space-3) var(--ui-space-4);
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+  cursor: pointer;
+  list-style: none;
+}
+.metiers > summary::-webkit-details-marker {
+  display: none;
+}
+.metiers > summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid var(--ui-text-muted);
+  border-bottom: 1.5px solid var(--ui-text-muted);
+  transform: rotate(45deg);
+}
+.metiers[open] > summary::after {
+  transform: rotate(-135deg);
+}
+.metiersBody {
+  display: grid;
+  gap: var(--ui-space-4);
+  padding: 0 var(--ui-space-4) var(--ui-space-4);
+}
+.hint {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}

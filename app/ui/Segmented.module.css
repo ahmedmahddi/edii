@@ -10,7 +10,16 @@
 }
 .block {
   display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr));
   width: 100%;
+}
+.block .item {
+  height: auto;
+  min-height: 28px;
+  padding-block: 4px;
+  white-space: normal;
+  line-height: 1.25;
 }
 .item {
   height: 28px;

@@ -8,7 +8,7 @@ export default function VeillePage() {
     <>
       <PageHeader title="Veille réglementaire" description="Les textes du Journal officiel qui concernent vos établissements." />
       <Legacy>
-        <Veille tab="journal" />
+        <Veille />
       </Legacy>
     </>
   );

@@ -14,9 +14,9 @@ export async function go(page: Page, name: RegExp) {
 /** A register without classification, opened. */
 export async function newRegister(page: Page, nom = "Usine de Sfax") {
   await page.goto("/registres/nouveau");
-  await page.getByPlaceholder("Nom de l’établissement").fill(nom);
-  await page.getByRole("button", { name: /Créer le registre/ }).click();
-  await expect(page.locator(".registre-head")).toBeVisible();
+  await page.getByRole("textbox", { name: "Nom de l’établissement" }).fill(nom);
+  await page.getByRole("button", { name: /Créer le registre \(\d+ textes proposés\)/ }).click();
+  await expect(page.getByRole("heading", { level: 1, name: nom })).toBeVisible();
 }
 
 /** Errors in the page fail the test. */

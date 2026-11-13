@@ -1,0 +1,61 @@
+.grid {
+  display: grid;
+  gap: var(--ui-space-6);
+}
+.etab {
+  min-width: 14rem;
+}
+.progressCell {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  min-width: 8rem;
+}
+.progressCell > :first-child {
+  flex: 1;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.hits {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hit {
+  display: grid;
+  gap: 2px;
+  padding: var(--ui-space-3) var(--ui-space-4);
+}
+.hit + .hit {
+  border-top: 1px solid var(--ui-border);
+}
+.hitHead {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-space-2);
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+}
+.hitTitle {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text);
+}
+.hitTitle:hover {
+  color: var(--ui-accent-fg);
+}
+.foot {
+  padding: var(--ui-space-3) var(--ui-space-4);
+  border-top: 1px solid var(--ui-border);
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+}
+.muted {
+  padding: var(--ui-space-4);
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}

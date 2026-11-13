@@ -6,7 +6,9 @@
  */
 import { useEffect, useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { Icon } from "@/app/components/icons";
+import { ArrowLeft, Printer } from "lucide-react";
+import { Button, Checkbox, TextField } from "@/app/ui";
+import s from "./rapport-conformite.module.css";
 import { rapportConformite } from "@/lib/registre/rapport";
 import type { Texte } from "@/lib/registre/referentiel";
 import type { Registre } from "@/lib/registre/registre";
@@ -14,6 +16,13 @@ import { categoryLabel } from "@/lib/report";
 import { metierLabels } from "@/lib/registre/profil";
 import { study } from "@/lib/studies";
 import type { Amendment } from "@/lib/veille/watch";
+
+/** The module's class names, from their names (falsy ones dropped). */
+const cx = (...names: (string | false)[]) =>
+  names
+    .filter((n): n is string => !!n)
+    .map((n) => s[n] ?? n)
+    .join(" ");
 
 const dateFr = (iso: string | null) => (iso ? new Date(`${iso.slice(0, 10)}T12:00:00`).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }) : "—");
 const dateCourt = (iso: string | null) => (iso ? iso.slice(0, 10).split("-").reverse().join("/") : "—");
@@ -56,69 +65,67 @@ export function RapportConformite({
   const metiers = metierLabels(reg.site);
   const classement = reg.classe === null && !reg.activites.length ? "Établissement sans classement" : categoryLabel(reg.classe);
   return createPortal(
-    <div className="rapport-root" role="dialog" aria-modal="true" aria-label="Rapport de conformité">
-      <div className="rapport-toolbar">
-        <button type="button" className="secondary-button" onClick={onClose}>
-          <Icon name="back" size={18} /> Fermer
-        </button>
-        <label>
-          <span>Période depuis</span>
-          <input type="date" value={depuis} max={r.date} onChange={(e) => setDepuis(e.target.value || yearAgo)} />
-        </label>
-        <label className="rapport-check">
-          <input type="checkbox" checked={annexe} onChange={(e) => setAnnexe(e.target.checked)} />
-          <span>Liste complète des textes</span>
-        </label>
-        <button type="button" onClick={() => window.print()}>
-          <Icon name="file" size={18} /> Imprimer / PDF
-        </button>
+    <div data-rapport="" data-ui="" className={cx("root")} role="dialog" aria-modal="true" aria-label="Rapport de conformité">
+      <div className={cx("toolbar")}>
+        <Button variant="ghost" onClick={onClose}>
+          <ArrowLeft size={15} /> Fermer
+        </Button>
+        <TextField label="Période depuis" type="date" value={depuis} max={r.date} onChange={(e) => setDepuis(e.target.value || yearAgo)} />
+        <span className={cx("check")}>
+          <Checkbox checked={annexe} onChange={(e) => setAnnexe(e.target.checked)}>
+            Liste complète des textes
+          </Checkbox>
+        </span>
+        <Button variant="primary" className={cx("print")} onClick={() => window.print()}>
+          <Printer size={15} /> Imprimer / PDF
+        </Button>
       </div>
 
-      <article className="rapport">
-        <header className="rapport-masthead">
+      <article className={cx("doc")}>
+        <header className={cx("masthead")}>
           <div>
-            <p className="rapport-kicker">État de conformité réglementaire</p>
+            <p className={cx("kicker")}>État de conformité réglementaire</p>
             <h1>{reg.nom}</h1>
-            <p className="rapport-meta">
+            <p className={cx("meta")}>
               {espace ? `${espace} · ` : ""}Arrêté au {dateFr(r.date)} · période du {dateFr(r.depuis)} au {dateFr(r.date)}
             </p>
           </div>
           <img src="/brand/abc-consulting.jpg" alt="ABC Consulting" width="763" height="366" />
         </header>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>1. Synthèse</h2>
-          <div className="rapport-kpis">
-            <div className="rapport-kpi is-main">
+          <div className={cx("kpis")}>
+            <div className={cx("kpi", "is-main")}>
               <strong>{t.taux === null ? "—" : `${t.taux} %`}</strong>
               <span>taux de conformité</span>
               <small>conformes / (conformes + non conformes)</small>
             </div>
-            <div className="rapport-kpi">
+            <div className={cx("kpi")}>
               <strong>{t.progression} %</strong>
               <span>des textes évalués</span>
               <small>
                 {t.evalues} sur {t.applicables}
               </small>
             </div>
-            <div className="rapport-kpi">
+            <div className={cx("kpi")}>
               <strong>{t.C}</strong>
               <span>conformes</span>
             </div>
-            <div className={`rapport-kpi${t.NC ? " is-bad" : ""}`}>
+            <div className={cx("kpi", t.NC > 0 && "is-bad")}>
               <strong>{t.NC}</strong>
               <span>non conformes</span>
             </div>
-            <div className="rapport-kpi">
+            <div className={cx("kpi")}>
               <strong>{t.NA}</strong>
               <span>non applicables</span>
             </div>
-            <div className={`rapport-kpi${t.enRetard ? " is-bad" : ""}`}>
+            <div className={cx("kpi", t.enRetard > 0 && "is-bad")}>
               <strong>{t.enRetard}</strong>
               <span>évaluations en retard</span>
             </div>
           </div>
-          <dl className="rapport-facts">
+          <dl className={cx("facts")}>
             <div>
               <dt>Classement</dt>
               <dd>
@@ -148,31 +155,31 @@ export function RapportConformite({
           </dl>
         </section>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>2. Conformité par domaine</h2>
-          <table className="rapport-table">
+          <table className={cx("table")}>
             <thead>
               <tr>
                 <th>Domaine</th>
-                <th className="num">Textes</th>
-                <th className="num">C</th>
-                <th className="num">NC</th>
-                <th className="num">NA</th>
-                <th className="num">À évaluer</th>
-                <th className="num">Taux</th>
+                <th className={cx("num")}>Textes</th>
+                <th className={cx("num")}>C</th>
+                <th className={cx("num")}>NC</th>
+                <th className={cx("num")}>NA</th>
+                <th className={cx("num")}>À évaluer</th>
+                <th className={cx("num")}>Taux</th>
               </tr>
             </thead>
             <tbody>
               {r.domaines.map((d) => (
                 <tr key={d.domaine}>
                   <td>{d.label}</td>
-                  <td className="num">{d.total}</td>
-                  <td className="num">{d.C}</td>
-                  <td className={`num${d.NC ? " is-bad" : ""}`}>{d.NC}</td>
-                  <td className="num">{d.NA}</td>
-                  <td className="num">{d.aEvaluer}</td>
-                  <td className="num">
-                    <span className="rapport-bar">
+                  <td className={cx("num")}>{d.total}</td>
+                  <td className={cx("num")}>{d.C}</td>
+                  <td className={cx("num", d.NC > 0 && "is-bad")}>{d.NC}</td>
+                  <td className={cx("num")}>{d.NA}</td>
+                  <td className={cx("num")}>{d.aEvaluer}</td>
+                  <td className={cx("num")}>
+                    <span className={cx("bar")}>
                       <span style={{ width: `${d.taux ?? 0}%` }} />
                     </span>
                     {d.taux === null ? "—" : `${d.taux} %`}
@@ -183,10 +190,10 @@ export function RapportConformite({
           </table>
         </section>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>3. Non-conformités et plan d’actions</h2>
           {r.nonConformites.length ? (
-            <table className="rapport-table is-fixed">
+            <table className={cx("table", "is-fixed")}>
               <colgroup><col style={{ width: "27%" }} /><col style={{ width: "18%" }} /><col style={{ width: "23%" }} /><col style={{ width: "12%" }} /><col style={{ width: "10%" }} /><col style={{ width: "10%" }} /></colgroup>
               <thead>
                 <tr>
@@ -209,23 +216,23 @@ export function RapportConformite({
                     <td>{n.constat || "—"}</td>
                     <td>{n.action || "—"}</td>
                     <td>{n.responsable || "—"}</td>
-                    <td className="date">{dateCourt(n.echeance)}</td>
+                    <td className={cx("date")}>{dateCourt(n.echeance)}</td>
                     <td>
-                      <span className={`rapport-tag tag-${n.etat}`}>{ETAT_NC[n.etat]}</span>
+                      <span className={cx("tag", `tag-${n.etat}`)}>{ETAT_NC[n.etat]}</span>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p className="rapport-empty">Aucune non-conformité ouverte.</p>
+            <p className={cx("empty")}>Aucune non-conformité ouverte.</p>
           )}
         </section>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>4. Actions réalisées sur la période</h2>
           {r.actionsRealisees.length ? (
-            <ul className="rapport-list">
+            <ul className={cx("list")}>
               {r.actionsRealisees.map((a) => (
                 <li key={a.id}>
                   <strong>{dateCourt(a.date)}</strong> · {a.ref} — {a.titre}
@@ -233,14 +240,14 @@ export function RapportConformite({
               ))}
             </ul>
           ) : (
-            <p className="rapport-empty">Aucune action corrective close sur la période.</p>
+            <p className={cx("empty")}>Aucune action corrective close sur la période.</p>
           )}
         </section>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>5. Évaluations en retard et à venir (30 jours)</h2>
           {r.aVenir.length ? (
-            <table className="rapport-table is-fixed">
+            <table className={cx("table", "is-fixed")}>
               <colgroup><col style={{ width: "70%" }} /><col style={{ width: "15%" }} /><col style={{ width: "15%" }} /></colgroup>
               <thead>
                 <tr>
@@ -256,28 +263,28 @@ export function RapportConformite({
                       <strong>{a.ref}</strong>
                       <small>{a.titre}</small>
                     </td>
-                    <td className="date">{dateCourt(a.date)}</td>
+                    <td className={cx("date")}>{dateCourt(a.date)}</td>
                     <td>
-                      <span className={`rapport-tag tag-${a.etat}`}>{ETAT_EVAL[a.etat]}</span>
+                      <span className={cx("tag", `tag-${a.etat}`)}>{ETAT_EVAL[a.etat]}</span>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           ) : (
-            <p className="rapport-empty">Aucune évaluation en retard ni prévue sous 30 jours.</p>
+            <p className={cx("empty")}>Aucune évaluation en retard ni prévue sous 30 jours.</p>
           )}
           {t.aEvaluer ? (
-            <p className="rapport-note">
+            <p className={cx("note")}>
               {t.aEvaluer} texte{t.aEvaluer > 1 ? "s" : ""} du registre {t.aEvaluer > 1 ? "n’ont" : "n’a"} pas encore été évalué{t.aEvaluer > 1 ? "s" : ""}.
             </p>
           ) : null}
         </section>
 
-        <section className="rapport-section">
+        <section className={cx("section")}>
           <h2>6. Veille réglementaire</h2>
           {r.jort.modifies.length ? (
-            <ul className="rapport-list">
+            <ul className={cx("list")}>
               {r.jort.modifies.map((m) => (
                 <li key={`${m.id}-${m.amendment}`}>
                   <strong>{m.ref}</strong> est modifié par : {m.par} ({m.jort}) — à réévaluer.
@@ -285,10 +292,10 @@ export function RapportConformite({
               ))}
             </ul>
           ) : (
-            <p className="rapport-empty">Aucun texte du registre modifié au Journal officiel depuis sa dernière prise en compte.</p>
+            <p className={cx("empty")}>Aucun texte du registre modifié au Journal officiel depuis sa dernière prise en compte.</p>
           )}
           {r.jort.nouveaux ? (
-            <p className="rapport-note">
+            <p className={cx("note")}>
               {r.jort.nouveaux} nouveau{r.jort.nouveaux > 1 ? "x" : ""} texte{r.jort.nouveaux > 1 ? "s" : ""} applicable{r.jort.nouveaux > 1 ? "s" : ""} au site
               {r.jort.nouveaux > 1 ? " sont" : " est"} à examiner pour l’ajouter au registre.
             </p>
@@ -296,9 +303,9 @@ export function RapportConformite({
         </section>
 
         {annexe ? (
-          <section className="rapport-section rapport-annexe">
+          <section className={cx("section", "annexe")}>
             <h2>Annexe : textes applicables ({r.textes.length})</h2>
-            <table className="rapport-table is-dense is-fixed">
+            <table className={cx("table", "is-dense", "is-fixed")}>
               <colgroup><col style={{ width: "46%" }} /><col style={{ width: "12%" }} /><col style={{ width: "11%" }} /><col style={{ width: "11%" }} /><col style={{ width: "20%" }} /></colgroup>
               <thead>
                 <tr>
@@ -317,10 +324,10 @@ export function RapportConformite({
                       <small>{x.titre}</small>
                     </td>
                     <td>{x.conformite}</td>
-                    <td className="date">{dateCourt(x.evalue)}</td>
-                    <td className="date">
+                    <td className={cx("date")}>{dateCourt(x.evalue)}</td>
+                    <td className={cx("date")}>
                       {dateCourt(x.prochaine)}
-                      {x.etat === "en-retard" ? <small className="is-bad">en retard</small> : null}
+                      {x.etat === "en-retard" ? <small className={cx("is-bad")}>en retard</small> : null}
                     </td>
                     <td>{x.preuves.length ? x.preuves.join(" · ") : "—"}</td>
                   </tr>
@@ -330,7 +337,7 @@ export function RapportConformite({
           </section>
         ) : null}
 
-        <footer className="rapport-signatures">
+        <footer className={cx("signatures")}>
           <div>
             <span>Établi par</span>
             <strong>{auteur ?? ""}</strong>
@@ -342,7 +349,7 @@ export function RapportConformite({
             <em>Date et signature</em>
           </div>
         </footer>
-        <p className="rapport-foot">
+        <p className={cx("foot")}>
           Établi avec ABClassement (ABC Consulting) à partir du registre de veille réglementaire de l’établissement. Document d’aide au suivi : le texte officiel
           fait foi.
         </p>

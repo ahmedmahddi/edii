@@ -4,8 +4,10 @@
  * The report reaches ABC Consulting's administrators (Administration → Signalements). Signed-in
  * accounts only: in local mode there is nowhere to send it.
  */
+import { Flag } from "lucide-react";
 import { useState } from "react";
 import { useCloud } from "@/app/components/cloud";
+import { Button, Notice, Segmented, TextArea } from "@/app/ui";
 import { MOTIFS, type Motif, signaler } from "@/lib/cloud/api";
 
 export function Signaler({ texteId, titre, compact }: { texteId: string; titre: string; compact?: boolean }) {
@@ -17,17 +19,12 @@ export function Signaler({ texteId, titre, compact }: { texteId: string; titre: 
   const [done, setDone] = useState(false);
   const [error, setError] = useState("");
   if (!enabled || !user) return null;
-  if (done)
-    return (
-      <p className="auth-done signaler-done" role="status">
-        Merci : ABC Consulting examinera ce texte. La réponse s’affichera dans Mon compte.
-      </p>
-    );
+  if (done) return <Notice title="Merci : ABC Consulting examinera ce texte.">La réponse s’affichera dans Mon compte.</Notice>;
   if (!open)
     return (
-      <button type="button" className={compact ? "edii-link signaler-link" : "secondary-button signaler-open"} onClick={() => setOpen(true)}>
-        Signaler un problème
-      </button>
+      <Button variant={compact ? "ghost" : "secondary"} size={compact ? "sm" : "md"} onClick={() => setOpen(true)}>
+        <Flag size={14} /> Signaler un problème
+      </Button>
     );
   const send = async () => {
     if (!motif) return;
@@ -43,31 +40,30 @@ export function Signaler({ texteId, titre, compact }: { texteId: string; titre: 
     }
   };
   return (
-    <div className="signaler">
-      <span className="panel-label">Quel est le problème ?</span>
-      <div className="signaler-motifs" role="radiogroup" aria-label="Motif">
-        {(Object.keys(MOTIFS) as Motif[]).map((m) => (
-          <button key={m} type="button" role="radio" aria-checked={motif === m} className={motif === m ? "chip active" : "chip"} onClick={() => setMotif(m)}>
-            {MOTIFS[m]}
-          </button>
-        ))}
-      </div>
-      <label>
-        <span>Précisez (facultatif)</span>
-        <textarea rows={2} value={commentaire} onChange={(e) => setCommentaire(e.target.value)} maxLength={2000} placeholder="Ex. : ce décret a été remplacé par…, le site n’a pas cette activité…" />
-      </label>
-      {error ? (
-        <p className="registre-warning" role="alert">
-          {error}
-        </p>
-      ) : null}
-      <div className="evidence-actions">
-        <button type="button" disabled={!motif || busy} onClick={send}>
+    <div data-ui="" style={{ display: "grid", gap: "var(--ui-space-3)" }}>
+      <Segmented<Motif>
+        label="Quel est le problème ?"
+        value={motif}
+        onChange={setMotif}
+        options={(Object.keys(MOTIFS) as Motif[]).map((m) => ({ value: m, label: MOTIFS[m] }))}
+        block
+      />
+      <TextArea
+        label="Précisez (facultatif)"
+        rows={2}
+        value={commentaire}
+        onChange={(e) => setCommentaire(e.target.value)}
+        maxLength={2000}
+        placeholder="Ex. : ce décret a été remplacé par…, le site n’a pas cette activité…"
+      />
+      {error ? <Notice tone="danger" title={error} /> : null}
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--ui-space-2)" }}>
+        <Button variant="primary" disabled={!motif || busy} onClick={send}>
           {busy ? "Envoi…" : "Envoyer à ABC Consulting"}
-        </button>
-        <button type="button" className="secondary-button" onClick={() => setOpen(false)}>
+        </Button>
+        <Button variant="ghost" onClick={() => setOpen(false)}>
           Annuler
-        </button>
+        </Button>
       </div>
     </div>
   );
