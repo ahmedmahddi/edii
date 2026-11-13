@@ -2637,3 +2637,13 @@ body.has-panel { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
 .registre-tools > * { min-width: 0; }
 .registre-search input { width: 100%; }
+
+/* A setting with a switch (Mon compte) */
+.toggle-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; }
+.toggle-row > span { display: grid; gap: 4px; }
+.toggle-row small { font-size: 13px; line-height: 1.45; }
+.switch { appearance: none; -webkit-appearance: none; flex: none; width: 51px; height: 31px; min-height: 31px; border-radius: 999px; background: rgba(15, 23, 42, 0.16); position: relative; cursor: pointer; transition: background 0.2s ease; border: 0; box-shadow: none; padding: 0; }
+.switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(15, 23, 42, 0.25); transition: transform 0.2s ease; }
+.switch:checked { background: #34c759; }
+.switch:checked::after { transform: translateX(20px); }
+.switch:disabled { opacity: 0.5; }

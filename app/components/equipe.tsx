@@ -19,7 +19,9 @@ import {
   ROLE_HELP,
   ROLE_LABEL,
   type Role,
+  myNotifications,
   setMemberRole,
+  setMyNotifications,
   updateMyName,
 } from "@/lib/cloud/api";
 import { cloud } from "@/lib/cloud/client";
@@ -315,7 +317,11 @@ export function Compte() {
   const [password, setPassword] = useState("");
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
+  const [notify, setNotify] = useState<boolean | null>(null);
   useEffect(() => setFullName(name ?? ""), [name]);
+  useEffect(() => {
+    if (user) void myNotifications(user.id).then(setNotify);
+  }, [user]);
   if (!user) return null;
   const act = async (fn: () => Promise<void>, done: string) => {
     setError("");
@@ -362,6 +368,27 @@ export function Compte() {
             Enregistrer
           </button>
         </form>
+      </section>
+      <section className="card equipe-section">
+        <h2>Récapitulatif par e-mail</h2>
+        <label className="toggle-row">
+          <span>
+            <strong>Chaque lundi</strong>
+            <small className="muted">Évaluations en retard ou à venir, actions à suivre, nouveaux textes du JORT : un seul e-mail pour tous vos espaces.</small>
+          </span>
+          <input
+            type="checkbox"
+            role="switch"
+            className="switch"
+            checked={notify ?? true}
+            disabled={notify === null}
+            onChange={(e) => {
+              const on = e.target.checked;
+              setNotify(on);
+              void act(() => setMyNotifications(user.id, on), on ? "Récapitulatif activé." : "Récapitulatif arrêté.");
+            }}
+          />
+        </label>
       </section>
       <section className="card equipe-section">
         <h2>Mot de passe</h2>

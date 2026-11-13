@@ -427,6 +427,28 @@ run a model). Two parts:
   grew from ~9,000 to ~9,600 texts). More one-offs ignored or demoted (end of functions, debt
   write-offs, State loan guarantees, concessions, statutes of bodies, grant agreements).
 
+**Launch list (13 November).** The user will publish the whole app after six blocks, then run
+a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF compliance report, 5 content
+feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
+every push come with the complete list of commands to run.
+
+**Launch 1: the weekly digest e-mail.** `lib/notify/digest.ts` (pure: `digestRegistre` → late /
+within-30-days evaluations, NC actions overdue / within 14 days / unplanned, JORT alerts, new
+texts; `quiet`; `jortRecent` = important hits of the past 7 days), `email.ts` (`renderDigest`:
+subject from what matters, inline-styled HTML + text, everything escaped), `send.ts` (Resend or
+Brevo over HTTPS, List-Unsubscribe headers), `token.ts` (HMAC of the account id with CRON_SECRET).
+`lib/cloud/server.ts`: `serviceClient()` (SUPABASE_SERVICE_ROLE_KEY, server only) and `all()`
+(pages of 1000). `app/api/notifications/cron` (Monday 05:23 UTC in vercel.json; CRON_SECRET;
+`?dry=1`, `?force=1`; reads profiles that want it, memberships, organizations, then the registers
+one workspace at a time; the feed from `/veille/feed.json` of the site; skips accounts notified in
+the last 6 days; stamps `notified_at`). `app/api/notifications/unsubscribe` (GET and POST).
+Migration `20261114000000_notifications.sql` (profiles.notifications, notified_at). Mon compte: a
+switch (`myNotifications`, `setMyNotifications`). `?vue=<view>` in the URL opens a screen.
+Checked against the stand-in (service role = superuser there): 401 without the secret, dry run over
+8 accounts (1 skipped, digests with actions "à planifier" and the week's JORT), forged unsubscribe
+refused (400), real one sets notifications false, the switch writes the column. Tests:
+tests/notify.test.ts.
+
 **Step 4 (12 November): the compliance workflow, in a register rebuilt as a checklist.**
 
 * Model (`lib/registre/registre.ts`): `Evaluation { id, date, enregistre, conformite, commentaire,

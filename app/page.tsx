@@ -108,7 +108,11 @@ function Edii() {
   const [activities, setActivities] = useState<Activity[]>(() =>
     decodeActivities(params.get("e")),
   );
-  const [view, setView] = useState<View>(() => (params.get("e") ? "establishment" : params.get("code") || params.get("q") ? "search" : "accueil"));
+  const [view, setView] = useState<View>(() => {
+    const vue = params.get("vue");
+    if (vue && vue in HEADINGS && vue !== "report") return vue as View; // a link to a screen (e-mails)
+    return params.get("e") ? "establishment" : params.get("code") || params.get("q") ? "search" : "accueil";
+  });
   // What the home asks of the registers screen: open one, or start a new one.
   const [registreAction, setRegistreAction] = useState<{ open?: string; create?: boolean } | null>(null);
   const registreActionUsed = useCallback(() => setRegistreAction(null), []);

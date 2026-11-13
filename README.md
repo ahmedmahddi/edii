@@ -58,13 +58,25 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
   invites the client's contact as administrator (then owner, if the client is to control it) and
   colleagues as editors. No billing yet: every workspace is free.
 
+**Weekly digest e-mail.** Every Monday (about 06:23 Tunis time; Vercel Cron, `vercel.json`)
+`GET /api/notifications/cron` sends each account one e-mail for all its workspaces: evaluations late
+or due within 30 days, actions of non-conformities overdue, due within 14 days or not planned, texts
+of the registers modified at the JORT and new texts that apply, and the week's important texts of the
+Journal officiel (`lib/notify/`). No e-mail to an account with nothing to report, nor twice within six
+days. Each e-mail has a signed one-click unsubscribe link (also in the mail headers); the choice is in
+*Mon compte*. `?dry=1` returns the e-mails without sending (with the `Authorization: Bearer
+<CRON_SECRET>` header), to check them first. Needs, on the server only: `SUPABASE_SERVICE_ROLE_KEY`,
+`CRON_SECRET`, `RESEND_API_KEY` (or `BREVO_API_KEY`), `NOTIFY_FROM`, and `NEXT_PUBLIC_SITE_URL`
+(the address the links lead to); and the migration `20261114000000_notifications.sql`.
+
 **Setting it up (once):**
 
 1. Create a project on [supabase.com](https://supabase.com) (region: Frankfurt, the closest to Tunis).
    The free plan pauses a project after a week without use: take the Pro plan for clients.
 2. *SQL Editor*: paste and run `supabase/migrations/20261112000000_workspaces.sql`, then
    `supabase/migrations/20261113000000_preuves.sql` (the private bucket for evidence files, 10 MB
-   per file, images and PDF; members read their workspace's files, editors add, admins remove).
+   per file, images and PDF; members read their workspace's files, editors add, admins remove),
+   then the other files of `supabase/migrations/` in the order of their names.
 3. *Authentication → URL Configuration*: **Site URL** = the site's address (e.g.
    `https://abclassement.vercel.app`); **Redirect URLs**: add `https://<that address>/**` and
    `http://localhost:3000/**`. The links of the confirmation and password e-mails lead there.

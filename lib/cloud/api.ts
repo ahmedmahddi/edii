@@ -154,6 +154,18 @@ export async function updateMyName(userId: string, name: string): Promise<void> 
   fail(error);
 }
 
+/** Whether the account receives the weekly digest e-mail. */
+export async function myNotifications(userId: string): Promise<boolean> {
+  const { data, error } = await db().from("profiles").select("notifications").eq("id", userId).maybeSingle();
+  if (error) return true; // the column comes with a migration: until it runs, the default
+  return (data?.notifications as boolean | undefined) ?? true;
+}
+
+export async function setMyNotifications(userId: string, on: boolean): Promise<void> {
+  const { error } = await db().from("profiles").update({ notifications: on }).eq("id", userId);
+  fail(error);
+}
+
 export async function myName(userId: string): Promise<string | null> {
   const { data, error } = await db().from("profiles").select("full_name").eq("id", userId).maybeSingle();
   fail(error);
