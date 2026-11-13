@@ -113,6 +113,20 @@ describe("the compliance workflow: evaluations recorded, evidence, the audit she
     expect(FREQUENCES[c.frequence]).toBe(12);
   });
 
+  it("keeps a written note as evidence, and a non-conformity's action plan", async () => {
+    const { preuveTexte } = await import("@/lib/registre/registre");
+    const now = new Date("2026-11-13T10:00:00Z");
+    const note = preuveTexte("Contrat", "Contrat n° 2026-14 avec Société X", "a", now);
+    expect(note).toMatchObject({ nom: "Contrat", texte: "Contrat n° 2026-14 avec Société X" });
+    expect(preuveTexte("", "vu sur site").nom).toBe("Note");
+    const nc = evaluer(base, { conformite: "NC", date: "2026-11-13", preuves: [note], action: { risque: "Incendie", plan: "Recharger", responsable: "M. R", echeance: "2026-12-01" } }, now);
+    expect(nc).toMatchObject({ risque: "Incendie", plan: "Recharger", responsable: "M. R", echeance: "2026-12-01" });
+    // A conformity does not touch the plan fields.
+    const c = evaluer(nc, { conformite: "C", date: "2026-12-01", action: { plan: "ignored" } }, now);
+    expect(c.plan).toBe("Recharger");
+    expect(historiqueRows(nc)[0].preuves).toEqual(["Contrat : Contrat n° 2026-14 avec Société X"]);
+  });
+
   it("writes the audit sheet, newest first", async () => {
     const now = new Date("2026-11-13T10:00:00Z");
     const l = evaluer(evaluer(base, { conformite: "NC", date: "2026-01-10", par: "a" }, now), { conformite: "C", date: "2026-06-10", par: "b", commentaire: "ok" }, now);

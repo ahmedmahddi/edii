@@ -432,6 +432,15 @@ a pilot: 1 weekly digest, 2 admin and plans, 3 concurrent editing, 4 PDF complia
 feedback, 6 hardening (legal pages, headers, rate limit, dark mode, e2e tests). The user asked that
 every push come with the complete list of commands to run.
 
+**Evaluation form adapts to the answer (13 November, asked by the user).** Conforme: a comment
+(optional) and evidence only. Non applicable: a justification. Non conforme: constat, evidence,
+then risk and the action plan (action, responsable, échéance) in the same form, saved on the text by
+`evaluer(..., { action })`. The "Plan d'action" section shows only while the text is non conforme
+(with its risk); a conforme text shows "Action réalisée le …" as a pill; "Exigences" no longer
+shows risk or plan once evaluated (risk stays as a draft before the first evaluation). Evidence has
+a third kind, a written note (`Preuve.texte`, `preuveTexte`): Texte · Lien · Photo ou PDF. Excel's
+history sheet writes "intitulé : texte".
+
 **Launch 1: the weekly digest e-mail.** `lib/notify/digest.ts` (pure: `digestRegistre` → late /
 within-30-days evaluations, NC actions overdue / within 14 days / unplanned, JORT alerts, new
 texts; `quiet`; `jortRecent` = important hits of the past 7 days), `email.ts` (`renderDigest`:

@@ -201,7 +201,7 @@ export function historiqueRows(l: Ligne): HistoriqueRow[] {
     conformite: CONFORMITE[e.conformite] ?? "À évaluer",
     par: e.par,
     commentaire: e.commentaire,
-    preuves: e.preuves.map((p) => p.url ?? p.nom),
+    preuves: e.preuves.map((p) => (p.url ? `${p.nom} : ${p.url}` : p.texte ? `${p.nom} : ${p.texte}` : p.nom)),
   }));
 }
 

@@ -2619,8 +2619,8 @@ body.has-panel { overflow: hidden; }
 .evidence-actions .secondary-button { min-height: 40px; }
 .panel-record { width: 100%; min-height: 48px; font-size: 16px; }
 .history { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.history li { display: grid; gap: 4px; padding-left: 14px; border-left: 2px solid var(--hairline); }
-.history li > .pill { justify-self: start; }
+.history > li { display: grid; gap: 4px; padding-left: 14px; border-left: 2px solid var(--hairline); }
+.history > li > .pill { justify-self: start; }
 .history-meta { font-size: 12px; color: var(--muted); }
 .history p { margin: 0; font-size: 14px; }
 @media (min-width: 1000px) {
@@ -2647,3 +2647,17 @@ body.has-panel { overflow: hidden; }
 .switch:checked { background: #34c759; }
 .switch:checked::after { transform: translateX(20px); }
 .switch:disabled { opacity: 0.5; }
+
+/* Evaluation form: a written note as evidence; a non-conformity's risk and action plan */
+.evidence-actions .secondary-button { display: inline-flex; align-items: center; gap: 6px; }
+.evidence-actions .secondary-button.active { background: var(--navy); color: #fff; }
+.evidence-form { display: grid; gap: 10px; }
+.evidence-form label { display: grid; gap: 5px; font-size: 13px; font-weight: 600; }
+.evidence-form .secondary-button { justify-self: start; }
+.evidence-list li small { font-size: 12px; }
+.evidence-list li.is-note { align-items: flex-start; }
+.evidence-list li.is-note > span { white-space: normal; overflow: visible; font-size: 14px; line-height: 1.45; }
+.evidence-list li.is-note svg { margin-top: 2px; }
+.panel-nc { display: grid; gap: 10px; padding: 12px; border-radius: var(--radius); background: var(--bad-bg); }
+.panel-nc label { display: grid; gap: 5px; font-size: 13px; font-weight: 600; }
+.panel-nc .panel-label { color: var(--bad); }

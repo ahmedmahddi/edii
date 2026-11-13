@@ -263,9 +263,9 @@ opens the establishment's register in the Veille réglementaire view:
 3. **Evaluation**, text by text. The register is a checklist: chips narrow it (à faire, non
    conformes, conformes, essentiels, suggestions), one row per text shows its status and next date,
    and a sheet opens the text: a **new evaluation** (conforme / non conforme / non applicable, date,
-   constat, evidence: a link, or a photo or PDF uploaded to the workspace when signed in), the
-   **action plan** of a non-conformity (action, responsible, deadline; closed by the next conforming
-   evaluation), the requirements and risk (prefilled from the text's fiche), and the **history** of
+   a comment, a constat or a justification, evidence: a written note, a link, or a photo or PDF
+   uploaded to the workspace when signed in; a non-conformity also takes its risk and **action
+   plan**: action, responsible, deadline, closed by the next conforming evaluation), the requirements and risk (prefilled from the text's fiche), and the **history** of
    every evaluation recorded, with its evidence. Excel: the ID-QSE-002 sheet plus a second sheet,
    "Historique des évaluations", the audit trail.
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),

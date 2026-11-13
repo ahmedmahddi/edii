@@ -23,11 +23,12 @@ export const CONFORMITES: Record<Conformite, string> = { "": "À évaluer", C: "
 /** Months between two evaluations. */
 export const FREQUENCES: Record<string, number> = { Mensuelle: 1, Trimestrielle: 3, Semestrielle: 6, Annuelle: 12, "Tous les deux ans": 24 };
 
-/** A piece of evidence: a link, or a file in the workspace's storage (cloud mode). */
+/** A piece of evidence: a link, a written note, or a file in the workspace's storage (cloud mode). */
 export interface Preuve {
   id: string;
   nom: string;
   url?: string; // a link given by hand
+  texte?: string; // a written note (a contract's reference, what was seen on site…)
   path?: string; // a file uploaded to the workspace's bucket (lib/cloud/api.ts)
   type?: string; // MIME type of an uploaded file
   ajoute: string; // ISO date and time
@@ -143,7 +144,15 @@ const newId = (prefix: string) => `${prefix}-${Date.now().toString(36)}-${Math.r
  */
 export function evaluer(
   l: Ligne,
-  e: { conformite: Conformite; date: string; commentaire?: string; par?: string; preuves?: Preuve[] },
+  e: {
+    conformite: Conformite;
+    date: string;
+    commentaire?: string;
+    par?: string;
+    preuves?: Preuve[];
+    // With a non-conformity: its risk and the action plan, kept on the text.
+    action?: { risque?: string; plan?: string; responsable?: string; echeance?: string };
+  },
   now = new Date(),
 ): Ligne {
   const entry: Evaluation = {
@@ -155,8 +164,10 @@ export function evaluer(
     par: e.par ?? "",
     preuves: e.preuves ?? [],
   };
+  const action = e.conformite === "NC" && e.action ? Object.fromEntries(Object.entries(e.action).filter(([, v]) => v !== undefined)) : {};
   return {
     ...l,
+    ...action,
     conformite: e.conformite,
     evalue: e.date,
     historique: [...(l.historique ?? []), entry],
@@ -173,6 +184,11 @@ export function evaluer(
 /** A link given by hand, as evidence. */
 export function preuveLien(nom: string, url: string, par = "", now = new Date()): Preuve {
   return { id: newId("pr"), nom: nom.trim() || url, url: url.trim(), ajoute: now.toISOString(), par };
+}
+
+/** A written note, as evidence (a contract's reference, a certificate's number, what was seen…). */
+export function preuveTexte(nom: string, texte: string, par = "", now = new Date()): Preuve {
+  return { id: newId("pr"), nom: nom.trim() || "Note", texte: texte.trim(), ajoute: now.toISOString(), par };
 }
 
 /** A file uploaded to the workspace's storage, as evidence. */

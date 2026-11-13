@@ -31,6 +31,7 @@ import {
   preuveFichier,
   preuveLien,
   preuvesDe,
+  preuveTexte,
   prochaine,
   type Registre,
   texteFromAmendment,
@@ -507,9 +508,16 @@ function LigneSheet({
   const [date, setDate] = useState(today());
   const [comment, setComment] = useState("");
   const [preuves, setPreuves] = useState<Preuve[]>([]);
+  const [adding, setAdding] = useState<"lien" | "texte" | null>(null);
   const [linkName, setLinkName] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
-  const [addingLink, setAddingLink] = useState(false);
+  const [noteName, setNoteName] = useState("");
+  const [noteText, setNoteText] = useState("");
+  // A non-conformity's risk and action plan, recorded with it (prefilled from the text or its fiche).
+  const [risque, setRisque] = useState(l.risque || proposed.risque);
+  const [plan, setPlan] = useState(l.plan || proposed.plan);
+  const [responsable, setResponsable] = useState(l.responsable);
+  const [echeance, setEcheance] = useState(l.echeance);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState("");
@@ -560,12 +568,24 @@ function LigneSheet({
     setPreuves((ps) => [...ps, preuveLien(linkName, linkUrl, who)]);
     setLinkName("");
     setLinkUrl("");
-    setAddingLink(false);
+    setAdding(null);
+    setError("");
+  };
+  const addNote = () => {
+    if (!noteText.trim()) {
+      setError("Écrivez le texte de la preuve.");
+      return;
+    }
+    setPreuves((ps) => [...ps, preuveTexte(noteName, noteText, who)]);
+    setNoteName("");
+    setNoteText("");
+    setAdding(null);
     setError("");
   };
   const record = () => {
     if (!conf) return;
-    replace((x) => evaluer(x, { conformite: conf, date, commentaire: comment, par: who, preuves }));
+    const action = conf === "NC" ? { risque, plan, responsable, echeance } : undefined;
+    replace((x) => evaluer(x, { conformite: conf, date, commentaire: comment, par: who, preuves, action }));
     setConf("");
     setComment("");
     setPreuves([]);
@@ -602,6 +622,7 @@ function LigneSheet({
               {ETATS[next.etat]}
               {next.date ? ` · ${dateFr(next.date)}` : ""}
             </span>
+            {l.conformite === "C" && l.actionFaite ? <span className="pill pill-ok">Action réalisée le {dateFr(l.actionFaite)}</span> : null}
           </div>
         </div>
         <div className="panel-body">
@@ -644,8 +665,19 @@ function LigneSheet({
                 </label>
               </div>
               <label>
-                <span>Constat</span>
-                <textarea rows={2} value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Ce qui a été vérifié, ce qui manque…" />
+                <span>{conf === "NA" ? "Justification" : conf === "C" ? "Commentaire (facultatif)" : "Constat"}</span>
+                <textarea
+                  rows={2}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  placeholder={
+                    conf === "NA"
+                      ? "Pourquoi ce texte ne s’applique pas au site…"
+                      : conf === "C"
+                        ? "Ce qui a été vérifié…"
+                        : "Ce qui a été vérifié, ce qui manque…"
+                  }
+                />
               </label>
               <div className="panel-evidence">
                 <span className="panel-label">Preuves</span>
@@ -653,8 +685,11 @@ function LigneSheet({
                   <ul className="evidence-list">
                     {preuves.map((p) => (
                       <li key={p.id}>
-                        <Icon name={p.path ? "file" : "arrow"} size={16} />
-                        <span>{p.nom}</span>
+                        <Icon name={p.path ? "file" : p.texte ? "note" : "link"} size={16} />
+                        <span>
+                          {p.nom}
+                          {p.texte ? <small className="muted"> · {p.texte}</small> : null}
+                        </span>
                         <button type="button" className="edii-link" onClick={() => setPreuves((ps) => ps.filter((x) => x.id !== p.id))}>
                           Retirer
                         </button>
@@ -671,12 +706,35 @@ function LigneSheet({
                       </button>
                     </>
                   ) : null}
-                  <button type="button" className="secondary-button" onClick={() => setAddingLink(!addingLink)}>
-                    Lien
+                  <button type="button" className={`secondary-button${adding === "texte" ? " active" : ""}`} onClick={() => setAdding(adding === "texte" ? null : "texte")}>
+                    <Icon name="note" size={16} /> Texte
+                  </button>
+                  <button type="button" className={`secondary-button${adding === "lien" ? " active" : ""}`} onClick={() => setAdding(adding === "lien" ? null : "lien")}>
+                    <Icon name="link" size={16} /> Lien
                   </button>
                   {!upload ? <span className="muted small">Les photos et fichiers demandent un espace de travail (compte).</span> : null}
                 </div>
-                {addingLink ? (
+                {adding === "texte" ? (
+                  <div className="evidence-form">
+                    <label>
+                      <span>Intitulé (facultatif)</span>
+                      <input value={noteName} onChange={(e) => setNoteName(e.target.value)} placeholder="Contrat de maintenance, attestation…" />
+                    </label>
+                    <label>
+                      <span>Preuve</span>
+                      <textarea
+                        rows={3}
+                        value={noteText}
+                        onChange={(e) => setNoteText(e.target.value)}
+                        placeholder="Ex. : contrat n° 2026-14 avec Société X, valable jusqu’au 31/12/2026 ; registre signé le 03/11/2026…"
+                      />
+                    </label>
+                    <button type="button" className="secondary-button" onClick={addNote}>
+                      Ajouter le texte
+                    </button>
+                  </div>
+                ) : null}
+                {adding === "lien" ? (
                   <div className="panel-grid">
                     <label>
                       <span>Intitulé</span>
@@ -692,6 +750,29 @@ function LigneSheet({
                   </div>
                 ) : null}
               </div>
+              {conf === "NC" ? (
+                <div className="panel-nc">
+                  <span className="panel-label">Risque et plan d’action</span>
+                  <label>
+                    <span>Risque</span>
+                    <textarea rows={2} value={risque} onChange={(e) => setRisque(e.target.value)} />
+                  </label>
+                  <label>
+                    <span>Action à mener</span>
+                    <textarea rows={3} value={plan} onChange={(e) => setPlan(e.target.value)} />
+                  </label>
+                  <div className="panel-grid">
+                    <label>
+                      <span>Responsable</span>
+                      <input value={responsable} onChange={(e) => setResponsable(e.target.value)} />
+                    </label>
+                    <label>
+                      <span>Échéance</span>
+                      <input type="date" value={echeance} min={date} onChange={(e) => setEcheance(e.target.value)} />
+                    </label>
+                  </div>
+                </div>
+              ) : null}
               {error ? (
                 <p className="registre-warning" role="alert">
                   {error}
@@ -708,7 +789,7 @@ function LigneSheet({
             </section>
           ) : null}
 
-          {l.retenu && (l.conformite === "NC" || l.plan || l.responsable || l.echeance) ? (
+          {l.retenu && l.conformite === "NC" ? (
             <section className="panel-section" aria-labelledby="plan-title">
               <h3 id="plan-title">Plan d’action</h3>
               <label>
@@ -725,20 +806,20 @@ function LigneSheet({
                   <input type="date" value={l.echeance} onChange={(e) => set({ echeance: e.target.value })} disabled={!editable} />
                 </label>
               </div>
-              {l.actionFaite ? (
-                <p className="auth-done">Action réalisée le {dateFr(l.actionFaite)}.</p>
-              ) : l.conformite === "NC" ? (
-                <p className="muted small">L’action est close par une nouvelle évaluation conforme.</p>
-              ) : null}
+              <label>
+                <span>Risque</span>
+                <textarea rows={2} value={l.risque || proposed.risque} onChange={(e) => set({ risque: e.target.value })} disabled={!editable} />
+              </label>
+              <p className="muted small">L’action est close par une nouvelle évaluation conforme.</p>
             </section>
           ) : null}
 
           <details className="panel-section panel-details" open={!l.retenu || l.conformite === "" || undefined}>
-            <summary>Exigences et risque</summary>
-            {!l.resume || !l.risque ? (
+            <summary>{l.conformite === "C" || l.conformite === "NA" || l.conformite === "NC" ? "Exigences" : "Exigences et risque"}</summary>
+            {!l.resume ? (
               <p className="muted small">
                 {fiche?.r ? "Résumé rédigé" : fiche?.o?.length ? "Exigences relevées dans les articles du texte" : "Proposé d’après le domaine du texte"}
-                {fiche?.k ? ", risque rédigé" : ", risque proposé d’après le domaine"} : à vérifier et à adapter au site.
+                {" "}: à vérifier et à adapter au site.
                 {fiche?.p ? ` Périodicité relevée : ${fiche.p.toLowerCase()}.` : ""}
                 {fiche?.t?.length ? ` Obligations : ${fiche.t.map((t) => TYPES[t]?.label.toLowerCase() ?? t).join(", ")}.` : ""}
               </p>
@@ -757,14 +838,10 @@ function LigneSheet({
                 </ul>
               </details>
             ) : null}
-            <label>
-              <span>Risque</span>
-              <textarea rows={2} value={l.risque || proposed.risque} onChange={(e) => set({ risque: e.target.value })} disabled={!editable} />
-            </label>
-            {!l.plan && l.conformite !== "NC" ? (
+            {l.conformite === "" ? (
               <label>
-                <span>Plan d’action en cas de non-conformité</span>
-                <textarea rows={2} value={proposed.plan} onChange={(e) => set({ plan: e.target.value })} disabled={!editable} />
+                <span>Risque en cas de non-conformité</span>
+                <textarea rows={2} value={l.risque || proposed.risque} onChange={(e) => set({ risque: e.target.value })} disabled={!editable} />
               </label>
             ) : null}
           </details>
@@ -787,9 +864,13 @@ function LigneSheet({
                     {e.preuves.length ? (
                       <ul className="evidence-list">
                         {e.preuves.map((p) => (
-                          <li key={p.id}>
-                            <Icon name={p.path ? "file" : "arrow"} size={16} />
-                            {linkOf(p) ? (
+                          <li key={p.id} className={p.texte ? "is-note" : undefined}>
+                            <Icon name={p.path ? "file" : p.texte ? "note" : "link"} size={16} />
+                            {p.texte ? (
+                              <span>
+                                <strong>{p.nom}</strong> {p.texte}
+                              </span>
+                            ) : linkOf(p) ? (
                               <a href={linkOf(p)} target="_blank" rel="noreferrer">
                                 {p.nom}
                               </a>
