@@ -7,7 +7,7 @@
  * (lib/registre/registre.ts) is exported with its evaluation.
  */
 import type ExcelJS from "exceljs";
-import type { Ligne } from "../registre/registre";
+import type { Ligne, Preuve } from "../registre/registre";
 import { isoDate } from "./jort";
 import { type Amendment, type Hit, rules } from "./watch";
 
@@ -23,6 +23,7 @@ export const COLUMNS = [
   ["RISQUE", 52],
   ["Plan d'action en cas de NC", 31],
   ["Responsable et échéance", 13],
+  ["Constat et preuves", 60],
 ] as const;
 
 export interface RegisterRow {
@@ -37,6 +38,7 @@ export interface RegisterRow {
   risque: string;
   plan: string;
   responsable: string; // and échéance
+  preuves?: string; // the last evaluation's comment and evidence
   url: string | undefined;
 }
 
@@ -112,10 +114,22 @@ export function statutLines(s: Statut | undefined): string[] {
  * A line of an establishment's register, with its evaluation. What the consultant has not written
  * yet comes from the text's fiche (lib/veille/fiche.ts), when given.
  */
+/** A piece of evidence in one line: a note in full, a link with its address, a file by its name. */
+const preuveLine = (p: Preuve) => (p.texte ? `${p.nom} : ${p.texte}` : p.url ? `${p.nom} : ${p.url}` : `${p.nom} (fichier)`);
+
 export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; plan: string }, statut?: Statut): RegisterRow {
   const t = l.texte;
   const ref = [t.type, t.numero ? `n° ${t.numero}` : "", t.date ? `du ${dmy(t.date)}` : ""].filter(Boolean).join(" ");
   const evaluated = l.evalue ? `Dernière évaluation : ${dmy(l.evalue)}.` : "";
+  // Risk and action plan belong to a non-conformity; before a first evaluation they stay as a draft.
+  const withPlan = l.conformite === "NC" || l.conformite === "";
+  const last = l.historique?.at(-1);
+  const preuves = [
+    last?.commentaire ? `${l.conformite === "NA" ? "Justification" : "Constat"} : ${last.commentaire}` : "",
+    ...(last?.preuves ?? []).map(preuveLine),
+    ...(l.preuves ?? []).map(preuveLine),
+    l.conformite === "C" && l.actionFaite ? `Action réalisée le ${dmy(l.actionFaite)}.` : "",
+  ].filter(Boolean);
   return {
     systeme: systeme([t.domaine]),
     domaine: t.theme,
@@ -125,9 +139,10 @@ export function ligneRow(l: Ligne, fiche?: { resume: string; risque: string; pla
     resume: [l.resume || fiche?.resume, ...statutLines(statut), t.publie ? `Source : ${t.publie}.` : ""].filter(Boolean).join("\n"),
     conformite: CONFORMITE[l.conformite] ?? "",
     frequence: [l.frequence, evaluated].filter(Boolean).join("\n"),
-    risque: l.risque || fiche?.risque || "",
-    plan: l.plan || fiche?.plan || "",
-    responsable: [l.responsable, l.echeance ? dmy(l.echeance) : ""].filter(Boolean).join(" / "),
+    risque: withPlan ? l.risque || fiche?.risque || "" : "",
+    plan: withPlan ? l.plan || fiche?.plan || "" : "",
+    responsable: l.conformite === "NC" ? [l.responsable, l.echeance ? dmy(l.echeance) : ""].filter(Boolean).join(" / ") : "",
+    preuves: preuves.join("\n"),
     url: t.source,
   };
 }
@@ -147,8 +162,8 @@ export function fillRegister(workbook: ExcelJS.Workbook, rows: RegisterRow[], to
   ws.columns = COLUMNS.map(([, width]) => ({ width }));
   ws.mergeCells("A1:B1");
   ws.mergeCells("C1:F1");
-  ws.mergeCells("G1:K1");
-  ws.mergeCells("A2:K2");
+  ws.mergeCells("G1:L1");
+  ws.mergeCells("A2:L2");
   ws.getCell("A1").value = establishment;
   ws.getCell("C1").value = "REGISTRE DE VEILLE LEGALE, REGLEMENTAIRE ET NORMATIVE";
   ws.getCell("G1").value = `Date : ${date}\nID-QSE-002`;
@@ -171,14 +186,14 @@ export function fillRegister(workbook: ExcelJS.Workbook, rows: RegisterRow[], to
 
   for (const r of rows) {
     const titre = r.url ? { text: r.titre, hyperlink: r.url } : r.titre;
-    const row = ws.addRow([r.systeme, r.domaine, r.type, r.ref, titre, r.resume, r.conformite, r.frequence, r.risque, r.plan, r.responsable]);
+    const row = ws.addRow([r.systeme, r.domaine, r.type, r.ref, titre, r.resume, r.conformite, r.frequence, r.risque, r.plan, r.responsable, r.preuves ?? ""]);
     row.eachCell({ includeEmpty: true }, (cell, col) => {
       cell.font = col === 5 && r.url ? { ...font, color: { argb: "FF1F4E79" }, underline: true } : font;
-      cell.alignment = [5, 6, 9, 10].includes(col) ? { ...center, horizontal: "left" } : center;
+      cell.alignment = [5, 6, 9, 10, 12].includes(col) ? { ...center, horizontal: "left" } : center;
       cell.border = border;
     });
   }
-  ws.autoFilter = { from: "A3", to: `K${Math.max(3, ws.rowCount)}` };
+  ws.autoFilter = { from: "A3", to: `L${Math.max(3, ws.rowCount)}` };
 }
 
 /** One recorded evaluation, for the "Historique des évaluations" sheet. */

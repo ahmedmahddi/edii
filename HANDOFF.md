@@ -439,7 +439,11 @@ then risk and the action plan (action, responsable, échéance) in the same form
 (with its risk); a conforme text shows "Action réalisée le …" as a pill; "Exigences" no longer
 shows risk or plan once evaluated (risk stays as a draft before the first evaluation). Evidence has
 a third kind, a written note (`Preuve.texte`, `preuveTexte`): Texte · Lien · Photo ou PDF. Excel's
-history sheet writes "intitulé : texte".
+history sheet writes "intitulé : texte". The ID-QSE-002 sheet follows (`ligneRow`): RISQUE, plan and
+responsable/échéance only for a non-conformity (or as a draft before the first evaluation), empty for
+conforme / non applicable; a 12th column "Constat et preuves" (L) holds the last evaluation's comment
+(or justification) and its evidence (notes in full, links with their address, files by name) and
+"Action réalisée le …". `evaluer` closes an action only on a conformity that follows an NC.
 
 **Launch 1: the weekly digest e-mail.** `lib/notify/digest.ts` (pure: `digestRegistre` → late /
 within-30-days evaluations, NC actions overdue / within 14 days / unplanned, JORT alerts, new

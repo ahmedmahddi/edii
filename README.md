@@ -266,7 +266,8 @@ opens the establishment's register in the Veille réglementaire view:
    a comment, a constat or a justification, evidence: a written note, a link, or a photo or PDF
    uploaded to the workspace when signed in; a non-conformity also takes its risk and **action
    plan**: action, responsible, deadline, closed by the next conforming evaluation), the requirements and risk (prefilled from the text's fiche), and the **history** of
-   every evaluation recorded, with its evidence. Excel: the ID-QSE-002 sheet plus a second sheet,
+   every evaluation recorded, with its evidence. Excel: the ID-QSE-002 sheet (risk and action plan for
+   non-conformities only, and a last column "Constat et preuves") plus a second sheet,
    "Historique des évaluations", the audit trail.
 4. **Follow-up.** The register says which evaluations are due (never done, late, within 30 days),
    which of its texts a new JORT text modifies ("modifiant l'arrêté du 10 janvier 1995…": add that

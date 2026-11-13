@@ -127,6 +127,22 @@ describe("the compliance workflow: evaluations recorded, evidence, the audit she
     expect(historiqueRows(nc)[0].preuves).toEqual(["Contrat : Contrat n° 2026-14 avec Société X"]);
   });
 
+  it("fills risk and action plan for a non-conformity only, and the last constat and evidence", async () => {
+    const { preuveTexte } = await import("@/lib/registre/registre");
+    const { ligneRow } = await import("@/lib/veille/registre");
+    const fiche = { resume: "R", risque: "Risque du domaine", plan: "Plan du domaine" };
+    const now = new Date("2026-11-13T10:00:00Z");
+    const draft = ligneRow(base, fiche);
+    expect([draft.risque, draft.plan]).toEqual(["Risque du domaine", "Former le personnel"]);
+    const c = ligneRow(evaluer(base, { conformite: "C", date: "2026-11-13", commentaire: "Vérifié sur site", preuves: [preuveTexte("Contrat", "n° 14 avec X", "", now)] }, now), fiche);
+    expect([c.conformite, c.risque, c.plan, c.responsable]).toEqual(["C", "", "", ""]);
+    expect(c.preuves).toBe("Constat : Vérifié sur site\nContrat : n° 14 avec X");
+    const na = ligneRow(evaluer(base, { conformite: "NA", date: "2026-11-13", commentaire: "Pas de chaudière" }, now), fiche);
+    expect([na.risque, na.plan, na.preuves]).toEqual(["", "", "Justification : Pas de chaudière"]);
+    const nc = ligneRow(evaluer(base, { conformite: "NC", date: "2026-11-13", action: { risque: "Feu", plan: "Recharger", responsable: "M. R", echeance: "2026-12-01" } }, now), fiche);
+    expect([nc.risque, nc.plan, nc.responsable]).toEqual(["Feu", "Recharger", "M. R / 01-12-2026"]);
+  });
+
   it("writes the audit sheet, newest first", async () => {
     const now = new Date("2026-11-13T10:00:00Z");
     const l = evaluer(evaluer(base, { conformite: "NC", date: "2026-01-10", par: "a" }, now), { conformite: "C", date: "2026-06-10", par: "b", commentaire: "ok" }, now);

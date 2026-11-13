@@ -171,11 +171,11 @@ export function evaluer(
     conformite: e.conformite,
     evalue: e.date,
     historique: [...(l.historique ?? []), entry],
-    // A conformity after a non-conformity (or with an action plan started) closes the action.
+    // A conformity after a non-conformity closes its action.
     actionFaite:
       e.conformite === "NC"
         ? ""
-        : e.conformite === "C" && (l.conformite === "NC" || l.plan || l.responsable || l.echeance)
+        : e.conformite === "C" && l.conformite === "NC"
           ? l.actionFaite || e.date
           : l.actionFaite,
   };
