@@ -1,6 +1,9 @@
 "use client";
 
+import { Braces, FileDown, Printer } from "lucide-react";
 import { useRef, useState } from "react";
+import { Button, Notice } from "@/app/ui";
+import ui from "./classification-report.module.css";
 import { categoryLabel, type ClassificationReport } from "@/lib/report";
 import { fmtRatio } from "@/lib/establishment";
 import { SITUATIONS } from "@/lib/studies";
@@ -80,50 +83,32 @@ export function ClassificationReportView({
     }
   };
   return (
-    <section
-      className="report-section"
-      aria-label="Synthèse détaillée du classement"
-    >
+    <section data-ui="" className={ui.section} aria-label="Synthèse détaillée du classement">
       <style>{REPORT_CSS}</style>
-      <div className="report-toolbar">
-        <div>
-          <div className="eyebrow">RÉSULTAT DE LA VALIDATION</div>
+      <div className={ui.toolbar}>
+        <div className={ui.heading}>
           <h2>Synthèse détaillée</h2>
-          <p>
-            Rapport complet, incluant tous les cas et seuils des rubriques
-            sélectionnées.
-          </p>
+          <p>Rapport complet, incluant tous les cas et seuils des rubriques sélectionnées.</p>
         </div>
-        <div className="report-export-actions">
-          <button onClick={() => window.print()} disabled={stale || exporting}>
-            Imprimer / PDF
-          </button>
-          <button
-            className="secondary-button"
-            onClick={downloadHtml}
-            disabled={stale || exporting}
-          >
-            {exporting ? "Préparation…" : "Télécharger le rapport HTML"}
-          </button>
-          <button
-            className="secondary-button"
+        <div className={ui.actions}>
+          <Button variant="primary" onClick={() => window.print()} disabled={stale || exporting}>
+            <Printer size={15} /> Imprimer / PDF
+          </Button>
+          <Button onClick={downloadHtml} disabled={stale || exporting}>
+            <FileDown size={15} /> {exporting ? "Préparation…" : "Rapport HTML"}
+          </Button>
+          <Button
             disabled={stale || exporting}
             onClick={() => {
-              saveFile(
-                JSON.stringify(report, null, 2),
-                `${filename}.json`,
-                "application/json;charset=utf-8",
-              );
-              setExportStatus(
-                "Données détaillées téléchargées au format JSON.",
-              );
+              saveFile(JSON.stringify(report, null, 2), `${filename}.json`, "application/json;charset=utf-8");
+              setExportStatus("Données détaillées téléchargées au format JSON.");
             }}
           >
-            Données JSON
-          </button>
+            <Braces size={15} /> Données JSON
+          </Button>
         </div>
       </div>
-      <nav className="report-toc" aria-label="Sections de la synthèse">
+      <nav className={ui.toc} aria-label="Sections de la synthèse">
         {[
           ["report-s1", "1. Résultat"],
           ["report-s2", "2. Activités et seuils"],
@@ -136,20 +121,12 @@ export function ClassificationReportView({
           </a>
         ))}
       </nav>
-      <p className="report-export-help">
-        Pour un PDF, choisissez « Enregistrer au format PDF » dans la fenêtre
-        d’impression. Le rapport HTML est un document complet à conserver ou à
-        transmettre.
+      <p className={ui.help}>
+        Pour un PDF, choisissez « Enregistrer au format PDF » dans la fenêtre d’impression. Le rapport HTML est un document complet à conserver ou à transmettre.
       </p>
-      <p className="small" role="status" aria-live="polite">
-        {exportStatus}
-      </p>
-      {exportError && (
-        <p className="error" role="alert">
-          {exportError}
-        </p>
-      )}
-      <article className="report-document" ref={bodyRef}>
+      {exportStatus ? <Notice title={exportStatus} /> : null}
+      {exportError ? <Notice tone="danger" title={exportError} /> : null}
+      <article className={`report-document ${ui.document}`} ref={bodyRef} data-print-document="">
         {stale && (
           <p className="report-notice" role="alert">
             <strong>Dossier modifié depuis la validation.</strong> Cette

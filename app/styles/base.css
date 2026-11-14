@@ -97,3 +97,18 @@ body.has-rapport {
     display: none !important;
   }
 }
+
+/* A document shown in a screen (the classification's synthesis): only it is printed. */
+@media print {
+  body:has([data-print-document]) * {
+    visibility: hidden;
+  }
+  body:has([data-print-document]) [data-print-document],
+  body:has([data-print-document]) [data-print-document] * {
+    visibility: visible;
+  }
+  body:has([data-print-document]) [data-print-document] {
+    position: absolute;
+    inset: 0 0 auto;
+  }
+}

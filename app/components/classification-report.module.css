@@ -1,0 +1,53 @@
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--ui-space-4);
+}
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--ui-space-3);
+}
+.heading h2 {
+  font-size: var(--ui-text-lg);
+  font-weight: var(--ui-weight-semibold);
+}
+.heading p,
+.help {
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2);
+}
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ui-space-2) var(--ui-space-4);
+  font-size: var(--ui-text-sm);
+  font-weight: var(--ui-weight-medium);
+}
+/* The document is paper: white, whatever the theme. */
+.document {
+  padding: clamp(16px, 4vw, 40px);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-lg);
+}
+.document [id^="report-s"] {
+  scroll-margin-top: 16px;
+}
+@media print {
+  .toolbar,
+  .toc,
+  .help {
+    display: none !important;
+  }
+  .document {
+    padding: 0;
+    border: 0;
+  }
+}

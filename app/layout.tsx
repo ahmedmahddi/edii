@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/inter";
 import "./styles/tokens.css";
 import "./styles/base.css";
-import "./styles/legacy.css";
 
 export const metadata: Metadata = {
   title: "ABClassement | ABC Consulting",

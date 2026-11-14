@@ -30,10 +30,6 @@ The sign-in screen pairs what the product does with the form; it stacks on phone
 
 The register is a table: one row per text (title, reference and theme; conformity as a word with a dot; the follow-up: next evaluation, late, the action's due date; evidence count; the person responsible), grouped by domain (a header row with its counts, opens on a click), or flat and sorted by importance once filtered or searched. Above it: four figures (evaluated, conforming, non conforming, to do; each filters the table), the lists of what waits (texts modified at the JORT, new texts, texts that no longer apply; three shown, the rest on demand), the filters as tabs with counts, the search and the domain. Keyboard: / searches, j and k move between rows, Entrée opens. A text opens in a sheet (right side on desktop, bottom on phones) whose address is kept (?texte=…): its status, a new evaluation (conformity, date, frequency, comment, evidence: file, written note, link; for a non-conformity the risk and the action plan in the same form), the action plan of a current non-conformity, the requirements, the history, why the text is there and its amendments. "Enregistrer l’évaluation" stays at the foot of the sheet.
 
-## Screens not rebuilt yet
-
-Screens not yet rebuilt on the components (classement, veille, équipe, compte, administration) render inside <div class="legacy">: app/styles/legacy.css holds their former rules, generated once from the former stylesheet and scoped so they cannot reach anything else (every rule is under :where(.legacy) and skips [data-ui] elements, so a component placed in an old screen keeps its own look). It shrinks as screens are rebuilt and goes with the last one; nothing is added to it.
-
 ## Typography and interaction
 
 Titles 20px (24px for the screen title), body 14px, secondary text 13px, labels 12px. Inputs are 16px on phones to avoid automatic zoom. A visible focus ring on every control; menus, sheets and the palette keep focus inside and return it (Radix). Reduced motion disables transitions.
@@ -48,7 +44,7 @@ The initial information architecture considered https://www.gov.uk/, https://ent
 
 ## Files
 
-app/styles/tokens.css (decisions), app/styles/base.css (reset, body), app/ui/ (components), app/(app)/_shell/ (side menu, bars, command palette), app/styles/legacy.css (screens not rebuilt yet).
+app/styles/tokens.css (decisions), app/styles/base.css (reset, body), app/ui/ (components), app/(app)/_shell/ (side menu, bars, command palette). Printed documents (the compliance report, the classification synthesis) have their own styles: they are paper.
 
 ## Validated reports
 
