@@ -4,7 +4,7 @@
  * every screen (lib/veille/served.ts says what each file holds). The issues read in this browser by
  * "Vérifier maintenant" are merged in.
  */
-import { useQueries, useQuery } from "@tanstack/react-query";
+import { type QueryClient, useQueries, useQuery } from "@tanstack/react-query";
 import { useMemo, useSyncExternalStore } from "react";
 import type { Texte } from "@/lib/registre/referentiel";
 import type { FicheData } from "@/lib/veille/fiche";
@@ -30,8 +30,10 @@ const STATIC = { staleTime: Infinity, gcTime: Infinity, retry: 2 } as const;
 
 const EMPTY_META: VeilleMeta = { updated: null, scanned: {}, recent: [] };
 
-function useLive() {
-  return useSyncExternalStore(subscribeLive, liveIssues, () => []);
+const NO_LIVE: ReturnType<typeof liveIssues> = [];
+/** The issues read in this browser with "Vérifier maintenant", not yet carried by the site. */
+export function useLive() {
+  return useSyncExternalStore(subscribeLive, liveIssues, () => NO_LIVE);
 }
 
 /** The issues read and the recent texts (small: the home, the menu). */
@@ -83,4 +85,14 @@ export function useFiche(id: string | null): FicheData | null | undefined {
     ...STATIC,
   });
   return q.data;
+}
+
+/** The served files, fetched if not yet (the check of the JORT needs them all). */
+export async function veilleBase(client: QueryClient): Promise<{ meta: VeilleMeta; catalogue: Texte[]; amendements: Amendment[] }> {
+  const [meta, catalogue, amendements] = await Promise.all([
+    client.ensureQueryData({ queryKey: veilleKeys.meta, queryFn: () => json<VeilleMeta>("/veille/meta.json"), ...STATIC }),
+    client.ensureQueryData({ queryKey: veilleKeys.catalogue, queryFn: () => json<Texte[]>("/veille/catalogue.json"), ...STATIC }),
+    client.ensureQueryData({ queryKey: veilleKeys.amendements, queryFn: () => json<Amendment[]>("/veille/amendements.json"), ...STATIC }),
+  ]);
+  return { meta, catalogue, amendements };
 }

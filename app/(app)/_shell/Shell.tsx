@@ -8,7 +8,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { type ReactNode, useEffect, useState } from "react";
 import { useCloud } from "@/app/components/cloud";
-import { useVeilleCount } from "@/app/components/veille";
+import { useVeilleCount } from "@/app/components/veille-count";
 import { Badge, Button, Kbd, Menu, MenuItem, MenuLabel, MenuSeparator } from "@/app/ui";
 import { ROLE_LABEL } from "@/lib/cloud/api";
 import { CommandPalette } from "./CommandPalette";

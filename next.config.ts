@@ -43,7 +43,7 @@ const nextConfig: NextConfig = {
   // otherwise take that folder as the workspace root and warn about it).
   outputFileTracingRoot: process.cwd(),
   // Files the server reads at run time (not public): the fiches, built before the build.
-  outputFileTracingIncludes: { "/api/fiches": ["./data/build/fiches.json"] },
+  outputFileTracingIncludes: { "/api/fiches": ["./data/build/fiches.json"], "/api/journal": ["./data/build/feed.json"] },
   // The page used to live at /edii inside the QMS app: keep old links working.
   async redirects() {
     return [{ source: "/edii", destination: "/", permanent: true }];

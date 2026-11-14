@@ -9,7 +9,6 @@ __pycache__/
 .DS_Store
 *.log
 # Derived from data/veille/sommaires: rebuilt by npm run veille (and before dev and build)
-public/veille/feed.json
 data/veille/veille-hebdo.log
 # Bodies of the texts found (their articles), read by --fiches: for writing résumés, not served
 data/veille/corps/

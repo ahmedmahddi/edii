@@ -1,6 +1,6 @@
 /**
  * Veille réglementaire: read the JORT issues not read yet and record the texts that concern the
- * app in public/veille/feed.json (fetched by the Veille réglementaire view).
+ * app in data/build/feed.json (read by the server) and public/veille/ (lib/veille/served.ts).
  *
  *   npm run veille                         new issues of the current year (and of last year in January)
  *   npm run veille -- --year 2025          new issues of 2025
@@ -48,8 +48,10 @@ import { served } from "../lib/veille/served";
 import { assess, type Feed, type Hit, reassess, record, type Sommaires } from "../lib/veille/watch";
 
 const DIR = path.join(process.cwd(), "data", "veille");
-// Served to the page, which fetches it when the veille is opened (not part of the page's code).
-const FEED = path.join(process.cwd(), "public", "veille", "feed.json");
+// Everything the veille found: read by the server (app/api/journal) and split into what the screens
+// download (lib/veille/served.ts, in public/veille/).
+const FEED = path.join(process.cwd(), "data", "build", "feed.json");
+const SERVED = path.join(process.cwd(), "public", "veille");
 const SOMMAIRES = path.join(DIR, "sommaires");
 // Repeals read in the issues' full OCR text (--abrogations): data/veille/abrogations/<year>.json.
 const ABROGATIONS = path.join(DIR, "abrogations");
@@ -95,9 +97,10 @@ function writeFeed(feed: Feed): void {
   writeFileSync(FEED, JSON.stringify(feed) + "\n");
   // And what each screen needs of it (lib/veille/served.ts).
   const out = served(feed);
-  writeFileSync(path.join(path.dirname(FEED), "meta.json"), JSON.stringify(out.meta) + "\n");
-  writeFileSync(path.join(path.dirname(FEED), "catalogue.json"), JSON.stringify(out.catalogue) + "\n");
-  writeFileSync(path.join(path.dirname(FEED), "amendements.json"), JSON.stringify(out.amendements) + "\n");
+  mkdirSync(SERVED, { recursive: true });
+  writeFileSync(path.join(SERVED, "meta.json"), JSON.stringify(out.meta) + "\n");
+  writeFileSync(path.join(SERVED, "catalogue.json"), JSON.stringify(out.catalogue) + "\n");
+  writeFileSync(path.join(SERVED, "amendements.json"), JSON.stringify(out.amendements) + "\n");
 }
 
 function saveFeed(feed: Feed): void {

@@ -104,7 +104,7 @@ function corps(): Record<string, string> {
 }
 
 function main(): void {
-  const feed = JSON.parse(readFileSync(path.join(ROOT, "public", "veille", "feed.json"), "utf8"));
+  const feed = JSON.parse(readFileSync(path.join(ROOT, "data", "build", "feed.json"), "utf8"));
   const texts = catalogue(feed.hits, feed.amendments, feed.citations);
   const byId = new Map(texts.map((t) => [t.id, t]));
   const done = written();

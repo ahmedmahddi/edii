@@ -5,9 +5,9 @@
  *   meta.json        the issues read and the texts of the last 120 days (home, menu, e-mails)  ~0.1 MB
  *   catalogue.json   every text a register can hold, built once here, not in each browser       ~4 MB (0.6 gz)
  *   amendements.json the JORT texts that modify a text of the référentiel (registers' alerts)   ~0.6 MB
- *   feed.json        everything, for the Journal officiel screen only (/veille)                 ~5 MB
  *
- * The fiches (requirements, written résumés, risks and plans) are not public files: the server
+ * Everything (data/build/feed.json) stays on the server: the Journal officiel screen asks it for a
+ * page at a time (app/api/journal). The fiches (requirements, written résumés, risks and plans) are not public files: the server
  * gives them one text at a time (app/api/fiches), from data/build/fiches.json.
  */
 import { amendments, catalogue, type Texte } from "@/lib/registre/referentiel";

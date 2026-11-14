@@ -62,3 +62,20 @@ test("dark mode follows the choice made", async ({ page }) => {
   const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
   expect(bg).toBe("rgb(13, 15, 18)");
 });
+
+test("the veille is read a page at a time, filtered by the server", async ({ page }) => {
+  const errors = watchErrors(page);
+  await page.goto("/veille");
+  await expect(page.getByText(/^\d+ textes$/)).toBeVisible();
+  const all = Number((await page.getByText(/^\d+ textes$/).textContent())!.replace(/\D/g, ""));
+  expect(await page.locator("ol li").count()).toBeLessThan(all);
+  await page.getByRole("searchbox", { name: "Rechercher dans la veille" }).fill("eau");
+  await expect(page.getByText(/^\d+ textes?$/)).not.toHaveText(`${all} textes`);
+  await page.locator("ol li button").first().click();
+  await page.getByRole("radio", { name: "Pertinent" }).click();
+  await page.keyboard.press("Escape");
+  await page.getByRole("combobox", { name: "Statut" }).selectOption("pertinent");
+  await expect(page.getByText(/^1 texte$/)).toBeVisible();
+  await fitsTheScreen(page);
+  expect(errors).toEqual([]);
+});
