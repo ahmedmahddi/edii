@@ -11,6 +11,9 @@ export function frenchError(error: unknown): string {
     return "Cette adresse e-mail est refusée : elle ne peut pas recevoir de courrier. Vérifiez-la (une adresse Gmail compte au moins 6 caractères avant @), ou utilisez une autre adresse.";
   if (/not authorized|email_address_not_authorized/i.test(m))
     return "Les e-mails de confirmation ne peuvent pas encore être envoyés à cette adresse : ABC Consulting doit terminer la configuration de l’envoi des e-mails.";
+  // The project's e-mails per hour (Supabase's own mail service allows very few): an hour, not minutes.
+  if (/email rate limit|over_email_send_rate_limit/i.test(m))
+    return "Trop d’e-mails envoyés pour l’instant par ABClassement : réessayez dans une heure. Si cela se reproduit, prévenez ABC Consulting.";
   if (/rate limit|too many/i.test(m)) return "Trop de tentatives : réessayez dans quelques minutes.";
   if (/same password|different from the old/i.test(m)) return "Choisissez un mot de passe différent de l’ancien.";
   if (/failed to fetch|network/i.test(m)) return "Le serveur ne répond pas : vérifiez la connexion Internet.";
