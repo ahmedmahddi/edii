@@ -11,6 +11,8 @@ comes from.
 
 ## Run it
 
+To put it online for clients (Vercel, Supabase, e-mail, the daily JORT reading): **[DEPLOY.md](DEPLOY.md)**.
+
 Needs Node.js 22. Without Supabase configured it runs in **local mode**: no account, the registers
 stay in the browser. With Supabase (below) it is the multi-client product: sign-in, one private
 workspace per client company, registers kept in the database.
