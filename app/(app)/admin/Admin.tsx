@@ -10,12 +10,14 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useCloud } from "@/app/components/cloud";
 import { Badge, Button, EmptyState, Notice, PageHeader, SearchInput, Segmented, Sheet, SheetSection, Stats, table, Tabs, TextArea, TextField, type Tone } from "@/app/ui";
 import {
+  adminErreurs,
   adminSetPlan,
   adminSignalements,
   adminTraiterSignalement,
   type AdminWorkspace,
   adminWorkspaceMembers,
   adminWorkspaces,
+  type ErreurGroupe,
   MOTIFS,
   ROLE_LABEL,
   type Role,
@@ -64,7 +66,7 @@ const matches = (w: AdminWorkspace, f: Filtre) => {
 
 export function Admin() {
   const { isAdmin } = useCloud();
-  const [tab, setTab] = useState<"clients" | "signalements">("clients");
+  const [tab, setTab] = useState<"clients" | "signalements" | "erreurs">("clients");
   const [nouveaux, setNouveaux] = useState(0);
   useEffect(() => {
     if (isAdmin)
@@ -89,9 +91,10 @@ export function Admin() {
         tabs={[
           { value: "clients", label: "Clients" },
           { value: "signalements", label: "Signalements", count: nouveaux || undefined },
+          { value: "erreurs", label: "Erreurs" },
         ]}
       />
-      {tab === "clients" ? <Clients /> : <Signalements onChange={setNouveaux} />}
+      {tab === "clients" ? <Clients /> : tab === "signalements" ? <Signalements onChange={setNouveaux} /> : <Erreurs />}
     </div>
   );
 }
@@ -393,5 +396,44 @@ function Signalements({ onChange }: { onChange: (nouveaux: number) => void }) {
         </ul>
       )}
     </>
+  );
+}
+
+/** Errors met by users over the last 30 days, grouped: what broke, where, how often, for how many. */
+function Erreurs() {
+  const [list, setList] = useState<ErreurGroupe[] | null>(null);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    adminErreurs()
+      .then(setList)
+      .catch((e) => setError(message(e)));
+  }, []);
+  if (error) return <Notice tone="danger" title={error} />;
+  if (!list) return <p className={s.muted}>Chargement des erreurs…</p>;
+  if (!list.length) return <EmptyState title="Aucune erreur sur les 30 derniers jours." />;
+  return (
+    <ul className={s.list}>
+      {list.map((x) => (
+        <li key={`${x.message}|${x.url}`} className={s.row} style={{ display: "grid", gap: "var(--ui-space-2)" }}>
+          <span className={s.actions}>
+            <Badge tone="danger">{x.occurrences} fois</Badge>
+            <Badge outline>
+              {x.utilisateurs} compte{x.utilisateurs > 1 ? "s" : ""}
+            </Badge>
+            <span className={s.meta}>
+              {x.url ?? "—"} · dernière le {dateHeure(x.derniere)}
+              {x.version ? ` · version ${x.version}` : ""}
+            </span>
+          </span>
+          <span className={s.name}>{x.message}</span>
+          {x.stack ? (
+            <details className={s.meta}>
+              <summary>Pile d’appels</summary>
+              <pre style={{ whiteSpace: "pre-wrap", fontSize: 11 }}>{x.stack}</pre>
+            </details>
+          ) : null}
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -26,6 +26,8 @@ export interface Stored {
 }
 
 export interface SyncIO {
+  /** A new register with all its lines, in one transaction (existed: it was already there, untouched). */
+  create(r: Registre): Promise<{ version: number; existed: boolean }>;
   /** The register's own fields (not its lines), from the version read (null: new). */
   saveMeta(r: Registre, expected: number | null): Promise<Saved<Registre>>;
   /** Lines of one register, each from the version read (null: new). */
@@ -208,10 +210,27 @@ export function cloudBackend(
       const deletes = [...batch].filter(([, p]) => p === null).map(([id]) => id);
       for (const [rid, p] of batch) {
         if (!p) continue;
-        // A new register: its own row first (its lines refer to it).
-        const isNew = !metaVersions.has(rid);
-        if ((p.meta || isNew) && (await saveMeta(rid))) merged.push(rid);
-        if (p.lignes.size && (await saveLignes(rid, isNew ? find(rid)?.lignes.map(idOf) ?? [] : [...p.lignes]))) merged.push(rid);
+        // A new register: created with its lines, in one transaction.
+        if (!metaVersions.has(rid)) {
+          const r = find(rid);
+          if (!r) continue;
+          const created = await io.create(r);
+          metaVersions.set(rid, created.version);
+          if (!created.existed) {
+            metaBases.set(rid, r);
+            for (const l of r.lignes) {
+              lineVersions.set(key(rid, idOf(l)), 1);
+              lineBases.set(key(rid, idOf(l)), l);
+            }
+            done.add(rid);
+            continue;
+          }
+          // Already there (sent twice): saved as a change, merged with what is stored.
+          p.meta = true;
+          r.lignes.forEach((l) => p.lignes.add(idOf(l)));
+        }
+        if (p.meta && (await saveMeta(rid))) merged.push(rid);
+        if (p.lignes.size && (await saveLignes(rid, [...p.lignes]))) merged.push(rid);
         if (p.removed.size) {
           await io.removeLignes(rid, [...p.removed]);
           for (const tid of p.removed) {
@@ -267,7 +286,8 @@ export function cloudBackend(
       for (const id of deletes) enqueue(id, null);
       if (waiting.size) {
         onState({ state: "saving" });
-        schedule(delay);
+        // A new register is sent at once: it is not to be lost if the page is left.
+        schedule(changes.some((c) => !metaVersions.has(c.id)) ? 0 : delay);
       }
     },
     pending: () => waiting.size > 0 || running !== null,

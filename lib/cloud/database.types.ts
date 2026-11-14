@@ -4,6 +4,42 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
+      erreurs: {
+        Row: {
+          id: number;
+          created_at: string;
+          message: string;
+          stack: string | null;
+          url: string | null;
+          digest: string | null;
+          user_id: string | null;
+          user_agent: string | null;
+          version: string | null;
+        };
+        Insert: {
+          id?: number;
+          created_at?: string;
+          message: string;
+          stack?: string | null;
+          url?: string | null;
+          digest?: string | null;
+          user_id?: string | null;
+          user_agent?: string | null;
+          version?: string | null;
+        };
+        Update: {
+          id?: number;
+          created_at?: string;
+          message?: string;
+          stack?: string | null;
+          url?: string | null;
+          digest?: string | null;
+          user_id?: string | null;
+          user_agent?: string | null;
+          version?: string | null;
+        };
+        Relationships: [];
+      };
       invitations: {
         Row: {
           id: string;
@@ -252,6 +288,21 @@ export interface Database {
         };
         Returns: string;
       };
+      admin_erreurs: {
+        Args: {
+          since?: string | null;
+        };
+        Returns: {
+          message: string | null;
+          url: string | null;
+          occurrences: number | null;
+          utilisateurs: number | null;
+          premiere: string | null;
+          derniere: string | null;
+          stack: string | null;
+          version: string | null;
+        }[];
+      };
       admin_set_plan: {
         Args: {
           org: string | null;
@@ -313,6 +364,19 @@ export interface Database {
           invitations: number | null;
           registres: number | null;
           derniere_activite: string | null;
+        }[];
+      };
+      create_registre: {
+        Args: {
+          org: string | null;
+          rid: string | null;
+          rnom: string | null;
+          rdata: Json | null;
+          lignes: Json | null;
+        };
+        Returns: {
+          v: number | null;
+          existed: boolean | null;
         }[];
       };
       create_workspace: {

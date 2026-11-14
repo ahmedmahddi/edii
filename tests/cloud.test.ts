@@ -13,6 +13,14 @@ function server(initial: Registre[] = []) {
   const lines = new Map<string, { l: Ligne; v: number }>(initial.flatMap((r) => r.lignes.map((l) => [`${r.id}/${l.texte.id}`, { l, v: 1 }] as const)));
   const calls: string[] = [];
   const io: SyncIO = {
+    async create(r) {
+      calls.push(`create ${r.id}: ${r.lignes.map((l) => l.texte.id).join(" ")}`);
+      const cur = metas.get(r.id);
+      if (cur) return { version: cur.v, existed: true };
+      metas.set(r.id, { r: { ...r, lignes: [] }, v: 1 });
+      for (const l of r.lignes) lines.set(`${r.id}/${l.texte.id}`, { l, v: 1 });
+      return { version: 1, existed: false };
+    },
     async saveMeta(r, expected): Promise<Saved<Registre>> {
       calls.push(`meta ${r.id}@${expected}`);
       const cur = metas.get(r.id);
@@ -86,7 +94,7 @@ describe("registers kept in a client workspace, line by line", () => {
     const z = reg("z", "Z", [ligne("u1")]);
     b.save([a2, z], [a1]);
     await vi.advanceTimersByTimeAsync(1000);
-    expect(s.calls).toEqual(["lignes a: t2@1", "meta z@null", "lignes z: u1@null"]);
+    expect(s.calls).toEqual(["lignes a: t2@1", "create z: u1"]);
     expect(s.lines.get("a/t2")).toMatchObject({ v: 2, l: { conformite: "NC" } });
     expect(b.ligneVersionOf("a", "t2")).toBe(2);
     expect(b.versionOf("z")).toBe(1);
@@ -136,7 +144,7 @@ describe("registers kept in a client workspace, line by line", () => {
     vi.useFakeTimers();
     let down = true;
     const s = server();
-    const io: SyncIO = { ...s.io, saveMeta: (r, e) => (down ? Promise.reject(new Error("réseau indisponible")) : s.io.saveMeta(r, e)) };
+    const io: SyncIO = { ...s.io, create: (r) => (down ? Promise.reject(new Error("réseau indisponible")) : s.io.create(r)) };
     const states: SyncState[] = [];
     const b = cloudBackend([], io, { onState: (x) => states.push(x) });
     b.save([reg("a", "A1", [ligne("t1")])], []);
@@ -148,6 +156,19 @@ describe("registers kept in a client workspace, line by line", () => {
     expect(s.metas.get("a")!.r.nom).toBe("A2");
     expect(s.lines.get("a/t1")!.l.plan).toBe("x");
     expect(states.at(-1)?.state).toBe("saved");
+  });
+
+  it("sends a new register at once, with its lines, and only once", async () => {
+    vi.useFakeTimers();
+    const s = server();
+    const b = cloudBackend([], s.io, { delay: 1500 });
+    b.save([reg("n", "Neuf", [ligne("t1"), ligne("t2")])], []);
+    await vi.advanceTimersByTimeAsync(10);
+    expect(s.calls).toEqual(["create n: t1 t2"]);
+    expect(b.ligneVersionOf("n", "t2")).toBe(1);
+    b.save([withLigne(b.list[0]!, ligne("t2", { plan: "x" }))], b.list);
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(s.calls).toEqual(["create n: t1 t2", "lignes n: t2@1"]);
   });
 
   it("does not send anything for a reader", async () => {

@@ -185,6 +185,25 @@ select pg_temp.check((select data->>'v' from public.registre_lignes where texte_
 delete from public.registres where id = 'r2';
 select pg_temp.check((select count(*) from public.registre_lignes where registre_id = 'r2') = 0, 'a register removed takes its lines');
 
+-- A new register comes with its lines, in one transaction.
+select pg_temp.act('alice');
+create temp table c1 as select * from public.create_registre((select org from ids), 'r5', 'Neuf', '{"id":"r5"}', '[{"id":"t1","data":{"v":1}},{"id":"t2","data":{"v":2}}]');
+select pg_temp.check((select v = 1 and not existed from c1) and (select count(*) from public.registre_lignes where registre_id = 'r5') = 2, 'a register is created with its lines');
+select pg_temp.check((select existed from public.create_registre((select org from ids), 'r5', 'Neuf', '{}', '[]')), 'sent twice, it is not created twice');
+select pg_temp.fails($$select * from public.create_registre((select org from ids), 'r6', 'Bad', '{}', '[{"id":null,"data":{}}]')$$, 'a line that cannot be stored stops the whole creation');
+select pg_temp.check((select count(*) from public.registres where id = 'r6') = 0, 'and leaves no register without its lines');
+delete from public.registres where id = 'r5';
+
+-- Errors: written by the server only, read by platform administrators only.
+select pg_temp.act('alice');
+select pg_temp.fails($$insert into public.erreurs (message) values ('x')$$, 'a user cannot write an error directly');
+select pg_temp.fails($$select * from public.admin_erreurs()$$, 'a client cannot read the errors');
+reset role;
+insert into public.erreurs (message, url) values ('Boom', '/registres'), ('Boom', '/registres');
+set role authenticated;
+select pg_temp.act('carol');
+select pg_temp.check((select occurrences from public.admin_erreurs() where message = 'Boom') = 2, 'an administrator reads the errors, grouped');
+
 -- Reports on texts: a member reports from a workspace; only administrators see them all and settle them.
 select pg_temp.act('alice');
 insert into public.signalements (organization_id, texte_id, texte_titre, motif, commentaire) select org, 'jort-1', 'Arrêté X', 'hors-sujet', 'Rien à voir avec notre site' from ids;

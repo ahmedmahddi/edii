@@ -1,0 +1,8 @@
+#!/bin/sh
+# Before every push: the types and the unit tests (npm run check). A push that would break the
+# site does not leave the computer. Skip once, knowingly, with: git push --no-verify
+echo "Vérifications avant l'envoi (npm run check)…"
+npm run --silent check || {
+  echo "Les vérifications ont échoué : rien n'a été envoyé. Corrigez, ou envoyez quand même avec git push --no-verify."
+  exit 1
+}

@@ -25,6 +25,8 @@ npm run typecheck
 npm test           # classification, addition rule, ANPE study, and data in sync with the texts
 npm run test:db    # the database's access rules (supabase/), on a throwaway local PostgreSQL
 npm run db:types   # lib/cloud/database.types.ts from the migrations (after changing one)
+npm run check      # types and unit tests: run before every push (.githooks/pre-push) and in every build
+npm run test:e2e:comptes  # with accounts, against a TEST Supabase project (see below)
 npm run test:e2e   # the interface in a real browser, phone and desktop (local mode)
                    # once before: npx playwright install chromium
 npm run build && npm start
@@ -58,6 +60,14 @@ workspaces they belong to; `npm run test:db` checks 29 cases (a stranger, a read
   sends only the lines changed, 1.5 s after the last change, retried when the network fails; the
   side menu says "Enregistré". A colleague's changes arrive when the page comes back to the front. Registers made
   in a browser before accounts are offered for import into the workspace.
+* **Errors** met by users (a screen that fails, an error in the page) are reported to the server
+  (`app/api/erreurs`), written to the hosting's logs and, with `SUPABASE_SERVICE_ROLE_KEY`, to the
+  `erreurs` table: ABC Consulting reads them grouped in *Administration → Erreurs*. Only the message,
+  the stack, the screen's path (no query string), the account and the browser are kept.
+* **Browser tests with accounts** (`npm run test:e2e:comptes`, `tests/e2e-comptes/`): sign-up,
+  workspace, register, an evaluation kept after a reload; two colleagues evaluating the same
+  register at the same time; a reader who cannot change it. Against a test Supabase project only,
+  whose e-mail confirmation is off: `E2E_SUPABASE_URL=… E2E_SUPABASE_ANON_KEY=… npm run test:e2e:comptes`.
 * **Two people on the same register**: every save says which version it started from
   (`save_registre`, migration `20261116000000_versions.sql`). A save from an older version is refused
   with the current copy; the app merges both people's changes (`lib/registre/merge.ts`: per text,

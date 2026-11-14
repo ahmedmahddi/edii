@@ -4,7 +4,7 @@ select json_build_object(
     select json_agg(json_build_object(
       'name', c.relname,
       'columns', (
-        select json_agg(json_build_object('name', a.attname, 'type', a.atttypid, 'nullable', not a.attnotnull, 'default', a.atthasdef) order by a.attnum)
+        select json_agg(json_build_object('name', a.attname, 'type', a.atttypid, 'nullable', not a.attnotnull, 'default', a.atthasdef or a.attidentity <> '' or a.attgenerated <> '') order by a.attnum)
         from pg_attribute a where a.attrelid = c.oid and a.attnum > 0 and not a.attisdropped)
     ) order by c.relname)
     from pg_class c join pg_namespace n on n.oid = c.relnamespace

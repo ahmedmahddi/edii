@@ -259,6 +259,14 @@ export async function fetchLigne(workspace: string, rid: string, tid: string): P
 /** What the sync engine (lib/cloud/sync.ts) needs to keep a workspace's registers. */
 export function registresIO(workspace: string): SyncIO {
   return {
+    async create(r) {
+      const lignes = r.lignes.map((l) => ({ id: l.texte.id, data: l }));
+      const { data, error } = await db().rpc("create_registre", { org: workspace, rid: r.id, rnom: r.nom, rdata: json(metaOf(r)), lignes: json(lignes) });
+      fail(error);
+      const row = data?.[0];
+      if (!row) throw new Error("Réponse vide du serveur");
+      return { version: row.v ?? 1, existed: !!row.existed };
+    },
     async saveMeta(r, expected) {
       const { data, error } = await db().rpc("save_registre", { org: workspace, rid: r.id, rnom: r.nom, rdata: json(metaOf(r)), expected });
       fail(error);
@@ -457,4 +465,31 @@ export async function adminSignalements(): Promise<Signalement[]> {
 export async function adminTraiterSignalement(id: string, statut: StatutSignalement, reponse: string): Promise<void> {
   const { error } = await db().rpc("admin_traiter_signalement", { sid: id, nouveau_statut: statut, texte_reponse: reponse });
   fail(error);
+}
+
+/** The errors met in the app over the last 30 days, grouped by message and screen (platform administrators). */
+export interface ErreurGroupe {
+  message: string;
+  url: string | null;
+  occurrences: number;
+  utilisateurs: number;
+  premiere: string;
+  derniere: string;
+  stack: string | null;
+  version: string | null;
+}
+
+export async function adminErreurs(): Promise<ErreurGroupe[]> {
+  const { data, error } = await db().rpc("admin_erreurs", {});
+  fail(error);
+  return (data ?? []).map((e) => ({
+    message: e.message ?? "",
+    url: e.url,
+    occurrences: e.occurrences ?? 0,
+    utilisateurs: e.utilisateurs ?? 0,
+    premiere: e.premiere ?? "",
+    derniere: e.derniere ?? "",
+    stack: e.stack,
+    version: e.version,
+  }));
 }
