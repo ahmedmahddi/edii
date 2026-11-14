@@ -17,5 +17,8 @@ public/veille/meta.json
 public/veille/catalogue.json
 public/veille/amendements.json
 data/build/
+# Written there before the rebuild (now in data/build/): never served, never committed
+public/veille/feed.json
+public/veille/fiches.json
 test-results/
 playwright-report/
