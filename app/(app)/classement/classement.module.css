@@ -245,3 +245,16 @@
   font-size: var(--ui-text-xs);
   color: var(--ui-text-muted);
 }
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  margin-bottom: calc(-1 * var(--ui-space-3));
+  font-size: var(--ui-text-sm);
+  color: var(--ui-text-muted);
+}
+.back:hover {
+  color: var(--ui-text);
+  text-decoration: none;
+}

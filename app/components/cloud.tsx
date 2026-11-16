@@ -12,6 +12,8 @@ import {
   isPlatformAdmin,
   cancelInvitation,
   createWorkspace,
+  classementsIO,
+  fetchClassements,
   fetchLigne,
   fetchRegistre,
   fetchRegistres,
@@ -26,6 +28,8 @@ import {
 import { AuthFrame, AuthScreen, AuthSection, NewPassword, Splash } from "@/app/components/auth";
 import { Button, Notice, TextField } from "@/app/ui";
 import { frenchError } from "@/lib/cloud/errors";
+import { type ClassementsCloud, classementsBackend } from "@/lib/cloud/classements-sync";
+import { classements } from "@/lib/classement/store";
 import ui from "./cloud.module.css";
 import { cloud, cloudConfigError, cloudEnabled } from "@/lib/cloud/client";
 import { etatOffre, PLANS } from "@/lib/cloud/plans";
@@ -119,17 +123,26 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
   const [sync, setSync] = useState<SyncState>({ state: "saved" });
   const [isAdmin, setIsAdmin] = useState(false);
   const backend = useRef<CloudBackend | null>(null);
+  const classementsCloud = useRef<ClassementsCloud | null>(null); // the workspace's classifications
+  const opening = useRef(0); // the latest opening of a workspace: an older one still reading gives way
 
   const open = useCallback(async (w: Workspace | null) => {
+    const seq = ++opening.current;
     if (backend.current) {
       await backend.current.flush();
       backend.current.dispose();
       backend.current = null;
     }
+    if (classementsCloud.current) {
+      await classementsCloud.current.flush();
+      classementsCloud.current.dispose();
+      classementsCloud.current = null;
+    }
     setReady(false);
     setCurrent(w);
     if (!w) {
       registres.setBackend(null);
+      classements.setBackend(null);
       return;
     }
     try {
@@ -137,7 +150,17 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     } catch {
       // remembered next time only
     }
-    const stored = (await fetchRegistres(w.id)).sort(
+    const [registresStored, classementsStored] = await Promise.all([fetchRegistres(w.id), fetchClassements(w.id)]);
+    // Opened again meanwhile (another workspace chosen, or the same one read again): that opening
+    // has the newer copy and sets everything up.
+    if (seq !== opening.current) return;
+    const c = classementsBackend(classementsStored, classementsIO(w.id), {
+      readOnly: !canWrite(w),
+      onError: (message) => setSync({ state: "error", message }),
+    });
+    classementsCloud.current = c;
+    classements.setBackend(c);
+    const stored = registresStored.sort(
       (a, b) => (a.registre.cree ?? "").localeCompare(b.registre.cree ?? "") || a.registre.id.localeCompare(b.registre.id),
     );
     const b: CloudBackend = cloudBackend(
@@ -189,7 +212,9 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
     void refresh();
     return () => {
       backend.current?.dispose();
+      classementsCloud.current?.dispose();
       registres.setBackend(null);
+      classements.setBackend(null);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -211,6 +236,9 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
           registres.setBackend(b);
           announce([...changed, ...gone], "remote");
         }
+        const cc = classementsCloud.current;
+        const since = cc?.generation() ?? 0;
+        if (cc && cc.replace(await fetchClassements(current.id), since)) classements.changed();
       } catch {
         // offline: the next return will try again
       }
@@ -300,8 +328,9 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
   // Leaving with changes not sent yet: the browser asks first.
   useEffect(() => {
     const warn = (e: BeforeUnloadEvent) => {
-      if (backend.current?.pending()) {
-        void backend.current.flush();
+      if (backend.current?.pending() || classementsCloud.current?.pending()) {
+        void backend.current?.flush();
+        void classementsCloud.current?.flush();
         e.preventDefault();
       }
     };
@@ -311,9 +340,13 @@ function Workspaces({ user, children }: { user: User; children: ReactNode }) {
 
   const signOut = useCallback(async () => {
     await backend.current?.flush();
+    await classementsCloud.current?.flush();
     backend.current?.dispose();
+    classementsCloud.current?.dispose();
     backend.current = null;
+    classementsCloud.current = null;
     registres.setBackend(null);
+    classements.setBackend(null);
     await cloud()!.auth.signOut();
   }, []);
 

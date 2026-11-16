@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { useCloud } from "@/app/components/cloud";
 import type { Registre } from "@/lib/registre/registre";
 import { registres as store } from "@/lib/registre/store";
+import type { Classement } from "@/lib/classement/classement";
+import { classements as classementStore } from "@/lib/classement/store";
 import s from "./CommandPalette.module.css";
 import type { Theme } from "@/app/ui";
 
@@ -15,8 +17,11 @@ export function CommandPalette({ open, onOpenChange, theme }: { open: boolean; o
   const router = useRouter();
   const cloud = useCloud();
   const [registres, setRegistres] = useState<Registre[]>([]);
+  const [kept, setKept] = useState<Classement[]>([]);
   useEffect(() => {
-    if (open) setRegistres(store.get());
+    if (!open) return;
+    setRegistres(store.get());
+    setKept(classementStore.get().filter((c) => c.nom || c.activites.length));
   }, [open]);
   const run = (fn: () => void) => () => {
     onOpenChange(false);
@@ -43,14 +48,24 @@ export function CommandPalette({ open, onOpenChange, theme }: { open: boolean; o
                   ))}
                 </Command.Group>
               ) : null}
+              {kept.length ? (
+                <Command.Group heading="Classements">
+                  {kept.map((c) => (
+                    <Command.Item key={c.id} value={`classement ${c.nom} ${c.activites.map((a) => a.code).join(" ")} ${c.id}`} onSelect={go(`/classement/${encodeURIComponent(c.id)}`)}>
+                      <Building2 size={15} />
+                      {c.nom || "Établissement sans nom"}
+                    </Command.Item>
+                  ))}
+                </Command.Group>
+              ) : null}
               <Command.Group heading="Actions">
                 <Command.Item value="nouveau registre sans classement" onSelect={go("/registres/nouveau")}>
                   <Plus size={15} />
                   Nouveau registre
                 </Command.Item>
-                <Command.Item value="classer un établissement nomenclature rubrique" onSelect={go("/classement")}>
+                <Command.Item value="nouveau classement classer un établissement nomenclature rubrique" onSelect={go("/classement/nouveau")}>
                   <Search size={15} />
-                  Classer un établissement
+                  Nouveau classement
                 </Command.Item>
                 <Command.Item value="vérifier le journal officiel jort" onSelect={go("/veille")}>
                   <Bell size={15} />
@@ -70,7 +85,7 @@ export function CommandPalette({ open, onOpenChange, theme }: { open: boolean; o
                   <Bell size={15} />
                   Veille réglementaire
                 </Command.Item>
-                <Command.Item value="classement nomenclature établissement" onSelect={go("/classement")}>
+                <Command.Item value="classements établissements classés" onSelect={go("/classement")}>
                   <Building2 size={15} />
                   Classement
                 </Command.Item>

@@ -7,9 +7,9 @@ import { X } from "lucide-react";
 import { Badge, Button, Checkbox, Input, Notice, Panel, Select, SelectField, table } from "@/app/ui";
 import { additionGroup, rubrique, variants } from "@/lib/classify";
 import { type Activity, type ActivityResult, type AdditionResult, type EstablishmentResult, fmtRatio } from "@/lib/establishment";
-import { eie, eieEntry, entriesFor, establishmentStudy, SITUATIONS, type Situation, type StudyKind } from "@/lib/studies";
+import { eie, eieEntry, entriesFor, establishmentStudy, SITUATIONS, type Situation } from "@/lib/studies";
 import s from "./classement.module.css";
-import { ClasseBadge, entryLabel, entryRef, fmtQty, LABEL, listFr, ordinal } from "./shared";
+import { ClasseBadge, entryLabel, entryRef, fmtQty, LABEL, listFr, ordinal, STUDY_SHORT } from "./shared";
 
 export function Establishment({
   est,
@@ -236,13 +236,6 @@ function Addition({ a }: { a: AdditionResult }) {
   );
 }
 
-const STUDY_SHORT: Record<StudyKind, string> = {
-  eie_a: "EIE catégorie A",
-  eie_b: "EIE catégorie B",
-  cahier_des_charges: "Cahier des charges",
-  depollution: "Étude de dépollution",
-  demande_avis: "Demande d'avis",
-};
 
 export function Study({
   activities,

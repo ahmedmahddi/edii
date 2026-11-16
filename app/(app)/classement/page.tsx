@@ -1,12 +1,13 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Classement } from "./classement";
+import { ListeClassements } from "./Liste";
 
-export const metadata = { title: "Classement | ABClassement" };
+export const metadata: Metadata = { title: "Classements | ABClassement" };
 
-export default function ClassementPage() {
+export default function ClassementsPage() {
   return (
     <Suspense>
-      <Classement />
+      <ListeClassements />
     </Suspense>
   );
 }

@@ -25,8 +25,8 @@ const OLD_VIEWS: Record<string, string> = {
   equipe: "/equipe",
   compte: "/compte",
   admin: "/admin",
-  search: "/classement",
-  establishment: "/classement?vue=etablissement",
+  search: "/classement/nouveau",
+  establishment: "/classement",
 };
 
 const href = (id: string) => `/registres/${encodeURIComponent(id)}`;
@@ -54,7 +54,7 @@ export function Home() {
   const today = new Date().toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
   const actions = (
     <>
-      <ButtonLink href="/classement">
+      <ButtonLink href="/classement/nouveau">
         <Search size={15} /> Classer un établissement
       </ButtonLink>
       {writable ? (

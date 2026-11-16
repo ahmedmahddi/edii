@@ -56,6 +56,7 @@ Get-Content supabase\migrations\20261117000000_signalements.sql -Raw | Set-Clipb
 Get-Content supabase\migrations\20261118000000_lignes.sql -Raw | Set-Clipboard
 Get-Content supabase\migrations\20261119000000_erreurs.sql -Raw | Set-Clipboard
 Get-Content supabase\migrations\20261120000000_creation.sql -Raw | Set-Clipboard
+Get-Content supabase\migrations\20261121000000_classements.sql -Raw | Set-Clipboard
 ```
 
 (One command at a time: copy, paste in Supabase, Run, wait for "Success", then the next.) They can
@@ -63,7 +64,7 @@ be run again safely. They create the tables, their access rules, the private **p
 evidence files, and add the registers to **Realtime** (colleagues' changes appear live).
 
 Check: **Table Editor** lists `organizations`, `memberships`, `registres`, `registre_lignes`,
-`erreurs`…; **Storage** lists the bucket `preuves` (private).
+`classements`, `erreurs`…; **Storage** lists the bucket `preuves` (private).
 
 ### 1.3 Authentication
 
@@ -262,7 +263,7 @@ the production deployment on Vercel (**Deployments**, about 3 to 5 minutes: the 
 veille's files and runs the tests).
 
 **Migrations and code go together**: run new migrations on the production project (step 1.2)
-right before merging the code that needs them. The current code needs all nine.
+right before merging the code that needs them. The current code needs all ten.
 
 ---
 

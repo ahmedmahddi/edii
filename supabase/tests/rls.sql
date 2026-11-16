@@ -194,6 +194,19 @@ select pg_temp.fails($$select * from public.create_registre((select org from ids
 select pg_temp.check((select count(*) from public.registres where id = 'r6') = 0, 'and leaves no register without its lines');
 delete from public.registres where id = 'r5';
 
+-- Classifications: the workspace's, with the registers' rights.
+select pg_temp.act('alice');
+insert into public.classements (organization_id, id, nom, data) select org, 'c1', 'Laiterie', '{"id":"c1"}' from ids;
+select pg_temp.check((select version from public.classements where id = 'c1') = 1 and (select updated_by from public.classements where id = 'c1') = auth.uid(), 'a classification is stored, stamped');
+update public.classements set nom = 'Laiterie du Cap Bon' where id = 'c1';
+select pg_temp.check((select version from public.classements where id = 'c1') = 2, 'and its version goes up');
+select pg_temp.act('carol');
+select pg_temp.check((select count(*) from public.classements where id = 'c1') = 0, 'a stranger reads no classification');
+select pg_temp.fails($$insert into public.classements (organization_id, id, nom, data) select org, 'c9', 'x', '{}' from ids$$, 'a stranger cannot add one');
+select pg_temp.act('alice');
+delete from public.classements where id = 'c1';
+select pg_temp.check((select count(*) from public.classements) = 0, 'an editor removes one');
+
 -- Errors: written by the server only, read by platform administrators only.
 select pg_temp.act('alice');
 select pg_temp.fails($$insert into public.erreurs (message) values ('x')$$, 'a user cannot write an error directly');

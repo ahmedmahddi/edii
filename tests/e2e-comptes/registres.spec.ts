@@ -71,3 +71,29 @@ test("a reader cannot change a register", async ({ browser }) => {
   await c.locator("tr[data-ligne]").first().click();
   await expect(c.getByRole("heading", { name: "Nouvelle évaluation" })).toHaveCount(0);
 });
+
+test("a classification is kept in the workspace, for colleagues too", async ({ browser }) => {
+  const a = await (await browser.newContext()).newPage();
+  const b = await (await browser.newContext()).newPage();
+  const dina = email("dina");
+  await signUp(a, email("hedi"), "Hedi E2E");
+  await createWorkspace(a, "E2E Classement SA");
+  await a.goto("/classement/nouveau");
+  await a.getByRole("searchbox").first().fill("lait");
+  await a.getByRole("button", { name: /^Ajouter 1214/ }).click();
+  await a.getByRole("tab", { name: /tablissement/ }).click();
+  await a.getByRole("textbox", { name: "Nom de l’établissement" }).fill("Laiterie E2E");
+  await a.getByRole("textbox", { name: /Quantité pour 1214/ }).fill("50000");
+  await saved(a);
+  await a.waitForTimeout(1500); // the classification's save follows the change
+  await a.goto("/equipe");
+  await a.getByLabel("Adresse e-mail").fill(dina);
+  await a.getByRole("button", { name: "Inviter" }).click();
+  await signUp(b, dina, "Dina E2E");
+  await b.getByRole("button", { name: "Rejoindre" }).click();
+  await b.goto("/classement");
+  const row = b.getByRole("row", { name: /Laiterie E2E/ });
+  await expect(row).toContainText("2ème catégorie");
+  await row.getByRole("link", { name: "Laiterie E2E" }).click();
+  await expect(b.getByRole("textbox", { name: /Quantité pour 1214/ })).toHaveValue("50000");
+});

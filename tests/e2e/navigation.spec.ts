@@ -9,7 +9,7 @@ test("the home shows the way in, and every screen fits the screen", async ({ pag
   for (const [link, url, heading] of [
     [/^Registres/, "/registres", "Registres"],
     [/^Veille/, "/veille", "Veille réglementaire"],
-    [/^Classement/, "/classement", "Classement"],
+    [/^Classement/, "/classement", "Classements"],
     [/^Accueil/, "/", "Accueil"],
   ] as const) {
     await go(page, link);

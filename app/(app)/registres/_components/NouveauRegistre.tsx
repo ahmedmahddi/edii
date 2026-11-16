@@ -10,11 +10,12 @@ import { EMPTY_SITE, type Site } from "@/lib/registre/profil";
 import { proposals, type Texte } from "@/lib/registre/referentiel";
 import { createRegistre, type Registre, sameName, siteFromReport, updateFromReport } from "@/lib/registre/registre";
 import { takePendingSeed } from "@/lib/registre/seed";
+import { classements } from "@/lib/classement/store";
 import type { ClassificationReport } from "@/lib/report";
 import { ProfilForm } from "./ProfilForm";
 import s from "./Registres.module.css";
 
-type Draft = { report: ClassificationReport | null; site: Site; nom: string };
+type Draft = { report: ClassificationReport | null; site: Site; nom: string; classement: string | null };
 
 export function NouveauRegistre({
   list,
@@ -39,11 +40,12 @@ export function NouveauRegistre({
   useEffect(() => {
     if (!loaded || started.current) return;
     started.current = true;
-    const seed = takePendingSeed();
-    if (!seed) return setDraft({ report: null, site: EMPTY_SITE, nom: "" });
+    const pending = takePendingSeed();
+    if (!pending) return setDraft({ report: null, site: EMPTY_SITE, nom: "", classement: null });
+    const seed = pending.report;
     // The same establishment already has a register: start from its profile, to update it.
     const existing = sameName(list, seed.name);
-    setDraft({ report: seed, site: existing ? updateFromReport(existing, seed).site : siteFromReport(seed), nom: seed.name });
+    setDraft({ report: seed, site: existing ? updateFromReport(existing, seed).site : siteFromReport(seed), nom: seed.name, classement: pending.classement });
   }, [loaded, list]);
   if (!draft) return null;
 
@@ -51,14 +53,24 @@ export function NouveauRegistre({
   const report = draft.report ? { ...draft.report, name: nom } : null;
   const existing = sameName(list, nom);
   const proposed = texts.length ? proposals(texts, draft.site).filter((p) => p.proposed).length : 0;
+  // From a classification kept: the register leads back to it, and it to the register.
+  const back = draft.classement ? `/classement/${draft.classement}` : null;
+  const link = (id: string) => {
+    if (draft.classement) classements.change(draft.classement, (c) => ({ ...c, registre: id }));
+  };
   const create = () => {
-    const reg = createRegistre(report, draft.site, texts, undefined, nom);
+    const made = createRegistre(report, draft.site, texts, undefined, nom);
+    const reg = back ? { ...made, restauration: back } : made;
     update((all) => [reg, ...all]);
+    link(reg.id);
     onDone(reg.id);
   };
   const updateExisting = () => {
     if (!existing) return;
-    update((all) => all.map((r) => (r.id === existing.id ? { ...(report ? updateFromReport(r, report) : r), site: draft.site } : r)));
+    update((all) =>
+      all.map((r) => (r.id === existing.id ? { ...(report ? updateFromReport(r, report) : r), site: draft.site, ...(back ? { restauration: back } : {}) } : r)),
+    );
+    link(existing.id);
     onDone(existing.id);
   };
 

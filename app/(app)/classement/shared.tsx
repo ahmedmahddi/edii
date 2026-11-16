@@ -2,6 +2,7 @@
 import type { Classe, Item } from "@/lib/classify";
 import { nomenclature } from "@/lib/classify";
 import { Badge, type Tone } from "@/app/ui";
+import type { StudyKind } from "@/lib/studies";
 
 export const LABEL: Record<string, string> = { "1": "1ère catégorie", "2": "2ème catégorie", "3": "3ème catégorie", NC: "Non classé" };
 const TONE: Record<string, Tone> = { "1": "danger", "2": "warning", "3": "accent", NC: "neutral" };
@@ -35,3 +36,11 @@ export function sourceOf(it: Item): string {
   const page = it.ref.match(/p\.(\d+)/)?.[1];
   return s ? `${s.title.split(",")[0]} (${s.jort})${page ? `, page ${page} du PDF` : ""}` : it.ref;
 }
+
+export const STUDY_SHORT: Record<StudyKind, string> = {
+  eie_a: "EIE catégorie A",
+  eie_b: "EIE catégorie B",
+  cahier_des_charges: "Cahier des charges",
+  depollution: "Étude de dépollution",
+  demande_avis: "Demande d'avis",
+};

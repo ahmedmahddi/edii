@@ -3,6 +3,8 @@
  * only reaches the workspaces they belong to (supabase/migrations/20261112000000_workspaces.sql).
  */
 import { compacter, type Ligne, type Registre } from "@/lib/registre/registre";
+import type { Classement } from "@/lib/classement/classement";
+import type { ClassementsIO } from "./classements-sync";
 import type { Json } from "./database.types";
 import { metaOf, type Saved, type Stored, type SyncIO } from "./sync";
 import { cloud } from "./client";
@@ -492,4 +494,29 @@ export async function adminErreurs(): Promise<ErreurGroupe[]> {
     stack: e.stack,
     version: e.version,
   }));
+}
+
+// Classifications: one row per classification, the classification as JSON (migration 20261121000000_classements.sql).
+
+export async function fetchClassements(workspace: string): Promise<Classement[]> {
+  const rows = await pages((a, b) => db().from("classements").select("data").eq("organization_id", workspace).order("id").range(a, b));
+  return rows.map((r) => r.data as unknown as Classement).sort((a, b) => b.maj.localeCompare(a.maj));
+}
+
+export function classementsIO(workspace: string): ClassementsIO {
+  return {
+    async upsert(list) {
+      const { error } = await db()
+        .from("classements")
+        .upsert(
+          list.map((c) => ({ organization_id: workspace, id: c.id, nom: c.nom, data: json(c) })),
+          { onConflict: "organization_id,id" },
+        );
+      fail(error);
+    },
+    async remove(ids) {
+      const { error } = await db().from("classements").delete().eq("organization_id", workspace).in("id", ids);
+      fail(error);
+    },
+  };
 }

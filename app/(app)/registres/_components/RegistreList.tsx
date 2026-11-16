@@ -116,7 +116,7 @@ export function RegistreList({
             title="Aucun registre pour l’instant"
             actions={
               <>
-                <ButtonLink href="/classement">
+                <ButtonLink href="/classement/nouveau">
                   <Search size={15} /> Classer un établissement
                 </ButtonLink>
                 {newButton}
@@ -185,7 +185,7 @@ export function RegistreList({
                     <td data-slot="hide" className={`${table.num} ${table.muted}`}>
                       {dateCourte(e.reg.maj.slice(0, 10))}
                     </td>
-                    <td data-slot="hide" className={s.rowMenu} onClick={(ev) => ev.stopPropagation()}>
+                    <td data-slot="action" className={s.rowMenu} onClick={(ev) => ev.stopPropagation()}>
                       {writable ? (
                         <Menu
                           align="end"

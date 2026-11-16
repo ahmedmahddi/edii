@@ -64,7 +64,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+/* A cell's name, said on phones where the table's header is not shown. */
+.phoneLabel {
+  display: none;
+}
 @media (max-width: 719px) {
+  .phoneLabel {
+    display: inline;
+    color: var(--ui-text-muted);
+  }
   .stack thead {
     display: none;
   }
@@ -97,5 +105,16 @@
   }
   .stack td[data-slot="hide"] {
     display: none;
+  }
+  /* A row's actions (its ⋯ menu): kept on phones, under the side value. */
+  /* Rows with actions: the details beside them, not under them. */
+  .stack tr:has(td[data-slot="action"]) td[data-slot="meta"] {
+    grid-column: 1;
+  }
+  .stack td[data-slot="action"] {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: end;
+    width: auto !important;
   }
 }

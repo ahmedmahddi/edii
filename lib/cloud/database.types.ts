@@ -4,6 +4,38 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export interface Database {
   public: {
     Tables: {
+      classements: {
+        Row: {
+          organization_id: string;
+          id: string;
+          nom: string;
+          data: Json;
+          version: number;
+          updated_at: string;
+          updated_by: string | null;
+        };
+        Insert: {
+          organization_id: string;
+          id: string;
+          nom?: string;
+          data: Json;
+          version?: number;
+          updated_at?: string;
+          updated_by?: string | null;
+        };
+        Update: {
+          organization_id?: string;
+          id?: string;
+          nom?: string;
+          data?: Json;
+          version?: number;
+          updated_at?: string;
+          updated_by?: string | null;
+        };
+        Relationships: [
+          { foreignKeyName: "classements_organization_id_fkey"; columns: ["organization_id"]; isOneToOne: false; referencedRelation: "organizations"; referencedColumns: ["id"] },
+        ];
+      };
       erreurs: {
         Row: {
           id: number;
