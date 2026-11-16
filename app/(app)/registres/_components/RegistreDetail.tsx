@@ -2,7 +2,8 @@
 /**
  * One register: where it stands, what waits (texts modified at the JORT, new texts, texts that no
  * longer apply), and its texts as a table, grouped by domain, to evaluate one by one in a sheet.
- * Keyboard: / searches, j and k move between texts, Entrée opens one.
+ * Keyboard: / searches, j and k move between texts (also while one is open: the next one opens),
+ * Entrée opens one.
  */
 import { ChevronLeft, ChevronRight, Download, FileText, MoreHorizontal, Paperclip, Plus, Settings2, Users } from "lucide-react";
 import Link from "next/link";
@@ -176,6 +177,10 @@ export function RegistreDetail({
     .concat([["autres", shown.filter((l) => !(l.texte.domaine in rules.domains)).sort(byScore)] as const])
     .filter(([, lignes]) => lignes.length);
   const isOpen = (d: string) => groups.length === 1 || ouverts.has(d);
+  // Every text in the order shown (closed groups included): what j and k walk through.
+  const order = flat ? [...shown].sort(byScore) : groups.flatMap(([, lignes]) => lignes);
+  const domainOf = new Map(groups.flatMap(([d, lignes]) => lignes.map((l) => [l.texte.id, d] as const)));
+  const dirty = useRef(false); // an evaluation started in the open sheet, not saved
   const toggle = (d: string) => setOuverts((o) => (o.has(d) ? new Set([...o].filter((x) => x !== d)) : new Set([...o, d])));
 
   const candidates = useMemo(() => {
@@ -185,28 +190,58 @@ export function RegistreDetail({
     return texts.filter((x) => !inRegister.has(x.id) && fold(`${x.titre} ${x.theme} ${x.numero ?? ""}`).includes(t)).slice(0, 12);
   }, [adding, texts, reg.lignes]);
 
-  // Keyboard: / to search, j / k between the rows, Entrée to open (on the row).
+  // Keyboard: / to search; j / k to the next or previous text (its group opened if closed), and
+  // while a text is open, that text opens instead; Entrée opens the row (on the row).
+  const focusRow = (id: string) =>
+    requestAnimationFrame(() => {
+      const el = tableRef.current?.querySelector<HTMLElement>(`tr[data-ligne="${CSS.escape(id)}"]`);
+      el?.focus({ preventScroll: true });
+      el?.scrollIntoView({ block: "nearest" });
+    });
+  // The text closed: its row takes the focus once the sheet is gone (j and k go on from there).
+  const lastOpen = useRef<string | null>(null);
+  useEffect(() => {
+    if (openId) {
+      lastOpen.current = openId;
+      return;
+    }
+    const id = lastOpen.current;
+    lastOpen.current = null;
+    if (id) setTimeout(() => focusRow(id), 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openId]);
+  const keys = useRef({ order, domainOf, openId, flat });
+  keys.current = { order, domainOf, openId, flat };
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey || openId || rapport || reglages || ajout) return;
+      if (e.metaKey || e.ctrlKey || e.altKey || rapport || reglages || ajout) return;
       const el = document.activeElement as HTMLElement | null;
       if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" || el.tagName === "SELECT" || el.isContentEditable)) return;
-      if (e.key === "/") {
+      const { order, domainOf, openId, flat } = keys.current;
+      if (e.key === "/" && !openId) {
         e.preventDefault();
         searchRef.current?.focus();
         return;
       }
       if (e.key !== "j" && e.key !== "k") return;
-      const rows = [...(tableRef.current?.querySelectorAll<HTMLElement>("tr[data-ligne]") ?? [])];
-      if (!rows.length) return;
+      if (!order.length) return;
       e.preventDefault();
-      const i = rows.findIndex((r) => r === el);
-      const next = e.key === "j" ? Math.min(rows.length - 1, i + 1) : Math.max(0, i < 0 ? 0 : i - 1);
-      rows[next]!.focus();
+      const current = openId ?? el?.closest<HTMLElement>("tr[data-ligne]")?.dataset.ligne ?? null;
+      const i = current ? order.findIndex((l) => l.texte.id === current) : -1;
+      const next = order[e.key === "j" ? Math.min(order.length - 1, i + 1) : Math.max(0, i < 0 ? 0 : i - 1)]!;
+      if (next.texte.id === current) return;
+      const d = domainOf.get(next.texte.id);
+      if (!flat && d) setOuverts((o) => (o.has(d) ? o : new Set([...o, d])));
+      if (openId) {
+        if (dirty.current && !window.confirm("Une évaluation est en cours sur ce texte : l’abandonner pour passer au texte suivant ?")) return;
+        dirty.current = false;
+        openText(next.texte.id);
+      }
+      focusRow(next.texte.id);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [openId, rapport, reglages, ajout]);
+  }, [rapport, reglages, ajout, openText]);
 
   const exportAll = async () => {
     setExporting(true);
@@ -545,7 +580,14 @@ export function RegistreDetail({
           repealed={abrogePar(open, amendments)}
           set={(patch) => setLigne(open, patch)}
           replace={(fn) => change((r) => withLigne(r, open, fn))}
-          onClose={() => openText(null)}
+          onClose={() => {
+            dirty.current = false;
+            openText(null);
+          }}
+          onDirty={(d) => {
+            dirty.current = d;
+          }}
+          position={{ index: order.findIndex((l) => l.texte.id === open.texte.id) + 1, total: order.length }}
           who={who}
           editable={editable}
           upload={cloud.current ? (file) => uploadPreuve(cloud.current!.id, reg.id, file) : null}

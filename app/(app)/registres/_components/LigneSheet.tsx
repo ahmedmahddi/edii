@@ -4,7 +4,7 @@ import { FileText, Link2, StickyNote, X } from "lucide-react";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { today } from "@/app/components/download";
 import { Signaler } from "@/app/components/signaler";
-import { Badge, Button, Notice, Segmented, SelectField, Sheet, SheetSection, TextArea, TextField } from "@/app/ui";
+import { Badge, Button, Kbd, Notice, Segmented, SelectField, Sheet, SheetSection, TextArea, TextField } from "@/app/ui";
 import { preuveUrl } from "@/lib/cloud/api";
 import { dateFr, refOf } from "@/lib/registre/labels";
 import { remplacePar } from "@/lib/registre/referentiel";
@@ -50,6 +50,8 @@ export function LigneSheet({
   who,
   editable,
   upload,
+  onDirty,
+  position,
 }: {
   l: Ligne;
   fiche?: FicheData;
@@ -62,6 +64,10 @@ export function LigneSheet({
   who: string;
   editable: boolean;
   upload: ((file: File) => Promise<string>) | null;
+  /** Whether an evaluation is being written and not saved (j / k ask before leaving it). */
+  onDirty?: (dirty: boolean) => void;
+  /** Where this text is in the list shown. */
+  position?: { index: number; total: number };
 }) {
   const proposed = defaults(l.texte.domaine, fiche);
   const next = prochaine(l);
@@ -147,6 +153,10 @@ export function LigneSheet({
     setSaved(`Évaluation du ${dateFr(date)} enregistrée.`);
   };
   const evaluating = editable && l.retenu;
+  const writing = conf !== "" || comment.trim() !== "" || preuves.length > 0;
+  useEffect(() => {
+    onDirty?.(writing);
+  }, [writing, onDirty]);
 
   return (
     <Sheet
@@ -178,6 +188,11 @@ export function LigneSheet({
           </Badge>
           {l.conformite === "C" && l.actionFaite ? <Badge tone="success">Action réalisée le {dateFr(l.actionFaite)}</Badge> : null}
           {!l.retenu ? <Badge outline>Non retenu</Badge> : null}
+          {position && position.index > 0 ? (
+            <span className={s.keys}>
+              {position.index} / {position.total} · <Kbd>j</Kbd> <Kbd>k</Kbd> suivant, précédent
+            </span>
+          ) : null}
         </div>
       }
       footer={

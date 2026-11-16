@@ -82,3 +82,29 @@ test("a suggestion retained joins the register", async ({ page }) => {
   await expect(page.getByRole("tab", { name: /^Tous/ })).toContainText(String(before + 1));
   expect(errors).toEqual([]);
 });
+
+test("j and k go through every text, groups closed or a text open", async ({ page }) => {
+  const errors = watchErrors(page);
+  await newRegister(page, "Carrière de Gafsa");
+  // All the groups closed: j opens the first one and lands on its first text.
+  await expect(page.locator("tr[data-ligne]")).toHaveCount(0);
+  await page.locator("body").press("j");
+  await expect(page.locator("tr[data-ligne]").first()).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.getByRole("dialog")).toContainText(/1 \/ \d+/);
+  const first = page.url();
+  // With the text open, j opens the next one, k comes back.
+  await page.keyboard.press("j");
+  await expect(page.getByRole("dialog")).toContainText(/2 \/ \d+/);
+  expect(page.url()).not.toBe(first);
+  await page.keyboard.press("k");
+  await expect(page.getByRole("dialog")).toContainText(/1 \/ \d+/);
+  // An evaluation started: j asks before leaving it.
+  await page.getByRole("radio", { name: "Conforme", exact: true }).click();
+  page.once("dialog", (d) => void d.dismiss());
+  await page.keyboard.press("j");
+  await expect(page.getByRole("dialog")).toContainText(/1 \/ \d+/);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("tr[data-ligne]").first()).toBeFocused();
+  expect(errors).toEqual([]);
+});

@@ -151,3 +151,14 @@
   font-size: var(--ui-text-xs);
   color: var(--ui-success);
 }
+.keys {
+  margin-left: auto;
+  font-size: var(--ui-text-xs);
+  color: var(--ui-text-muted);
+  white-space: nowrap;
+}
+@media (pointer: coarse) {
+  .keys {
+    display: none;
+  }
+}
