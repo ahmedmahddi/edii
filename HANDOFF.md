@@ -1,6 +1,6 @@
 # ABClassement (repo `edii`): project handoff
 
-State on **22 October 2026**, branch **`claude/veille`**. This file is for a new working session:
+State on **24 November 2026** (§11 covers the November rebuild; `CONTINUE.md` says where the work stopped), branch **`claude/veille`**. This file is for a new working session:
 what the app is, how it is built, what has been decided, what the data holds today, and what comes
 next. `README.md` stays the reference for the classification pipeline, the ANPE study and the
 veille commands; this file covers the whole project and its history, and does not repeat those
