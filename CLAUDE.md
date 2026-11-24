@@ -49,3 +49,33 @@ npm run db:types           # regenerate lib/cloud/database.types.ts after changi
 
 After a fresh clone, the served veille data must be rebuilt once:
 `npx tsx scripts/veille.ts --reassess` (`npm run dev` and `npm run build` also rebuild it).
+
+One test file or one test: `npx vitest run tests/registre.test.ts`, `npx vitest run -t "addition"`.
+Two tests in `tests/edii.test.ts` re-run the Python pipeline and are skipped without Python 3.10+
+and `pdftotext` (expected on the laptop). Behind a proxy (cloud sessions), Node's fetch needs
+`NODE_USE_ENV_PROXY=1`.
+
+## Where things are (details in `README.md` and `HANDOFF.md`)
+
+* **Classification data is generated.** `data/nomenclature.json` and `data/eie*.json` come from
+  `data/pipeline/*.py` over the scans in `data/sources/`. Never edit them by hand: fix a misread
+  in `data/corrections.json`, run `npm run data:parse`, commit both (a test checks they match).
+* **Veille.** `data/veille/sommaires/<year>.json` (committed) is the source of truth; the rules
+  in `data/veille/watch.json` (+ `watch-ar.json`) are applied by `lib/veille/watch.ts`. What the
+  site serves is derived at build by `--reassess` (`lib/veille/served.ts`): small files in
+  `public/veille/`, the rest in `data/build/` read by the API routes (`app/api/journal`,
+  `app/api/fiches`). None of it is in git. Editing rules never needs a download: `--reassess`.
+* **Stores.** Registers and classifications each have one client store (`lib/registre/store.ts`,
+  `lib/classement/store.ts`), in localStorage in local mode or synced to the workspace
+  (`lib/cloud/sync.ts`, `classements-sync.ts`): per line, with versions; a conflict is merged by
+  `lib/registre/merge.ts` and saved again.
+* **Database.** Access rules, roles and plan limits are enforced by RLS in `supabase/migrations/`
+  (run in name order, must be re-runnable: `test:db` runs each twice).
+
+## Gotchas
+
+* JavaScript `\b` sees no word end after an accented letter ("Arrêté"): use `(?!\p{L})` with the
+  `u` flag in regexes over French text.
+* Keep `data/veille/watch.json` one rule per line: never re-dump it with a JSON serializer.
+* `tsx` loads modules once: a long scan keeps the parser it started with.
+* More in `HANDOFF.md` §13 (encodings, pdf.js buffers, JORT numbering).
